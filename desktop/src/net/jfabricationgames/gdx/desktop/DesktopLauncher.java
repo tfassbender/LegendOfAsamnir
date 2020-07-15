@@ -2,10 +2,9 @@ package net.jfabricationgames.gdx.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.desktop.util.TextureUtil;
 
 public class DesktopLauncher {
 	
@@ -21,15 +20,6 @@ public class DesktopLauncher {
 	}
 	
 	private static void packTextures() {
-		TexturePacker.Settings textureSettings = new TexturePacker.Settings();
-		textureSettings.maxWidth = 4096;
-		textureSettings.maxHeight = 4096;
-		textureSettings.edgePadding = false;
-		textureSettings.duplicatePadding = false;
-		textureSettings.filterMin = TextureFilter.Linear;
-		textureSettings.filterMag = TextureFilter.Linear;
-		
-		TexturePacker.process(textureSettings, "dwarf/dwarf_left_attack", "dwarf/packed", "dwarf_left_attack");
-		TexturePacker.process(textureSettings, "dwarf/dwarf_left_run", "dwarf/packed", "dwarf_left_run");
+		new TextureUtil().packTextures();
 	}
 }

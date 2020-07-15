@@ -15,8 +15,8 @@ public class RunningDwarf {
 	private float stateTime;
 	
 	public RunningDwarf(GameScreen gameScreen) {
-		TextureAtlas atlas = gameScreen.getAssetManager().get("dwarf/packed/dwarf_left_run.atlas", TextureAtlas.class);
-		runAnimation = new Animation<TextureRegion>(0.1f, atlas.findRegions("dwarf_left_run"), PlayMode.LOOP);
+		TextureAtlas atlas = gameScreen.getAssetManager().get("packed/dwarf/dwarf_right_run.atlas", TextureAtlas.class);
+		runAnimation = new Animation<TextureRegion>(0.1f, atlas.findRegions("dwarf_right_run"), PlayMode.LOOP);
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
