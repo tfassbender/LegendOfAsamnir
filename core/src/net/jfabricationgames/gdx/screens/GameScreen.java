@@ -2,36 +2,37 @@ package net.jfabricationgames.gdx.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
-import net.jfabricationgames.gdx.screens.animation.RunningDwarf;
+import net.jfabricationgames.gdx.character.Dwarf;
+import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
 
 public class GameScreen extends ScreenAdapter {
-
+	
+	public static final float WORLD_TO_SCREEN = 1.0f / 100.0f;
+	public static final float SCENE_WIDTH = 1.280f;
+	public static final float SCENE_HEIGHT = .720f;
+	
+	private OrthographicCamera camera;
+	private Viewport viewport;
 	private SpriteBatch batch;
-	private AssetManager assetManager;
 	
-	private TextureAtlas dwarfAttackLeftAtlas;
-	private TextureRegion dwarfTexture;
+	private CharacterAnimationAssetManager assetManager;
 	
-	private RunningDwarf runningDwarf;
+	private Dwarf dwarf;
 	
 	public GameScreen() {
-		assetManager = new AssetManager();
-		assetManager.load("packed/dwarf/dwarf_attack_left.atlas", TextureAtlas.class);
-		assetManager.load("packed/dwarf/dwarf_run_right.atlas", TextureAtlas.class);
-		assetManager.finishLoading();
-
+		camera = new OrthographicCamera();
+		viewport = new FitViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
 		batch = new SpriteBatch();
 		
-		dwarfAttackLeftAtlas = assetManager.get("packed/dwarf/dwarf_attack_left.atlas", TextureAtlas.class);
-		dwarfTexture = dwarfAttackLeftAtlas.findRegion("dwarf_attack_left", 1);//indices starting at 1
+		assetManager = CharacterAnimationAssetManager.getInstance();
 		
-		runningDwarf = new RunningDwarf(this);
+		dwarf = new Dwarf();
 	}
 	
 	@Override
@@ -39,10 +40,11 @@ public class GameScreen extends ScreenAdapter {
 		//clear the screen (with a black screen)
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		batch.setProjectionMatrix(camera.combined);
 		
 		batch.begin();
-		batch.draw(dwarfTexture, 500, 500, dwarfTexture.getRegionWidth()*5, dwarfTexture.getRegionHeight()*5);
-		runningDwarf.render(delta, batch);
+		dwarf.render(delta, batch);
 		batch.end();
 	}
 	
@@ -52,13 +54,13 @@ public class GameScreen extends ScreenAdapter {
 	}
 	
 	@Override
-	public void dispose() {
-		dwarfAttackLeftAtlas.dispose();
-		batch.dispose();
+	public void resize(int width, int height) {
+		viewport.update(width, height, false);
 	}
-
 	
-	public AssetManager getAssetManager() {
-		return assetManager;
+	@Override
+	public void dispose() {
+		batch.dispose();
+		assetManager.dispose();
 	}
 }

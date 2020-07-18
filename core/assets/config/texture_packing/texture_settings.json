@@ -6,6 +6,11 @@
 			atlasName: dwarf_attack_left
 		}, 
 		{
+			textureDir: dwarf/dwarf_attack_jump_left,
+			outputDir: packed/dwarf,
+			atlasName: dwarf_attack_jump_left
+		}, 
+		{
 			textureDir: dwarf/dwarf_die_left, 
 			outputDir: packed/dwarf, 
 			atlasName: dwarf_die_left

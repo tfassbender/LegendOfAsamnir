@@ -17,4 +17,9 @@ public class AnimationConfigList {
 	public void setConfigList(List<AnimationConfig> configList) {
 		this.configList = configList;
 	}
+	
+	@Override
+	public String toString() {
+		return "AnimationConfigList [configList=" + configList + "]";
+	}
 }

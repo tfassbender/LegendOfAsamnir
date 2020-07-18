@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Json;
 
 public class TexturePackingTool {
 	
-	public static final boolean REPACK_TEXTURES = true;
+	public static final boolean REPACK_TEXTURES = false;
 	public static final String TEXTURE_SETTINGS_FILE = "config/texture_packing/texture_settings.json";
 	
 	private TexturePacker.Settings textureSettings;

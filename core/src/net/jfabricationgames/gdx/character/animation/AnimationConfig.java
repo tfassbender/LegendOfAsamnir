@@ -6,7 +6,7 @@ public class AnimationConfig {
 	
 	private String name;
 	private String atlas;
-	private float frameDuration;
+	private float frameDuration = 0.1f;
 	private PlayMode playMode = PlayMode.LOOP;
 	
 	public AnimationConfig() {
@@ -39,5 +39,10 @@ public class AnimationConfig {
 	}
 	public void setPlayMode(PlayMode playMode) {
 		this.playMode = playMode;
+	}
+	
+	@Override
+	public String toString() {
+		return "AnimationConfig [name=" + name + ", atlas=" + atlas + ", frameDuration=" + frameDuration + ", playMode=" + playMode + "]";
 	}
 }

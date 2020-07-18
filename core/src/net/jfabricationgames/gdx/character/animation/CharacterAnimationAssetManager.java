@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.character.animation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ public class CharacterAnimationAssetManager {
 	
 	private CharacterAnimationAssetManager() {
 		assetManager = new AssetManager();
+		animations = new HashMap<>();
 	}
 	
 	/**
@@ -38,7 +40,7 @@ public class CharacterAnimationAssetManager {
 	 * Example: To load dwarf animations from file "assets/config/animation/dwarf.json" enter the parameter "dwarf"
 	 * 
 	 * @param config
-	 *        The configuration file, that's animations are to be loaded
+	 *        The configuration file, that's animations are to be loaded (without the file ending)
 	 */
 	public void loadAnimations(String... configurations) {
 		for (String config : configurations) {
@@ -65,10 +67,19 @@ public class CharacterAnimationAssetManager {
 	
 	private void createAnimation(AnimationConfig config) {
 		TextureAtlas textureAtlas = assetManager.get(config.getAtlas(), TextureAtlas.class);
-		Animation<TextureRegion> animation = new Animation<>(config.getFrameDuration(), textureAtlas.findRegions(config.getName()));
+		Animation<TextureRegion> animation = new Animation<>(config.getFrameDuration(), textureAtlas.findRegions(config.getName()),
+				config.getPlayMode());
 		animations.put(config.getName(), animation);
 	}
 	
+	/**
+	 * Get an {@link Animation} from the loaded animations.
+	 * 
+	 * @param name
+	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
+	 * 		
+	 * @return The {@link Animation}.
+	 */
 	public Animation<TextureRegion> getAnimation(String name) {
 		if (!animations.containsKey(name)) {
 			throw new IllegalArgumentException("The animation \"" + name + "\" doesn't exist in this asset manager");
@@ -76,6 +87,24 @@ public class CharacterAnimationAssetManager {
 		return animations.get(name);
 	}
 	
+	/**
+	 * Get an {@link AnimationDirector} from the loaded animations.
+	 * 
+	 * @param name
+	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
+	 * 		
+	 * @return The {@link AnimationDirector}.
+	 */
+	public AnimationDirector<TextureRegion> getAnimationDirector(String name) {
+		return new AnimationDirector<TextureRegion>(getAnimation(name));
+	}
+	
+	/**
+	 * Get a {@link List} of all names of animations that are currently loaded. The names can then be used to get the animations using the
+	 * getAnimation(String) method.
+	 * 
+	 * @return A {@link List} of the names of all animations.
+	 */
 	public List<String> getAvailableAnimations() {
 		return new ArrayList<String>(animations.keySet());
 	}

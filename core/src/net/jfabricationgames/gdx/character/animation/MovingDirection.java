@@ -7,13 +7,13 @@ public enum MovingDirection {
 	LEFT("left"), //
 	RIGHT("right");
 	
-	private final String animationPostfix;
+	private final String animationDirectionPostfix;
 	
-	private MovingDirection(String animationPostfix) {
-		this.animationPostfix = animationPostfix;
+	private MovingDirection(String animationDirectionPostfix) {
+		this.animationDirectionPostfix = animationDirectionPostfix;
 	}
 	
-	public String getAnimationPostfix() {
-		return animationPostfix;
+	public String getAnimationDirectionPostfix() {
+		return animationDirectionPostfix;
 	}
 }
