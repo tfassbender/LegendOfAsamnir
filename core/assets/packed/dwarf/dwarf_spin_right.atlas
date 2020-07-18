@@ -1,0 +1,20 @@
+
+dwarf_spin_right.png
+size: 128,32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dwarf_spin_right
+  rotate: false
+  xy: 0, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+dwarf_spin_right
+  rotate: false
+  xy: 34, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2

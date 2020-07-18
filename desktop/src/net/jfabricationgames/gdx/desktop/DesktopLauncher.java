@@ -4,7 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
-import net.jfabricationgames.gdx.desktop.util.TextureUtil;
+import net.jfabricationgames.gdx.desktop.util.TexturePackingTool;
 
 public class DesktopLauncher {
 	
@@ -20,6 +20,6 @@ public class DesktopLauncher {
 	}
 	
 	private static void packTextures() {
-		new TextureUtil().packTextures();
+		new TexturePackingTool().packTextures();
 	}
 }

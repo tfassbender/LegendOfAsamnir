@@ -1,0 +1,79 @@
+{
+	settings: [
+		{
+			textureDir: dwarf/dwarf_attack_left,
+			outputDir: packed/dwarf,
+			atlasName: dwarf_attack_left
+		}, 
+		{
+			textureDir: dwarf/dwarf_die_left, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_die_left
+		},
+		{
+			textureDir: dwarf/dwarf_hit_left, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_hit_left
+		},
+		{
+			textureDir: dwarf/dwarf_idle_left, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_idle_left
+		},
+		{
+			textureDir: dwarf/dwarf_jump_left, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_jump_left
+		},
+		{
+			textureDir: dwarf/dwarf_run_left, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_run_left
+		},
+		{
+			textureDir: dwarf/dwarf_spin_left, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_spin_left
+		},
+		{
+			textureDir: dwarf/dwarf_attack_right, 
+			outputDir: packed/dwarf, 
+			atlasName:  dwarf_attack_right
+		},
+		{
+			textureDir: dwarf/dwarf_attack_jump_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_attack_jump_right
+		},
+		{
+			textureDir: dwarf/dwarf_die_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_die_right
+		},
+		{
+			textureDir: dwarf/dwarf_hit_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_hit_right
+		},
+		{
+			textureDir: dwarf/dwarf_idle_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_idle_right
+		},
+		{
+			textureDir: dwarf/dwarf_jump_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_jump_right
+		},
+		{
+			textureDir: dwarf/dwarf_run_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_run_right
+		},
+		{
+			textureDir: dwarf/dwarf_spin_right, 
+			outputDir: packed/dwarf, 
+			atlasName: dwarf_spin_right
+		}
+	]
+}

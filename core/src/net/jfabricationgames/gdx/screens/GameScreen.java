@@ -22,14 +22,14 @@ public class GameScreen extends ScreenAdapter {
 	
 	public GameScreen() {
 		assetManager = new AssetManager();
-		assetManager.load("packed/dwarf/dwarf_left_attack.atlas", TextureAtlas.class);
-		assetManager.load("packed/dwarf/dwarf_right_run.atlas", TextureAtlas.class);
+		assetManager.load("packed/dwarf/dwarf_attack_left.atlas", TextureAtlas.class);
+		assetManager.load("packed/dwarf/dwarf_run_right.atlas", TextureAtlas.class);
 		assetManager.finishLoading();
 
 		batch = new SpriteBatch();
 		
-		dwarfAttackLeftAtlas = assetManager.get("packed/dwarf/dwarf_left_attack.atlas", TextureAtlas.class);
-		dwarfTexture = dwarfAttackLeftAtlas.findRegion("dwarf_left_attack", 1);//indices starting at 1
+		dwarfAttackLeftAtlas = assetManager.get("packed/dwarf/dwarf_attack_left.atlas", TextureAtlas.class);
+		dwarfTexture = dwarfAttackLeftAtlas.findRegion("dwarf_attack_left", 1);//indices starting at 1
 		
 		runningDwarf = new RunningDwarf(this);
 	}
