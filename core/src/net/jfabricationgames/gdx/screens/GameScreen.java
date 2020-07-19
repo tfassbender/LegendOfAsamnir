@@ -43,7 +43,7 @@ public class GameScreen extends ScreenAdapter {
 	
 	private Dwarf dwarf;
 	
-	private DebugGridRenderer gridRenderer;
+	private DebugGridRenderer debugGridRenderer;
 	
 	public GameScreen() {
 		initializeCamerasAndViewports();
@@ -54,8 +54,9 @@ public class GameScreen extends ScreenAdapter {
 		assetManager = CharacterAnimationAssetManager.getInstance();
 		
 		dwarf = new Dwarf();
-		gridRenderer = new DebugGridRenderer();
-		gridRenderer.setLineOffsets(0.1f, 0.1f);
+		debugGridRenderer = new DebugGridRenderer();
+		debugGridRenderer.setLineOffsets(0.1f, 0.1f);
+		//debugGridRenderer.stopDebug();
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -63,6 +64,8 @@ public class GameScreen extends ScreenAdapter {
 		cameraHud = new OrthographicCamera();
 		viewport = new FitViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
 		viewportHud = new FitViewport(SCENE_WIDTH, SCENE_HEIGHT, cameraHud);
+		//viewport = new ExtendViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
+		//viewportHud = new ExtendViewport(SCENE_WIDTH, SCENE_HEIGHT, cameraHud);
 		
 		cameraHud.position.x += SCENE_WIDTH * 0.5;
 		cameraHud.position.y += SCENE_HEIGHT * 0.5;
@@ -111,8 +114,8 @@ public class GameScreen extends ScreenAdapter {
 	}
 	
 	private void renderDebugGraphics(float delta) {
-		gridRenderer.updateCamera(camera);
-		gridRenderer.render(delta);
+		debugGridRenderer.updateCamera(camera);
+		debugGridRenderer.render(delta);
 	}
 	
 	private void renderGameGraphics(float delta) {
