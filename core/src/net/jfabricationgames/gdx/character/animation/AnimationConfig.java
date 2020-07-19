@@ -7,7 +7,7 @@ public class AnimationConfig {
 	private String name;
 	private String atlas;
 	private float frameDuration = 0.1f;
-	private PlayMode playMode = PlayMode.LOOP;
+	private PlayMode playMode = PlayMode.NORMAL;
 	
 	public AnimationConfig() {
 		

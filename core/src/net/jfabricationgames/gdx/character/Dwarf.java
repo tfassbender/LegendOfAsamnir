@@ -7,74 +7,92 @@ import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
+import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.character.animation.MovingDirection;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class Dwarf {
+	
+	public static final float MOVING_SPEED = 0.5f;
+	public static final float JUMPING_SPEED = 0.75f;
 	
 	private static final String assetConfigFileName = "dwarf";
 	
 	private CharacterAnimationAssetManager assetManager;
 	
 	private Vector2 position;
-	private Action action;
-	private MovingDirection direction;
+	private CharacterAction action;
+	
+	private CharacterInputMovementHandler movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
-	private Sprite dwarfSprite;
-	
-	public enum Action {
-		
-		IDLE("dwarf_idle_"), //
-		RUN("dwarf_run_"), //
-		JUMP("dwarf_jump_"), //
-		ATTACK("dwarf_attack_"), //
-		ATTACK_JUMP("dwarf_attack_jump_"), //
-		ATTACK_SPIN("dwarf_spin_"), //
-		HIT("dwarf_hit_"), //
-		DIE("dwarf_die_");
-		
-		private final String animationPrefix;
-		
-		private Action(String animationPrefix) {
-			this.animationPrefix = animationPrefix;
-		}
-		
-		public String getAnimationName(MovingDirection direction) {
-			return animationPrefix + direction.getAnimationDirectionPostfix();
-		}
-	}
+	private Sprite idleDwarfSprite;
 	
 	public Dwarf() {
 		assetManager = CharacterAnimationAssetManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		
 		position = new Vector2(0, 0);
-		action = Action.IDLE;
-		direction = MovingDirection.RIGHT;
+		action = CharacterAction.NONE;
 		
+		movementHandler = new CharacterInputMovementHandler(this);
+		
+		idleDwarfSprite = getIdleSprite();
 		animation = getAnimation();
-		dwarfSprite = getSprite();
+	}
+	
+	private Sprite getIdleSprite() {
+		return new Sprite(getAnimation(CharacterAction.IDLE, movementHandler.getDirection()).getAnimation().getKeyFrame(0));
+	}
+	
+	public void changeAction(CharacterAction action) {
+		this.action = action;
+		this.animation = getAnimation();
+		this.animation.resetStateTime();
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
-		return getAnimation(action, direction);
+		if (action != CharacterAction.NONE) {
+			return getAnimation(action, movementHandler.getDirection());
+		}
+		else {
+			return new DummyAnimationDirector<TextureRegion>();
+		}
 	}
-	private AnimationDirector<TextureRegion> getAnimation(Action action, MovingDirection movingDirection) {
+	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action, MovingDirection movingDirection) {
 		return assetManager.getAnimationDirector(getAnimationName(action, movingDirection));
 	}
-	
-	private Sprite getSprite() {
-		return new Sprite(animation.getAnimation().getKeyFrame(0));
-	}
-	
-	private String getAnimationName(Action action, MovingDirection direction) {
+	private String getAnimationName(CharacterAction action, MovingDirection direction) {
 		return action.getAnimationName(direction);
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
-		TextureRegion frame = animation.getKeyFrame(delta);
-		drawDwarf(batch, frame);
+		movementHandler.handleInputs(delta);
+		movementHandler.move(delta);
+		
+		updateAction(delta);
+		
+		draw(batch);
+	}
+	
+	private void updateAction(float delta) {
+		animation.increaseStateTime(delta);
+		if (animation.isAnimationFinished()) {
+			changeAction(CharacterAction.NONE);
+		}
+	}
+	
+	private void draw(SpriteBatch batch) {
+		if (action != CharacterAction.NONE) {
+			TextureRegion frame = animation.getKeyFrame();
+			drawDwarf(batch, frame);
+		}
+		else {
+			if (movementHandler.getDirection().isDrawingDirectionRight() == idleDwarfSprite.isFlipX()) {
+				idleDwarfSprite.flip(true, false);
+			}
+			drawDwarf(batch, idleDwarfSprite);
+		}
 	}
 	
 	private void drawDwarf(SpriteBatch batch, TextureRegion frame) {
@@ -100,5 +118,21 @@ public class Dwarf {
 				GameScreen.WORLD_TO_SCREEN, // scaleX
 				GameScreen.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation
+	}
+	
+	public CharacterAction getCurrentAction() {
+		return action;
+	}
+	
+	public float getMovingSpeed() {
+		return MOVING_SPEED;
+	}
+	public float getJumpingSpeed() {
+		return JUMPING_SPEED;
+	}
+	
+	public void move(float deltaX, float deltaY) {
+		position.x += deltaX;
+		position.y += deltaY;
 	}
 }

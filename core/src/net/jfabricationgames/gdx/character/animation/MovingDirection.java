@@ -2,18 +2,31 @@ package net.jfabricationgames.gdx.character.animation;
 
 public enum MovingDirection {
 	
-	UP("right"), //
-	DOWN("left"), //
-	LEFT("left"), //
-	RIGHT("right");
+	NONE(true), //
+	UP(true), //
+	DOWN(false), //
+	LEFT(false), //
+	RIGHT(true);
 	
-	private final String animationDirectionPostfix;
+	public static final String DRAWING_DIRECTION_RIGHT_POSTFIX = "right";
+	public static final String DRAWING_DIRECTION_LEFT_POSTFIX = "left";
 	
-	private MovingDirection(String animationDirectionPostfix) {
-		this.animationDirectionPostfix = animationDirectionPostfix;
+	private final boolean drawingDirectionRight;
+	
+	private MovingDirection(boolean drawingDirectionRight) {
+		this.drawingDirectionRight = drawingDirectionRight;
 	}
 	
 	public String getAnimationDirectionPostfix() {
-		return animationDirectionPostfix;
+		if (drawingDirectionRight) {
+			return DRAWING_DIRECTION_RIGHT_POSTFIX;
+		}
+		else {
+			return DRAWING_DIRECTION_LEFT_POSTFIX;
+		}
+	}
+	
+	public boolean isDrawingDirectionRight() {
+		return drawingDirectionRight;
 	}
 }

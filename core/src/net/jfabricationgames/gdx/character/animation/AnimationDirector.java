@@ -58,4 +58,8 @@ public class AnimationDirector<T> {
 	public Animation<T> getAnimation() {
 		return animation;
 	}
+	
+	public boolean isAnimationFinished() {
+		return animation.isAnimationFinished(stateTime);
+	}
 }

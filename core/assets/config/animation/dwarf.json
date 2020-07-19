@@ -5,67 +5,97 @@
 			name: dwarf_attack_left,
 			atlas: packed/dwarf/dwarf_attack_left.atlas,
 			frameDuration: 0.1,
-			playMode: LOOP
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_attack_jump_left,
 			atlas: packed/dwarf/dwarf_attack_jump_left.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_die_left,
 			atlas: packed/dwarf/dwarf_die_left.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_hit_left,
 			atlas: packed/dwarf/dwarf_hit_left.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_idle_left,
 			atlas: packed/dwarf/dwarf_idle_left.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_jump_left,
 			atlas: packed/dwarf/dwarf_jump_left.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_run_left,
 			atlas: packed/dwarf/dwarf_run_left.atlas,
+			frameDuration: 0.1,
+			playMode: LOOP
 		},
 		{
 			name: dwarf_spin_left,
 			atlas: packed/dwarf/dwarf_spin_left.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_attack_right,
 			atlas: packed/dwarf/dwarf_attack_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_attack_jump_right,
 			atlas: packed/dwarf/dwarf_attack_jump_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_die_right,
 			atlas: packed/dwarf/dwarf_die_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_hit_right,
 			atlas: packed/dwarf/dwarf_hit_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_idle_right,
 			atlas: packed/dwarf/dwarf_idle_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_jump_right,
 			atlas: packed/dwarf/dwarf_jump_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		},
 		{
 			name: dwarf_run_right,
 			atlas: packed/dwarf/dwarf_run_right.atlas,
+			frameDuration: 0.1,
+			playMode: LOOP
 		},
 		{
 			name: dwarf_spin_right
 			atlas: packed/dwarf/dwarf_spin_right.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
 		}
 	]
 }
