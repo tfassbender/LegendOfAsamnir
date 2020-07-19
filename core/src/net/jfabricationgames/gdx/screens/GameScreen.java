@@ -14,8 +14,8 @@ import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetMana
 public class GameScreen extends ScreenAdapter {
 	
 	public static final float WORLD_TO_SCREEN = 1.0f / 100.0f;
-	public static final float SCENE_WIDTH = 1.280f;
-	public static final float SCENE_HEIGHT = .720f;
+	public static final float SCENE_WIDTH = 3.20f;
+	public static final float SCENE_HEIGHT = 1.80f;
 	
 	private OrthographicCamera camera;
 	private Viewport viewport;

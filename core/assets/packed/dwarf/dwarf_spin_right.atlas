@@ -2,7 +2,7 @@
 dwarf_spin_right.png
 size: 128,32
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 dwarf_spin_right
   rotate: false

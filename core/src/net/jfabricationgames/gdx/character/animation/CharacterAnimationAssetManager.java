@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 public class CharacterAnimationAssetManager {
@@ -28,10 +32,12 @@ public class CharacterAnimationAssetManager {
 	
 	private AssetManager assetManager;
 	private Map<String, Animation<TextureRegion>> animations;
+	private Map<String, AnimationConfig> animationConfigurations;
 	
 	private CharacterAnimationAssetManager() {
 		assetManager = new AssetManager();
 		animations = new HashMap<>();
+		animationConfigurations = new HashMap<>();
 	}
 	
 	/**
@@ -45,6 +51,9 @@ public class CharacterAnimationAssetManager {
 	public void loadAnimations(String... configurations) {
 		for (String config : configurations) {
 			AnimationConfigList animationConfig = loadAnimationConfig(config);
+			
+			animationConfigurations
+					.putAll(animationConfig.getConfigList().stream().collect(Collectors.toMap(AnimationConfig::getName, Function.identity())));
 			
 			animationConfig.getConfigList().forEach(this::markAnimationForLoading);
 			assetManager.finishLoading();
@@ -109,6 +118,48 @@ public class CharacterAnimationAssetManager {
 		return new ArrayList<String>(animations.keySet());
 	}
 	
+	/**
+	 * Get a {@link TextureAtlas} from the asset manager.
+	 * 
+	 * @param name
+	 *        The atlas' name
+	 * 		
+	 * @return The {@link TextureAtlas}
+	 */
+	public TextureAtlas getAtlas(String name) {
+		return assetManager.get(name, TextureAtlas.class);
+	}
+	
+	/**
+	 * Get some {@link AtlasRegion}s as an {@link Array} from a {@link TextureAtlas}.
+	 * 
+	 * @param atlas
+	 *        The name of the {@link TextureAtlas}
+	 * 		
+	 * @param region
+	 *        The name of the {@link AtlasRegion}s within the {@link TextureAtlas}
+	 * 		
+	 * @return An {@link Array} of {@link AtlasRegion} objects.
+	 */
+	public Array<AtlasRegion> getAtlasRegions(String atlas, String regions) {
+		return getAtlas(atlas).findRegions(regions);
+	}
+	
+	/**
+	 * Get an {@link AnimationConfig} by it's name.
+	 * 
+	 * @param configName
+	 *        The name of the configuration that is defined in the configuration's JSON file.
+	 * 		
+	 * @return The {@link AnimationConfig}
+	 */
+	public AnimationConfig getAnimationConfig(String configName) {
+		return animationConfigurations.get(configName);
+	}
+	
+	/**
+	 * Dispose the asset manager.
+	 */
 	public void dispose() {
 		assetManager.dispose();
 	}

@@ -22,8 +22,8 @@ public class TexturePackingTool {
 		textureSettings.maxHeight = 4096;
 		textureSettings.edgePadding = false;
 		textureSettings.duplicatePadding = false;
-		textureSettings.filterMin = TextureFilter.Linear;
-		textureSettings.filterMag = TextureFilter.Linear;
+		textureSettings.filterMin = TextureFilter.Nearest;
+		textureSettings.filterMag = TextureFilter.Nearest;
 		
 		try {
 			if (REPACK_TEXTURES) {

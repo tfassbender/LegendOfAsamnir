@@ -23,8 +23,9 @@ public class AnimationDirector<T> {
 	/**
 	 * Increase the state time and get the frame at the increased state time.
 	 * 
-	 * @param delta The time delta from the render method.
-	 * 
+	 * @param delta
+	 *        The time delta from the render method.
+	 * 		
 	 * @return The frame after the increased state time.
 	 */
 	public T getKeyFrame(float delta) {
@@ -35,7 +36,8 @@ public class AnimationDirector<T> {
 	/**
 	 * Increase the state time by a given delta time.
 	 * 
-	 * @param delta The time delta from the render method.
+	 * @param delta
+	 *        The time delta from the render method.
 	 */
 	public void increaseStateTime(float delta) {
 		stateTime += delta;
@@ -46,5 +48,14 @@ public class AnimationDirector<T> {
 	 */
 	public void resetStateTime() {
 		stateTime = 0;
+	}
+	
+	/**
+	 * Get the {@link Animation} that this object holds.
+	 * 
+	 * @return The {@link Animation}
+	 */
+	public Animation<T> getAnimation() {
+		return animation;
 	}
 }

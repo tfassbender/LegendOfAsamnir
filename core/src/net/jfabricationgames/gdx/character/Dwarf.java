@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.character;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -20,6 +21,7 @@ public class Dwarf {
 	private MovingDirection direction;
 	
 	private AnimationDirector<TextureRegion> animation;
+	private Sprite dwarfSprite;
 	
 	public enum Action {
 		
@@ -52,6 +54,22 @@ public class Dwarf {
 		direction = MovingDirection.RIGHT;
 		
 		animation = getAnimation();
+		dwarfSprite = getSprite();
+	}
+	
+	private AnimationDirector<TextureRegion> getAnimation() {
+		return getAnimation(action, direction);
+	}
+	private AnimationDirector<TextureRegion> getAnimation(Action action, MovingDirection movingDirection) {
+		return assetManager.getAnimationDirector(getAnimationName(action, movingDirection));
+	}
+	
+	private Sprite getSprite() {
+		return new Sprite(animation.getAnimation().getKeyFrame(0));
+	}
+	
+	private String getAnimationName(Action action, MovingDirection direction) {
+		return action.getAnimationName(direction);
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
@@ -67,19 +85,20 @@ public class Dwarf {
 		float x = position.x - originX;
 		float y = position.y - originY;
 		
-		batch.draw(frame,                     // textureRegion
-				x, y,                         // x, y
-				originX, originY,             //originX, originY
-				width, height,                // width, height
-				GameScreen.WORLD_TO_SCREEN,   // scaleX
-				GameScreen.WORLD_TO_SCREEN,	  // scaleY
-				0.0f);                        // rotation
-	}
-	
-	private AnimationDirector<TextureRegion> getAnimation() {
-		return getAnimation(action, direction);
-	}
-	private AnimationDirector<TextureRegion> getAnimation(Action action, MovingDirection movingDirection) {
-		return assetManager.getAnimationDirector(action.getAnimationName(movingDirection));
+		//		batch.draw(dwarfSprite, // sprite
+		//				x, y, //x, y
+		//				originX, originY, // originX, originY
+		//				width, height, // width, height
+		//				GameScreen.WORLD_TO_SCREEN, // scaleX
+		//				GameScreen.WORLD_TO_SCREEN, // scaleY
+		//				0); // rotation
+		
+		batch.draw(frame, // textureRegion
+				x, y, // x, y
+				originX, originY, //originX, originY
+				width, height, // width, height
+				GameScreen.WORLD_TO_SCREEN, // scaleX
+				GameScreen.WORLD_TO_SCREEN, // scaleY
+				0.0f); // rotation
 	}
 }

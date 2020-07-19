@@ -2,7 +2,7 @@
 dwarf_die_right.png
 size: 256,32
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 dwarf_die_right
   rotate: false
