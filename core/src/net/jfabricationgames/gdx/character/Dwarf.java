@@ -8,13 +8,13 @@ import com.badlogic.gdx.math.Vector2;
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
 import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
-import net.jfabricationgames.gdx.character.animation.MovingDirection;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class Dwarf {
 	
 	public static final float MOVING_SPEED = 0.5f;
 	public static final float JUMPING_SPEED = 0.75f;
+	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	
 	private static final String assetConfigFileName = "dwarf";
 	
@@ -42,7 +42,7 @@ public class Dwarf {
 	}
 	
 	private Sprite getIdleSprite() {
-		return new Sprite(getAnimation(CharacterAction.IDLE, movementHandler.getDirection()).getAnimation().getKeyFrame(0));
+		return new Sprite(getAnimation(CharacterAction.IDLE).getAnimation().getKeyFrame(0));
 	}
 	
 	public void changeAction(CharacterAction action) {
@@ -53,24 +53,24 @@ public class Dwarf {
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
 		if (action != CharacterAction.NONE) {
-			return getAnimation(action, movementHandler.getDirection());
+			return getAnimation(action);
 		}
 		else {
 			return new DummyAnimationDirector<TextureRegion>();
 		}
 	}
-	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action, MovingDirection movingDirection) {
-		return assetManager.getAnimationDirector(getAnimationName(action, movingDirection));
+	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action) {
+		return assetManager.getAnimationDirector(getAnimationName(action));
 	}
-	private String getAnimationName(CharacterAction action, MovingDirection direction) {
-		return action.getAnimationName(direction);
+	private String getAnimationName(CharacterAction action) {
+		return action.getAnimationName();
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
+		updateAction(delta);
+		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
-		
-		updateAction(delta);
 		
 		draw(batch);
 	}
@@ -83,16 +83,13 @@ public class Dwarf {
 	}
 	
 	private void draw(SpriteBatch batch) {
-		if (action != CharacterAction.NONE) {
-			TextureRegion frame = animation.getKeyFrame();
-			drawDwarf(batch, frame);
+		TextureRegion frame = action != CharacterAction.NONE ? animation.getKeyFrame() : idleDwarfSprite;
+		
+		if (movementHandler.isDrawDirectionRight() == frame.isFlipX()) {
+			frame.flip(true, false);
 		}
-		else {
-			if (movementHandler.getDirection().isDrawingDirectionRight() == idleDwarfSprite.isFlipX()) {
-				idleDwarfSprite.flip(true, false);
-			}
-			drawDwarf(batch, idleDwarfSprite);
-		}
+		
+		drawDwarf(batch, frame);
 	}
 	
 	private void drawDwarf(SpriteBatch batch, TextureRegion frame) {
@@ -134,5 +131,13 @@ public class Dwarf {
 	public void move(float deltaX, float deltaY) {
 		position.x += deltaX;
 		position.y += deltaY;
+	}
+	
+	public float getTimeTillIdleAnimation() {
+		return TIME_TILL_IDLE_ANIMATION;
+	}
+	
+	public boolean isAnimationFinished() {
+		return animation.isAnimationFinished();
 	}
 }

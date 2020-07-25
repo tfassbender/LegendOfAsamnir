@@ -1,7 +1,5 @@
 package net.jfabricationgames.gdx.character;
 
-import net.jfabricationgames.gdx.character.animation.MovingDirection;
-
 public enum CharacterAction {
 	
 	NONE("", false, true, false),// just stay still
@@ -19,6 +17,8 @@ public enum CharacterAction {
 	private final boolean interruptable;
 	private final boolean moveBlocking;
 	
+	private static final String defaultAnimationDirection = "right";
+	
 	private CharacterAction(String animationPrefix, boolean animated, boolean interruptable, boolean moveBlocking) {
 		if (interruptable && moveBlocking) {
 			throw new IllegalArgumentException("An action can't be interruptable and move blocking at the same time");
@@ -30,8 +30,8 @@ public enum CharacterAction {
 		this.moveBlocking = moveBlocking;
 	}
 	
-	public String getAnimationName(MovingDirection direction) {
-		return animationPrefix + direction.getAnimationDirectionPostfix();
+	public String getAnimationName() {
+		return animationPrefix + defaultAnimationDirection;
 	}
 	
 	public String getAnimationPrefix() {
