@@ -39,6 +39,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		jumpDirection = MovingDirection.NONE;
 		lastMoveDirection = MovingDirection.NONE;
 		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		inputContext.addListener(this);
 	}
 	
 	public void handleInputs(float delta) {
@@ -228,14 +229,8 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	}
 	
 	@Override
-	public boolean onAction(String action) {
+	public boolean onAction(String action, Type type, Parameters parameters) {
 		//only states are used in this implementation
-		return false;
-	}
-	
-	@Override
-	public boolean onButtonAction(String action, float screenX, float screenY, int pointer) {
-		//no buttons used here
 		return false;
 	}
 }

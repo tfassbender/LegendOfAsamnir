@@ -1,5 +1,15 @@
 <InputProfile>
 	<context name="mainMenu">
+		<events>
+			<KEY_DOWN listening="true" />
+			<KEY_UP listening="false" />
+			<KEY_TYPED listening="false" />
+			<TOUCH_DOWN listening="true" />
+			<TOUCH_UP listening="false" />
+			<TOUCH_DRAGGED listening="false" />
+			<MOUSE_MOVED listening="false" />
+			<SCROLLED listening="false" />
+		</events>
 		<actions>
 			<action name="nextOption">
 				<key code="Right" />
@@ -41,9 +51,5 @@
 				<button code="Left" />
 			</state>
 		</states>
-
-		<actions>
-			<!-- <action name="an_action"> <key code="Enter" /> </action> -->
-		</actions>
 	</context>
 </InputProfile>
