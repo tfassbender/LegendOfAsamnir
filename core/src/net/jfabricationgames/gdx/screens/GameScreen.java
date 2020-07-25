@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
@@ -23,6 +24,8 @@ public class GameScreen extends ScreenAdapter {
 	public static final float WORLD_TO_SCREEN = 1.0f / 100.0f;
 	public static final float SCENE_WIDTH = 3.20f;
 	public static final float SCENE_HEIGHT = 1.80f;
+	
+	public static final String INPUT_CONTEXT_NAME = "game";
 	
 	private static final float CAMERA_SPEED = 1.0f;
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
@@ -46,6 +49,7 @@ public class GameScreen extends ScreenAdapter {
 	private DebugGridRenderer debugGridRenderer;
 	
 	public GameScreen() {
+		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		initializeCamerasAndViewports();
 		
 		batch = new SpriteBatch();

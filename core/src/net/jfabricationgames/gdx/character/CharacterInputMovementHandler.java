@@ -1,12 +1,20 @@
 package net.jfabricationgames.gdx.character;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.Input.Keys;
-
+import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.animation.MovingDirection;
+import net.jfabricationgames.gdx.input.InputActionListener;
+import net.jfabricationgames.gdx.input.InputContext;
 
-public class CharacterInputMovementHandler {
+public class CharacterInputMovementHandler implements InputActionListener {
+	
+	private static final float SQRT_0_5 = (float) Math.sqrt(0.5f);
+	
+	private static final String INPUT_MOVE_UP = "up";
+	private static final String INPUT_MOVE_DOWN = "down";
+	private static final String INPUT_MOVE_LEFT = "left";
+	private static final String INPUT_MOVE_RIGHT = "right";
+	private static final String INPUT_JUMP = "jump";
+	private static final String INPUT_ATTACK = "attack";
 	
 	private Dwarf inputCharacter;
 	
@@ -17,13 +25,20 @@ public class CharacterInputMovementHandler {
 	private boolean jump = false;
 	private boolean attack = false;
 	
+	private float idleTime;
+	private float timeTillIdleAnimation;
+	
 	private MovingDirection jumpDirection;
-	private MovingDirection direction;
+	private MovingDirection lastMoveDirection;
+	
+	private InputContext inputContext;
 	
 	public CharacterInputMovementHandler(Dwarf inputCharacter) {
 		this.inputCharacter = inputCharacter;
+		timeTillIdleAnimation = inputCharacter.getTimeTillIdleAnimation();
 		jumpDirection = MovingDirection.NONE;
-		direction = MovingDirection.NONE;
+		lastMoveDirection = MovingDirection.NONE;
+		inputContext = DwarfScrollerGame.getInstance().getInputContext();
 	}
 	
 	public void handleInputs(float delta) {
@@ -34,8 +49,8 @@ public class CharacterInputMovementHandler {
 		if (attack) {
 			if (getAction().isInterruptable()) {
 				if (move) {
-					direction = getDirectionFromInputs();
-					jumpDirection = getDirectionFromInputs();
+					lastMoveDirection = getDirectionFromInputs();
+					jumpDirection = getDrawingDirectionChangesFromInputs();
 					inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
 				}
 				else {
@@ -50,8 +65,8 @@ public class CharacterInputMovementHandler {
 			}
 		}
 		else if (move) {
+			lastMoveDirection = getDrawingDirectionChangesFromInputs();
 			if (getAction().isInterruptable() && getAction() != CharacterAction.RUN) {
-				direction = getDirectionFromInputs();
 				inputCharacter.changeAction(CharacterAction.RUN);
 			}
 		}
@@ -60,26 +75,43 @@ public class CharacterInputMovementHandler {
 				inputCharacter.changeAction(CharacterAction.NONE);
 			}
 		}
+		
+		if (inputCharacter.getCurrentAction() == CharacterAction.NONE) {
+			idleTime += delta;
+			
+			if (idleTime > timeTillIdleAnimation) {
+				if (inputCharacter.getCurrentAction() != CharacterAction.IDLE) {
+					inputCharacter.changeAction(CharacterAction.IDLE);
+				}
+				else if (inputCharacter.isAnimationFinished()) {
+					inputCharacter.changeAction(CharacterAction.NONE);
+					idleTime = 0;
+				}
+			}
+		}
+		else {
+			idleTime = 0;
+		}
 	}
 	
 	private void readInputs() {
 		resetInputFlags();
-		if (Gdx.input.isKeyPressed(Keys.W)) {
+		if (inputContext.isStateActive(INPUT_MOVE_UP)) {
 			moveUp = true;
 		}
-		if (Gdx.input.isKeyPressed(Keys.S)) {
+		if (inputContext.isStateActive(INPUT_MOVE_DOWN)) {
 			moveDown = true;
 		}
-		if (Gdx.input.isKeyPressed(Keys.A)) {
+		if (inputContext.isStateActive(INPUT_MOVE_LEFT)) {
 			moveLeft = true;
 		}
-		if (Gdx.input.isKeyPressed(Keys.D)) {
+		if (inputContext.isStateActive(INPUT_MOVE_RIGHT)) {
 			moveRight = true;
 		}
-		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+		if (inputContext.isStateActive(INPUT_JUMP)) {
 			jump = true;
 		}
-		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+		if (inputContext.isStateActive(INPUT_ATTACK)) {
 			attack = true;
 		}
 		
@@ -102,18 +134,38 @@ public class CharacterInputMovementHandler {
 		attack = false;
 	}
 	
-	private MovingDirection getDirectionFromInputs() {
-		if (moveUp) {
-			return MovingDirection.UP;
-		}
-		if (moveDown) {
-			return MovingDirection.DOWN;
-		}
+	/**
+	 * Get the current drawing direction (left or right) or the current drawing direction if no movement to the left or the right is done.
+	 * 
+	 * @return The drawing direction.
+	 */
+	private MovingDirection getDrawingDirectionChangesFromInputs() {
 		if (moveLeft) {
 			return MovingDirection.LEFT;
 		}
 		if (moveRight) {
 			return MovingDirection.RIGHT;
+		}
+		return lastMoveDirection;
+	}
+	
+	/**
+	 * Get the current input direction (where horizontal directions have a higher priority than vertical directions)
+	 * 
+	 * @return The current direction from the inputs.
+	 */
+	private MovingDirection getDirectionFromInputs() {
+		if (moveLeft) {
+			return MovingDirection.LEFT;
+		}
+		if (moveRight) {
+			return MovingDirection.RIGHT;
+		}
+		if (moveUp) {
+			return MovingDirection.UP;
+		}
+		if (moveDown) {
+			return MovingDirection.DOWN;
 		}
 		return MovingDirection.NONE;
 	}
@@ -122,7 +174,7 @@ public class CharacterInputMovementHandler {
 		if (!getAction().isMoveBlocking()) {
 			float moveSpeedPerDirection = inputCharacter.getMovingSpeed();
 			if ((moveUp || moveDown) && (moveLeft || moveRight)) {
-				moveSpeedPerDirection = inputCharacter.getMovingSpeed() * (float) Math.sqrt(0.5f);
+				moveSpeedPerDirection = inputCharacter.getMovingSpeed() * SQRT_0_5;
 			}
 			
 			float speedX = 0;
@@ -171,7 +223,19 @@ public class CharacterInputMovementHandler {
 		return inputCharacter.getCurrentAction();
 	}
 	
-	public MovingDirection getDirection() {
-		return direction;
+	public boolean isDrawDirectionRight() {
+		return lastMoveDirection.isDrawingDirectionRight();
+	}
+	
+	@Override
+	public boolean onAction(String action) {
+		//only states are used in this implementation
+		return false;
+	}
+	
+	@Override
+	public boolean onButtonAction(String action, float screenX, float screenY, int pointer) {
+		//no buttons used here
+		return false;
 	}
 }
