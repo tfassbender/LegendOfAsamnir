@@ -5,21 +5,29 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
-
-public class InputProfile implements InputProcessor {
+public class InputProfile implements InputProcessor, ControllerListener {
+	
+	/** Can be changed (before the XML-profile is loaded) if higher or lower dead zones for the analog sticks are needed */
+	public static float CONTROLLER_AXIS_DEAD_ZONE = 0.1f;
 	
 	private ArrayMap<String, InputContext> contexts;
 	private InputContext context;
 	
-	public InputProfile(FileHandle handle) {
-		DwarfScrollerGame.getInstance().addInputProcessor(this);
+	public InputProfile(FileHandle handle, InputMultiplexer inputMultiplexer) {
+		inputMultiplexer.addProcessor(this);
+		Controllers.addListener(this);
 		
 		contexts = new ArrayMap<String, InputContext>();
 		context = null;
@@ -119,5 +127,65 @@ public class InputProfile implements InputProcessor {
 			return context.scrolled(amount);
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean buttonDown(Controller controller, int buttonCode) {
+		if (context != null) {
+			return context.controllerButtonDown(controller, buttonCode);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean buttonUp(Controller controller, int buttonCode) {
+		if (context != null) {
+			return context.controllerButtonUp(controller, buttonCode);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean axisMoved(Controller controller, int axisCode, float value) {
+		if (context != null && Math.abs(value) > CONTROLLER_AXIS_DEAD_ZONE) {
+			return context.controllerAxisMoved(controller, axisCode, value);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean povMoved(Controller controller, int povCode, PovDirection value) {
+		if (context != null) {
+			return context.controllerPovMoved(controller, povCode, value);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean xSliderMoved(Controller controller, int sliderCode, boolean value) {
+		//not supported here
+		return false;
+	}
+	
+	@Override
+	public boolean ySliderMoved(Controller controller, int sliderCode, boolean value) {
+		//not supported here
+		return false;
+	}
+	
+	@Override
+	public boolean accelerometerMoved(Controller controller, int accelerometerCode, Vector3 value) {
+		//not supported here
+		return false;
+	}
+	
+	@Override
+	public void connected(Controller controller) {
+		//not supported here
+	}
+	
+	@Override
+	public void disconnected(Controller controller) {
+		//not supported here
 	}
 }

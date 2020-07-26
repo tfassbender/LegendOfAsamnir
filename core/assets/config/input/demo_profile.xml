@@ -1,0 +1,220 @@
+<!-- An input profile that contains several contexts, for different situations (e.g. game and menu) -->
+<InputProfile>
+	<!-- A context defines the inputs for a specific situation (e.g. game) and can be changed in the InputProfile -->
+	<context name="game">
+		<!-- The context may contain a list of events, to which it listens. -->
+		<!-- The events (and the parameters of the events) will be given to the registered InputActionListener objects for all matching actions, 
+			that are defined in the <actions> part of the context (see below) -->
+		<!-- If no events are defined the default is KEY_DOWN and TOUCH_DOWN -->
+		<events>
+			<!-- Events can be turned on and off by the 'listener' attribute -->
+			<KEY_DOWN listening="true" />
+			<KEY_UP listening="true" />
+			<KEY_TYPED listening="false" />
+			<!-- The 'listener' attribute is optional. If it is not set it is assumed to be 'true', because it was defined in this list. -->
+			<TOUCH_DOWN />
+			<TOUCH_UP listening="false" />
+			<TOUCH_DRAGGED listening="false" />
+			<!-- All events that are not contained in this list will be set to 'false' (which means they are not handled) -->
+			<!-- <MOUSE_MOVED listening="false" /> -->
+			<!-- <SCROLLED /> -->
+			<!-- For controller inputs there are input events too -->
+			<CONTROLLER_BUTTON_DOWN />
+			<CONTROLLER_BUTTON_UP />
+			<CONTROLLER_POV_CHANGED />
+			<CONTROLLER_AXIS_THRESHOLD_PASSED />
+		</events>
+		
+		<!-- The context may contain a list of states, of which the state can be requested (by polling). -->
+		<!-- The <states> tag contains a list of <state> objects that have a name, by which the state of the underlying keys, mouse buttons, 
+			or controller states can be polled -->
+		<states>
+			<!-- A state needs a unique name to be identified when polling the state -->
+			<!-- The following four <state> tags use the WASD-keys for a simple character movement -->
+			<state name="up">
+				<!-- Within a state there has to be a key, a mouse button or a controller state (or all of them) -->
+				<!-- Here the W-Key is used for a movement in upper direction (the use of controllers is shown in the next <context>) -->
+				<key code="W" />
+			</state>
+			<state name="down">
+				<key code="S" />
+			</state>
+			<state name="left">
+				<key code="A" />
+			</state>
+			<state name="right">
+				<key code="D" />
+			</state>
+
+			<!-- A state may also contain a key, and a button, and a controller state object -->
+			<state name="attack">
+				<!-- The 'attack' state can be triggered either by pressing the 'space' button on the keyboard or by clicking the 'left' mouse button -->
+				<!-- NOTE: The state 'attack' can be polled in the InputContext by different methods, that check only the keyboard or only the mouse.
+					To be sure that any of the listed states (keyboard, mouse or controller) is checked (using a logical OR), use the isStateActive(String) method. -->
+				<!-- Attack by pressing 'space' -->
+				<key code="Space" />
+				<!-- Attack by clicking on the left mouse button -->
+				<button code="Left" />
+			</state>
+		</states>
+		
+		<!-- A context may also contain several actions, that use event listening instead of state polling to inform the registered listeners about a key,
+			a button, or a controller state that was registered -->
+		<actions>
+			<!-- If the right arrow key is pressed all registered InputActionListeners will be notified by a call of the onAction(...) method.
+				The call will contain all information that is related to the event -->
+			<!-- NOTE: in this configuration the user will be notified when the key is pressed down or released, because these events are configured 
+				in the <events> section (see the beginning of this <context>) -->
+			<action name="nextOption">
+				<key code="Right" />
+			</action>
+			<action name="previousOption">
+				<key code="Left" />
+			</action>
+			<action name="selectOption">
+				<key code="Enter" />
+			</action>
+			
+			<!-- This action will only be triggered when the user pushes the right mouse button down (because only the TOUCH_DOWN event is activated 
+				in the <events> section; see the beginning of this <context>) -->
+			<!-- The call of the onAction method will contain all information that is related to the event (which is the x and y coordinates of the click 
+				on the screen, and the pointer (for multi-touch events on smartphones or tablets) -->
+			<action name="showOptions">
+				<button code="right" />
+			</action>
+		</actions>
+	</context>
+
+	<!-- An input profile can contain more than one context. One can switch between these contexts on the InputProfile object. -->
+	<context name="controller">
+		<!-- The <events> tag can be empty or it can be left out completely. In this case the default is, that the  KEY_DOWN, TOUCH_DOWN, 
+			CONTROLLER_BUTTON_DOWN, CONTROLLER_POV_CHANGED and CONTROLLER_AXIS_THRESHOLD_PASSED events are set to 'true' (so they are handled) and all other 
+			events are set to 'false' (which means they are not handled) -->
+			
+		<!-- The <states> tag has to include a list of <state> objects for the state polling (see the context above) -->
+		<states>
+			<!-- The following four <state> tags define a simple character movement. But this time using the WASD-keys and a controller -->
+			<state name="up">
+				<!-- Here the W-Key is used for a movement in upper direction -->
+				<key code="W" />
+				<!-- The use of the controller is a bit more difficult. It needs a <controller> tag that includes more configuration -->
+				<!-- The controller tag might have a 'player' attribute that tell which controller is to be used (starting at "1" for the first controller).
+					If no 'player' attribute is defined, then every controller is checked or can fire the event -->
+				<controller player="1">
+					<!-- Inside the <controller> tag one can define the controllers buttons, pov (the directions-cross), or axes (or all of them) -->
+					<!-- In this case we define, that the button "0" (which is usually the 'A' button) is for moving up (which is not that common, 
+						but shows how to do it in this example) -->
+					<button code="0" />
+					<!-- Also the directions-cross (called 'pov' here) can be used to move the character -->
+					<!-- The pov tag has no 'code' attribute (because I have never seen a controller with more than one direction crosses). But it has a 
+						'directions' tag, that includes a list of directions that should lead to moving up. These directions are named after cardinal directions
+						('north', 'east', 'southWest', ...). They can be separated by a space to set this state on every one of the given directions. 
+						So the character will move 'up' not only if up is pressed, but also if up and left is pressed at the same time. The same can be 
+						done for left, so the character moves up and left when both keys are pressed -->
+					<!-- NOTE: the pov also has a direction 'center', which means no direction key is pressed -->
+					<pov directions="north northWest northEast" />
+					<!-- At last we define an axis to make the character move -->
+					<!-- The axis tag has a 'code' attribute, which defines the axis that is used (0 is the left analog stick in vertical direction on my controller).
+						The axis tag also has a threshold value, that indicates when the analog axis is moved enough to activate the state. A value of -0.5 means
+						that the analog stick has to be moved at least half the way up (approximately) to activate the state -->
+					<!-- A negative threshold (which is the upper direction on my controller) means that the value has to be below the threshold (or equal to 
+						the threshold), while a positive threshold (like "0.5") means that the value has to be above the value (or equal to the threshold value)
+						to activate the state -->
+					<!-- NOTE: a threshold must be either less than -0.1 or more than 0.1 to avoid activating the state, by an inaccurate analog stick.
+						To check whether the stick is at position 0 (or any other analog value between -1 and 1) the <controllerAxes> tag is used (see
+						the description below) -->
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</state>
+			<!-- For the other directions we only use the other WASD-keys and the controllers direction-cross (pov) and analog sticks, but no controller buttons -->
+			<state name="down">
+				<key code="S" />
+				<controller player="1">
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
+			</state>
+			<state name="left">
+				<key code="A" />
+				<controller player="1">
+					<pov directions="west southWest northWest" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
+			</state>
+			<state name="right">
+				<key code="D" />
+				<controller player="1">
+					<pov directions="east southEast northEast" />
+					<axis code="1" threshold="0.5" />
+				</controller>
+			</state>
+		</states>
+		
+		<!-- Actions (for controllers) work the same way like states. They use the <controller> tag, that can include <button>, <pov> and <axis> tags (see 
+			The <states> part of this <context> for a more detailed description) -->
+		<!-- NOTE: If a player presses and releases the buttons or axes (especially axes) very fast there might be some actions, that are not registered. -->
+		<actions>
+			<action name="attack">
+				<key code="Space" />
+				<!-- For a two player game we could make the first player (who holds the first controller) move our character, while the second player (who 
+					holds the second controller) attacks. Therefore the 'player' tag is set to "2" here -->
+				<controller player="2">
+					<!-- To attack the player can either push a button (like in older games) or use the shoulder-axis (like in modern shooter games; not all
+						controllers have this shoulder-axis, but most modern ones; well "modern" here probably means "build after 2005") -->
+					<button code="2" />
+					<!-- On my controller the right shoulder-axis is the axis "4" in negative direction. But that may differ. You will have to try. -->
+					<axis code="4" threshold="-0.5" />
+				</controller>
+			</action>
+			<!-- To make the first player able to attack (using a different attack) there can be another action defined, that has the same axis and button tags
+				defined, but the controller tag's 'player' attribute is set to "1" -->
+			<action name="attack_player_1">
+				<controller player="1">
+					<button code="2" />
+					<axis code="4" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="toMenu">
+				<key code="Escape" />
+				<!-- The pause menu should be accessible to all players, so we don't define a 'player' attribute in the <controller> tag, which means every 
+					controller which's buttons, or axes match the criteria can set this state or activate this action -->
+				<controller>
+					<!-- The button code "7" is the start button on my controller, which is usually a pause menu -->
+					<button code="7" />
+				</controller>
+			</action>
+		</actions>
+		
+		<!-- A controller has not only buttons, with digital states (the button is either pressed down or it is not), but it also has analog axes. To get the 
+			analog values of this axes the <controllerAxes> tag is used. Using this tag one can give names to all axes on all controllers to make it easier to
+			configure and query the states of the correct axes (so the programmer can send queries like: 'InputContext.getAxis("controller_1_left_analog_stick_horizontal")' 
+			which is much easier to understand than 'Controller.getAxis(0)' -->
+		<controllerAxes>
+			<!-- In the <controllerAxes> tag one can define a list of <controllerAxis> tags, that are named axes for the controller axes -->
+			<controllerAxis name="controller_1_vertical_move_axis">
+				<!-- In each <controllerAxis> tag there needs to be one <axis> tag, that holds a 'player' attribute, to identify the controller and a 'code'
+					attribute, that is used to identify the axis (e.g. on my controller the code "1" is the vertical axis of the left analog stick) -->
+				<!-- NOTE: The 'player' attribute is NOT optional here and has to be a value greater than 0 to identify a controller (because the returned 
+					value is a scalar value, which can not be queried from more than one controller at the same time) -->
+				<axis player="1" code="1" />
+			</controllerAxis>
+		</controllerAxes>
+	</context>
+	
+	<!-- The number of contexts is not limited (but all contests must have an unique name to identify them) -->
+	<context name="menu">
+		<!-- A context can be build only with the <actions> list (or any other list; all of them are optional) -->
+		<!-- A context with only actions might be useful in menus -->
+		<actions>
+			<action name="nextOption">
+				<key code="Right" />
+			</action>
+			<action name="previousOption">
+				<key code="Left" />
+			</action>
+			<action name="selectOption">
+				<key code="Enter" />
+			</action>
+		</actions>
+	</context>
+</InputProfile>

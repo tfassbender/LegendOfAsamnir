@@ -33,7 +33,7 @@ public class DwarfScrollerGame extends Game {
 		multiplexer = new InputMultiplexer();
 		Gdx.input.setInputProcessor(multiplexer);
 		
-		gameInputProfile = new InputProfile(Gdx.files.internal("config/input/profile.xml"));
+		gameInputProfile = new InputProfile(Gdx.files.internal("config/input/profile.xml"), multiplexer);
 		
 		setScreen(new GameScreen());
 	}

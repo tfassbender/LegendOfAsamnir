@@ -9,7 +9,11 @@ public enum InputEvent {
 	TOUCH_UP(false), // 
 	TOUCH_DRAGGED(false), //
 	MOUSE_MOVED(false), //
-	SCROLLED(false); //
+	SCROLLED(false), //
+	CONTROLLER_BUTTON_DOWN(true), //
+	CONTROLLER_BUTTON_UP(false), //
+	CONTROLLER_POV_CHANGED(true), //
+	CONTROLLER_AXIS_THRESHOLD_PASSED(true); //
 	
 	private final boolean isDefault;
 	
