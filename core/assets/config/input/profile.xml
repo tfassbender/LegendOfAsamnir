@@ -1,54 +1,116 @@
 <InputProfile>
+	<!-- The context for the main menu contains movement (for inputs), selecting an option, moving back (all modeled as actions) -->
 	<context name="mainMenu">
 		<events>
-			<KEY_DOWN listening="true" />
-			<KEY_UP listening="false" />
-			<KEY_TYPED listening="false" />
-			<TOUCH_DOWN listening="true" />
-			<TOUCH_UP listening="false" />
-			<TOUCH_DRAGGED listening="false" />
-			<MOUSE_MOVED listening="false" />
-			<SCROLLED listening="false" />
+			<KEY_DOWN />
+			<TOUCH_DOWN />
+			<CONTROLLER_BUTTON_DOWN />
+			<CONTROLLER_POV_CHANGED />
+			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
 		<actions>
-			<action name="nextOption">
-				<key code="Right" />
+			<!-- input movement using WASD, controller pov or controller analog stick (should usually be the left analog stick). 
+				Works on all attached controllers -->
+			<action name="up">
+				<key code="W" />
+				<controller>
+					<pov directions="north northWest northEast" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="down">
+				<key code="S" />
+				<controller>
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
+			</action>
+			<action name="left">
+				<key code="A" />
+				<controller>
+					<pov directions="west southWest northWest" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="right">
+				<key code="D" />
+				<controller>
+					<pov directions="east southEast northEast" />
+					<axis code="1" threshold="0.5" />
+				</controller>
 			</action>
 
-			<action name="previousOption">
-				<key code="Left" />
+			<action name="back">
+				<key code="Escape" />
+				<controller>
+					<button code="1" />
+				</controller>
 			</action>
 
-			<action name="selectOption">
+			<action name="select">
 				<key code="Enter" />
+				<controller>
+					<button code="0" />
+				</controller>
 			</action>
 		</actions>
 	</context>
 
+	<!-- The game context contains player movement (using WASD, controller pov and controller analog stick), -->
 	<context name="game">
+		<events>
+			<KEY_DOWN />
+			<TOUCH_DOWN />
+			<CONTROLLER_BUTTON_DOWN />
+			<CONTROLLER_POV_CHANGED />
+			<CONTROLLER_AXIS_THRESHOLD_PASSED />
+		</events>
 		<states>
+			<!-- movement input states -->
 			<state name="up">
 				<key code="W" />
+				<controller player="1">
+					<pov directions="north northWest northEast" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
 			</state>
-
 			<state name="down">
 				<key code="S" />
+				<controller player="1">
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
 			</state>
-
 			<state name="left">
 				<key code="A" />
+				<controller player="1">
+					<pov directions="west southWest northWest" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
 			</state>
-
 			<state name="right">
 				<key code="D" />
+				<controller player="1">
+					<pov directions="east southEast northEast" />
+					<axis code="1" threshold="0.5" />
+				</controller>
 			</state>
-
+			
+			<!-- jumping dwarf -->
 			<state name="jump">
 				<key code="Space" />
+				<controller>
+					<button code="0" />
+				</controller>
 			</state>
-
+			
+			<!-- attacking dwarf -->
 			<state name="attack">
-				<button code="Left" />
+				<button code="Left" /><!-- left mouse button -->
+				<controller player="1">
+					<button code="1" />
+					<axis code="4" threshold="-0.7" /><!-- right shoulder axis -->
+				</controller>
 			</state>
 		</states>
 	</context>
