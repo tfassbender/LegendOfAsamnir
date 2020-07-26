@@ -1,11 +1,6 @@
 package net.jfabricationgames.gdx.input;
 
-import java.util.Objects;
-import java.util.function.BiConsumer;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
@@ -16,147 +11,38 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 
 import net.jfabricationgames.gdx.input.InputActionListener.Parameters;
 import net.jfabricationgames.gdx.input.InputActionListener.Type;
+import net.jfabricationgames.gdx.input.struct.AxisThreshold;
+import net.jfabricationgames.gdx.input.struct.PlayerAxis;
+import net.jfabricationgames.gdx.input.struct.PlayerValue;
 
 public class InputContext {
 	
 	public static final int CONTROLLER_ANY_PLAYER = -1;
 	
-	private static final ArrayMap<String, Integer> BUTTONS = createButtonsMap();
+	protected String name;
 	
-	private static ArrayMap<String, Integer> createButtonsMap() {
-		ArrayMap<String, Integer> buttons = new ArrayMap<>();
-		buttons.put("left", Buttons.LEFT);
-		buttons.put("middle", Buttons.MIDDLE);
-		buttons.put("right", Buttons.RIGHT);
-		buttons.put("forward", Buttons.FORWARD);
-		buttons.put("back", Buttons.BACK);
-		return buttons;
-	};
+	protected ArrayMap<InputEvent, Boolean> handledEvents;
 	
-	private enum ContextType {
-		STATES, //
-		ACTIONS, //
-		CONTROLLER_AXES;
-	}
-	
-	private class PlayerAxis {
-		
-		public int axisCode;
-		public int player;
-		
-		public PlayerAxis(int axisCode, int player) {
-			this.axisCode = axisCode;
-			this.player = player;
-		}
-		
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + Objects.hash(axisCode, player);
-			return result;
-		}
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			PlayerAxis other = (PlayerAxis) obj;
-			if (player != other.player && player != CONTROLLER_ANY_PLAYER && other.player != CONTROLLER_ANY_PLAYER)
-				// if one of the players is CONTROLLER_ANY_PLAYER consider them as equal
-				return false;
-			return axisCode == other.axisCode;
-		}
-	}
-	
-	/**
-	 * A threshold value for an axis of a specific player's controller.
-	 */
-	private class AxisThreshold extends PlayerAxis {
-		
-		public float threshold;
-		public boolean thresholdPassed = false;
-		public String stateName;
-		
-		public AxisThreshold(int axisCode, int player, float threshold) {
-			super(axisCode, player);
-			this.threshold = threshold;
-		}
-		public AxisThreshold(int axisCode, int player, float threshold, String stateName) {
-			super(axisCode, player);
-			this.threshold = threshold;
-			this.stateName = stateName;
-		}
-		
-		public boolean isThresholdPassed(float value) {
-			return threshold < 0 && value < threshold || threshold > 0 && value > threshold;
-		}
-	}
-	
-	/**
-	 * A value from the controller of a specific player.
-	 */
-	private class PlayerValue {
-		
-		public int player;
-		public String value;
-		public int intValue;
-		
-		public PlayerValue(int player, String value) {
-			this.player = player;
-			this.value = value;
-		}
-		public PlayerValue(int player, int intValue) {
-			this.player = player;
-			this.intValue = intValue;
-		}
-		
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			PlayerValue other = (PlayerValue) obj;
-			if (player != other.player && player != CONTROLLER_ANY_PLAYER && other.player != CONTROLLER_ANY_PLAYER)
-				// if one of the players is CONTROLLER_ANY_PLAYER consider them as equal
-				return false;
-			if (value == null) {
-				if (other.value != null)
-					return false;
-			}
-			else if (!value.equals(other.value))
-				return false;
-			if (intValue != other.intValue)
-				return false;
-			return true;
-		}
-	}
-	
-	private String name;
-	
-	private ArrayMap<InputEvent, Boolean> handledEvents;
-	
-	private ArrayMap<String, Integer> keyStates;
-	private ArrayMap<Integer, String> keyActions;
-	private ArrayMap<String, Integer> buttonStates;
-	private ArrayMap<Integer, String> buttonActions;
-	private ArrayMap<String, PlayerValue> controllerButtonStates;
-	private ArrayMap<PlayerValue, String> controllerButtonActions;
-	private ArrayMap<String, Array<PlayerValue>> controllerPovStates;
-	private ArrayMap<PlayerValue, Array<String>> controllerPovActions;
-	private ArrayMap<String, AxisThreshold> controllerAxisStates;
-	private ArrayMap<PlayerValue, AxisThreshold> controllerAxisActions;
-	private ArrayMap<String, PlayerAxis> namedAxes;
+	protected ArrayMap<String, Integer> keyStates;
+	protected ArrayMap<Integer, String> keyActions;
+	protected ArrayMap<String, Integer> buttonStates;
+	protected ArrayMap<Integer, String> buttonActions;
+	protected ArrayMap<String, PlayerValue> controllerButtonStates;
+	protected ArrayMap<PlayerValue, String> controllerButtonActions;
+	protected ArrayMap<String, Array<PlayerValue>> controllerPovStates;
+	protected ArrayMap<PlayerValue, Array<String>> controllerPovActions;
+	protected ArrayMap<String, AxisThreshold> controllerAxisStates;
+	protected ArrayMap<PlayerValue, AxisThreshold> controllerAxisActions;
+	protected ArrayMap<String, PlayerAxis> namedAxes;
 	
 	private ObjectSet<InputActionListener> listeners;
 	
 	public InputContext() {
+		initializeMaps();
+		listeners = new ObjectSet<>();
+	}
+	
+	private void initializeMaps() {
 		keyStates = new ArrayMap<>();
 		keyActions = new ArrayMap<>();
 		buttonStates = new ArrayMap<>();
@@ -169,31 +55,11 @@ public class InputContext {
 		controllerAxisStates = new ArrayMap<>();
 		controllerAxisActions = new ArrayMap<>();
 		namedAxes = new ArrayMap<>();
-		listeners = new ObjectSet<>();
 	}
 	
-	public void load(Element contextRoot) {
+	protected void load(Element contextRoot) {
 		clearInputMaps();
-		
-		try {
-			name = contextRoot.getAttribute("name");
-			
-			Element eventsElement = contextRoot.getChildByName("events");
-			loadEvents(eventsElement);
-			
-			Element statesElement = contextRoot.getChildByName("states");
-			loadElements(statesElement, ContextType.STATES, keyStates::put, buttonStates::put);
-			
-			Element actionsElement = contextRoot.getChildByName("actions");
-			loadElements(actionsElement, ContextType.ACTIONS, (name, code) -> keyActions.put(code, name),
-					(name, code) -> buttonActions.put(code, name));
-			
-			Element controllerAxes = contextRoot.getChildByName("controllerAxes");
-			loadControllerAxes(controllerAxes);
-		}
-		catch (Exception e) {
-			Gdx.app.error("InputContext", "Error loading context element", e);
-		}
+		new InputContextLoader(this).load(contextRoot);
 	}
 	
 	private void clearInputMaps() {
@@ -211,213 +77,6 @@ public class InputContext {
 		namedAxes.clear();
 	}
 	
-	/**
-	 * Load the events from the profile or set the defaults if no events are defined.
-	 * 
-	 * Loads: <context><events>...</events><context>
-	 */
-	private void loadEvents(Element eventsElement) {
-		if (eventsElement != null && eventsElement.getChildCount() > 0) {
-			for (InputEvent inputEvent : InputEvent.values()) {
-				Element inputElement = eventsElement.getChildByName(inputEvent.name());
-				if (inputElement != null) {
-					if (inputElement.hasAttribute("listening")) {
-						handledEvents.put(inputEvent, Boolean.parseBoolean(inputElement.getAttribute("listening")));
-					}
-					else {
-						//the event has no "listening" attribute, so it is assumed to be true
-						handledEvents.put(inputEvent, true);
-					}
-				}
-			}
-		}
-		else {
-			//use the defaults on all events
-			for (InputEvent inputEvent : InputEvent.values()) {
-				handledEvents.put(inputEvent, inputEvent.isDefault());
-			}
-		}
-	}
-	
-	/**
-	 * Load the state and action elements for keys, mouse buttons, and controllers.
-	 * 
-	 * Loads: <context><states>...</states><context> AND <context><actions>...</actions><context>
-	 */
-	private void loadElements(Element contextElement, ContextType type, BiConsumer<String, Integer> keyInsertConsumer,
-			BiConsumer<String, Integer> buttonInsertConsumer) {
-		int numStates = contextElement != null ? contextElement.getChildCount() : 0;
-		
-		for (int i = 0; i < numStates; i++) {
-			Element element = contextElement.getChild(i);
-			String elementName = element.getAttribute("name");
-			
-			Element keyElement = element.getChildByName("key");
-			Element buttonElement = element.getChildByName("button");
-			Element controllerElement = element.getChildByName("controller");
-			
-			loadKeyElement(elementName, keyElement, keyInsertConsumer);
-			loadButtonElement(elementName, buttonElement, buttonInsertConsumer);
-			loadControllerElement(elementName, type, controllerElement);
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><key code="..."/></state></states><context>
-	 */
-	private void loadKeyElement(String elementName, Element keyElement, BiConsumer<String, Integer> keyInsertConsumer) {
-		if (keyElement != null) {
-			String code = keyElement.getAttribute("code");
-			int keycode = Keys.valueOf(code);
-			if (keycode == -1 && !code.equals("ANY_KEY")) {
-				Gdx.app.error(getClass().getSimpleName(), "The key code '" + code + "' is unknown");
-				//prevent mapping an unknown key to ANY_KEY
-				keycode = -2;
-			}
-			keyInsertConsumer.accept(elementName, keycode);
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><button code="..."/></state></states><context>
-	 */
-	private void loadButtonElement(String elementName, Element buttonElement, BiConsumer<String, Integer> buttonInsertConsumer) {
-		if (buttonElement != null) {
-			String code = buttonElement.getAttribute("code");
-			int buttoncode = buttonValueOf(code);
-			if (buttoncode == -1) {
-				Gdx.app.error(getClass().getSimpleName(), "The button code '" + code + "' is unknown");
-			}
-			buttonInsertConsumer.accept(elementName, buttoncode);
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><controller player="...">...</controller></state></states><context>
-	 */
-	private void loadControllerElement(String elementName, ContextType type, Element controllerElement) {
-		if (controllerElement != null) {
-			int player = CONTROLLER_ANY_PLAYER;
-			if (controllerElement.hasAttribute("player")) {
-				player = Integer.parseInt(controllerElement.getAttribute("player"));
-			}
-			
-			Element buttonElement = controllerElement.getChildByName("button");
-			Element povElement = controllerElement.getChildByName("pov");
-			Element axisElement = controllerElement.getChildByName("axis");
-			
-			loadControllerButton(elementName, player, type, buttonElement);
-			loadControllerPov(elementName, player, type, povElement);
-			loadControllerAxisElement(elementName, player, type, axisElement);
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><controller player="..."><button code="..." /></controller></state></states><context>
-	 */
-	private void loadControllerButton(String elementName, int player, ContextType type, Element controllerButtonElement) {
-		if (controllerButtonElement != null) {
-			String code = controllerButtonElement.getAttribute("code");
-			int buttoncode = Integer.parseInt(code);
-			
-			if (type == ContextType.STATES) {
-				controllerButtonStates.put(elementName, new PlayerValue(player, buttoncode));
-			}
-			else if (type == ContextType.ACTIONS) {
-				controllerButtonActions.put(new PlayerValue(player, buttoncode), elementName);
-			}
-			else {
-				throw new IllegalStateException("unexpected ContextType: " + type);
-			}
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><controller player="..."><pov directions="..." /></controller></state></states><context>
-	 */
-	private void loadControllerPov(String elementName, int player, ContextType type, Element controllerPovElement) {
-		if (controllerPovElement != null) {
-			String[] directions = controllerPovElement.getAttribute("directions").split(" ");
-			//convert directions to PlayerValue objects (containing the direction and the player information)
-			PlayerValue[] playerDirections = new PlayerValue[directions.length];
-			for (int i = 0; i < directions.length; i++) {
-				playerDirections[i] = new PlayerValue(player, directions[i]);
-			}
-			
-			if (type == ContextType.STATES) {
-				controllerPovStates.put(elementName, new Array<PlayerValue>(playerDirections));
-			}
-			else if (type == ContextType.ACTIONS) {
-				for (PlayerValue playerDirection : playerDirections) {
-					Array<String> actions = controllerPovActions.get(playerDirection);
-					if (actions == null) {
-						actions = new Array<String>();
-						controllerPovActions.put(playerDirection, actions);
-					}
-					actions.add(elementName);
-				}
-			}
-			else {
-				throw new IllegalStateException("unexpected ContextType: " + type);
-			}
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><controller player="..."><axis code="..." threshold="..." /></controller></state></states><context>
-	 */
-	private void loadControllerAxisElement(String elementName, int player, ContextType type, Element controllerAxisElement) {
-		if (controllerAxisElement != null) {
-			int axisCode = Integer.parseInt(controllerAxisElement.getAttribute("code"));
-			float threshold = Float.parseFloat(controllerAxisElement.getAttribute("threshold"));
-			if (Math.abs(threshold) < InputProfile.CONTROLLER_AXIS_DEAD_ZONE) {
-				throw new IllegalArgumentException("The absolute value of the 'threshold' attribute must be greater than 0.01");
-			}
-			AxisThreshold axisThreshold = new AxisThreshold(axisCode, player, threshold);
-			
-			if (type == ContextType.STATES) {
-				controllerAxisStates.put(elementName, axisThreshold);
-			}
-			else {
-				controllerAxisActions.put(new PlayerValue(player, axisCode), new AxisThreshold(axisCode, player, threshold, elementName));
-			}
-		}
-	}
-	
-	/**
-	 * Loads: <context><controllerAxes name="...">...</controllerAxes><context>
-	 */
-	private void loadControllerAxes(Element controllerAxesElement) {
-		int numStates = controllerAxesElement != null ? controllerAxesElement.getChildCount() : 0;
-		
-		for (int i = 0; i < numStates; i++) {
-			Element element = controllerAxesElement.getChild(i);
-			String elementName = element.getAttribute("name");
-			
-			Element axisElement = element.getChildByName("axis");
-			
-			loadAxisElement(elementName, axisElement);
-		}
-	}
-	
-	/**
-	 * Loads: <context><controllerAxes name="..."><axis code="..." player="..." /></controllerAxes><context>
-	 */
-	private void loadAxisElement(String elementName, Element axisElement) {
-		int axisCode = Integer.parseInt(axisElement.getAttribute("code"));
-		int playerCode = Integer.parseInt(axisElement.getAttribute("player"));
-		
-		PlayerAxis playerAxis = new PlayerAxis(axisCode, playerCode);
-		namedAxes.put(elementName, playerAxis);
-	}
-	
-	private int buttonValueOf(String code) {
-		if (BUTTONS.containsKey(code.toLowerCase())) {
-			return BUTTONS.get(code.toLowerCase());
-		}
-		return -1;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -428,6 +87,18 @@ public class InputContext {
 	
 	public void removeListener(InputActionListener listener) {
 		listeners.remove(listener);
+	}
+	
+	/**
+	 * Checks whether a key, a mouse button or a controller button or axis, that has the given state name is active.
+	 * 
+	 * @param state
+	 *        The state name
+	 * 		
+	 * @return True if the state key or button is pressed, or if a controller axis is above a defined threshold. False otherwise.
+	 */
+	public boolean isStateActive(String state) {
+		return isKeyDown(state) || isMouseButtonPressed(state) || isControllerStateActive(state);
 	}
 	
 	/**
@@ -565,18 +236,6 @@ public class InputContext {
 	}
 	
 	/**
-	 * Checks whether a key, a mouse button or a controller button or axis, that has the given state name is active.
-	 * 
-	 * @param state
-	 *        The state name
-	 * 		
-	 * @return True if the state key or button is pressed, or if a controller axis is above a defined threshold. False otherwise.
-	 */
-	public boolean isStateActive(String state) {
-		return isKeyDown(state) || isMouseButtonPressed(state) || isControllerStateActive(state);
-	}
-	
-	/**
 	 * Get the value of an axis by the name of the axis (that was provided in the XML-profile)
 	 * 
 	 * @param name
@@ -680,7 +339,7 @@ public class InputContext {
 					invokeListeners(axisThreshold.stateName, Type.CONTROLLER_AXIS_THRESHOLD_PASSED,
 							new Parameters().setPlayer(player).setAxisValue(axisValue).setAxisThreshold(axisThreshold.threshold));
 				}
-				axisThreshold.thresholdPassed = thresholdPassed;				
+				axisThreshold.thresholdPassed = thresholdPassed;
 			}
 		}
 		return false;
@@ -700,7 +359,7 @@ public class InputContext {
 			if (actions != null) {
 				for (String action : actions) {
 					invokeListeners(action, Type.CONTROLLER_POV_CHANGED, new Parameters().setPlayer(player).setPovDirection(value));
-				}				
+				}
 			}
 		}
 		return false;
