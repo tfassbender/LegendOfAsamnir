@@ -1,0 +1,56 @@
+{
+	soundSets: {
+		dwarf: {
+			sounds: {
+				hit: {
+					path: "sound/dwarf/hit.wav",
+					volume: 1
+				},
+				hit2: {
+					path: "sound/dwarf/hit2.wav",
+					volume: 1
+				},
+				jump: {
+					path: "sound/dwarf/jump.wav",
+					volume: 1
+				},
+				damage: {
+					path: "sound/dwarf/damage.wav",
+					volume: 1
+				},
+				health_small: {
+					path: "sound/dwarf/health_small.wav",
+					volume: 1
+				},
+				health_big: {
+					path: "sound/dwarf/health_big.wav",
+					volume: 1
+				},
+				mana: {
+					path: "sound/dwarf/mana.wav",
+					volume: 1
+				}
+			}
+		},
+		common: {
+			sounds: {
+				select: {
+					path: "sound/common/select.wav",
+					volume: 1
+				},
+				error: {
+					path: "sound/common/error.wav",
+					volume: 1
+				},
+				pick: {
+					path: "sound/common/pick.wav",
+					volume: 1
+				},
+				explosion: {
+					path: "sound/common/explosion.wav",
+					volume: 1
+				}
+			}
+		}
+	}
+}

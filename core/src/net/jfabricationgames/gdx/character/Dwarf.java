@@ -4,19 +4,23 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
 import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.sound.SoundManager;
+import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Dwarf {
+public class Dwarf implements Disposable {
 	
 	public static final float MOVING_SPEED = 0.5f;
 	public static final float JUMPING_SPEED = 0.75f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	
 	private static final String assetConfigFileName = "dwarf";
+	private static final String soundSetKey = "dwarf";
 	
 	private CharacterAnimationAssetManager assetManager;
 	
@@ -28,6 +32,8 @@ public class Dwarf {
 	private AnimationDirector<TextureRegion> animation;
 	private Sprite idleDwarfSprite;
 	
+	private SoundSet soundSet;
+	
 	public Dwarf() {
 		assetManager = CharacterAnimationAssetManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
@@ -35,10 +41,12 @@ public class Dwarf {
 		position = new Vector2(0, 0);
 		action = CharacterAction.NONE;
 		
-		movementHandler = new CharacterInputMovementHandler(this);
-		
 		idleDwarfSprite = getIdleSprite();
 		animation = getAnimation();
+		
+		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
+		
+		movementHandler = new CharacterInputMovementHandler(this);
 	}
 	
 	private Sprite getIdleSprite() {
@@ -49,6 +57,8 @@ public class Dwarf {
 		this.action = action;
 		this.animation = getAnimation();
 		this.animation.resetStateTime();
+		
+		playSound(action);
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
@@ -64,6 +74,12 @@ public class Dwarf {
 	}
 	private String getAnimationName(CharacterAction action) {
 		return action.getAnimationName();
+	}
+	
+	private void playSound(CharacterAction action) {
+		if (action.getSound() != null) {
+			soundSet.playSound(action.getSound());
+		}
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
@@ -139,5 +155,10 @@ public class Dwarf {
 	
 	public boolean isAnimationFinished() {
 		return animation.isAnimationFinished();
+	}
+
+	@Override
+	public void dispose() {
+		soundSet.dispose();
 	}
 }

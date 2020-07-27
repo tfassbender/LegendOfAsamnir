@@ -8,6 +8,7 @@ import com.badlogic.gdx.InputProcessor;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputProfile;
 import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.sound.SoundManager;
 
 public class DwarfScrollerGame extends Game {
 	
@@ -34,6 +35,8 @@ public class DwarfScrollerGame extends Game {
 		Gdx.input.setInputProcessor(multiplexer);
 		
 		gameInputProfile = new InputProfile(Gdx.files.internal("config/input/profile.xml"), multiplexer);
+		
+		SoundManager.getInstance().loadConfig();
 		
 		setScreen(new GameScreen());
 	}
