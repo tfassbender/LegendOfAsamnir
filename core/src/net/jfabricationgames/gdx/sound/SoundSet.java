@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 import net.jfabricationgames.gdx.sound.config.SoundConfig;
 
@@ -19,7 +21,7 @@ public class SoundSet implements Disposable {
 	
 	private ArrayMap<String, String> soundFiles;
 	private ArrayMap<String, Sound> sounds;
-	private ArrayMap<String, Float> defaultVolumes;
+	private ArrayMap<String, SoundConfig> soundConfigs;
 	
 	private boolean loaded = false;
 	
@@ -32,14 +34,14 @@ public class SoundSet implements Disposable {
 		loadSoundSetFromConfig(soundConfigs);
 	}
 	
-	private void loadSoundSetFromConfig(Map<String, SoundConfig> soundConfigs) {
+	private void loadSoundSetFromConfig(Map<String, SoundConfig> configs) {
+		soundConfigs = new ArrayMap<String, SoundConfig>();
 		soundFiles = new ArrayMap<String, String>();
 		sounds = new ArrayMap<String, Sound>();
-		defaultVolumes = new ArrayMap<String, Float>();
 		
-		for (Entry<String, SoundConfig> config : soundConfigs.entrySet()) {
+		for (Entry<String, SoundConfig> config : configs.entrySet()) {
 			soundFiles.put(config.getKey(), config.getValue().getPath());
-			defaultVolumes.put(config.getKey(), config.getValue().getVolume());
+			soundConfigs.put(config.getKey(), config.getValue());
 		}
 	}
 	
@@ -72,14 +74,38 @@ public class SoundSet implements Disposable {
 	
 	public void playSound(String name) {
 		Sound sound = getSoundChecked(name);
-		float volume = defaultVolumes.get(name);
-		sound.play(volume);
+		float volume = soundConfigs.get(name).getVolume();
+		float delay = soundConfigs.get(name).getDelay();
+		if (delay > 0.01) {
+			Timer.schedule(new Task() {
+				
+				@Override
+				public void run() {
+					sound.play(volume);
+				}
+			}, delay);
+		}
+		else {
+			sound.play(volume);
+		}
 	}
 	
 	public void loopSound(String name) {
 		Sound sound = getSoundChecked(name);
-		float volume = defaultVolumes.get(name);
-		sound.loop(volume);
+		float volume = soundConfigs.get(name).getVolume();
+		float delay = soundConfigs.get(name).getDelay();
+		if (delay > 0.01) {
+			Timer.schedule(new Task() {
+				
+				@Override
+				public void run() {
+					sound.loop(volume);
+				}
+			}, delay);
+		}
+		else {
+			sound.loop(volume);
+		}
 	}
 	
 	private Sound getSoundChecked(String name) {

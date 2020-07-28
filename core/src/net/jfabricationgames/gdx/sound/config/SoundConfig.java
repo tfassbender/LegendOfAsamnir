@@ -4,6 +4,7 @@ public class SoundConfig {
 	
 	private String path;
 	private float volume = 1f;
+	private float delay = 0f;
 	
 	public SoundConfig() {
 		
@@ -23,5 +24,13 @@ public class SoundConfig {
 	
 	public void setVolume(float volume) {
 		this.volume = volume;
+	}
+	
+	public float getDelay() {
+		return delay;
+	}
+	
+	public void setDelay(float delay) {
+		this.delay = delay;
 	}
 }
