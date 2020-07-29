@@ -9,8 +9,12 @@ import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputProfile;
 import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
+import net.jfabricationgames.gdx.text.FontManager;
 
 public class DwarfScrollerGame extends Game {
+	
+	public static final String INPUT_PROFILE_CONFIG_PATH = "config/input/profile.xml";
+	public static final String FONT_CONFIG_PATH = "font/config.json";
 	
 	private static DwarfScrollerGame instance;
 	
@@ -34,9 +38,10 @@ public class DwarfScrollerGame extends Game {
 		multiplexer = new InputMultiplexer();
 		Gdx.input.setInputProcessor(multiplexer);
 		
-		gameInputProfile = new InputProfile(Gdx.files.internal("config/input/profile.xml"), multiplexer);
+		gameInputProfile = new InputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
 		
 		SoundManager.getInstance().loadConfig();
+		FontManager.getInstance().load(FONT_CONFIG_PATH);
 		
 		setScreen(new GameScreen());
 	}
@@ -54,5 +59,12 @@ public class DwarfScrollerGame extends Game {
 	}
 	public InputContext getInputContext() {
 		return gameInputProfile.getContext();
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		SoundManager.getInstance().dispose();
+		FontManager.getInstance().dispose();
 	}
 }

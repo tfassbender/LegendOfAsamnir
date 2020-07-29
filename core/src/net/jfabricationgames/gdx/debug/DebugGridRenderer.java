@@ -14,10 +14,10 @@ public class DebugGridRenderer implements DebugRenderer {
 	private ShapeRenderer shapeRenderer;
 	private OrthographicCamera camera;
 	
-	private float minLineX = -100;
-	private float maxLineX = 100;
-	private float minLineY = -100;
-	private float maxLineY = 100;
+	private float minLineX = -10000;
+	private float maxLineX = 10000;
+	private float minLineY = -10000;
+	private float maxLineY = 10000;
 	
 	private float lineDeltaX = 1;
 	private float lineDeltaY = 1;

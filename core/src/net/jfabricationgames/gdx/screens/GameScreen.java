@@ -18,21 +18,22 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
+import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
 public class GameScreen extends ScreenAdapter {
 	
-	public static final float WORLD_TO_SCREEN = 1.0f / 100.0f;
-	public static final float SCENE_WIDTH = 3.20f;
-	public static final float SCENE_HEIGHT = 1.80f;
+	public static final float WORLD_TO_SCREEN = 4.0f;
+	public static final float SCENE_WIDTH = 1280f;
+	public static final float SCENE_HEIGHT = 720f;
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	
-	private static final float CAMERA_SPEED = 1.0f;
+	private static final float CAMERA_SPEED = 400.0f;
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
 	private static final float CAMERA_ZOOM_MAX = 2.0f;
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
 	
-	private static final float WORLD_EDGE_SIZE = 0.025f;
+	private static final float WORLD_EDGE_SIZE = 10f;
 	
 	private OrthographicCamera camera;
 	private OrthographicCamera cameraHud;
@@ -48,6 +49,8 @@ public class GameScreen extends ScreenAdapter {
 	
 	private DebugGridRenderer debugGridRenderer;
 	
+	private ScreenTextWriter screenTextWriter;
+	
 	public GameScreen() {
 		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		initializeCamerasAndViewports();
@@ -59,8 +62,11 @@ public class GameScreen extends ScreenAdapter {
 		
 		dwarf = new Dwarf();
 		debugGridRenderer = new DebugGridRenderer();
-		debugGridRenderer.setLineOffsets(0.1f, 0.1f);
+		debugGridRenderer.setLineOffsets(40f, 40f);
 		//debugGridRenderer.stopDebug();
+		
+		screenTextWriter = new ScreenTextWriter();
+		screenTextWriter.setFont("vikingMedium");
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -85,8 +91,9 @@ public class GameScreen extends ScreenAdapter {
 		
 		moveCamera(delta);
 		renderDebugGraphics(delta);
-		renderGameGraphics(delta);
+		renderText();
 		renderHUD(delta);
+		renderGameGraphics(delta);
 	}
 	
 	private void moveCamera(float delta) {
@@ -137,6 +144,16 @@ public class GameScreen extends ScreenAdapter {
 		shapeRenderer.end();
 	}
 	
+	private void renderText() {
+		batch.setProjectionMatrix(cameraHud.combined);
+		batch.begin();
+		screenTextWriter.setColor(Color.RED);
+		screenTextWriter.setScale(2f);
+		screenTextWriter.addText("Dwarf Scroller GDX", 100f, 0.1f * SCENE_HEIGHT);
+		screenTextWriter.draw(batch);
+		batch.end();
+	}
+	
 	private void drawWorldEdge() {
 		shapeRenderer.setColor(Color.GRAY);
 		shapeRenderer.rect(0, 0, SCENE_WIDTH, WORLD_EDGE_SIZE);
@@ -148,11 +165,11 @@ public class GameScreen extends ScreenAdapter {
 	private void drawStatsBars() {
 		final float healthBarHeightPercent = 0.65f;
 		final Vector2 tileUpperRight = new Vector2(SCENE_WIDTH - WORLD_EDGE_SIZE * 2f, SCENE_HEIGHT - WORLD_EDGE_SIZE * 2f);
-		final Vector2 tileSize = new Vector2(-1, -0.2f);
-		final Vector2 healthBarUpperRightOffset = new Vector2(-0.025f, -0.025f);
+		final Vector2 tileSize = new Vector2(-400, -80f);
+		final Vector2 healthBarUpperRightOffset = new Vector2(-10f, -10f);
 		final Vector2 healthBarSize = new Vector2(tileSize.x - healthBarUpperRightOffset.x * 2,
 				(tileSize.y - (healthBarUpperRightOffset.y * 3)) * healthBarHeightPercent);
-		final Vector2 manaBarUpperRightOffset = new Vector2(-0.025f, -0.025f + healthBarUpperRightOffset.y + healthBarSize.y);
+		final Vector2 manaBarUpperRightOffset = new Vector2(-10f, -10f + healthBarUpperRightOffset.y + healthBarSize.y);
 		final Vector2 manaBarSize = new Vector2(tileSize.x - manaBarUpperRightOffset.x * 2,
 				(tileSize.y - (healthBarUpperRightOffset.y * 3)) * (1 - healthBarHeightPercent));
 		

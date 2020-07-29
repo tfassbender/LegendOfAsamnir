@@ -15,8 +15,8 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class Dwarf implements Disposable {
 	
-	public static final float MOVING_SPEED = 0.5f;
-	public static final float JUMPING_SPEED = 0.75f;
+	public static final float MOVING_SPEED = 200f;
+	public static final float JUMPING_SPEED = 300f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	
 	private static final String assetConfigFileName = "dwarf";

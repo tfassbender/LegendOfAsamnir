@@ -1,0 +1,14 @@
+{
+	fontShaderFrag: "font/shader/font.frag",
+	fontShaderVert: "font/shader/font.vert",
+	
+	fonts: {
+		vikingMedium: "font/viking_medium.fnt",
+		celticHand: "font/celtic_hand.fnt",
+		keilschrift: "font/keilschrift.fnt",
+		
+		courierNew: "font/courier_new.fnt",
+		narkism: "font/narkism.fnt",
+		sourceCodeProLight: "font/source_code_pro_light.fnt"
+	}
+}
