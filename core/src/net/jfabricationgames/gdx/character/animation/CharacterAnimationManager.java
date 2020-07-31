@@ -8,7 +8,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,36 +16,34 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
-public class CharacterAnimationAssetManager {
+import net.jfabricationgames.gdx.assets.AssetGroupManager;
+
+public class CharacterAnimationManager {
 	
-	public static final String CONFIG_DIR = "config/animation/";
+	private static CharacterAnimationManager instance;
 	
-	private static CharacterAnimationAssetManager instance;
-	
-	public static synchronized CharacterAnimationAssetManager getInstance() {
+	public static synchronized CharacterAnimationManager getInstance() {
 		if (instance == null) {
-			instance = new CharacterAnimationAssetManager();
+			instance = new CharacterAnimationManager();
 		}
 		return instance;
 	}
 	
-	private AssetManager assetManager;
+	private AssetGroupManager assetManager;
 	private Map<String, Animation<TextureRegion>> animations;
 	private Map<String, AnimationConfig> animationConfigurations;
 	
-	private CharacterAnimationAssetManager() {
-		assetManager = new AssetManager();
+	private CharacterAnimationManager() {
+		assetManager = AssetGroupManager.getInstance();
 		animations = new HashMap<>();
 		animationConfigurations = new HashMap<>();
 	}
 	
 	/**
-	 * Load the animations, defined in the configuration file in "assets/config/animation/__the_config_parameter__.json
-	 * 
-	 * Example: To load dwarf animations from file "assets/config/animation/dwarf.json" enter the parameter "dwarf"
+	 * Load the animations, defined in the configuration file.
 	 * 
 	 * @param config
-	 *        The configuration file, that's animations are to be loaded (without the file ending)
+	 *        The configuration file, that's animations are to be loaded
 	 */
 	public void loadAnimations(String... configurations) {
 		for (String config : configurations) {
@@ -55,23 +52,14 @@ public class CharacterAnimationAssetManager {
 			animationConfigurations
 					.putAll(animationConfig.getConfigList().stream().collect(Collectors.toMap(AnimationConfig::getName, Function.identity())));
 			
-			animationConfig.getConfigList().forEach(this::markAnimationForLoading);
-			assetManager.finishLoading();
-			
 			animationConfig.getConfigList().forEach(this::createAnimation);
 		}
 	}
 	
 	private AnimationConfigList loadAnimationConfig(String config) {
-		FileHandle configFile = Gdx.files.internal(CONFIG_DIR + config + ".json");
+		FileHandle configFile = Gdx.files.internal(config);
 		Json json = new Json();
 		return json.fromJson(AnimationConfigList.class, configFile);
-	}
-	
-	private void markAnimationForLoading(AnimationConfig animation) {
-		if (!animations.containsKey(animation.getName())) {
-			assetManager.load(animation.getAtlas(), TextureAtlas.class);
-		}
 	}
 	
 	private void createAnimation(AnimationConfig config) {
@@ -155,12 +143,5 @@ public class CharacterAnimationAssetManager {
 	 */
 	public AnimationConfig getAnimationConfig(String configName) {
 		return animationConfigurations.get(configName);
-	}
-	
-	/**
-	 * Dispose the asset manager.
-	 */
-	public void dispose() {
-		assetManager.dispose();
 	}
 }

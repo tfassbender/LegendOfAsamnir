@@ -1,0 +1,39 @@
+{
+	"menu" : [
+		
+	],
+	"game" : [
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_attack_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_attack_jump_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_die_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_hit_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_idle_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_jump_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_run_right.atlas"
+		},
+		{	
+			"type" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path" : "packed/dwarf/dwarf_spin_right.atlas"
+		}
+	]
+}

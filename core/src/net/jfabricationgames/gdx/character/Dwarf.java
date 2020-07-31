@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
-import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
+import net.jfabricationgames.gdx.character.animation.CharacterAnimationManager;
 import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
@@ -19,10 +19,10 @@ public class Dwarf implements Disposable {
 	public static final float JUMPING_SPEED = 300f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	
-	private static final String assetConfigFileName = "dwarf";
+	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String soundSetKey = "dwarf";
 	
-	private CharacterAnimationAssetManager assetManager;
+	private CharacterAnimationManager assetManager;
 	
 	private Vector2 position;
 	private CharacterAction action;
@@ -35,7 +35,7 @@ public class Dwarf implements Disposable {
 	private SoundSet soundSet;
 	
 	public Dwarf() {
-		assetManager = CharacterAnimationAssetManager.getInstance();
+		assetManager = CharacterAnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		
 		position = new Vector2(0, 0);

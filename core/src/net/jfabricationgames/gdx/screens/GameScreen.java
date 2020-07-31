@@ -15,8 +15,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.Dwarf;
-import net.jfabricationgames.gdx.character.animation.CharacterAnimationAssetManager;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
@@ -27,6 +27,7 @@ public class GameScreen extends ScreenAdapter {
 	public static final float SCENE_HEIGHT = 720f;
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
+	public static final String ASSET_GROUP_NAME = "game";
 	
 	private static final float CAMERA_SPEED = 400.0f;
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
@@ -43,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	
-	private CharacterAnimationAssetManager assetManager;
+	private AssetGroupManager assetManager;
 	
 	private Dwarf dwarf;
 	
@@ -52,13 +53,15 @@ public class GameScreen extends ScreenAdapter {
 	private ScreenTextWriter screenTextWriter;
 	
 	public GameScreen() {
+		assetManager = AssetGroupManager.getInstance();
+		assetManager.loadGroup(ASSET_GROUP_NAME);
+		assetManager.finishLoading();
+		
 		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		initializeCamerasAndViewports();
 		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
-		
-		assetManager = CharacterAnimationAssetManager.getInstance();
 		
 		dwarf = new Dwarf();
 		debugGridRenderer = new DebugGridRenderer();
@@ -217,6 +220,6 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		assetManager.dispose();
+		assetManager.unloadGroup(ASSET_GROUP_NAME);
 	}
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
+import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputProfile;
 import net.jfabricationgames.gdx.screens.GameScreen;
@@ -13,6 +14,7 @@ import net.jfabricationgames.gdx.text.FontManager;
 
 public class DwarfScrollerGame extends Game {
 	
+	public static final String ASSET_GROUP_MANAGER_CONFIG_PATH = "config/assets/asset_groups.json";
 	public static final String INPUT_PROFILE_CONFIG_PATH = "config/input/profile.xml";
 	public static final String FONT_CONFIG_PATH = "font/config.json";
 	
@@ -40,6 +42,7 @@ public class DwarfScrollerGame extends Game {
 		
 		gameInputProfile = new InputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
 		
+		AssetGroupManager.initialize(ASSET_GROUP_MANAGER_CONFIG_PATH);
 		SoundManager.getInstance().loadConfig();
 		FontManager.getInstance().load(FONT_CONFIG_PATH);
 		
