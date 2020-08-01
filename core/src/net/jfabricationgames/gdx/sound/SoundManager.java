@@ -17,8 +17,6 @@ import net.jfabricationgames.gdx.sound.config.SoundSetConfig;
  */
 public class SoundManager implements Disposable {
 	
-	public static final String SOUND_CONFIG_PATH = "sound/config.json";
-	
 	private static SoundManager instance;
 	
 	public static synchronized SoundManager getInstance() {
@@ -34,9 +32,9 @@ public class SoundManager implements Disposable {
 		
 	}
 	
-	public void loadConfig() {
+	public void loadConfig(String soundConfigPath) {
 		soundSets = new ArrayMap<>();
-		FileHandle configFile = Gdx.files.internal(SOUND_CONFIG_PATH);
+		FileHandle configFile = Gdx.files.internal(soundConfigPath);
 		Json json = new Json();
 		SoundManagerConfig config = json.fromJson(SoundManagerConfig.class, HashMap.class, configFile);
 		for (Entry<String, SoundSetConfig> configEntry : config.getSoundSets().entrySet()) {

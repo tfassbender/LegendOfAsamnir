@@ -1,0 +1,69 @@
+
+menu_buttons.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+button_round
+  rotate: false
+  xy: 871, 50
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+button_six_edges
+  rotate: false
+  xy: 1703, 238
+  size: 200, 214
+  orig: 200, 214
+  offset: 0, 0
+  index: -1
+button_square
+  rotate: false
+  xy: 1073, 50
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+button_square_round_edges
+  rotate: false
+  xy: 1275, 50
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+button_wide
+  rotate: false
+  xy: 0, 252
+  size: 873, 200
+  orig: 873, 200
+  offset: 0, 0
+  index: -1
+button_wide_round
+  rotate: false
+  xy: 875, 252
+  size: 826, 200
+  orig: 826, 200
+  offset: 0, 0
+  index: -1
+button_wide_round_edges
+  rotate: false
+  xy: 0, 50
+  size: 869, 200
+  orig: 869, 200
+  offset: 0, 0
+  index: -1
+exit_button_text
+  rotate: false
+  xy: 1477, 211
+  size: 154, 39
+  orig: 154, 39
+  offset: 0, 0
+  index: -1
+play_button_text
+  rotate: false
+  xy: 0, 0
+  size: 159, 48
+  orig: 159, 48
+  offset: 0, 0
+  index: -1

@@ -28,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	public static final String ASSET_GROUP_NAME = "game";
+	public static final String FONT_NAME = "vikingMedium";
 	
 	private static final float CAMERA_SPEED = 400.0f;
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
@@ -69,7 +70,7 @@ public class GameScreen extends ScreenAdapter {
 		//debugGridRenderer.stopDebug();
 		
 		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont("vikingMedium");
+		screenTextWriter.setFont(FONT_NAME);
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -94,9 +95,9 @@ public class GameScreen extends ScreenAdapter {
 		
 		moveCamera(delta);
 		renderDebugGraphics(delta);
+		renderGameGraphics(delta);
 		renderText();
 		renderHUD(delta);
-		renderGameGraphics(delta);
 	}
 	
 	private void moveCamera(float delta) {
