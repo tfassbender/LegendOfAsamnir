@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -53,6 +56,10 @@ public class GameScreen extends ScreenAdapter {
 	
 	private ScreenTextWriter screenTextWriter;
 	
+	private TiledMap map;
+	private TmxMapLoader mapLoader;
+	private OrthogonalTiledMapRenderer renderer;
+	
 	public GameScreen() {
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
@@ -67,10 +74,14 @@ public class GameScreen extends ScreenAdapter {
 		dwarf = new Dwarf();
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
-		//debugGridRenderer.stopDebug();
+		debugGridRenderer.stopDebug();
 		
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(FONT_NAME);
+		
+		mapLoader = new TmxMapLoader();
+		map = mapLoader.load("map/map.tmx");
+		renderer = new OrthogonalTiledMapRenderer(map);
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -94,6 +105,8 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		moveCamera(delta);
+		renderer.setView(camera);
+		renderer.render();
 		renderDebugGraphics(delta);
 		renderGameGraphics(delta);
 		renderText();

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -83,6 +84,9 @@ public class MainMenuScreen extends ScreenAdapter {
 		
 		table.setFillParent(true);
 		table.pack();
+		
+		table.setPosition(0, VIRTUAL_HEIGHT);
+		table.addAction(Actions.sequence(Actions.moveTo(0, -VIRTUAL_HEIGHT * 0.05f, 0.5f), Actions.moveTo(0, 0, 0.2f)));
 		
 		buttonPlay.addListener(new ClickListener() {
 			
