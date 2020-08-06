@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -38,6 +37,10 @@ public class GameScreen extends ScreenAdapter {
 	private static final float CAMERA_ZOOM_MAX = 2.0f;
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
 	
+	private static final float MOVEMENT_EDGE_OFFSET = 250f;
+	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET;
+	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET;
+	
 	private static final float WORLD_EDGE_SIZE = 10f;
 	
 	private OrthographicCamera camera;
@@ -57,7 +60,6 @@ public class GameScreen extends ScreenAdapter {
 	private ScreenTextWriter screenTextWriter;
 	
 	private TiledMap map;
-	private TmxMapLoader mapLoader;
 	private OrthogonalTiledMapRenderer renderer;
 	
 	public GameScreen() {
@@ -72,6 +74,8 @@ public class GameScreen extends ScreenAdapter {
 		shapeRenderer = new ShapeRenderer();
 		
 		dwarf = new Dwarf();
+		dwarf.move(SCENE_WIDTH * 0.9f, SCENE_HEIGHT * 0.8f);
+		
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
 		debugGridRenderer.stopDebug();
@@ -79,8 +83,7 @@ public class GameScreen extends ScreenAdapter {
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(FONT_NAME);
 		
-		mapLoader = new TmxMapLoader();
-		map = mapLoader.load("map/map.tmx");
+		map = assetManager.get("map/map.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
 	}
 	
@@ -92,8 +95,11 @@ public class GameScreen extends ScreenAdapter {
 		//viewport = new ExtendViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
 		//viewportHud = new ExtendViewport(SCENE_WIDTH, SCENE_HEIGHT, cameraHud);
 		
-		cameraHud.position.x += SCENE_WIDTH * 0.5;
-		cameraHud.position.y += SCENE_HEIGHT * 0.5;
+		cameraHud.position.x = SCENE_WIDTH * 0.5f;
+		cameraHud.position.y = SCENE_HEIGHT * 0.5f;
+		
+		camera.position.x = SCENE_WIDTH;
+		camera.position.y = SCENE_HEIGHT;
 		
 		cameraHud.update();
 	}
@@ -111,6 +117,7 @@ public class GameScreen extends ScreenAdapter {
 		renderGameGraphics(delta);
 		renderText();
 		renderHUD(delta);
+		moveCameraToPlayer();
 	}
 	
 	private void moveCamera(float delta) {
@@ -218,6 +225,30 @@ public class GameScreen extends ScreenAdapter {
 				healthBarSize.y, healthBarColors[0], healthBarColors[1], healthBarColors[2], healthBarColors[3]);
 		shapeRenderer.rect(tileUpperRight.x + manaBarUpperRightOffset.x, tileUpperRight.y + manaBarUpperRightOffset.y, manaBarSize.x, manaBarSize.y,
 				manaBarColors[0], manaBarColors[1], manaBarColors[2], manaBarColors[3]);
+	}
+	
+	private void moveCameraToPlayer() {
+		Vector2 dwarfPosition = dwarf.getPosition();
+		
+		//movement in positive X and Y direction
+		float deltaX = camera.position.x - dwarfPosition.x;
+		float deltaY = camera.position.y - dwarfPosition.y;
+		float movementXPos = deltaX - MOVEMENT_RANGE_X;
+		float movementYPos = deltaY - MOVEMENT_RANGE_Y;
+		
+		//movement in negative X and Y direction
+		deltaX = dwarfPosition.x - camera.position.x;
+		deltaY = dwarfPosition.y - camera.position.y;
+		float movementXNeg = deltaX - MOVEMENT_RANGE_X;
+		float movementYNeg = deltaY - MOVEMENT_RANGE_Y;
+		
+		camera.position.x -= Math.max(movementXPos, 0);
+		camera.position.y -= Math.max(movementYPos, 0);
+		
+		camera.position.x += Math.max(movementXNeg, 0);
+		camera.position.y += Math.max(movementYNeg, 0);
+		
+		camera.update();
 	}
 	
 	@Override

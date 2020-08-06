@@ -43,6 +43,7 @@ public class TexturePackingTool {
 	public void packTextures() {
 		if (REPACK_TEXTURES) {
 			for (TexturePackSetting packSetting : textures.getSettings()) {
+				textureSettings.edgePadding = packSetting.isEdgePadding();
 				TexturePacker.process(textureSettings, packSetting.getTextureDir(), packSetting.getOutputDir(), packSetting.getAtlasName());
 			}
 		}

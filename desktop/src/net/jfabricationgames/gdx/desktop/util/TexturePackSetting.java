@@ -5,11 +5,13 @@ public class TexturePackSetting {
 	private String textureDir;
 	private String outputDir;
 	private String atlasName;
+	private boolean edgePadding = false;
 	
-	public TexturePackSetting(String textureDir, String outputDir, String atlasName) {
+	public TexturePackSetting(String textureDir, String outputDir, String atlasName, boolean edgePadding) {
 		this.textureDir = textureDir;
 		this.outputDir = outputDir;
 		this.atlasName = atlasName;
+		this.edgePadding = edgePadding;
 	}
 	
 	public TexturePackSetting() {
@@ -35,5 +37,12 @@ public class TexturePackSetting {
 	}
 	public void setAtlasName(String atlasName) {
 		this.atlasName = atlasName;
+	}
+	
+	public boolean isEdgePadding() {
+		return edgePadding;
+	}
+	public void setEdgePadding(boolean edgePadding) {
+		this.edgePadding = edgePadding;
 	}
 }

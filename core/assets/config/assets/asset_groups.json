@@ -10,6 +10,7 @@
 		}
 	],
 	"game" : [
+		// dwarf animation textures
 		{	
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
 			"path": "packed/dwarf/dwarf_attack_right.atlas"
@@ -41,6 +42,11 @@
 		{	
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
 			"path": "packed/dwarf/dwarf_spin_right.atlas"
+		},
+		// tileset maps
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/map.tmx"
 		}
 	]
 }
