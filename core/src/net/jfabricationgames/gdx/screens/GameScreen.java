@@ -111,6 +111,7 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		moveCamera(delta);
+		//cropCameraPosition();
 		renderer.setView(camera);
 		renderer.render();
 		renderDebugGraphics(delta);
@@ -147,6 +148,16 @@ public class GameScreen extends ScreenAdapter {
 		//update the camera to re-calculate the matrices
 		camera.update();
 	}
+	
+	//	private void cropCameraPosition() {
+	//		if (((int) Math.round(camera.position.x)) % 32 == 0) {//tile size is 32
+	//			camera.position.x += 1; 
+	//		}
+	//		if (((int) Math.round(camera.position.y)) % 32 == 0) {
+	//			camera.position.y += 1;
+	//		}
+	//		camera.update();
+	//	}
 	
 	private void renderDebugGraphics(float delta) {
 		debugGridRenderer.updateCamera(camera);
