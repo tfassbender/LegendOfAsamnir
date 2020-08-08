@@ -47,6 +47,11 @@
 		{
 			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
 			"path": "map/map.tmx"
+		},
+		// items
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/items/items.atlas"
 		}
 	]
 }

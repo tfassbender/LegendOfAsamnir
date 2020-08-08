@@ -6,13 +6,20 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -62,6 +69,11 @@ public class GameScreen extends ScreenAdapter {
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	
+	private Array<Sprite> items;
+	private Array<Sprite> triggers;
+	
+	private TextureAtlas itemsAtlas;
+	
 	public GameScreen() {
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
@@ -83,8 +95,12 @@ public class GameScreen extends ScreenAdapter {
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(FONT_NAME);
 		
+		itemsAtlas = assetManager.get("packed/items/items.atlas");
+		
 		map = assetManager.get("map/map.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
+		
+		processMapMetaData();
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -111,9 +127,9 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		moveCamera(delta);
-		//cropCameraPosition();
 		renderer.setView(camera);
 		renderer.render();
+		renderItems();
 		renderDebugGraphics(delta);
 		renderGameGraphics(delta);
 		renderText();
@@ -149,15 +165,13 @@ public class GameScreen extends ScreenAdapter {
 		camera.update();
 	}
 	
-	//	private void cropCameraPosition() {
-	//		if (((int) Math.round(camera.position.x)) % 32 == 0) {//tile size is 32
-	//			camera.position.x += 1; 
-	//		}
-	//		if (((int) Math.round(camera.position.y)) % 32 == 0) {
-	//			camera.position.y += 1;
-	//		}
-	//		camera.update();
-	//	}
+	private void renderItems() {
+		batch.begin();
+		for (Sprite item : items) {
+			item.draw(batch);
+		}
+		batch.end();
+	}
 	
 	private void renderDebugGraphics(float delta) {
 		debugGridRenderer.updateCamera(camera);
@@ -260,6 +274,37 @@ public class GameScreen extends ScreenAdapter {
 		camera.position.y += Math.max(movementYNeg, 0);
 		
 		camera.update();
+	}
+	
+	private void processMapMetaData() {
+		// Load entities
+		items = new Array<Sprite>();
+		triggers = new Array<Sprite>();
+		
+		MapObjects objects = map.getLayers().get("objects").getObjects();
+		
+		for (MapObject object : objects) {
+			String name = object.getName();
+			String[] parts = name.split("_");
+			RectangleMapObject rectangleObject = (RectangleMapObject) object;
+			Rectangle rectangle = rectangleObject.getRectangle();
+			
+			if (name.equals("starting_position_player")) {
+				dwarf.setPosition(rectangle.x, rectangle.y);
+			}
+			else if (parts.length > 1 && parts[0].equals("item")) {
+				Sprite item = new Sprite(itemsAtlas.findRegion(name));
+				item.setPosition(rectangle.x, rectangle.y);
+				items.add(item);
+			}
+			//			else if (parts.length > 0 && parts[0].equals("trigger")) {
+			//				Sprite trigger = new Sprite(atlas.findRegion("pixel"));
+			//				trigger.setColor(1.0f, 1.0f, 1.0f, 0.5f);
+			//				trigger.setScale(rectangle.width, rectangle.height);
+			//				trigger.setPosition(rectangle.x - rectangle.width * 0.5f, rectangle.y + rectangle.height * 0.5f);
+			//				triggers.add(trigger);
+			//			}
+		}
 	}
 	
 	@Override

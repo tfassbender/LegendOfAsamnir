@@ -44,6 +44,11 @@
 			textureDir: menu/buttons,
 			outputDir: packed/menu,
 			atlasName: menu_buttons
+		},
+		{
+			textureDir: items,
+			outputDir: packed/items,
+			atlasName: items
 		}
 	]
 }

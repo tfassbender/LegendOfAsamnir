@@ -150,6 +150,11 @@ public class Dwarf implements Disposable {
 		position.y += deltaY;
 	}
 	
+	public void setPosition(float x, float y) {
+		position.x = x;
+		position.y = y;
+	}
+	
 	public float getTimeTillIdleAnimation() {
 		return TIME_TILL_IDLE_ANIMATION;
 	}

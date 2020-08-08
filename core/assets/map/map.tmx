@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="10">
  <tileset firstgid="1" source="rpg_nature_tileset.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="gzip">
@@ -11,4 +11,17 @@
    H4sIAAAAAAAACu2ZgW6EIAyGOTdfAb0H3vPsFRcymvv3p0iLoOfil5ATQWhpqZUL4ebmf/NobPPw0WkchGWLhjarPrV+3L5nnSLVl1y4bYFrfsY6dq1d679Svabrkvs8oe9Cv738CudEnvmXZa+t4SfVp/Ar65Trc67LuDHX0WYt8vYA13Sh+xGKtMfw1z7S9gznwnsV90Ja/2SjFe6n6ym8OFt+hv1M9Frh+kF9xZ+SXuyT74CseVrrJJ/IjT6E+8Iar6xw/OB9XkLrJ77D/ib2YX+0zqUhY4iPor1bwViEv0gsXHuZDWNYdGGfZnuW9vCcx0cbjIilXnD/om4i54j8ZwSaXfndzSR9ee9clVK+5eWIfFeTT+5JnjKC0rhaXJR7+Ayu8RzqTPUuVTk0tr4XLM946f0OtM5hWWOkZ75hGWvLj1vm2sr/rhKHW/ky9Ll6jL4S35X2Utzx+il+f1rta53D0i9uzNvT3/bk3j1Bu42Sqce4tffaEe8kpNUXtuT0nk95Oes8ocU21vUdlRsirXmHRTbtfLQHWqwT+3v1qeWtpf3t2fcLFHlupftYWjgiRoj8UgLVseD5TMs8Vrz2lvEtcqEeI+Dz35bn30EPpOWsTDsreoTX2aSwR48jYqmmx5TLlh4enSz7XNaOsX4zanrI/xIWe9R80qov/hfSgqaHFmdFD0sOfcZ3mWefv0vurWHV42i8NuX3YK2MZM85UCn/6JmX3NzcHMsPBhYr5RAnAAA=
   </data>
  </layer>
+ <objectgroup id="3" name="objects">
+  <object id="1" name="starting_position_player" x="1601.7" y="4661.94" width="128" height="130.667"/>
+  <object id="4" name="item_axe" x="768" y="4864" width="127" height="127"/>
+  <object id="5" name="item_health" x="1280" y="3712" width="128" height="126"/>
+ </objectgroup>
+ <objectgroup id="4" name="physics">
+  <object id="8" x="896" y="4353">
+   <polygon points="0,0 127,0 128,255 -128,255 -128,1279 1152,1279 1152,1407 -256,1407 -256,127 0,127 0,-1"/>
+  </object>
+  <object id="9" x="1152" y="4352">
+   <polygon points="0,0 128,0 128,128 768,128 768,1024 896,1024 896,1152 640,1152 640,256 0,256"/>
+  </object>
+ </objectgroup>
 </map>
