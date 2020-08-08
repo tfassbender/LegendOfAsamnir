@@ -48,5 +48,9 @@
 			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
 			"path": "map/map.tmx"
 		}
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/map2.tmx"
+		}
 	]
 }
