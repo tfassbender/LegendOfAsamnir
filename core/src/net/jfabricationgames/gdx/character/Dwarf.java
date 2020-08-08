@@ -18,6 +18,7 @@ public class Dwarf implements Disposable {
 	public static final float MOVING_SPEED = 200f;
 	public static final float JUMPING_SPEED = 300f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
+	public static final float SCALE_FACTOR = 1f;
 	
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String soundSetKey = "dwarf";
@@ -128,8 +129,8 @@ public class Dwarf implements Disposable {
 				x, y, // x, y
 				originX, originY, //originX, originY
 				width, height, // width, height
-				GameScreen.WORLD_TO_SCREEN, // scaleX
-				GameScreen.WORLD_TO_SCREEN, // scaleY
+				GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR, // scaleX
+				GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR, // scaleY
 				0.0f); // rotation
 	}
 	
@@ -155,6 +156,10 @@ public class Dwarf implements Disposable {
 	
 	public boolean isAnimationFinished() {
 		return animation.isAnimationFinished();
+	}
+
+	public Vector2 getPosition() {
+		return position;
 	}
 
 	@Override
