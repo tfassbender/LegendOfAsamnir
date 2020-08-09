@@ -100,6 +100,7 @@ public class GameScreen extends ScreenAdapter {
 		map = assetManager.get("map/map.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
 		
+		items = new Array<Sprite>();
 		processMapMetaData();
 	}
 	
@@ -163,8 +164,8 @@ public class GameScreen extends ScreenAdapter {
 		camera.update();
 	}
 	
-
 	private void renderItems() {
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		for (Sprite item : items) {
 			item.draw(batch);
@@ -276,26 +277,35 @@ public class GameScreen extends ScreenAdapter {
 	}
 	
 	private void processMapMetaData() {
-		// Load entities
-		items = new Array<Sprite>();
-		triggers = new Array<Sprite>();
-		
 		MapObjects objects = map.getLayers().get("objects").getObjects();
+		
+		if (objects == null) {
+			throw new IllegalStateException("The 'objects' layer couldn't be loaded.");
+		}
 		
 		for (MapObject object : objects) {
 			String name = object.getName();
-			String[] parts = name.split("_");
+			String[] parts = name.split("[.]");
 			RectangleMapObject rectangleObject = (RectangleMapObject) object;
 			Rectangle rectangle = rectangleObject.getRectangle();
 			
-			if (name.equals("starting_position_player")) {
-				dwarf.setPosition(rectangle.x, rectangle.y);
+			Gdx.app.log(getClass().getSimpleName(), "Processing map object: " + name + " at [x: " + rectangle.x + ", y: " + rectangle.y + ", w: "
+					+ rectangle.width + ", h: " + rectangle.height + "]");
+			
+			switch (parts[0]) {
+				case "player":
+					if (parts[1].equals("startingPosition")) {
+						dwarf.setPosition(rectangle.x, rectangle.y);
+					}
+					break;
+				case "item":
+					Sprite item = new Sprite(itemsAtlas.findRegion(parts[1]));
+					item.setPosition(rectangle.x, rectangle.y);
+					item.setScale(WORLD_TO_SCREEN);
+					items.add(item);
+					break;
 			}
-			else if (parts.length > 1 && parts[0].equals("item")) {
-				Sprite item = new Sprite(itemsAtlas.findRegion(name));
-				item.setPosition(rectangle.x, rectangle.y);
-				items.add(item);
-			}
+			
 			//			else if (parts.length > 0 && parts[0].equals("trigger")) {
 			//				Sprite trigger = new Sprite(atlas.findRegion("pixel"));
 			//				trigger.setColor(1.0f, 1.0f, 1.0f, 0.5f);

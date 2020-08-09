@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="15">
  <tileset firstgid="1" source="rpg_nature_tileset.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="gzip">
@@ -8,7 +8,35 @@
  </layer>
  <layer id="2" name="terrain" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu1ZC27DIAylWXuEJO1pd5xdc0LF2uuTCTYBmk55EmoAx9j4g0NDOHHif+NSOefBVyM+CJZtNsxZ9SnR8fyefZqpv6TGc+vGO1bepXmNfqF+Sdcl0TyAdqHfVn6FayIe6XclGqTTdL1SfwpPWafUv6W+8J1Tf6G1vPK2AO7pSuMzNFl/Dq/2kblHeC84VjEW4v5fw6sto65T+AP63RHAfiayrfB8IVrRL+rFPnkE3MNTtrjXUT6RG30I48Kar6xg+1pj766Mie+gXYRWYgfnNR5WCA+JMbR3LUQetgFizjx7cTPwsOjCPs32zOWguH60D9qgRy71AuMXdRPZetQ/PaDZVeIht89RX87Vn4pcveXFiHpXk0/2X+qUHsjx1fKijOE7uMe3UMZUJnmB1Qe3vhcs73jR+gy0rmHZY0TLesPCa8uPa9baql8/JQ/X4ttAsyevnfDhpzCfyzteP+XvIQusa1jo5pCP2Zb+tqf2bgm0W6+apwXf0rk24kxC1PqC53ujdd3zrvuQGttYfWbE/Uht3WGRTbsfbQEt14n9vfqU6tacrTxxv1DTxnjeixE5Qu6JpAXqY/OecwjPO157R1jvgVGPHkDeNbF+FD0Q4ofee3aklzvXizJeq8eIXKrpMaW2pYdHJ0ucy94xrN+Mmh7yv4TFHiV9PN/+e/KapgfnLxmPtJYa+h13Z0eM8xp4/38bBe+e8TlYaj2x5x5oqwZpVZecOHFiLH4BCZp7IhAnAAA=
+   H4sIAAAAAAAACu1ZC27DIAylWXsEkua0O86uOaHytBcLgk2AplOehBrAMTb+xFDnLlz437hVzlnw1YgPQ8rmFXNafUp0cv7IPnnRn2OTc8vOO1repfkU/Sz6JV3nSLMS7Sx+W/kVr8lY4+8iaJgupetd9Cf3knWK/Ufsg6+P/VmsZZW3BXhPFzHuqWF977b2wdzq3gsZqxwLYf/vbmvLoOvk/sB+dwZIP4NsCz3fBC30C3pJnzwDnu4lW9jrIB/kZh/iuNDmKy2kfbWx90yMwXfYLqBF7PB8iocW4IEYY3vXAvJIGzB85tmKh4KHRhfp09KeuRwU1g/2YRv0yKVWcPyybpCtR/3TAym7Ih5y+xz0lbn6U5Grt6wYUe+m5MP+o07pgRzfVF7EGL/De/xwZUxlkg20Prh3XtC8Y0Xrb6B2Dc0eM1rWGxpee35cs9Ze/fopebgW3wqaI3ntgg0/hflc3rH6qTwPaaBdQ0PnXT5mW/rbkdq7JdhuvWqeFnxL37UR3yRGrS9Yzhut65533YfU2EbrMyPuR2rrDo1sqfvRFkjlOtjfqk+pbs3ZyhL3MzXE1iLGudVgRI6A/GhO9LlZv3MMyztWewdo74FZjx5g3jWxfhY9GPBD6z070+PO9ZYYr9VjRC5N6THFtqeHRSdNnGPvJLRnxpQe+F9CY4+SPpaz/5G8ltJD5i+MB1pNDf2OuzNLnJ/53Gj9/20UrDaV38FS64kj90C5+qNlXXLhwoWx+AVGS4y9ECcAAA==
   </data>
  </layer>
+ <objectgroup id="3" name="objects">
+  <object id="7" name="player.startingPosition" x="1664" y="4734">
+   <point/>
+  </object>
+  <object id="8" name="item.axe" x="896" y="4736">
+   <point/>
+  </object>
+  <object id="9" name="item.health" x="892" y="4090">
+   <point/>
+  </object>
+  <object id="10" name="item.coin" x="894" y="3450">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="physics">
+  <object id="11" x="1152" y="4352">
+   <polygon points="0,0 128,0 128,128 768,128 768,1024 896,1024 896,1152 640,1152 640,256 0,256"/>
+  </object>
+  <object id="12" x="1024" y="4352">
+   <polygon points="0,0 -128,0 -128,128 -384,128 -384,1408 1024,1408 1024,1280 -256,1280 -256,256 0,256"/>
+  </object>
+  <object id="13" x="1024" y="4864">
+   <polygon points="0,0 128,0 128,384 384,384 384,0 512,0 512,512 0,512"/>
+  </object>
+  <object id="14" x="1152" y="4864">
+   <polygon points="0,0 256,0 256,128 0,128"/>
+  </object>
+ </objectgroup>
 </map>

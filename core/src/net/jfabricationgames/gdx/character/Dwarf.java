@@ -15,8 +15,8 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class Dwarf implements Disposable {
 	
-	public static final float MOVING_SPEED = 200f;
-	public static final float JUMPING_SPEED = 300f;
+	public static final float MOVING_SPEED = 300f;
+	public static final float JUMPING_SPEED = 350f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	public static final float SCALE_FACTOR = 1f;
 	
@@ -116,14 +116,6 @@ public class Dwarf implements Disposable {
 		float originY = 0.5f * height;
 		float x = position.x - originX;
 		float y = position.y - originY;
-		
-		//		batch.draw(dwarfSprite, // sprite
-		//				x, y, //x, y
-		//				originX, originY, // originX, originY
-		//				width, height, // width, height
-		//				GameScreen.WORLD_TO_SCREEN, // scaleX
-		//				GameScreen.WORLD_TO_SCREEN, // scaleY
-		//				0); // rotation
 		
 		batch.draw(frame, // textureRegion
 				x, y, // x, y
