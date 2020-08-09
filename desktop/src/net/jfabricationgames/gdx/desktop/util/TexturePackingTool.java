@@ -10,8 +10,11 @@ import com.badlogic.gdx.utils.Json;
 
 public class TexturePackingTool {
 	
-	public static final boolean REPACK_TEXTURES = false;
 	public static final String TEXTURE_SETTINGS_FILE = "config/texture_packing/texture_settings.json";
+	
+	public static void main(String[] args) {
+		new TexturePackingTool().packTextures();
+	}
 	
 	private TexturePacker.Settings textureSettings;
 	private TextureSettingsList textures;
@@ -26,9 +29,7 @@ public class TexturePackingTool {
 		textureSettings.filterMag = TextureFilter.Nearest;
 		
 		try {
-			if (REPACK_TEXTURES) {
-				loadTextureSettings();
-			}
+			loadTextureSettings();
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new IllegalStateException(fnfe);
@@ -41,11 +42,9 @@ public class TexturePackingTool {
 	}
 	
 	public void packTextures() {
-		if (REPACK_TEXTURES) {
-			for (TexturePackSetting packSetting : textures.getSettings()) {
-				textureSettings.edgePadding = packSetting.isEdgePadding();
-				TexturePacker.process(textureSettings, packSetting.getTextureDir(), packSetting.getOutputDir(), packSetting.getAtlasName());
-			}
+		for (TexturePackSetting packSetting : textures.getSettings()) {
+			textureSettings.edgePadding = packSetting.isEdgePadding();
+			TexturePacker.process(textureSettings, packSetting.getTextureDir(), packSetting.getOutputDir(), packSetting.getAtlasName());
 		}
 	}
 }

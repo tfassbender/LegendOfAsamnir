@@ -15,7 +15,13 @@ task run(dependsOn: classes, type: JavaExec) {
     ignoreExitValue = true
 }
 
-task debug(dependsOn: classes, type: JavaExec) {
+task packTextures(dependsOn: classes, type: JavaExec) {
+    main = "net.jfabricationgames.gdx.desktop.util.TexturePackingTool"
+    classpath = sourceSets.main.runtimeClasspath
+    workingDir = project.assetsDir
+}
+
+task debug(type: JavaExec) {
     main = project.mainClassName
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
