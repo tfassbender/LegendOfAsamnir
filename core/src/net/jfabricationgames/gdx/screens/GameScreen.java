@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.screens;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -288,9 +291,10 @@ public class GameScreen extends ScreenAdapter {
 			String[] parts = name.split("[.]");
 			RectangleMapObject rectangleObject = (RectangleMapObject) object;
 			Rectangle rectangle = rectangleObject.getRectangle();
+			MapProperties properties = object.getProperties();
 			
 			Gdx.app.log(getClass().getSimpleName(), "Processing map object: " + name + " at [x: " + rectangle.x + ", y: " + rectangle.y + ", w: "
-					+ rectangle.width + ", h: " + rectangle.height + "]");
+					+ rectangle.width + ", h: " + rectangle.height + "] properties: " + mapPropertiesToString(properties, false));
 			
 			switch (parts[0]) {
 				case "player":
@@ -314,6 +318,29 @@ public class GameScreen extends ScreenAdapter {
 			//				triggers.add(trigger);
 			//			}
 		}
+	}
+	
+	private String mapPropertiesToString(MapProperties properties, boolean includePosition) {
+		StringBuilder sb = new StringBuilder();
+		
+		Array<String> excludedKeys = new Array<>();
+		if (!includePosition) {
+			excludedKeys.addAll("x", "y", "width", "height");
+		}
+		
+		sb.append('{');
+		Iterator<String> keys = properties.getKeys();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			String value = properties.get(key).toString();
+			if (!excludedKeys.contains(key, false)) {
+				sb.append('\"').append(key).append('\"').append(": ").append('\"').append(value).append("\", ");
+			}
+		}
+		sb.setLength(sb.length() - 2);
+		sb.append('}');
+		
+		return sb.toString();
 	}
 	
 	@Override

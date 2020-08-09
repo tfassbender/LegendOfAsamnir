@@ -16,12 +16,23 @@
    <point/>
   </object>
   <object id="8" name="item.axe" x="896" y="4736">
+   <properties>
+    <property name="damage" value="42"/>
+    <property name="killsEnemies" value="true"/>
+    <property name="weight" value="20"/>
+   </properties>
    <point/>
   </object>
   <object id="9" name="item.health" x="892" y="4090">
+   <properties>
+    <property name="health" value="10"/>
+   </properties>
    <point/>
   </object>
   <object id="10" name="item.coin" x="894" y="3450">
+   <properties>
+    <property name="value" value="1"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
