@@ -5,14 +5,11 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
@@ -30,7 +27,7 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
-import net.jfabricationgames.gdx.text.ScreenTextWriter;
+import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 
 public class GameScreen extends ScreenAdapter {
 	
@@ -40,9 +37,8 @@ public class GameScreen extends ScreenAdapter {
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	public static final String ASSET_GROUP_NAME = "game";
-	public static final String FONT_NAME = "vikingMedium";
 	
-	private static final float CAMERA_SPEED = 400.0f;
+	private static final float CAMERA_SPEED = 600.0f;
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
 	private static final float CAMERA_ZOOM_MAX = 2.0f;
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
@@ -51,15 +47,12 @@ public class GameScreen extends ScreenAdapter {
 	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET;
 	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET;
 	
-	private static final float WORLD_EDGE_SIZE = 10f;
-	
 	private OrthographicCamera camera;
 	private OrthographicCamera cameraHud;
 	private Viewport viewport;
 	private Viewport viewportHud;
 	
 	private SpriteBatch batch;
-	private ShapeRenderer shapeRenderer;
 	
 	private AssetGroupManager assetManager;
 	
@@ -67,13 +60,13 @@ public class GameScreen extends ScreenAdapter {
 	
 	private DebugGridRenderer debugGridRenderer;
 	
-	private ScreenTextWriter screenTextWriter;
+	private HeadsUpDisplay hud;
 	
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	
 	private Array<Sprite> items;
-	private Array<Sprite> triggers;
+	// private Array<Sprite> triggers;
 	
 	private TextureAtlas itemsAtlas;
 	
@@ -85,8 +78,9 @@ public class GameScreen extends ScreenAdapter {
 		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		initializeCamerasAndViewports();
 		
+		hud = new HeadsUpDisplay(cameraHud);
+		
 		batch = new SpriteBatch();
-		shapeRenderer = new ShapeRenderer();
 		
 		dwarf = new Dwarf();
 		dwarf.move(SCENE_WIDTH * 0.9f, SCENE_HEIGHT * 0.8f);
@@ -94,9 +88,6 @@ public class GameScreen extends ScreenAdapter {
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
 		debugGridRenderer.stopDebug();
-		
-		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont(FONT_NAME);
 		
 		itemsAtlas = assetManager.get("packed/items/items.atlas");
 		
@@ -131,11 +122,9 @@ public class GameScreen extends ScreenAdapter {
 		moveCamera(delta);
 		renderer.setView(camera);
 		renderer.render();
-		renderItems();
 		renderDebugGraphics(delta);
 		renderGameGraphics(delta);
-		renderText();
-		renderHUD(delta);
+		hud.render(delta);
 		moveCameraToPlayer();
 	}
 	
@@ -168,12 +157,9 @@ public class GameScreen extends ScreenAdapter {
 	}
 	
 	private void renderItems() {
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
 		for (Sprite item : items) {
 			item.draw(batch);
 		}
-		batch.end();
 	}
 	
 	private void renderDebugGraphics(float delta) {
@@ -184,75 +170,9 @@ public class GameScreen extends ScreenAdapter {
 	private void renderGameGraphics(float delta) {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		renderItems();
 		dwarf.render(delta, batch);
 		batch.end();
-	}
-	
-	private void renderHUD(float delta) {
-		shapeRenderer.setProjectionMatrix(cameraHud.combined);
-		shapeRenderer.begin(ShapeType.Filled);
-		drawWorldEdge();
-		drawStatsBars();
-		shapeRenderer.end();
-	}
-	
-	private void renderText() {
-		batch.setProjectionMatrix(cameraHud.combined);
-		batch.begin();
-		screenTextWriter.setColor(Color.RED);
-		screenTextWriter.setScale(2f);
-		screenTextWriter.addText("Dwarf Scroller GDX", 100f, 0.1f * SCENE_HEIGHT);
-		screenTextWriter.draw(batch);
-		batch.end();
-	}
-	
-	private void drawWorldEdge() {
-		shapeRenderer.setColor(Color.GRAY);
-		shapeRenderer.rect(0, 0, SCENE_WIDTH, WORLD_EDGE_SIZE);
-		shapeRenderer.rect(0, 0, WORLD_EDGE_SIZE, SCENE_HEIGHT);
-		shapeRenderer.rect(SCENE_WIDTH, SCENE_HEIGHT, -SCENE_WIDTH, -WORLD_EDGE_SIZE);
-		shapeRenderer.rect(SCENE_WIDTH, SCENE_HEIGHT, -WORLD_EDGE_SIZE, -SCENE_HEIGHT);
-	}
-	
-	private void drawStatsBars() {
-		final float healthBarHeightPercent = 0.65f;
-		final Vector2 tileUpperRight = new Vector2(SCENE_WIDTH - WORLD_EDGE_SIZE * 2f, SCENE_HEIGHT - WORLD_EDGE_SIZE * 2f);
-		final Vector2 tileSize = new Vector2(-400, -80f);
-		final Vector2 healthBarUpperRightOffset = new Vector2(-10f, -10f);
-		final Vector2 healthBarSize = new Vector2(tileSize.x - healthBarUpperRightOffset.x * 2,
-				(tileSize.y - (healthBarUpperRightOffset.y * 3)) * healthBarHeightPercent);
-		final Vector2 manaBarUpperRightOffset = new Vector2(-10f, -10f + healthBarUpperRightOffset.y + healthBarSize.y);
-		final Vector2 manaBarSize = new Vector2(tileSize.x - manaBarUpperRightOffset.x * 2,
-				(tileSize.y - (healthBarUpperRightOffset.y * 3)) * (1 - healthBarHeightPercent));
-		
-		final Color[] backgroundBarColors = new Color[] {// positions are inverted because the size of the rectangles is negative
-				new Color(0.3f, 0.3f, 0.3f, 1f), //top-right
-				new Color(0.35f, 0.35f, 0.35f, 1f), //top-left
-				new Color(0.2f, 0.2f, 0.2f, 1f), //bottom-left
-				new Color(0.05f, 0.05f, 0.05f, 1f) //bottom-right
-		};
-		
-		final Color[] healthBarColors = new Color[] {// positions are inverted because the size of the rectangles is negative
-				new Color(0f, 0.85f, 0f, 1f), //top-right
-				Color.GREEN, //top-left
-				Color.DARK_GRAY, //bottom-left
-				new Color(0.05f, 0.05f, 0.05f, 1f) //bottom-right
-		};
-		
-		final Color[] manaBarColors = new Color[] {// positions are inverted because the size of the rectangles is negative
-				new Color(0f, 0f, 0.85f, 1f), //top-right
-				Color.BLUE, //top-left
-				Color.DARK_GRAY, //bottom-left
-				new Color(0.15f, 0.15f, 0.15f, 1f) //bottom-right
-		
-		};
-		
-		shapeRenderer.rect(tileUpperRight.x, tileUpperRight.y, tileSize.x, tileSize.y, backgroundBarColors[0], backgroundBarColors[1],
-				backgroundBarColors[2], backgroundBarColors[3]);
-		shapeRenderer.rect(tileUpperRight.x + healthBarUpperRightOffset.x, tileUpperRight.y + healthBarUpperRightOffset.y, healthBarSize.x,
-				healthBarSize.y, healthBarColors[0], healthBarColors[1], healthBarColors[2], healthBarColors[3]);
-		shapeRenderer.rect(tileUpperRight.x + manaBarUpperRightOffset.x, tileUpperRight.y + manaBarUpperRightOffset.y, manaBarSize.x, manaBarSize.y,
-				manaBarColors[0], manaBarColors[1], manaBarColors[2], manaBarColors[3]);
 	}
 	
 	private void moveCameraToPlayer() {
