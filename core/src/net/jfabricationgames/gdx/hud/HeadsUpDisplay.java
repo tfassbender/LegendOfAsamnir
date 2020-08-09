@@ -1,8 +1,9 @@
 package net.jfabricationgames.gdx.hud;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.Disposable;
 
-public class HeadsUpDisplay {
+public class HeadsUpDisplay implements Disposable {
 	
 	private StatusBar statusBar;
 	private InGameMenu inGameMenu;
@@ -18,5 +19,12 @@ public class HeadsUpDisplay {
 		statusBar.render(delta);
 		inGameMenu.render(delta);
 		worldEdge.render(delta);
+	}
+
+	@Override
+	public void dispose() {
+		statusBar.dispose();
+		inGameMenu.dispose();
+		worldEdge.dispose();
 	}
 }

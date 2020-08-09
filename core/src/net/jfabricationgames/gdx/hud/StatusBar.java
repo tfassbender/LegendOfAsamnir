@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.screens.GameScreen;
 
-public class StatusBar {
-
+public class StatusBar implements Disposable {
+	
 	private final float healthBarHeightPercent = 0.65f;
 	private final Vector2 size = new Vector2(-400, -80); //negative values because it's drawn from the top right
 	private final Vector2 healthBarUpperRightOffset = new Vector2(-10f, -10f);
@@ -75,5 +76,10 @@ public class StatusBar {
 	public void setPosition(float x, float y) {
 		tileUpperRight.x = x + size.x;
 		tileUpperRight.y = y + size.y;
+	}
+	
+	@Override
+	public void dispose() {
+		shapeRenderer.dispose();
 	}
 }

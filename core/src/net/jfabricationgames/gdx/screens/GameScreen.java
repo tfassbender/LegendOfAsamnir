@@ -1,25 +1,13 @@
 package net.jfabricationgames.gdx.screens;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -28,6 +16,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
+import net.jfabricationgames.gdx.map.GameMap;
 
 public class GameScreen extends ScreenAdapter {
 	
@@ -51,24 +40,13 @@ public class GameScreen extends ScreenAdapter {
 	private OrthographicCamera cameraHud;
 	private Viewport viewport;
 	private Viewport viewportHud;
-	
 	private SpriteBatch batch;
 	
 	private AssetGroupManager assetManager;
-	
 	private Dwarf dwarf;
-	
 	private DebugGridRenderer debugGridRenderer;
-	
 	private HeadsUpDisplay hud;
-	
-	private TiledMap map;
-	private OrthogonalTiledMapRenderer renderer;
-	
-	private Array<Sprite> items;
-	// private Array<Sprite> triggers;
-	
-	private TextureAtlas itemsAtlas;
+	private GameMap map;
 	
 	public GameScreen() {
 		assetManager = AssetGroupManager.getInstance();
@@ -78,24 +56,18 @@ public class GameScreen extends ScreenAdapter {
 		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		initializeCamerasAndViewports();
 		
-		hud = new HeadsUpDisplay(cameraHud);
-		
 		batch = new SpriteBatch();
 		
+		map = new GameMap("map/map.tmx", camera);
+		hud = new HeadsUpDisplay(cameraHud);
+		
 		dwarf = new Dwarf();
-		dwarf.move(SCENE_WIDTH * 0.9f, SCENE_HEIGHT * 0.8f);
+		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
+		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
 		debugGridRenderer.stopDebug();
-		
-		itemsAtlas = assetManager.get("packed/items/items.atlas");
-		
-		map = assetManager.get("map/map.tmx");
-		renderer = new OrthogonalTiledMapRenderer(map);
-		
-		items = new Array<Sprite>();
-		processMapMetaData();
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -120,8 +92,7 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		moveCamera(delta);
-		renderer.setView(camera);
-		renderer.render();
+		map.render(delta);
 		renderDebugGraphics(delta);
 		renderGameGraphics(delta);
 		hud.render(delta);
@@ -156,12 +127,6 @@ public class GameScreen extends ScreenAdapter {
 		camera.update();
 	}
 	
-	private void renderItems() {
-		for (Sprite item : items) {
-			item.draw(batch);
-		}
-	}
-	
 	private void renderDebugGraphics(float delta) {
 		debugGridRenderer.updateCamera(camera);
 		debugGridRenderer.render(delta);
@@ -170,7 +135,6 @@ public class GameScreen extends ScreenAdapter {
 	private void renderGameGraphics(float delta) {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		renderItems();
 		dwarf.render(delta, batch);
 		batch.end();
 	}
@@ -199,70 +163,6 @@ public class GameScreen extends ScreenAdapter {
 		camera.update();
 	}
 	
-	private void processMapMetaData() {
-		MapObjects objects = map.getLayers().get("objects").getObjects();
-		
-		if (objects == null) {
-			throw new IllegalStateException("The 'objects' layer couldn't be loaded.");
-		}
-		
-		for (MapObject object : objects) {
-			String name = object.getName();
-			String[] parts = name.split("[.]");
-			RectangleMapObject rectangleObject = (RectangleMapObject) object;
-			Rectangle rectangle = rectangleObject.getRectangle();
-			MapProperties properties = object.getProperties();
-			
-			Gdx.app.log(getClass().getSimpleName(), "Processing map object: " + name + " at [x: " + rectangle.x + ", y: " + rectangle.y + ", w: "
-					+ rectangle.width + ", h: " + rectangle.height + "] properties: " + mapPropertiesToString(properties, false));
-			
-			switch (parts[0]) {
-				case "player":
-					if (parts[1].equals("startingPosition")) {
-						dwarf.setPosition(rectangle.x, rectangle.y);
-					}
-					break;
-				case "item":
-					Sprite item = new Sprite(itemsAtlas.findRegion(parts[1]));
-					item.setPosition(rectangle.x, rectangle.y);
-					item.setScale(WORLD_TO_SCREEN);
-					items.add(item);
-					break;
-			}
-			
-			//			else if (parts.length > 0 && parts[0].equals("trigger")) {
-			//				Sprite trigger = new Sprite(atlas.findRegion("pixel"));
-			//				trigger.setColor(1.0f, 1.0f, 1.0f, 0.5f);
-			//				trigger.setScale(rectangle.width, rectangle.height);
-			//				trigger.setPosition(rectangle.x - rectangle.width * 0.5f, rectangle.y + rectangle.height * 0.5f);
-			//				triggers.add(trigger);
-			//			}
-		}
-	}
-	
-	private String mapPropertiesToString(MapProperties properties, boolean includePosition) {
-		StringBuilder sb = new StringBuilder();
-		
-		Array<String> excludedKeys = new Array<>();
-		if (!includePosition) {
-			excludedKeys.addAll("x", "y", "width", "height");
-		}
-		
-		sb.append('{');
-		Iterator<String> keys = properties.getKeys();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			String value = properties.get(key).toString();
-			if (!excludedKeys.contains(key, false)) {
-				sb.append('\"').append(key).append('\"').append(": ").append('\"').append(value).append("\", ");
-			}
-		}
-		sb.setLength(sb.length() - 2);
-		sb.append('}');
-		
-		return sb.toString();
-	}
-	
 	@Override
 	public void hide() {
 		dispose();
@@ -277,6 +177,7 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void dispose() {
 		batch.dispose();
+		map.dispose();
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
 	}
 }

@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.screens.GameScreen;
 
-public class WorldEdge {
+public class WorldEdge implements Disposable {
 	
 	private float worldEdgeSize = 10f;
 	
@@ -40,5 +41,10 @@ public class WorldEdge {
 	
 	public void setWorldEdgeSize(float worldEdgeSize) {
 		this.worldEdgeSize = worldEdgeSize;
+	}
+	
+	@Override
+	public void dispose() {
+		shapeRenderer.dispose();
 	}
 }

@@ -3,11 +3,12 @@ package net.jfabricationgames.gdx.hud;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
-public class InGameMenu {
+public class InGameMenu implements Disposable {
 	
 	public static final String DEFAULT_FONT_NAME = "vikingMedium";
 	
@@ -23,7 +24,7 @@ public class InGameMenu {
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(DEFAULT_FONT_NAME);
 	}
-
+	
 	public void render(float delta) {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
@@ -36,5 +37,10 @@ public class InGameMenu {
 		screenTextWriter.setScale(2f);
 		screenTextWriter.addText("Dwarf Scroller GDX", 100f, 0.1f * GameScreen.SCENE_HEIGHT);
 		screenTextWriter.draw(batch);
+	}
+	
+	@Override
+	public void dispose() {
+		batch.dispose();
 	}
 }
