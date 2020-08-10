@@ -6,7 +6,11 @@ public enum MovingDirection {
 	UP(true), //
 	DOWN(false), //
 	LEFT(false), //
-	RIGHT(true);
+	RIGHT(true), //
+	UP_LEFT(false), //
+	UP_RIGHT(true), //
+	DOWN_LEFT(false), //
+	DOWN_RIGHT(true);
 	
 	public static final String DRAWING_DIRECTION_RIGHT_POSTFIX = "right";
 	public static final String DRAWING_DIRECTION_LEFT_POSTFIX = "left";
@@ -28,5 +32,24 @@ public enum MovingDirection {
 	
 	public boolean isDrawingDirectionRight() {
 		return drawingDirectionRight;
+	}
+	
+	public boolean containsDirection(MovingDirection direction) {
+		switch (this) {
+			case DOWN_LEFT:
+				return direction == DOWN || direction == LEFT;
+			case DOWN_RIGHT:
+				return direction == DOWN || direction == RIGHT;
+			case UP_LEFT:
+				return direction == UP || direction == LEFT;
+			case UP_RIGHT:
+				return direction == UP || direction == RIGHT;
+			default:
+				return direction == this;
+		}
+	}
+	
+	public boolean isCombinedDirection() {
+		return this == UP_LEFT || this == UP_RIGHT || this == DOWN_LEFT || this == DOWN_RIGHT;
 	}
 }

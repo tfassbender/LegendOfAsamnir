@@ -16,9 +16,11 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
+import net.jfabricationgames.gdx.input.InputActionListener;
+import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.map.GameMap;
 
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
 	public static final float WORLD_TO_SCREEN = 4.0f;
 	public static final float SCENE_WIDTH = 1280f;
@@ -36,6 +38,10 @@ public class GameScreen extends ScreenAdapter {
 	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET;
 	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET;
 	
+	private static final String INPUT_AXIS_CAMERA_VERTICAL_MOVMENT = "camera_vertical_move_axis";
+	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
+	private static final float INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD = 0.3f;
+	
 	private OrthographicCamera camera;
 	private OrthographicCamera cameraHud;
 	private Viewport viewport;
@@ -43,6 +49,7 @@ public class GameScreen extends ScreenAdapter {
 	private SpriteBatch batch;
 	
 	private AssetGroupManager assetManager;
+	private InputContext inputContext;
 	private Dwarf dwarf;
 	private DebugGridRenderer debugGridRenderer;
 	private HeadsUpDisplay hud;
@@ -55,6 +62,9 @@ public class GameScreen extends ScreenAdapter {
 		
 		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		initializeCamerasAndViewports();
+		
+		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		inputContext.addListener(this);
 		
 		batch = new SpriteBatch();
 		
@@ -99,20 +109,40 @@ public class GameScreen extends ScreenAdapter {
 		moveCameraToPlayer();
 	}
 	
+	@Override
+	public boolean onAction(String action, Type type, Parameters parameters) {
+		// dummy implementation, because only controllerAxes are used yet
+		return false;
+	}
+	
 	private void moveCamera(float delta) {
+		float cameraMovementAxisVertically = inputContext.getControllerAxisValue(INPUT_AXIS_CAMERA_VERTICAL_MOVMENT);
+		float cameraMovementAxisHorizontally = inputContext.getControllerAxisValue(INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT);
+		float cameraMovementSpeedX = 0;
+		float cameraMovementSpeedY = 0;
+		if (Math.abs(cameraMovementAxisHorizontally) > INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD) {
+			cameraMovementSpeedX = CAMERA_SPEED * cameraMovementAxisHorizontally * delta;
+		}
+		if (Math.abs(cameraMovementAxisVertically) > INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD) {
+			cameraMovementSpeedY = -CAMERA_SPEED * cameraMovementAxisVertically * delta;
+		}
+		
 		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-			camera.position.x -= CAMERA_SPEED * delta;
+			cameraMovementSpeedX = -CAMERA_SPEED * delta;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			camera.position.x += CAMERA_SPEED * delta;
+			cameraMovementSpeedX = CAMERA_SPEED * delta;
 		}
 		
 		if (Gdx.input.isKeyPressed(Keys.UP)) {
-			camera.position.y += CAMERA_SPEED * delta;
+			cameraMovementSpeedY = CAMERA_SPEED * delta;
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-			camera.position.y -= CAMERA_SPEED * delta;
+			cameraMovementSpeedY = -CAMERA_SPEED * delta;
 		}
+		
+		camera.position.x += cameraMovementSpeedX;
+		camera.position.y += cameraMovementSpeedY;
 		
 		if (Gdx.input.isKeyPressed(Keys.PAGE_UP)) {
 			camera.zoom -= CAMERA_ZOOM_SPEED * delta;

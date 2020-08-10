@@ -15,6 +15,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_MOVE_RIGHT = "right";
 	private static final String INPUT_JUMP = "jump";
 	private static final String INPUT_ATTACK = "attack";
+	private static final String INPUT_ATTACK_JUMP = "attack_jump";
 	
 	private Dwarf inputCharacter;
 	
@@ -24,6 +25,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean moveRight = false;
 	private boolean jump = false;
 	private boolean attack = false;
+	private boolean attackJump = false;
 	
 	private float idleTime;
 	private float timeTillIdleAnimation;
@@ -47,16 +49,21 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
 		
-		if (attack) {
+		if (attackJump) {
 			if (getAction().isInterruptable()) {
 				if (move) {
 					lastMoveDirection = getDirectionFromInputs();
-					jumpDirection = getDrawingDirectionChangesFromInputs();
+					jumpDirection = getDirectionFromInputs();
 					inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
 				}
 				else {
 					inputCharacter.changeAction(CharacterAction.ATTACK);
 				}
+			}
+		}
+		else if (attack) {
+			if (getAction().isInterruptable()) {
+				inputCharacter.changeAction(CharacterAction.ATTACK);
 			}
 		}
 		else if (jump) {
@@ -115,6 +122,9 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		if (inputContext.isStateActive(INPUT_ATTACK)) {
 			attack = true;
 		}
+		if (inputContext.isStateActive(INPUT_ATTACK_JUMP)) {
+			attackJump = true;
+		}
 		
 		if (moveUp && moveDown) {
 			moveUp = false;
@@ -133,6 +143,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		moveRight = false;
 		jump = false;
 		attack = false;
+		attackJump = false;
 	}
 	
 	/**
@@ -156,6 +167,18 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	 * @return The current direction from the inputs.
 	 */
 	private MovingDirection getDirectionFromInputs() {
+		if (moveUp && moveRight) {
+			return MovingDirection.UP_RIGHT;
+		}
+		if (moveUp && moveLeft) {
+			return MovingDirection.UP_LEFT;
+		}
+		if (moveDown && moveRight) {
+			return MovingDirection.DOWN_RIGHT;
+		}
+		if (moveDown && moveLeft) {
+			return MovingDirection.DOWN_LEFT;
+		}
 		if (moveLeft) {
 			return MovingDirection.LEFT;
 		}
@@ -200,16 +223,20 @@ public class CharacterInputMovementHandler implements InputActionListener {
 			float speedX = 0;
 			float speedY = 0;
 			
-			if (jumpDirection == MovingDirection.UP) {
+			if (jumpDirection.isCombinedDirection()) {
+				jumpingSpeed *= SQRT_0_5;
+			}
+			
+			if (jumpDirection.containsDirection(MovingDirection.UP)) {
 				speedY = jumpingSpeed;
 			}
-			else if (jumpDirection == MovingDirection.DOWN) {
+			if (jumpDirection.containsDirection(MovingDirection.DOWN)) {
 				speedY = -jumpingSpeed;
 			}
-			else if (jumpDirection == MovingDirection.LEFT) {
+			if (jumpDirection.containsDirection(MovingDirection.LEFT)) {
 				speedX = -jumpingSpeed;
 			}
-			else if (jumpDirection == MovingDirection.RIGHT) {
+			if (jumpDirection.containsDirection(MovingDirection.RIGHT)) {
 				speedX = jumpingSpeed;
 			}
 			move(speedX, speedY, delta);

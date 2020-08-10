@@ -21,16 +21,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.input.InputActionListener;
+import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
-public class MainMenuScreen extends ScreenAdapter {
+public class MainMenuScreen extends ScreenAdapter implements InputActionListener {
 	
 	public static final String ASSET_GROUP_NAME = "main_menu";
 	public static final String FONT_NAME = "vikingMedium";
 	public static final int VIRTUAL_WIDTH = 1280;
 	public static final int VIRTUAL_HEIGHT = 720;
 	
+	private static final String CONTROLLER_ACTION_START_GAME = "start_game";
+	private static final String INPUT_CONTEXT_NAME = "mainMenu";
+	
 	private AssetGroupManager assetManager;
+	private InputContext inputContext;
 	
 	private Viewport viewport;
 	
@@ -43,6 +49,10 @@ public class MainMenuScreen extends ScreenAdapter {
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
 		assetManager.finishLoading();
+		
+		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
+		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		inputContext.addListener(this);
 		
 		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		stage = new Stage(viewport);
@@ -92,8 +102,7 @@ public class MainMenuScreen extends ScreenAdapter {
 			
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				DwarfScrollerGame.getInstance().setScreen(new GameScreen());
-				dispose();
+				startGame();
 			};
 		});
 		buttonExit.addListener(new ClickListener() {
@@ -105,6 +114,11 @@ public class MainMenuScreen extends ScreenAdapter {
 		});
 		
 		stage.addActor(table);
+	}
+	
+	private void startGame() {
+		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+		dispose();
 	}
 	
 	@Override
@@ -125,7 +139,16 @@ public class MainMenuScreen extends ScreenAdapter {
 	public void dispose() {
 		DwarfScrollerGame.getInstance().removeInputProcessor(stage);
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
+		inputContext.removeListener(this);
 		
 		stage.dispose();
+	}
+	
+	@Override
+	public boolean onAction(String action, Type type, Parameters parameters) {
+		if (action.equals(CONTROLLER_ACTION_START_GAME)) {
+			startGame();
+		}
+		return false;
 	}
 }

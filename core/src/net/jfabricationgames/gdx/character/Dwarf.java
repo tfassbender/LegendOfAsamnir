@@ -17,6 +17,7 @@ public class Dwarf implements Disposable {
 	
 	public static final float MOVING_SPEED = 300f;
 	public static final float JUMPING_SPEED = 350f;
+	public static final float MOVING_SPEED_ATTACK = 150;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	public static final float SCALE_FACTOR = 1f;
 	
@@ -131,6 +132,9 @@ public class Dwarf implements Disposable {
 	}
 	
 	public float getMovingSpeed() {
+		if (action == CharacterAction.ATTACK) {
+			return MOVING_SPEED_ATTACK;
+		}
 		return MOVING_SPEED;
 	}
 	public float getJumpingSpeed() {

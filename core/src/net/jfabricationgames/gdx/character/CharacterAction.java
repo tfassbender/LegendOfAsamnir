@@ -6,7 +6,7 @@ public enum CharacterAction {
 	IDLE("dwarf_idle_", null, true, true, false), // staying still for some time
 	RUN("dwarf_run_", null, true, true, false), // running in any direction
 	JUMP("dwarf_jump_", "jump", true, false, true), // jumping with or without direction
-	ATTACK("dwarf_attack_", "hit", true, false, true), // attack while standing 
+	ATTACK("dwarf_attack_", "hit", true, false, false), // attack while standing 
 	ATTACK_JUMP("dwarf_attack_jump_", "hit2", true, false, true), // attack while running
 	ATTACK_SPIN("dwarf_spin_", "hit", true, false, true), // spin attack
 	HIT("dwarf_hit_", "damage", true, false, false), // dwarf got hit

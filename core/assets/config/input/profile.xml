@@ -53,6 +53,12 @@
 					<button code="0" />
 				</controller>
 			</action>
+			
+			<action name="start_game">
+				<controller>
+					<button code="2" />
+				</controller>
+			</action>
 		</actions>
 	</context>
 
@@ -65,6 +71,7 @@
 			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
+		
 		<states>
 			<!-- movement input states -->
 			<state name="up">
@@ -100,7 +107,7 @@
 			<state name="jump">
 				<key code="Space" />
 				<controller>
-					<button code="0" />
+					<button code="2" />
 				</controller>
 			</state>
 			
@@ -108,10 +115,27 @@
 			<state name="attack">
 				<button code="Left" /><!-- left mouse button -->
 				<controller player="1">
-					<button code="1" />
+					<button code="0" />
 					<axis code="4" threshold="-0.7" /><!-- right shoulder axis -->
 				</controller>
 			</state>
+			
+			<!-- attacking dwarf 2 -->
+			<state name="attack_jump">
+				<button code="Right" /><!-- left mouse button -->
+				<controller player="1">
+					<button code="1" />
+				</controller>
+			</state>
 		</states>
+		
+		<controllerAxes>
+			<controllerAxis name="camera_vertical_move_axis">
+				<axis player="1" code="2" />
+			</controllerAxis>
+			<controllerAxis name="camera_horizontal_move_axis">
+				<axis player="1" code="3" />
+			</controllerAxis>
+		</controllerAxes>
 	</context>
 </InputProfile>
