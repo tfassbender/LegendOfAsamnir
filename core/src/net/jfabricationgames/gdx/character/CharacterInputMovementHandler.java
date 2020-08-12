@@ -18,7 +18,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_ATTACK_JUMP = "attack_jump";
 	private static final String INPUT_SPRINT = "sprint";
 	
-	private Dwarf inputCharacter;
+	private PlayableCharacter inputCharacter;
 	
 	private boolean moveUp = false;
 	private boolean moveDown = false;
@@ -37,7 +37,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	
 	private InputContext inputContext;
 	
-	public CharacterInputMovementHandler(Dwarf inputCharacter) {
+	public CharacterInputMovementHandler(PlayableCharacter inputCharacter) {
 		this.inputCharacter = inputCharacter;
 		timeTillIdleAnimation = inputCharacter.getTimeTillIdleAnimation();
 		jumpDirection = MovingDirection.NONE;

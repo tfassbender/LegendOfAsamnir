@@ -14,7 +14,7 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Dwarf implements Disposable, StatsCharacter {
+public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	
 	public static final float MOVING_SPEED = 300f;
 	public static final float JUMPING_SPEED = 425f;
@@ -158,10 +158,12 @@ public class Dwarf implements Disposable, StatsCharacter {
 				0.0f); // rotation
 	}
 	
+	@Override
 	public CharacterAction getCurrentAction() {
 		return action;
 	}
 	
+	@Override
 	public float getMovingSpeed(boolean sprint) {
 		if (action == CharacterAction.JUMP) {
 			return JUMPING_SPEED;
@@ -175,41 +177,32 @@ public class Dwarf implements Disposable, StatsCharacter {
 		return MOVING_SPEED;
 	}
 	
+	@Override
 	public void reduceEnduranceForSprinting(float delta) {
 		endurance -= enduranceCostsSprint * delta;
 		if (endurance < 0) {
 			endurance = 0;
 		}
 	}
+	@Override
 	public boolean isExhausted() {
 		return endurance < 1e-5;
 	}
 	
+	@Override
 	public void move(float deltaX, float deltaY) {
 		position.x += deltaX;
 		position.y += deltaY;
 	}
 	
-	public void setPosition(float x, float y) {
-		position.x = x;
-		position.y = y;
-	}
-	
+	@Override
 	public float getTimeTillIdleAnimation() {
 		return TIME_TILL_IDLE_ANIMATION;
 	}
 	
+	@Override
 	public boolean isAnimationFinished() {
 		return animation.isAnimationFinished();
-	}
-	
-	public Vector2 getPosition() {
-		return position;
-	}
-	
-	@Override
-	public void dispose() {
-		soundSet.dispose();
 	}
 	
 	@Override
@@ -225,5 +218,19 @@ public class Dwarf implements Disposable, StatsCharacter {
 	@Override
 	public float getEndurance() {
 		return endurance / maxEndurance;
+	}
+	
+	@Override
+	public void dispose() {
+		soundSet.dispose();
+	}
+	
+	public Vector2 getPosition() {
+		return position;
+	}
+	
+	public void setPosition(float x, float y) {
+		position.x = x;
+		position.y = y;
 	}
 }
