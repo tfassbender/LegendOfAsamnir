@@ -68,10 +68,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		
 		batch = new SpriteBatch();
 		
-		map = new GameMap("map/map.tmx", camera);
-		hud = new HeadsUpDisplay(cameraHud);
-		
 		dwarf = new Dwarf();
+		
+		map = new GameMap("map/map.tmx", camera);
+		hud = new HeadsUpDisplay(cameraHud, dwarf);
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
@@ -91,6 +91,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		
 		camera.position.x = SCENE_WIDTH;
 		camera.position.y = SCENE_HEIGHT;
+		camera.zoom = 1.5f;
 		
 		cameraHud.update();
 	}

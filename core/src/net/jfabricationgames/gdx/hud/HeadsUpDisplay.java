@@ -9,8 +9,8 @@ public class HeadsUpDisplay implements Disposable {
 	private InGameMenu inGameMenu;
 	private WorldEdge worldEdge;
 	
-	public HeadsUpDisplay(OrthographicCamera camera) {
-		statusBar = new StatusBar(camera);
+	public HeadsUpDisplay(OrthographicCamera camera, StatsCharacter character) {
+		statusBar = new StatusBar(camera, character);
 		inGameMenu = new InGameMenu(camera);
 		worldEdge = new WorldEdge(camera);
 	}

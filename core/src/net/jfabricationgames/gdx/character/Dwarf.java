@@ -9,11 +9,12 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationManager;
 import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
+import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Dwarf implements Disposable {
+public class Dwarf implements Disposable, StatsCharacter {
 	
 	public static final float MOVING_SPEED = 300f;
 	public static final float JUMPING_SPEED = 350f;
@@ -28,6 +29,13 @@ public class Dwarf implements Disposable {
 	
 	private Vector2 position;
 	private CharacterAction action;
+	
+	private float health = 100f;
+	private float maxHealth = 100f;
+	private float mana = 100f;
+	private float maxMana = 100f;
+	private float endurance = 100f;
+	private float maxEndurance = 100f;
 	
 	private CharacterInputMovementHandler movementHandler;
 	
@@ -166,5 +174,20 @@ public class Dwarf implements Disposable {
 	@Override
 	public void dispose() {
 		soundSet.dispose();
+	}
+
+	@Override
+	public float getHealth() {
+		return health / maxHealth;
+	}
+
+	@Override
+	public float getMana() {
+		return mana / maxMana;
+	}
+
+	@Override
+	public float getEndurance() {
+		return endurance / maxEndurance;
 	}
 }
