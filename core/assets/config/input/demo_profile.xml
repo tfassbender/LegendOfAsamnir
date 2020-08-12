@@ -34,6 +34,7 @@
 			<state name="up">
 				<!-- Within a state there has to be a key, a mouse button or a controller state (or all of them) -->
 				<!-- Here the W-Key is used for a movement in upper direction (the use of controllers is shown in the next <context>) -->
+				<!-- NOTE: The names of the keys can be found in com.badlogic.gdx.Input.Keys.toString(int) -->
 				<key code="W" />
 			</state>
 			<state name="down">

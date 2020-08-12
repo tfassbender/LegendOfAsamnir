@@ -103,6 +103,13 @@
 				</controller>
 			</state>
 			
+			<state name="sprint">
+				<key code="L-Shift" />
+				<controller player="1">
+					<button code="8" />
+				</controller>
+			</state>
+			
 			<!-- jumping dwarf -->
 			<state name="jump">
 				<key code="Space" />

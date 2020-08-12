@@ -16,6 +16,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_JUMP = "jump";
 	private static final String INPUT_ATTACK = "attack";
 	private static final String INPUT_ATTACK_JUMP = "attack_jump";
+	private static final String INPUT_SPRINT = "sprint";
 	
 	private Dwarf inputCharacter;
 	
@@ -26,6 +27,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean jump = false;
 	private boolean attack = false;
 	private boolean attackJump = false;
+	private boolean sprint = false;
 	
 	private float idleTime;
 	private float timeTillIdleAnimation;
@@ -48,43 +50,45 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		readInputs();
 		
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
+		boolean characterActionSet = false;
 		
-		if (attackJump) {
+		if (!characterActionSet && attackJump) {
 			if (getAction().isInterruptable()) {
 				if (move) {
 					lastMoveDirection = getDirectionFromInputs();
 					jumpDirection = getDirectionFromInputs();
-					inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
+					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
 				}
 				else {
-					inputCharacter.changeAction(CharacterAction.ATTACK);
+					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
 				}
 			}
 		}
-		else if (attack) {
+		if (!characterActionSet && attack) {
 			if (getAction().isInterruptable()) {
-				inputCharacter.changeAction(CharacterAction.ATTACK);
+				characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
 			}
 		}
-		else if (jump) {
+		if (!characterActionSet && jump) {
 			if (getAction().isInterruptable()) {
 				jumpDirection = getDirectionFromInputs();
-				inputCharacter.changeAction(CharacterAction.JUMP);
+				characterActionSet = inputCharacter.changeAction(CharacterAction.JUMP);
 			}
 		}
-		else if (move) {
+		if (!characterActionSet && move) {
 			lastMoveDirection = getDrawingDirectionChangesFromInputs();
 			if (getAction().isInterruptable() && getAction() != CharacterAction.RUN) {
-				inputCharacter.changeAction(CharacterAction.RUN);
+				characterActionSet = inputCharacter.changeAction(CharacterAction.RUN);
 			}
 		}
 		else {
 			if (getAction() == CharacterAction.RUN) {
-				inputCharacter.changeAction(CharacterAction.NONE);
+				characterActionSet = inputCharacter.changeAction(CharacterAction.NONE);
 			}
 		}
 		
 		if (inputCharacter.getCurrentAction() == CharacterAction.NONE) {
+			sprint = false;
 			idleTime += delta;
 			
 			if (idleTime > timeTillIdleAnimation) {
@@ -125,6 +129,9 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		if (inputContext.isStateActive(INPUT_ATTACK_JUMP)) {
 			attackJump = true;
 		}
+		if (inputContext.isStateActive(INPUT_SPRINT)) {
+			sprint = true;
+		}
 		
 		if (moveUp && moveDown) {
 			moveUp = false;
@@ -144,6 +151,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		jump = false;
 		attack = false;
 		attackJump = false;
+		//sprint is not reset here, but in the handleInputs method (when idle)
 	}
 	
 	/**
@@ -196,9 +204,18 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	
 	public void move(float delta) {
 		if (!getAction().isMoveBlocking()) {
-			float moveSpeedPerDirection = inputCharacter.getMovingSpeed();
+			//reduce the endurance for sprinting before requesting the movement speed
+			if (sprint) {
+				inputCharacter.reduceEnduranceForSprinting(delta);
+				if (inputCharacter.isExhausted()) {
+					System.out.println("exhausted");
+					sprint = false;
+				}
+			}
+			
+			float moveSpeedPerDirection = inputCharacter.getMovingSpeed(sprint);
 			if ((moveUp || moveDown) && (moveLeft || moveRight)) {
-				moveSpeedPerDirection = inputCharacter.getMovingSpeed() * SQRT_0_5;
+				moveSpeedPerDirection = inputCharacter.getMovingSpeed(sprint) * SQRT_0_5;
 			}
 			
 			float speedX = 0;
@@ -219,25 +236,25 @@ public class CharacterInputMovementHandler implements InputActionListener {
 			move(speedX, speedY, delta);
 		}
 		else if (getAction() == CharacterAction.JUMP || getAction() == CharacterAction.ATTACK_JUMP) {
-			float jumpingSpeed = inputCharacter.getJumpingSpeed();
+			float movingSpeed = inputCharacter.getMovingSpeed(sprint);
 			float speedX = 0;
 			float speedY = 0;
 			
 			if (jumpDirection.isCombinedDirection()) {
-				jumpingSpeed *= SQRT_0_5;
+				movingSpeed *= SQRT_0_5;
 			}
 			
 			if (jumpDirection.containsDirection(MovingDirection.UP)) {
-				speedY = jumpingSpeed;
+				speedY = movingSpeed;
 			}
 			if (jumpDirection.containsDirection(MovingDirection.DOWN)) {
-				speedY = -jumpingSpeed;
+				speedY = -movingSpeed;
 			}
 			if (jumpDirection.containsDirection(MovingDirection.LEFT)) {
-				speedX = -jumpingSpeed;
+				speedX = -movingSpeed;
 			}
 			if (jumpDirection.containsDirection(MovingDirection.RIGHT)) {
-				speedX = jumpingSpeed;
+				speedX = movingSpeed;
 			}
 			move(speedX, speedY, delta);
 		}

@@ -17,7 +17,8 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 public class Dwarf implements Disposable, StatsCharacter {
 	
 	public static final float MOVING_SPEED = 300f;
-	public static final float JUMPING_SPEED = 350f;
+	public static final float JUMPING_SPEED = 425f;
+	public static final float MOVING_SPEED_SPRINT = 425f;
 	public static final float MOVING_SPEED_ATTACK = 150;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	public static final float SCALE_FACTOR = 1f;
@@ -36,6 +37,9 @@ public class Dwarf implements Disposable, StatsCharacter {
 	private float maxMana = 100f;
 	private float endurance = 100f;
 	private float maxEndurance = 100f;
+	private float enduranceChargeMoving = 7.5f;
+	private float enduranceChargeIdle = 15f;
+	private float enduranceCostsSprint = 15f;
 	
 	private CharacterInputMovementHandler movementHandler;
 	
@@ -63,12 +67,18 @@ public class Dwarf implements Disposable, StatsCharacter {
 		return new Sprite(getAnimation(CharacterAction.IDLE).getAnimation().getKeyFrame(0));
 	}
 	
-	public void changeAction(CharacterAction action) {
-		this.action = action;
-		this.animation = getAnimation();
-		this.animation.resetStateTime();
-		
-		playSound(action);
+	public boolean changeAction(CharacterAction action) {
+		if (endurance >= action.getEnduranceCosts()) {
+			this.action = action;
+			this.animation = getAnimation();
+			this.animation.resetStateTime();
+			
+			endurance = Math.max(0, endurance - action.getEnduranceCosts());
+			
+			playSound(action);
+			return true;
+		}
+		return false;
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
@@ -94,6 +104,7 @@ public class Dwarf implements Disposable, StatsCharacter {
 	
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
+		updateStats(delta);
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
@@ -105,6 +116,18 @@ public class Dwarf implements Disposable, StatsCharacter {
 		animation.increaseStateTime(delta);
 		if (animation.isAnimationFinished()) {
 			changeAction(CharacterAction.NONE);
+		}
+	}
+	
+	private void updateStats(float delta) {
+		endurance = Math.min(endurance + delta * getEnduranceCharge(), maxEndurance);
+	}
+	private float getEnduranceCharge() {
+		if (action == CharacterAction.NONE || action == CharacterAction.IDLE) {
+			return enduranceChargeIdle;
+		}
+		else {
+			return enduranceChargeMoving;
 		}
 	}
 	
@@ -139,14 +162,27 @@ public class Dwarf implements Disposable, StatsCharacter {
 		return action;
 	}
 	
-	public float getMovingSpeed() {
+	public float getMovingSpeed(boolean sprint) {
+		if (action == CharacterAction.JUMP) {
+			return JUMPING_SPEED;
+		}
 		if (action == CharacterAction.ATTACK) {
 			return MOVING_SPEED_ATTACK;
 		}
+		if (sprint) {
+			return MOVING_SPEED_SPRINT;
+		}
 		return MOVING_SPEED;
 	}
-	public float getJumpingSpeed() {
-		return JUMPING_SPEED;
+	
+	public void reduceEnduranceForSprinting(float delta) {
+		endurance -= enduranceCostsSprint * delta;
+		if (endurance < 0) {
+			endurance = 0;
+		}
+	}
+	public boolean isExhausted() {
+		return endurance < 1e-5;
 	}
 	
 	public void move(float deltaX, float deltaY) {
@@ -166,26 +202,26 @@ public class Dwarf implements Disposable, StatsCharacter {
 	public boolean isAnimationFinished() {
 		return animation.isAnimationFinished();
 	}
-
+	
 	public Vector2 getPosition() {
 		return position;
 	}
-
+	
 	@Override
 	public void dispose() {
 		soundSet.dispose();
 	}
-
+	
 	@Override
 	public float getHealth() {
 		return health / maxHealth;
 	}
-
+	
 	@Override
 	public float getMana() {
 		return mana / maxMana;
 	}
-
+	
 	@Override
 	public float getEndurance() {
 		return endurance / maxEndurance;

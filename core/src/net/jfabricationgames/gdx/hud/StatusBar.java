@@ -92,10 +92,6 @@ public class StatusBar implements Disposable {
 		this.character = character;
 		this.camera = camera;
 		shapeRenderer = new ShapeRenderer();
-		
-		health = 0.8f;
-		mana = 0.4f;
-		endurance = 0.6f;
 	}
 	
 	public void render(float delta) {
