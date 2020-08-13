@@ -28,6 +28,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean attack = false;
 	private boolean attackJump = false;
 	private boolean sprint = false;
+	private boolean changeSprint = false;
 	
 	private float idleTime;
 	private float timeTillIdleAnimation;
@@ -130,7 +131,13 @@ public class CharacterInputMovementHandler implements InputActionListener {
 			attackJump = true;
 		}
 		if (inputContext.isStateActive(INPUT_SPRINT)) {
-			sprint = true;
+			if (!changeSprint) {
+				sprint = !sprint;				
+			}
+			changeSprint = true;
+		}
+		else {
+			changeSprint = false;
 		}
 		
 		if (moveUp && moveDown) {
