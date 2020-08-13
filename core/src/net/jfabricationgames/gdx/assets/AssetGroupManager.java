@@ -160,7 +160,7 @@ public class AssetGroupManager implements Disposable, AssetErrorListener {
 			}
 		}
 		catch (Exception e) {
-			Gdx.app.log(getClass().getSimpleName(), "error loading file: " + assetFile + " " + e.getMessage());
+			Gdx.app.error(getClass().getSimpleName(), "error loading file: " + assetFile + " " + e.getMessage());
 		}
 	}
 }
