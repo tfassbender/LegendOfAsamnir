@@ -4,6 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
@@ -28,7 +34,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	
 	private CharacterAnimationManager assetManager;
 	
-	private Vector2 position;
+	private Body body;
+	
 	private CharacterAction action;
 	
 	private float health = 100f;
@@ -48,19 +55,46 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	
 	private SoundSet soundSet;
 	
-	public Dwarf() {
+	public Dwarf(World world) {
 		assetManager = CharacterAnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		
-		position = new Vector2(0, 0);
 		action = CharacterAction.NONE;
 		
 		idleDwarfSprite = getIdleSprite();
 		animation = getAnimation();
 		
+		body = createPolygon(world, BodyType.DynamicBody, 0, 0, 1f, 0f, 0.8f,
+				idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR * 0.5f,
+				idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR * 0.5f);
+		body.setLinearDamping(10f);
+		
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
 		
 		movementHandler = new CharacterInputMovementHandler(this);
+	}
+	
+	private Body createPolygon(World world, BodyType type, float x, float y, float density, float restitution, float friction, float halfwidth,
+			float halfheight) {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = type;
+		bodyDef.position.set(x, y);
+		bodyDef.angle = 0;
+		bodyDef.fixedRotation = true;
+		
+		Body square = world.createBody(bodyDef);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.density = density;
+		fixtureDef.restitution = restitution;
+		fixtureDef.friction = friction;
+		fixtureDef.shape = new PolygonShape();
+		((PolygonShape) fixtureDef.shape).setAsBox(halfwidth, halfheight);
+		
+		square.createFixture(fixtureDef);
+		fixtureDef.shape.dispose();
+		
+		return square;
 	}
 	
 	private Sprite getIdleSprite() {
@@ -105,11 +139,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
 		updateStats(delta);
+		updateForce();
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
 		
-		draw(batch);
+		drawDwarf(batch);
 	}
 	
 	private void updateAction(float delta) {
@@ -131,23 +166,26 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 		}
 	}
 	
-	private void draw(SpriteBatch batch) {
+	private void updateForce() {
+	}
+	
+	private void drawDwarf(SpriteBatch batch) {
 		TextureRegion frame = action != CharacterAction.NONE ? animation.getKeyFrame() : idleDwarfSprite;
 		
 		if (movementHandler.isDrawDirectionRight() == frame.isFlipX()) {
 			frame.flip(true, false);
 		}
 		
-		drawDwarf(batch, frame);
+		draw(batch, frame);
 	}
 	
-	private void drawDwarf(SpriteBatch batch, TextureRegion frame) {
+	private void draw(SpriteBatch batch, TextureRegion frame) {
 		int width = frame.getRegionWidth();
 		int height = frame.getRegionHeight();
 		float originX = 0.5f * width;
 		float originY = 0.5f * height;
-		float x = position.x - originX;
-		float y = position.y - originY;
+		float x = body.getPosition().x - originX;
+		float y = body.getPosition().y - originY;
 		
 		batch.draw(frame, // textureRegion
 				x, y, // x, y
@@ -191,8 +229,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	
 	@Override
 	public void move(float deltaX, float deltaY) {
-		position.x += deltaX;
-		position.y += deltaY;
+		float force = 10f * body.getMass();
+		body.applyForceToCenter(deltaX * force, deltaY * force, true);
 	}
 	
 	@Override
@@ -226,11 +264,10 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	}
 	
 	public Vector2 getPosition() {
-		return position;
+		return body.getPosition();
 	}
 	
 	public void setPosition(float x, float y) {
-		position.x = x;
-		position.y = y;
+		body.setTransform(x, y, 0);
 	}
 }

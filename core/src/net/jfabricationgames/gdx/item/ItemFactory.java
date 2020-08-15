@@ -20,8 +20,8 @@ public class ItemFactory {
 	
 	public Item createItem(String string, float x, float y, MapProperties properties) {
 		Sprite sprite = new Sprite(atlas.findRegion(string));
-		sprite.setX(x);
-		sprite.setY(y);
+		sprite.setX(x * GameScreen.WORLD_TO_SCREEN);
+		sprite.setY(y * GameScreen.WORLD_TO_SCREEN);
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		return new Item(string, sprite, properties);
 	}

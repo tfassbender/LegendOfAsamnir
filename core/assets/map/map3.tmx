@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="52">
+ <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
+ <layer id="1" name="background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmUtOwzAQhuc+tJwhUJ47RFVBIc2qKqhFgm7b8/QQ3I7pwpIV2eOJ4zyM/sW3++XxF8eOY0+IaAJAh9wyd5lwL3i8MReZUCo8ZsxuYG4SeLww04FZDOxRMFcOnplfi7knd92Rh69fPpaeuhvm0mLtyZnaqT1C7WmBBzzgAQ94wMPm/J0+KDgO7LEleT9Xf85a+vYIcYJHrx4FyfvCXN6rUHsfzFMEnyPzSA084AEPeMADHvCAx3/3CP1HpeZLqGufwedy3u7CHiONxys1O5uOwZyrFw2yTT3GNA98WY3HA/MT4DEDDylj+G7pNhYPrZvPtQ+PFcn3ujbmrlqTP2erWt8067pZi2PmeUnuvtbv2KtaXrqDN9l3ilvb23rY41SRe+xLRxsSMWv70lEv5LFyPEeJph5tkTw089THPkEbMfUA6JI/byEWOA==
+  </data>
+ </layer>
+ <layer id="2" name="terrain" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmQ0OgyAMhfFnV5juwruOO+I0kYQ1VUota9n6JcTENBsPyqNgCI7jXGHS7sAf42N/TLe2ZW1D8m7Z37dEvz9n8OyR2DPmfEhVpHTUZgznY9WKjhTMJ6zp4HqZhA5JHx0LYtM8u6pjCvL7Aef3uDpKxg3yKIzvCM3a+sC4E9uGVR1DPuSDKzpq74HP/T+oLe2Tlfng4jrq8QpleZXmlyUdFN/N+bEFqL575setcCPGQW+FtUNJLZGL1TrDSddXWC5w6qA4HtS5qs3RPpubN+ra0D7DY/3k5Ia0F2jfB2neMWA5AddDui9+EzgvWB/iGSbmBPQB7ZzPQc09bs5b158Dzq91Ss9ljqPF5qecfNXeL6XAdMR3uXpy81XtbwMQTn+gr/7K3Dp04l1B68R7AkzLlbzWWhNSNY+vacepxxuuzQ5F
+  </data>
+ </layer>
+ <objectgroup id="3" name="objects">
+  <object id="1" name="item.axe" x="480" y="639">
+   <point/>
+  </object>
+  <object id="2" name="player.startingPosition" x="911.333" y="656.667">
+   <point/>
+  </object>
+  <object id="3" name="item.coin" x="912" y="465.333">
+   <point/>
+  </object>
+  <object id="4" name="item.health" x="338.667" y="722">
+   <point/>
+  </object>
+  <object id="25" name="label.text_1" x="480" y="544" width="32" height="32"/>
+  <object id="26" name="label.text_1" x="864" y="224" width="32" height="32"/>
+  <object id="27" name="label.text_1" x="224" y="1216" width="32" height="32"/>
+  <object id="28" name="label.text_1" x="1120" y="1088" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="4" name="physics">
+  <properties>
+   <property name="material" value="water"/>
+  </properties>
+  <object id="7" x="576" y="320">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="8" x="704" y="416" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="9" x="1120" y="768" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="10" x="1024" y="960" width="64" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="11" x="1344" y="928" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="12" x="1152" y="1248" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="13" x="704" y="1280" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="14" x="192" y="1216" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="21" x="1376" y="256" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="22" x="1344" y="544" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="23" x="512" y="864" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="24" x="512" y="992" width="32" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="32" x="-0.181818" y="108.727">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 1600,0.363636 1600.18,-108.727 0.181818,-108.727"/>
+  </object>
+  <object id="33" x="109.438" y="108.938">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 -0.1875,1491.31 -109.438,1491.06 -109.438,-0.1875"/>
+  </object>
+  <object id="34" x="110" y="1490">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 1489.75,0.5 1490,110 -0.75,110"/>
+  </object>
+  <object id="35" x="1490" y="1490">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 109.75,0 109.75,-1380.25 0,-1380.5"/>
+  </object>
+  <object id="36" x="653.5" y="1390.25">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0.5,100 -60.25,99.75 -59,0.5"/>
+  </object>
+  <object id="37" x="909.5" y="1330.25">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0.5,27.75 -31.5,27.5 -31.75,-0.75"/>
+  </object>
+  <object id="38" x="877.25" y="1390.5">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0.75,-60.5 -282.25,-60.5 -282.75,0"/>
+  </object>
+  <object id="39" x="595" y="1330">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0,-32.75 26.5,-32.25 26.75,-0.75"/>
+  </object>
+  <object id="40" x="594.75" y="1358.25">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 -68.75,0.25 -69,-60.75 -0.5,-60.75"/>
+  </object>
+  <object id="41" x="525.5" y="1389.5">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 -127.25,0.5 -127.25,-91.5 -0.25,-91.25"/>
+  </object>
+  <object id="42" x="398.5" y="1298.5">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0,-33 63,-32.25 62.5,-0.25"/>
+  </object>
+  <object id="43" x="398.25" y="1421.75">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0.25,-156 -28.75,-156 -28,-0.5"/>
+  </object>
+  <object id="44" x="209.75" y="1358.25">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 0.5,-92.75 -31.75,-92.75 -31.75,-1.25"/>
+  </object>
+  <object id="45" x="210.25" y="1453.5">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 91.25,0.25 90.25,-188.25 0,-188"/>
+  </object>
+  <object id="46" x="301.25" y="1389.5">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 68.75,0 68.25,-123.5 0,-124"/>
+  </object>
+  <object id="47" x="864" y="256" width="32" height="352">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="48" x="928" y="256" width="32" height="448">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="50" x="544" y="672" width="384" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="51" x="544" y="576" width="320" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

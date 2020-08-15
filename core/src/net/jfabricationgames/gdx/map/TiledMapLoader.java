@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
+import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class TiledMapLoader {
 	
@@ -49,10 +50,16 @@ public class TiledMapLoader {
 		
 		for (MapObject object : objects) {
 			String name = object.getName();
-			String[] parts = name.split("[.]");
 			RectangleMapObject rectangleObject = (RectangleMapObject) object;
 			Rectangle rectangle = rectangleObject.getRectangle();
 			MapProperties properties = object.getProperties();
+			
+			if (name == null) {
+				Gdx.app.error(getClass().getSimpleName(), "Unnamed object in tiled map at " + rectangle.x + "," +  rectangle.y);
+				continue;
+			}
+			
+			String[] parts = name.split("[.]");
 			
 			if (parts.length != 2) {
 				throw new IllegalStateException("Object name couldn't be parsed (unexpected format): " + name);
@@ -64,7 +71,7 @@ public class TiledMapLoader {
 			switch (parts[0]) {
 				case "player":
 					if (parts[1].equals("startingPosition")) {
-						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y);
+						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y).scl(GameScreen.WORLD_TO_SCREEN);
 					}
 					break;
 				case "item":

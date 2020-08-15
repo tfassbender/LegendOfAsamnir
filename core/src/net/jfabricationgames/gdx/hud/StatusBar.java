@@ -79,7 +79,7 @@ public class StatusBar implements Disposable {
 	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	
-	private Vector2 tileUpperRight = new Vector2(GameScreen.SCENE_WIDTH - 20f, GameScreen.SCENE_HEIGHT - 20f);
+	private Vector2 tileUpperRight = new Vector2(GameScreen.HUD_SCENE_WIDTH - 20f, GameScreen.HUD_SCENE_HEIGHT - 20f);
 	private Color[] healthBarColors;
 	
 	private float health;

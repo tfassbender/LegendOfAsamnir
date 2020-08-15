@@ -6,8 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.utils.Disposable;
 
-public class DebugGridRenderer implements DebugRenderer {
+public class DebugGridRenderer implements DebugRenderer, Disposable {
 	
 	private boolean drawGrid;
 	
@@ -87,5 +88,10 @@ public class DebugGridRenderer implements DebugRenderer {
 	public void setLineOffsets(float deltaX, float deltaY) {
 		this.lineDeltaX = deltaX;
 		this.lineDeltaY = deltaY;
+	}
+	
+	@Override
+	public void dispose() {
+		shapeRenderer.dispose();
 	}
 }

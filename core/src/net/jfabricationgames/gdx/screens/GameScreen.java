@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -22,21 +24,31 @@ import net.jfabricationgames.gdx.map.GameMap;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
-	public static final float WORLD_TO_SCREEN = 4.0f;
-	public static final float SCENE_WIDTH = 1280f;
-	public static final float SCENE_HEIGHT = 720f;
+	public static final float WORLD_TO_SCREEN = 0.04f;
+	public static final float SCREEN_TO_WORLD = 1f / WORLD_TO_SCREEN;
+	public static final float SCENE_WIDTH = 12.80f;
+	public static final float SCENE_HEIGHT = 7.20f;
+	
+	//the HUD uses a different scene size to make it easier to calculate in pixel units
+	public static final float HUD_SCENE_FACTOR = 100f;
+	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
+	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
+	
+	public static final boolean RENDER_DEBUG_GRAPHICS = true;
+	public static final int VELOCITY_ITERATIONS = 6;
+	public static final int POSITION_ITERATIONS = 2;
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	public static final String ASSET_GROUP_NAME = "game";
 	
-	private static final float CAMERA_SPEED = 600.0f;
+	private static final float CAMERA_SPEED = 150.0f * WORLD_TO_SCREEN;
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
 	private static final float CAMERA_ZOOM_MAX = 2.0f;
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
 	
-	private static final float MOVEMENT_EDGE_OFFSET = 250f;
-	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET;
-	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET;
+	private static final float MOVEMENT_EDGE_OFFSET = 50f;
+	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET * WORLD_TO_SCREEN;
+	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET * WORLD_TO_SCREEN;
 	
 	private static final String INPUT_AXIS_CAMERA_VERTICAL_MOVMENT = "camera_vertical_move_axis";
 	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
@@ -55,6 +67,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	private HeadsUpDisplay hud;
 	private GameMap map;
 	
+	private Box2DDebugRenderer debugRenderer;
+	private World world;
+	
 	public GameScreen() {
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
@@ -68,12 +83,16 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		
 		batch = new SpriteBatch();
 		
-		dwarf = new Dwarf();
+		world = new World(new Vector2(0, 0f), true);
+		debugRenderer = new Box2DDebugRenderer();
 		
-		map = new GameMap("map/map.tmx", camera);
-		hud = new HeadsUpDisplay(cameraHud, dwarf);
+		map = new GameMap("map/map3.tmx", camera, world);
+		
+		dwarf = new Dwarf(world);
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
+		
+		hud = new HeadsUpDisplay(cameraHud, dwarf);
 		
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
@@ -84,10 +103,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		camera = new OrthographicCamera();
 		cameraHud = new OrthographicCamera();
 		viewport = new FitViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
-		viewportHud = new FitViewport(SCENE_WIDTH, SCENE_HEIGHT, cameraHud);
+		viewportHud = new FitViewport(SCENE_WIDTH * HUD_SCENE_FACTOR, SCENE_HEIGHT * HUD_SCENE_FACTOR, cameraHud);
 		
-		cameraHud.position.x = SCENE_WIDTH * 0.5f;
-		cameraHud.position.y = SCENE_HEIGHT * 0.5f;
+		cameraHud.position.x = HUD_SCENE_WIDTH * 0.5f;
+		cameraHud.position.y = HUD_SCENE_HEIGHT * 0.5f;
 		
 		camera.position.x = SCENE_WIDTH;
 		camera.position.y = SCENE_HEIGHT;
@@ -102,12 +121,18 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		world.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+		
 		moveCamera(delta);
 		map.render(delta);
 		renderDebugGraphics(delta);
 		renderGameGraphics(delta);
 		hud.render(delta);
 		moveCameraToPlayer();
+		
+		if (RENDER_DEBUG_GRAPHICS) {
+			debugRenderer.render(world, camera.combined);
+		}
 	}
 	
 	@Override
@@ -209,6 +234,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	public void dispose() {
 		batch.dispose();
 		map.dispose();
+		world.dispose();
+		debugRenderer.dispose();
+		debugGridRenderer.dispose();
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
 	}
 }

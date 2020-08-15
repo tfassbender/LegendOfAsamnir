@@ -1,14 +1,17 @@
 package net.jfabricationgames.gdx.map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.item.Item;
+import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class GameMap implements Disposable {
 	
@@ -22,13 +25,18 @@ public class GameMap implements Disposable {
 	protected Array<Item> items;
 	protected Vector2 playerStartingPosition;
 	
-	public GameMap(String mapAsset, OrthographicCamera camera) {
+	private TiledMapPhysicsLoader mapPhysicsLoader;
+	
+	public GameMap(String mapAsset, OrthographicCamera camera, World world) {
 		this.camera = camera;
 		batch = new SpriteBatch();
 		
 		loader = new TiledMapLoader(mapAsset, this);
 		loader.load();//initializes the map
-		renderer = new OrthogonalTiledMapRenderer(map);
+		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN);
+		
+		mapPhysicsLoader = new TiledMapPhysicsLoader(world, GameScreen.SCREEN_TO_WORLD, Gdx.files.internal("map/materials.json"));
+		mapPhysicsLoader.createPhysics(map);
 	}
 	
 	public void render(float delta) {

@@ -29,10 +29,10 @@ public class WorldEdge implements Disposable {
 	
 	private void drawWorldEdge() {
 		shapeRenderer.setColor(Color.GRAY);
-		shapeRenderer.rect(0, 0, GameScreen.SCENE_WIDTH, worldEdgeSize);
-		shapeRenderer.rect(0, 0, worldEdgeSize, GameScreen.SCENE_HEIGHT);
-		shapeRenderer.rect(GameScreen.SCENE_WIDTH, GameScreen.SCENE_HEIGHT, -GameScreen.SCENE_WIDTH, -worldEdgeSize);
-		shapeRenderer.rect(GameScreen.SCENE_WIDTH, GameScreen.SCENE_HEIGHT, -worldEdgeSize, -GameScreen.SCENE_HEIGHT);
+		shapeRenderer.rect(0, 0, GameScreen.HUD_SCENE_WIDTH, worldEdgeSize);
+		shapeRenderer.rect(0, 0, worldEdgeSize, GameScreen.HUD_SCENE_HEIGHT);
+		shapeRenderer.rect(GameScreen.HUD_SCENE_WIDTH, GameScreen.HUD_SCENE_HEIGHT, -GameScreen.HUD_SCENE_WIDTH, -worldEdgeSize);
+		shapeRenderer.rect(GameScreen.HUD_SCENE_WIDTH, GameScreen.HUD_SCENE_HEIGHT, -worldEdgeSize, -GameScreen.HUD_SCENE_HEIGHT);
 	}
 	
 	public float getWorldEdgeSize() {

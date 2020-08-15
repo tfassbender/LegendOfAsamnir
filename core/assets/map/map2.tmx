@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="2">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
@@ -11,4 +11,10 @@
    eJztl7ENgDAMBCHsAPtvCg0d4Dj/hRXuJBeRrFO+gNjLAgAAABHrQDk8btpVe6KawfPmUHM4+jMecvQ5j4+K7tDjiRwK5Mh7IocCOfKeyKEwYw6lv8J/NzNPfOVQHQqZmeQuh6cCW3AGmIWRPerp+2CP8uVw9Fd4Bx39lXLMMl+RgxwuyJH3RA6FGXMo/RXeD/bBcQ8AAAD8hxOpyRg4
   </data>
  </layer>
+ <objectgroup id="3" name="objects">
+  <object id="1" name="player.startingPosition" x="814.5" y="781.75">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="physics"/>
 </map>
