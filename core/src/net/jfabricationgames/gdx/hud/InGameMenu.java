@@ -17,8 +17,8 @@ public class InGameMenu implements Disposable {
 	
 	private ScreenTextWriter screenTextWriter;
 	
-	public InGameMenu(OrthographicCamera camera) {
-		this.camera = camera;
+	public InGameMenu(HeadsUpDisplay hud) {
+		this.camera = hud.getCamera();
 		batch = new SpriteBatch();
 		
 		screenTextWriter = new ScreenTextWriter();

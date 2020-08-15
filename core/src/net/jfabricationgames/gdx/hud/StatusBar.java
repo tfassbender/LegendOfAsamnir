@@ -1,15 +1,11 @@
 package net.jfabricationgames.gdx.hud;
 
-import java.util.Objects;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
-
-import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class StatusBar implements Disposable {
 	
@@ -71,7 +67,7 @@ public class StatusBar implements Disposable {
 	private final Color[] enduranceBarColors = new Color[] {//
 			new Color(0.9f, 0.9f, 0.1f, 1f), //top-right
 			Color.YELLOW, //top-left
-			new Color(0.45f, 0.45f, 0.15f, 1f) , //bottom-left
+			new Color(0.45f, 0.45f, 0.15f, 1f), //bottom-left
 			new Color(0.35f, 0.35f, 0.05f, 1f) //bottom-right
 	};
 	
@@ -79,19 +75,19 @@ public class StatusBar implements Disposable {
 	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	
-	private Vector2 tileUpperRight = new Vector2(GameScreen.HUD_SCENE_WIDTH - 20f, GameScreen.HUD_SCENE_HEIGHT - 20f);
+	private Vector2 tileUpperRight;
 	private Color[] healthBarColors;
 	
 	private float health;
 	private float mana;
 	private float endurance;
 	
-	public StatusBar(OrthographicCamera camera, StatsCharacter character) {
-		Objects.requireNonNull(camera);
-		Objects.requireNonNull(character);
-		this.character = character;
-		this.camera = camera;
+	public StatusBar(HeadsUpDisplay hud) {
+		this.character = hud.getCharacter();
+		this.camera = hud.getCamera();
 		shapeRenderer = new ShapeRenderer();
+		
+		tileUpperRight = new Vector2(hud.getHudSceneWidth() - 20f, hud.getHudSceneHeight() - 20f);
 	}
 	
 	public void render(float delta) {

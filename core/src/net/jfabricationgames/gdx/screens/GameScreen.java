@@ -92,7 +92,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
-		hud = new HeadsUpDisplay(cameraHud, dwarf);
+		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
 		
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
