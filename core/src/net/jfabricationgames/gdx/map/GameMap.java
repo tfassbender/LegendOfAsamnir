@@ -15,6 +15,8 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class GameMap implements Disposable {
 	
+	public static final String MAP_MATERIALS_CONFIG_FILE = "config/map/materials.json";
+	
 	private TiledMapLoader loader;
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
@@ -35,7 +37,7 @@ public class GameMap implements Disposable {
 		loader.load();//initializes the map
 		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN);
 		
-		mapPhysicsLoader = new TiledMapPhysicsLoader(world, GameScreen.SCREEN_TO_WORLD, Gdx.files.internal("map/materials.json"));
+		mapPhysicsLoader = new TiledMapPhysicsLoader(world, GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
 		mapPhysicsLoader.createPhysics(map);
 	}
 	
