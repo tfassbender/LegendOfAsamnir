@@ -64,7 +64,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 		idleDwarfSprite = getIdleSprite();
 		animation = getAnimation();
 		
-		body = createPolygon(world, BodyType.DynamicBody, 0, 0, 1f, 0f, 0.8f,
+		body = createCharacterOctagon(world, BodyType.DynamicBody, 0, 0, 1f, 0f, 0.8f,
 				idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR * 0.5f,
 				idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR * 0.5f);
 		body.setLinearDamping(10f);
@@ -74,8 +74,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 		movementHandler = new CharacterInputMovementHandler(this);
 	}
 	
-	private Body createPolygon(World world, BodyType type, float x, float y, float density, float restitution, float friction, float halfwidth,
-			float halfheight) {
+	private Body createCharacterOctagon(World world, BodyType type, float x, float y, float density, float restitution, float friction,
+			float halfWidth, float halfHeight) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = type;
 		bodyDef.position.set(x, y);
@@ -88,8 +88,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 		fixtureDef.density = density;
 		fixtureDef.restitution = restitution;
 		fixtureDef.friction = friction;
-		fixtureDef.shape = new PolygonShape();
-		((PolygonShape) fixtureDef.shape).setAsBox(halfwidth, halfheight);
+		PolygonShape shape = new PolygonShape();
+		shape.set(new Vector2[] {new Vector2(-1f * halfWidth, -0.8f * halfHeight), new Vector2(-1f * halfWidth, 0.8f * halfHeight),
+				new Vector2(-0.8f * halfWidth, halfHeight), new Vector2(0.8f * halfWidth, halfHeight), new Vector2(halfWidth, 0.8f * halfHeight),
+				new Vector2(halfWidth, -0.8f * halfHeight), new Vector2(0.8f * halfWidth, -1f * halfHeight),
+				new Vector2(-0.8f * halfWidth, -1f * halfHeight)});
+		fixtureDef.shape = shape;
 		
 		square.createFixture(fixtureDef);
 		fixtureDef.shape.dispose();
@@ -139,7 +143,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
 		updateStats(delta);
-		updateForce();
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
@@ -164,9 +167,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 		else {
 			return enduranceChargeMoving;
 		}
-	}
-	
-	private void updateForce() {
 	}
 	
 	private void drawDwarf(SpriteBatch batch) {

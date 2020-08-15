@@ -126,6 +126,8 @@ public class AssetGroupManager implements Disposable, AssetErrorListener {
 	}
 	
 	private void loadGroups(String assetFile) {
+		Gdx.app.log(getClass().getSimpleName(), "--- Loading asset groups --------------------------------------------------------------");
+		
 		groups = new ObjectMap<String, Array<Asset>>();
 		
 		Gdx.app.log(getClass().getSimpleName(), "loading file: " + assetFile);

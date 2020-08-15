@@ -40,6 +40,7 @@ public class TiledMapLoader {
 	}
 	
 	private void loadMapObjects() {
+		Gdx.app.log(getClass().getSimpleName(), "--- Loading map objects --------------------------------------------------------------");
 		Array<Item> items = new Array<>();
 		
 		MapObjects objects = gameMap.map.getLayers().get("objects").getObjects();
@@ -55,7 +56,7 @@ public class TiledMapLoader {
 			MapProperties properties = object.getProperties();
 			
 			if (name == null) {
-				Gdx.app.error(getClass().getSimpleName(), "Unnamed object in tiled map at " + rectangle.x + "," +  rectangle.y);
+				Gdx.app.error(getClass().getSimpleName(), "Unnamed object in tiled map at " + rectangle.x + "," + rectangle.y);
 				continue;
 			}
 			

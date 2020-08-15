@@ -57,6 +57,8 @@ public class TiledMapPhysicsLoader {
 		bodies = new Array<Body>();
 		materials = new ObjectMap<String, FixtureDef>();
 		
+		Gdx.app.log(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
+		
 		if (materialsFile != null) {
 			loadMaterialsFile(materialsFile);
 		}
@@ -110,8 +112,6 @@ public class TiledMapPhysicsLoader {
 				Gdx.app.error(getClass().getSimpleName(), "material does not exist " + material + " using default");
 				fixtureDef = materials.get("default");
 			}
-			
-			Gdx.app.log(getClass().getSimpleName(), "Body: " + object.getName() + ", material: " + material);
 			
 			fixtureDef.shape = shape;
 			
