@@ -36,7 +36,6 @@ public class TiledMapLoader {
 	
 	private void loadMapProperties() {
 		loadMapObjects();
-		loadMapPhysics();
 	}
 	
 	private void loadMapObjects() {
@@ -82,10 +81,6 @@ public class TiledMapLoader {
 		}
 		
 		gameMap.items = items;
-	}
-	
-	private void loadMapPhysics() {
-		//TODO
 	}
 	
 	private String mapPropertiesToString(MapProperties properties, boolean includePosition) {
