@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
@@ -83,12 +84,17 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		
 		batch = new SpriteBatch();
 		
-		world = new World(new Vector2(0, 0f), true);
-		debugRenderer = new Box2DDebugRenderer();
+		world = PhysicsWorld.getInstance().createWorld(new Vector2(0, 0f), true);
+		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
+				false, /* joints */
+				false, /* aabbs */
+				true, /* inactive bodies */
+				true, /* velocities */
+				false /* contacts */);
 		
-		map = new GameMap("map/map3.tmx", camera, world);
+		map = new GameMap("map/map3.tmx", camera);
 		
-		dwarf = new Dwarf(world);
+		dwarf = new Dwarf(map);
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
@@ -122,6 +128,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		world.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+		PhysicsWorld.getInstance().removeDeadBodies();
 		
 		moveCamera(delta);
 		map.render(delta);
@@ -234,7 +241,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	public void dispose() {
 		batch.dispose();
 		map.dispose();
-		world.dispose();
+		PhysicsWorld.getInstance().disposeWorld();
 		debugRenderer.dispose();
 		debugGridRenderer.dispose();
 		assetManager.unloadGroup(ASSET_GROUP_NAME);

@@ -28,6 +28,9 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
+
 /**
  * Populates the Box2D world with static bodies using data from a map object.
  * 
@@ -51,11 +54,12 @@ public class TiledMapPhysicsLoader {
 	 * @param materialsFile
 	 *        json file with specific physics properties to be assigned to newly created bodies.
 	 */
-	public TiledMapPhysicsLoader(World world, float unitsPerPixel, FileHandle materialsFile) {
-		this.world = world;
+	public TiledMapPhysicsLoader(float unitsPerPixel, FileHandle materialsFile) {
 		this.units = unitsPerPixel;
 		bodies = new Array<Body>();
 		materials = new ObjectMap<String, FixtureDef>();
+		
+		world = PhysicsWorld.getInstance().getWorld();
 		
 		Gdx.app.log(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
 		
@@ -105,7 +109,7 @@ public class TiledMapPhysicsLoader {
 			}
 			
 			MapProperties properties = object.getProperties();
-			String material = properties.get("material", "default", String.class);
+			String material = properties.get("material", String.class);
 			FixtureDef fixtureDef = materials.get(material);
 			
 			if (fixtureDef == null) {
@@ -141,6 +145,8 @@ public class TiledMapPhysicsLoader {
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.0f;
+		fixtureDef.filter.categoryBits = PhysicsCollisionType.MAP_OBJECT.category;
+		fixtureDef.filter.maskBits = PhysicsCollisionType.MAP_OBJECT.mask;
 		materials.put("default", fixtureDef);
 		
 		Gdx.app.log(getClass().getSimpleName(), "loading materials file");
@@ -164,6 +170,8 @@ public class TiledMapPhysicsLoader {
 				fixtureDef.density = materialValue.getFloat("density", 1.0f);
 				fixtureDef.friction = materialValue.getFloat("friction", 1.0f);
 				fixtureDef.restitution = materialValue.getFloat("restitution", 0.0f);
+				fixtureDef.filter.categoryBits = PhysicsCollisionType.MAP_OBJECT.category;
+				fixtureDef.filter.maskBits = PhysicsCollisionType.MAP_OBJECT.mask;
 				Gdx.app.log(getClass().getSimpleName(), "adding material " + name);
 				materials.put(name, fixtureDef);
 			}

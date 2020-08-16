@@ -3,12 +3,15 @@ package net.jfabricationgames.gdx.character;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -16,18 +19,28 @@ import net.jfabricationgames.gdx.character.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationManager;
 import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
+import net.jfabricationgames.gdx.item.Item;
+import net.jfabricationgames.gdx.item.ItemPropertyKeys;
+import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
+import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
+public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener {
 	
 	public static final float MOVING_SPEED = 300f;
 	public static final float JUMPING_SPEED = 425f;
 	public static final float MOVING_SPEED_SPRINT = 425f;
 	public static final float MOVING_SPEED_ATTACK = 150;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
-	public static final float SCALE_FACTOR = 1f;
+	
+	private static final float PHYSICS_BODY_SIZE_FACTOR_X = 0.8f;
+	private static final float PHYSICS_BODY_SIZE_FACTOR_Y = 0.7f;
+	private static final float PHYSICS_BODY_SENSOR_RADIUS = 0.6f;
+	private static final Vector2 PHYSICS_BODY_POSITION_OFFSET = new Vector2(0f, -0.15f);
 	
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String soundSetKey = "dwarf";
@@ -35,6 +48,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	private CharacterAnimationManager assetManager;
 	
 	private Body body;
+	
+	private GameMap map;
 	
 	private CharacterAction action;
 	
@@ -55,7 +70,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	
 	private SoundSet soundSet;
 	
-	public Dwarf(World world) {
+	public Dwarf(GameMap map) {
+		this.map = map;
+		
 		assetManager = CharacterAnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		
@@ -64,41 +81,20 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 		idleDwarfSprite = getIdleSprite();
 		animation = getAnimation();
 		
-		body = createCharacterOctagon(world, BodyType.DynamicBody, 0, 0, 1f, 0f, 0.8f,
-				idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR * 0.5f,
-				idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR * 0.5f);
+		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
+		World world = physicsWorld.getWorld();
+		physicsWorld.registerContactListener(this);
+		
+		body = PhysicsBodyCreator.createOctagonBody(world, BodyType.DynamicBody, 0f, 0f, 0f, 0f, 0f,
+				idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X,
+				idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y, PhysicsCollisionType.PLAYER);
+		PhysicsBodyCreator.addCircularFixture(body, true, 0f, 0f, 0f, PHYSICS_BODY_SENSOR_RADIUS, PhysicsCollisionType.PLAYER_SENSOR);
 		body.setLinearDamping(10f);
+		body.setUserData(this);
 		
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
 		
 		movementHandler = new CharacterInputMovementHandler(this);
-	}
-	
-	private Body createCharacterOctagon(World world, BodyType type, float x, float y, float density, float restitution, float friction,
-			float halfWidth, float halfHeight) {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = type;
-		bodyDef.position.set(x, y);
-		bodyDef.angle = 0;
-		bodyDef.fixedRotation = true;
-		
-		Body square = world.createBody(bodyDef);
-		
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.density = density;
-		fixtureDef.restitution = restitution;
-		fixtureDef.friction = friction;
-		PolygonShape shape = new PolygonShape();
-		shape.set(new Vector2[] {new Vector2(-1f * halfWidth, -0.8f * halfHeight), new Vector2(-1f * halfWidth, 0.8f * halfHeight),
-				new Vector2(-0.8f * halfWidth, halfHeight), new Vector2(0.8f * halfWidth, halfHeight), new Vector2(halfWidth, 0.8f * halfHeight),
-				new Vector2(halfWidth, -0.8f * halfHeight), new Vector2(0.8f * halfWidth, -1f * halfHeight),
-				new Vector2(-0.8f * halfWidth, -1f * halfHeight)});
-		fixtureDef.shape = shape;
-		
-		square.createFixture(fixtureDef);
-		fixtureDef.shape.dispose();
-		
-		return square;
 	}
 	
 	private Sprite getIdleSprite() {
@@ -182,8 +178,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	private void draw(SpriteBatch batch, TextureRegion frame) {
 		int width = frame.getRegionWidth();
 		int height = frame.getRegionHeight();
-		float originX = 0.5f * width;
-		float originY = 0.5f * height;
+		float originX = 0.5f * width + PHYSICS_BODY_POSITION_OFFSET.x * width;
+		float originY = 0.5f * height + PHYSICS_BODY_POSITION_OFFSET.y * height;
 		float x = body.getPosition().x - originX;
 		float y = body.getPosition().y - originY;
 		
@@ -191,8 +187,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 				x, y, // x, y
 				originX, originY, //originX, originY
 				width, height, // width, height
-				GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR, // scaleX
-				GameScreen.WORLD_TO_SCREEN * SCALE_FACTOR, // scaleY
+				GameScreen.WORLD_TO_SCREEN, // scaleX
+				GameScreen.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation
 	}
 	
@@ -270,4 +266,54 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable {
 	public void setPosition(float x, float y) {
 		body.setTransform(x, y, 0);
 	}
+	
+	@Override
+	public void beginContact(Contact contact) {
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		Object sensorCollidingUserData = null;
+		Object sensorUserData = null;
+		
+		if (fixtureA.isSensor()) {
+			sensorUserData = fixtureA.getBody().getUserData();
+			sensorCollidingUserData = fixtureB.getBody().getUserData();
+		}
+		else if (fixtureB.isSensor()) {
+			sensorUserData = fixtureB.getBody().getUserData();
+			sensorCollidingUserData = fixtureA.getBody().getUserData();
+		}
+		
+		if (sensorUserData instanceof Dwarf && sensorCollidingUserData instanceof Item) {
+			collectItem((Item) sensorCollidingUserData);
+		}
+	}
+	
+	private void collectItem(Item item) {
+		MapProperties properties = item.getProperties();
+		if (properties.containsKey(ItemPropertyKeys.HEALTH.getPropertyName())) {
+			int itemHealth = properties.get(ItemPropertyKeys.HEALTH.getPropertyName(), Integer.class);
+			health = Math.min(health + itemHealth, maxHealth);
+		}
+		if (properties.containsKey(ItemPropertyKeys.MANA.getPropertyName())) {
+			int itemMana = properties.get(ItemPropertyKeys.MANA.getPropertyName(), Integer.class);
+			mana = Math.min(mana + itemMana, maxMana);
+		}
+		//TODO other item types
+		
+		removeItem(item);
+	}
+	
+	private void removeItem(Item item) {
+		map.removeItem(item);
+		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(item.getBody());
+	}
+	
+	@Override
+	public void preSolve(Contact contact, Manifold oldManifold) {}
+	
+	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {}
+	
+	@Override
+	public void endContact(Contact contact) {}
 }

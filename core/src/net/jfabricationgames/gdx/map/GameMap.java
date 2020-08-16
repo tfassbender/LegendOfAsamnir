@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -29,7 +28,7 @@ public class GameMap implements Disposable {
 	
 	private TiledMapPhysicsLoader mapPhysicsLoader;
 	
-	public GameMap(String mapAsset, OrthographicCamera camera, World world) {
+	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
 		batch = new SpriteBatch();
 		
@@ -37,7 +36,7 @@ public class GameMap implements Disposable {
 		loader.load();//initializes the map
 		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN);
 		
-		mapPhysicsLoader = new TiledMapPhysicsLoader(world, GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
+		mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
 		mapPhysicsLoader.createPhysics(map);
 	}
 	
@@ -59,6 +58,14 @@ public class GameMap implements Disposable {
 	
 	public Vector2 getPlayerStartingPosition() {
 		return playerStartingPosition;
+	}
+	
+	public void addItem(Item item) {
+		items.add(item);
+	}
+	
+	public void removeItem(Item item) {
+		items.removeValue(item, false);
 	}
 	
 	@Override
