@@ -1,5 +1,6 @@
 {
 	settings: [
+		// dwarf
 		{
 			textureDir: dwarf/dwarf_attack_right, 
 			outputDir: packed/dwarf, 
@@ -40,15 +41,73 @@
 			outputDir: packed/dwarf, 
 			atlasName: dwarf_spin_right
 		},
+		//menu
 		{
 			textureDir: menu/buttons,
 			outputDir: packed/menu,
 			atlasName: menu_buttons
 		},
+		//items
 		{
 			textureDir: items,
 			outputDir: packed/items,
 			atlasName: items
+		},
+		//objects
+		{
+			textureDir: objects/all,
+			outputDir: packed/objects,
+			atlasName: objects
+		},
+		{
+			textureDir: objects/animated/barrel/hit,
+			outputDir: packed/objects,
+			atlasName: barrel_hit
+		},
+		{
+			textureDir: objects/animated/barrel/break,
+			outputDir: packed/objects,
+			atlasName: barrel_break
+		},
+		{
+			textureDir: objects/animated/box/hit,
+			outputDir: packed/objects,
+			atlasName: box_hit
+		},
+		{
+			textureDir: objects/animated/box/break,
+			outputDir: packed/objects,
+			atlasName: box_break
+		},
+		{
+			textureDir: objects/animated/chest/hit,
+			outputDir: packed/objects,
+			atlasName: chest_hit
+		},
+		{
+			textureDir: objects/animated/chest/open,
+			outputDir: packed/objects,
+			atlasName: chest_open
+		},
+		{
+			textureDir: objects/animated/direction_board/hit,
+			outputDir: packed/objects,
+			atlasName: direction_board_hit
+		},
+		{
+			textureDir: objects/animated/pot/break,
+			outputDir: packed/objects,
+			atlasName: pot_break
+		},
+		{
+			textureDir: objects/animated/pot/hit,
+			outputDir: packed/objects,
+			atlasName: pot_hit
+		},
+		{
+			textureDir: objects/animated/signboard/break,
+			outputDir: packed/objects,
+			atlasName: signboard_break
 		}
 	]
 }

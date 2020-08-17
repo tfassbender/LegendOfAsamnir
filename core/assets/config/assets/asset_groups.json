@@ -61,7 +61,7 @@
 				"textureMinFilter": "Linear",
 				"textureMagFilter": "Linear"
 			}
-		}
+		},
 		{
 			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
 			"path": "map/map3.tmx",
@@ -70,11 +70,48 @@
 				"textureMinFilter": "Linear",
 				"textureMagFilter": "Linear"
 			}
-		}
+		},
 		// items
 		{
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
 			"path": "packed/items/items.atlas"
-		}
+		},
+		// objects
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/objects.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/barel_break.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/barel_hit.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/box_break.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/box_hit.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/chest_open.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/chest_hit.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/pot_break.atlas"
+		},
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/objects/pot_hit.atlas"
+		},
 	]
 }

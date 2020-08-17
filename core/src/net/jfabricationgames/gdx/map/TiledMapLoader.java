@@ -14,6 +14,9 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.ObjectFactory;
+import net.jfabricationgames.gdx.object.ObjectType;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class TiledMapLoader {
@@ -22,11 +25,13 @@ public class TiledMapLoader {
 	private GameMap gameMap;
 	
 	private ItemFactory itemFactory;
+	private ObjectFactory objectFactory;
 	
 	public TiledMapLoader(String mapAsset, GameMap gameMap) {
 		this.mapAsset = mapAsset;
 		this.gameMap = gameMap;
 		itemFactory = new ItemFactory();
+		objectFactory = new ObjectFactory();
 	}
 	
 	public void load() {
@@ -41,14 +46,15 @@ public class TiledMapLoader {
 	private void loadMapObjects() {
 		Gdx.app.log(getClass().getSimpleName(), "--- Loading map objects --------------------------------------------------------------");
 		Array<Item> items = new Array<>();
+		Array<GameObject> objects = new Array<>();
 		
-		MapObjects objects = gameMap.map.getLayers().get("objects").getObjects();
+		MapObjects mapObjects = gameMap.map.getLayers().get("objects").getObjects();
 		
-		if (objects == null) {
+		if (mapObjects == null) {
 			throw new IllegalStateException("The 'objects' layer couldn't be loaded.");
 		}
 		
-		for (MapObject object : objects) {
+		for (MapObject object : mapObjects) {
 			String name = object.getName();
 			RectangleMapObject rectangleObject = (RectangleMapObject) object;
 			Rectangle rectangle = rectangleObject.getRectangle();
@@ -77,10 +83,14 @@ public class TiledMapLoader {
 				case "item":
 					items.add(itemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
+				case "object":
+					objects.add(objectFactory.createObject(ObjectType.getByName(parts[1]), rectangle.x, rectangle.y, properties));//TODO object driven type
+					break;
 			}
 		}
 		
 		gameMap.items = items;
+		gameMap.objects = objects;
 	}
 	
 	private String mapPropertiesToString(MapProperties properties, boolean includePosition) {

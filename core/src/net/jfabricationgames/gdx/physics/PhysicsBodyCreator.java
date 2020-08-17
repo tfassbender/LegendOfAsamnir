@@ -13,14 +13,14 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class PhysicsBodyCreator {
 	
 	public static Body createOctagonBody(World world, PhysicsBodyProperties properties) {
-		BodyDef bodyDef = createBodyDef(properties.type, properties.x, properties.y);
+		BodyDef bodyDef = createBodyDef(properties);
 		Body body = world.createBody(bodyDef);
 		
+		properties.setBody(body);
 		addOctagonFixture(properties);
 		
 		return body;
 	}
-	
 	public static void addOctagonFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
 		shape.set(new Vector2[] {new Vector2(-0.5f * properties.width, -0.4f * properties.height),
@@ -29,54 +29,67 @@ public abstract class PhysicsBodyCreator {
 				new Vector2(0.5f * properties.width, -0.4f * properties.height), new Vector2(0.4f * properties.width, -0.5f * properties.height),
 				new Vector2(-0.4f * properties.width, -0.5f * properties.height)});
 		
-		FixtureDef fixtureDef = createFixtureDef(shape, properties.density, properties.restitution, properties.friction, properties.collisionType);
+		FixtureDef fixtureDef = createFixtureDef(shape, properties);
 		properties.body.createFixture(fixtureDef);
 		shape.dispose();
 	}
 	
 	public static Body createCircularBody(World world, PhysicsBodyProperties properties) {
-		BodyDef bodyDef = createBodyDef(properties.type, properties.x, properties.y);
+		BodyDef bodyDef = createBodyDef(properties);
 		Body body = world.createBody(bodyDef);
 		
+		properties.setBody(body);
 		addCircularFixture(properties);
 		
 		return body;
 	}
-	
 	public static void addCircularFixture(PhysicsBodyProperties properties) {
 		CircleShape shape = new CircleShape();
 		shape.setRadius(properties.radius);
 		
-		FixtureDef fixtureDef = createFixtureDef(shape, properties.density, properties.restitution, properties.friction, properties.collisionType);
-		fixtureDef.isSensor = properties.sensor;
+		FixtureDef fixtureDef = createFixtureDef(shape, properties);
 		properties.body.createFixture(fixtureDef);
 		shape.dispose();
 	}
 	
 	public static Body createRectangularBody(World world, PhysicsBodyProperties properties) {
-		//TODO
-		return null;
+		BodyDef bodyDef = createBodyDef(properties);
+		Body body = world.createBody(bodyDef);
+		
+		properties.setBody(body);
+		addRectangularBody(properties);
+		
+		return body;
+	}
+	public static void addRectangularBody(PhysicsBodyProperties properties) {
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(properties.width * 0.5f, properties.height * 0.5f);
+		
+		FixtureDef fixtureDef = createFixtureDef(shape, properties);
+		properties.body.createFixture(fixtureDef);
+		shape.dispose();
 	}
 	
-	private static BodyDef createBodyDef(BodyType type, float x, float y) {
+	private static BodyDef createBodyDef(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = type;
-		bodyDef.position.set(x, y);
+		bodyDef.type = properties.type;
+		bodyDef.position.set(properties.x, properties.y);
 		bodyDef.angle = 0;
 		bodyDef.fixedRotation = true;
 		
 		return bodyDef;
 	}
 	
-	private static FixtureDef createFixtureDef(Shape shape, float density, float restitution, float friction, PhysicsCollisionType collisionType) {
+	private static FixtureDef createFixtureDef(Shape shape, PhysicsBodyProperties properties) {
 		FixtureDef fixtureDef;
 		fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = density;
-		fixtureDef.friction = friction;
-		fixtureDef.restitution = restitution;
-		fixtureDef.filter.categoryBits = collisionType.category;
-		fixtureDef.filter.maskBits = collisionType.mask;
+		fixtureDef.density = properties.density;
+		fixtureDef.friction = properties.friction;
+		fixtureDef.restitution = properties.restitution;
+		fixtureDef.filter.categoryBits = properties.collisionType.category;
+		fixtureDef.filter.maskBits = properties.collisionType.mask;
+		fixtureDef.isSensor = properties.sensor;
 		
 		return fixtureDef;
 	}

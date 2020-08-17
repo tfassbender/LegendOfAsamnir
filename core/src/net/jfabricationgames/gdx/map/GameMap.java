@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.item.Item;
+import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class GameMap implements Disposable {
@@ -24,6 +25,7 @@ public class GameMap implements Disposable {
 	
 	protected TiledMap map;
 	protected Array<Item> items;
+	protected Array<GameObject> objects;
 	protected Vector2 playerStartingPosition;
 	
 	private TiledMapPhysicsLoader mapPhysicsLoader;
@@ -47,12 +49,18 @@ public class GameMap implements Disposable {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		renderItems();
+		renderObjects();
 		batch.end();
 	}
 	
 	private void renderItems() {
 		for (Item item : items) {
 			item.getSprite().draw(batch);
+		}
+	}
+	private void renderObjects() {
+		for (GameObject object : objects) {
+			object.getSprite().draw(batch);
 		}
 	}
 	
