@@ -22,13 +22,13 @@ public class ItemFactory {
 		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
-	public Item createItem(String string, float x, float y, MapProperties properties) {
-		Sprite sprite = new Sprite(atlas.findRegion(string));
+	public Item createItem(String name, float x, float y, MapProperties properties) {
+		Sprite sprite = new Sprite(atlas.findRegion(name));
 		sprite.setX(x * GameScreen.WORLD_TO_SCREEN - sprite.getWidth() * 0.5f);
 		sprite.setY(y * GameScreen.WORLD_TO_SCREEN - sprite.getHeight() * 0.5f);
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		
-		Item item = new Item(string, sprite, properties);
+		Item item = new Item(name, sprite, properties);
 		item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return item;

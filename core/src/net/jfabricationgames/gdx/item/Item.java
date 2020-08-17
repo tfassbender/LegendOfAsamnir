@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class Item {
@@ -23,7 +24,9 @@ public class Item {
 	}
 	
 	protected void createPhysicsBody(World world, float x, float y) {
-		body = PhysicsBodyCreator.createCircularBody(world, BodyType.StaticBody, x, y, false, 0, 0, 0, 0.1f, PhysicsCollisionType.ITEM);
+		PhysicsBodyProperties properties = new PhysicsBodyProperties().setType(BodyType.StaticBody).setX(x).setY(y).setSensor(false).setRadius(0.1f)
+				.setCollisionType(PhysicsCollisionType.ITEM);
+		body = PhysicsBodyCreator.createCircularBody(world, properties);
 		body.setUserData(this);
 	}
 	

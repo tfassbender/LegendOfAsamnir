@@ -23,6 +23,7 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
@@ -55,10 +56,19 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private float health = 100f;
 	private float maxHealth = 100f;
+	private float increaseHealth = 0f;
+	private final float healthIncreasePerSecond = 25f;
+	
 	private float mana = 100f;
 	private float maxMana = 100f;
+	private float increaseMana = 0f;
+	private float manaIncreasePerSecond = 25f;
+	
 	private float endurance = 100f;
 	private float maxEndurance = 100f;
+	private float increaseEndurance = 0f;
+	private float enduranceIncreasePerSecond = 25f;
+	
 	private float enduranceChargeMoving = 7.5f;
 	private float enduranceChargeIdle = 15f;
 	private float enduranceCostsSprint = 15f;
@@ -81,16 +91,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		idleDwarfSprite = getIdleSprite();
 		animation = getAnimation();
 		
-		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
-		World world = physicsWorld.getWorld();
-		physicsWorld.registerContactListener(this);
-		
-		body = PhysicsBodyCreator.createOctagonBody(world, BodyType.DynamicBody, 0f, 0f, 0f, 0f, 0f,
-				idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X,
-				idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y, PhysicsCollisionType.PLAYER);
-		PhysicsBodyCreator.addCircularFixture(body, true, 0f, 0f, 0f, PHYSICS_BODY_SENSOR_RADIUS, PhysicsCollisionType.PLAYER_SENSOR);
-		body.setLinearDamping(10f);
-		body.setUserData(this);
+		createBody();
 		
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
 		
@@ -136,6 +137,24 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 	}
 	
+	private void createBody() {
+		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
+		World world = physicsWorld.getWorld();
+		physicsWorld.registerContactListener(this);
+		
+		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
+				.setWidth(idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
+				.setHeight(idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
+				.setCollisionType(PhysicsCollisionType.PLAYER);
+		body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
+		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(PHYSICS_BODY_SENSOR_RADIUS)
+				.setCollisionType(PhysicsCollisionType.PLAYER_SENSOR);
+		PhysicsBodyCreator.addCircularFixture(sensorProperties);
+		body.setLinearDamping(10f);
+		body.setUserData(this);
+		
+	}
+	
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
 		updateStats(delta);
@@ -154,7 +173,25 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	private void updateStats(float delta) {
+		//recharge endurance by time
 		endurance = Math.min(endurance + delta * getEnduranceCharge(), maxEndurance);
+		
+		//increase health, mana and endurance
+		if (increaseHealth > 0f) {
+			float increaseStep = Math.min(delta * healthIncreasePerSecond, increaseHealth);
+			increaseHealth -= increaseStep;
+			health = Math.min(health + increaseStep, maxHealth);
+		}
+		if (increaseMana > 0f) {
+			float increaseStep = Math.min(delta * manaIncreasePerSecond, increaseMana);
+			increaseMana -= increaseStep;
+			mana = Math.min(mana + increaseStep, maxMana);
+		}
+		if (increaseEndurance > 0f) {
+			float increaseStep = Math.min(delta * enduranceIncreasePerSecond, increaseEndurance);
+			increaseEndurance -= increaseStep;
+			endurance = Math.min(endurance + increaseStep, maxEndurance);
+		}
 	}
 	private float getEnduranceCharge() {
 		if (action == CharacterAction.NONE || action == CharacterAction.IDLE) {
@@ -292,7 +329,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		MapProperties properties = item.getProperties();
 		if (properties.containsKey(ItemPropertyKeys.HEALTH.getPropertyName())) {
 			int itemHealth = properties.get(ItemPropertyKeys.HEALTH.getPropertyName(), Integer.class);
-			health = Math.min(health + itemHealth, maxHealth);
+			increaseHealth = itemHealth;
 		}
 		if (properties.containsKey(ItemPropertyKeys.MANA.getPropertyName())) {
 			int itemMana = properties.get(ItemPropertyKeys.MANA.getPropertyName(), Integer.class);

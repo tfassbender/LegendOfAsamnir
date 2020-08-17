@@ -12,47 +12,50 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class PhysicsBodyCreator {
 	
-	public static Body createOctagonBody(World world, BodyType type, float x, float y, float density, float restitution, float friction, float width,
-			float height, PhysicsCollisionType collisionType) {
-		BodyDef bodyDef = createBodyDef(type, x, y);
+	public static Body createOctagonBody(World world, PhysicsBodyProperties properties) {
+		BodyDef bodyDef = createBodyDef(properties.type, properties.x, properties.y);
 		Body body = world.createBody(bodyDef);
 		
-		addOctagonFixture(body, density, restitution, friction, width, height, collisionType);
+		addOctagonFixture(properties);
 		
 		return body;
 	}
 	
-	public static void addOctagonFixture(Body body, float density, float restitution, float friction, float width, float height,
-			PhysicsCollisionType collisionType) {
+	public static void addOctagonFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
-		shape.set(new Vector2[] {new Vector2(-0.5f * width, -0.4f * height), new Vector2(-0.5f * width, 0.4f * height),
-				new Vector2(-0.4f * width, 0.5f * height), new Vector2(0.4f * width, 0.5f * height), new Vector2(0.5f * width, 0.4f * height),
-				new Vector2(0.5f * width, -0.4f * height), new Vector2(0.4f * width, -0.5f * height), new Vector2(-0.4f * width, -0.5f * height)});
+		shape.set(new Vector2[] {new Vector2(-0.5f * properties.width, -0.4f * properties.height),
+				new Vector2(-0.5f * properties.width, 0.4f * properties.height), new Vector2(-0.4f * properties.width, 0.5f * properties.height),
+				new Vector2(0.4f * properties.width, 0.5f * properties.height), new Vector2(0.5f * properties.width, 0.4f * properties.height),
+				new Vector2(0.5f * properties.width, -0.4f * properties.height), new Vector2(0.4f * properties.width, -0.5f * properties.height),
+				new Vector2(-0.4f * properties.width, -0.5f * properties.height)});
 		
-		FixtureDef fixtureDef = createFixtureDef(shape, density, restitution, friction, collisionType);
-		body.createFixture(fixtureDef);
+		FixtureDef fixtureDef = createFixtureDef(shape, properties.density, properties.restitution, properties.friction, properties.collisionType);
+		properties.body.createFixture(fixtureDef);
 		shape.dispose();
 	}
 	
-	public static Body createCircularBody(World world, BodyType type, float x, float y, boolean sensor, float density, float restitution, float friction,
-			float radius, PhysicsCollisionType collisionType) {
-		BodyDef bodyDef = createBodyDef(type, x, y);
+	public static Body createCircularBody(World world, PhysicsBodyProperties properties) {
+		BodyDef bodyDef = createBodyDef(properties.type, properties.x, properties.y);
 		Body body = world.createBody(bodyDef);
 		
-		addCircularFixture(body, sensor, density, restitution, friction, radius, collisionType);
+		addCircularFixture(properties);
 		
 		return body;
 	}
 	
-	public static void addCircularFixture(Body body, boolean sensor, float density, float restitution, float friction, float radius,
-			PhysicsCollisionType collisionType) {
+	public static void addCircularFixture(PhysicsBodyProperties properties) {
 		CircleShape shape = new CircleShape();
-		shape.setRadius(radius);
+		shape.setRadius(properties.radius);
 		
-		FixtureDef fixtureDef = createFixtureDef(shape, density, restitution, friction, collisionType);
-		fixtureDef.isSensor = sensor;
-		body.createFixture(fixtureDef);
+		FixtureDef fixtureDef = createFixtureDef(shape, properties.density, properties.restitution, properties.friction, properties.collisionType);
+		fixtureDef.isSensor = properties.sensor;
+		properties.body.createFixture(fixtureDef);
 		shape.dispose();
+	}
+	
+	public static Body createRectangularBody(World world, PhysicsBodyProperties properties) {
+		//TODO
+		return null;
 	}
 	
 	private static BodyDef createBodyDef(BodyType type, float x, float y) {
@@ -76,5 +79,85 @@ public abstract class PhysicsBodyCreator {
 		fixtureDef.filter.maskBits = collisionType.mask;
 		
 		return fixtureDef;
+	}
+	
+	public static class PhysicsBodyProperties {
+		
+		public BodyType type;
+		public Body body;
+		
+		public float x;
+		public float y;
+		
+		public float density;
+		public float restitution;
+		public float friction;
+		public boolean sensor;
+		
+		public float width;
+		public float height;
+		public float radius;
+		
+		public PhysicsCollisionType collisionType;
+		
+		public PhysicsBodyProperties setType(BodyType type) {
+			this.type = type;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setBody(Body body) {
+			this.body = body;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setX(float x) {
+			this.x = x;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setY(float y) {
+			this.y = y;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setDensity(float density) {
+			this.density = density;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setRestitution(float restitution) {
+			this.restitution = restitution;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setFriction(float friction) {
+			this.friction = friction;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setSensor(boolean sensor) {
+			this.sensor = sensor;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setWidth(float width) {
+			this.width = width;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setHeight(float height) {
+			this.height = height;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setRadius(float radius) {
+			this.radius = radius;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setCollisionType(PhysicsCollisionType collisionType) {
+			this.collisionType = collisionType;
+			return this;
+		}
 	}
 }
