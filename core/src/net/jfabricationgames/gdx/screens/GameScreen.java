@@ -128,7 +128,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		world.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-		PhysicsWorld.getInstance().removeDeadBodies();
+		PhysicsWorld.getInstance().removeBodiesAndFixtures();
 		
 		moveCamera(delta);
 		map.render(delta);

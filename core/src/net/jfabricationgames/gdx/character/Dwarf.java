@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.character.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.animation.CharacterAnimationManager;
 import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
@@ -22,6 +23,7 @@ import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -30,7 +32,7 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener {
+public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable {
 	
 	public static final float MOVING_SPEED = 300f;
 	public static final float JUMPING_SPEED = 425f;
@@ -43,12 +45,17 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final float PHYSICS_BODY_SENSOR_RADIUS = 0.6f;
 	private static final Vector2 PHYSICS_BODY_POSITION_OFFSET = new Vector2(0f, -0.15f);
 	
+	private static final float PHYSICS_BODY_HIT_FIXTURE_RADIUS_FACTOR = 0.4f; //radius is calculated as width * factor
+	private static final float PHYSICS_BODY_HIT_FIXTURE_POSITION_OFFSET_FACTOR = 0.4f; //offset (in the given direction) is [width/height] * factor
+	
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String soundSetKey = "dwarf";
 	
 	private CharacterAnimationManager assetManager;
 	
 	private Body body;
+	
+	private Fixture hitFixture;
 	
 	private GameMap map;
 	
@@ -111,6 +118,14 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			endurance = Math.max(0, endurance - action.getEnduranceCosts());
 			
 			playSound(action);
+			
+			if (CharacterAction.isAttack(action)) {
+				addHitFixture();
+			}
+			else {
+				removeHitFixture();
+			}
+			
 			return true;
 		}
 		return false;
@@ -134,6 +149,27 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private void playSound(CharacterAction action) {
 		if (action.getSound() != null) {
 			soundSet.playSound(action.getSound());
+		}
+	}
+	
+	private void addHitFixture() {
+		PhysicsBodyProperties properties = new PhysicsBodyProperties().setBody(body).setSensor(true)
+				.setCollisionType(PhysicsCollisionType.PLAYER_ATTACK).setRadius(getSpriteWidth() * PHYSICS_BODY_HIT_FIXTURE_RADIUS_FACTOR)
+				.setFixturePosition(getHitFixturePosition());
+		hitFixture = PhysicsBodyCreator.addCircularFixture(properties);
+	}
+	private Vector2 getHitFixturePosition() {
+		return movementHandler.getMovingDirection().getNormalizedDirectionVector()
+				.scl(PHYSICS_BODY_HIT_FIXTURE_POSITION_OFFSET_FACTOR * getSpriteWidth());
+	}
+	
+	private float getSpriteWidth() {
+		return idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN;
+	}
+	
+	private void removeHitFixture() {
+		if (hitFixture != null) {
+			PhysicsWorld.getInstance().removeFixture(hitFixture, body);
 		}
 	}
 	
@@ -308,20 +344,23 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public void beginContact(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
-		Object sensorCollidingUserData = null;
-		Object sensorUserData = null;
 		
-		if (fixtureA.isSensor()) {
-			sensorUserData = fixtureA.getBody().getUserData();
-			sensorCollidingUserData = fixtureB.getBody().getUserData();
-		}
-		else if (fixtureB.isSensor()) {
-			sensorUserData = fixtureB.getBody().getUserData();
-			sensorCollidingUserData = fixtureA.getBody().getUserData();
+		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.PLAYER_SENSOR, fixtureA, fixtureB)) {
+			//collect stuff that touches the player sensor (usually items)
+			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_SENSOR, fixtureA, fixtureB);
+			
+			if (sensorCollidingUserData instanceof Item) {
+				collectItem((Item) sensorCollidingUserData);
+			}
 		}
 		
-		if (sensorUserData instanceof Dwarf && sensorCollidingUserData instanceof Item) {
-			collectItem((Item) sensorCollidingUserData);
+		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.PLAYER_ATTACK, fixtureA, fixtureB)) {
+			//hit something with an axe
+			Object attackedUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_ATTACK, fixtureA, fixtureB);
+			
+			if (attackedUserData instanceof Hittable) {
+				((Hittable) attackedUserData).takeDamage(action.getDamage());
+			}
 		}
 	}
 	
@@ -337,12 +376,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		//TODO other item types
 		
-		removeItem(item);
-	}
-	
-	private void removeItem(Item item) {
-		map.removeItem(item);
-		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(item.getBody());
+		item.remove();
 	}
 	
 	@Override
@@ -353,4 +387,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void endContact(Contact contact) {}
+
+	@Override
+	public void takeDamage(float damage) {
+		health -= damage;
+		if (health <= 0) {
+			//TODO die
+		}
+	}
 }

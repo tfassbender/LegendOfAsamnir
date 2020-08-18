@@ -77,7 +77,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 			}
 		}
 		if (!characterActionSet && move) {
-			lastMoveDirection = getDrawingDirectionChangesFromInputs();
+			lastMoveDirection = getDirectionFromInputs();
 			if (getAction().isInterruptable() && getAction() != CharacterAction.RUN) {
 				characterActionSet = inputCharacter.changeAction(CharacterAction.RUN);
 			}
@@ -159,21 +159,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		attack = false;
 		attackJump = false;
 		//sprint is not reset here, but in the handleInputs method (when idle)
-	}
-	
-	/**
-	 * Get the current drawing direction (left or right) or the current drawing direction if no movement to the left or the right is done.
-	 * 
-	 * @return The drawing direction.
-	 */
-	private MovingDirection getDrawingDirectionChangesFromInputs() {
-		if (moveLeft) {
-			return MovingDirection.LEFT;
-		}
-		if (moveRight) {
-			return MovingDirection.RIGHT;
-		}
-		return lastMoveDirection;
 	}
 	
 	/**
@@ -277,6 +262,10 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	
 	public boolean isDrawDirectionRight() {
 		return lastMoveDirection.isDrawingDirectionRight();
+	}
+	
+	public MovingDirection getMovingDirection() {
+		return lastMoveDirection;
 	}
 	
 	@Override

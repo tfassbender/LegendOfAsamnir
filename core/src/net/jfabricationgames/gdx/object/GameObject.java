@@ -5,16 +5,19 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
-public class GameObject {
+public abstract class GameObject {
 	
 	private ObjectType type;
 	private Sprite sprite;
 	private MapProperties properties;
 	private Body body;
+	private GameMap gameMap;
 	
 	public GameObject(ObjectType type, Sprite sprite, MapProperties properties) {
 		this.type = type;
@@ -32,6 +35,11 @@ public class GameObject {
 		PhysicsBodyProperties properties = type.getPhysicsBodyProperties().setX(x).setY(y).setWidth(width).setHeight(height);
 		body = PhysicsBodyCreator.createRectangularBody(world, properties);
 		body.setUserData(this);
+	}
+	
+	public void remove() {
+		gameMap.removeObject(this);
+		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
 	}
 	
 	public ObjectType getType() {
@@ -53,5 +61,9 @@ public class GameObject {
 	@Override
 	public String toString() {
 		return "MapObject [type=" + type + ", properties=" + properties + "]";
+	}
+	
+	public void setGameMap(GameMap gameMap) {
+		this.gameMap = gameMap;
 	}
 }

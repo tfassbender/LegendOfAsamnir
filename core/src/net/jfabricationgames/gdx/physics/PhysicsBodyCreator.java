@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
@@ -21,7 +22,7 @@ public abstract class PhysicsBodyCreator {
 		
 		return body;
 	}
-	public static void addOctagonFixture(PhysicsBodyProperties properties) {
+	public static Fixture addOctagonFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
 		shape.set(new Vector2[] {new Vector2(-0.5f * properties.width, -0.4f * properties.height),
 				new Vector2(-0.5f * properties.width, 0.4f * properties.height), new Vector2(-0.4f * properties.width, 0.5f * properties.height),
@@ -30,8 +31,10 @@ public abstract class PhysicsBodyCreator {
 				new Vector2(-0.4f * properties.width, -0.5f * properties.height)});
 		
 		FixtureDef fixtureDef = createFixtureDef(shape, properties);
-		properties.body.createFixture(fixtureDef);
+		Fixture fixture = properties.body.createFixture(fixtureDef);
 		shape.dispose();
+		
+		return fixture;
 	}
 	
 	public static Body createCircularBody(World world, PhysicsBodyProperties properties) {
@@ -43,13 +46,16 @@ public abstract class PhysicsBodyCreator {
 		
 		return body;
 	}
-	public static void addCircularFixture(PhysicsBodyProperties properties) {
+	public static Fixture addCircularFixture(PhysicsBodyProperties properties) {
 		CircleShape shape = new CircleShape();
 		shape.setRadius(properties.radius);
+		shape.setPosition(properties.fixturePosition);
 		
 		FixtureDef fixtureDef = createFixtureDef(shape, properties);
-		properties.body.createFixture(fixtureDef);
+		Fixture fixture = properties.body.createFixture(fixtureDef);
 		shape.dispose();
+		
+		return fixture;
 	}
 	
 	public static Body createRectangularBody(World world, PhysicsBodyProperties properties) {
@@ -61,13 +67,15 @@ public abstract class PhysicsBodyCreator {
 		
 		return body;
 	}
-	public static void addRectangularBody(PhysicsBodyProperties properties) {
+	public static Fixture addRectangularBody(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(properties.width * 0.5f, properties.height * 0.5f);
 		
 		FixtureDef fixtureDef = createFixtureDef(shape, properties);
-		properties.body.createFixture(fixtureDef);
+		Fixture fixture = properties.body.createFixture(fixtureDef);
 		shape.dispose();
+		
+		return fixture;
 	}
 	
 	private static BodyDef createBodyDef(PhysicsBodyProperties properties) {
@@ -110,6 +118,8 @@ public abstract class PhysicsBodyCreator {
 		public float width;
 		public float height;
 		public float radius;
+		
+		public Vector2 fixturePosition = new Vector2(0f, 0f);
 		
 		public PhysicsCollisionType collisionType;
 		
@@ -165,6 +175,11 @@ public abstract class PhysicsBodyCreator {
 		
 		public PhysicsBodyProperties setRadius(float radius) {
 			this.radius = radius;
+			return this;
+		}
+		
+		public PhysicsBodyProperties setFixturePosition(Vector2 fixturePosition) {
+			this.fixturePosition = fixturePosition;
 			return this;
 		}
 		

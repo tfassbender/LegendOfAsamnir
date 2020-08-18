@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.character.animation;
 
+import com.badlogic.gdx.math.Vector2;
+
 public enum MovingDirection {
 	
 	NONE(true), //
@@ -51,5 +53,30 @@ public enum MovingDirection {
 	
 	public boolean isCombinedDirection() {
 		return this == UP_LEFT || this == UP_RIGHT || this == DOWN_LEFT || this == DOWN_RIGHT;
+	}
+	
+	public Vector2 getNormalizedDirectionVector() {
+		switch (this) {
+			case DOWN:
+				return new Vector2(0f, -1f);
+			case DOWN_LEFT:
+				return new Vector2(-1f, -1f).nor();
+			case DOWN_RIGHT:
+				return new Vector2(1f, -1f).nor();
+			case LEFT:
+				return new Vector2(-1f, 0f);
+			case NONE:
+				return new Vector2(0f, 0f);
+			case RIGHT:
+				return new Vector2(1f, 0f);
+			case UP:
+				return new Vector2(0f, 1f);
+			case UP_LEFT:
+				return new Vector2(-1f, 1f).nor();
+			case UP_RIGHT:
+				return new Vector2(1f, 1f).nor();
+			default:
+				throw new IllegalStateException("Unknown MovingDirection: " + this);
+		}
 	}
 }

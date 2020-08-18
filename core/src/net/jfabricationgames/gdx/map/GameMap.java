@@ -76,6 +76,10 @@ public class GameMap implements Disposable {
 		items.removeValue(item, false);
 	}
 	
+	public void removeObject(GameObject gameObject) {
+		objects.removeValue(gameObject, false);
+	}
+	
 	@Override
 	public void dispose() {
 		renderer.dispose();

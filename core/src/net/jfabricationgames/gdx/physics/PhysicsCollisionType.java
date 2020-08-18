@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.physics;
 
+import com.badlogic.gdx.physics.box2d.Filter;
+
 /**
  * Defines the category and mask bits for all body categories.
  */
@@ -21,5 +23,14 @@ public enum PhysicsCollisionType {
 	private PhysicsCollisionType(short category, short mask) {
 		this.category = category;
 		this.mask = mask;
+	}
+	
+	public static PhysicsCollisionType getByFilter(Filter filter) {
+		for (PhysicsCollisionType type : values()) {
+			if (type.category == filter.categoryBits) {
+				return type;
+			}
+		}
+		return null;
 	}
 }

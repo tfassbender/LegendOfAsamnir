@@ -30,8 +30,8 @@ public class TiledMapLoader {
 	public TiledMapLoader(String mapAsset, GameMap gameMap) {
 		this.mapAsset = mapAsset;
 		this.gameMap = gameMap;
-		itemFactory = new ItemFactory();
-		objectFactory = new ObjectFactory();
+		itemFactory = new ItemFactory(gameMap);
+		objectFactory = new ObjectFactory(gameMap);
 	}
 	
 	public void load() {

@@ -5,9 +5,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 /**
  * A singleton that keeps track of the current world instance.
@@ -26,9 +28,11 @@ public class PhysicsWorld implements ContactListener {
 	private World world;
 	private Array<ContactListener> contactListeners;
 	private Array<Body> bodiesToRemove;
+	private ArrayMap<Body, Array<Fixture>> fixturesToRemove;
 	
 	private PhysicsWorld() {
 		bodiesToRemove = new Array<>();
+		fixturesToRemove = new ArrayMap<>();
 	}
 	
 	public World createWorld(Vector2 gravity, boolean doSleep) {
@@ -62,14 +66,38 @@ public class PhysicsWorld implements ContactListener {
 	public void destroyBodyAfterWorldStep(Body body) {
 		bodiesToRemove.add(body);
 	}
+	
+	/**
+	 * Mark a fixture to be deleted after the world step is over.
+	 */
+	public void removeFixture(Fixture fixture, Body body) {
+		Array<Fixture> fixtures = fixturesToRemove.get(body);
+		if (fixtures == null) {
+			fixtures = new Array<Fixture>();
+			fixturesToRemove.put(body, fixtures);
+		}
+		fixtures.add(fixture);
+	}
+	
 	/**
 	 * Destroy all bodies that are marked to be deleted after the world step is over.
 	 */
-	public void removeDeadBodies() {
+	public void removeBodiesAndFixtures() {
+		for (Body body : fixturesToRemove.keys()) {
+			Array<Fixture> bodiesFixtures = body.getFixtureList();
+			//iterate over all fixtures of the body and check if they are to be deleted because it just wont work any other way
+			for (Fixture fixture : bodiesFixtures) {
+				if (fixturesToRemove.get(body).contains(fixture, true)) {
+					body.destroyFixture(fixture);
+				}
+			}
+		}
 		for (Body body : bodiesToRemove) {
 			world.destroyBody(body);
 		}
+		
 		bodiesToRemove.clear();
+		fixturesToRemove.clear();
 	}
 	
 	@Override

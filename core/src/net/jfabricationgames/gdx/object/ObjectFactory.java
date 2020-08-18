@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
@@ -16,7 +17,10 @@ public class ObjectFactory {
 	private TextureAtlas atlas;
 	private World world;
 	
-	public ObjectFactory() {
+	private GameMap gameMap;
+	
+	public ObjectFactory(GameMap gameMap) {
+		this.gameMap = gameMap;
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		atlas = assetManager.get(OBJECTS_ATLAS);
 		world = PhysicsWorld.getInstance().getWorld();
@@ -28,7 +32,24 @@ public class ObjectFactory {
 		sprite.setY(y * GameScreen.WORLD_TO_SCREEN - sprite.getHeight() * 0.5f);
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		
-		GameObject object = new GameObject(type, sprite, properties);
+		GameObject object;
+		switch (type) {
+			case BARREL:
+				object = new Barrel(type, sprite, properties);
+				break;
+			case BOX:
+				object = new Box(type, sprite, properties);
+				break;
+			case CHEST:
+				object = new Chest(type, sprite, properties);
+				break;
+			case POT:
+				object = new Pot(type, sprite, properties);
+				break;
+			default:
+				throw new IllegalStateException("Unknown object type: " + type);
+		}
+		object.setGameMap(gameMap);
 		object.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return object;
