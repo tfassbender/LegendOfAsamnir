@@ -3,13 +3,12 @@ package net.jfabricationgames.gdx.object;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
 
-import net.jfabricationgames.gdx.attributes.Hittable;
-
-public abstract class DestroyableObject extends GameObject implements Hittable {
+public abstract class DestroyableObject extends GameObject {
 	
 	protected float health;
-	
 	protected boolean destroyed;
+	
+	protected String destroySound;
 	
 	public DestroyableObject(ObjectType type, Sprite sprite, MapProperties properties) {
 		super(type, sprite, properties);
@@ -23,13 +22,21 @@ public abstract class DestroyableObject extends GameObject implements Hittable {
 			destroy();
 		}
 		else {
-			//TODO animate hit			
+			//TODO animate hit
+			playHitSound();
 		}
 	}
 	
 	public void destroy() {
 		destroyed = true;
 		//TODO destroy animation before removing
+		playDestroySound();
 		remove();
+	}
+	
+	private void playDestroySound() {
+		if (destroySound != null) {
+			soundSet.playSound(destroySound);
+		}
 	}
 }

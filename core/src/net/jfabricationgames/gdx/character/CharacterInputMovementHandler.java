@@ -200,7 +200,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 			if (sprint) {
 				inputCharacter.reduceEnduranceForSprinting(delta);
 				if (inputCharacter.isExhausted()) {
-					System.out.println("exhausted");
 					sprint = false;
 				}
 			}

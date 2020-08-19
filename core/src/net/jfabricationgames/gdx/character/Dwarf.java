@@ -22,7 +22,6 @@ import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -57,8 +56,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private Fixture hitFixture;
 	
-	private GameMap map;
-	
 	private CharacterAction action;
 	
 	private float health = 100f;
@@ -87,9 +84,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private SoundSet soundSet;
 	
-	public Dwarf(GameMap map) {
-		this.map = map;
-		
+	public Dwarf() {
 		assetManager = CharacterAnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		
@@ -188,7 +183,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		PhysicsBodyCreator.addCircularFixture(sensorProperties);
 		body.setLinearDamping(10f);
 		body.setUserData(this);
-		
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
@@ -376,7 +370,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		//TODO other item types
 		
-		item.remove();
+		item.pickUp();
 	}
 	
 	@Override

@@ -94,9 +94,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		
 		map = new GameMap("map/map3.tmx", camera);
 		
-		dwarf = new Dwarf(map);
+		dwarf = new Dwarf();
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
+		
+		//take some damage to test the items (only for demo)
+		dwarf.takeDamage(25f);
 		
 		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
 		

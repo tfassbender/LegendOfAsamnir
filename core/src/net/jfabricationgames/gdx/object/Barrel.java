@@ -8,5 +8,7 @@ public class Barrel extends DestroyableObject {
 	public Barrel(ObjectType type, Sprite sprite, MapProperties properties) {
 		super(type, sprite, properties);
 		health = 30f;
+		hitSound = "wood_hit_2";
+		destroySound = "wood_break";
 	}
 }

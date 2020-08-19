@@ -5,19 +5,26 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.sound.SoundManager;
+import net.jfabricationgames.gdx.sound.SoundSet;
 
-public abstract class GameObject {
+public abstract class GameObject implements Hittable {
+	
+	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	
 	private ObjectType type;
 	private Sprite sprite;
 	private MapProperties properties;
 	private Body body;
 	private GameMap gameMap;
+	
+	protected String hitSound;
 	
 	public GameObject(ObjectType type, Sprite sprite, MapProperties properties) {
 		this.type = type;
@@ -37,9 +44,19 @@ public abstract class GameObject {
 		body.setUserData(this);
 	}
 	
+	public void takeDamage(float damage) {
+		playHitSound();
+	}
+	
 	public void remove() {
 		gameMap.removeObject(this);
 		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+	}
+	
+	protected void playHitSound() {
+		if (hitSound != null) {
+			soundSet.playSound(hitSound);
+		}
 	}
 	
 	public ObjectType getType() {

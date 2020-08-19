@@ -9,10 +9,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
+import net.jfabricationgames.gdx.sound.SoundManager;
+import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class Item {
+	
+	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
 	private String name;
 	private Sprite sprite;
@@ -34,9 +38,18 @@ public class Item {
 		body.setUserData(this);
 	}
 	
+	public void pickUp() {
+		playPickUpSound();
+		remove();
+	}
+	
 	public void remove() {
 		gameMap.removeItem(this);
 		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+	}
+	
+	private void playPickUpSound() {
+		new ItemPickUpSound(name, properties, soundSet).play();
 	}
 	
 	public String getName() {

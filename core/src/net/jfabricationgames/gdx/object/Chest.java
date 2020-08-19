@@ -7,5 +7,6 @@ public class Chest extends GameObject {
 
 	public Chest(ObjectType type, Sprite sprite, MapProperties properties) {
 		super(type, sprite, properties);
+		hitSound = "wood_knock";
 	}
 }
