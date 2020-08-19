@@ -59,8 +59,10 @@ public abstract class GameObject implements Hittable {
 		if (animation != null && !animation.isAnimationFinished()) {
 			animation.increaseStateTime(delta);
 			TextureRegion region = animation.getKeyFrame();
-			batch.draw(region, sprite.getX(), sprite.getY(), sprite.getWidth() * 0.5f, sprite.getHeight() * 0.5f, sprite.getWidth(),
-					sprite.getHeight(), GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+			float x = sprite.getX() + ((sprite.getWidth() - region.getRegionWidth()) * GameScreen.WORLD_TO_SCREEN / 2f);
+			float y = sprite.getY() + ((sprite.getHeight() - region.getRegionHeight()) * GameScreen.WORLD_TO_SCREEN / 2f);
+			batch.draw(region, x, y, sprite.getWidth() * 0.5f, sprite.getHeight() * 0.5f, region.getRegionWidth(), region.getRegionHeight(),
+					GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
 		}
 		else {
 			sprite.draw(batch);

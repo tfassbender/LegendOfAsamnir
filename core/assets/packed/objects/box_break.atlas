@@ -1,55 +1,55 @@
 
 box_break.png
-size: 256,32
+size: 512,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 box_break
   rotate: false
   xy: 0, 0
-  size: 32, 32
-  orig: 32, 32
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 1
 box_break
   rotate: false
-  xy: 34, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 66, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 2
 box_break
   rotate: false
-  xy: 68, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 132, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 3
 box_break
   rotate: false
-  xy: 102, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 198, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 4
 box_break
   rotate: false
-  xy: 136, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 264, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 5
 box_break
   rotate: false
-  xy: 170, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 330, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 6
 box_break
   rotate: false
-  xy: 204, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 396, 0
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: 7
