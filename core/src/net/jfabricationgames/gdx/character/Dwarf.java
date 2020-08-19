@@ -3,7 +3,6 @@ package net.jfabricationgames.gdx.character;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -15,10 +14,10 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attributes.Hittable;
-import net.jfabricationgames.gdx.character.animation.AnimationDirector;
-import net.jfabricationgames.gdx.character.animation.CharacterAnimationManager;
-import net.jfabricationgames.gdx.character.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
@@ -50,7 +49,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String soundSetKey = "dwarf";
 	
-	private CharacterAnimationManager assetManager;
+	private AnimationManager assetManager;
 	
 	private Body body;
 	
@@ -85,7 +84,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private SoundSet soundSet;
 	
 	public Dwarf() {
-		assetManager = CharacterAnimationManager.getInstance();
+		assetManager = AnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		
 		action = CharacterAction.NONE;
@@ -359,13 +358,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	private void collectItem(Item item) {
-		MapProperties properties = item.getProperties();
-		if (properties.containsKey(ItemPropertyKeys.HEALTH.getPropertyName())) {
-			int itemHealth = properties.get(ItemPropertyKeys.HEALTH.getPropertyName(), Integer.class);
+		if (item.containsProperty(ItemPropertyKeys.HEALTH.getPropertyName())) {
+			int itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Integer.class);
 			increaseHealth = itemHealth;
 		}
-		if (properties.containsKey(ItemPropertyKeys.MANA.getPropertyName())) {
-			int itemMana = properties.get(ItemPropertyKeys.MANA.getPropertyName(), Integer.class);
+		if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
+			int itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Integer.class);
 			mana = Math.min(mana + itemMana, maxMana);
 		}
 		//TODO other item types
@@ -381,7 +379,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void endContact(Contact contact) {}
-
+	
 	@Override
 	public void takeDamage(float damage) {
 		health -= damage;

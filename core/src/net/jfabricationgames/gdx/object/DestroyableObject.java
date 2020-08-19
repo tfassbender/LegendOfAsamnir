@@ -1,7 +1,11 @@
 package net.jfabricationgames.gdx.object;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
+
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 
 public abstract class DestroyableObject extends GameObject {
 	
@@ -15,6 +19,7 @@ public abstract class DestroyableObject extends GameObject {
 		destroyed = false;
 	}
 	
+	@Override
 	public void takeDamage(float damage) {
 		health -= damage;
 		
@@ -22,17 +27,28 @@ public abstract class DestroyableObject extends GameObject {
 			destroy();
 		}
 		else {
-			//TODO animate hit
+			animation = getHitAnimation();
 			playHitSound();
+		}
+	}
+	
+	public void draw(float delta, SpriteBatch batch) {
+		super.draw(delta, batch);
+		
+		//remove this object, if it is destroyed and the destroy animation has finished
+		if (destroyed && (animation == null || animation.isAnimationFinished())) {
+			remove();
 		}
 	}
 	
 	public void destroy() {
 		destroyed = true;
-		//TODO destroy animation before removing
+		animation = getDestroyAnimation();
 		playDestroySound();
-		remove();
+		removePhysicsBody();
 	}
+	
+	protected abstract AnimationDirector<TextureRegion> getDestroyAnimation();
 	
 	private void playDestroySound() {
 		if (destroySound != null) {

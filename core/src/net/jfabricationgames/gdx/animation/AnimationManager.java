@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.animation;
+package net.jfabricationgames.gdx.animation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,13 +18,13 @@ import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 
-public class CharacterAnimationManager {
+public class AnimationManager {
 	
-	private static CharacterAnimationManager instance;
+	private static AnimationManager instance;
 	
-	public static synchronized CharacterAnimationManager getInstance() {
+	public static synchronized AnimationManager getInstance() {
 		if (instance == null) {
-			instance = new CharacterAnimationManager();
+			instance = new AnimationManager();
 		}
 		return instance;
 	}
@@ -33,7 +33,7 @@ public class CharacterAnimationManager {
 	private Map<String, Animation<TextureRegion>> animations;
 	private Map<String, AnimationConfig> animationConfigurations;
 	
-	private CharacterAnimationManager() {
+	private AnimationManager() {
 		assetManager = AssetGroupManager.getInstance();
 		animations = new HashMap<>();
 		animationConfigurations = new HashMap<>();

@@ -48,19 +48,19 @@ public class GameMap implements Disposable {
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		renderItems();
-		renderObjects();
+		renderItems(delta);
+		renderObjects(delta);
 		batch.end();
 	}
 	
-	private void renderItems() {
+	private void renderItems(float delta) {
 		for (Item item : items) {
-			item.getSprite().draw(batch);
+			item.draw(delta, batch);
 		}
 	}
-	private void renderObjects() {
+	private void renderObjects(float delta) {
 		for (GameObject object : objects) {
-			object.getSprite().draw(batch);
+			object.draw(delta, batch);
 		}
 	}
 	

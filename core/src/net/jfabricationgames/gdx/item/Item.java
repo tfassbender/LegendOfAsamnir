@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.item;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -38,6 +39,10 @@ public class Item {
 		body.setUserData(this);
 	}
 	
+	public void draw(float delta, SpriteBatch batch) {
+		sprite.draw(batch);
+	}
+	
 	public void pickUp() {
 		playPickUpSound();
 		remove();
@@ -56,16 +61,12 @@ public class Item {
 		return name;
 	}
 	
-	public Sprite getSprite() {
-		return sprite;
+	public boolean containsProperty(String property) {
+		return properties.containsKey(property);
 	}
 	
-	public MapProperties getProperties() {
-		return properties;
-	}
-	
-	public Body getBody() {
-		return body;
+	public <T> T getProperty(String property, Class<T> clazz) {
+		return properties.get(property, clazz);
 	}
 	
 	@Override

@@ -1,7 +1,6 @@
 package net.jfabricationgames.gdx.character;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
-import net.jfabricationgames.gdx.character.animation.MovingDirection;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 

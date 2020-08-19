@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.animation;
+package net.jfabricationgames.gdx.animation;
 
 import java.util.List;
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.World;
 
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -13,6 +14,7 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 public class ObjectFactory {
 	
 	private static final String OBJECTS_ATLAS = "packed/objects/objects.atlas";
+	private static final String OBJECTS_ANIMATIONS = "config/animation/objects.json";
 	
 	private TextureAtlas atlas;
 	private World world;
@@ -22,6 +24,7 @@ public class ObjectFactory {
 	public ObjectFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
+		AnimationManager.getInstance().loadAnimations(OBJECTS_ANIMATIONS);
 		atlas = assetManager.get(OBJECTS_ATLAS);
 		world = PhysicsWorld.getInstance().getWorld();
 	}

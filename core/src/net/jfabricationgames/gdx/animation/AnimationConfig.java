@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.animation;
+package net.jfabricationgames.gdx.animation;
 
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 

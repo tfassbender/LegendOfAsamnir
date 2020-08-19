@@ -83,11 +83,11 @@
 		},
 		{
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/barel_break.atlas"
+			"path": "packed/objects/barrel_break.atlas"
 		},
 		{
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/barel_hit.atlas"
+			"path": "packed/objects/barrel_hit.atlas"
 		},
 		{
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",

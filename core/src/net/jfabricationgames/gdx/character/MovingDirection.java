@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.animation;
+package net.jfabricationgames.gdx.character;
 
 import com.badlogic.gdx.math.Vector2;
 
