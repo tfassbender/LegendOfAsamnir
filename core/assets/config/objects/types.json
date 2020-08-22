@@ -1,22 +1,77 @@
 {
+//	object: {
+//		textureName: ,
+//		animationHit: ,
+//		animationBreak: ,
+//		animationAction: ,
+//		
+//		physicsBodySizeFactorX: ,
+//		physicsBodySizeFactorY: ,
+//		physicsBodyOffsetFactorX: ,
+//		physicsBodyOffsetFactorY: -,
+//	
+//		hitSound: ,
+//		destroySound: ,
+//		health: ,
+//		
+//		bodyType: BodyType.StaticBody,
+//		density: 0,
+//		friction: 0,
+//		restitution: 0,
+//		collsitionType: PhysicsCollisionType.OBSTACLE,
+//		sensor: false,
+//	}
 	barrel: {
 		textureName: barrel,
-		animationAtlasPathHit: packed/barrel_hit,
-		animationAtlasPathBreak: packed/barrel_break
+		animationHit: barrel_hit,
+		animationBreak: barrel_break,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.5,
+		physicsBodyOffsetFactorX: 0.05,
+		physicsBodyOffsetFactorY: -0.15,
+	
+		hitSound: wood_hit_2,
+		destroySound: wood_break,
+		health: 30
 	},
 	box: {
 		textureName: box,
-		animationAtlasPathHit: packed/box_hit,
-		animationAtlasPathBreak: packed/box_break
+		animationHit: box_hit,
+		animationBreak: box_break,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.5,
+		physicsBodyOffsetFactorX: 0.075,
+		physicsBodyOffsetFactorY: -0.125,
+	
+		hitSound: wood_hit_1,
+		destroySound: wood_break,
+		health: 20
 	},
 	chest: {
 		textureName: chest,
-		animationAtlasPathHit: packed/chest_hit,
-		animationAtlasPathAction: packed/chest_open
+		animationHit: chest_hit,
+		animationAction: chest_open,
+		
+		physicsBodySizeFactorX: 0.4,
+		physicsBodySizeFactorY: 0.3,
+		physicsBodyOffsetFactorX: 0.01,
+		physicsBodyOffsetFactorY: -0.025,
+	
+		hitSound: wood_hit_2
 	},
 	pot: {
 		textureName: pot,
-		animationAtlasPathHit: packed/pot_hit,
-		animationAtlasPathBreak: packed/pot_break
+		animationHit: pot_hit,
+		animationBreak: pot_break,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.3,
+		physicsBodyOffsetFactorX: 0.05,
+		physicsBodyOffsetFactorY: -0.075,
+	
+		destroySound: glass_break,
+		health: 5
 	}
 }

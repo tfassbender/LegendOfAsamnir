@@ -63,16 +63,12 @@ public class ObjectFactory extends AbstractFactory {
 		GameObject object;
 		switch (type) {
 			case "barrel":
-				object = new Barrel(typeConfig, sprite, properties);
-				break;
 			case "box":
-				object = new Box(typeConfig, sprite, properties);
+			case "pot":
+				object = new DestroyableObject(typeConfig, sprite, properties);
 				break;
 			case "chest":
-				object = new Chest(typeConfig, sprite, properties);
-				break;
-			case "pot":
-				object = new Pot(typeConfig, sprite, properties);
+				object = new GameObject(typeConfig, sprite, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);

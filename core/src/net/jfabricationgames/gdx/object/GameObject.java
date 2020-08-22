@@ -22,16 +22,17 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public abstract class GameObject implements Hittable {
+public class GameObject implements Hittable {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	
-	private ObjectTypeConfig typeConfig;
 	private Sprite sprite;
 	private MapProperties properties;
 	private Body body;
 	private GameMap gameMap;
+	
+	protected ObjectTypeConfig typeConfig;
 	
 	protected AnimationManager animationManager;
 	protected AnimationDirector<TextureRegion> animation;
@@ -46,22 +47,20 @@ public abstract class GameObject implements Hittable {
 		this.sprite = sprite;
 		this.properties = properties;
 		animationManager = AnimationManager.getInstance();
+		
+		readTypeConfig();
+	}
+	
+	protected void readTypeConfig() {
+		physicsBodyProperties = new PhysicsBodyProperties().setType(typeConfig.bodyType).setSensor(typeConfig.sensor).setDensity(typeConfig.density)
+				.setFriction(typeConfig.friction).setRestitution(typeConfig.restitution).setCollisionType(typeConfig.collsitionType);
+		physicsBodySizeFactor = new Vector2(typeConfig.physicsBodySizeFactorX, typeConfig.physicsBodySizeFactorY);
+		physicsBodyOffsetFactor = new Vector2(typeConfig.physicsBodyOffsetFactorX, typeConfig.physicsBodyOffsetFactorY);
+		
+		hitSound = typeConfig.hitSound;
 	}
 	
 	protected void createPhysicsBody(World world, float x, float y) {
-		if (physicsBodyProperties == null) {
-			throw new IllegalStateException("The physicsProperties of this object have not yet been set. "
-					+ "Set them (usually in the class constructor) before calling the createPhysicsBody method.");
-		}
-		if (physicsBodySizeFactor == null) {
-			throw new IllegalStateException("The physicsBodySizeFactor of this object have not yet been set. "
-					+ "Set them (usually in the class constructor) before calling the createPhysicsBody method.");
-		}
-		if (physicsBodyOffsetFactor == null) {
-			throw new IllegalStateException("The physicsBodyOffsetFactor of this object have not yet been set. "
-					+ "Set them (usually in the class constructor) before calling the createPhysicsBody method.");
-		}
-		
 		float width = sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.x;
 		float height = sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.y;
 		
@@ -97,8 +96,10 @@ public abstract class GameObject implements Hittable {
 		animation = getHitAnimation();
 		playHitSound();
 	}
-	
-	protected abstract AnimationDirector<TextureRegion> getHitAnimation();
+
+	protected AnimationDirector<TextureRegion> getHitAnimation() {
+		return animationManager.getAnimationDirector(typeConfig.animationHit);
+	}
 	
 	public void remove() {
 		gameMap.removeObject(this);

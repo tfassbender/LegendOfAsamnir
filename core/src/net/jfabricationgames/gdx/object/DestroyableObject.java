@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 
-public abstract class DestroyableObject extends GameObject {
+public class DestroyableObject extends GameObject {
 	
 	protected float health;
 	protected boolean destroyed;
@@ -17,6 +17,14 @@ public abstract class DestroyableObject extends GameObject {
 	public DestroyableObject(ObjectTypeConfig type, Sprite sprite, MapProperties properties) {
 		super(type, sprite, properties);
 		destroyed = false;
+	}
+	
+	@Override
+	protected void readTypeConfig() {
+		super.readTypeConfig();
+		
+		destroySound = typeConfig.destroySound;
+		health = typeConfig.health;
 	}
 	
 	@Override
@@ -48,7 +56,9 @@ public abstract class DestroyableObject extends GameObject {
 		removePhysicsBody();
 	}
 	
-	protected abstract AnimationDirector<TextureRegion> getDestroyAnimation();
+	protected AnimationDirector<TextureRegion> getDestroyAnimation() {
+		return animationManager.getAnimationDirector(typeConfig.animationBreak);
+	}
 	
 	private void playDestroySound() {
 		if (destroySound != null) {
