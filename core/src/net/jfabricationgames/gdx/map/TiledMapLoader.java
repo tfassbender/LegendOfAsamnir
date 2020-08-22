@@ -16,7 +16,6 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.ObjectFactory;
-import net.jfabricationgames.gdx.object.ObjectType;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class TiledMapLoader {
@@ -84,7 +83,7 @@ public class TiledMapLoader {
 					items.add(itemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				case "object":
-					objects.add(objectFactory.createObject(ObjectType.getByName(parts[1]), rectangle.x, rectangle.y, properties));//TODO object driven type
+					objects.add(objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties));//TODO object driven type
 					break;
 			}
 		}

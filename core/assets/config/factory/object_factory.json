@@ -1,4 +1,5 @@
 {
 	objectAtlas: packed/demo/demo.atlas, 
 	objectAnimations: config/animation/objects.json
+	objectTypesConfig: config/objects/types.json
 }

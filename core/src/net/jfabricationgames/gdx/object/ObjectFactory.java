@@ -1,5 +1,9 @@
 package net.jfabricationgames.gdx.object;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
@@ -22,6 +26,8 @@ public class ObjectFactory extends AbstractFactory {
 	
 	private GameMap gameMap;
 	
+	private Map<String, ObjectTypeConfig> typeConfigs;
+	
 	public ObjectFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
 		
@@ -29,31 +35,44 @@ public class ObjectFactory extends AbstractFactory {
 			config = loadConfig(Config.class, configFile);
 		}
 		
+		loadTypeConfigs();
+		
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		AnimationManager.getInstance().loadAnimations(config.objectAnimations);
 		atlas = assetManager.get(config.objectAtlas);
 		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
-	public GameObject createObject(ObjectType type, float x, float y, MapProperties properties) {
-		Sprite sprite = new Sprite(atlas.findRegion(type.getTextureName()));
+	@SuppressWarnings("unchecked")
+	private void loadTypeConfigs() {
+		typeConfigs = json.fromJson(HashMap.class, ObjectTypeConfig.class, Gdx.files.internal(config.objectTypesConfig));
+	}
+	
+	public GameObject createObject(String type, float x, float y, MapProperties properties) {
+		ObjectTypeConfig typeConfig = typeConfigs.get(type);
+		if (typeConfig == null) {
+			throw new IllegalStateException("No type config known for type: " + type
+					+ ". Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
+		}
+		
+		Sprite sprite = new Sprite(atlas.findRegion(typeConfig.textureName));
 		sprite.setX(x * GameScreen.WORLD_TO_SCREEN - sprite.getWidth() * 0.5f);
 		sprite.setY(y * GameScreen.WORLD_TO_SCREEN - sprite.getHeight() * 0.5f);
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		
 		GameObject object;
 		switch (type) {
-			case BARREL:
-				object = new Barrel(type, sprite, properties);
+			case "barrel":
+				object = new Barrel(typeConfig, sprite, properties);
 				break;
-			case BOX:
-				object = new Box(type, sprite, properties);
+			case "box":
+				object = new Box(typeConfig, sprite, properties);
 				break;
-			case CHEST:
-				object = new Chest(type, sprite, properties);
+			case "chest":
+				object = new Chest(typeConfig, sprite, properties);
 				break;
-			case POT:
-				object = new Pot(type, sprite, properties);
+			case "pot":
+				object = new Pot(typeConfig, sprite, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);
@@ -68,5 +87,6 @@ public class ObjectFactory extends AbstractFactory {
 		
 		public String objectAtlas;
 		public String objectAnimations;
+		public String objectTypesConfig;
 	}
 }

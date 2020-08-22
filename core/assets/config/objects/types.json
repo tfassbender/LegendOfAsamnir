@@ -1,0 +1,22 @@
+{
+	barrel: {
+		textureName: barrel,
+		animationAtlasPathHit: packed/barrel_hit,
+		animationAtlasPathBreak: packed/barrel_break
+	},
+	box: {
+		textureName: box,
+		animationAtlasPathHit: packed/box_hit,
+		animationAtlasPathBreak: packed/box_break
+	},
+	chest: {
+		textureName: chest,
+		animationAtlasPathHit: packed/chest_hit,
+		animationAtlasPathAction: packed/chest_open
+	},
+	pot: {
+		textureName: pot,
+		animationAtlasPathHit: packed/pot_hit,
+		animationAtlasPathBreak: packed/pot_break
+	}
+}

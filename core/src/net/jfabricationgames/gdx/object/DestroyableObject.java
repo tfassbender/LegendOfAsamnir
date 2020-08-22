@@ -14,7 +14,7 @@ public abstract class DestroyableObject extends GameObject {
 	
 	protected String destroySound;
 	
-	public DestroyableObject(ObjectType type, Sprite sprite, MapProperties properties) {
+	public DestroyableObject(ObjectTypeConfig type, Sprite sprite, MapProperties properties) {
 		super(type, sprite, properties);
 		destroyed = false;
 	}
