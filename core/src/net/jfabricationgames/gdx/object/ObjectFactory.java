@@ -7,14 +7,15 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
-public class ObjectFactory {
+public class ObjectFactory extends AbstractFactory {
 	
-	private static final String OBJECTS_ATLAS = "packed/demo/demo.atlas";
-	private static final String OBJECTS_ANIMATIONS = "config/animation/objects.json";
+	private static final String configFile = "config/factory/object_factory.json";
+	private static Config config;
 	
 	private TextureAtlas atlas;
 	private World world;
@@ -23,9 +24,14 @@ public class ObjectFactory {
 	
 	public ObjectFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
+		
+		if (config == null) {
+			config = loadConfig(Config.class, configFile);
+		}
+		
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
-		AnimationManager.getInstance().loadAnimations(OBJECTS_ANIMATIONS);
-		atlas = assetManager.get(OBJECTS_ATLAS);
+		AnimationManager.getInstance().loadAnimations(config.objectAnimations);
+		atlas = assetManager.get(config.objectAtlas);
 		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
@@ -56,5 +62,11 @@ public class ObjectFactory {
 		object.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return object;
+	}
+	
+	public static class Config {
+		
+		public String objectAtlas;
+		public String objectAnimations;
 	}
 }

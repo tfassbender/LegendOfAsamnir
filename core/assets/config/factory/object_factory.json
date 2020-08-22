@@ -1,0 +1,4 @@
+{
+	objectAtlas: packed/demo/demo.atlas, 
+	objectAnimations: config/animation/objects.json
+}
