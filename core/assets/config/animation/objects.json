@@ -3,43 +3,43 @@
 	[
 		{
 			name: barrel_hit,
-			atlas: packed/objects/barrel_hit.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: barrel_break,
-			atlas: packed/objects/barrel_break.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: box_hit,
-			atlas: packed/objects/box_hit.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: box_break,
-			atlas: packed/objects/box_break.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: pot_hit,
-			atlas: packed/objects/box_hit.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: pot_break,
-			atlas: packed/objects/pot_break.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: chest_hit,
-			atlas: packed/objects/chest_hit.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},

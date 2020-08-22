@@ -2,46 +2,14 @@
 	"main_menu" : [
 		{
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/menu/menu_buttons.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.Texture",
-			"path": "menu/dwarf_scroller_headline.png"
+			"path": "packed/menu/menu.atlas"
 		}
 	],
 	"game" : [
-		// dwarf animation textures
+		// texture atlas (includes dwarf, item, objects, ...)
 		{	
 			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_attack_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_attack_jump_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_die_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_hit_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_idle_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_jump_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_run_right.atlas"
-		},
-		{	
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/dwarf/dwarf_spin_right.atlas"
+			"path": "packed/demo/demo.atlas"
 		},
 		// tileset maps
 		{
@@ -70,48 +38,6 @@
 				"textureMinFilter": "Linear",
 				"textureMagFilter": "Linear"
 			}
-		},
-		// items
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/items/items.atlas"
-		},
-		// objects
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/objects.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/barrel_break.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/barrel_hit.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/box_break.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/box_hit.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/chest_open.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/chest_hit.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/pot_break.atlas"
-		},
-		{
-			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-			"path": "packed/objects/pot_hit.atlas"
-		},
+		}
 	]
 }

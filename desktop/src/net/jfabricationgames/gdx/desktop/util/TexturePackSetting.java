@@ -1,28 +1,29 @@
 package net.jfabricationgames.gdx.desktop.util;
 
+import java.util.List;
+
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+
 public class TexturePackSetting {
 	
-	private String textureDir;
+	private List<String> textureDirs;
 	private String outputDir;
 	private String atlasName;
-	private boolean edgePadding = false;
 	
-	public TexturePackSetting(String textureDir, String outputDir, String atlasName, boolean edgePadding) {
-		this.textureDir = textureDir;
-		this.outputDir = outputDir;
-		this.atlasName = atlasName;
-		this.edgePadding = edgePadding;
-	}
+	private boolean edgePadding = false;
+	private boolean duplicatePadding = false;
+	private TextureFilter filterMin = TextureFilter.Nearest;
+	private TextureFilter filterMag = TextureFilter.Nearest;
 	
 	public TexturePackSetting() {
 		
 	}
 	
-	public String getTextureDir() {
-		return textureDir;
+	public List<String> getTextureDirs() {
+		return textureDirs;
 	}
-	public void setTextureDir(String textureDir) {
-		this.textureDir = textureDir;
+	public void setTextureDirs(List<String> textureDirs) {
+		this.textureDirs = textureDirs;
 	}
 	
 	public String getOutputDir() {
@@ -44,5 +45,29 @@ public class TexturePackSetting {
 	}
 	public void setEdgePadding(boolean edgePadding) {
 		this.edgePadding = edgePadding;
+	}
+	
+	public boolean isDuplicatePadding() {
+		return duplicatePadding;
+	}
+	
+	public void setDuplicatePadding(boolean duplicatePadding) {
+		this.duplicatePadding = duplicatePadding;
+	}
+	
+	public TextureFilter getFilterMin() {
+		return filterMin;
+	}
+	
+	public void setFilterMin(TextureFilter filterMin) {
+		this.filterMin = filterMin;
+	}
+	
+	public TextureFilter getFilterMag() {
+		return filterMag;
+	}
+	
+	public void setFilterMag(TextureFilter filterMag) {
+		this.filterMag = filterMag;
 	}
 }

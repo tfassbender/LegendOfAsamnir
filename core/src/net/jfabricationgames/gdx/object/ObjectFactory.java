@@ -13,7 +13,7 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class ObjectFactory {
 	
-	private static final String OBJECTS_ATLAS = "packed/objects/objects.atlas";
+	private static final String OBJECTS_ATLAS = "packed/demo/demo.atlas";
 	private static final String OBJECTS_ANIMATIONS = "config/animation/objects.json";
 	
 	private TextureAtlas atlas;

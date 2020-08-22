@@ -1,113 +1,41 @@
 {
-	settings: [
-		// dwarf
-		{
-			textureDir: dwarf/dwarf_attack_right, 
-			outputDir: packed/dwarf, 
-			atlasName:  dwarf_attack_right
+	levels: {
+		demo: {
+			outputDir: packed/demo, 
+			atlasName:  demo
+			textureDirs: [
+				// dwarf
+				dwarf/dwarf_attack_right, 
+				dwarf/dwarf_attack_jump_right, 
+				dwarf/dwarf_die_right, 
+				dwarf/dwarf_hit_right, 
+				dwarf/dwarf_idle_right, 
+				dwarf/dwarf_jump_right, 
+				dwarf/dwarf_run_right, 
+				dwarf/dwarf_spin_right,
+				// items
+				items,
+				// objects
+				objects/all,
+				objects/animated/barrel/hit,
+				objects/animated/barrel/break,
+				objects/animated/box/hit,
+				objects/animated/box/break,
+				objects/animated/chest/hit,
+				objects/animated/chest/open,
+				objects/animated/direction_board/hit,
+				objects/animated/pot/break,
+				objects/animated/pot/hit,
+				objects/animated/signboard/break,
+			]
 		},
-		{
-			textureDir: dwarf/dwarf_attack_jump_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_attack_jump_right
-		},
-		{
-			textureDir: dwarf/dwarf_die_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_die_right
-		},
-		{
-			textureDir: dwarf/dwarf_hit_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_hit_right
-		},
-		{
-			textureDir: dwarf/dwarf_idle_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_idle_right
-		},
-		{
-			textureDir: dwarf/dwarf_jump_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_jump_right
-		},
-		{
-			textureDir: dwarf/dwarf_run_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_run_right
-		},
-		{
-			textureDir: dwarf/dwarf_spin_right, 
-			outputDir: packed/dwarf, 
-			atlasName: dwarf_spin_right
-		},
-		//menu
-		{
-			textureDir: menu/buttons,
+		menu: {
 			outputDir: packed/menu,
-			atlasName: menu_buttons
+			atlasName: menu
+			textureDirs: [
+				menu/buttons,
+				menu,
+			]
 		},
-		//items
-		{
-			textureDir: items,
-			outputDir: packed/items,
-			atlasName: items
-		},
-		//objects
-		{
-			textureDir: objects/all,
-			outputDir: packed/objects,
-			atlasName: objects
-		},
-		{
-			textureDir: objects/animated/barrel/hit,
-			outputDir: packed/objects,
-			atlasName: barrel_hit
-		},
-		{
-			textureDir: objects/animated/barrel/break,
-			outputDir: packed/objects,
-			atlasName: barrel_break
-		},
-		{
-			textureDir: objects/animated/box/hit,
-			outputDir: packed/objects,
-			atlasName: box_hit
-		},
-		{
-			textureDir: objects/animated/box/break,
-			outputDir: packed/objects,
-			atlasName: box_break
-		},
-		{
-			textureDir: objects/animated/chest/hit,
-			outputDir: packed/objects,
-			atlasName: chest_hit
-		},
-		{
-			textureDir: objects/animated/chest/open,
-			outputDir: packed/objects,
-			atlasName: chest_open
-		},
-		{
-			textureDir: objects/animated/direction_board/hit,
-			outputDir: packed/objects,
-			atlasName: direction_board_hit
-		},
-		{
-			textureDir: objects/animated/pot/break,
-			outputDir: packed/objects,
-			atlasName: pot_break
-		},
-		{
-			textureDir: objects/animated/pot/hit,
-			outputDir: packed/objects,
-			atlasName: pot_hit
-		},
-		{
-			textureDir: objects/animated/signboard/break,
-			outputDir: packed/objects,
-			atlasName: signboard_break
-		}
-	]
+	}
 }

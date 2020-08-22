@@ -3,49 +3,49 @@
 	[
 		{
 			name: dwarf_attack_right,
-			atlas: packed/dwarf/dwarf_attack_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: dwarf_attack_jump_right,
-			atlas: packed/dwarf/dwarf_attack_jump_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: dwarf_die_right,
-			atlas: packed/dwarf/dwarf_die_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: dwarf_hit_right,
-			atlas: packed/dwarf/dwarf_hit_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: dwarf_idle_right,
-			atlas: packed/dwarf/dwarf_idle_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: dwarf_jump_right,
-			atlas: packed/dwarf/dwarf_jump_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
 		{
 			name: dwarf_run_right,
-			atlas: packed/dwarf/dwarf_run_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: LOOP
 		},
 		{
 			name: dwarf_spin_right
-			atlas: packed/dwarf/dwarf_spin_right.atlas,
+			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
 		}

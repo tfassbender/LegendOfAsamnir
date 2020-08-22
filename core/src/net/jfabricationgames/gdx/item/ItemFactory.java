@@ -12,7 +12,7 @@ import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class ItemFactory {
 	
-	private static final String ITEM_ATLAS = "packed/items/items.atlas";
+	private static final String ITEM_ATLAS = "packed/demo/demo.atlas";
 	
 	private TextureAtlas atlas;
 	private World world;

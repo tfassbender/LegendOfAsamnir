@@ -3,7 +3,6 @@ package net.jfabricationgames.gdx.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -65,20 +64,20 @@ public class MainMenuScreen extends ScreenAdapter implements InputActionListener
 	}
 	
 	private void buildStage() {
-		TextureAtlas menuButtons = assetManager.get("packed/menu/menu_buttons.atlas");
-		Texture headlineTexture = assetManager.get("menu/dwarf_scroller_headline.png");
-		TextureRegion playButtonTexture = menuButtons.findRegion("play_button_text");
-		TextureRegion exitButtonTexture = menuButtons.findRegion("exit_button_text");
+		TextureAtlas menu = assetManager.get("packed/menu/menu.atlas");
+		TextureRegion headlineTexture = menu.findRegion("dwarf_scroller_headline");
+		TextureRegion playButtonTexture = menu.findRegion("play_button_text");
+		TextureRegion exitButtonTexture = menu.findRegion("exit_button_text");
 		
 		Image headline = new Image(headlineTexture);
 		
 		ImageButtonStyle playButtonStyle = new ImageButtonStyle();
-		playButtonStyle.up = new TextureRegionDrawable(menuButtons.findRegion("button_wide_round_edges"));
+		playButtonStyle.up = new TextureRegionDrawable(menu.findRegion("button_wide_round_edges"));
 		playButtonStyle.imageUp = new TextureRegionDrawable(playButtonTexture);
 		ImageButton buttonPlay = new ImageButton(playButtonStyle);
 		
 		ImageButtonStyle exitButtonStyle = new ImageButtonStyle();
-		exitButtonStyle.up = new TextureRegionDrawable(menuButtons.findRegion("button_wide_round_edges"));
+		exitButtonStyle.up = new TextureRegionDrawable(menu.findRegion("button_wide_round_edges"));
 		exitButtonStyle.imageUp = new TextureRegionDrawable(exitButtonTexture);
 		ImageButton buttonExit = new ImageButton(exitButtonStyle);
 		
