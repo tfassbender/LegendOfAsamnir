@@ -1,5 +1,9 @@
 package net.jfabricationgames.gdx.item;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
@@ -21,6 +25,8 @@ public class ItemFactory extends AbstractFactory {
 	
 	private GameMap gameMap;
 	
+	private Map<String, ItemTypeConfig> typeConfigs;
+	
 	public ItemFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
 		
@@ -28,18 +34,31 @@ public class ItemFactory extends AbstractFactory {
 			config = loadConfig(Config.class, configFile);
 		}
 		
+		loadTypeConfigs();
+		
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		atlas = assetManager.get(config.itemAtlas);
 		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
+	@SuppressWarnings("unchecked")
+	private void loadTypeConfigs() {
+		typeConfigs = json.fromJson(HashMap.class, ItemTypeConfig.class, Gdx.files.internal(config.itemTypeConfig));
+	}
+	
 	public Item createItem(String name, float x, float y, MapProperties properties) {
-		Sprite sprite = new Sprite(atlas.findRegion(name));
+		ItemTypeConfig typeConfig = typeConfigs.get(name);
+		if (typeConfig == null) {
+			throw new IllegalStateException("No type config known for type: " + name
+					+ ". Either the type name is wrong or you have to add it to the itemTypesConfig (see \"" + configFile + "\")");
+		}
+		
+		Sprite sprite = new Sprite(atlas.findRegion(typeConfig.textureName));
 		sprite.setX(x * GameScreen.WORLD_TO_SCREEN - sprite.getWidth() * 0.5f);
 		sprite.setY(y * GameScreen.WORLD_TO_SCREEN - sprite.getHeight() * 0.5f);
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		
-		Item item = new Item(name, sprite, properties, gameMap);
+		Item item = new Item(typeConfig, sprite, properties, gameMap);
 		item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return item;
@@ -48,5 +67,6 @@ public class ItemFactory extends AbstractFactory {
 	public static class Config {
 		
 		public String itemAtlas;
+		public String itemTypeConfig;
 	}
 }

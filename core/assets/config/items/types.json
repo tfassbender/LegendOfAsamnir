@@ -1,0 +1,21 @@
+{
+//	item: {
+//		textureName: ,
+//		physicsObjectRadius: ,
+//		pickUpSoundName: ,
+//	}
+	health: {
+		textureName: health,
+		pickUpSoundName: health_small,
+	},
+	health_big: {
+		textureName: health,
+		pickUpSoundName: health_big,
+	}
+	axe: {
+		textureName: axe,
+	},
+	coin: {
+		textureName: coin,
+	}
+}

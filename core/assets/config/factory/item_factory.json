@@ -1,3 +1,4 @@
 {
 	itemAtlas: packed/demo/demo.atlas
+	itemTypeConfig: config/items/types.json
 }

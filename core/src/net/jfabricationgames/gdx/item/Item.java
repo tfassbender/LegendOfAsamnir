@@ -19,22 +19,30 @@ public class Item {
 	
 	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
-	private String name;
 	private Sprite sprite;
 	private MapProperties properties;
 	private Body body;
 	private GameMap gameMap;
 	
-	public Item(String name, Sprite sprite, MapProperties properties, GameMap gameMap) {
-		this.name = name;
+	protected ItemTypeConfig typeConfig;
+	protected String pickUpSoundName;
+	
+	public Item(ItemTypeConfig typeConfig, Sprite sprite, MapProperties properties, GameMap gameMap) {
+		this.typeConfig = typeConfig;
 		this.sprite = sprite;
 		this.properties = properties;
 		this.gameMap = gameMap;
+		
+		readTypeConfig();
+	}
+	
+	protected void readTypeConfig() {
+		pickUpSoundName = typeConfig.pickUpSoundName;
 	}
 	
 	protected void createPhysicsBody(World world, float x, float y) {
-		PhysicsBodyProperties properties = new PhysicsBodyProperties().setType(BodyType.StaticBody).setX(x).setY(y).setSensor(false).setRadius(0.1f)
-				.setCollisionType(PhysicsCollisionType.ITEM);
+		PhysicsBodyProperties properties = new PhysicsBodyProperties().setType(BodyType.StaticBody).setX(x).setY(y).setSensor(false)
+				.setRadius(typeConfig.physicsObjectRadius).setCollisionType(PhysicsCollisionType.ITEM);
 		body = PhysicsBodyCreator.createCircularBody(world, properties);
 		body.setUserData(this);
 	}
@@ -54,11 +62,9 @@ public class Item {
 	}
 	
 	private void playPickUpSound() {
-		new ItemPickUpSound(name, properties, soundSet).play();
-	}
-	
-	public String getName() {
-		return name;
+		if (pickUpSoundName != null) {
+			soundSet.playSound(pickUpSoundName);
+		}
 	}
 	
 	public boolean containsProperty(String property) {
@@ -71,6 +77,6 @@ public class Item {
 	
 	@Override
 	public String toString() {
-		return "Item [name=" + name + ", properties=" + properties + "]";
+		return "Item [properties=" + properties + "]";
 	}
 }
