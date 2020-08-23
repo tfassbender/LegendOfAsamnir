@@ -1,9 +1,7 @@
 package net.jfabricationgames.gdx.object;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
@@ -86,17 +84,12 @@ public class GameObject implements Hittable {
 		}
 	}
 	
-	protected AnimationDirector<TextureRegion> createAnimation(String atlas, String region, float frameDuration) {
-		return new AnimationDirector<TextureRegion>(
-				new Animation<TextureRegion>(frameDuration, assetManager.get(atlas, TextureAtlas.class).findRegions(region)));
-	}
-	
 	@Override
 	public void takeDamage(float damage) {
 		animation = getHitAnimation();
 		playHitSound();
 	}
-
+	
 	protected AnimationDirector<TextureRegion> getHitAnimation() {
 		return animationManager.getAnimationDirector(typeConfig.animationHit);
 	}

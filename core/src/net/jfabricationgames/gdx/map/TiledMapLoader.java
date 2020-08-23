@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.enemy.Enemy;
+import net.jfabricationgames.gdx.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -25,12 +27,14 @@ public class TiledMapLoader {
 	
 	private ItemFactory itemFactory;
 	private ObjectFactory objectFactory;
+	private EnemyFactory enemyFactory;
 	
 	public TiledMapLoader(String mapAsset, GameMap gameMap) {
 		this.mapAsset = mapAsset;
 		this.gameMap = gameMap;
 		itemFactory = new ItemFactory(gameMap);
 		objectFactory = new ObjectFactory(gameMap);
+		enemyFactory = new EnemyFactory(gameMap);
 	}
 	
 	public void load() {
@@ -46,6 +50,7 @@ public class TiledMapLoader {
 		Gdx.app.log(getClass().getSimpleName(), "--- Loading map objects --------------------------------------------------------------");
 		Array<Item> items = new Array<>();
 		Array<GameObject> objects = new Array<>();
+		Array<Enemy> enemies = new Array<>();
 		
 		MapObjects mapObjects = gameMap.map.getLayers().get("objects").getObjects();
 		
@@ -83,13 +88,17 @@ public class TiledMapLoader {
 					items.add(itemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				case "object":
-					objects.add(objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties));//TODO object driven type
+					objects.add(objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties));
+					break;
+				case "enemy":
+					enemies.add(enemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 			}
 		}
 		
 		gameMap.items = items;
 		gameMap.objects = objects;
+		gameMap.enemies = enemies;
 	}
 	
 	private String mapPropertiesToString(MapProperties properties, boolean includePosition) {

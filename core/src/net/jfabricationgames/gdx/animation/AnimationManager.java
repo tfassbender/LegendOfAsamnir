@@ -66,6 +66,10 @@ public class AnimationManager {
 		TextureAtlas textureAtlas = assetManager.get(config.getAtlas(), TextureAtlas.class);
 		Animation<TextureRegion> animation = new Animation<>(config.getFrameDuration(), textureAtlas.findRegions(config.getName()),
 				config.getPlayMode());
+		if (animation.getKeyFrames().length == 0) {
+			Gdx.app.error(getClass().getSimpleName(), "Animation loaded, but with 0 key frames. Animation was '" + config.getName()
+					+ "'. Maybe the animation was configured, but the images were not packed into the atlas?");
+		}
 		animations.put(config.getName(), animation);
 	}
 	

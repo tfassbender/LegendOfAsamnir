@@ -25,19 +25,15 @@
 			sounds: {
 				select: {
 					path: "sound/common/select.wav",
-					volume: 1
 				},
 				error: {
 					path: "sound/common/error.wav",
-					volume: 1
 				},
 				pick: {
 					path: "sound/common/pick.wav",
-					volume: 1
 				},
 				explosion: {
 					path: "sound/common/explosion.wav",
-					volume: 1
 				}
 			}
 		},
@@ -45,15 +41,12 @@
 			sounds: {
 				health_small: {
 					path: "sound/item/health_small.wav",
-					volume: 1
 				},
 				health_big: {
 					path: "sound/item/health_big.wav",
-					volume: 1
 				},
 				mana: {
 					path: "sound/item/mana.wav",
-					volume: 1
 				}
 			}
 		},
@@ -61,39 +54,46 @@
 			sounds: {
 				wood_hit_1: {
 					path: "sound/object/wood_hit_1.wav",
-					volume: 1
 				},
 				wood_hit_2: {
 					path: "sound/object/wood_hit_2.wav",
-					volume: 1
 				},
 				wood_knock: {
 					path: "sound/object/wood_knock.wav",
-					volume: 1
 				},
 				wood_break: {
 					path: "sound/object/wood_break_1.wav",
-					volume: 1
 				},
 				flesh_hit_1: {
 					path: "sound/object/flesh_hit_1.wav",
-					volume: 1
 				},
 				flesh_hit_2: {
 					path: "sound/object/flesh_hit_2.wav",
-					volume: 1
 				},
 				metal_hit_1: {
 					path: "sound/object/metal_hit_1.wav",
-					volume: 1
 				},
 				metal_hit_2: {
 					path: "sound/object/metal_hit_2.wav",
-					volume: 1
 				},
 				glass_break: {
 					path: "sound/object/glass_break_1.wav",
-					volume: 1
+				}
+			}
+		},
+		enemy: {
+			sounds: {
+				flesh_hit_1: {
+					path: "sound/object/flesh_hit_1.wav",
+				},
+				flesh_hit_2: {
+					path: "sound/object/flesh_hit_2.wav",
+				},
+				metal_hit_1: {
+					path: "sound/object/metal_hit_1.wav",
+				},
+				metal_hit_2: {
+					path: "sound/object/metal_hit_2.wav",
 				}
 			}
 		}

@@ -27,6 +27,10 @@
 				objects/animated/pot/break,
 				objects/animated/pot/hit,
 				objects/animated/signboard/break,
+				//enemies
+				enemy/bat/bat_attack,
+				enemy/bat/bat_die,
+				enemy/bat/bat_fly,
 			]
 		},
 		menu: {

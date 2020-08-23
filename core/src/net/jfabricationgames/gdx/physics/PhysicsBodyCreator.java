@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.physics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,6 +13,28 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class PhysicsBodyCreator {
+	
+	public static Body createBody(World world, PhysicsBodyProperties properties) {
+		BodyDef bodyDef = createBodyDef(properties);
+		Body body = world.createBody(bodyDef);
+		
+		properties.setBody(body);
+		addFixture(properties);
+		
+		return body;
+	}
+	public static Fixture addFixture(PhysicsBodyProperties properties) {
+		switch (properties.physicsBodyShape) {
+			case CIRCLE:
+				return addCircularFixture(properties);
+			case OCTAGON:
+				return addOctagonFixture(properties);
+			case RECTANGLE:
+				return addRectangularFixture(properties);
+			default:
+				throw new IllegalStateException("Unknown PhysicsBodyShape type: " + properties.physicsBodyShape);
+		}
+	}
 	
 	public static Body createOctagonBody(World world, PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
@@ -63,11 +86,11 @@ public abstract class PhysicsBodyCreator {
 		Body body = world.createBody(bodyDef);
 		
 		properties.setBody(body);
-		addRectangularBody(properties);
+		addRectangularFixture(properties);
 		
 		return body;
 	}
-	public static Fixture addRectangularBody(PhysicsBodyProperties properties) {
+	public static Fixture addRectangularFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(properties.width * 0.5f, properties.height * 0.5f);
 		
@@ -84,6 +107,7 @@ public abstract class PhysicsBodyCreator {
 		bodyDef.position.set(properties.x, properties.y);
 		bodyDef.angle = 0;
 		bodyDef.fixedRotation = true;
+		bodyDef.linearDamping = properties.linearDamping;
 		
 		return bodyDef;
 	}
@@ -102,8 +126,9 @@ public abstract class PhysicsBodyCreator {
 		return fixtureDef;
 	}
 	
-	public static class PhysicsBodyProperties {
+	public static class PhysicsBodyProperties implements Cloneable {
 		
+		public PhysicsBodyShape physicsBodyShape;
 		public BodyType type;
 		public Body body;
 		
@@ -114,6 +139,7 @@ public abstract class PhysicsBodyCreator {
 		public float restitution;
 		public float friction;
 		public boolean sensor;
+		public float linearDamping;
 		
 		public float width;
 		public float height;
@@ -122,6 +148,21 @@ public abstract class PhysicsBodyCreator {
 		public Vector2 fixturePosition = new Vector2(0f, 0f);
 		
 		public PhysicsCollisionType collisionType;
+		
+		public PhysicsBodyProperties clone() {
+			try {
+				return (PhysicsBodyProperties) super.clone();
+			}
+			catch (CloneNotSupportedException e) {
+				Gdx.app.error(getClass().getSimpleName(), "Couldn't create a clone of PhysicsBodyProperties: " + e.getMessage());
+				return null;
+			}
+		}
+		
+		public PhysicsBodyProperties setPhysicsBodyShape(PhysicsBodyShape physicsBodyShape) {
+			this.physicsBodyShape = physicsBodyShape;
+			return this;
+		}
 		
 		public PhysicsBodyProperties setType(BodyType type) {
 			this.type = type;
@@ -163,6 +204,11 @@ public abstract class PhysicsBodyCreator {
 			return this;
 		}
 		
+		public PhysicsBodyProperties setLinearDamping(float linearDamping) {
+			this.linearDamping = linearDamping;
+			return this;
+		}
+		
 		public PhysicsBodyProperties setWidth(float width) {
 			this.width = width;
 			return this;
@@ -187,5 +233,11 @@ public abstract class PhysicsBodyCreator {
 			this.collisionType = collisionType;
 			return this;
 		}
+	}
+	
+	public static enum PhysicsBodyShape {
+		CIRCLE, //
+		RECTANGLE, //
+		OCTAGON, //
 	}
 }

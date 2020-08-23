@@ -17,7 +17,7 @@ public class DwarfScrollerGame extends Game {
 	
 	public static final String ASSET_GROUP_MANAGER_CONFIG_PATH = "config/assets/asset_groups.json";
 	public static final String INPUT_PROFILE_CONFIG_PATH = "config/input/profile.xml";
-	public static final String SOUND_CONFIG_PATH = "sound/config.json";
+	public static final String SOUND_CONFIG_PATH = "config/sound/sound_sets.json";
 	public static final String FONT_CONFIG_PATH = "font/config.json";
 	
 	private static DwarfScrollerGame instance;

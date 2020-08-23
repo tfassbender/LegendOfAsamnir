@@ -175,12 +175,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
 				.setWidth(idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
 				.setHeight(idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
-				.setCollisionType(PhysicsCollisionType.PLAYER);
+				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
 		body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
 		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(PHYSICS_BODY_SENSOR_RADIUS)
 				.setCollisionType(PhysicsCollisionType.PLAYER_SENSOR);
 		PhysicsBodyCreator.addCircularFixture(sensorProperties);
-		body.setLinearDamping(10f);
 		body.setUserData(this);
 	}
 	

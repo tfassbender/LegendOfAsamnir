@@ -1,0 +1,20 @@
+{
+	bat: {
+		// textures and animtions
+		animations: {
+			idle: bat_fly,
+			move: bat_fly,
+			attack: bat_attack,
+			die: bat_die
+		},
+		animationsConfig: config/animation/enemy/bat.json
+		
+		// sounds
+		sounds: {
+			damage: flesh_hit_1
+		}
+		
+		// others
+		health: 5
+	}
+}

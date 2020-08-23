@@ -1,0 +1,4 @@
+{
+	enemyAtlas: packed/demo/demo.atlas, 
+	enemyTypesConfig: config/enemy/types.json
+}
