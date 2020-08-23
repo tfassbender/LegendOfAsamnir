@@ -95,6 +95,12 @@
 				metal_hit_2: {
 					path: "sound/object/metal_hit_2.wav",
 				}
+				rock_hit: {
+					path: "sound/enemy/rock_hit.wav",
+				}
+				rock_break: {
+					path: "sound/enemy/rock_break.wav",
+				}
 			}
 		}
 	}

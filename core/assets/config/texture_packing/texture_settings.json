@@ -2,9 +2,11 @@
 	levels: {
 		demo: {
 			outputDir: packed/demo, 
-			atlasName:  demo
+			atlasName:  demo,
 			textureDirs: [
-				// dwarf
+				//##############################################################
+				//### dwarf
+				//##############################################################
 				dwarf/dwarf_attack_right, 
 				dwarf/dwarf_attack_jump_right, 
 				dwarf/dwarf_die_right, 
@@ -13,9 +15,15 @@
 				dwarf/dwarf_jump_right, 
 				dwarf/dwarf_run_right, 
 				dwarf/dwarf_spin_right,
-				// items
+				
+				//##############################################################
+				//### items
+				//##############################################################
 				items,
-				// objects
+				
+				//##############################################################
+				//### objects
+				//##############################################################
 				objects/all,
 				objects/animated/barrel/hit,
 				objects/animated/barrel/break,
@@ -27,18 +35,37 @@
 				objects/animated/pot/break,
 				objects/animated/pot/hit,
 				objects/animated/signboard/break,
-				//enemies
+				
+				//##############################################################
+				//### enemies
+				//##############################################################
+				
+				// bat
 				enemy/bat/bat_attack,
 				enemy/bat/bat_die,
 				enemy/bat/bat_fly,
+				
+				// gladiator
+				enemy/gladiator/gladiator_attack,
+				enemy/gladiator/gladiator_damage,
+				enemy/gladiator/gladiator_die,
+				enemy/gladiator/gladiator_idle,
+				enemy/gladiator/gladiator_move,
+				
+				// mini_golem
+				enemy/mini_golem/mini_golem_attack,
+				enemy/mini_golem/mini_golem_damage,
+				enemy/mini_golem/mini_golem_die,
+				enemy/mini_golem/mini_golem_idle,
+				enemy/mini_golem/mini_golem_move,
 			]
 		},
 		menu: {
 			outputDir: packed/menu,
-			atlasName: menu
+			atlasName: menu,
 			textureDirs: [
 				menu/buttons,
-				menu,
+				menu
 			]
 		},
 	}

@@ -11,10 +11,50 @@
 		
 		// sounds
 		sounds: {
-			damage: flesh_hit_1
+			die: flesh_hit_1
 		}
 		
 		// others
 		health: 5
+	},
+	gladiator: {
+		// textures and animtions
+		animations: {
+			attack: gladiator_attack,
+			damage: gladiator_damage,
+			die: gladiator_die,
+			idle: gladiator_idle,
+			move: gladiator_move,
+		},
+		animationsConfig: config/animation/enemy/gladiator.json
+		
+		// sounds
+		sounds: {
+			damage: metal_hit_1
+			die: flesh_hit_1
+		}
+		
+		// others
+		health: 35
+	}
+	mini_golem: {
+		// textures and animtions
+		animations: {
+			attack: mini_golem_attack,
+			damage: mini_golem_damage,
+			die: mini_golem_die,
+			idle: mini_golem_idle,
+			move: mini_golem_move,
+		},
+		animationsConfig: config/animation/enemy/mini_golem.json
+		
+		// sounds
+		sounds: {
+			damage: rock_hit
+			die: rock_break
+		}
+		
+		// others
+		health: 15
 	}
 }

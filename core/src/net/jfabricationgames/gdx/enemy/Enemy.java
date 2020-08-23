@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.enemy.ai.ArtificalIntelligence;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
@@ -33,8 +34,8 @@ public abstract class Enemy implements Hittable {
 	protected MapProperties properties;
 	protected GameMap gameMap;
 	protected Body body;
-
-	private  PhysicsBodyProperties physicsBodyProperties;
+	
+	private PhysicsBodyProperties physicsBodyProperties;
 	
 	protected float health;
 	
@@ -57,7 +58,14 @@ public abstract class Enemy implements Hittable {
 	/**
 	 * Called from the factory to create a box2d physics body for this enemy.
 	 */
-	protected abstract void createPhysicsBody(World world, float f, float g);
+	public void createPhysicsBody(World world, float x, float y) {
+		PhysicsBodyProperties properties = definePhysicsBodyProperties();
+		properties.setX(x).setY(y);
+		body = PhysicsBodyCreator.createBody(world, properties);
+		body.setUserData(this);
+	}
+	
+	protected abstract PhysicsBodyProperties definePhysicsBodyProperties();
 	
 	protected PhysicsBodyProperties getDefaultPhysicsBodyProperties() {
 		return physicsBodyProperties.clone();

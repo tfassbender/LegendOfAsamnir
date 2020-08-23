@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.enemy.implementation.Bat;
+import net.jfabricationgames.gdx.enemy.implementation.Gladiator;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -59,6 +61,12 @@ public class EnemyFactory extends AbstractFactory {
 		switch (type) {
 			case "bat":
 				enemy = new Bat(typeConfig, properties);
+				break;
+			case "gladiator":
+				enemy = new Gladiator(typeConfig, properties);
+				break;
+			case "mini_golem":
+				enemy = new MiniGolem(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);
