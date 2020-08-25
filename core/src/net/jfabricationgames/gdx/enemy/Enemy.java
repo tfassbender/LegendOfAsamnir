@@ -11,7 +11,7 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attributes.Hittable;
-import net.jfabricationgames.gdx.enemy.ai.ArtificalIntelligence;
+import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -29,7 +29,7 @@ public abstract class Enemy implements Hittable {
 	protected EnemyTypeConfig typeConfig;
 	protected AnimationManager animationManager;
 	protected AnimationDirector<TextureRegion> animation;
-	protected ArtificalIntelligence ai;
+	protected ArtificialIntelligence ai;
 	
 	protected MapProperties properties;
 	protected GameMap gameMap;
