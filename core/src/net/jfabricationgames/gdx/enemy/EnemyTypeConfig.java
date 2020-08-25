@@ -10,6 +10,7 @@ public class EnemyTypeConfig {
 	public HashMap<String, String> sounds;
 	
 	public float health;
+	public float movingSpeed;
 	
 	//TODO more parameters
 }

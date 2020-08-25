@@ -1,30 +1,36 @@
 package net.jfabricationgames.gdx.character;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public interface PlayableCharacter {
-
+	
 	/**
 	 * Render the character.
 	 * 
-	 * @param delta The delta time since the last rendering step.
-	 * @param batch The {@link SpriteBatch} on which the character is drawn.
+	 * @param delta
+	 *        The delta time since the last rendering step.
+	 * @param batch
+	 *        The {@link SpriteBatch} on which the character is drawn.
 	 */
 	public void render(float delta, SpriteBatch batch);
 	
 	/**
 	 * Move the character.
 	 * 
-	 * @param x Movement in x direction (in world units).
-	 * @param y Movement in y direction (in world units).
+	 * @param x
+	 *        Movement in x direction (in world units).
+	 * @param y
+	 *        Movement in y direction (in world units).
 	 */
 	public void move(float x, float y);
 	
 	/**
 	 * Get the current moving speed of the character, depending on the current action and the "sprint" state.
 	 * 
-	 * @param sprint True if the character should sprint. False otherwise.
-	 * 
+	 * @param sprint
+	 *        True if the character should sprint. False otherwise.
+	 * 		
 	 * @return The current moving speed (per second) in world units.
 	 */
 	public float getMovingSpeed(boolean sprint);
@@ -32,12 +38,13 @@ public interface PlayableCharacter {
 	/**
 	 * Change the action of the character and return whether the change was possible.
 	 * 
-	 * @param action The new action to which the character shall change.
-	 * 
+	 * @param action
+	 *        The new action to which the character shall change.
+	 * 		
 	 * @return Returns true if the change was possible. False otherwise.
 	 */
 	public boolean changeAction(CharacterAction action);
-
+	
 	/**
 	 * Get the characters current action.
 	 * 
@@ -51,7 +58,7 @@ public interface PlayableCharacter {
 	 * @return The time in seconds.
 	 */
 	public float getTimeTillIdleAnimation();
-
+	
 	/**
 	 * Indicates whether the current animation is finished.
 	 * 
@@ -62,7 +69,8 @@ public interface PlayableCharacter {
 	/**
 	 * Reduce the endurance of the character (by the endurance costs per second * delta), because he is sprinting.
 	 * 
-	 * @param delta The delta time since the last rendering step.
+	 * @param delta
+	 *        The delta time since the last rendering step.
 	 */
 	public void reduceEnduranceForSprinting(float delta);
 	
@@ -72,4 +80,6 @@ public interface PlayableCharacter {
 	 * @return True if the character is exhausted. False otherwise.
 	 */
 	public boolean isExhausted();
+	
+	public Vector2 getPosition();
 }

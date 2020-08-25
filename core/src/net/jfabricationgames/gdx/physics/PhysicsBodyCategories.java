@@ -25,7 +25,7 @@ public abstract class PhysicsBodyCategories {
 	public static final short MASK_PLAYER_SENSOR = ~(CATEGORY_PLAYER | CATEGORY_PLAYER_ATTACK | CATEGORY_MAP_OBJECT);
 	public static final short MASK_PLAYER_ATTACK = CATEGORY_ENEMY | CATEGORY_OBSTACLE;
 	public static final short MASK_ENEMY = ~CATEGORY_ENEMY_ATTACK;
-	public static final short MASK_ENEMY_SENSOR = ~(CATEGORY_ENEMY_ATTACK | CATEGORY_MAP_OBJECT);
+	public static final short MASK_ENEMY_SENSOR = ~(CATEGORY_ENEMY_ATTACK | CATEGORY_PLAYER_SENSOR | CATEGORY_MAP_OBJECT);
 	public static final short MASK_ENEMY_ATTACK = CATEGORY_PLAYER;
 	public static final short MASK_ITEM = CATEGORY_PLAYER_SENSOR;
 	public static final short MASK_OBSTACLE = CATEGORY_PLAYER | CATEGORY_PLAYER_ATTACK | MASK_ENEMY;

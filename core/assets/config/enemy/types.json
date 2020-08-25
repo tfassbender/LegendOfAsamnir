@@ -7,7 +7,7 @@
 			attack: bat_attack,
 			die: bat_die
 		},
-		animationsConfig: config/animation/enemy/bat.json
+		animationsConfig: config/animation/enemy/bat.json,
 		
 		// sounds
 		sounds: {
@@ -15,7 +15,8 @@
 		}
 		
 		// others
-		health: 5
+		health: 5,
+		movingSpeed: 3
 	},
 	gladiator: {
 		// textures and animtions
@@ -26,16 +27,17 @@
 			idle: gladiator_idle,
 			move: gladiator_move,
 		},
-		animationsConfig: config/animation/enemy/gladiator.json
+		animationsConfig: config/animation/enemy/gladiator.json,
 		
 		// sounds
 		sounds: {
-			damage: metal_hit_1
+			damage: metal_hit_1,
 			die: flesh_hit_1
 		}
 		
 		// others
-		health: 35
+		health: 35,
+		movingSpeed: 1.5
 	}
 	mini_golem: {
 		// textures and animtions
@@ -46,15 +48,16 @@
 			idle: mini_golem_idle,
 			move: mini_golem_move,
 		},
-		animationsConfig: config/animation/enemy/mini_golem.json
+		animationsConfig: config/animation/enemy/mini_golem.json,
 		
 		// sounds
 		sounds: {
-			damage: rock_hit
+			damage: rock_hit,
 			die: rock_break
 		}
 		
 		// others
-		health: 15
+		health: 15,
+		movingSpeed: 0.75
 	}
 }

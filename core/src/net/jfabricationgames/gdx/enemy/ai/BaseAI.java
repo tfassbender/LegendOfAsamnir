@@ -1,7 +1,11 @@
 package net.jfabricationgames.gdx.enemy.ai;
 
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
 
@@ -14,6 +18,7 @@ public class BaseAI extends AbstractArtificialIntelligence implements Artificial
 	private ArrayMap<MoveType, AIMove> moves;
 	
 	public BaseAI() {
+		super(null);
 		moves = new ArrayMap<>();
 	}
 	
@@ -28,8 +33,23 @@ public class BaseAI extends AbstractArtificialIntelligence implements Artificial
 	}
 	
 	@Override
-	public void calculateMove() {}
+	public void calculateMove(float delta) {}
 	
 	@Override
 	public void executeMove() {}
+	
+	@Override
+	public void setEnemy(Enemy enemy) {}
+	
+	@Override
+	public void beginContact(Contact contact) {}
+	
+	@Override
+	public void endContact(Contact contact) {}
+	
+	@Override
+	public void preSolve(Contact contact, Manifold oldManifold) {}
+	
+	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {}
 }

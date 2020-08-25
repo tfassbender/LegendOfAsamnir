@@ -322,10 +322,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public void dispose() {
 		soundSet.dispose();
+		PhysicsWorld.getInstance().removeContactListener(this);
 	}
 	
 	public Vector2 getPosition() {
-		return body.getPosition();
+		return new Vector2(body.getPosition());
 	}
 	
 	public void setPosition(float x, float y) {
