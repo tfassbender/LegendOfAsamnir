@@ -2,11 +2,14 @@ package net.jfabricationgames.gdx.enemy.ai;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.physics.CollisionUtil;
+import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
 	
@@ -24,9 +27,14 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	 * The call is passed to the next subAI. The lowest AI in the subAI-list is a BaseAI, that overwrites this method and handles the request for all
 	 * decorating AIs.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public AIMove getMove(MoveType moveType) {
-		return subAI.getMove(moveType);
+	public <T extends AIMove> T getMove(MoveType moveType) {
+		return (T) subAI.getMove(moveType);
+	}
+	
+	protected boolean isExecutedByMe(AIMove move) {
+		return move != null && !move.isExecuted() && move.isCreatingAi(this);
 	}
 	
 	/**
@@ -40,6 +48,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		subAI.setMove(moveType, aiMove);
 	}
 	
+	@Override
 	public void setEnemy(Enemy enemy) {
 		this.enemy = enemy;
 		subAI.setEnemy(enemy);
@@ -67,5 +76,22 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	public void postSolve(Contact contact, ContactImpulse impulse) {
 		//delegate the event to the underlying AI where it might be handled
 		subAI.postSolve(contact, impulse);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected <T> T getObjectCollidingWithEnemySensor(Contact contact, Class<T> collidingType) {
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		
+		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB)) {
+			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
+			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
+			
+			// if the sensor touches a PlayableCharacter -> start following him
+			if (sensorUserData == enemy && collidingType.isAssignableFrom(sensorCollidingUserData.getClass())) {
+				return (T) sensorCollidingUserData;
+			}
+		}
+		return null;
 	}
 }

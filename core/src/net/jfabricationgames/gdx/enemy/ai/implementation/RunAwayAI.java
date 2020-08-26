@@ -1,16 +1,12 @@
 package net.jfabricationgames.gdx.enemy.ai.implementation;
 
 import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.enemy.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
 import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
-import net.jfabricationgames.gdx.physics.CollisionUtil;
-import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class RunAwayAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
 	
@@ -26,6 +22,7 @@ public class RunAwayAI extends AbstractArtificialIntelligence implements Artific
 	@Override
 	public void calculateMove(float delta) {
 		subAI.calculateMove(delta);
+		
 		if (player != null) {
 			float distanceToPlayer = enemy.getPosition().sub(player.getPosition()).len();
 			if (distanceToPlayer < distanceToKeepFromPlayer && distanceToPlayer > distanceToStopRunning) {
@@ -38,46 +35,33 @@ public class RunAwayAI extends AbstractArtificialIntelligence implements Artific
 	
 	@Override
 	public void executeMove() {
-		AIMove move = getMove(MoveType.MOVE);
-		if (move != null && !move.isExecuted() && move.isCreatingAi(this)) {
-			AIPositionChangingMove positionMove = (AIPositionChangingMove) move;
-			enemy.moveToDirection(positionMove.movementDirection);
+		AIPositionChangingMove move = getMove(MoveType.MOVE);
+		if (isExecutedByMe(move)) {
+			enemy.moveToDirection(move.movementDirection);
 			move.executed();
 		}
+		
 		subAI.executeMove();
 	}
 	
 	@Override
 	public void beginContact(Contact contact) {
-		Fixture fixtureA = contact.getFixtureA();
-		Fixture fixtureB = contact.getFixtureB();
-		
-		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB)) {
-			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
-			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
-			
-			// if the sensor touches a PlayableCharacter -> start following him
-			if (sensorUserData == enemy && sensorCollidingUserData instanceof PlayableCharacter) {
-				runFromPlayer((PlayableCharacter) sensorCollidingUserData);
-			}
+		PlayableCharacter collidingPlayer = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
+		// if the sensor touches a PlayableCharacter -> start following him
+		if (collidingPlayer != null) {
+			runFromPlayer(collidingPlayer);
 		}
+		
 		subAI.beginContact(contact);
 	}
 	
 	@Override
 	public void endContact(Contact contact) {
-		Fixture fixtureA = contact.getFixtureA();
-		Fixture fixtureB = contact.getFixtureB();
-		
-		// if the sensor looses touch of a PlayableCharacter -> stop following
-		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB)) {
-			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
-			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
-			
-			if (sensorUserData == enemy && sensorCollidingUserData instanceof PlayableCharacter) {
-				stopRunningPlayer();
-			}
+		PlayableCharacter collidingPlayer = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
+		if (collidingPlayer != null) {
+			stopRunningPlayer();
 		}
+		
 		subAI.endContact(contact);
 	}
 	
