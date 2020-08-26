@@ -6,7 +6,8 @@ import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
-import net.jfabricationgames.gdx.enemy.ai.implementation.FollowingAI;
+import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
+import net.jfabricationgames.gdx.enemy.ai.implementation.RunAwayAI;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
@@ -28,6 +29,6 @@ public class Bat extends Enemy {
 	
 	@Override
 	protected void createAI() {
-		ai = new FollowingAI(new BaseAI());
+		ai = new RunAwayAI(new FollowAI(new BaseAI()));
 	}
 }

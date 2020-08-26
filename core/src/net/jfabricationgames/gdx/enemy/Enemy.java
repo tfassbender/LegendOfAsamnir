@@ -118,12 +118,21 @@ public abstract class Enemy implements Hittable, ContactListener {
 		moveTo(new Vector2(x, y));
 	}
 	public void moveTo(Vector2 pos) {
-		Vector2 normalizedDirection = pos.sub(getPosition()).nor();
-		move(normalizedDirection.x * movingSpeed, normalizedDirection.y * movingSpeed);
+		Vector2 direction = pos.sub(getPosition()).nor().scl(movingSpeed);
+		move(direction);
 	}
-	private void move(float deltaX, float deltaY) {
+	
+	public void moveToDirection(float x, float y) {
+		moveToDirection(new Vector2(x, y));
+	}
+	public void moveToDirection(Vector2 pos) {
+		Vector2 direction = pos.nor().scl(movingSpeed);
+		move(direction);
+	}
+	
+	private void move(Vector2 delta) {
 		float force = 10f * body.getMass();
-		body.applyForceToCenter(deltaX * force, deltaY * force, true);
+		body.applyForceToCenter(delta.x * force, delta.y * force, true);
 	}
 	
 	public Vector2 getPosition() {

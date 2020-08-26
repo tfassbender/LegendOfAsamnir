@@ -6,31 +6,43 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.enemy.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
+import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
+import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-/**
- * An AI implementation that follows the player when he's in a range in which he's noticed by the enemy.
- */
-public class FollowingAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
+public class RunAwayAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
 	
-	private PlayableCharacter playerToFollow;
+	private PlayableCharacter player;
 	
-	public FollowingAI(ArtificialIntelligence subAI) {
+	private float distanceToKeepFromPlayer = 5f;
+	private float distanceToStopRunning = 2f;
+	
+	public RunAwayAI(ArtificialIntelligence subAI) {
 		super(subAI);
 	}
 	
 	@Override
 	public void calculateMove(float delta) {
 		subAI.calculateMove(delta);
-		//TODO calculate move
+		if (player != null) {
+			float distanceToPlayer = enemy.getPosition().sub(player.getPosition()).len();
+			if (distanceToPlayer < distanceToKeepFromPlayer && distanceToPlayer > distanceToStopRunning) {
+				AIPositionChangingMove move = new AIPositionChangingMove(this);
+				move.movementDirection = enemy.getPosition().sub(player.getPosition());
+				setMove(MoveType.MOVE, move);
+			}
+		}
 	}
 	
 	@Override
 	public void executeMove() {
-		//TODO check if the move is still planed and not overturned by a higher AI
-		if (playerToFollow != null) {
-			enemy.moveTo(playerToFollow.getPosition());
+		AIMove move = getMove(MoveType.MOVE);
+		if (move != null && !move.isExecuted() && move.isCreatingAi(this)) {
+			AIPositionChangingMove positionMove = (AIPositionChangingMove) move;
+			enemy.moveToDirection(positionMove.movementDirection);
+			move.executed();
 		}
 		subAI.executeMove();
 	}
@@ -46,8 +58,7 @@ public class FollowingAI extends AbstractArtificialIntelligence implements Artif
 			
 			// if the sensor touches a PlayableCharacter -> start following him
 			if (sensorUserData == enemy && sensorCollidingUserData instanceof PlayableCharacter) {
-				followPlayer((PlayableCharacter) sensorCollidingUserData);
-				return;
+				runFromPlayer((PlayableCharacter) sensorCollidingUserData);
 			}
 		}
 		subAI.beginContact(contact);
@@ -64,17 +75,17 @@ public class FollowingAI extends AbstractArtificialIntelligence implements Artif
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
 			
 			if (sensorUserData == enemy && sensorCollidingUserData instanceof PlayableCharacter) {
-				stopFollowingPlayer();
-				return;
+				stopRunningPlayer();
 			}
 		}
-		subAI.beginContact(contact);
+		subAI.endContact(contact);
 	}
 	
-	private void followPlayer(PlayableCharacter player) {
-		playerToFollow = player;
+	private void runFromPlayer(PlayableCharacter player) {
+		this.player = player;
 	}
-	private void stopFollowingPlayer() {
-		playerToFollow = null;
+	
+	private void stopRunningPlayer() {
+		player = null;
 	}
 }

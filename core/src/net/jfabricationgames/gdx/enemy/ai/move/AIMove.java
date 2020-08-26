@@ -22,7 +22,7 @@ public abstract class AIMove {
 	public boolean isExecuted() {
 		return executed;
 	}
-	public void setMoveExecuted() {
+	public void executed() {
 		executed = true;
 	}
 	
