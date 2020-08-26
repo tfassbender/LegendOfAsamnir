@@ -35,7 +35,7 @@ public class RunAwayAI extends AbstractArtificialIntelligence implements Artific
 	
 	@Override
 	public void executeMove() {
-		AIPositionChangingMove move = getMove(MoveType.MOVE);
+		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			enemy.moveToDirection(move.movementDirection);
 			move.executed();

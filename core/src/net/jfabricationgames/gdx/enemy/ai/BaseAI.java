@@ -22,9 +22,14 @@ public class BaseAI extends AbstractArtificialIntelligence implements Artificial
 		moves = new ArrayMap<>();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public AIMove getMove(MoveType moveType) {
-		return moves.get(moveType);
+	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz) {
+		AIMove move = moves.get(moveType);
+		if (move != null && move.getClass().isAssignableFrom(clazz)) {
+			return (T) move;
+		}
+		return null;
 	}
 	
 	@Override

@@ -35,7 +35,7 @@ public class FollowAI extends AbstractArtificialIntelligence implements Artifici
 	
 	@Override
 	public void executeMove() {
-		AIPositionChangingMove move = getMove(MoveType.MOVE);
+		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			enemy.moveTo(move.movementTarget);
 			move.executed();

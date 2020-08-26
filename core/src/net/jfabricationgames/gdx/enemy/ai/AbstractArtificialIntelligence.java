@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
+import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -26,11 +27,13 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	 * 
 	 * The call is passed to the next subAI. The lowest AI in the subAI-list is a BaseAI, that overwrites this method and handles the request for all
 	 * decorating AIs.
+	 * 
+	 * @param class1
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends AIMove> T getMove(MoveType moveType) {
-		return (T) subAI.getMove(moveType);
+	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz) {
+		return (T) subAI.getMove(moveType, clazz);
 	}
 	
 	protected boolean isExecutedByMe(AIMove move) {

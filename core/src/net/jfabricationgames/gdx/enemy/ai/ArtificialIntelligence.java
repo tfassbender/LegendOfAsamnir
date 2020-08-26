@@ -25,7 +25,7 @@ public interface ArtificialIntelligence extends ContactListener {
 	public void executeMove();
 	
 	public void setMove(MoveType moveType, AIMove aiMove);
-	public <T extends AIMove> T getMove(MoveType moveType);
+	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz);
 	
 	public void setEnemy(Enemy enemy);
 }

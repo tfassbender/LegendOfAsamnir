@@ -6,6 +6,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -27,6 +29,8 @@ import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
 public abstract class Enemy implements Hittable, ContactListener {
+	
+	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("enemy");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
@@ -69,6 +73,16 @@ public abstract class Enemy implements Hittable, ContactListener {
 	 * Create the {@link ArtificialIntelligence} that controls this enemy.
 	 */
 	protected abstract void createAI();
+	
+	@SuppressWarnings("unchecked")
+	protected Array<Vector2> loadPositionsFromMapProperties() {
+		String predefinedMovingPositions = properties.get(MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS, String.class);
+		if (predefinedMovingPositions != null) {
+			Json json = new Json();
+			return (Array<Vector2>) json.fromJson(Array.class, Vector2.class, predefinedMovingPositions);
+		}
+		return null;
+	}
 	
 	/**
 	 * Called from the factory to create a box2d physics body for this enemy.
@@ -118,7 +132,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		moveTo(new Vector2(x, y));
 	}
 	public void moveTo(Vector2 pos) {
-		Vector2 direction = pos.sub(getPosition()).nor().scl(movingSpeed);
+		Vector2 direction = pos.cpy().sub(getPosition()).nor().scl(movingSpeed);
 		move(direction);
 	}
 	
@@ -126,7 +140,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		moveToDirection(new Vector2(x, y));
 	}
 	public void moveToDirection(Vector2 pos) {
-		Vector2 direction = pos.nor().scl(movingSpeed);
+		Vector2 direction = pos.cpy().nor().scl(movingSpeed);
 		move(direction);
 	}
 	
