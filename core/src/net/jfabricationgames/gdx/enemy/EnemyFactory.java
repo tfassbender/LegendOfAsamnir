@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.enemy.implementation.Bat;
@@ -20,9 +19,6 @@ public class EnemyFactory extends AbstractFactory {
 	
 	private static final String configFile = "config/factory/enemy_factory.json";
 	private static Config config;
-	
-	private GameMap gameMap;
-	private World world;
 	
 	private Map<String, EnemyTypeConfig> typeConfigs;
 	

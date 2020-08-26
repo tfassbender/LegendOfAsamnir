@@ -5,9 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
@@ -19,11 +17,6 @@ public class ItemFactory extends AbstractFactory {
 	
 	private static final String configFile = "config/factory/item_factory.json";
 	private static Config config;
-	
-	private TextureAtlas atlas;
-	private World world;
-	
-	private GameMap gameMap;
 	
 	private Map<String, ItemTypeConfig> typeConfigs;
 	
@@ -53,10 +46,7 @@ public class ItemFactory extends AbstractFactory {
 					+ ". Either the type name is wrong or you have to add it to the itemTypesConfig (see \"" + configFile + "\")");
 		}
 		
-		Sprite sprite = new Sprite(atlas.findRegion(typeConfig.textureName));
-		sprite.setX(x * GameScreen.WORLD_TO_SCREEN - sprite.getWidth() * 0.5f);
-		sprite.setY(y * GameScreen.WORLD_TO_SCREEN - sprite.getHeight() * 0.5f);
-		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
+		Sprite sprite = createSprite(x, y, typeConfig.textureName);
 		
 		Item item = new Item(typeConfig, sprite, properties, gameMap);
 		item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
