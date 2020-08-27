@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
-import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -30,7 +29,6 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	 * 
 	 * @param class1
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz) {
 		return (T) subAI.getMove(moveType, clazz);

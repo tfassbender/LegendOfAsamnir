@@ -18,6 +18,8 @@ public class PreDefinedMovementAI extends AbstractArtificialIntelligence impleme
 	 */
 	private boolean updateAbsolutePositions;
 	
+	private boolean positionsDefined;
+	
 	private int targetPointIndex = 0;
 	
 	/** The distance that is needed to the target point to assume it is reached */
@@ -28,18 +30,20 @@ public class PreDefinedMovementAI extends AbstractArtificialIntelligence impleme
 	}
 	public PreDefinedMovementAI(ArtificialIntelligence subAI, boolean relativePositions, Array<Vector2> positions) {
 		super(subAI);
-		if (positions == null || positions.isEmpty()) {
-			throw new IllegalArgumentException("The parameter 'positions' must not be null or empty.");
-		}
+		positionsDefined = positions != null && !positions.isEmpty();
 		updateAbsolutePositions = relativePositions;
 		this.relativePositions = positions;
-		absolutePositions = new Array<>(positions);
+		if (positionsDefined) {
+			absolutePositions = new Array<>(positions);			
+		}
 	}
 	
 	public void updateAbsolutePositions(Vector2 relativeZero) {
-		absolutePositions.clear();
-		for (Vector2 relativePosition : relativePositions) {
-			absolutePositions.add(new Vector2(relativeZero).add(relativePosition));
+		if (positionsDefined) {
+			absolutePositions.clear();
+			for (Vector2 relativePosition : relativePositions) {
+				absolutePositions.add(new Vector2(relativeZero).add(relativePosition));
+			}
 		}
 	}
 	
@@ -47,30 +51,34 @@ public class PreDefinedMovementAI extends AbstractArtificialIntelligence impleme
 	public void calculateMove(float delta) {
 		subAI.calculateMove(delta);
 		
-		if (updateAbsolutePositions) {
-			updateAbsolutePositions(enemy.getPosition());
-			updateAbsolutePositions = false;
+		if (positionsDefined) {
+			if (updateAbsolutePositions) {
+				updateAbsolutePositions(enemy.getPosition());
+				updateAbsolutePositions = false;
+			}
+			
+			Vector2 targetPoint = absolutePositions.get(targetPointIndex);
+			AIPositionChangingMove move = new AIPositionChangingMove(this);
+			move.movementTarget = targetPoint;
+			setMove(MoveType.MOVE, move);
 		}
-		
-		Vector2 targetPoint = absolutePositions.get(targetPointIndex);
-		AIPositionChangingMove move = new AIPositionChangingMove(this);
-		move.movementTarget = targetPoint;
-		setMove(MoveType.MOVE, move);
 	}
 	
 	@Override
 	public void executeMove() {
-		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
-		if (isExecutedByMe(move)) {
-			Vector2 targetPoint = move.movementTarget;
-			if (reachedTargetPoint(targetPoint)) {
-				// next target point
-				targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
+		if (positionsDefined) {
+			AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
+			if (isExecutedByMe(move)) {
+				Vector2 targetPoint = move.movementTarget;
+				if (reachedTargetPoint(targetPoint)) {
+					// next target point
+					targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
+				}
+				else {
+					enemy.moveTo(targetPoint);
+				}
+				move.executed();
 			}
-			else {
-				enemy.moveTo(targetPoint);
-			}
-			move.executed();
 		}
 		
 		subAI.executeMove();

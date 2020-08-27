@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
-import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.PreDefinedMovementAI;
@@ -27,20 +26,12 @@ public class Gladiator extends Enemy {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 1.5f);
+		EnemyPhysicsUtil.addSensor(body, 4f);
 	}
 	
 	@Override
 	protected void createAI() {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
-		ArtificialIntelligence subAI;
-		if (positions != null && !positions.isEmpty()) {
-			subAI = new PreDefinedMovementAI(new BaseAI(), true, positions);
-		}
-		else {
-			subAI = new BaseAI();
-		}
-		
-		ai = new FollowAI(subAI);
+		ai = new FollowAI(new PreDefinedMovementAI(new BaseAI(), true, positions));
 	}
 }

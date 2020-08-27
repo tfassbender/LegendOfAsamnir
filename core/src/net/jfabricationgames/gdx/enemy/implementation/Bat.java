@@ -24,7 +24,7 @@ public class Bat extends Enemy {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 4f);
+		EnemyPhysicsUtil.addSensor(body, 6f);
 	}
 	
 	@Override

@@ -23,7 +23,7 @@ public class MiniGolem extends Enemy {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 2f);
+		EnemyPhysicsUtil.addSensor(body, 3f);
 	}
 	
 	@Override

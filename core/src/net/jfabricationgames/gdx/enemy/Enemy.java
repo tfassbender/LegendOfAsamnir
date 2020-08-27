@@ -129,10 +129,17 @@ public abstract class Enemy implements Hittable, ContactListener {
 	}
 	
 	public void moveTo(float x, float y) {
-		moveTo(new Vector2(x, y));
+		moveTo(new Vector2(x, y), false);
 	}
 	public void moveTo(Vector2 pos) {
-		Vector2 direction = pos.cpy().sub(getPosition()).nor().scl(movingSpeed);
+		moveTo(pos, false);
+	}
+	public void moveTo(Vector2 pos, boolean slowDown) {
+		Vector2 direction = pos.cpy().sub(getPosition());
+		if (!slowDown || direction.len() > movingSpeed) {
+			direction.nor().scl(movingSpeed);
+		}
+		
 		move(direction);
 	}
 	
@@ -180,14 +187,16 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	@Override
 	public void takeDamage(float damage) {
-		health -= damage;
-		
-		if (health <= 0) {
-			die();
-		}
-		else {
-			animation = getHitAnimation(damage);
-			playSound(EnemyState.DAMAGE);
+		if (health > 0) {
+			health -= damage;
+			
+			if (health <= 0) {
+				die();
+			}
+			else {
+				animation = getHitAnimation(damage);
+				playSound(EnemyState.DAMAGE);
+			}
 		}
 	}
 	
