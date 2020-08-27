@@ -3,20 +3,20 @@ package net.jfabricationgames.gdx.enemy.ai.implementation;
 import com.badlogic.gdx.physics.box2d.Contact;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
-import net.jfabricationgames.gdx.enemy.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
-public class RunAwayAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
+public class RunAwayAI extends AbstractMovementAI implements ArtificialIntelligence {
 	
 	private PlayableCharacter player;
 	
 	private float distanceToKeepFromPlayer = 5f;
 	private float distanceToStopRunning = 2f;
 	
-	public RunAwayAI(ArtificialIntelligence subAI) {
-		super(subAI);
+	public RunAwayAI(ArtificialIntelligence subAI, EnemyState movingState) {
+		super(subAI, movingState);
 	}
 	
 	@Override
@@ -37,8 +37,10 @@ public class RunAwayAI extends AbstractArtificialIntelligence implements Artific
 	public void executeMove() {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
-			enemy.moveToDirection(move.movementDirection);
-			move.executed();
+			if (inMovingState() || changeToMovingState()) {
+				enemy.moveToDirection(move.movementDirection);
+				move.executed();
+			}
 		}
 		
 		subAI.executeMove();

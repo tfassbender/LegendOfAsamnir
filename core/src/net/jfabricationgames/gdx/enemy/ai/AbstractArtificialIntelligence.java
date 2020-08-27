@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.ai.move.AIMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
@@ -16,6 +17,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	/** The next sub-AI in the decorator chain */
 	protected ArtificialIntelligence subAI;
 	protected Enemy enemy;
+	protected EnemyStateMachine stateMachine;
 	
 	public AbstractArtificialIntelligence(ArtificialIntelligence subAI) {
 		this.subAI = subAI;
@@ -52,6 +54,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	@Override
 	public void setEnemy(Enemy enemy) {
 		this.enemy = enemy;
+		this.stateMachine = enemy.getStateMachine();
 		subAI.setEnemy(enemy);
 	}
 	

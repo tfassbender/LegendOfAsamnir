@@ -3,23 +3,23 @@ package net.jfabricationgames.gdx.enemy.ai.implementation;
 import com.badlogic.gdx.physics.box2d.Contact;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
-import net.jfabricationgames.gdx.enemy.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
 /**
  * An AI implementation that follows the player when he's in a range in which he's noticed by the enemy.
  */
-public class FollowAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
+public class FollowAI extends AbstractMovementAI implements ArtificialIntelligence {
 	
 	private PlayableCharacter playerToFollow;
 	
 	/** The distance till which the enemy follows the player (to not push him if to near) */
 	private float distance = 1f;
 	
-	public FollowAI(ArtificialIntelligence subAI) {
-		super(subAI);
+	public FollowAI(ArtificialIntelligence subAI, EnemyState movingState) {
+		super(subAI, movingState);
 	}
 	
 	@Override
@@ -37,8 +37,10 @@ public class FollowAI extends AbstractArtificialIntelligence implements Artifici
 	public void executeMove() {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
-			enemy.moveTo(move.movementTarget);
-			move.executed();
+			if (inMovingState() || changeToMovingState()) {
+				enemy.moveTo(move.movementTarget);
+				move.executed();
+			}
 		}
 		
 		subAI.executeMove();

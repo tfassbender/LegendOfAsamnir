@@ -10,6 +10,7 @@ import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.PreDefinedMovementAI;
+import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
@@ -32,6 +33,10 @@ public class Gladiator extends Enemy {
 	@Override
 	protected void createAI() {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
-		ai = new FollowAI(new PreDefinedMovementAI(new BaseAI(), true, positions));
+		EnemyState movingState = stateMachine.getState("move");
+		
+		ai = new BaseAI();
+		ai = new PreDefinedMovementAI(ai, movingState, true, positions);
+		ai = new FollowAI(ai, movingState);
 	}
 }

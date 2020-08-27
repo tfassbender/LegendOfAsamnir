@@ -3,12 +3,12 @@ package net.jfabricationgames.gdx.enemy.ai.implementation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.enemy.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
-public class PreDefinedMovementAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
+public class PreDefinedMovementAI extends AbstractMovementAI implements ArtificialIntelligence {
 	
 	private Array<Vector2> relativePositions;
 	private Array<Vector2> absolutePositions;
@@ -25,16 +25,16 @@ public class PreDefinedMovementAI extends AbstractArtificialIntelligence impleme
 	/** The distance that is needed to the target point to assume it is reached */
 	private float distanceToReachTargetPoint = 0.1f;
 	
-	public PreDefinedMovementAI(ArtificialIntelligence subAI, boolean relativePositions, Vector2... positions) {
-		this(subAI, relativePositions, new Array<>(positions));
+	public PreDefinedMovementAI(ArtificialIntelligence subAI, EnemyState movingState, boolean relativePositions, Vector2... positions) {
+		this(subAI, movingState, relativePositions, new Array<>(positions));
 	}
-	public PreDefinedMovementAI(ArtificialIntelligence subAI, boolean relativePositions, Array<Vector2> positions) {
-		super(subAI);
+	public PreDefinedMovementAI(ArtificialIntelligence subAI, EnemyState movingState, boolean relativePositions, Array<Vector2> positions) {
+		super(subAI, movingState);
 		positionsDefined = positions != null && !positions.isEmpty();
 		updateAbsolutePositions = relativePositions;
 		this.relativePositions = positions;
 		if (positionsDefined) {
-			absolutePositions = new Array<>(positions);			
+			absolutePositions = new Array<>(positions);
 		}
 	}
 	
@@ -69,15 +69,17 @@ public class PreDefinedMovementAI extends AbstractArtificialIntelligence impleme
 		if (positionsDefined) {
 			AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 			if (isExecutedByMe(move)) {
-				Vector2 targetPoint = move.movementTarget;
-				if (reachedTargetPoint(targetPoint)) {
-					// next target point
-					targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
+				if (inMovingState() || changeToMovingState()) {
+					Vector2 targetPoint = move.movementTarget;
+					if (reachedTargetPoint(targetPoint)) {
+						// next target point
+						targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
+					}
+					else {
+						enemy.moveTo(targetPoint);
+					}
+					move.executed();
 				}
-				else {
-					enemy.moveTo(targetPoint);
-				}
-				move.executed();
 			}
 		}
 		

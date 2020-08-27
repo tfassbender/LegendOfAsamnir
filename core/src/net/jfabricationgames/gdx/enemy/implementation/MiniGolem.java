@@ -7,6 +7,7 @@ import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
+import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
@@ -28,6 +29,9 @@ public class MiniGolem extends Enemy {
 	
 	@Override
 	protected void createAI() {
-		ai = new FollowAI(new BaseAI());
+		EnemyState movingState = stateMachine.getState("move");
+		
+		ai = new BaseAI();
+		ai = new FollowAI(ai, movingState);
 	}
 }

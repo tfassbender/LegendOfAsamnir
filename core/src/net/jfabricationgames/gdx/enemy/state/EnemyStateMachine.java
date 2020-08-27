@@ -41,6 +41,9 @@ public class EnemyStateMachine {
 		//link the states
 		for (EnemyStateConfig config : stateConfig) {
 			EnemyState state = states.get(config.id);
+			
+			state.stateEnteringSound = config.soundOnEntering;
+			
 			if (config.followingState != null) {
 				EnemyState followingState = states.get(config.followingState);
 				if (followingState == null) {
@@ -77,7 +80,7 @@ public class EnemyStateMachine {
 	}
 	
 	public boolean setState(String id) {
-		return setState(getEnemyState(id));
+		return setState(getState(id));
 	}
 	public boolean setState(EnemyState state) {
 		if (currentState.interruptingStates.contains(state) || followsOnCurrentState(state)) {
@@ -93,7 +96,7 @@ public class EnemyStateMachine {
 		return currentState.endsWithAnimation && currentState.animation.isAnimationFinished() && currentState.followingState == state;
 	}
 	
-	public EnemyState getEnemyState(String id) {
+	public EnemyState getState(String id) {
 		return states.get(id);
 	}
 	

@@ -161,6 +161,10 @@ public abstract class Enemy implements Hittable, ContactListener {
 	public Vector2 getPosition() {
 		return new Vector2(body.getPosition());
 	}
+
+	public EnemyStateMachine getStateMachine() {
+		return stateMachine;
+	}
 	
 	@Override
 	public void takeDamage(float damage) {
