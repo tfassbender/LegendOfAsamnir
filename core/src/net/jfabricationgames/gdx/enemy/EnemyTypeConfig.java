@@ -1,16 +1,11 @@
 package net.jfabricationgames.gdx.enemy;
 
-import java.util.HashMap;
-
 public class EnemyTypeConfig {
 	
-	public HashMap<String, String> animations;
 	public String animationsConfig;//the animation config file that is to be loaded (by the factory)
-	
-	public HashMap<String, String> sounds;
+	public String stateConfig;//the state config file that is to be loaded (by the EnemyStateMachine)
+	public String initialState;
 	
 	public float health;
 	public float movingSpeed;
-	
-	//TODO more parameters
 }

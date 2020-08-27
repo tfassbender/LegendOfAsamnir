@@ -1,0 +1,46 @@
+[
+	{
+		id: idle,
+		animation: mini_golem_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, attack, damage, die
+		]
+	},
+	{
+		id: move,
+		animation: mini_golem_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, attack, damage, die
+		]
+	},
+	{
+		id: attack,
+		animation: mini_golem_attack,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: damage,
+		animation: mini_golem_damage,
+		endsWithAnimation: true,
+		soundOnEntering: rock_hit,
+		followingState: idle,
+		interruptingStates: [
+			attack, die
+		]
+	},
+	{
+		id: die,
+		animation: mini_golem_die,
+		endsWithAnimation: false,
+		soundOnEntering: rock_break,
+		interruptingStates: []
+	},
+]

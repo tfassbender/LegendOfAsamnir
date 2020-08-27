@@ -1,0 +1,46 @@
+[
+	{
+		id: idle,
+		animation: gladiator_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, attack, damage, die
+		]
+	},
+	{
+		id: move,
+		animation: gladiator_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, attack, damage, die
+		]
+	},
+	{
+		id: attack,
+		animation: gladiator_attack,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: damage,
+		animation: gladiator_damage,
+		endsWithAnimation: true,
+		soundOnEntering: metal_hit_1,
+		followingState: idle,
+		interruptingStates: [
+			attack, die
+		]
+	},
+	{
+		id: die,
+		animation: gladiator_die,
+		endsWithAnimation: false,
+		soundOnEntering: flesh_hit_1,
+		interruptingStates: []
+	},
+]

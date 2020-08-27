@@ -1,0 +1,28 @@
+[
+	//the bat has no idle state -> move in place as idle
+	{
+		id: move,
+		animation: bat_fly,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: [
+			attack, die
+		]
+	},
+	{
+		id: attack,
+		animation: bat_attack,
+		endsWithAnimation: true,
+		followingState: attack,
+		interruptingStates: [
+			die, move
+		]
+	},
+	{
+		id: die,
+		animation: bat_die,
+		endsWithAnimation: false,
+		soundOnEntering: flesh_hit_1,
+		interruptingStates: []
+	},
+]

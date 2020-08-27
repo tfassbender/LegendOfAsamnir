@@ -1,43 +1,40 @@
 package net.jfabricationgames.gdx.enemy;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
-import net.jfabricationgames.gdx.sound.SoundManager;
-import net.jfabricationgames.gdx.sound.SoundSet;
 
 public abstract class Enemy implements Hittable, ContactListener {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
-	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("enemy");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	
 	protected EnemyTypeConfig typeConfig;
-	protected AnimationManager animationManager;
-	protected AnimationDirector<TextureRegion> animation;
+	protected EnemyStateMachine stateMachine;
 	protected ArtificialIntelligence ai;
 	
 	protected MapProperties properties;
@@ -52,21 +49,23 @@ public abstract class Enemy implements Hittable, ContactListener {
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		this.typeConfig = typeConfig;
 		this.properties = properties;
-		animationManager = AnimationManager.getInstance();
 		physicsBodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false)
 				.setCollisionType(PhysicsCollisionType.ENEMY);
 		PhysicsWorld.getInstance().registerContactListener(this);
 		
 		readTypeConfig();
+		initializeStates();
 		createAI();
 		ai.setEnemy(this);
-		
-		animation = getAnimation(EnemyState.IDLE);
 	}
 	
 	protected void readTypeConfig() {
 		health = typeConfig.health;
 		movingSpeed = typeConfig.movingSpeed;
+	}
+	
+	private void initializeStates() {
+		stateMachine = new EnemyStateMachine(Gdx.files.internal(typeConfig.stateConfig), typeConfig.initialState);
 	}
 	
 	/**
@@ -103,14 +102,17 @@ public abstract class Enemy implements Hittable, ContactListener {
 		return physicsBodyProperties.clone();
 	}
 	
+	private AnimationDirector<TextureRegion> getAnimation() {
+		return stateMachine.getCurrentState().getAnimation();
+	}
+	
 	public void act(float delta) {
+		stateMachine.updateState();
+		
 		if (health < 0) {
-			if (animation == null || animation.isAnimationFinished()) {
+			if (getAnimation() == null || getAnimation().isAnimationFinished()) {
 				remove();
 			}
-		}
-		if (animation == null || animation.isAnimationFinished()) {
-			animation = getAnimation(EnemyState.IDLE);
 		}
 		
 		ai.calculateMove(delta);
@@ -118,9 +120,9 @@ public abstract class Enemy implements Hittable, ContactListener {
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
-		if (animation != null && !animation.isAnimationFinished()) {
-			animation.increaseStateTime(delta);
-			TextureRegion region = animation.getKeyFrame();
+		if (getAnimation() != null && !getAnimation().isAnimationFinished()) {
+			getAnimation().increaseStateTime(delta);
+			TextureRegion region = getAnimation().getKeyFrame();
 			float x = body.getPosition().x - region.getRegionWidth() * 0.5f;
 			float y = body.getPosition().y - region.getRegionHeight() * 0.5f;
 			batch.draw(region, x, y, region.getRegionWidth() * 0.5f, region.getRegionHeight() * 0.5f, region.getRegionWidth(),
@@ -160,31 +162,6 @@ public abstract class Enemy implements Hittable, ContactListener {
 		return new Vector2(body.getPosition());
 	}
 	
-	/**
-	 * Get the animation for the given state, that is defined in the animation config (see config/enemy/types).
-	 */
-	protected AnimationDirector<TextureRegion> getAnimation(EnemyState state) {
-		return getAnimation(state.name().toLowerCase());
-	}
-	protected AnimationDirector<TextureRegion> getAnimation(String animation) {
-		if (animation != null) {
-			return animationManager.getAnimationDirector(typeConfig.animations.get(animation));
-		}
-		return null;
-	}
-	
-	/**
-	 * Play the sound for the given state, that is defined in the sound config (see config/enemy/types).
-	 */
-	protected void playSound(EnemyState state) {
-		playSound(typeConfig.sounds.get(state.name().toLowerCase()));
-	}
-	protected void playSound(String sound) {
-		if (sound != null) {
-			soundSet.playSound(sound);
-		}
-	}
-	
 	@Override
 	public void takeDamage(float damage) {
 		if (health > 0) {
@@ -194,23 +171,27 @@ public abstract class Enemy implements Hittable, ContactListener {
 				die();
 			}
 			else {
-				animation = getHitAnimation(damage);
-				playSound(EnemyState.DAMAGE);
+				stateMachine.setState(getDamageStateName());
 			}
 		}
 	}
 	
+	/**
+	 * Returns the name of the state that shows the enemy taking damage. Override this method if the state is not named "damage".
+	 */
+	protected String getDamageStateName() {
+		return "damage";
+	}
+	
 	protected void die() {
-		animation = getAnimation(EnemyState.DIE);
-		playSound(EnemyState.DIE);
+		stateMachine.setState(getDieStateName());
 	}
 	
 	/**
-	 * Hit animations are special because they can be based on the damage an enemy takes.<br>
-	 * The default implementation will just return the EnemyState.DAMAGE animation.
+	 * Returns the name of the state that shows the enemy dying. Override this method if the state is not named "die".
 	 */
-	protected AnimationDirector<TextureRegion> getHitAnimation(float damage) {
-		return getAnimation(EnemyState.DAMAGE);
+	protected String getDieStateName() {
+		return "die";
 	}
 	
 	public void remove() {
