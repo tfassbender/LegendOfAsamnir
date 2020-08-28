@@ -1,8 +1,9 @@
 package net.jfabricationgames.gdx.animation;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class AnimationDirector<T> {
+public class AnimationDirector<T extends TextureRegion> {
 	
 	private float stateTime;
 	private Animation<T> animation;
@@ -61,5 +62,14 @@ public class AnimationDirector<T> {
 	
 	public boolean isAnimationFinished() {
 		return animation.isAnimationFinished(stateTime);
+	}
+	
+	/**
+	 * Flip all key frames of the animation.
+	 */
+	public void flip(boolean x, boolean y) {
+		for (TextureRegion region : animation.getKeyFrames()) {
+			region.flip(x, y);
+		}
 	}
 }

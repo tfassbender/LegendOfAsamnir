@@ -46,12 +46,15 @@ public abstract class Enemy implements Hittable, ContactListener {
 	protected float health;
 	protected float movingSpeed;
 	
+	protected Vector2 intendedMovement;
+	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		this.typeConfig = typeConfig;
 		this.properties = properties;
 		physicsBodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false)
 				.setCollisionType(PhysicsCollisionType.ENEMY);
 		PhysicsWorld.getInstance().registerContactListener(this);
+		intendedMovement = new Vector2();
 		
 		readTypeConfig();
 		initializeStates();
@@ -123,6 +126,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		if (getAnimation() != null && !getAnimation().isAnimationFinished()) {
 			getAnimation().increaseStateTime(delta);
 			TextureRegion region = getAnimation().getKeyFrame();
+			stateMachine.flipTextureToMovementDirection(region, intendedMovement);
 			float x = body.getPosition().x - region.getRegionWidth() * 0.5f;
 			float y = body.getPosition().y - region.getRegionHeight() * 0.5f;
 			batch.draw(region, x, y, region.getRegionWidth() * 0.5f, region.getRegionHeight() * 0.5f, region.getRegionWidth(),
@@ -154,6 +158,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	}
 	
 	private void move(Vector2 delta) {
+		intendedMovement = delta;
 		float force = 10f * body.getMass();
 		body.applyForceToCenter(delta.x * force, delta.y * force, true);
 	}
@@ -161,7 +166,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	public Vector2 getPosition() {
 		return new Vector2(body.getPosition());
 	}
-
+	
 	public EnemyStateMachine getStateMachine() {
 		return stateMachine;
 	}

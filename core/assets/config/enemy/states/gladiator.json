@@ -30,17 +30,21 @@
 		id: damage,
 		animation: gladiator_damage,
 		endsWithAnimation: true,
-		soundOnEntering: metal_hit_1,
+		stateEnteringSound: metal_hit_1,
 		followingState: idle,
 		interruptingStates: [
 			attack, die
-		]
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
 	},
 	{
 		id: die,
 		animation: gladiator_die,
 		endsWithAnimation: false,
-		soundOnEntering: flesh_hit_1,
-		interruptingStates: []
+		stateEnteringSound: flesh_hit_1,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
 	},
 ]

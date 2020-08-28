@@ -13,17 +13,17 @@ public class EnemyState {
 	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("enemy");
 	
 	protected AnimationDirector<TextureRegion> animation;
-	protected boolean endsWithAnimation;
-	protected String stateEnteringSound;
+	
+	protected EnemyStateConfig config;
 	
 	protected EnemyState followingState;
 	protected ObjectSet<EnemyState> interruptingStates;
 	
 	private Array<EnemyStateListener> stateListeners;
 	
-	public EnemyState(AnimationDirector<TextureRegion> animation, boolean endsWithAnimation) {
+	public EnemyState(AnimationDirector<TextureRegion> animation, EnemyStateConfig config) {
 		this.animation = animation;
-		this.endsWithAnimation = endsWithAnimation;
+		this.config = config;
 		stateListeners = new Array<>();
 	}
 	
@@ -44,17 +44,31 @@ public class EnemyState {
 		}
 	}
 	
-	public void enterState() {
+	public void enterState(EnemyState previousState) {
 		for (EnemyStateListener listener : stateListeners) {
 			listener.enteringState(this);
+		}
+		if (config.flipAnimationOnEnteringOnly) {
+			flipAnimationToMovementDirection(previousState);
 		}
 		animation.resetStateTime();
 		playSound();
 	}
 	
+	/**
+	 * Flip the whole animation into the right direction, according to the last image, that was drawn of the previous state.
+	 */
+	private void flipAnimationToMovementDirection(EnemyState previousState) {
+		boolean lastImageRight = previousState.config.initialAnimationDirectionRight && !previousState.animation.getKeyFrame().isFlipX();
+		boolean animationRight = config.initialAnimationDirectionRight != animation.getKeyFrame().isFlipX();
+		if (lastImageRight != animationRight) {
+			animation.flip(true, false);
+		}
+	}
+	
 	private void playSound() {
-		if (stateEnteringSound != null) {
-			soundSet.playSound(stateEnteringSound);
+		if (config.stateEnteringSound != null) {
+			soundSet.playSound(config.stateEnteringSound);
 		}
 	}
 }

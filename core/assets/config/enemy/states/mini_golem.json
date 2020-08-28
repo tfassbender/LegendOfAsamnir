@@ -30,17 +30,21 @@
 		id: damage,
 		animation: mini_golem_damage,
 		endsWithAnimation: true,
-		soundOnEntering: rock_hit,
+		stateEnteringSound: rock_hit,
 		followingState: idle,
 		interruptingStates: [
 			attack, die
-		]
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
 	},
 	{
 		id: die,
 		animation: mini_golem_die,
 		endsWithAnimation: false,
-		soundOnEntering: rock_break,
-		interruptingStates: []
+		stateEnteringSound: rock_break,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
 	},
 ]

@@ -1,6 +1,8 @@
 package net.jfabricationgames.gdx.enemy.state;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
@@ -9,6 +11,8 @@ import com.badlogic.gdx.utils.ObjectSet;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 
 public class EnemyStateMachine {
+	
+	public static final float ANGLE_FLIP_THRESHOLD_DEGREES = 10f;
 	
 	private AnimationManager animationManager;
 	
@@ -32,17 +36,20 @@ public class EnemyStateMachine {
 	private void loadStates(Array<EnemyStateConfig> stateConfig) {
 		states = new ArrayMap<>();
 		
-		//initialize all states
+		initializeStates(stateConfig);
+		linkStates(stateConfig);
+	}
+	
+	private void initializeStates(Array<EnemyStateConfig> stateConfig) {
 		for (EnemyStateConfig config : stateConfig) {
-			EnemyState state = new EnemyState(animationManager.getAnimationDirector(config.animation), config.endsWithAnimation);
+			EnemyState state = new EnemyState(animationManager.getAnimationDirector(config.animation), config);
 			states.put(config.id, state);
 		}
-		
-		//link the states
+	}
+	
+	private void linkStates(Array<EnemyStateConfig> stateConfig) {
 		for (EnemyStateConfig config : stateConfig) {
 			EnemyState state = states.get(config.id);
-			
-			state.stateEnteringSound = config.soundOnEntering;
 			
 			if (config.followingState != null) {
 				EnemyState followingState = states.get(config.followingState);
@@ -74,7 +81,7 @@ public class EnemyStateMachine {
 	 * Change states that end on the animations end (if the animation has ended).
 	 */
 	public void updateState() {
-		if (currentState.getAnimation().isAnimationFinished() && currentState.endsWithAnimation) {
+		if (currentState.getAnimation().isAnimationFinished() && currentState.config.endsWithAnimation) {
 			setState(currentState.followingState);
 		}
 	}
@@ -84,16 +91,42 @@ public class EnemyStateMachine {
 	}
 	public boolean setState(EnemyState state) {
 		if (currentState.interruptingStates.contains(state) || followsOnCurrentState(state)) {
-			currentState.leaveState();
+			EnemyState leavingState = currentState;
+			leavingState.leaveState();
 			currentState = state;
-			currentState.enterState();
+			currentState.enterState(leavingState);
 			return true;
 		}
 		return false;
 	}
 	
 	private boolean followsOnCurrentState(EnemyState state) {
-		return currentState.endsWithAnimation && currentState.animation.isAnimationFinished() && currentState.followingState == state;
+		return currentState.config.endsWithAnimation && currentState.animation.isAnimationFinished() && currentState.followingState == state;
+	}
+	
+	public void flipTextureToMovementDirection(TextureRegion region, Vector2 movingDirection) {
+		if (flipTextureToMovingDirection() && movingDirection.len2() > 1e-3) {
+			float angleDegrees = movingDirection.angle();
+			boolean flipToLeft = angleDegrees > 90 + ANGLE_FLIP_THRESHOLD_DEGREES && angleDegrees < 270 - ANGLE_FLIP_THRESHOLD_DEGREES;
+			boolean flipToRight = angleDegrees < 90 - ANGLE_FLIP_THRESHOLD_DEGREES || angleDegrees > 270 + ANGLE_FLIP_THRESHOLD_DEGREES;
+			if ((flipToLeft && isTextureRight(region)) || (flipToRight && isTextureLeft(region))) {
+				region.flip(true, false);
+			}
+		}
+	}
+	
+	private boolean flipTextureToMovingDirection() {
+		return currentState.config.flipAnimationToMovingDirection;
+	}
+	
+	private boolean isTextureRight(TextureRegion texture) {
+		//animationRight && !texture.flip || !animationRight && texture.flip
+		return currentState.config.initialAnimationDirectionRight != texture.isFlipX();
+	}
+	
+	private boolean isTextureLeft(TextureRegion texture) {
+		//animationRight && texture.flip || !animationRight && !texture.flip
+		return currentState.config.initialAnimationDirectionRight == texture.isFlipX();
 	}
 	
 	public EnemyState getState(String id) {

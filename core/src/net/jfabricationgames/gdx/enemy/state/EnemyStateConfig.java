@@ -6,10 +6,14 @@ public class EnemyStateConfig {
 	
 	public String id;
 	public String animation;
-	public String soundOnEntering;
+	public String stateEnteringSound;
 	
 	public boolean endsWithAnimation = true;
 	public String followingState;
 	
 	public Array<String> interruptingStates;
+	
+	public boolean flipAnimationToMovingDirection = true;
+	public boolean flipAnimationOnEnteringOnly = false;
+	public boolean initialAnimationDirectionRight = true;
 }

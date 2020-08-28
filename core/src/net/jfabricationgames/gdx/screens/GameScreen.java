@@ -133,11 +133,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		world.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		PhysicsWorld.getInstance().removeBodiesAndFixtures();
 		
-		moveCamera(delta);
 		map.render(delta);
 		renderDebugGraphics(delta);
 		renderGameGraphics(delta);
 		hud.render(delta);
+		moveCamera(delta);
 		moveCameraToPlayer();
 		
 		if (RENDER_DEBUG_GRAPHICS) {
