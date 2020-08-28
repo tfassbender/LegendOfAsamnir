@@ -15,8 +15,8 @@ public class RunAwayAI extends AbstractMovementAI implements ArtificialIntellige
 	private float distanceToKeepFromPlayer = 5f;
 	private float distanceToStopRunning = 2f;
 	
-	public RunAwayAI(ArtificialIntelligence subAI, EnemyState movingState) {
-		super(subAI, movingState);
+	public RunAwayAI(ArtificialIntelligence subAI, EnemyState movingState, EnemyState idleState) {
+		super(subAI, movingState, idleState);
 	}
 	
 	@Override

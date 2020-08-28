@@ -18,17 +18,19 @@ public class FollowAI extends AbstractMovementAI implements ArtificialIntelligen
 	/** The distance till which the enemy follows the player (to not push him if to near) */
 	private float distance = 1f;
 	
-	public FollowAI(ArtificialIntelligence subAI, EnemyState movingState) {
-		super(subAI, movingState);
+	public FollowAI(ArtificialIntelligence subAI, EnemyState movingState, EnemyState idleState) {
+		super(subAI, movingState, idleState);
 	}
 	
 	@Override
 	public void calculateMove(float delta) {
 		subAI.calculateMove(delta);
 		
-		if (playerToFollow != null && enemy.getPosition().sub(playerToFollow.getPosition()).len() > distance) {
+		if (playerToFollow != null) {
 			AIPositionChangingMove move = new AIPositionChangingMove(this);
-			move.movementTarget = playerToFollow.getPosition();
+			if (enemy.getPosition().sub(playerToFollow.getPosition()).len() > distance) {
+				move.movementTarget = playerToFollow.getPosition();
+			}
 			setMove(MoveType.MOVE, move);
 		}
 	}
@@ -37,9 +39,16 @@ public class FollowAI extends AbstractMovementAI implements ArtificialIntelligen
 	public void executeMove() {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
-			if (inMovingState() || changeToMovingState()) {
-				enemy.moveTo(move.movementTarget);
-				move.executed();
+			if (move.movementTarget != null) {
+				if (inMovingState() || changeToMovingState()) {
+					enemy.moveTo(move.movementTarget);
+					move.executed();
+				}
+			}
+			else {
+				if (inIdleState() || changeToIdleState()) {
+					move.executed();
+				}
 			}
 		}
 		

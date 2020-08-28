@@ -25,11 +25,13 @@ public class PreDefinedMovementAI extends AbstractMovementAI implements Artifici
 	/** The distance that is needed to the target point to assume it is reached */
 	private float distanceToReachTargetPoint = 0.1f;
 	
-	public PreDefinedMovementAI(ArtificialIntelligence subAI, EnemyState movingState, boolean relativePositions, Vector2... positions) {
-		this(subAI, movingState, relativePositions, new Array<>(positions));
+	public PreDefinedMovementAI(ArtificialIntelligence subAI, EnemyState movingState, EnemyState idleState, boolean relativePositions,
+			Vector2... positions) {
+		this(subAI, movingState, idleState, relativePositions, new Array<>(positions));
 	}
-	public PreDefinedMovementAI(ArtificialIntelligence subAI, EnemyState movingState, boolean relativePositions, Array<Vector2> positions) {
-		super(subAI, movingState);
+	public PreDefinedMovementAI(ArtificialIntelligence subAI, EnemyState movingState, EnemyState idleState, boolean relativePositions,
+			Array<Vector2> positions) {
+		super(subAI, movingState, idleState);
 		positionsDefined = positions != null && !positions.isEmpty();
 		updateAbsolutePositions = relativePositions;
 		this.relativePositions = positions;

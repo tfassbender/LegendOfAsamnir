@@ -34,9 +34,10 @@ public class Gladiator extends Enemy {
 	protected void createAI() {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
 		EnemyState movingState = stateMachine.getState("move");
+		EnemyState idleState = stateMachine.getState("idle");
 		
 		ai = new BaseAI();
-		ai = new PreDefinedMovementAI(ai, movingState, true, positions);
-		ai = new FollowAI(ai, movingState);
+		ai = new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
+		ai = new FollowAI(ai, movingState, idleState);
 	}
 }

@@ -30,8 +30,9 @@ public class MiniGolem extends Enemy {
 	@Override
 	protected void createAI() {
 		EnemyState movingState = stateMachine.getState("move");
+		EnemyState idleState = stateMachine.getState("idle");
 		
 		ai = new BaseAI();
-		ai = new FollowAI(ai, movingState);
+		ai = new FollowAI(ai, movingState, idleState);
 	}
 }

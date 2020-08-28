@@ -18,9 +18,11 @@ public class EnemyStateMachine {
 	
 	private EnemyState currentState;
 	private ArrayMap<String, EnemyState> states;
+	private String configFileName;
 	
 	public EnemyStateMachine(FileHandle stateConfig, String initialState) {
 		animationManager = AnimationManager.getInstance();
+		configFileName = stateConfig.name();
 		
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
@@ -130,7 +132,11 @@ public class EnemyStateMachine {
 	}
 	
 	public EnemyState getState(String id) {
-		return states.get(id);
+		EnemyState state = states.get(id);
+		if (state == null) {
+			throw new IllegalArgumentException("The state '" + id + "' doesn't exist in this config (config file is '" + configFileName + "')");
+		}
+		return state;
 	}
 	
 	public EnemyState getCurrentState() {

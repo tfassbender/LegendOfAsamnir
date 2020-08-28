@@ -31,8 +31,9 @@ public class Bat extends Enemy {
 	@Override
 	protected void createAI() {
 		EnemyState movingState = stateMachine.getState("move");
+		EnemyState idleState = movingState;
 		ai = new BaseAI();
-		ai = new FollowAI(ai, movingState);
-		ai = new RunAwayAI(ai, movingState);
+		ai = new FollowAI(ai, movingState, idleState);
+		ai = new RunAwayAI(ai, movingState, idleState);
 	}
 }
