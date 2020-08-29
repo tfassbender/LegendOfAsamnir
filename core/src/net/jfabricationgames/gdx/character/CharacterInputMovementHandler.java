@@ -14,7 +14,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_MOVE_RIGHT = "right";
 	private static final String INPUT_JUMP = "jump";
 	private static final String INPUT_ATTACK = "attack";
-	private static final String INPUT_ATTACK_JUMP = "attack_jump";
 	private static final String INPUT_SPRINT = "sprint";
 	
 	private PlayableCharacter inputCharacter;
@@ -25,7 +24,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean moveRight = false;
 	private boolean jump = false;
 	private boolean attack = false;
-	private boolean attackJump = false;
 	private boolean sprint = false;
 	private boolean changeSprint = false;
 	
@@ -52,9 +50,9 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
 		boolean characterActionSet = false;
 		
-		if (!characterActionSet && attackJump) {
+		if (!characterActionSet && attack) {
 			if (getAction().isInterruptable()) {
-				if (move) {
+				if (move && sprint) {
 					lastMoveDirection = getDirectionFromInputs();
 					jumpDirection = getDirectionFromInputs();
 					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
@@ -62,11 +60,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 				else {
 					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
 				}
-			}
-		}
-		if (!characterActionSet && attack) {
-			if (getAction().isInterruptable()) {
-				characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
 			}
 		}
 		if (!characterActionSet && jump) {
@@ -126,9 +119,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		if (inputContext.isStateActive(INPUT_ATTACK)) {
 			attack = true;
 		}
-		if (inputContext.isStateActive(INPUT_ATTACK_JUMP)) {
-			attackJump = true;
-		}
 		if (inputContext.isStateActive(INPUT_SPRINT)) {
 			if (!changeSprint) {
 				sprint = !sprint;				
@@ -156,7 +146,6 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		moveRight = false;
 		jump = false;
 		attack = false;
-		attackJump = false;
 		//sprint is not reset here, but in the handleInputs method (when idle)
 	}
 	

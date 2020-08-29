@@ -126,14 +126,6 @@
 					<axis code="4" threshold="-0.7" /><!-- right shoulder axis -->
 				</controller>
 			</state>
-			
-			<!-- attacking dwarf 2 -->
-			<state name="attack_jump">
-				<button code="Right" /><!-- left mouse button -->
-				<controller player="1">
-					<button code="1" />
-				</controller>
-			</state>
 		</states>
 		
 		<controllerAxes>

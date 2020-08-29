@@ -319,12 +319,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return endurance / maxEndurance;
 	}
 	
-	@Override
-	public void dispose() {
-		soundSet.dispose();
-		PhysicsWorld.getInstance().removeContactListener(this);
-	}
-	
 	public Vector2 getPosition() {
 		return new Vector2(body.getPosition());
 	}
@@ -395,5 +389,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
 		force *= 10f * body.getMass();
 		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
+	}
+	
+	@Override
+	public void dispose() {
+		soundSet.dispose();
+		PhysicsWorld.getInstance().removeContactListener(this);
 	}
 }
