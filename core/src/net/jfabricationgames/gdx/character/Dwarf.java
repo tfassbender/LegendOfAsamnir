@@ -352,7 +352,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			Object attackedUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_ATTACK, fixtureA, fixtureB);
 			
 			if (attackedUserData instanceof Hittable) {
-				((Hittable) attackedUserData).takeDamage(action.getDamage());
+				Hittable hittable = ((Hittable) attackedUserData);
+				hittable.takeDamage(action.getDamage());
+				hittable.pushByHit(getPosition(), 0);//enemies define the force themselves
 			}
 		}
 	}
@@ -386,5 +388,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		if (health <= 0) {
 			//TODO die
 		}
+	}
+	
+	@Override
+	public void pushByHit(Vector2 hitCenter, float force) {
+		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
+		force *= 10f * body.getMass();
+		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
 	}
 }

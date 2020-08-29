@@ -5,7 +5,10 @@
 		initialState: move,
 		
 		health: 5,
-		movingSpeed: 3
+		movingSpeed: 3,
+		
+		pushForceDamage: 50,
+		pushForceHit: 25
 	},
 	gladiator: {
 		animationsConfig: config/animation/enemy/gladiator.json,
@@ -14,6 +17,9 @@
 		
 		health: 35,
 		movingSpeed: 1.5
+		
+		pushForceDamage: 25,
+		pushForceHit: 40
 	}
 	mini_golem: {
 		animationsConfig: config/animation/enemy/mini_golem.json,
@@ -22,5 +28,8 @@
 		
 		health: 15,
 		movingSpeed: 0.75
+		
+		pushForceDamage: 35,
+		pushForceHit: 30
 	}
 }

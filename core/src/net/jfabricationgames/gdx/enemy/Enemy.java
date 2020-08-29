@@ -185,6 +185,14 @@ public abstract class Enemy implements Hittable, ContactListener {
 		}
 	}
 	
+	@Override
+	public void pushByHit(Vector2 hitCenter, float force) {
+		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
+		//enemies define the force to get pushed themselves
+		force = typeConfig.pushForceDamage * 10f * body.getMass();
+		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
+	}
+	
 	/**
 	 * Returns the name of the state that shows the enemy taking damage. Override this method if the state is not named "damage".
 	 */

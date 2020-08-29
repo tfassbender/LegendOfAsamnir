@@ -90,6 +90,11 @@ public class GameObject implements Hittable {
 		playHitSound();
 	}
 	
+	@Override
+	public void pushByHit(Vector2 hitCenter, float force) {
+		//objects don't get pushed by hits
+	}
+	
 	protected AnimationDirector<TextureRegion> getHitAnimation() {
 		return animationManager.getAnimationDirector(typeConfig.animationHit);
 	}
