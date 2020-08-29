@@ -320,7 +320,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	public Vector2 getPosition() {
-		return new Vector2(body.getPosition());
+		return body.getPosition().cpy();
 	}
 	
 	public void setPosition(float x, float y) {
@@ -348,7 +348,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			if (attackedUserData instanceof Hittable) {
 				Hittable hittable = ((Hittable) attackedUserData);
 				hittable.takeDamage(action.getDamage());
-				hittable.pushByHit(getPosition(), 0);//enemies define the force themselves
+				//enemies define the force themselves; the force parameter is a factor for this self defined force
+				hittable.pushByHit(getPosition(), 1f);
 			}
 		}
 	}

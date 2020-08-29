@@ -107,7 +107,7 @@ public class EnemyStateMachine {
 	}
 	
 	public void flipTextureToMovementDirection(TextureRegion region, Vector2 movingDirection) {
-		if (flipTextureToMovingDirection() && movingDirection.len2() > 1e-3) {
+		if (isFlipTextureToMovingDirection() && movingDirection.len2() > 1e-3) {
 			float angleDegrees = movingDirection.angle();
 			boolean flipToLeft = angleDegrees > 90 + ANGLE_FLIP_THRESHOLD_DEGREES && angleDegrees < 270 - ANGLE_FLIP_THRESHOLD_DEGREES;
 			boolean flipToRight = angleDegrees < 90 - ANGLE_FLIP_THRESHOLD_DEGREES || angleDegrees > 270 + ANGLE_FLIP_THRESHOLD_DEGREES;
@@ -117,7 +117,7 @@ public class EnemyStateMachine {
 		}
 	}
 	
-	private boolean flipTextureToMovingDirection() {
+	private boolean isFlipTextureToMovingDirection() {
 		return currentState.config.flipAnimationToMovingDirection;
 	}
 	

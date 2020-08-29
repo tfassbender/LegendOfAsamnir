@@ -188,8 +188,8 @@ public abstract class Enemy implements Hittable, ContactListener {
 	@Override
 	public void pushByHit(Vector2 hitCenter, float force) {
 		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
-		//enemies define the force to get pushed themselves
-		force = typeConfig.pushForceDamage * 10f * body.getMass();
+		//enemies define the force to get pushed themselves (the player's attack is multiplied to this self defined force as a factor)
+		force *= typeConfig.pushForceDamage * 10f * body.getMass();
 		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
 	}
 	

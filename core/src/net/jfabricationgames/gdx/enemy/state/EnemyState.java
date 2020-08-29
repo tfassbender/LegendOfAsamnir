@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.enemy.state;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
@@ -62,6 +63,15 @@ public class EnemyState {
 		boolean lastImageRight = previousState.config.initialAnimationDirectionRight && !previousState.animation.getKeyFrame().isFlipX();
 		boolean animationRight = config.initialAnimationDirectionRight != animation.getKeyFrame().isFlipX();
 		if (lastImageRight != animationRight) {
+			animation.flip(true, false);
+		}
+	}
+	
+	public void flipAnimationToDirection(Vector2 direction) {
+		float directionAngle = direction.angle();
+		boolean directionRight = directionAngle < 90 || directionAngle > 270;
+		boolean animationRight = config.initialAnimationDirectionRight != animation.getKeyFrame().isFlipX();
+		if (directionRight != animationRight) {
 			animation.flip(true, false);
 		}
 	}

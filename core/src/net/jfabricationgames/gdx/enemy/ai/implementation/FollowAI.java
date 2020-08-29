@@ -16,7 +16,7 @@ public class FollowAI extends AbstractMovementAI implements ArtificialIntelligen
 	private PlayableCharacter playerToFollow;
 	
 	/** The distance till which the enemy follows the player (to not push him if to near) */
-	private float distance = 1f;
+	private float minDistanceToPlayer = 1f;
 	
 	public FollowAI(ArtificialIntelligence subAI, EnemyState movingState, EnemyState idleState) {
 		super(subAI, movingState, idleState);
@@ -28,11 +28,15 @@ public class FollowAI extends AbstractMovementAI implements ArtificialIntelligen
 		
 		if (playerToFollow != null) {
 			AIPositionChangingMove move = new AIPositionChangingMove(this);
-			if (enemy.getPosition().sub(playerToFollow.getPosition()).len() > distance) {
+			if (distanceToPlayer() > minDistanceToPlayer) {
 				move.movementTarget = playerToFollow.getPosition();
 			}
 			setMove(MoveType.MOVE, move);
 		}
+	}
+	
+	private float distanceToPlayer() {
+		return enemy.getPosition().sub(playerToFollow.getPosition()).len();
 	}
 	
 	@Override
@@ -83,12 +87,8 @@ public class FollowAI extends AbstractMovementAI implements ArtificialIntelligen
 		playerToFollow = null;
 	}
 	
-	public float getDistance() {
-		return distance;
-	}
-	
-	public FollowAI setDistance(float distance) {
-		this.distance = distance;
+	public FollowAI setMinDistanceToPlayer(float distance) {
+		this.minDistanceToPlayer = distance;
 		return this;
 	}
 }
