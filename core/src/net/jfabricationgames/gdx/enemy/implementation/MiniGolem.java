@@ -36,6 +36,6 @@ public class MiniGolem extends Enemy {
 		
 		ai = new BaseAI();
 		ai = new FollowAI(ai, movingState, idleState);
-		ai = new FightAI(ai, attackState, 1f, 1.5f);
+		ai = new FightAI(ai, attackState, 1f, 1.25f);
 	}
 }

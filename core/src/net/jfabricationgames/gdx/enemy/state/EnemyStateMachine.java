@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.enemy.state;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.attack.AttackCreator;
 
 public class EnemyStateMachine {
 	
@@ -18,15 +20,21 @@ public class EnemyStateMachine {
 	
 	private EnemyState currentState;
 	private ArrayMap<String, EnemyState> states;
+	
+	private AttackCreator attackCreator;
+	
 	private String configFileName;
 	
-	public EnemyStateMachine(FileHandle stateConfig, String initialState) {
+	public EnemyStateMachine(String stateConfigFile, String initialState, AttackCreator attackCreator) {
+		this.attackCreator = attackCreator;
 		animationManager = AnimationManager.getInstance();
-		configFileName = stateConfig.name();
+		
+		FileHandle stateConfigFileHandle = Gdx.files.internal(stateConfigFile);
+		configFileName = stateConfigFileHandle.name();
 		
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
-		Array<EnemyStateConfig> config = json.fromJson(Array.class, EnemyStateConfig.class, stateConfig);
+		Array<EnemyStateConfig> config = json.fromJson(Array.class, EnemyStateConfig.class, stateConfigFileHandle);
 		loadStates(config);
 		
 		currentState = states.get(initialState);
@@ -44,7 +52,7 @@ public class EnemyStateMachine {
 	
 	private void initializeStates(Array<EnemyStateConfig> stateConfig) {
 		for (EnemyStateConfig config : stateConfig) {
-			EnemyState state = new EnemyState(animationManager.getAnimationDirector(config.animation), config);
+			EnemyState state = new EnemyState(animationManager.getAnimationDirector(config.animation), config, attackCreator);
 			states.put(config.id, state);
 		}
 	}

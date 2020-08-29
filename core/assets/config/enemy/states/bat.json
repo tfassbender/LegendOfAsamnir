@@ -12,6 +12,7 @@
 	{
 		id: attack,
 		animation: bat_attack,
+		attack: attack
 		endsWithAnimation: true,
 		followingState: move,
 		interruptingStates: [

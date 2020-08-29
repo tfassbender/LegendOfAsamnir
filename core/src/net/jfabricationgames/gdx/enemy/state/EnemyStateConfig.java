@@ -6,6 +6,7 @@ public class EnemyStateConfig {
 	
 	public String id;
 	public String animation;
+	public String attack;
 	public String stateEnteringSound;
 	
 	public boolean endsWithAnimation = true;

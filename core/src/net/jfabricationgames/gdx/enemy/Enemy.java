@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
@@ -17,6 +16,7 @@ import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
@@ -36,6 +36,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	protected EnemyTypeConfig typeConfig;
 	protected EnemyStateMachine stateMachine;
 	protected ArtificialIntelligence ai;
+	protected AttackCreator attackCreator;
 	
 	protected MapProperties properties;
 	protected GameMap gameMap;
@@ -57,6 +58,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		intendedMovement = new Vector2();
 		
 		readTypeConfig();
+		initializeAttackCreator();
 		initializeStates();
 		createAI();
 		ai.setEnemy(this);
@@ -67,8 +69,13 @@ public abstract class Enemy implements Hittable, ContactListener {
 		movingSpeed = typeConfig.movingSpeed;
 	}
 	
+	private void initializeAttackCreator() {
+		//the body is not yet created -> set a null body here and update it when it is created (see createPhysicsBody(...))
+		attackCreator = new AttackCreator(typeConfig.attackConfig, null, PhysicsCollisionType.ENEMY_ATTACK);
+	}
+	
 	private void initializeStates() {
-		stateMachine = new EnemyStateMachine(Gdx.files.internal(typeConfig.stateConfig), typeConfig.initialState);
+		stateMachine = new EnemyStateMachine(typeConfig.stateConfig, typeConfig.initialState, attackCreator);
 	}
 	
 	/**
@@ -95,6 +102,8 @@ public abstract class Enemy implements Hittable, ContactListener {
 		body = PhysicsBodyCreator.createBody(world, properties);
 		addAdditionalPhysicsParts();
 		body.setUserData(this);
+		//add the body to the attackCreator, because it needed to be initialized before the body was created
+		attackCreator.setBody(body);
 	}
 	
 	protected abstract PhysicsBodyProperties definePhysicsBodyProperties();
@@ -111,6 +120,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	public void act(float delta) {
 		stateMachine.updateState();
+		attackCreator.handleAttacks(delta);
 		
 		if (health < 0) {
 			if (getAnimation() == null || getAnimation().isAnimationFinished()) {
@@ -224,6 +234,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	@Override
 	public void beginContact(Contact contact) {
 		ai.beginContact(contact);
+		attackCreator.handleAttackDamage(contact);
 	}
 	
 	@Override

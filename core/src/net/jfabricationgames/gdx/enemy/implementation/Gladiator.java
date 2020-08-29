@@ -41,6 +41,6 @@ public class Gladiator extends Enemy {
 		ai = new BaseAI();
 		ai = new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
 		ai = new FollowAI(ai, movingState, idleState);
-		ai = new FightAI(ai, attackState, 1f, 1.5f);
+		ai = new FightAI(ai, attackState, 1f, 1.25f);
 	}
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
@@ -20,11 +21,16 @@ public class EnemyState {
 	protected EnemyState followingState;
 	protected ObjectSet<EnemyState> interruptingStates;
 	
+	protected AttackCreator attackCreator;
+	
 	private Array<EnemyStateListener> stateListeners;
 	
-	public EnemyState(AnimationDirector<TextureRegion> animation, EnemyStateConfig config) {
+	private Vector2 directionToTarget;
+	
+	public EnemyState(AnimationDirector<TextureRegion> animation, EnemyStateConfig config, AttackCreator attackCreator) {
 		this.animation = animation;
 		this.config = config;
+		this.attackCreator = attackCreator;
 		stateListeners = new Array<>();
 	}
 	
@@ -51,6 +57,13 @@ public class EnemyState {
 		}
 		if (config.flipAnimationOnEnteringOnly) {
 			flipAnimationToMovementDirection(previousState);
+		}
+		if (config.attack != null) {
+			if (directionToTarget == null) {
+				throw new IllegalStateException("The direction for the attack has not been set. "
+						+ "Use the setAttackDirection(Vector2) method to set the direction BEFORE changing to this state.");
+			}
+			attackCreator.startAttack(config.attack, directionToTarget);
 		}
 		animation.resetStateTime();
 		playSound();
@@ -80,5 +93,12 @@ public class EnemyState {
 		if (config.stateEnteringSound != null) {
 			soundSet.playSound(config.stateEnteringSound);
 		}
+	}
+	
+	/**
+	 * Set the direction to the target (BEFORE changing to this state), to creating an attack, that aims in the correct direction
+	 */
+	public void setAttackDirection(Vector2 directionToTarget) {
+		this.directionToTarget = directionToTarget;
 	}
 }

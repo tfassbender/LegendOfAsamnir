@@ -3,6 +3,7 @@
 		animationsConfig: config/animation/enemy/bat.json,
 		stateConfig: config/enemy/states/bat.json,
 		initialState: move,
+		attackConfig: config/enemy/attack/bat.json,
 		
 		health: 5,
 		movingSpeed: 3,
@@ -14,6 +15,7 @@
 		animationsConfig: config/animation/enemy/gladiator.json,
 		stateConfig: config/enemy/states/gladiator.json,
 		initialState: idle,
+		attackConfig: config/enemy/attack/gladiator.json,
 		
 		health: 35,
 		movingSpeed: 1.5
@@ -25,6 +27,7 @@
 		animationsConfig: config/animation/enemy/mini_golem.json,
 		stateConfig: config/enemy/states/mini_golem.json,
 		initialState: idle,
+		attackConfig: config/enemy/attack/mini_golem.json
 		
 		health: 15,
 		movingSpeed: 0.75

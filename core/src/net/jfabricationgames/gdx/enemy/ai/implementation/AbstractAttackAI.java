@@ -28,6 +28,7 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 	
 	protected boolean changeToAttackState() {
 		if (timeTillLastAttack >= timeBetweenAttacks) {
+			attackState.setAttackDirection(directionToTarget());
 			boolean changedState = stateMachine.setState(attackState);
 			if (changedState) {
 				timeTillLastAttack = 0;

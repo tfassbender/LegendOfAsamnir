@@ -20,6 +20,7 @@
 	{
 		id: attack,
 		animation: gladiator_attack,
+		attack: attack
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
