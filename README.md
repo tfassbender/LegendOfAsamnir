@@ -74,6 +74,10 @@ These AI's will cause the following behaviour for the Gladiator:
 - The [FollowAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/FollowAI.java) will make the gladiator follow the player if he is in range (and detected by the enemies box2d sensor). This AI is positioned higher as the PreDefinedMovementAI in the chain of responsibility. Therefore the gladiator will priorize following the player higher than moving along his pre-defined way.
 - The [FightAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/FightAI.java) will make the gladiator attack the player if he is near enough.
 
+The following image shows the call hierarchy of the AI classes:
+
+![AI call hierarchie](core/data/documentation/ai_call_hierarchie.png)
+
 ### States
 
 An enemy can be in different states, which can be interrupted by other states, or changed to other states when the state ends. Therefore the enemy states are designed as a (kind of) [state pattern](https://en.wikipedia.org/wiki/State_pattern). These states of the enemy and the transitions between the states can be configured in json configuration files. An example of a state configuration file for the gladiator is the [gladiator.json](https://github.com/tfassbender/DwarfScrollerGDX/blob/master/core/assets/config/enemy/states/gladiator.json) file. It defines a list of states, that are identified by their id. The states may define the following attributes:
