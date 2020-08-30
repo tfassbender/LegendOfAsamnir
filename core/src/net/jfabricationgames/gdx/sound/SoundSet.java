@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -55,7 +56,7 @@ public class SoundSet implements Disposable {
 	
 	protected SoundSet load() {
 		if (!loaded) {
-			for (com.badlogic.gdx.utils.ObjectMap.Entry<String, String> soundFile : soundFiles.entries()) {
+			for (ObjectMap.Entry<String, String> soundFile : soundFiles.entries()) {
 				Sound sound = Gdx.audio.newSound(Gdx.files.internal(soundFile.value));
 				sounds.put(soundFile.key, sound);
 			}
