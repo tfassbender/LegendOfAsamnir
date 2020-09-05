@@ -388,15 +388,15 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private void collectItem(Item item) {
 		if (item.containsProperty(ItemPropertyKeys.HEALTH.getPropertyName())) {
-			int itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Integer.class);
+			float itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Float.class);
 			increaseHealth = itemHealth;
 		}
 		if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
-			int itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Integer.class);
+			float itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Float.class);
 			increaseMana = itemMana;
 		}
 		if (item.containsProperty(ItemPropertyKeys.ARMOR.getPropertyName())) {
-			int itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Integer.class);
+			float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
 			increaseArmor = itemArmor;
 		}
 		//TODO other item types

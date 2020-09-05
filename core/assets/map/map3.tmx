@@ -19,15 +19,9 @@
    <point/>
   </object>
   <object id="3" name="item.coin" x="912" y="465.333">
-   <properties>
-    <property name="value" type="int" value="10"/>
-   </properties>
    <point/>
   </object>
   <object id="4" name="item.health" x="338.667" y="722">
-   <properties>
-    <property name="health" type="int" value="20"/>
-   </properties>
    <point/>
   </object>
   <object id="25" name="label.text_1" x="480" y="544" width="32" height="32"/>
@@ -143,21 +137,12 @@
    <point/>
   </object>
   <object id="92" name="item.shield" x="432" y="719.333">
-   <properties>
-    <property name="armor" type="int" value="15"/>
-   </properties>
    <point/>
   </object>
   <object id="94" name="item.shield" x="680.667" y="794">
-   <properties>
-    <property name="armor" type="int" value="15"/>
-   </properties>
    <point/>
   </object>
   <object id="93" name="item.shield" x="684.667" y="438.667">
-   <properties>
-    <property name="armor" type="int" value="15"/>
-   </properties>
    <point/>
   </object>
  </objectgroup>

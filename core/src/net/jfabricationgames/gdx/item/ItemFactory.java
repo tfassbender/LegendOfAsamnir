@@ -1,11 +1,10 @@
 package net.jfabricationgames.gdx.item;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
@@ -18,7 +17,8 @@ public class ItemFactory extends AbstractFactory {
 	private static final String configFile = "config/factory/item_factory.json";
 	private static Config config;
 	
-	private Map<String, ItemTypeConfig> typeConfigs;
+	private ObjectMap<String, ItemTypeConfig> typeConfigs;
+	private ObjectMap<String, ObjectMap<String, Object>> defaultValues;
 	
 	public ItemFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
@@ -28,19 +28,25 @@ public class ItemFactory extends AbstractFactory {
 		}
 		
 		loadTypeConfigs();
+		loadDefaultValues();
 		
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		atlas = assetManager.get(config.itemAtlas);
 		world = PhysicsWorld.getInstance().getWorld();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(HashMap.class, ItemTypeConfig.class, Gdx.files.internal(config.itemTypeConfig));
+		typeConfigs = json.fromJson(ObjectMap.class, ItemTypeConfig.class, Gdx.files.internal(config.itemTypeConfig));
 		Item.defaultTypeConfig = typeConfigs.get("__default");
 		if (Item.defaultTypeConfig == null) {
 			Gdx.app.error(getClass().getSimpleName(), "No default type config for items found. Add a type '__default' to 'config/items/types.json'.");
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void loadDefaultValues() {
+		defaultValues = json.fromJson(ObjectMap.class, ObjectMap.class, Gdx.files.internal(config.defaultValuesConfig));
 	}
 	
 	public Item createItem(String name, float x, float y, MapProperties properties) {
@@ -52,15 +58,27 @@ public class ItemFactory extends AbstractFactory {
 		
 		Sprite sprite = createSprite(x, y, typeConfig.textureName);
 		
+		addDefaultProperties(name, properties);
 		Item item = new Item(typeConfig, sprite, properties, gameMap);
 		item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return item;
 	}
 	
+	private void addDefaultProperties(String name, MapProperties properties) {
+		if (defaultValues.containsKey(name)) {
+			for (Entry<String, Object> entry : defaultValues.get(name).entries()) {
+				if (!properties.containsKey(entry.key)) {
+					properties.put(entry.key, entry.value);
+				}
+			}			
+		}
+	}
+
 	public static class Config {
 		
 		public String itemAtlas;
 		public String itemTypeConfig;
+		public String defaultValuesConfig;
 	}
 }

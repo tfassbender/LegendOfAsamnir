@@ -1,0 +1,14 @@
+{
+	health: {
+		health: 20
+	},
+	health_big: {
+		health: 35
+	},
+	coin: {
+		value: 10
+	},
+	shield: {
+		armor: 15
+	}
+}

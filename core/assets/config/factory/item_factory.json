@@ -1,4 +1,5 @@
 {
-	itemAtlas: packed/demo/demo.atlas
-	itemTypeConfig: config/items/types.json
+	itemAtlas: packed/demo/demo.atlas,
+	itemTypeConfig: config/items/types.json,
+	defaultValuesConfig: config/items/default_values.json 
 }
