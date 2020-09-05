@@ -2,7 +2,8 @@ package net.jfabricationgames.gdx.character;
 
 public enum CharacterAction {
 	
-	NONE("", null, 0f, false, true, false, 0f),// just stay still
+	NONE("", null, 0f, false, true, false, 0f), // just stay still
+	BLOCK("", null, 0f, false, false, true, 0f), // hold a shield to block attacks
 	IDLE("dwarf_idle_", null, 0f, true, true, false, 0f), // staying still for some time
 	RUN("dwarf_run_", null, 0f, true, true, false, 0f), // running in any direction
 	JUMP("dwarf_jump_", "jump", 10f, true, false, true, 0f), // jumping with or without direction
@@ -10,7 +11,8 @@ public enum CharacterAction {
 	ATTACK_JUMP("dwarf_attack_jump_", "hit2", 20f, true, false, true, 15.01f), // attack while running
 	ATTACK_SPIN("dwarf_spin_", "hit", 10f, true, false, true, 5.01f), // spin attack
 	HIT("dwarf_hit_", "damage", 0f, true, false, false, 0f), // dwarf got hit
-	DIE("dwarf_die_", "damage", 0f, true, false, true, 0f); // dwarf died
+	DIE("dwarf_die_", "damage", 0f, true, false, true, 0f), // dwarf died
+	SHIELD_HIT("dwarf_shield_hit_", "shield_damage", 0f, true, false, true, 0f); // dwarf holding a shield (and gets hit)
 	
 	private final String animationPrefix;
 	private final String sound;

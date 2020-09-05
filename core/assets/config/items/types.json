@@ -22,5 +22,8 @@
 	coin: {
 		textureName: coin,
 		pickUpSoundName: coin,
+	},
+	shield: {
+		textureName: shield,
 	}
 }

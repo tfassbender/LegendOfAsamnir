@@ -11,6 +11,7 @@
 				dwarf/dwarf_attack_jump_right, 
 				dwarf/dwarf_die_right, 
 				dwarf/dwarf_hit_right, 
+				dwarf/dwarf_shield_hit_right,
 				dwarf/dwarf_idle_right, 
 				dwarf/dwarf_jump_right, 
 				dwarf/dwarf_run_right, 

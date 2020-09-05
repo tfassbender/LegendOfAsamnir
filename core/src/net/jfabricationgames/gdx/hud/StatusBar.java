@@ -10,11 +10,14 @@ import com.badlogic.gdx.utils.Disposable;
 public class StatusBar implements Disposable {
 	
 	private final float healthBarHeightPercent = 0.55f;
+	private final float armorBarHeightPercent = 0.25f;//takes a part of the health bar
 	private final float manaBarHeightPercent = 0.3f;
 	private final Vector2 size = new Vector2(-400, -80); //negative values because it's drawn from the top right
 	private final Vector2 healthBarUpperRightOffset = new Vector2(-10f, -10f);
 	private final Vector2 healthBarSize = new Vector2(size.x - healthBarUpperRightOffset.x * 2,
 			(size.y - (healthBarUpperRightOffset.y * 4)) * healthBarHeightPercent);
+	private final Vector2 armorBarUpperRightOffset = new Vector2(-10f, -10f + healthBarSize.y * (1f - armorBarHeightPercent));
+	private final Vector2 armorBarSize = new Vector2(healthBarSize.x, healthBarSize.y * armorBarHeightPercent);
 	private final Vector2 manaBarUpperRightOffset = new Vector2(-10f, -10f + healthBarUpperRightOffset.y + healthBarSize.y);
 	private final Vector2 manaBarSize = new Vector2(size.x - manaBarUpperRightOffset.x * 2,
 			(size.y - (healthBarUpperRightOffset.y * 4)) * manaBarHeightPercent);
@@ -57,6 +60,13 @@ public class StatusBar implements Disposable {
 			new Color(0.05f, 0.05f, 0.05f, 1f) //bottom-right
 	};
 	
+	private final Color[] armorBarColors = new Color[] {//
+			Color.LIGHT_GRAY, //top-right
+			new Color(0.7f, 0.7f, 0.8f, 1f), //top-left
+			Color.GRAY, //bottom-left
+			Color.DARK_GRAY, //bottom-right
+	};
+	
 	private final Color[] manaBarColors = new Color[] {//
 			new Color(0f, 0f, 0.85f, 1f), //top-right
 			Color.BLUE, //top-left
@@ -81,6 +91,7 @@ public class StatusBar implements Disposable {
 	private float health;
 	private float mana;
 	private float endurance;
+	private float armor;
 	
 	public StatusBar(HeadsUpDisplay hud) {
 		this.character = hud.getCharacter();
@@ -104,10 +115,11 @@ public class StatusBar implements Disposable {
 		health = character.getHealth();
 		mana = character.getMana();
 		endurance = character.getEndurance();
+		armor = character.getArmor();
 	}
 	
 	private void chooseHealthBarColors() {
-		if (health > 0.6) {
+		if (health > 0.4) {
 			healthBarColors = healthBarColorsHigh;
 		}
 		else if (health > 0.2) {
@@ -122,21 +134,27 @@ public class StatusBar implements Disposable {
 		shapeRenderer.rect(tileUpperRight.x, tileUpperRight.y, size.x, size.y, backgroundTileColors[0], backgroundTileColors[1],
 				backgroundTileColors[2], backgroundTileColors[3]);
 		
-		//health bar
+		//bar backgrounds
 		shapeRenderer.rect(tileUpperRight.x + healthBarUpperRightOffset.x, tileUpperRight.y + healthBarUpperRightOffset.y, healthBarSize.x,
 				healthBarSize.y, barBackgroundColors[0], barBackgroundColors[1], barBackgroundColors[2], barBackgroundColors[3]);
+		shapeRenderer.rect(tileUpperRight.x + manaBarUpperRightOffset.x, tileUpperRight.y + manaBarUpperRightOffset.y, manaBarSize.x, manaBarSize.y,
+				barBackgroundColors[0], barBackgroundColors[1], barBackgroundColors[2], barBackgroundColors[3]);
+		shapeRenderer.rect(tileUpperRight.x + enduranceBarUpperRightOffset.x, tileUpperRight.y + enduranceBarUpperRightOffset.y, enduranceBarSize.x,
+				enduranceBarSize.y, barBackgroundColors[0], barBackgroundColors[1], barBackgroundColors[2], barBackgroundColors[3]);
+		
+		//health bar
 		shapeRenderer.rect(tileUpperRight.x + healthBarUpperRightOffset.x, tileUpperRight.y + healthBarUpperRightOffset.y, healthBarSize.x * health,
 				healthBarSize.y, healthBarColors[0], healthBarColors[1], healthBarColors[2], healthBarColors[3]);
 		
+		//armor bar
+		shapeRenderer.rect(tileUpperRight.x + armorBarUpperRightOffset.x, tileUpperRight.y + armorBarUpperRightOffset.y, armorBarSize.x * armor,
+				armorBarSize.y, armorBarColors[0], armorBarColors[1], armorBarColors[2], armorBarColors[3]);
+		
 		//mana bar
-		shapeRenderer.rect(tileUpperRight.x + manaBarUpperRightOffset.x, tileUpperRight.y + manaBarUpperRightOffset.y, manaBarSize.x, manaBarSize.y,
-				barBackgroundColors[0], barBackgroundColors[1], barBackgroundColors[2], barBackgroundColors[3]);
 		shapeRenderer.rect(tileUpperRight.x + manaBarUpperRightOffset.x, tileUpperRight.y + manaBarUpperRightOffset.y, manaBarSize.x * mana,
 				manaBarSize.y, manaBarColors[0], manaBarColors[1], manaBarColors[2], manaBarColors[3]);
 		
 		//endurance bar
-		shapeRenderer.rect(tileUpperRight.x + enduranceBarUpperRightOffset.x, tileUpperRight.y + enduranceBarUpperRightOffset.y, enduranceBarSize.x,
-				enduranceBarSize.y, barBackgroundColors[0], barBackgroundColors[1], barBackgroundColors[2], barBackgroundColors[3]);
 		shapeRenderer.rect(tileUpperRight.x + enduranceBarUpperRightOffset.x, tileUpperRight.y + enduranceBarUpperRightOffset.y,
 				enduranceBarSize.x * endurance, enduranceBarSize.y, enduranceBarColors[0], enduranceBarColors[1], enduranceBarColors[2],
 				enduranceBarColors[3]);

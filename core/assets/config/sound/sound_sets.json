@@ -19,7 +19,7 @@
 					path: "sound/dwarf/damage.wav",
 					volume: 0.3
 				},
-				shield: {
+				shield_damage: {
 					path: "sound/object/metal_hit_1.wav"
 					volume: 0.9
 				}

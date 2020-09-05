@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="92">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="95">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
@@ -142,8 +142,26 @@
   <object id="91" name="enemy.mini_golem" x="448" y="320">
    <point/>
   </object>
+  <object id="92" name="item.shield" x="432" y="719.333">
+   <properties>
+    <property name="armor" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="94" name="item.shield" x="680.667" y="794">
+   <properties>
+    <property name="armor" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="93" name="item.shield" x="684.667" y="438.667">
+   <properties>
+    <property name="armor" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="4" name="physics">
+ <objectgroup id="4" name="physics" locked="1">
   <properties>
    <property name="material" value="water"/>
   </properties>

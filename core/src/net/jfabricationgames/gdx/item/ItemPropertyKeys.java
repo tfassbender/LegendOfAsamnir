@@ -4,7 +4,8 @@ public enum ItemPropertyKeys {
 	
 	HEALTH("health"), //
 	MANA("mana"), //
-	VALUE("value"); //
+	VALUE("value"), // 
+	ARMOR("armor"); //
 	
 	private final String propertyName;
 	

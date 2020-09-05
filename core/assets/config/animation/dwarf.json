@@ -26,6 +26,12 @@
 			playMode: NORMAL
 		},
 		{
+			name: dwarf_shield_hit_right,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
+		{
 			name: dwarf_idle_right,
 			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,

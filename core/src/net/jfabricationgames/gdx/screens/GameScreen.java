@@ -100,6 +100,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		
 		//take some damage to test the items (only for demo)
 		dwarf.takeDamage(50f);
+		dwarf.takeArmorDamage(60f);
 		
 		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
 		

@@ -15,6 +15,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_JUMP = "jump";
 	private static final String INPUT_ATTACK = "attack";
 	private static final String INPUT_SPRINT = "sprint";
+	private static final String INPUT_BLOCK = "block";
 	
 	private PlayableCharacter inputCharacter;
 	
@@ -25,6 +26,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean jump = false;
 	private boolean attack = false;
 	private boolean sprint = false;
+	private boolean block = false;
 	private boolean changeSprint = false;
 	
 	private float idleTime;
@@ -60,6 +62,11 @@ public class CharacterInputMovementHandler implements InputActionListener {
 				else {
 					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
 				}
+			}
+		}
+		if (!characterActionSet && block) {
+			if (getAction().isInterruptable()) {
+				characterActionSet = inputCharacter.changeAction(CharacterAction.BLOCK);
 			}
 		}
 		if (!characterActionSet && jump) {
@@ -119,6 +126,9 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		if (inputContext.isStateActive(INPUT_ATTACK)) {
 			attack = true;
 		}
+		if (inputContext.isStateActive(INPUT_BLOCK)) {
+			block = true;
+		}
 		if (inputContext.isStateActive(INPUT_SPRINT)) {
 			if (!changeSprint) {
 				sprint = !sprint;				
@@ -146,6 +156,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		moveRight = false;
 		jump = false;
 		attack = false;
+		block = false;
 		//sprint is not reset here, but in the handleInputs method (when idle)
 	}
 	
@@ -236,6 +247,14 @@ public class CharacterInputMovementHandler implements InputActionListener {
 				speedX = movingSpeed;
 			}
 			move(speedX, speedY, delta);
+		}
+		else if (getAction() == CharacterAction.BLOCK) {
+			if (moveLeft) {
+				lastMoveDirection = MovingDirection.LEFT;
+			}
+			if (moveRight) {
+				lastMoveDirection = MovingDirection.RIGHT;
+			}
 		}
 	}
 	

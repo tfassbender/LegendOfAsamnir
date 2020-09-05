@@ -76,10 +76,16 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private float enduranceChargeIdle = 15f;
 	private float enduranceCostsSprint = 15f;
 	
+	private float armor = 100f;
+	private float maxArmor = 100f;
+	private float increaseArmor = 0f;
+	private final float armorIncreasePerSecond = 25f;
+	
 	private CharacterInputMovementHandler movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
 	private Sprite idleDwarfSprite;
+	private Sprite blockSprite;
 	
 	private SoundSet soundSet;
 	
@@ -90,6 +96,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		action = CharacterAction.NONE;
 		
 		idleDwarfSprite = getIdleSprite();
+		blockSprite = getShieldSprite();
 		animation = getAnimation();
 		
 		createBody();
@@ -102,31 +109,37 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private Sprite getIdleSprite() {
 		return new Sprite(getAnimation(CharacterAction.IDLE).getAnimation().getKeyFrame(0));
 	}
+	private Sprite getShieldSprite() {
+		return new Sprite(getAnimation(CharacterAction.SHIELD_HIT).getAnimation().getKeyFrame(0));
+	}
 	
 	public boolean changeAction(CharacterAction action) {
-		if (endurance >= action.getEnduranceCosts()) {
-			this.action = action;
-			this.animation = getAnimation();
-			this.animation.resetStateTime();
-			
-			endurance = Math.max(0, endurance - action.getEnduranceCosts());
-			
-			playSound(action);
-			
-			if (CharacterAction.isAttack(action)) {
-				addHitFixture();
-			}
-			else {
-				removeHitFixture();
-			}
-			
-			return true;
+		if (endurance < action.getEnduranceCosts()) {
+			return false;
 		}
-		return false;
+		if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && armor <= 0) {
+			return false;
+		}
+		this.action = action;
+		this.animation = getAnimation();
+		this.animation.resetStateTime();
+		
+		endurance = Math.max(0, endurance - action.getEnduranceCosts());
+		
+		playSound(action);
+		
+		if (CharacterAction.isAttack(action)) {
+			addHitFixture();
+		}
+		else {
+			removeHitFixture();
+		}
+		
+		return true;
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
-		if (action != CharacterAction.NONE) {
+		if (action != CharacterAction.NONE && action != CharacterAction.BLOCK) {
 			return getAnimation(action);
 		}
 		else {
@@ -143,12 +156,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private void playSound(CharacterAction action) {
 		if (action.getSound() != null) {
 			soundSet.playSound(action.getSound());
-		}
-	}
-	
-	private void playSound(String sound) {
-		if (sound != null) {
-			soundSet.playSound(sound);
 		}
 	}
 	
@@ -226,6 +233,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			increaseEndurance -= increaseStep;
 			endurance = Math.min(endurance + increaseStep, maxEndurance);
 		}
+		if (increaseArmor > 0f) {
+			float increaseStep = Math.min(delta * armorIncreasePerSecond, increaseArmor);
+			increaseArmor -= increaseStep;
+			armor = Math.min(armor + increaseStep, maxArmor);
+		}
 	}
 	private float getEnduranceCharge() {
 		if (action == CharacterAction.NONE || action == CharacterAction.IDLE) {
@@ -237,7 +249,16 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	private void drawDwarf(SpriteBatch batch) {
-		TextureRegion frame = action != CharacterAction.NONE ? animation.getKeyFrame() : idleDwarfSprite;
+		TextureRegion frame;
+		if (action == CharacterAction.NONE) {
+			frame = idleDwarfSprite;
+		}
+		else if (action == CharacterAction.BLOCK) {
+			frame = blockSprite;
+		}
+		else {
+			frame = animation.getKeyFrame();
+		}
 		
 		if (movementHandler.isDrawDirectionRight() == frame.isFlipX()) {
 			frame.flip(true, false);
@@ -325,6 +346,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return endurance / maxEndurance;
 	}
 	
+	@Override
+	public float getArmor() {
+		return armor / maxArmor;
+	}
+	
 	public Vector2 getPosition() {
 		return body.getPosition().cpy();
 	}
@@ -367,7 +393,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
 			int itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Integer.class);
-			mana = Math.min(mana + itemMana, maxMana);
+			increaseMana = itemMana;
+		}
+		if (item.containsProperty(ItemPropertyKeys.ARMOR.getPropertyName())) {
+			int itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Integer.class);
+			increaseArmor = itemArmor;
 		}
 		//TODO other item types
 		
@@ -385,6 +415,10 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void takeDamage(float damage) {
+		if (isBlocking()) {
+			takeArmorDamage(damage * 0.5f);
+			damage *= 0.1f;
+		}
 		health -= damage;
 		if (health <= 0) {
 			health = 0;
@@ -392,15 +426,32 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			//TODO play death sound
 		}
 		else {
-			playSound("damage");
+			if (isBlocking()) {
+				changeAction(CharacterAction.SHIELD_HIT);
+			}
+			else {
+				changeAction(CharacterAction.HIT);
+			}
 		}
+	}
+	
+	public void takeArmorDamage(float damage) {
+		armor = Math.max(armor - damage, 0);
 	}
 	
 	@Override
 	public void pushByHit(Vector2 hitCenter, float force) {
 		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
 		force *= 10f * body.getMass();
+		if (isBlocking()) {
+			force *= 0.33;
+		}
+		
 		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
+	}
+	
+	private boolean isBlocking() {
+		return action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT;
 	}
 	
 	@Override
