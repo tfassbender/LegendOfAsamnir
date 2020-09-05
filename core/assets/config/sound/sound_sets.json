@@ -17,7 +17,11 @@
 				},
 				damage: {
 					path: "sound/dwarf/damage.wav",
-					volume: 1
+					volume: 0.3
+				},
+				shield: {
+					path: "sound/object/metal_hit_1.wav"
+					volume: 0.9
 				}
 			}
 		},
@@ -48,6 +52,17 @@
 				mana: {
 					path: "sound/item/mana.wav",
 				}
+				coin: {
+					path: "sound/item/coin.wav",
+					volume: 0.35
+				}
+				pickup: {
+					path: "sound/item/pickup.wav",
+					volume: 0.4
+				}
+				sell_buy_item: {
+					path: "sound/item/sell_buy_item.wav",
+				} 
 			}
 		},
 		object: {
@@ -78,6 +93,10 @@
 				},
 				glass_break: {
 					path: "sound/object/glass_break_1.wav",
+				},
+				switch: {
+					path: "sound/object/switch.mp3",
+					volume: 0.75
 				}
 			}
 		},
@@ -94,13 +113,28 @@
 				},
 				metal_hit_2: {
 					path: "sound/object/metal_hit_2.wav",
-				}
+				},
 				rock_hit: {
 					path: "sound/enemy/rock_hit.wav",
-				}
+				},
 				rock_break: {
 					path: "sound/enemy/rock_break.wav",
-				}
+				},
+				//attack sounds
+				attack_gladiator: {
+					path: "sound/enemy/attack/gladiator.wav",
+					volume: 0.4,
+					delay: 0.1
+				},
+				attack_bat: {
+					path: "sound/enemy/attack/bat.wav",
+					volume: 0.3
+				},
+				attack_mini_golem: {
+					path: "sound/enemy/attack/mini_golem.wav",
+					volume: 0.2,
+					delay: 0.4
+				},
 			}
 		}
 	}

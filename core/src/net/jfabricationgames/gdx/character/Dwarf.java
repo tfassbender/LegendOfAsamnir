@@ -146,6 +146,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 	}
 	
+	private void playSound(String sound) {
+		if (sound != null) {
+			soundSet.playSound(sound);
+		}
+	}
+	
 	private void addHitFixture() {
 		PhysicsBodyProperties properties = new PhysicsBodyProperties().setBody(body).setSensor(true)
 				.setCollisionType(PhysicsCollisionType.PLAYER_ATTACK).setRadius(getSpriteWidth() * PHYSICS_BODY_HIT_FIXTURE_RADIUS_FACTOR)
@@ -381,7 +387,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public void takeDamage(float damage) {
 		health -= damage;
 		if (health <= 0) {
+			health = 0;
 			//TODO die
+			//TODO play death sound
+		}
+		else {
+			playSound("damage");
 		}
 	}
 	

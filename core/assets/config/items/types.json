@@ -4,6 +4,10 @@
 //		physicsObjectRadius: ,
 //		pickUpSoundName: ,
 //	}
+	__default: {
+		//default fallbacks
+		pickUpSoundName: pickup
+	}
 	health: {
 		textureName: health,
 		pickUpSoundName: health_small,
@@ -17,5 +21,6 @@
 	},
 	coin: {
 		textureName: coin,
+		pickUpSoundName: coin,
 	}
 }

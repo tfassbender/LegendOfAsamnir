@@ -20,6 +20,7 @@
 	{
 		id: attack,
 		animation: gladiator_attack,
+		stateEnteringSound: attack_gladiator,
 		attack: attack
 		endsWithAnimation: true,
 		followingState: idle,
@@ -31,7 +32,7 @@
 		id: damage,
 		animation: gladiator_damage,
 		endsWithAnimation: true,
-		stateEnteringSound: metal_hit_1,
+		stateEnteringSound: metal_hit_2,
 		followingState: idle,
 		interruptingStates: [
 			attack, die

@@ -37,6 +37,10 @@ public class ItemFactory extends AbstractFactory {
 	@SuppressWarnings("unchecked")
 	private void loadTypeConfigs() {
 		typeConfigs = json.fromJson(HashMap.class, ItemTypeConfig.class, Gdx.files.internal(config.itemTypeConfig));
+		Item.defaultTypeConfig = typeConfigs.get("__default");
+		if (Item.defaultTypeConfig == null) {
+			Gdx.app.error(getClass().getSimpleName(), "No default type config for items found. Add a type '__default' to 'config/items/types.json'.");
+		}
 	}
 	
 	public Item createItem(String name, float x, float y, MapProperties properties) {

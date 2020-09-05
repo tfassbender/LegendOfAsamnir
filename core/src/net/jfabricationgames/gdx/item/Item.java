@@ -19,6 +19,8 @@ public class Item {
 	
 	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
+	protected static ItemTypeConfig defaultTypeConfig;
+	
 	private Sprite sprite;
 	private MapProperties properties;
 	private Body body;
@@ -38,6 +40,9 @@ public class Item {
 	
 	protected void readTypeConfig() {
 		pickUpSoundName = typeConfig.pickUpSoundName;
+		if (pickUpSoundName == null && defaultTypeConfig != null) {
+			pickUpSoundName = defaultTypeConfig.pickUpSoundName;
+		}
 	}
 	
 	protected void createPhysicsBody(World world, float x, float y) {
