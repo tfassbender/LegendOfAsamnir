@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
+import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
@@ -43,17 +44,14 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final float PHYSICS_BODY_SENSOR_RADIUS = 0.6f;
 	private static final Vector2 PHYSICS_BODY_POSITION_OFFSET = new Vector2(0f, -0.15f);
 	
-	private static final float PHYSICS_BODY_HIT_FIXTURE_RADIUS_FACTOR = 0.4f; //radius is calculated as width * factor
-	private static final float PHYSICS_BODY_HIT_FIXTURE_POSITION_OFFSET_FACTOR = 0.4f; //offset (in the given direction) is [width/height] * factor
-	
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
+	private static final String attackConfigFileName = "config/dwarf/attacks.json";
 	private static final String soundSetKey = "dwarf";
 	
 	private AnimationManager assetManager;
 	
 	private Body body;
-	
-	private Fixture hitFixture;
+	private AttackCreator attackCreator;
 	
 	private CharacterAction action;
 	
@@ -99,11 +97,29 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		blockSprite = getShieldSprite();
 		animation = getAnimation();
 		
-		createBody();
+		createPhysicsBody();
+		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
 		
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
 		
 		movementHandler = new CharacterInputMovementHandler(this);
+	}
+	
+	private void createPhysicsBody() {
+		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
+		World world = physicsWorld.getWorld();
+		physicsWorld.registerContactListener(this);
+		
+		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
+				.setWidth(idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
+				.setHeight(idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
+				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
+		body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
+		body.setSleepingAllowed(false);
+		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(PHYSICS_BODY_SENSOR_RADIUS)
+				.setCollisionType(PhysicsCollisionType.PLAYER_SENSOR);
+		PhysicsBodyCreator.addCircularFixture(sensorProperties);
+		body.setUserData(this);
 	}
 	
 	private Sprite getIdleSprite() {
@@ -128,11 +144,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		
 		playSound(action);
 		
-		if (CharacterAction.isAttack(action)) {
-			addHitFixture();
-		}
-		else {
-			removeHitFixture();
+		if (action.isAttack()) {
+			attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
 		}
 		
 		return true;
@@ -159,46 +172,10 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 	}
 	
-	private void addHitFixture() {
-		PhysicsBodyProperties properties = new PhysicsBodyProperties().setBody(body).setSensor(true)
-				.setCollisionType(PhysicsCollisionType.PLAYER_ATTACK).setRadius(getSpriteWidth() * PHYSICS_BODY_HIT_FIXTURE_RADIUS_FACTOR)
-				.setFixturePosition(getHitFixturePosition());
-		hitFixture = PhysicsBodyCreator.addCircularFixture(properties);
-	}
-	private Vector2 getHitFixturePosition() {
-		return movementHandler.getMovingDirection().getNormalizedDirectionVector()
-				.scl(PHYSICS_BODY_HIT_FIXTURE_POSITION_OFFSET_FACTOR * getSpriteWidth());
-	}
-	
-	private float getSpriteWidth() {
-		return idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN;
-	}
-	
-	private void removeHitFixture() {
-		if (hitFixture != null) {
-			PhysicsWorld.getInstance().removeFixture(hitFixture, body);
-		}
-	}
-	
-	private void createBody() {
-		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
-		World world = physicsWorld.getWorld();
-		physicsWorld.registerContactListener(this);
-		
-		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
-				.setWidth(idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
-				.setHeight(idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
-				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
-		body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
-		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(PHYSICS_BODY_SENSOR_RADIUS)
-				.setCollisionType(PhysicsCollisionType.PLAYER_SENSOR);
-		PhysicsBodyCreator.addCircularFixture(sensorProperties);
-		body.setUserData(this);
-	}
-	
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
 		updateStats(delta);
+		attackCreator.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);

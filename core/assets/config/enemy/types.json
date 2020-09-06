@@ -5,7 +5,7 @@
 		initialState: move,
 		attackConfig: config/enemy/attack/bat.json,
 		
-		health: 5,
+		health: 1,
 		movingSpeed: 3,
 		
 		pushForceDamage: 50,

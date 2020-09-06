@@ -1,0 +1,29 @@
+[
+	{
+		id: attack,
+		delay: 0,
+		duration: 0,
+		damage: 10,
+		distFromCenter: 0.4,
+		hitFixtureRadius: 0.5,
+		pushForce: 1
+	}
+	{
+		id: jump_attack,
+		delay: 0.3,
+		duration: 0,
+		damage: 15,
+		distFromCenter: 0.4,
+		hitFixtureRadius: 0.5,
+		pushForce: 1
+	}
+	{
+		id: spin_attack,
+		delay: 0.1,
+		duration: 0,
+		damage: 5,
+		distFromCenter: 0,
+		hitFixtureRadius: 1.5,
+		pushForce: 2
+	}
+]
