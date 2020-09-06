@@ -122,7 +122,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		stateMachine.updateState();
 		attackCreator.handleAttacks(delta);
 		
-		if (health < 0) {
+		if (health <= 0) {
 			if (getAnimation() == null || getAnimation().isAnimationFinished()) {
 				remove();
 			}

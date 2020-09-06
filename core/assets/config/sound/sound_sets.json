@@ -22,6 +22,14 @@
 				shield_damage: {
 					path: "sound/object/metal_hit_1.wav"
 					volume: 0.9
+				},
+				spin_attack: {
+					path: "sound/dwarf/spin_attack.wav",
+					volume: 0.5
+				},
+				spin_attack_charged: {
+					path: "sound/dwarf/spin_attack_charge.wav",
+					volume: 0.3
 				}
 			}
 		},

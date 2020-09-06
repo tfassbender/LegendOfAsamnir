@@ -60,13 +60,14 @@ public class AttackCreator {
 		}
 	}
 	
-	public void startAttack(String attack, Vector2 direction) {
-		startAttack(configs.get(attack), direction);
+	public Attack startAttack(String attack, Vector2 direction) {
+		return startAttack(configs.get(attack), direction);
 	}
 	
-	private void startAttack(AttackConfig config, Vector2 direction) {
+	private Attack startAttack(AttackConfig config, Vector2 direction) {
 		Attack attack = new Attack(config, direction, body, collisionType);
 		attacks.add(attack);
+		return attack;
 	}
 	
 	/**

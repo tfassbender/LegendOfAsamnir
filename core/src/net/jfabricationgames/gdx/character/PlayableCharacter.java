@@ -60,6 +60,18 @@ public interface PlayableCharacter {
 	public float getTimeTillIdleAnimation();
 	
 	/**
+	 * The time (in seconds) the player needs to hold down the attack button, before a spin attack starts (when releasing the button).
+	 * 
+	 * @return The time in seconds.
+	 */
+	public float getHoldTimeTillSpinAttack();
+
+	/**
+	 * Play a sound that indicates that the spin attack was charged.
+	 */
+	public void playSpinAttackChargedSound();
+	
+	/**
 	 * Indicates whether the current animation is finished.
 	 * 
 	 * @return Returns true if the animation is finished. False if it's still playing.

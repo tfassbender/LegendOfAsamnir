@@ -5,7 +5,7 @@
 		duration: 0,
 		damage: 10,
 		distFromCenter: 0.4,
-		hitFixtureRadius: 0.5,
+		hitFixtureRadius: 0.6,
 		pushForce: 1
 	}
 	{
@@ -14,7 +14,7 @@
 		duration: 0,
 		damage: 15,
 		distFromCenter: 0.4,
-		hitFixtureRadius: 0.5,
+		hitFixtureRadius: 0.6,
 		pushForce: 1
 	}
 	{
@@ -24,6 +24,6 @@
 		damage: 5,
 		distFromCenter: 0,
 		hitFixtureRadius: 1.5,
-		pushForce: 2
+		pushForce: 3
 	}
 ]

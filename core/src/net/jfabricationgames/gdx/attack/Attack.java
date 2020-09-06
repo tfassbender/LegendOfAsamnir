@@ -61,6 +61,14 @@ public class Attack {
 		timer += delta;
 	}
 	
+	public float getDamage() {
+		return config.damage;
+	}
+	
+	public float getPushForce() {
+		return config.pushForce;
+	}
+	
 	protected void dealAttackDamage(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();

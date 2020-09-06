@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
+import net.jfabricationgames.gdx.attack.Attack;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
@@ -38,6 +39,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public static final float MOVING_SPEED_SPRINT = 425f;
 	public static final float MOVING_SPEED_ATTACK = 150;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
+	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
 	
 	private static final float PHYSICS_BODY_SIZE_FACTOR_X = 0.8f;
 	private static final float PHYSICS_BODY_SIZE_FACTOR_Y = 0.7f;
@@ -48,10 +50,13 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final String attackConfigFileName = "config/dwarf/attacks.json";
 	private static final String soundSetKey = "dwarf";
 	
+	private static final String spinAttackChargedSound = "spin_attack_charged";
+	
 	private AnimationManager assetManager;
 	
 	private Body body;
 	private AttackCreator attackCreator;
+	private Attack currentAttack;
 	
 	private CharacterAction action;
 	
@@ -145,7 +150,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		playSound(action);
 		
 		if (action.isAttack()) {
-			attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
+			currentAttack = attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
 		}
 		
 		return true;
@@ -168,8 +173,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private void playSound(CharacterAction action) {
 		if (action.getSound() != null) {
-			soundSet.playSound(action.getSound());
+			playSound(action.getSound());
 		}
+	}
+	private void playSound(String sound) {
+		soundSet.playSound(sound);
 	}
 	
 	public void render(float delta, SpriteBatch batch) {
@@ -304,6 +312,16 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
+	public float getHoldTimeTillSpinAttack() {
+		return TIME_TILL_SPIN_ATTACK;
+	}
+	
+	@Override
+	public void playSpinAttackChargedSound() {
+		playSound(spinAttackChargedSound);
+	}
+	
+	@Override
 	public boolean isAnimationFinished() {
 		return animation.isAnimationFinished();
 	}
@@ -356,9 +374,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			
 			if (attackedUserData instanceof Hittable) {
 				Hittable hittable = ((Hittable) attackedUserData);
-				hittable.takeDamage(action.getDamage());
+				hittable.takeDamage(currentAttack.getDamage());
 				//enemies define the force themselves; the force parameter is a factor for this self defined force
-				hittable.pushByHit(getPosition(), 1f);
+				hittable.pushByHit(getPosition(), currentAttack.getPushForce());
 			}
 		}
 	}

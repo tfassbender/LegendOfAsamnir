@@ -28,18 +28,26 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean sprint = false;
 	private boolean block = false;
 	private boolean changeSprint = false;
+	private boolean spinAttack = false;
+	
+	private boolean attackReleased = false;
 	
 	private float idleTime;
 	private float timeTillIdleAnimation;
+	private float attackHeld;
+	private float timeTillSpinAttack;
 	
 	private MovingDirection jumpDirection;
 	private MovingDirection lastMoveDirection;
 	
 	private InputContext inputContext;
 	
+	private boolean spinAttackCharged;
+	
 	public CharacterInputMovementHandler(PlayableCharacter inputCharacter) {
 		this.inputCharacter = inputCharacter;
 		timeTillIdleAnimation = inputCharacter.getTimeTillIdleAnimation();
+		timeTillSpinAttack = inputCharacter.getHoldTimeTillSpinAttack();
 		jumpDirection = MovingDirection.NONE;
 		lastMoveDirection = MovingDirection.NONE;
 		inputContext = DwarfScrollerGame.getInstance().getInputContext();
@@ -47,11 +55,16 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	}
 	
 	public void handleInputs(float delta) {
-		readInputs();
+		readInputs(delta);
 		
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
 		boolean characterActionSet = false;
 		
+		if (!characterActionSet && spinAttack) {
+			if (getAction().isInterruptable()) {
+				inputCharacter.changeAction(CharacterAction.ATTACK_SPIN);
+			}
+		}
 		if (!characterActionSet && attack) {
 			if (getAction().isInterruptable()) {
 				if (move && sprint) {
@@ -106,7 +119,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		}
 	}
 	
-	private void readInputs() {
+	private void readInputs(float delta) {
 		resetInputFlags();
 		if (inputContext.isStateActive(INPUT_MOVE_UP)) {
 			moveUp = true;
@@ -124,14 +137,31 @@ public class CharacterInputMovementHandler implements InputActionListener {
 			jump = true;
 		}
 		if (inputContext.isStateActive(INPUT_ATTACK)) {
-			attack = true;
+			if (attackReleased) {
+				attack = true;
+				attackReleased = false;
+			}
+			
+			attackHeld += delta;
+			if (attackHeld >= timeTillSpinAttack && !spinAttackCharged) {
+				spinAttackCharged = true;
+				inputCharacter.playSpinAttackChargedSound();
+			}
+		}
+		else {
+			if (spinAttackCharged) {
+				spinAttack = true;
+				spinAttackCharged = false;
+			}
+			attackHeld = 0;
+			attackReleased = true;
 		}
 		if (inputContext.isStateActive(INPUT_BLOCK)) {
 			block = true;
 		}
 		if (inputContext.isStateActive(INPUT_SPRINT)) {
 			if (!changeSprint) {
-				sprint = !sprint;				
+				sprint = !sprint;
 			}
 			changeSprint = true;
 		}
@@ -154,9 +184,11 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		moveDown = false;
 		moveLeft = false;
 		moveRight = false;
-		jump = false;
 		attack = false;
+		jump = false;
 		block = false;
+		spinAttack = false;
+		//attack is not reset, because the attackReleased flag does this
 		//sprint is not reset here, but in the handleInputs method (when idle)
 	}
 	
