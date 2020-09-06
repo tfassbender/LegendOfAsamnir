@@ -8,6 +8,9 @@
 	coin: {
 		value: 10
 	},
+	mana: {
+		mana: 20
+	}
 	shield: {
 		armor: 15
 	}

@@ -963,6 +963,13 @@ health
   orig: 16, 16
   offset: 0, 0
   index: -1
+mana
+  rotate: false
+  xy: 564, 108
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 mini_golem_attack
   rotate: false
   xy: 1578, 190
@@ -1259,7 +1266,7 @@ pot_hit
   index: 3
 shield
   rotate: false
-  xy: 564, 108
+  xy: 1090, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1322,7 +1329,7 @@ signboard_broken
   index: -1
 sword
   rotate: false
-  xy: 1090, 172
+  xy: 288, 8
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

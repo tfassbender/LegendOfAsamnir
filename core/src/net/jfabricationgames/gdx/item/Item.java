@@ -39,9 +39,9 @@ public class Item {
 	}
 	
 	protected void readTypeConfig() {
-		pickUpSoundName = typeConfig.pickUpSoundName;
+		pickUpSoundName = typeConfig.pickUpSound;
 		if (pickUpSoundName == null && defaultTypeConfig != null) {
-			pickUpSoundName = defaultTypeConfig.pickUpSoundName;
+			pickUpSoundName = defaultTypeConfig.pickUpSound;
 		}
 	}
 	

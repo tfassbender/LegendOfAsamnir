@@ -6,7 +6,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class ObjectTypeConfig {
 	
-	public String textureName;
+	public String texture;
 	public String animationHit;
 	public String animationBreak;
 	public String animationAction;

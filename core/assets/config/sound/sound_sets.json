@@ -126,10 +126,6 @@
 					volume: 0.4,
 					delay: 0.1
 				},
-				attack_bat: {
-					path: "sound/enemy/attack/bat.wav",
-					volume: 0.3
-				},
 				attack_mini_golem: {
 					path: "sound/enemy/attack/mini_golem.wav",
 					volume: 0.2,

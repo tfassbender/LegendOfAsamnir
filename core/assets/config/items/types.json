@@ -6,24 +6,28 @@
 //	}
 	__default: {
 		//default fallbacks
-		pickUpSoundName: pickup
+		pickUpSound: pickup
 	}
 	health: {
-		textureName: health,
-		pickUpSoundName: health_small,
+		texture: health,
+		pickUpSound: health_small,
 	},
 	health_big: {
-		textureName: health,
-		pickUpSoundName: health_big,
+		texture: health,
+		pickUpSound: health_big,
 	}
 	axe: {
-		textureName: axe,
+		texture: axe,
 	},
 	coin: {
-		textureName: coin,
-		pickUpSoundName: coin,
+		texture: coin,
+		pickUpSound: coin,
 	},
+	mana: {
+		texture: mana,
+		pickUpSound: mana
+	}
 	shield: {
-		textureName: shield,
+		texture: shield,
 	}
 }

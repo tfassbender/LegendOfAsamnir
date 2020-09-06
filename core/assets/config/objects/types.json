@@ -22,7 +22,7 @@
 //		sensor: false,
 //	}
 	barrel: {
-		textureName: barrel,
+		texture: barrel,
 		animationHit: barrel_hit,
 		animationBreak: barrel_break,
 		
@@ -36,7 +36,7 @@
 		health: 30
 	},
 	box: {
-		textureName: box,
+		texture: box,
 		animationHit: box_hit,
 		animationBreak: box_break,
 		
@@ -50,7 +50,7 @@
 		health: 20
 	},
 	chest: {
-		textureName: chest,
+		texture: chest,
 		animationHit: chest_hit,
 		animationAction: chest_open,
 		
@@ -62,7 +62,7 @@
 		hitSound: wood_hit_2
 	},
 	pot: {
-		textureName: pot,
+		texture: pot,
 		animationHit: pot_hit,
 		animationBreak: pot_break,
 		

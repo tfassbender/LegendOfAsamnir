@@ -48,7 +48,7 @@ public class ObjectFactory extends AbstractFactory {
 					+ ". Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
 		}
 		
-		Sprite sprite = createSprite(x, y, typeConfig.textureName);
+		Sprite sprite = createSprite(x, y, typeConfig.texture);
 		
 		GameObject object;
 		switch (type) {

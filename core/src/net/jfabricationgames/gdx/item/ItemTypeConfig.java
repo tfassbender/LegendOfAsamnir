@@ -2,7 +2,7 @@ package net.jfabricationgames.gdx.item;
 
 public class ItemTypeConfig {
 	
-	public String textureName;
+	public String texture;
 	public float physicsObjectRadius = 0.1f;
-	public String pickUpSoundName;
+	public String pickUpSound;
 }

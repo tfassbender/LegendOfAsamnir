@@ -12,7 +12,6 @@
 	{
 		id: attack,
 		animation: bat_attack,
-		stateEnteringSound: attack_bat,
 		attack: attack
 		endsWithAnimation: true,
 		followingState: move,
