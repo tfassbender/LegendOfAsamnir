@@ -411,7 +411,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public void takeDamage(float damage) {
 		if (isBlocking()) {
-			takeArmorDamage(damage * 0.5f);
+			takeArmorDamage(damage * 0.33f);
 			damage *= 0.1f;
 		}
 		health -= damage;
