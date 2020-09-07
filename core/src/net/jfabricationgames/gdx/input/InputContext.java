@@ -1,12 +1,13 @@
 package net.jfabricationgames.gdx.input;
 
+import java.util.PriorityQueue;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.ObjectSet;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import net.jfabricationgames.gdx.input.InputActionListener.Parameters;
@@ -35,11 +36,11 @@ public class InputContext {
 	protected ArrayMap<PlayerValue, AxisThreshold> controllerAxisActions;
 	protected ArrayMap<String, PlayerAxis> namedAxes;
 	
-	private ObjectSet<InputActionListener> listeners;
+	private PriorityQueue<InputActionListener> listeners;
 	
 	public InputContext() {
 		initializeMaps();
-		listeners = new ObjectSet<>();
+		listeners = new PriorityQueue<>((l1, l2) -> Integer.compare(l2.getInputPriority().priority, l1.getInputPriority().priority));
 	}
 	
 	private void initializeMaps() {

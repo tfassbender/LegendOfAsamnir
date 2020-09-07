@@ -212,8 +212,8 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	@Override
-	public void dispose() {
-		batch.dispose();
+	public Priority getInputPriority() {
+		return InputActionListener.Priority.ON_SCREEN_TEXT;
 	}
 	
 	@Override
@@ -249,5 +249,11 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	
 	private void close() {
 		text = null;
+	}
+	
+	@Override
+	public void dispose() {
+		shapeRenderer.dispose();
+		batch.dispose();
 	}
 }

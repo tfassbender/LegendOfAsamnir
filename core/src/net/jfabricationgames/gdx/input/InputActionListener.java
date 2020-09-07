@@ -19,6 +19,23 @@ public interface InputActionListener {
 		CONTROLLER_AXIS_THRESHOLD_PASSED; //
 	}
 	
+	/**
+	 * A priority for the {@link InputActionListener} let the components with higher priority handle the input events first and maybe consume the
+	 * event.
+	 */
+	public enum Priority {
+		
+		NORMAL(1), // will be called with normal priority (after menus, ...)
+		ON_SCREEN_TEXT(2), // will be called before normal map interactions
+		MENU(3); // will always be called first
+		
+		public final int priority;
+		
+		private Priority(int priority) {
+			this.priority = priority;
+		}
+	}
+	
 	public class Parameters {
 		
 		public int keycode;
@@ -97,4 +114,8 @@ public interface InputActionListener {
 	}
 	
 	public boolean onAction(String action, Type type, Parameters parameters);
+	
+	public default Priority getInputPriority() {
+		return Priority.NORMAL;
+	};
 }
