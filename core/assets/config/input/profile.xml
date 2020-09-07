@@ -134,7 +134,23 @@
 					<axis code="4" threshold="0.7" /><!-- left shoulder axis -->
 				</controller>
 			</state>
+			
+			<state name="interact">
+				<key code="E" />
+				<controller player="1">
+					<button code="3" />
+				</controller>
+			</state>
 		</states>
+		
+		<actions>
+			<action name="interact">
+				<key code="E" />
+				<controller player="1">
+					<button code="3" />
+				</controller>
+			</action>
+		</actions>
 		
 		<controllerAxes>
 			<controllerAxis name="camera_vertical_move_axis">

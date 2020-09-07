@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.text.ScreenTextWriter.TextDrawCall.CallType;
 
@@ -15,62 +14,69 @@ public class ScreenTextWriter {
 	private ShaderProgram fontShader;
 	private FontManager fontManager;
 	
-	private float scale;
+	private SpriteBatch batch;
+	
 	private Color color;
 	
-	private Array<TextDrawCall> bufferedTexts;
+	private GlyphLayout glyphLayout;
 	
 	public ScreenTextWriter() {
 		fontManager = FontManager.getInstance();
 		fontShader = fontManager.getFontShader();
-		bufferedTexts = new Array<>();
+		
+		batch = new SpriteBatch();
+		batch.setShader(fontShader);
+		
+		color = Color.BLACK;
+		glyphLayout = new GlyphLayout();
 	}
 	
 	public void setFont(String fontName) {
 		font = fontManager.getFont(fontName);
 	}
 	
-	public Array<TextDrawCall> draw(SpriteBatch batch) {
-		ShaderProgram tmpShader = batch.getShader();
-		batch.setShader(fontShader);
-		
-		Array<TextDrawCall> drawCalls = new Array<>();
-		for (TextDrawCall drawCall : bufferedTexts) {
-			drawCall.invoke(batch, font);
-			drawCalls.add(drawCall);
-		}
-		
-		batch.setShader(tmpShader);
-		clearBuffer();
-		
-		return drawCalls;
-	}
-	
 	public void setScale(float scale) {
-		this.scale = scale;
+		font.getData().setScale(scale);
 	}
 	
 	public void setColor(Color color) {
 		this.color = color;
 	}
 	
-	public void addText(CharSequence str, float x, float y) {
-		addText(CallType.DRAW_X_Y, str, x, y, -1, -1, -1, -1, false, null);
+	public GlyphLayout createGlyphLayout(CharSequence str, int textStartIndex, int textEndIndex, float targetWidth, int halign, boolean wrap) {
+		glyphLayout.setText(font, str, textStartIndex, textEndIndex, color, targetWidth, halign, wrap, null);
+		return glyphLayout;
+	}
+	public GlyphLayout createGlyphLayout(CharSequence str, float targetWidth, int halign, boolean wrap) {
+		glyphLayout.setText(font, str, color, targetWidth, halign, wrap);
+		return glyphLayout;
 	}
 	
-	public void addText(CharSequence str, float x, float y, float targetWidth, int halign, boolean wrap) {
-		addText(CallType.DRAW_TARGET_WIDTH_ALIGN_WRAP, str, x, y, -1, -1, targetWidth, halign, wrap, null);
+	public GlyphLayout drawText(CharSequence str, float x, float y) {
+		return drawText(CallType.DRAW_X_Y, str, x, y, -1, -1, -1, -1, false, null);
 	}
 	
-	public void addText(CharSequence str, float x, float y, int start, int end, float targetWidth, int halign, boolean wrap) {
-		addText(CallType.DRAW_START_END, str, x, y, start, end, targetWidth, halign, wrap, null);
+	public GlyphLayout drawText(CharSequence str, float x, float y, float targetWidth, int halign, boolean wrap) {
+		return drawText(CallType.DRAW_TARGET_WIDTH_ALIGN_WRAP, str, x, y, -1, -1, targetWidth, halign, wrap, null);
 	}
 	
-	public void addText(CharSequence str, float x, float y, int start, int end, float targetWidth, int halign, boolean wrap, String truncate) {
-		addText(CallType.DRAW_START_END_TARGET_WIDTH_ALIGN_WRAP_TRUNCATE, str, x, y, start, end, targetWidth, halign, wrap, truncate);
+	public GlyphLayout drawText(CharSequence str, float x, float y, int start, int end, float targetWidth, int halign, boolean wrap) {
+		return drawText(CallType.DRAW_START_END, str, x, y, start, end, targetWidth, halign, wrap, null);
 	}
 	
-	private void addText(CallType callType, CharSequence str, float x, float y, int start, int end, float targetWidth, int halign, boolean wrap, String truncate) {
+	public GlyphLayout drawText(CharSequence str, float x, float y, int start, int end, float targetWidth, int halign, boolean wrap,
+			String truncate) {
+		return drawText(CallType.DRAW_START_END_TARGET_WIDTH_ALIGN_WRAP_TRUNCATE, str, x, y, start, end, targetWidth, halign, wrap, truncate);
+	}
+	
+	private GlyphLayout drawText(CallType callType, CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
+			boolean wrap, String truncate) {
+		TextDrawCall drawCall = createDrawCall(callType, str, x, y, start, end, targetWidth, halign, wrap, truncate);
+		return drawCall.invoke(batch, font);
+	}
+	
+	private TextDrawCall createDrawCall(CallType callType, CharSequence str, float x, float y, int start, int end, float targetWidth, int halign,
+			boolean wrap, String truncate) {
 		TextDrawCall drawCall = new TextDrawCall();
 		drawCall.callType = callType;
 		drawCall.str = str;
@@ -82,28 +88,23 @@ public class ScreenTextWriter {
 		drawCall.halign = halign;
 		drawCall.wrap = wrap;
 		drawCall.truncate = truncate;
-		drawCall.scale = scale;
 		drawCall.color = new Color(color);
-		bufferedTexts.add(drawCall);
+		return drawCall;
 	}
 	
-	public void addText(GlyphLayout layout, float x, float y) {
+	public void drawText(GlyphLayout layout, float x, float y) {
+		TextDrawCall drawCall = createTextDrawCall(layout, x, y);
+		drawCall.invoke(batch, font);
+	}
+	
+	private TextDrawCall createTextDrawCall(GlyphLayout layout, float x, float y) {
 		TextDrawCall drawCall = new TextDrawCall();
 		drawCall.callType = CallType.DRAW_LAYOUT;
 		drawCall.glyphLayout = layout;
 		drawCall.x = x;
 		drawCall.y = y;
-		drawCall.scale = scale;
 		drawCall.color = new Color(color);
-		bufferedTexts.add(drawCall);
-	}
-	
-	public void clearBuffer() {
-		bufferedTexts.clear();
-	}
-	
-	public void setFontColor(Color color) {
-		font.setColor(color);
+		return drawCall;
 	}
 	
 	public static class TextDrawCall {
@@ -128,9 +129,9 @@ public class ScreenTextWriter {
 		public float scale;
 		public Color color;
 		
-		public void invoke(SpriteBatch batch, BitmapFont font) {
+		public GlyphLayout invoke(SpriteBatch batch, BitmapFont font) {
+			batch.begin();
 			font.setColor(color);
-			font.getData().setScale(scale);
 			switch (callType) {
 				case DRAW_LAYOUT:
 					font.draw(batch, glyphLayout, x, y);
@@ -150,6 +151,9 @@ public class ScreenTextWriter {
 				default:
 					throw new IllegalStateException("The callType is unknown: " + callType);
 			}
+			
+			batch.end();
+			return glyphLayout;
 		}
 	}
 }

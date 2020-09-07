@@ -35,8 +35,7 @@ public class InGameMenu implements Disposable {
 	private void renderText() {
 		screenTextWriter.setColor(Color.RED);
 		screenTextWriter.setScale(2f);
-		screenTextWriter.addText("Dwarf Scroller GDX", 100f, 0.1f * GameScreen.HUD_SCENE_HEIGHT);
-		screenTextWriter.draw(batch);
+		screenTextWriter.drawText("Dwarf Scroller GDX", 100f, 0.1f * GameScreen.HUD_SCENE_HEIGHT);
 	}
 	
 	@Override
