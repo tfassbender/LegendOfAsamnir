@@ -58,7 +58,9 @@ public class ObjectFactory extends AbstractFactory {
 				object = new DestroyableObject(typeConfig, sprite, properties);
 				break;
 			case "chest":
-				object = new GameObject(typeConfig, sprite, properties);
+			case "signboard":
+			case "directionboard":
+				object = new InteractiveObject(typeConfig, sprite, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);

@@ -73,5 +73,16 @@
 	
 		destroySound: glass_break,
 		health: 5
+	},
+	signboard: {
+		texture: signboard,
+		animationHit: signboard_hit,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.3,
+		physicsBodyOffsetFactorX: 0.05,
+		physicsBodyOffsetFactorY: -0.075,
+		
+		hitSound: wood_hit_1
 	}
 }

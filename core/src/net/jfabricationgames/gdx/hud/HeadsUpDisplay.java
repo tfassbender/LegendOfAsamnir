@@ -23,7 +23,7 @@ public class HeadsUpDisplay implements Disposable {
 		
 		statusBar = new StatusBar(this);
 		inGameMenu = new InGameMenu(this);
-		onScreenText = new OnScreenTextBox(this);
+		onScreenText = OnScreenTextBox.createInstance(this);
 		worldEdge = new WorldEdge(this);
 	}
 	

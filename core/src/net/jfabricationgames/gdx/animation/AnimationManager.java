@@ -33,10 +33,14 @@ public class AnimationManager {
 	private Map<String, Animation<TextureRegion>> animations;
 	private Map<String, AnimationConfig> animationConfigurations;
 	
+	private Array<String> configFiles;
+	
 	private AnimationManager() {
 		assetManager = AssetGroupManager.getInstance();
 		animations = new HashMap<>();
 		animationConfigurations = new HashMap<>();
+		
+		configFiles = new Array<>();
 	}
 	
 	/**
@@ -46,6 +50,7 @@ public class AnimationManager {
 	 *        The configuration file, that's animations are to be loaded
 	 */
 	public void loadAnimations(String... configurations) {
+		configFiles.addAll(configurations);
 		for (String config : configurations) {
 			AnimationConfigList animationConfig = loadAnimationConfig(config);
 			
@@ -83,7 +88,8 @@ public class AnimationManager {
 	 */
 	public Animation<TextureRegion> getAnimation(String name) {
 		if (!animations.containsKey(name)) {
-			throw new IllegalArgumentException("The animation \"" + name + "\" doesn't exist in this asset manager");
+			throw new IllegalArgumentException("The animation \"" + name + "\" doesn't exist in this asset manager. "
+					+ "Please add it to the animation configuration (see config files: " + configFiles + ")");
 		}
 		return animations.get(name);
 	}

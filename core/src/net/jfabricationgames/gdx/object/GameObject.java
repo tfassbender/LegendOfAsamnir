@@ -25,10 +25,10 @@ public class GameObject implements Hittable {
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	
-	private Sprite sprite;
-	private MapProperties properties;
-	private Body body;
-	private GameMap gameMap;
+	protected Sprite sprite;
+	protected MapProperties properties;
+	protected Body body;
+	protected GameMap gameMap;
 	
 	protected ObjectTypeConfig typeConfig;
 	
@@ -96,7 +96,17 @@ public class GameObject implements Hittable {
 	}
 	
 	protected AnimationDirector<TextureRegion> getHitAnimation() {
-		return animationManager.getAnimationDirector(typeConfig.animationHit);
+		if (typeConfig.animationHit != null) {
+			return animationManager.getAnimationDirector(typeConfig.animationHit);
+		}
+		return null;
+	}
+	
+	protected AnimationDirector<TextureRegion> getActionAnimation() {
+		if (typeConfig.animationAction != null) {
+			return animationManager.getAnimationDirector(typeConfig.animationAction);
+		}
+		return null;
 	}
 	
 	public void remove() {

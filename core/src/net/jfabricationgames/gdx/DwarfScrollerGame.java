@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputProfile;
+import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.screens.MainMenuScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.text.FontManager;
@@ -53,6 +54,13 @@ public class DwarfScrollerGame extends Game {
 	
 	public void setScreen(Screen screen) {
 		super.setScreen(screen);
+	}
+	
+	public GameScreen getGameScreen() {
+		if (screen instanceof GameScreen) {
+			return (GameScreen) screen;
+		}
+		return null;
 	}
 	
 	public void addInputProcessor(InputProcessor processor) {

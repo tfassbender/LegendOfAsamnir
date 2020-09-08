@@ -43,5 +43,23 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			name: chest_open,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
+		{
+			name: signboard_hit,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
+		{
+			name: signboard_break,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
 	]
 }

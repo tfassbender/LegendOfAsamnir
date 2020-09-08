@@ -28,6 +28,24 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	private static final float textScale = 1f;
 	private static final int displayableLines = 5;
 	
+	private static OnScreenTextBox instance;
+	
+	public static synchronized OnScreenTextBox getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("The instance of OnScreenTextBox has not yet been created. "
+					+ "Use the createInstance(HeadsUpDisplay) method to create an instance.");
+		}
+		return instance;
+	}
+	
+	protected static synchronized OnScreenTextBox createInstance(HeadsUpDisplay hud) {
+		if (instance != null) {
+			throw new IllegalStateException("An instance of OnScreenTextBox has already been created.");
+		}
+		instance = new OnScreenTextBox(hud);
+		return instance;
+	}
+	
 	private final float textBoxX;
 	private final float textBoxY;
 	private final float textBoxWidth;
@@ -60,7 +78,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	private final float nextPageIndicatorBlinkingTime = 0.75f;
 	private boolean displayNextPageIndicator = false;
 	
-	public OnScreenTextBox(HeadsUpDisplay hud) {
+	private OnScreenTextBox(HeadsUpDisplay hud) {
 		this.camera = hud.getCamera();
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
@@ -122,9 +140,11 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	private void renderText() {
 		batch.begin();
 		
-		screenTextWriter.setScale(1.25f * textScale);
-		screenTextWriter.setColor(Color.RED);
-		screenTextWriter.drawText(headerText, textBoxX + textOffsetX, textBoxY + textBoxHeight - headerOffsetY);
+		if (headerText != null) {
+			screenTextWriter.setScale(1.25f * textScale);
+			screenTextWriter.setColor(Color.RED);
+			screenTextWriter.drawText(headerText, textBoxX + textOffsetX, textBoxY + textBoxHeight - headerOffsetY);
+		}
 		
 		screenTextWriter.setScale(textScale);
 		screenTextWriter.setColor(Color.BLACK);

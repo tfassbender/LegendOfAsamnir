@@ -33,8 +33,10 @@
 				objects/animated/chest/hit,
 				objects/animated/chest/open,
 				objects/animated/direction_board/hit,
+				objects/animated/direction_board/break,
 				objects/animated/pot/break,
 				objects/animated/pot/hit,
+				objects/animated/signboard/hit,
 				objects/animated/signboard/break,
 				
 				//##############################################################
