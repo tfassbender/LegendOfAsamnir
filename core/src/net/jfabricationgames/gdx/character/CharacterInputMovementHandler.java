@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.character;
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.interaction.InteractionManager;
 
 public class CharacterInputMovementHandler implements InputActionListener {
 	
@@ -16,6 +17,8 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_ATTACK = "attack";
 	private static final String INPUT_SPRINT = "sprint";
 	private static final String INPUT_BLOCK = "block";
+	
+	private static final String ACTION_INTERACT = "interact";
 	
 	private PlayableCharacter inputCharacter;
 	
@@ -308,7 +311,9 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
-		//only states are used in this implementation
+		if (action.equals(ACTION_INTERACT) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
+			InteractionManager.getInstance().interact(inputCharacter);
+		}
 		return false;
 	}
 }

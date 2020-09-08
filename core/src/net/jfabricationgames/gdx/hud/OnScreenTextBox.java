@@ -71,7 +71,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	private int[] displayedTextIndices;
 	
 	private int displayedCharacters = 0;
-	private float timeTillPageStarted = 0;
+	private float timeSincePageStarted = 0;
 	private float displayCharactersPerSecond = 25f;
 	
 	private float nextPageIndicatorTimer = 0;
@@ -98,10 +98,6 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		
 		InputContext inputContext = DwarfScrollerGame.getInstance().getInputContext();
 		inputContext.addListener(this);
-		
-		//TODO remove after tests
-		setText("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.");
-		setHeaderText("Header text:");
 	}
 	
 	public void render(float delta) {
@@ -119,8 +115,8 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 			}
 			
 			if (!allCharactersDisplayed()) {
-				timeTillPageStarted += delta;
-				displayedCharacters = Math.min((int) (displayCharactersPerSecond * timeTillPageStarted),
+				timeSincePageStarted += delta;
+				displayedCharacters = Math.min((int) (displayCharactersPerSecond * timeSincePageStarted),
 						displayedTextIndices[1] - displayedTextIndices[0]);
 			}
 		}
@@ -185,14 +181,19 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	private void calculateDisplayedText() {
 		firstDisplayedLine = 0;
 		displayedTextIndices = getDisplayedTextIndices();
-		timeTillPageStarted = 0;
+		resetDisplayedCharacters();
+	}
+
+	private void resetDisplayedCharacters() {
+		displayedCharacters = 0;
+		timeSincePageStarted = 0;
 	}
 	
 	public void nextPage() {
 		if (hasNextPage()) {
 			firstDisplayedLine += displayableLines;
 			displayedTextIndices = getDisplayedTextIndices();
-			timeTillPageStarted = 0;
+			timeSincePageStarted = 0;
 			displayedCharacters = 0;
 		}
 	}

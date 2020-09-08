@@ -58,6 +58,10 @@
 		physicsBodySizeFactorY: 0.3,
 		physicsBodyOffsetFactorX: 0.01,
 		physicsBodyOffsetFactorY: -0.025,
+		
+		addSensor: true,
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: chest_open_5,
 	
 		hitSound: wood_hit_2
 	},
@@ -82,6 +86,9 @@
 		physicsBodySizeFactorY: 0.3,
 		physicsBodyOffsetFactorX: 0.05,
 		physicsBodyOffsetFactorY: -0.075,
+		
+		addSensor: true,
+		multipleActionExecutionsPossible: true,
 		
 		hitSound: wood_hit_1
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="97">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="99">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
@@ -152,6 +152,20 @@
    <properties>
     <property name="displayText" value="Lorem ipsum dingsum..."/>
     <property name="displayTextHeader" value="Header Dings"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="97" name="object.signboard" x="992" y="160">
+   <properties>
+    <property name="displayText" value="Some text on the left sign"/>
+    <property name="displayTextHeader" value="Left Sign:"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="98" name="object.signboard" x="1005.33" y="160">
+   <properties>
+    <property name="displayText" value="Some text on the right sign."/>
+    <property name="displayTextHeader" value="Right Sign:"/>
    </properties>
    <point/>
   </object>
