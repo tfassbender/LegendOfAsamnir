@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.animation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class AnimationManager {
 	 *        The configuration file, that's animations are to be loaded
 	 */
 	public void loadAnimations(String... configurations) {
+		Gdx.app.log(getClass().getSimpleName(), "Loading animations from config: " + Arrays.toString(configurations));
 		configFiles.addAll(configurations);
 		for (String config : configurations) {
 			AnimationConfigList animationConfig = loadAnimationConfig(config);
@@ -79,7 +81,8 @@ public class AnimationManager {
 	}
 	
 	/**
-	 * Get an {@link Animation} from the loaded animations.
+	 * Get an {@link Animation} from the loaded animations.<br>
+	 * <b>WARNING:</b> This {@link Animation} will always be the same instance. Use getAnimationCopy(String) for a unique animation instance.
 	 * 
 	 * @param name
 	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
@@ -93,9 +96,23 @@ public class AnimationManager {
 		}
 		return animations.get(name);
 	}
+	/**
+	 * Get a copy of an {@link Animation} from the loaded animations. The copy is a new, independent instance of the animation.<br>
+	 * 
+	 * @param name
+	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
+	 * 		
+	 * @return The {@link Animation}.
+	 */
+	public Animation<TextureRegion> getAnimationCopy(String name) {
+		Animation<TextureRegion> animation = getAnimation(name);
+		return new Animation<TextureRegion>(animation.getFrameDuration(), animation.getKeyFrames());
+	}
 	
 	/**
-	 * Get an {@link AnimationDirector} from the loaded animations.
+	 * Get an {@link AnimationDirector} from the loaded animations.<br>
+	 * <b>WARNING:</b> The underlying {@link Animation} will always be the same instance. Use getAnimationDirectorCopy(String) for a unique animation
+	 * instance.
 	 * 
 	 * @param name
 	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
@@ -104,6 +121,18 @@ public class AnimationManager {
 	 */
 	public AnimationDirector<TextureRegion> getAnimationDirector(String name) {
 		return new AnimationDirector<TextureRegion>(getAnimation(name));
+	}
+	/**
+	 * Get an {@link AnimationDirector} from the loaded animations. The underlying {@link Animation} is a new independent instance of a loaded
+	 * {@link Animation}.
+	 * 
+	 * @param name
+	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
+	 * 		
+	 * @return The {@link AnimationDirector}.
+	 */
+	public AnimationDirector<TextureRegion> getAnimationDirectorCopy(String name) {
+		return new AnimationDirector<TextureRegion>(getAnimationCopy(name));
 	}
 	
 	/**

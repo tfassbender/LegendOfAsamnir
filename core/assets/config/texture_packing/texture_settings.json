@@ -21,6 +21,14 @@
 				//### items
 				//##############################################################
 				items,
+				items/key,
+				
+				//##############################################################
+				//### interactions
+				//##############################################################
+				interaction/dialogue/exclamation,
+				interaction/dialogue/interrogation,
+				interaction/dialogue/skull,
 				
 				//##############################################################
 				//### objects
@@ -38,6 +46,8 @@
 				objects/animated/pot/hit,
 				objects/animated/signboard/hit,
 				objects/animated/signboard/break,
+				objects/animated/map/idle,
+				objects/animated/map/unfold,
 				
 				//##############################################################
 				//### enemies

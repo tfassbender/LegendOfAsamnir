@@ -2,11 +2,17 @@ package net.jfabricationgames.gdx.interaction;
 
 import java.util.Comparator;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 
 public class InteractionManager {
+	
+	public static final String ANIMATION_CONFIG_FILE = "config/animation/interaction.json";
+	public static final String INTERACTION_ANIMATION = "interrogation";
 	
 	private static PlayableCharacter character;
 	private static final Comparator<Interactive> distanceComparator = (i1, i2) -> Float.compare(i1.getDistanceFromDwarf(character),
@@ -25,6 +31,8 @@ public class InteractionManager {
 	
 	private InteractionManager() {
 		interactivesInRange = new Array<>();
+		
+		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 	}
 	
 	public void interact(PlayableCharacter character) {
@@ -43,5 +51,10 @@ public class InteractionManager {
 	
 	public void movedOutOfRange(Interactive interactive) {
 		interactivesInRange.removeValue(interactive, false);
+	}
+	
+	//do not declare static, because otherwise the animation will not be loaded before it's attempted to be used
+	public AnimationDirector<TextureRegion> getInteractionAnimation() {
+		return AnimationManager.getInstance().getAnimationDirectorCopy(INTERACTION_ANIMATION);
 	}
 }

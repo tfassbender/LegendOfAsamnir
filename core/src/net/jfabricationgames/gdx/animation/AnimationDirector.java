@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.animation;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class AnimationDirector<T extends TextureRegion> {
 	
@@ -49,6 +50,20 @@ public class AnimationDirector<T extends TextureRegion> {
 	 */
 	public void resetStateTime() {
 		stateTime = 0;
+	}
+	
+	/**
+	 * Set the animation state time to the end of the animation.
+	 */
+	public void endAnimation() {
+		stateTime = animation.getAnimationDuration();
+	}
+	
+	/**
+	 * Set the {@link PlayMode} of the underlying animation.
+	 */
+	public void setPlayMode(PlayMode playMode) {
+		animation.setPlayMode(playMode);
 	}
 	
 	/**
