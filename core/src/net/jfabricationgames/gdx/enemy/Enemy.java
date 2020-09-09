@@ -47,6 +47,9 @@ public abstract class Enemy implements Hittable, ContactListener {
 	protected float health;
 	protected float movingSpeed;
 	
+	private float imageOffsetX;
+	private float imageOffsetY;
+	
 	protected Vector2 intendedMovement;
 	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
@@ -137,8 +140,8 @@ public abstract class Enemy implements Hittable, ContactListener {
 			getAnimation().increaseStateTime(delta);
 			TextureRegion region = getAnimation().getKeyFrame();
 			stateMachine.flipTextureToMovementDirection(region, intendedMovement);
-			float x = body.getPosition().x - region.getRegionWidth() * 0.5f;
-			float y = body.getPosition().y - region.getRegionHeight() * 0.5f;
+			float x = body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX;
+			float y = body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY;
 			batch.draw(region, x, y, region.getRegionWidth() * 0.5f, region.getRegionHeight() * 0.5f, region.getRegionWidth(),
 					region.getRegionHeight(), GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
 		}
@@ -175,6 +178,11 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	public Vector2 getPosition() {
 		return new Vector2(body.getPosition());
+	}
+	
+	protected void setImageOffset(float x, float y) {
+		this.imageOffsetX = x;
+		this.imageOffsetY = y;
 	}
 	
 	public EnemyStateMachine getStateMachine() {

@@ -16,6 +16,7 @@ public class Bat extends Enemy {
 	
 	public Bat(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
+		setImageOffset(0f, -0.2f);
 	}
 	
 	@Override

@@ -16,6 +16,7 @@ public class MiniGolem extends Enemy {
 	
 	public MiniGolem(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
+		setImageOffset(0f, 0.4f);
 	}
 	
 	@Override

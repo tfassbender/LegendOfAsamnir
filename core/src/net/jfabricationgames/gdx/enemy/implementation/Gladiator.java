@@ -19,6 +19,7 @@ public class Gladiator extends Enemy {
 	
 	public Gladiator(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
+		setImageOffset(0f, 0.1f);
 	}
 	
 	@Override

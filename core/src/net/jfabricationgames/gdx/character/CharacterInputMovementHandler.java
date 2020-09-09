@@ -64,7 +64,8 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		boolean characterActionSet = false;
 		
 		if (!characterActionSet && spinAttack) {
-			if (getAction().isInterruptable()) {
+			//hit and shield hit can only be interrupted by spin attacks (to free from near enemies)
+			if (getAction().isInterruptable() || getAction() == CharacterAction.HIT || getAction() == CharacterAction.SHIELD_HIT) {
 				inputCharacter.changeAction(CharacterAction.ATTACK_SPIN);
 			}
 		}
