@@ -164,7 +164,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public boolean executeSpecialAction() {
 		//only arrows are used currently
 		if (attackCreator.allAttacksExecuted()) {
-			attackCreator.startAttack("arrow", movementHandler.getMovingDirection().getNormalizedDirectionVector());//TODO refactor
+			attackCreator.startAttack("arrow", movementHandler.getMovingDirection().getNormalizedDirectionVector());//TODO refactor "arrow"
 			return true;
 		}
 		
