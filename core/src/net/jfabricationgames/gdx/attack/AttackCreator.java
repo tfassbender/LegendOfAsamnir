@@ -74,7 +74,7 @@ public class AttackCreator {
 	}
 	
 	private Attack startAttack(AttackConfig config, Vector2 direction) {
-		Attack attack = Attack.createAttack(config, direction, body, collisionType);
+		Attack attack = AttackFactory.createAttack(config, direction, body, collisionType);
 		attacks.add(attack);
 		return attack;
 	}

@@ -23,17 +23,6 @@ public abstract class Attack {
 	protected Body body;
 	protected Vector2 direction;
 	
-	public static Attack createAttack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
-		switch (config.type) {
-			case MELEE:
-				return new MeleeAttack(config, direction, body, collisionType);
-			case PROJECTILE:
-				return new ProjectileAttack(config, direction, body, collisionType);
-			default:
-				throw new IllegalStateException("Unexpected attack type: " + config.type);
-		}
-	}
-	
 	protected Attack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
 		this.config = config;
 		this.collisionType = collisionType;
