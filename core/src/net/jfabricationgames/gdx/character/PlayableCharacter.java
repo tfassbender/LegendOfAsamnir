@@ -53,6 +53,13 @@ public interface PlayableCharacter {
 	public CharacterAction getCurrentAction();
 	
 	/**
+	 * Execute the special action that the character currently uses.
+	 * 
+	 * @return True if the action was possible. False otherwise.
+	 */
+	public boolean executeSpecialAction();
+	
+	/**
 	 * The time (in seconds) the character has to stay idle before an idle animation is started.
 	 * 
 	 * @return The time in seconds.
@@ -65,7 +72,7 @@ public interface PlayableCharacter {
 	 * @return The time in seconds.
 	 */
 	public float getHoldTimeTillSpinAttack();
-
+	
 	/**
 	 * Play a sound that indicates that the spin attack was charged.
 	 */

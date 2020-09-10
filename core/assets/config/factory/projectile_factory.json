@@ -1,0 +1,4 @@
+{
+	atlas: packed/demo/demo.atlas, 
+	typesConfig: config/projectile/types.json
+}

@@ -5,83 +5,60 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
-import net.jfabricationgames.gdx.attributes.Hittable;
-import net.jfabricationgames.gdx.physics.CollisionUtil;
-import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
-import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
-public class Attack {
+public abstract class Attack {
 	
-	private float timer;
-	private boolean started;
+	protected float timer;
+	protected boolean started;
 	
-	private AttackConfig config;
-	private PhysicsBodyProperties hitFixtureProperties;
+	protected AttackConfig config;
+	protected PhysicsBodyProperties hitFixtureProperties;
 	
-	private PhysicsCollisionType collisionType;
+	protected PhysicsCollisionType collisionType;
 	
-	private Fixture hitFixture;
+	protected Fixture hitFixture;
 	
-	public Attack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
+	protected Body body;
+	protected Vector2 direction;
+	
+	public static Attack createAttack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
+		switch (config.type) {
+			case MELEE:
+				return new MeleeAttack(config, direction, body, collisionType);
+			case PROJECTILE:
+				return new ProjectileAttack(config, direction, body, collisionType);
+			default:
+				throw new IllegalStateException("Unexpected attack type: " + config.type);
+		}
+	}
+	
+	protected Attack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
 		this.config = config;
 		this.collisionType = collisionType;
-		hitFixtureProperties = new PhysicsBodyProperties().setBody(body).setCollisionType(collisionType).setSensor(true)
-				.setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(config.hitFixtureRadius).setFixturePosition(getFixturePosition(direction));
+		this.direction = direction;
+		this.body = body;
+		
 		timer = 0;
 		started = false;
 	}
 	
-	private Vector2 getFixturePosition(Vector2 direction) {
-		return direction.nor().scl(config.distFromCenter);
-	}
-	
-	public boolean isExecuted() {
+	protected boolean isExecuted() {
 		return started && timer >= config.delay + config.duration;
 	}
 	
-	public boolean isToStart() {
+	protected boolean isToStart() {
 		return !started && timer >= config.delay;
 	}
 	
-	public void start() {
-		hitFixture = PhysicsBodyCreator.addFixture(hitFixtureProperties);
-		started = true;
-	}
-	
-	public void remove() {
-		if (hitFixture != null) {
-			PhysicsWorld.getInstance().removeFixture(hitFixture, hitFixtureProperties.body);
-		}
-	}
-	
-	public void increaseTimer(float delta) {
+	protected void increaseTimer(float delta) {
 		timer += delta;
 	}
 	
-	public float getDamage() {
-		return config.damage;
-	}
+	protected abstract void start();
 	
-	public float getPushForce() {
-		return config.pushForce;
-	}
+	protected abstract void remove();
 	
-	protected void dealAttackDamage(Contact contact) {
-		Fixture fixtureA = contact.getFixtureA();
-		Fixture fixtureB = contact.getFixtureB();
-		
-		if (CollisionUtil.containsCollisionType(collisionType, fixtureA, fixtureB)) {
-			Object attackUserData = CollisionUtil.getCollisionTypeUserData(collisionType, fixtureA, fixtureB);
-			Object attackedObjectUserData = CollisionUtil.getOtherTypeUserData(collisionType, fixtureA, fixtureB);
-			
-			if (attackUserData == hitFixtureProperties.body.getUserData() && attackedObjectUserData instanceof Hittable) {
-				Hittable attackedObject = ((Hittable) attackedObjectUserData);
-				attackedObject.takeDamage(config.damage);
-				attackedObject.pushByHit(hitFixture.getBody().getPosition(), config.pushForce);
-			}
-		}
-	}
+	protected abstract void dealAttackDamage(Contact contact);
 }

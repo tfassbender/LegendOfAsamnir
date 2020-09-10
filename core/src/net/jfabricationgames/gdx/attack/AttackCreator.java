@@ -60,12 +60,21 @@ public class AttackCreator {
 		}
 	}
 	
+	public boolean allAttacksExecuted() {
+		for (Attack attack : attacks) {
+			if (!attack.isExecuted()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public Attack startAttack(String attack, Vector2 direction) {
 		return startAttack(configs.get(attack), direction);
 	}
 	
 	private Attack startAttack(AttackConfig config, Vector2 direction) {
-		Attack attack = new Attack(config, direction, body, collisionType);
+		Attack attack = Attack.createAttack(config, direction, body, collisionType);
 		attacks.add(attack);
 		return attack;
 	}

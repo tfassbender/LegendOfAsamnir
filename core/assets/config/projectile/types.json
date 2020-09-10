@@ -1,0 +1,11 @@
+{
+	arrow: {
+		texture: projectile_arrow,
+		textureScale: 0.5,
+		textureInitialRotation: 225,
+		
+		range: 100,
+		speed: 40,
+		dampingAfterObjectHit: 5,
+	}
+}

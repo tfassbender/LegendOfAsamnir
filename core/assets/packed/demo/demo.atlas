@@ -370,7 +370,7 @@ dialog_skull
   index: 1
 dialog_skull
   rotate: false
-  xy: 1846, 158
+  xy: 1880, 158
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -818,21 +818,21 @@ dwarf_spin_right
   index: 4
 exclamation
   rotate: false
-  xy: 1882, 176
+  xy: 1916, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 interrogation
   rotate: false
-  xy: 1882, 176
+  xy: 1916, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 exclamation
   rotate: false
-  xy: 1862, 158
+  xy: 1896, 158
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -1070,7 +1070,7 @@ interrogation
   index: 2
 interrogation
   rotate: false
-  xy: 1898, 176
+  xy: 1932, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -1133,7 +1133,7 @@ key
   index: 8
 mana
   rotate: false
-  xy: 1846, 172
+  xy: 1880, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1175,77 +1175,77 @@ map_idle
   index: 4
 map_idle
   rotate: false
-  xy: 1494, 156
+  xy: 1528, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 5
 map_idle
   rotate: false
-  xy: 1526, 156
+  xy: 1560, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 6
 map_idle
   rotate: false
-  xy: 1558, 156
+  xy: 1592, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 7
 map_idle
   rotate: false
-  xy: 1590, 156
+  xy: 1624, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 8
 map_idle
   rotate: false
-  xy: 1622, 156
+  xy: 1656, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 9
 map_idle
   rotate: false
-  xy: 1654, 156
+  xy: 1688, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 10
 map_idle
   rotate: false
-  xy: 1686, 156
+  xy: 1720, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 11
 map_unfold
   rotate: false
-  xy: 1718, 156
+  xy: 1752, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 1
 map_unfold
   rotate: false
-  xy: 1750, 156
+  xy: 1784, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 2
 map_unfold
   rotate: false
-  xy: 1782, 156
+  xy: 1816, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: 3
 map_unfold
   rotate: false
-  xy: 1814, 156
+  xy: 1848, 156
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
@@ -1544,6 +1544,13 @@ pot_hit
   orig: 32, 32
   offset: 0, 0
   index: 3
+projectile_arrow
+  rotate: false
+  xy: 1358, 156
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 shield
   rotate: false
   xy: 496, 8
@@ -1553,14 +1560,14 @@ shield
   index: -1
 signboard
   rotate: false
-  xy: 1358, 156
+  xy: 1392, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 signboard_hit
   rotate: false
-  xy: 1358, 156
+  xy: 1392, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -1609,28 +1616,28 @@ signboard_break
   index: 6
 signboard_broken
   rotate: false
-  xy: 1392, 156
+  xy: 1426, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 signboard_hit
   rotate: false
-  xy: 1426, 156
+  xy: 1460, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 signboard_hit
   rotate: false
-  xy: 1460, 156
+  xy: 1494, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 sword
   rotate: false
-  xy: 1864, 172
+  xy: 1898, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

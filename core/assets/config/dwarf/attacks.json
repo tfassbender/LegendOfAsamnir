@@ -7,7 +7,7 @@
 		distFromCenter: 0.5,
 		hitFixtureRadius: 0.6,
 		pushForce: 1
-	}
+	},
 	{
 		id: jump_attack,
 		delay: 0.3,
@@ -16,7 +16,7 @@
 		distFromCenter: 0.5,
 		hitFixtureRadius: 0.6,
 		pushForce: 1
-	}
+	},
 	{
 		id: spin_attack,
 		delay: 0.1,
@@ -25,5 +25,14 @@
 		distFromCenter: 0,
 		hitFixtureRadius: 1.5,
 		pushForce: 3
-	}
+	},
+	{
+		id: arrow,
+		type: PROJECTILE,
+		projectileType: arrow,
+		delay: 0,
+		duration: 0.75,
+		damage: 10,
+		pushForce: 0.5
+	},
 ]

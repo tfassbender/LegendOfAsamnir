@@ -13,7 +13,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private static final String INPUT_MOVE_DOWN = "down";
 	private static final String INPUT_MOVE_LEFT = "left";
 	private static final String INPUT_MOVE_RIGHT = "right";
-	private static final String INPUT_JUMP = "jump";
+	private static final String INPUT_SPECIAL = "special";
 	private static final String INPUT_ATTACK = "attack";
 	private static final String INPUT_SPRINT = "sprint";
 	private static final String INPUT_BLOCK = "block";
@@ -26,7 +26,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	private boolean moveDown = false;
 	private boolean moveLeft = false;
 	private boolean moveRight = false;
-	private boolean jump = false;
+	private boolean special = false;
 	private boolean attack = false;
 	private boolean sprint = false;
 	private boolean block = false;
@@ -86,10 +86,10 @@ public class CharacterInputMovementHandler implements InputActionListener {
 				characterActionSet = inputCharacter.changeAction(CharacterAction.BLOCK);
 			}
 		}
-		if (!characterActionSet && jump) {
+		if (!characterActionSet && special) {
 			if (getAction().isInterruptable()) {
 				jumpDirection = getDirectionFromInputs();
-				characterActionSet = inputCharacter.changeAction(CharacterAction.JUMP);
+				characterActionSet = inputCharacter.executeSpecialAction();
 			}
 		}
 		if (!characterActionSet && move) {
@@ -137,8 +137,8 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		if (inputContext.isStateActive(INPUT_MOVE_RIGHT)) {
 			moveRight = true;
 		}
-		if (inputContext.isStateActive(INPUT_JUMP)) {
-			jump = true;
+		if (inputContext.isStateActive(INPUT_SPECIAL)) {
+			special = true;
 		}
 		if (inputContext.isStateActive(INPUT_ATTACK)) {
 			if (attackReleased) {
@@ -189,7 +189,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 		moveLeft = false;
 		moveRight = false;
 		attack = false;
-		jump = false;
+		special = false;
 		block = false;
 		spinAttack = false;
 		//attack is not reset, because the attackReleased flag does this

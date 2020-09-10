@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
-import net.jfabricationgames.gdx.attack.Attack;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
@@ -37,7 +36,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public static final float MOVING_SPEED = 300f;
 	public static final float JUMPING_SPEED = 425f;
 	public static final float MOVING_SPEED_SPRINT = 425f;
-	public static final float MOVING_SPEED_ATTACK = 150;
+	public static final float MOVING_SPEED_ATTACK = 150f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
 	
@@ -56,7 +55,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private Body body;
 	private AttackCreator attackCreator;
-	private Attack currentAttack;
 	
 	private CharacterAction action;
 	
@@ -95,36 +93,41 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public Dwarf() {
 		assetManager = AnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
+		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
+		idleDwarfSprite = getIdleSprite();
 		
 		action = CharacterAction.NONE;
+		body = createPhysicsBody();
+		registerAsContactListener();
 		
-		idleDwarfSprite = getIdleSprite();
 		blockSprite = getShieldSprite();
 		animation = getAnimation();
 		
-		createPhysicsBody();
 		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
-		
-		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
-		
 		movementHandler = new CharacterInputMovementHandler(this);
 	}
 	
-	private void createPhysicsBody() {
+	private Body createPhysicsBody() {
 		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
 		World world = physicsWorld.getWorld();
-		physicsWorld.registerContactListener(this);
 		
 		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
 				.setWidth(idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
 				.setHeight(idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
 				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
-		body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
+		Body body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
 		body.setSleepingAllowed(false);
 		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(PHYSICS_BODY_SENSOR_RADIUS)
 				.setCollisionType(PhysicsCollisionType.PLAYER_SENSOR);
 		PhysicsBodyCreator.addCircularFixture(sensorProperties);
 		body.setUserData(this);
+		
+		return body;
+	}
+	
+	private void registerAsContactListener() {
+		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
+		physicsWorld.registerContactListener(this);
 	}
 	
 	private Sprite getIdleSprite() {
@@ -134,6 +137,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return new Sprite(getAnimation(CharacterAction.SHIELD_HIT).getAnimation().getKeyFrame(0));
 	}
 	
+	@Override
 	public boolean changeAction(CharacterAction action) {
 		if (endurance < action.getEnduranceCosts()) {
 			return false;
@@ -150,10 +154,21 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		playSound(action);
 		
 		if (action.isAttack()) {
-			currentAttack = attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
+			attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public boolean executeSpecialAction() {
+		//only arrows are used currently
+		if (attackCreator.allAttacksExecuted()) {
+			attackCreator.startAttack("arrow", movementHandler.getMovingDirection().getNormalizedDirectionVector());//TODO refactor
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
@@ -368,17 +383,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			}
 		}
 		
-		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.PLAYER_ATTACK, fixtureA, fixtureB)) {
-			//hit something with an axe
-			Object attackedUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_ATTACK, fixtureA, fixtureB);
-			
-			if (attackedUserData instanceof Hittable) {
-				Hittable hittable = ((Hittable) attackedUserData);
-				hittable.takeDamage(currentAttack.getDamage());
-				//enemies define the force themselves; the force parameter is a factor for this self defined force
-				hittable.pushByHit(getPosition(), currentAttack.getPushForce());
-			}
-		}
+		attackCreator.handleAttackDamage(contact);
 	}
 	
 	private void collectItem(Item item) {

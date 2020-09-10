@@ -12,6 +12,8 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.projectile.Projectile;
+import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.GameScreen;
 
 public class GameMap implements Disposable {
@@ -26,13 +28,18 @@ public class GameMap implements Disposable {
 	protected TiledMap map;
 	protected Vector2 playerStartingPosition;
 	
+	//the lists are initialized in the factories
 	protected Array<Item> items;
 	protected Array<GameObject> objects;
 	protected Array<Enemy> enemies;
+	protected Array<Projectile> projectiles;
 	
 	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
 		batch = new SpriteBatch();
+		
+		projectiles = new Array<>();
+		ProjectileFactory.createInstance(this);
 		
 		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
 		loader.load();//initializes the map
@@ -52,6 +59,8 @@ public class GameMap implements Disposable {
 		renderObjects(delta);
 		processEnemies(delta);
 		renderEnemies(delta);
+		processProjectiles(delta);
+		renderProjectiles();
 		batch.end();
 	}
 	
@@ -65,7 +74,7 @@ public class GameMap implements Disposable {
 			object.draw(delta, batch);
 		}
 	}
-
+	
 	private void processEnemies(float delta) {
 		for (Enemy enemy : enemies) {
 			enemy.act(delta);
@@ -74,6 +83,17 @@ public class GameMap implements Disposable {
 	private void renderEnemies(float delta) {
 		for (Enemy enemy : enemies) {
 			enemy.draw(delta, batch);
+		}
+	}
+	
+	private void processProjectiles(float delta) {
+		for (Projectile projectile : projectiles) {
+			projectile.update(delta);
+		}
+	}
+	private void renderProjectiles() {
+		for (Projectile projectile : projectiles) {
+			projectile.draw(batch);
 		}
 	}
 	
@@ -103,6 +123,14 @@ public class GameMap implements Disposable {
 	
 	public void removeEnemy(Enemy enemy) {
 		enemies.removeValue(enemy, false);
+	}
+	
+	public void addProjectile(Projectile projectile) {
+		projectiles.add(projectile);
+	}
+	
+	public void removeProjectile(Projectile projectile) {
+		projectiles.removeValue(projectile, false);
 	}
 	
 	@Override

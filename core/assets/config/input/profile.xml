@@ -110,8 +110,7 @@
 				</controller>
 			</state>
 			
-			<!-- jumping dwarf -->
-			<state name="jump">
+			<state name="special">
 				<key code="Space" />
 				<controller>
 					<button code="2" />
