@@ -4,23 +4,25 @@ import com.badlogic.gdx.math.Vector2;
 
 public enum MovingDirection {
 	
-	NONE(true), //
-	UP(true), //
-	DOWN(false), //
-	LEFT(false), //
-	RIGHT(true), //
-	UP_LEFT(false), //
-	UP_RIGHT(true), //
-	DOWN_LEFT(false), //
-	DOWN_RIGHT(true);
+	NONE(true, new Vector2(0f, 0f)), //
+	UP(true, new Vector2(0f, 1f)), //
+	DOWN(false, new Vector2(0f, -1f)), //
+	LEFT(false, new Vector2(-1f, 0f)), //
+	RIGHT(true, new Vector2(1f, 0f)), //
+	UP_LEFT(false, new Vector2(-1f, 1f).nor()), //
+	UP_RIGHT(true, new Vector2(1f, 1f).nor()), //
+	DOWN_LEFT(false, new Vector2(-1f, -1f).nor()), //
+	DOWN_RIGHT(true, new Vector2(1f, -1f).nor());
 	
 	public static final String DRAWING_DIRECTION_RIGHT_POSTFIX = "right";
 	public static final String DRAWING_DIRECTION_LEFT_POSTFIX = "left";
 	
 	private final boolean drawingDirectionRight;
+	private final Vector2 normalizedDirectionVector;
 	
-	private MovingDirection(boolean drawingDirectionRight) {
+	private MovingDirection(boolean drawingDirectionRight, Vector2 normalizedDirectionVector) {
 		this.drawingDirectionRight = drawingDirectionRight;
+		this.normalizedDirectionVector = normalizedDirectionVector;
 	}
 	
 	public String getAnimationDirectionPostfix() {
@@ -56,27 +58,6 @@ public enum MovingDirection {
 	}
 	
 	public Vector2 getNormalizedDirectionVector() {
-		switch (this) {
-			case DOWN:
-				return new Vector2(0f, -1f);
-			case DOWN_LEFT:
-				return new Vector2(-1f, -1f).nor();
-			case DOWN_RIGHT:
-				return new Vector2(1f, -1f).nor();
-			case LEFT:
-				return new Vector2(-1f, 0f);
-			case NONE:
-				return new Vector2(0f, 0f);
-			case RIGHT:
-				return new Vector2(1f, 0f);
-			case UP:
-				return new Vector2(0f, 1f);
-			case UP_LEFT:
-				return new Vector2(-1f, 1f).nor();
-			case UP_RIGHT:
-				return new Vector2(1f, 1f).nor();
-			default:
-				throw new IllegalStateException("Unknown MovingDirection: " + this);
-		}
+		return normalizedDirectionVector.cpy();
 	}
 }
