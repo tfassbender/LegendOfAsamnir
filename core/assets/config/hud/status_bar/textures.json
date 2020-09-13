@@ -1,0 +1,14 @@
+{
+	health: {
+		atlas: packed/demo/demo.atlas,
+		texture: health
+	},
+	shield: {
+		atlas: packed/demo/demo.atlas,
+		texture: shield
+	},
+	mana: {
+		atlas: packed/demo/demo.atlas,
+		texture: mana
+	}
+}

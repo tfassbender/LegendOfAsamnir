@@ -4,6 +4,20 @@ size: 2048,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+aim_marker_gray
+  rotate: false
+  xy: 478, 1
+  size: 5, 5
+  orig: 5, 5
+  offset: 0, 0
+  index: -1
+aim_marker_red
+  rotate: false
+  xy: 714, 119
+  size: 5, 5
+  orig: 5, 5
+  offset: 0, 0
+  index: -1
 axe
   rotate: false
   xy: 762, 174

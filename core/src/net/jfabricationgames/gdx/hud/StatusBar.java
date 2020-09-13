@@ -3,16 +3,17 @@ package net.jfabricationgames.gdx.hud;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.texture.TextureLoader;
 
 public class StatusBar implements Disposable {
+	
+	private static final String textureConfig = "config/hud/status_bar/textures.json";
 	
 	private final float healthBarHeightPercent = 0.55f;
 	private final float armorBarHeightPercent = 0.25f;//takes a part of the health bar
@@ -116,10 +117,10 @@ public class StatusBar implements Disposable {
 	}
 	
 	private void loadIcons() {
-		TextureAtlas atlas = AssetGroupManager.getInstance().get("packed/demo/demo.atlas");
-		healthIcon = atlas.findRegion("health");
-		armorIcon = atlas.findRegion("shield");
-		manaIcon = atlas.findRegion("mana");
+		TextureLoader textureLoader = new TextureLoader(textureConfig);
+		healthIcon = textureLoader.loadTexture("health");
+		armorIcon = textureLoader.loadTexture("shield");
+		manaIcon = textureLoader.loadTexture("mana");
 	}
 	
 	public void render(float delta) {

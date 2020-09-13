@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx.character;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -30,6 +29,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
+import net.jfabricationgames.gdx.texture.TextureLoader;
 
 public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable {
 	
@@ -47,6 +47,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String attackConfigFileName = "config/dwarf/attacks.json";
+	private static final String textureConfig = "config/dwarf/textures.json";
 	private static final String soundSetKey = "dwarf";
 	
 	private static final String spinAttackChargedSound = "spin_attack_charged";
@@ -85,8 +86,10 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private CharacterInputMovementHandler movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
-	private Sprite idleDwarfSprite;
-	private Sprite blockSprite;
+	private TextureLoader textureLoader;
+	private TextureRegion idleDwarfSprite;
+	private TextureRegion blockSprite;
+	private TextureRegion aimMarkerSprite;
 	
 	private SoundSet soundSet;
 	
@@ -94,13 +97,16 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		assetManager = AnimationManager.getInstance();
 		assetManager.loadAnimations(assetConfigFileName);
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
+		
+		textureLoader = new TextureLoader(textureConfig);
 		idleDwarfSprite = getIdleSprite();
+		blockSprite = getShieldSprite();
+		aimMarkerSprite = getAimMarkerSprite();
 		
 		action = CharacterAction.NONE;
 		body = createPhysicsBody();
 		registerAsContactListener();
 		
-		blockSprite = getShieldSprite();
 		animation = getAnimation();
 		
 		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
@@ -112,8 +118,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		World world = physicsWorld.getWorld();
 		
 		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
-				.setWidth(idleDwarfSprite.getWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
-				.setHeight(idleDwarfSprite.getHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
+				.setWidth(idleDwarfSprite.getRegionWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
+				.setHeight(idleDwarfSprite.getRegionHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
 				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
 		Body body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
 		body.setSleepingAllowed(false);
@@ -130,11 +136,14 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		physicsWorld.registerContactListener(this);
 	}
 	
-	private Sprite getIdleSprite() {
-		return new Sprite(getAnimation(CharacterAction.IDLE).getAnimation().getKeyFrame(0));
+	private TextureRegion getIdleSprite() {
+		return textureLoader.loadTexture("idle");
 	}
-	private Sprite getShieldSprite() {
-		return new Sprite(getAnimation(CharacterAction.SHIELD_HIT).getAnimation().getKeyFrame(0));
+	private TextureRegion getShieldSprite() {
+		return textureLoader.loadTexture("block");
+	}
+	private TextureRegion getAimMarkerSprite() {
+		return textureLoader.loadTexture("aim_marker");
 	}
 	
 	@Override
@@ -204,6 +213,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		movementHandler.move(delta);
 		
 		drawDwarf(batch);
+		drawAimMarker(batch);
 	}
 	
 	private void updateAction(float delta) {
@@ -260,25 +270,45 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			frame = animation.getKeyFrame();
 		}
 		
-		if (movementHandler.isDrawDirectionRight() == frame.isFlipX()) {
+		if (!drawingDirectionEqualsTextureDirection(frame)) {
 			frame.flip(true, false);
 		}
 		
 		draw(batch, frame);
 	}
 	
+	private boolean drawingDirectionEqualsTextureDirection(TextureRegion frame) {
+		return movementHandler.isDrawDirectionRight() != frame.isFlipX();
+	}
+	
+	private void drawAimMarker(SpriteBatch batch) {
+		float aimMarkerDistanceFactor = 0.5f;
+		float aimMarkerOffsetY = -0.1f;
+		Vector2 aimMarkerOffset = movementHandler.getMovingDirection().getNormalizedDirectionVector().scl(aimMarkerDistanceFactor).add(0,
+				aimMarkerOffsetY);
+		Vector2 aimMarkerSize = new Vector2(5f, 5f);
+		draw(batch, aimMarkerSprite, aimMarkerOffset, aimMarkerSize);
+	}
+	
 	private void draw(SpriteBatch batch, TextureRegion frame) {
-		int width = frame.getRegionWidth();
-		int height = frame.getRegionHeight();
-		float originX = 0.5f * width + PHYSICS_BODY_POSITION_OFFSET.x * width;
-		float originY = 0.5f * height + PHYSICS_BODY_POSITION_OFFSET.y * height;
+		Vector2 size = new Vector2(frame.getRegionWidth(), frame.getRegionHeight());
+		//use null as offset parameter to not create a new empty vector every time
+		draw(batch, frame, null, size);
+	}
+	private void draw(SpriteBatch batch, TextureRegion frame, Vector2 offset, Vector2 size) {
+		float originX = 0.5f * size.x + PHYSICS_BODY_POSITION_OFFSET.x * size.x;
+		float originY = 0.5f * size.y + PHYSICS_BODY_POSITION_OFFSET.y * size.y;
 		float x = body.getPosition().x - originX;
 		float y = body.getPosition().y - originY;
+		if (offset != null) {
+			x += offset.x;
+			y += offset.y;
+		}
 		
 		batch.draw(frame, // textureRegion
 				x, y, // x, y
 				originX, originY, //originX, originY
-				width, height, // width, height
+				size.x, size.y, // width, height
 				GameScreen.WORLD_TO_SCREEN, // scaleX
 				GameScreen.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation

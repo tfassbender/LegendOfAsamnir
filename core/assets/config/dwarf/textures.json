@@ -1,0 +1,17 @@
+{
+	idle: {
+		atlas: packed/demo/demo.atlas,
+		texture: dwarf_idle_right_1,
+		type: ANIMATION_FRAME
+	},
+	block: {
+		atlas: packed/demo/demo.atlas,
+		texture: dwarf_shield_hit_right_1,
+		type: ANIMATION_FRAME
+	},
+	aim_marker: {
+		atlas: packed/demo/demo.atlas,
+		texture: aim_marker_red,
+		type: TEXTURE_REGION
+	}
+}
