@@ -125,14 +125,20 @@ public abstract class Enemy implements Hittable, ContactListener {
 		stateMachine.updateState();
 		attackCreator.handleAttacks(delta);
 		
-		if (health <= 0) {
+		if (!isAlive()) {
 			if (getAnimation() == null || getAnimation().isAnimationFinished()) {
 				remove();
 			}
 		}
-		
-		ai.calculateMove(delta);
-		ai.executeMove();
+		else {
+			ai.calculateMove(delta);
+			ai.executeMove();
+			
+		}
+	}
+	
+	private boolean isAlive() {
+		return health > 0;
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
@@ -191,10 +197,10 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	@Override
 	public void takeDamage(float damage) {
-		if (health > 0) {
+		if (isAlive()) {
 			health -= damage;
 			
-			if (health <= 0) {
+			if (!isAlive()) {
 				die();
 			}
 			else {
@@ -205,10 +211,16 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	@Override
 	public void pushByHit(Vector2 hitCenter, float force) {
-		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
-		//enemies define the force to get pushed themselves (the player's attack is multiplied to this self defined force as a factor)
-		force *= typeConfig.pushForceDamage * 10f * body.getMass();
-		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
+		if (hasBody()) {
+			Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
+			//enemies define the force to get pushed themselves (the player's attack is multiplied to this self defined force as a factor)
+			force *= typeConfig.pushForceDamage * 10f * body.getMass();
+			body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
+		}
+	}
+
+	private boolean hasBody() {
+		return body != null;
 	}
 	
 	/**
@@ -234,9 +246,10 @@ public abstract class Enemy implements Hittable, ContactListener {
 		removePhysicsBody();
 	}
 	
-	public void removePhysicsBody() {
+	private void removePhysicsBody() {
 		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
 		PhysicsWorld.getInstance().removeContactListener(this);
+		body = null;
 	}
 	
 	@Override

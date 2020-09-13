@@ -64,6 +64,7 @@ public class Item {
 	public void remove() {
 		gameMap.removeItem(this);
 		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+		body = null;
 	}
 	
 	private void playPickUpSound() {

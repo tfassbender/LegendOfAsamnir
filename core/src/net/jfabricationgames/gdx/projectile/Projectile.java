@@ -133,11 +133,14 @@ public abstract class Projectile implements ContactListener {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	
 	public void remove() {
-		gameMap.removeProjectile(this);
+		attackPerformed = true;
 		removePhysicsBody();
+		gameMap.removeProjectile(this);
 	}
 	
-	public void removePhysicsBody() {
+	private void removePhysicsBody() {
 		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+		PhysicsWorld.getInstance().removeContactListener(this);
+		body = null;
 	}
 }

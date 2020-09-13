@@ -70,10 +70,13 @@ public class AttackCreator {
 	}
 	
 	public Attack startAttack(String attack, Vector2 direction) {
-		return startAttack(configs.get(attack), direction);
+		return startAttack(attack, direction, collisionType);
+	}
+	public Attack startAttack(String attack, Vector2 direction, PhysicsCollisionType collisionType) {
+		return startAttack(configs.get(attack), direction, collisionType);
 	}
 	
-	private Attack startAttack(AttackConfig config, Vector2 direction) {
+	private Attack startAttack(AttackConfig config, Vector2 direction, PhysicsCollisionType collisionType) {
 		Attack attack = AttackFactory.createAttack(config, direction, body, collisionType);
 		attacks.add(attack);
 		return attack;

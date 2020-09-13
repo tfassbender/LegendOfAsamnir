@@ -93,6 +93,7 @@ public class PhysicsWorld implements ContactListener {
 			}
 		}
 		for (Body body : bodiesToRemove) {
+			body.setUserData(null);
 			world.destroyBody(body);
 		}
 		

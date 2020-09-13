@@ -137,8 +137,11 @@ public class GameObject implements Hittable {
 		removePhysicsBody();
 	}
 	
-	public void removePhysicsBody() {
-		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+	protected void removePhysicsBody() {
+		if (body != null) {
+			PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+			body = null;
+		}
 	}
 	
 	protected void playHitSound() {
