@@ -145,4 +145,4 @@ The texture packing tool can be used to easily pack multiple texture files from 
 
 ### Credits
 
-All of the graphics used for this game are available for free on [itch.io](https://itch.io/). Most of them came from [Elthen's Pixel Art Shop](https://elthen.itch.io/).
+All of the graphics used for this game are available on [itch.io](https://itch.io/). Most of them came from [Elthen's Pixel Art Shop](https://elthen.itch.io/) and [Pixel Frog](https://pixelfrog-store.itch.io/).
