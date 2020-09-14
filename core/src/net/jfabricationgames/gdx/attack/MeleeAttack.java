@@ -27,13 +27,13 @@ public class MeleeAttack extends Attack {
 	}
 	
 	@Override
-	public void start() {
+	protected void start() {
 		hitFixture = PhysicsBodyCreator.addFixture(hitFixtureProperties);
 		started = true;
 	}
 	
 	@Override
-	public void remove() {
+	protected void remove() {
 		if (hitFixture != null) {
 			PhysicsWorld.getInstance().removeFixture(hitFixture, hitFixtureProperties.body);
 		}

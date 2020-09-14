@@ -130,12 +130,10 @@ public class EnemyStateMachine {
 	}
 	
 	private boolean isTextureRight(TextureRegion texture) {
-		//animationRight && !texture.flip || !animationRight && texture.flip
 		return currentState.config.initialAnimationDirectionRight != texture.isFlipX();
 	}
 	
 	private boolean isTextureLeft(TextureRegion texture) {
-		//animationRight && texture.flip || !animationRight && !texture.flip
 		return currentState.config.initialAnimationDirectionRight == texture.isFlipX();
 	}
 	

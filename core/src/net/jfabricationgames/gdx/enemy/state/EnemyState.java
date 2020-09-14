@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.attack.Attack;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
@@ -22,6 +23,7 @@ public class EnemyState {
 	protected ObjectSet<EnemyState> interruptingStates;
 	
 	protected AttackCreator attackCreator;
+	private Array<Attack> attacks;
 	
 	private Array<EnemyStateListener> stateListeners;
 	
@@ -31,6 +33,7 @@ public class EnemyState {
 		this.animation = animation;
 		this.config = config;
 		this.attackCreator = attackCreator;
+		attacks = new Array<>();
 		stateListeners = new Array<>();
 	}
 	
@@ -49,24 +52,40 @@ public class EnemyState {
 		for (EnemyStateListener listener : stateListeners) {
 			listener.leavingState(this);
 		}
+		
+		abortAttacks();
+	}
+	
+	private void abortAttacks() {
+		for (Attack attack : attacks) {
+			attack.abort();
+		}
+		attacks.clear();
 	}
 	
 	public void enterState(EnemyState previousState) {
 		for (EnemyStateListener listener : stateListeners) {
 			listener.enteringState(this);
 		}
+		
 		if (config.flipAnimationOnEnteringOnly) {
 			flipAnimationToMovementDirection(previousState);
 		}
 		if (config.attack != null) {
-			if (directionToTarget == null) {
-				throw new IllegalStateException("The direction for the attack has not been set. "
-						+ "Use the setAttackDirection(Vector2) method to set the direction BEFORE changing to this state.");
-			}
-			attackCreator.startAttack(config.attack, directionToTarget);
+			startAttack();
 		}
+		
 		animation.resetStateTime();
 		playSound();
+	}
+	
+	private void startAttack() {
+		if (directionToTarget == null) {
+			throw new IllegalStateException("The direction for the attack has not been set. "
+					+ "Use the setAttackDirection(Vector2) method to set the direction BEFORE changing to this state.");
+		}
+		Attack attack = attackCreator.startAttack(config.attack, directionToTarget);
+		attacks.add(attack);
 	}
 	
 	/**

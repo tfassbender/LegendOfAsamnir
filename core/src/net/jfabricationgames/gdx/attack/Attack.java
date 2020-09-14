@@ -12,6 +12,7 @@ public abstract class Attack {
 	
 	protected float timer;
 	protected boolean started;
+	protected boolean aborted;
 	
 	protected AttackConfig config;
 	protected PhysicsBodyProperties hitFixtureProperties;
@@ -31,14 +32,19 @@ public abstract class Attack {
 		
 		timer = 0;
 		started = false;
+		aborted = false;
+	}
+	
+	public void abort() {
+		aborted = true;
 	}
 	
 	protected boolean isExecuted() {
-		return started && timer >= config.delay + config.duration;
+		return aborted || (started && timer >= config.delay + config.duration);
 	}
 	
 	protected boolean isToStart() {
-		return !started && timer >= config.delay;
+		return !aborted && !started && timer >= config.delay;
 	}
 	
 	protected void increaseTimer(float delta) {
