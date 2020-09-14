@@ -27,10 +27,10 @@ public class InteractiveObject extends GameObject implements Interactive {
 		DISPLAY_TEXT("displayText"), // text that is displayed in the OnScreenTextBox
 		DISPLAY_TEXT_HEADER("displayTextHeader"); // header that is displayed in the OnScreenTextBox (only if DISPLAY_TEXT is defined)
 		
-		public final String key;
+		public final String mapPropertiesKey;
 		
-		private Properties(String key) {
-			this.key = key;
+		private Properties(String mapPropertiesKey) {
+			this.mapPropertiesKey = mapPropertiesKey;
 		}
 	}
 	
@@ -74,6 +74,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 				animation = getActionAnimation();
 			}
 			performAction();
+			dropItems();
 			actionExecuted = true;
 			if (typeConfig.textureAfterAction != null) {
 				sprite = createSprite(typeConfig.textureAfterAction);
@@ -96,10 +97,10 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private void performAction() {
-		if (properties.containsKey(Properties.DISPLAY_TEXT.key)) {
+		if (properties.containsKey(Properties.DISPLAY_TEXT.mapPropertiesKey)) {
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(properties.get(Properties.DISPLAY_TEXT_HEADER.key, String.class));
-			onScreenTextBox.setText(properties.get(Properties.DISPLAY_TEXT.key, String.class));
+			onScreenTextBox.setHeaderText(properties.get(Properties.DISPLAY_TEXT_HEADER.mapPropertiesKey, String.class));
+			onScreenTextBox.setText(properties.get(Properties.DISPLAY_TEXT.mapPropertiesKey, String.class));
 		}
 	}
 	

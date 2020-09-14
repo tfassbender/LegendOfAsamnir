@@ -1,26 +1,4 @@
 {
-//	object: {
-//		texture: ,
-//		animationHit: ,
-//		animationBreak: ,
-//		animationAction: ,
-//		
-//		physicsBodySizeFactorX: ,
-//		physicsBodySizeFactorY: ,
-//		physicsBodyOffsetFactorX: ,
-//		physicsBodyOffsetFactorY: ,
-//	
-//		hitSound: ,
-//		destroySound: ,
-//		health: ,
-//		
-//		bodyType: BodyType.StaticBody,
-//		density: 0,
-//		friction: 0,
-//		restitution: 0,
-//		collsitionType: PhysicsCollisionType.OBSTACLE,
-//		sensor: false,
-//	}
 	barrel: {
 		texture: barrel,
 		animationHit: barrel_hit,
@@ -33,7 +11,14 @@
 	
 		hitSound: wood_hit_2,
 		destroySound: wood_break,
-		health: 30
+		health: 30,
+		
+		drops: {
+			coin: 0.5,
+			health: 0.1,
+			mana: 0.1,
+			shield: 0.1
+		}
 	},
 	box: {
 		texture: box,
@@ -47,7 +32,13 @@
 	
 		hitSound: wood_hit_1,
 		destroySound: wood_break,
-		health: 20
+		health: 20,
+		
+		drops: {
+			coin: 0.3,
+			health: 0.1,
+			shield: 0.1
+		}
 	},
 	chest: {
 		texture: chest,
@@ -63,7 +54,16 @@
 		multipleActionExecutionsPossible: false,
 		textureAfterAction: chest_open_5,
 	
-		hitSound: wood_hit_2
+		hitSound: wood_hit_2,
+		
+		drops: {
+			coin: 0.5,
+			health: 0.25,
+			mana: 0.1,
+			shield: 0.15
+		}
+		dropPositionOffsetY: -0.25,
+		renderDropsAboveObject: true,
 	},
 	pot: {
 		texture: pot,
@@ -76,7 +76,11 @@
 		physicsBodyOffsetFactorY: -0.075,
 	
 		destroySound: glass_break,
-		health: 5
+		health: 5,
+		
+		drops: {
+			coin: 0.75,
+		}
 	},
 	signboard: {
 		texture: signboard,

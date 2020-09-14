@@ -29,6 +29,7 @@ public class PhysicsWorld implements ContactListener {
 	private Array<ContactListener> contactListeners;
 	private Array<Body> bodiesToRemove;
 	private ArrayMap<Body, Array<Fixture>> fixturesToRemove;
+	private Array<Runnable> runAfterWorldStep;
 	
 	private PhysicsWorld() {
 		bodiesToRemove = new Array<>();
@@ -40,6 +41,7 @@ public class PhysicsWorld implements ContactListener {
 		world = new World(gravity, doSleep);
 		world.setContactListener(this);
 		contactListeners = new Array<>();
+		runAfterWorldStep = new Array<>();
 		return world;
 	}
 	
@@ -82,7 +84,7 @@ public class PhysicsWorld implements ContactListener {
 	/**
 	 * Destroy all bodies that are marked to be deleted after the world step is over.
 	 */
-	public void removeBodiesAndFixtures() {
+	private void removeBodiesAndFixtures() {
 		for (Body body : fixturesToRemove.keys()) {
 			Array<Fixture> bodiesFixtures = body.getFixtureList();
 			//iterate over all fixtures of the body and check if they are to be deleted because it just wont work any other way
@@ -99,6 +101,25 @@ public class PhysicsWorld implements ContactListener {
 		
 		bodiesToRemove.clear();
 		fixturesToRemove.clear();
+	}
+	
+	public void runAfterWorldStep(Runnable runnable) {
+		runAfterWorldStep.add(runnable);
+	}
+	
+	/**
+	 * Call after the world step is over to execute everything that could not be done while the world was locked.
+	 */
+	public void afterWorldStep() {
+		removeBodiesAndFixtures();
+		executeRunnables();
+	}
+	
+	private void executeRunnables() {
+		for (Runnable runnable : runAfterWorldStep) {
+			runnable.run();
+		}
+		runAfterWorldStep.clear();
 	}
 	
 	@Override

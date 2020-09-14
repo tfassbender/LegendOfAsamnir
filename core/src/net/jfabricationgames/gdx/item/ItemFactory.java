@@ -34,7 +34,7 @@ public class ItemFactory extends AbstractFactory {
 		atlas = assetManager.get(config.itemAtlas);
 		world = PhysicsWorld.getInstance().getWorld();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	private void loadTypeConfigs() {
 		typeConfigs = json.fromJson(ObjectMap.class, ItemTypeConfig.class, Gdx.files.internal(config.itemTypeConfig));
@@ -47,6 +47,18 @@ public class ItemFactory extends AbstractFactory {
 	@SuppressWarnings("unchecked")
 	private void loadDefaultValues() {
 		defaultValues = json.fromJson(ObjectMap.class, ObjectMap.class, Gdx.files.internal(config.defaultValuesConfig));
+	}
+	
+	public void createAndAddItemAfterWorldStep(String type, float x, float y, boolean renderAboveGameObjects) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			Item item = createItem(type, x, y, new MapProperties());
+			if (renderAboveGameObjects) {
+				gameMap.addItemAboveGameObjects(item);
+			}
+			else {
+				gameMap.addItem(item);
+			}
+		});
 	}
 	
 	public Item createItem(String name, float x, float y, MapProperties properties) {
@@ -71,10 +83,10 @@ public class ItemFactory extends AbstractFactory {
 				if (!properties.containsKey(entry.key)) {
 					properties.put(entry.key, entry.value);
 				}
-			}			
+			}
 		}
 	}
-
+	
 	public static class Config {
 		
 		public String itemAtlas;

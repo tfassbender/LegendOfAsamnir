@@ -1,9 +1,4 @@
 {
-//	item: {
-//		textureName: ,
-//		physicsObjectRadius: ,
-//		pickUpSoundName: ,
-//	}
 	__default: {
 		//default fallbacks
 		pickUpSound: pickup

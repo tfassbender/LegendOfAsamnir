@@ -33,6 +33,7 @@ public class GameMap implements Disposable {
 	
 	//the lists are initialized in the factories
 	protected Array<Item> items;
+	protected Array<Item> itemsAboveGameObjects;
 	protected Array<GameObject> objects;
 	protected Array<Enemy> enemies;
 	protected Array<Projectile> projectiles;
@@ -40,11 +41,13 @@ public class GameMap implements Disposable {
 	protected ItemFactory itemFactory;
 	protected ObjectFactory objectFactory;
 	protected EnemyFactory enemyFactory;
+
 	
 	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
 		batch = new SpriteBatch();
 		
+		itemsAboveGameObjects = new Array<>();
 		projectiles = new Array<>();
 		ProjectileFactory.createInstance(this);
 		
@@ -68,6 +71,7 @@ public class GameMap implements Disposable {
 		batch.begin();
 		renderItems(delta);
 		renderObjects(delta);
+		renderItemsAboveGameObjects(delta);
 		processEnemies(delta);
 		renderEnemies(delta);
 		processProjectiles(delta);
@@ -80,9 +84,16 @@ public class GameMap implements Disposable {
 			item.draw(delta, batch);
 		}
 	}
+	
 	private void renderObjects(float delta) {
 		for (GameObject object : objects) {
 			object.draw(delta, batch);
+		}
+	}
+	
+	private void renderItemsAboveGameObjects(float delta) {
+		for (Item item : itemsAboveGameObjects) {
+			item.draw(delta, batch);
 		}
 	}
 	
@@ -116,8 +127,13 @@ public class GameMap implements Disposable {
 		items.add(item);
 	}
 	
+	public void addItemAboveGameObjects(Item item) {
+		itemsAboveGameObjects.add(item);
+	}
+	
 	public void removeItem(Item item) {
 		items.removeValue(item, false);
+		itemsAboveGameObjects.removeValue(item, false);
 	}
 	
 	public void addObject(GameObject object) {

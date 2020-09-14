@@ -53,6 +53,7 @@ public class DestroyableObject extends GameObject {
 		destroyed = true;
 		animation = getDestroyAnimation();
 		playDestroySound();
+		dropItems();
 		removePhysicsBody();
 	}
 	

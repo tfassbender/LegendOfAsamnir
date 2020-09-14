@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
@@ -130,6 +131,33 @@ public class GameObject implements Hittable {
 			return animationManager.getAnimationDirector(typeConfig.animationAction);
 		}
 		return null;
+	}
+	
+	protected void dropItems() {
+		if (dropsItems()) {
+			double random = Math.random();
+			float summedProbability = 0f;
+			for (Entry<String, Float> entry : typeConfig.drops.entries()) {
+				String dropType = entry.key;
+				float dropProbability = entry.value;
+				if (random <= summedProbability + dropProbability) {
+					dropItem(dropType);
+					return;
+				}
+				summedProbability += dropProbability;
+			}
+		}
+	}
+	
+	private boolean dropsItems() {
+		return typeConfig.drops != null && !typeConfig.drops.isEmpty();
+	}
+	
+	private void dropItem(String type) {
+		gameMap.getItemFactory().createAndAddItemAfterWorldStep(type,
+				(body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD, //
+				(body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD, //
+				typeConfig.renderDropsAboveObject);
 	}
 	
 	public void remove() {
