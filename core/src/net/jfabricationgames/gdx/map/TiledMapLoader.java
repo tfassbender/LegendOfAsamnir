@@ -24,7 +24,7 @@ public class TiledMapLoader {
 	
 	private String mapAsset;
 	private GameMap gameMap;
-	
+
 	private ItemFactory itemFactory;
 	private ObjectFactory objectFactory;
 	private EnemyFactory enemyFactory;
@@ -32,9 +32,10 @@ public class TiledMapLoader {
 	public TiledMapLoader(String mapAsset, GameMap gameMap) {
 		this.mapAsset = mapAsset;
 		this.gameMap = gameMap;
-		itemFactory = new ItemFactory(gameMap);
-		objectFactory = new ObjectFactory(gameMap);
-		enemyFactory = new EnemyFactory(gameMap);
+		
+		this.itemFactory = gameMap.itemFactory;
+		this.objectFactory = gameMap.objectFactory;
+		this.enemyFactory = gameMap.enemyFactory;
 	}
 	
 	public void load() {

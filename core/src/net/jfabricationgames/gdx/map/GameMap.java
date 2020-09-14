@@ -10,8 +10,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.enemy.Enemy;
+import net.jfabricationgames.gdx.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
+import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.ObjectFactory;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.GameScreen;
@@ -34,12 +37,20 @@ public class GameMap implements Disposable {
 	protected Array<Enemy> enemies;
 	protected Array<Projectile> projectiles;
 	
+	protected ItemFactory itemFactory;
+	protected ObjectFactory objectFactory;
+	protected EnemyFactory enemyFactory;
+	
 	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
 		batch = new SpriteBatch();
 		
 		projectiles = new Array<>();
 		ProjectileFactory.createInstance(this);
+		
+		itemFactory = new ItemFactory(this);
+		objectFactory = new ObjectFactory(this);
+		enemyFactory = new EnemyFactory(this);
 		
 		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
 		loader.load();//initializes the map
@@ -138,5 +149,17 @@ public class GameMap implements Disposable {
 		renderer.dispose();
 		map.dispose();
 		batch.dispose();
+	}
+	
+	public ItemFactory getItemFactory() {
+		return itemFactory;
+	}
+	
+	public ObjectFactory getObjectFactory() {
+		return objectFactory;
+	}
+	
+	public EnemyFactory getEnemyFactory() {
+		return enemyFactory;
 	}
 }
