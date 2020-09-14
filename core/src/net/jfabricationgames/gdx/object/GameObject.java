@@ -39,6 +39,7 @@ public class GameObject implements Hittable {
 	protected GameMap gameMap;
 	protected TextureAtlas textureAtlas;
 	protected ObjectTypeConfig typeConfig;
+	protected ObjectMap<String, Float> dropTypes;
 	
 	protected AnimationManager animationManager;
 	protected AnimationDirector<TextureRegion> animation;
@@ -61,7 +62,10 @@ public class GameObject implements Hittable {
 	private void processMapProperties() {
 		if (mapProperties.containsKey(dropItemMapPropertiesKey)) {
 			String droppedItemConfig = mapProperties.get(dropItemMapPropertiesKey, String.class);
-			typeConfig.drops = readDroppedItemConfig(droppedItemConfig);
+			dropTypes = readDroppedItemConfig(droppedItemConfig);
+		}
+		else {
+			dropTypes = typeConfig.drops;
 		}
 	}
 	
@@ -152,7 +156,7 @@ public class GameObject implements Hittable {
 		if (dropsItems()) {
 			double random = Math.random();
 			float summedProbability = 0f;
-			for (Entry<String, Float> entry : typeConfig.drops.entries()) {
+			for (Entry<String, Float> entry : dropTypes.entries()) {
 				String dropType = entry.key;
 				float dropProbability = entry.value;
 				if (random <= summedProbability + dropProbability) {
@@ -165,7 +169,7 @@ public class GameObject implements Hittable {
 	}
 	
 	private boolean dropsItems() {
-		return typeConfig.drops != null && !typeConfig.drops.isEmpty();
+		return dropTypes != null && !dropTypes.isEmpty();
 	}
 	
 	private void dropItem(String type) {
