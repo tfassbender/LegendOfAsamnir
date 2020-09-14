@@ -6,7 +6,6 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
@@ -68,7 +67,6 @@ public class ObjectFactory extends AbstractFactory {
 		}
 		object.setGameMap(gameMap);
 		object.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
-		object.setPosition(new Vector2(x, y));
 		object.setTextureAtlas(atlas);
 		
 		return object;

@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
@@ -26,17 +28,16 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class GameObject implements Hittable {
 	
+	protected static final String dropItemMapPropertiesKey = "drop";
+	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	
 	protected Sprite sprite;
-	protected MapProperties properties;
+	protected MapProperties mapProperties;
 	protected Body body;
 	protected GameMap gameMap;
 	protected TextureAtlas textureAtlas;
-	
-	protected Vector2 position;
-	
 	protected ObjectTypeConfig typeConfig;
 	
 	protected AnimationManager animationManager;
@@ -47,13 +48,27 @@ public class GameObject implements Hittable {
 	protected Vector2 physicsBodySizeFactor;
 	protected Vector2 physicsBodyOffsetFactor;
 	
-	public GameObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
+	public GameObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
-		this.properties = properties;
+		this.mapProperties = mapProperties;
 		animationManager = AnimationManager.getInstance();
 		
+		processMapProperties();
 		readTypeConfig();
+	}
+	
+	private void processMapProperties() {
+		if (mapProperties.containsKey(dropItemMapPropertiesKey)) {
+			String droppedItemConfig = mapProperties.get(dropItemMapPropertiesKey, String.class);
+			typeConfig.drops = readDroppedItemConfig(droppedItemConfig);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private ObjectMap<String, Float> readDroppedItemConfig(String droppedItemConfig) {
+		Json json = new Json();
+		return json.fromJson(ObjectMap.class, Float.class, droppedItemConfig);
 	}
 	
 	protected void readTypeConfig() {
@@ -88,8 +103,8 @@ public class GameObject implements Hittable {
 		TextureRegion textureRegion = animationFrame.findRegion(textureAtlas);
 		
 		Sprite sprite = new Sprite(textureRegion);
-		sprite.setX(position.x * GameScreen.WORLD_TO_SCREEN - sprite.getWidth() * 0.5f);
-		sprite.setY(position.y * GameScreen.WORLD_TO_SCREEN - sprite.getHeight() * 0.5f);
+		sprite.setX(body.getPosition().x - sprite.getWidth() * 0.5f);
+		sprite.setY(body.getPosition().y - sprite.getHeight() * 0.5f);
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		return sprite;
 	}
@@ -180,7 +195,7 @@ public class GameObject implements Hittable {
 	
 	@Override
 	public String toString() {
-		return "MapObject [type=" + typeConfig + ", properties=" + properties + "]";
+		return "MapObject [type=" + typeConfig + ", properties=" + mapProperties + "]";
 	}
 	
 	protected void setGameMap(GameMap gameMap) {
@@ -190,9 +205,4 @@ public class GameObject implements Hittable {
 	protected void setTextureAtlas(TextureAtlas textureAtlas) {
 		this.textureAtlas = textureAtlas;
 	}
-	
-	protected void setPosition(Vector2 position) {
-		this.position = position;
-	}
-	
 }

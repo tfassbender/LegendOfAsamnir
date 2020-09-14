@@ -97,10 +97,10 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private void performAction() {
-		if (properties.containsKey(Properties.DISPLAY_TEXT.mapPropertiesKey)) {
+		if (mapProperties.containsKey(Properties.DISPLAY_TEXT.mapPropertiesKey)) {
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(properties.get(Properties.DISPLAY_TEXT_HEADER.mapPropertiesKey, String.class));
-			onScreenTextBox.setText(properties.get(Properties.DISPLAY_TEXT.mapPropertiesKey, String.class));
+			onScreenTextBox.setHeaderText(mapProperties.get(Properties.DISPLAY_TEXT_HEADER.mapPropertiesKey, String.class));
+			onScreenTextBox.setText(mapProperties.get(Properties.DISPLAY_TEXT.mapPropertiesKey, String.class));
 		}
 	}
 	
