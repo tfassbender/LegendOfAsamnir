@@ -1,0 +1,38 @@
+{
+	up_left: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_up_left,
+	},
+	up: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_up,
+	},
+	up_right: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_up_right,
+	},
+	right: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_right,
+	},
+	down_right: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_down_right,
+	},
+	down: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_down,
+	},
+	down_left: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_down_left,
+	},
+	left: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_left,
+	},
+	mid: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_board_mid,
+	},
+}

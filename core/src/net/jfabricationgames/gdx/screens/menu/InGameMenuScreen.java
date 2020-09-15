@@ -17,6 +17,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBackground;
+import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
 public class InGameMenuScreen extends ScreenAdapter implements InputActionListener {
 	
@@ -25,6 +26,7 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 	
 	public static final String ASSET_GROUP_NAME = "main_menu";
 	public static final String INPUT_CONTEXT_NAME = "inGameMenu";
+	public static final String FONT_NAME = "vikingMedium";
 	
 	public static final String ACTION_BACK_TO_GAME = "backToGame";
 	
@@ -32,12 +34,14 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 	
 	private AssetGroupManager assetManager;
 	private GameScreen gameScreen;
+	private ScreenTextWriter screenTextWriter;
 	
 	private SpriteBatch batch;
 	private FrameBuffer gameSnapshotFrameBuffer;
 	private Sprite gameSnapshotSprite;
 	
 	private MenuBackground background;
+	private MenuBackground banner;
 	
 	public InGameMenuScreen(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
@@ -51,6 +55,10 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 		assetManager.finishLoading();
 		
 		background = new MenuBackground(12, 8, MenuBackground.TextureType.GREEN_BOARD);
+		banner = new MenuBackground(6, 2, MenuBackground.TextureType.BIG_BANNER);
+		
+		screenTextWriter = new ScreenTextWriter();
+		screenTextWriter.setFont(FONT_NAME);
 	}
 	
 	@Override
@@ -105,9 +113,22 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-		gameSnapshotSprite.draw(batch);
-		background.draw(batch, 100, 100, VIRTUAL_WIDTH - 200, VIRTUAL_HEIGHT - 200);
+		drawBackground();
 		batch.end();
+		
+		drawHeadline();
+	}
+	
+	private void drawBackground() {
+		gameSnapshotSprite.draw(batch);
+		background.draw(batch, 100, 100, 980, 600);
+		banner.draw(batch, 125, 540, 650, 250);
+	}
+	
+	private void drawHeadline() {
+		screenTextWriter.setScale(1.5f);
+		screenTextWriter.setColor(Color.BLACK);
+		screenTextWriter.drawText("Pause Menu", 230, 683);
 	}
 	
 	@Override

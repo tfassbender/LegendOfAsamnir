@@ -10,7 +10,11 @@ public class MenuBackground {
 	
 	public enum TextureType {
 		
-		GREEN_BOARD("config/menu/backgrounds/green_board_textures.json");
+		GREEN_BOARD("config/menu/backgrounds/green_board_textures.json"), //
+		YELLOW_BOARD("config/menu/backgrounds/yellow_board_textures.json"), //
+		INVENTORY("config/menu/backgrounds/inventory_textures.json"), //
+		BIG_BANNER("config/menu/backgrounds/big_banner_textures.json"), //
+		YELLOW_PAPER("config/menu/backgrounds/yellow_paper_textures.json"); //
 		
 		public final String configFile;
 		
@@ -66,15 +70,34 @@ public class MenuBackground {
 	}
 	
 	public void draw(SpriteBatch batch, float x, float y, float width, float height) {
-		float widthPerPart = width / (partsX + 1);
-		float heightPerPart = height / (partsY + 1);
-		
+		float widthFactor = width / summedWidth();
+		float heightFactor = height / summedHeight();
+
+		float offsetX = 0;
+		float offsetY = 0;
 		for (int i = 0; i < partsY; i++) {
+			float lineHeight = 0;
+			offsetX = 0;
 			for (int j = 0; j < partsX; j++) {
 				TextureRegion texture = getTextureRegion(j, i);
-				batch.draw(texture, x + widthPerPart * j, y + heightPerPart * i, widthPerPart, heightPerPart);
+				float scaledWidth = texture.getRegionWidth() * widthFactor;
+				float scaledHeight = texture.getRegionHeight() * heightFactor;
+				batch.draw(texture, x + offsetX, y + offsetY, scaledWidth, scaledHeight);
+				offsetX += scaledWidth;
+				lineHeight = scaledHeight;
 			}
+			offsetY += lineHeight;
 		}
+	}
+	
+	private float summedWidth() {
+		return textureParts.get(Part.LEFT).getRegionWidth() + textureParts.get(Part.MID).getRegionWidth() * (partsX - 2)
+				+ textureParts.get(Part.RIGHT).getRegionWidth();
+	}
+	
+	private float summedHeight() {
+		return textureParts.get(Part.UP).getRegionHeight() + textureParts.get(Part.MID).getRegionHeight() * (partsY - 2)
+				+ textureParts.get(Part.DOWN).getRegionHeight();
 	}
 	
 	private TextureRegion getTextureRegion(int x, int y) {

@@ -85,7 +85,11 @@
 			textureDirs: [
 				menu,
 				menu/buttons,
+				menu/background/big_banner,
 				menu/background/green_board,
+				menu/background/inventory,
+				menu/background/yellow_board,
+				menu/background/yellow_paper
 			]
 		},
 	}
