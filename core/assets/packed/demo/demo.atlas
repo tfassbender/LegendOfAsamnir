@@ -214,6 +214,13 @@ bat_fly
   orig: 16, 24
   offset: 0, 0
   index: 5
+bow
+  rotate: false
+  xy: 762, 156
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 box
   rotate: false
   xy: 176, 26
@@ -370,7 +377,7 @@ chest_open
   index: 4
 coin
   rotate: false
-  xy: 762, 156
+  xy: 478, 8
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -391,7 +398,7 @@ dialog_skull
   index: 2
 dialog_skull
   rotate: false
-  xy: 514, 12
+  xy: 532, 12
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -832,14 +839,14 @@ dwarf_spin_right
   index: 4
 exclamation
   rotate: false
-  xy: 1916, 176
+  xy: 1934, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 interrogation
   rotate: false
-  xy: 1916, 176
+  xy: 1934, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -1063,32 +1070,39 @@ gladiator_move
   index: 8
 hammer
   rotate: false
-  xy: 478, 8
+  xy: 696, 108
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 health
   rotate: false
-  xy: 696, 108
+  xy: 1880, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 interrogation
   rotate: false
-  xy: 530, 12
+  xy: 548, 12
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 2
 interrogation
   rotate: false
-  xy: 1932, 176
+  xy: 1950, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 3
+jump
+  rotate: false
+  xy: 496, 8
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 key
   rotate: false
   xy: 0, 0
@@ -1147,7 +1161,7 @@ key
   index: 8
 mana
   rotate: false
-  xy: 1880, 172
+  xy: 1898, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1567,7 +1581,7 @@ projectile_arrow
   index: -1
 shield
   rotate: false
-  xy: 496, 8
+  xy: 514, 8
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1651,7 +1665,7 @@ signboard_hit
   index: 3
 sword
   rotate: false
-  xy: 1898, 172
+  xy: 1916, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

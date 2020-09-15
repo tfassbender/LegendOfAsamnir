@@ -1,0 +1,10 @@
+{
+	bow: {
+		atlas: packed/demo/demo.atlas,
+		texture: bow,
+	},
+	jump: {
+		atlas: packed/demo/demo.atlas,
+		texture: jump,
+	}
+}

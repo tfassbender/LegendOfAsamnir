@@ -2,7 +2,7 @@
 	__default: {
 		//default fallbacks
 		pickUpSound: pickup
-	}
+	},
 	health: {
 		texture: health,
 		pickUpSound: health_small,
@@ -21,8 +21,15 @@
 	mana: {
 		texture: mana,
 		pickUpSound: mana
-	}
+	},
 	shield: {
 		texture: shield,
+	},
+	//menu items
+	bow: {
+		texture: bow
+	},
+	jump: {
+		texture: jump
 	}
 }

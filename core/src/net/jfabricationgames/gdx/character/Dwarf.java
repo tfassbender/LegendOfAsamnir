@@ -24,9 +24,9 @@ import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.texture.TextureLoader;
@@ -58,6 +58,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private AttackCreator attackCreator;
 	
 	private CharacterAction action;
+	private SpecialAction activeSpecialAction;
 	
 	private float health = 100f;
 	private float maxHealth = 100f;
@@ -106,6 +107,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		action = CharacterAction.NONE;
 		body = createPhysicsBody();
 		registerAsContactListener();
+		
+		activeSpecialAction = SpecialAction.JUMP;
 		
 		animation = getAnimation();
 		
@@ -171,10 +174,19 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public boolean executeSpecialAction() {
-		//only arrows are used currently
-		if (attackCreator.allAttacksExecuted()) {
-			attackCreator.startAttack("arrow", movementHandler.getMovingDirection().getNormalizedDirectionVector());//TODO refactor "arrow"
-			return true;
+		if (activeSpecialAction != null) {
+			switch (activeSpecialAction) {
+				case BOW:
+					if (attackCreator.allAttacksExecuted()) {
+						attackCreator.startAttack("arrow", movementHandler.getMovingDirection().getNormalizedDirectionVector());//TODO refactor "arrow"
+						return true;
+					}
+					break;
+				case JUMP:
+					return changeAction(CharacterAction.JUMP);
+				default:
+					throw new IllegalStateException("Unexpected SpecialAction: " + activeSpecialAction);
+			}
 		}
 		
 		return false;
@@ -391,12 +403,23 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return armor / maxArmor;
 	}
 	
+	@Override
 	public Vector2 getPosition() {
 		return body.getPosition().cpy();
 	}
 	
 	public void setPosition(float x, float y) {
 		body.setTransform(x, y, 0);
+	}
+	
+	@Override
+	public SpecialAction getActiveSpecialAction() {
+		return activeSpecialAction;
+	}
+	
+	@Override
+	public void setActiveSpecialAction(SpecialAction specialAction) {
+		this.activeSpecialAction = specialAction;
 	}
 	
 	@Override

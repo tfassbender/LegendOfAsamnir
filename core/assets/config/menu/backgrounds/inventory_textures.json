@@ -35,4 +35,12 @@
 		atlas: packed/menu/menu.atlas,
 		texture: inventory_mid,
 	},
+	selected: {
+		atlas: packed/menu/menu.atlas,
+		texture: inventory_mid_selected
+	},
+	hover: {
+		atlas: packed/menu/menu.atlas,
+		texture: inventory_mid_hover
+	}
 }

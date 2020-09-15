@@ -161,7 +161,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
 	private void showInGameMenu() {
 		if (inGameMenu == null) {
-			inGameMenu = new InGameMenuScreen(this);
+			inGameMenu = new InGameMenuScreen(this, dwarf);
 		}
 		inGameMenu.showMenu();
 	}

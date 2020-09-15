@@ -101,4 +101,8 @@ public interface PlayableCharacter {
 	public boolean isExhausted();
 	
 	public Vector2 getPosition();
+	
+	public SpecialAction getActiveSpecialAction();
+	
+	public void setActiveSpecialAction(SpecialAction specialAction);
 }
