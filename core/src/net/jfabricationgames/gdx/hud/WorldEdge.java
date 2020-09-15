@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class WorldEdge implements Disposable {
 	

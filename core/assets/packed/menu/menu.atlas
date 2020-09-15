@@ -1,75 +1,138 @@
 
 menu.png
-size: 2048,512
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button_round
   rotate: false
-  xy: 1703, 216
+  xy: 202, 132
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 button_six_edges
   rotate: false
-  xy: 871, 0
+  xy: 0, 118
   size: 200, 214
   orig: 200, 214
   offset: 0, 0
   index: -1
 button_square
   rotate: false
-  xy: 1073, 14
+  xy: 404, 132
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 button_square_round_edges
   rotate: false
-  xy: 1275, 14
+  xy: 606, 132
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 button_wide
   rotate: false
-  xy: 0, 279
+  xy: 0, 801
   size: 873, 200
   orig: 873, 200
   offset: 0, 0
   index: -1
 button_wide_round
   rotate: false
-  xy: 875, 216
+  xy: 0, 397
   size: 826, 200
   orig: 826, 200
   offset: 0, 0
   index: -1
 button_wide_round_edges
   rotate: false
-  xy: 0, 77
+  xy: 0, 599
   size: 869, 200
   orig: 869, 200
   offset: 0, 0
   index: -1
 dwarf_scroller_headline
   rotate: false
-  xy: 875, 418
+  xy: 0, 334
   size: 983, 61
   orig: 983, 61
   offset: 0, 0
   index: -1
 exit_button_text
   rotate: false
-  xy: 0, 36
+  xy: 808, 293
   size: 154, 39
   orig: 154, 39
   offset: 0, 0
   index: -1
+green_board_down
+  rotate: false
+  xy: 875, 969
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_down_left
+  rotate: false
+  xy: 828, 565
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_down_right
+  rotate: false
+  xy: 0, 34
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_left
+  rotate: false
+  xy: 161, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_mid
+  rotate: false
+  xy: 808, 259
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_right
+  rotate: false
+  xy: 875, 935
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_up
+  rotate: false
+  xy: 909, 969
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_up_left
+  rotate: false
+  xy: 828, 531
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_board_up_right
+  rotate: false
+  xy: 0, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 play_button_text
   rotate: false
-  xy: 1860, 431
+  xy: 0, 68
   size: 159, 48
   orig: 159, 48
   offset: 0, 0

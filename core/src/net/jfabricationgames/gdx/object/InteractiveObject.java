@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class InteractiveObject extends GameObject implements Interactive {
 	

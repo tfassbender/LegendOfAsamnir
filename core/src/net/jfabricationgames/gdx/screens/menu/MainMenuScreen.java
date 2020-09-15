@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screens;
+package net.jfabricationgames.gdx.screens.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -22,12 +22,11 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
-import net.jfabricationgames.gdx.text.ScreenTextWriter;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class MainMenuScreen extends ScreenAdapter implements InputActionListener {
 	
 	public static final String ASSET_GROUP_NAME = "main_menu";
-	public static final String FONT_NAME = "vikingMedium";
 	public static final int VIRTUAL_WIDTH = 1280;
 	public static final int VIRTUAL_HEIGHT = 720;
 	
@@ -38,8 +37,6 @@ public class MainMenuScreen extends ScreenAdapter implements InputActionListener
 	private InputContext inputContext;
 	
 	private Viewport viewport;
-	
-	private ScreenTextWriter screenTextWriter;
 	
 	private Table table;
 	private Stage stage;
@@ -56,9 +53,6 @@ public class MainMenuScreen extends ScreenAdapter implements InputActionListener
 		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
 		stage = new Stage(viewport);
 		DwarfScrollerGame.getInstance().addInputProcessor(stage);
-		
-		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont(FONT_NAME);
 		
 		buildStage();
 	}

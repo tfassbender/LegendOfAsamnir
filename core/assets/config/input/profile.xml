@@ -1,67 +1,4 @@
 <InputProfile>
-	<!-- The context for the main menu contains movement (for inputs), selecting an option, moving back (all modeled as actions) -->
-	<context name="mainMenu">
-		<events>
-			<KEY_DOWN />
-			<TOUCH_DOWN />
-			<CONTROLLER_BUTTON_DOWN />
-			<CONTROLLER_POV_CHANGED />
-			<CONTROLLER_AXIS_THRESHOLD_PASSED />
-		</events>
-		<actions>
-			<!-- input movement using WASD, controller pov or controller analog stick (should usually be the left analog stick). 
-				Works on all attached controllers -->
-			<action name="up">
-				<key code="W" />
-				<controller>
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
-				</controller>
-			</action>
-			<action name="down">
-				<key code="S" />
-				<controller>
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
-				</controller>
-			</action>
-			<action name="left">
-				<key code="A" />
-				<controller>
-					<pov directions="west southWest northWest" />
-					<axis code="1" threshold="-0.5" />
-				</controller>
-			</action>
-			<action name="right">
-				<key code="D" />
-				<controller>
-					<pov directions="east southEast northEast" />
-					<axis code="1" threshold="0.5" />
-				</controller>
-			</action>
-
-			<action name="back">
-				<key code="Escape" />
-				<controller>
-					<button code="1" />
-				</controller>
-			</action>
-
-			<action name="select">
-				<key code="Enter" />
-				<controller>
-					<button code="0" />
-				</controller>
-			</action>
-			
-			<action name="start_game">
-				<controller>
-					<button code="2" />
-				</controller>
-			</action>
-		</actions>
-	</context>
-
 	<!-- The game context contains player movement (using WASD, controller pov and controller analog stick), -->
 	<context name="game">
 		<events>
@@ -149,6 +86,13 @@
 					<button code="3" />
 				</controller>
 			</action>
+			
+			<action name="menu">
+				<key code="Escape" />
+				<controller>
+					<button code="7" />
+				</controller>
+			</action>
 		</actions>
 		
 		<controllerAxes>
@@ -159,5 +103,125 @@
 				<axis player="1" code="3" />
 			</controllerAxis>
 		</controllerAxes>
+	</context>
+	
+	<!-- The context for the main menu contains movement (for inputs), selecting an option, moving back (all modeled as actions) -->
+	<context name="mainMenu">
+		<events>
+			<KEY_DOWN />
+			<TOUCH_DOWN />
+			<CONTROLLER_BUTTON_DOWN />
+			<CONTROLLER_POV_CHANGED />
+			<CONTROLLER_AXIS_THRESHOLD_PASSED />
+		</events>
+		<actions>
+			<!-- input movement using WASD, controller pov or controller analog stick (should usually be the left analog stick). 
+				Works on all attached controllers -->
+			<action name="up">
+				<key code="W" />
+				<controller>
+					<pov directions="north northWest northEast" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="down">
+				<key code="S" />
+				<controller>
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
+			</action>
+			<action name="left">
+				<key code="A" />
+				<controller>
+					<pov directions="west southWest northWest" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="right">
+				<key code="D" />
+				<controller>
+					<pov directions="east southEast northEast" />
+					<axis code="1" threshold="0.5" />
+				</controller>
+			</action>
+
+			<action name="back">
+				<key code="Escape" />
+				<controller>
+					<button code="1" />
+				</controller>
+			</action>
+
+			<action name="select">
+				<key code="Enter" />
+				<controller>
+					<button code="0" />
+				</controller>
+			</action>
+			
+			<action name="start_game">
+				<controller>
+					<button code="3" />
+				</controller>
+			</action>
+		</actions>
+	</context>
+	
+	<!-- The context for the in-game menu contains movement (for inputs), selecting an option, moving back (all modeled as actions) -->
+	<context name="inGameMenu">
+		<events>
+			<KEY_DOWN />
+			<TOUCH_DOWN />
+			<CONTROLLER_BUTTON_DOWN />
+			<CONTROLLER_POV_CHANGED />
+			<CONTROLLER_AXIS_THRESHOLD_PASSED />
+		</events>
+		<actions>
+			<!-- input movement using WASD, controller pov or controller analog stick (should usually be the left analog stick). 
+				Works on all attached controllers -->
+			<action name="up">
+				<key code="W" />
+				<controller>
+					<pov directions="north northWest northEast" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="down">
+				<key code="S" />
+				<controller>
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
+			</action>
+			<action name="left">
+				<key code="A" />
+				<controller>
+					<pov directions="west southWest northWest" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="right">
+				<key code="D" />
+				<controller>
+					<pov directions="east southEast northEast" />
+					<axis code="1" threshold="0.5" />
+				</controller>
+			</action>
+
+			<action name="backToGame">
+				<key code="Escape" />
+				<controller>
+					<button code="7" />
+				</controller>
+			</action>
+
+			<action name="select">
+				<key code="Enter" />
+				<controller>
+					<button code="0" />
+				</controller>
+			</action>
+		</actions>
 	</context>
 </InputProfile>

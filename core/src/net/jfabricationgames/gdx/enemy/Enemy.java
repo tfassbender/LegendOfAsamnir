@@ -23,9 +23,9 @@ import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.GameScreen;
 
 public abstract class Enemy implements Hittable, ContactListener {
 	

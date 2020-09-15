@@ -13,7 +13,7 @@ import net.jfabricationgames.gdx.enemy.implementation.MiniGolem;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class EnemyFactory extends AbstractFactory {
 	

@@ -24,9 +24,9 @@ import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.texture.TextureLoader;
@@ -83,7 +83,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private float increaseArmor = 0f;
 	private final float armorIncreasePerSecond = 25f;
 	
-	private CharacterInputMovementHandler movementHandler;
+	private CharacterInputProcessor movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
 	private TextureLoader textureLoader;
@@ -110,7 +110,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		animation = getAnimation();
 		
 		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
-		movementHandler = new CharacterInputMovementHandler(this);
+		movementHandler = new CharacterInputProcessor(this);
 	}
 	
 	private Body createPhysicsBody() {

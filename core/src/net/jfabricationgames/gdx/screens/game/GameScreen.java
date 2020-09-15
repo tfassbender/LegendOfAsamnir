@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screens;
+package net.jfabricationgames.gdx.screens.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -22,6 +22,7 @@ import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
@@ -55,6 +56,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
 	private static final float INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD = 0.3f;
 	
+	private static final String ACTION_SHOW_MENU = "menu";
+	
 	private OrthographicCamera camera;
 	private OrthographicCamera cameraHud;
 	private Viewport viewport;
@@ -67,6 +70,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	private DebugGridRenderer debugGridRenderer;
 	private HeadsUpDisplay hud;
 	private GameMap map;
+	private InGameMenuScreen inGameMenu;
 	
 	private Box2DDebugRenderer debugRenderer;
 	private World world;
@@ -148,8 +152,18 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
-		// dummy implementation, because only controllerAxes are used yet
+		if (action.equals(ACTION_SHOW_MENU) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
+			showInGameMenu();
+			return true;
+		}
 		return false;
+	}
+	
+	private void showInGameMenu() {
+		if (inGameMenu == null) {
+			inGameMenu = new InGameMenuScreen(this);
+		}
+		inGameMenu.showMenu();
 	}
 	
 	private void moveCamera(float delta) {
@@ -228,11 +242,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		camera.position.y += Math.max(movementYNeg, 0);
 		
 		camera.update();
-	}
-	
-	@Override
-	public void hide() {
-		dispose();
 	}
 	
 	@Override

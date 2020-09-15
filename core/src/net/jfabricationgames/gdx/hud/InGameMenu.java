@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
 public class InGameMenu implements Disposable {

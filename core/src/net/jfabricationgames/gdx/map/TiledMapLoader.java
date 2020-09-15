@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.ObjectFactory;
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class TiledMapLoader {
 	

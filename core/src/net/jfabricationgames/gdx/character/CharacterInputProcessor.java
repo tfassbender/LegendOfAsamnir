@@ -5,7 +5,7 @@ import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 
-public class CharacterInputMovementHandler implements InputActionListener {
+public class CharacterInputProcessor implements InputActionListener {
 	
 	private static final float SQRT_0_5 = (float) Math.sqrt(0.5f);
 	
@@ -47,7 +47,7 @@ public class CharacterInputMovementHandler implements InputActionListener {
 	
 	private boolean spinAttackCharged;
 	
-	public CharacterInputMovementHandler(PlayableCharacter inputCharacter) {
+	public CharacterInputProcessor(PlayableCharacter inputCharacter) {
 		this.inputCharacter = inputCharacter;
 		timeTillIdleAnimation = inputCharacter.getTimeTillIdleAnimation();
 		timeTillSpinAttack = inputCharacter.getHoldTimeTillSpinAttack();

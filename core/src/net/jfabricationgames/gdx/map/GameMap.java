@@ -17,7 +17,7 @@ import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.ObjectFactory;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class GameMap implements Disposable {
 	

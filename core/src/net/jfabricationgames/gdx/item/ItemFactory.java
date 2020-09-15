@@ -10,7 +10,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.GameScreen;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class ItemFactory extends AbstractFactory {
 	

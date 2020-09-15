@@ -37,14 +37,23 @@ public class TextureLoader {
 		
 		TextureConfig config = textureConfigs.get(texture);
 		TextureAtlas atlas = AssetGroupManager.getInstance().get(config.atlas);
+		TextureRegion region;
 		switch (config.type) {
 			case ANIMATION_FRAME:
 				AnimationFrame frame = AnimationFrame.getAnimationFrame(config.texture);
-				return frame.findRegion(atlas);
+				region = frame.findRegion(atlas);
+				break;
 			case TEXTURE_REGION:
-				return atlas.findRegion(config.texture);
+				region = atlas.findRegion(config.texture);
+				break;
 			default:
 				throw new IllegalStateException("Unexpected TextureType: " + config.type);
 		}
+		
+		if (region == null) {
+			Gdx.app.error(getClass().getSimpleName(), "The loaded texture region is null. Maybe it was not packed yet? Config file is: \""
+					+ configFile + "\"; Requested Texture is: \"" + texture + "\"");
+		}
+		return region;
 	}
 }

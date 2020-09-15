@@ -83,8 +83,9 @@
 			outputDir: packed/menu,
 			atlasName: menu,
 			textureDirs: [
+				menu,
 				menu/buttons,
-				menu
+				menu/background/green_board,
 			]
 		},
 	}
