@@ -11,6 +11,8 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 
 public class TextureLoader {
 	
+	public static final String DEFAULT_TEXTURE_NAME = "texture";
+	
 	private static Json json = new Json();
 	
 	private String configFile;
@@ -19,6 +21,14 @@ public class TextureLoader {
 	public TextureLoader(String configFile) {
 		this.configFile = configFile;
 		textureConfigs = loadConfigFile(configFile);
+	}
+	/**
+	 * Creates a texture loader that can load a single texture from the given config. The texture can be accessed using the loadTexture method and the
+	 * parameter TextureLoader.DEFAULT_TEXTURE_NAME.
+	 */
+	public TextureLoader(TextureConfig config) {
+		textureConfigs = new ObjectMap<>();
+		textureConfigs.put(DEFAULT_TEXTURE_NAME, config);
 	}
 	
 	@SuppressWarnings("unchecked")

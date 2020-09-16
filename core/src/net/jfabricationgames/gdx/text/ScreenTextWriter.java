@@ -132,6 +132,7 @@ public class ScreenTextWriter {
 		public GlyphLayout invoke(SpriteBatch batch, BitmapFont font) {
 			batch.begin();
 			font.setColor(color);
+			font.getData().markupEnabled = true;
 			switch (callType) {
 				case DRAW_LAYOUT:
 					font.draw(batch, glyphLayout, x, y);

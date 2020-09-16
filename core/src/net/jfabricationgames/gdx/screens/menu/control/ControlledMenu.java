@@ -24,5 +24,5 @@ public abstract class ControlledMenu<T extends ControlledMenu<T>> extends Screen
 		}
 	}
 	
-	protected abstract void setFocusTo(String stateName);
+	protected abstract void setFocusTo(String stateName, String leavingState);
 }

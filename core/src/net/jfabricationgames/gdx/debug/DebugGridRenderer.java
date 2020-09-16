@@ -36,10 +36,9 @@ public class DebugGridRenderer implements DebugRenderer, Disposable {
 	@Override
 	public void render(float delta) {
 		if (drawGrid) {
-			if (camera == null) {
-				throw new IllegalStateException("A camera needs to be set");
+			if (camera != null) {
+				shapeRenderer.setProjectionMatrix(camera.combined);
 			}
-			shapeRenderer.setProjectionMatrix(camera.combined);
 			
 			shapeRenderer.begin(ShapeType.Line);
 			

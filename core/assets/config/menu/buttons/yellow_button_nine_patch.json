@@ -1,0 +1,10 @@
+{
+	texture: {
+		atlas: packed/menu/menu.atlas,
+		texture: button_yellow
+	}
+	top: 6
+	bottom: 6
+	left: 6
+	right: 6
+}

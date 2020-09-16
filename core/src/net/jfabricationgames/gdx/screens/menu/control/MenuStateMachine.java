@@ -68,8 +68,9 @@ public class MenuStateMachine<T extends ControlledMenu<T>> {
 	}
 	
 	private void changeState(String stateName) {
+		String leavingState = currentState;
 		currentState = stateName;
-		menu.setFocusTo(stateName);
+		menu.setFocusTo(stateName, leavingState);
 	}
 	
 	public void selectActionOnCurrentState() {

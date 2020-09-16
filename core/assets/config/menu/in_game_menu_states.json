@@ -1,9 +1,32 @@
 {
+	button_backToGame: {
+		down: button_controls,
+		right: item_1,
+		select: backToGame
+		initial: true,
+	},
+	button_controls: {
+		up: button_backToGame,
+		down: button_restartGame,
+		right: item_1,
+		select: showControls, 
+	},
+	button_restartGame: {
+		up: button_controls,
+		down: button_quit,
+		right: item_1,
+		select: restartGame,
+	},
+	button_quit: {
+		up: button_restartGame,
+		right: item_5,
+		select: quitGame,
+	},
 	item_1: {
 		down: item_5,
+		left: button_restartGame,
 		right: item_2,
 		select: selectCurrentItem,
-		initial: true,
 	},
 	item_2: {
 		down: item_6,
@@ -24,6 +47,7 @@
 	},
 	item_5: {
 		up: item_1,
+		left: button_quit,
 		right: item_6,
 		select: selectCurrentItem, 
 	},

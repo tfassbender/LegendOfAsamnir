@@ -67,6 +67,20 @@ big_banner_up_right
   orig: 32, 32
   offset: 0, 0
   index: -1
+button_green
+  rotate: false
+  xy: 161, 85
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+button_green_focus
+  rotate: false
+  xy: 876, 224
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 button_round
   rotate: false
   xy: 202, 149
@@ -114,6 +128,20 @@ button_wide_round_edges
   xy: 0, 616
   size: 869, 200
   orig: 869, 200
+  offset: 0, 0
+  index: -1
+button_yellow
+  rotate: false
+  xy: 977, 936
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+button_yellow_focus
+  rotate: false
+  xy: 910, 258
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 dwarf_scroller_headline
@@ -202,14 +230,14 @@ inventory_down
   index: -1
 inventory_down_left
   rotate: false
-  xy: 876, 225
+  xy: 944, 293
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_down_right
   rotate: false
-  xy: 910, 259
+  xy: 875, 833
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
@@ -258,14 +286,14 @@ inventory_up
   index: -1
 inventory_up_left
   rotate: false
-  xy: 944, 293
+  xy: 909, 867
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_up_right
   rotate: false
-  xy: 875, 833
+  xy: 943, 901
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
