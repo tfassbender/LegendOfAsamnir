@@ -11,9 +11,9 @@ public enum SpecialAction {
 		this.indexInMenu = indexInMenu;
 	}
 	
-	public static SpecialAction findByMenuIndex(int menuIndex) {
+	public static SpecialAction findByNameIgnoringCase(String specialAction) {
 		for (SpecialAction action : values()) {
-			if (action.indexInMenu == menuIndex) {
+			if (action.name().equalsIgnoreCase(specialAction)) {
 				return action;
 			}
 		}

@@ -1,7 +1,6 @@
 package net.jfabricationgames.gdx.screens.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -22,13 +21,11 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.ItemMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBackground;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
+import net.jfabricationgames.gdx.screens.menu.control.MenuStateMachine.InputDirection;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
-public class InGameMenuScreen extends ScreenAdapter implements InputActionListener {
-
-	public enum InputDirection {
-		UP, DOWN, LEFT, RIGHT;
-	}
+public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implements InputActionListener {
 	
 	public static final int VIRTUAL_WIDTH = 1280;
 	public static final int VIRTUAL_HEIGHT = 837;//820 seems to be smaller here than in the GameScreen...
@@ -47,6 +44,7 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 	public static final int ITEM_MENU_ITEMS_PER_LINE = 4;
 	public static final int ITEM_MENU_LINES = 2;
 	
+	private static final String inGameMenuStatesConfig = "config/menu/in_game_menu_states.json";
 	private static final Array<String> items = new Array<String>(new String[] {"jump", "bow"});
 	
 	private Viewport viewport;
@@ -65,9 +63,8 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 	private ItemMenu itemMenu;
 	private MenuBox itemMenuBanner;
 	
-	private int selectedIndex;
-	
 	public InGameMenuScreen(GameScreen gameScreen, PlayableCharacter character) {
+		super(inGameMenuStatesConfig);
 		this.gameScreen = gameScreen;
 		this.character = character;
 		
@@ -87,10 +84,10 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(FONT_NAME);
 		
-		SpecialAction activeSpecialAction = character.getActiveSpecialAction();
-		selectedIndex = activeSpecialAction != null ? activeSpecialAction.indexInMenu : 0;
-		itemMenu.setHoveredIndex(selectedIndex);
+		itemMenu.setHoveredIndex(0);
 		itemMenu.selectHoveredItem();
+		
+		stateMachine.changeToInitialState();
 	}
 	
 	@Override
@@ -100,48 +97,26 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 			return true;
 		}
 		if (action.equals(ACTION_SELECTION_UP) && isEventTypeHandled(type)) {
-			changeSelection(InputDirection.UP);
+			stateMachine.changeState(InputDirection.UP);
 		}
 		if (action.equals(ACTION_SELECTION_DOWN) && isEventTypeHandled(type)) {
-			changeSelection(InputDirection.DOWN);
+			stateMachine.changeState(InputDirection.DOWN);
 		}
 		if (action.equals(ACTION_SELECTION_LEFT) && isEventTypeHandled(type)) {
-			changeSelection(InputDirection.LEFT);
+			stateMachine.changeState(InputDirection.LEFT);
 		}
 		if (action.equals(ACTION_SELECTION_RIGHT) && isEventTypeHandled(type)) {
-			changeSelection(InputDirection.RIGHT);
+			stateMachine.changeState(InputDirection.RIGHT);
 		}
 		if (action.equals(ACTION_SELECT) && isEventTypeHandled(type)) {
-			selectCurrentIndex();
+			stateMachine.selectActionOnCurrentState();
 		}
 		return false;
 	}
 	
-	private void changeSelection(InputDirection direction) {
-		//only item menu control at the moment
-		switch (direction) {
-			case UP:
-				selectedIndex -= ITEM_MENU_ITEMS_PER_LINE;
-				break;
-			case DOWN:
-				selectedIndex += ITEM_MENU_ITEMS_PER_LINE;
-				break;
-			case LEFT:
-				selectedIndex--;
-				break;
-			case RIGHT:
-				selectedIndex++;
-				break;
-			default:
-				throw new IllegalStateException("Unexpected InputDirection: " + direction);
-		}
-		selectedIndex = Math.min(Math.max(selectedIndex, 0), ITEM_MENU_ITEMS_PER_LINE * ITEM_MENU_LINES - 1);
-		itemMenu.setHoveredIndex(selectedIndex);
-	}
-	
-	private void selectCurrentIndex() {
+	public void selectCurrentItem() {
 		itemMenu.selectHoveredItem();
-		SpecialAction specialAction = SpecialAction.findByMenuIndex(selectedIndex);
+		SpecialAction specialAction = SpecialAction.findByNameIgnoringCase(itemMenu.getSelectedItem());
 		character.setActiveSpecialAction(specialAction);
 	}
 	
@@ -231,5 +206,13 @@ public class InGameMenuScreen extends ScreenAdapter implements InputActionListen
 		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
 		
 		gameSnapshotFrameBuffer.dispose();
+	}
+	
+	@Override
+	protected void setFocusTo(String stateName) {
+		if (stateName.startsWith("item_")) {
+			int itemIndex = Integer.parseInt(stateName.substring("item_".length())) - 1;
+			itemMenu.setHoveredIndex(itemIndex);
+		}
 	}
 }

@@ -1,0 +1,47 @@
+{
+	item_1: {
+		down: item_5,
+		right: item_2,
+		select: selectCurrentItem,
+		initial: true,
+	},
+	item_2: {
+		down: item_6,
+		left: item_1,
+		right: item_3,
+		select: selectCurrentItem, 
+	},
+	item_3: {
+		down: item_7,
+		left: item_2,
+		right: item_4,
+		select: selectCurrentItem, 
+	},
+	item_4: {
+		down: item_8,
+		left: item_3,
+		select: selectCurrentItem, 
+	},
+	item_5: {
+		up: item_1,
+		right: item_6,
+		select: selectCurrentItem, 
+	},
+	item_6: {
+		up: item_2,
+		left: item_5,
+		right: item_7,
+		select: selectCurrentItem, 
+	},
+	item_7: {
+		up: item_3,
+		left: item_6,
+		right: item_8,
+		select: selectCurrentItem, 
+	},
+	item_8: {
+		up: item_4,
+		left: item_7,
+		select: selectCurrentItem, 
+	}
+}
