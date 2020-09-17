@@ -22,6 +22,7 @@ import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screens.menu.components.GameControlsDialog;
 import net.jfabricationgames.gdx.screens.menu.components.ItemMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBackground;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
@@ -31,8 +32,8 @@ import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
 public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implements InputActionListener {
 	
-	private static final String TEXT_COLOR_ENCODING_NORMAL = "[#000000]";
-	private static final String TEXT_COLOR_ENCODING_FOCUS = "[#C8441B]";
+	public static final String TEXT_COLOR_ENCODING_NORMAL = "[#000000]";
+	public static final String TEXT_COLOR_ENCODING_FOCUS = "[#C8441B]";
 	public static final int VIRTUAL_WIDTH = 1280;
 	public static final int VIRTUAL_HEIGHT = 837;//820 seems to be smaller here than in the GameScreen...
 	
@@ -49,10 +50,6 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 	
 	public static final int ITEM_MENU_ITEMS_PER_LINE = 4;
 	public static final int ITEM_MENU_LINES = 2;
-	
-	private static final String BUTTON_CONFIG_FOCUSED_FILE = "config/menu/buttons/green_button_focused_nine_patch.json";
-	private static final String BUTTON_CONFIG_FILE = "config/menu/buttons/green_button_nine_patch.json";
-	private static final float BUTTON_SCALE = 2f;
 	
 	private static final String statePrefixItems = "item_";
 	private static final String statePrefixButtons = "button_";
@@ -71,6 +68,8 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 	private SpriteBatch batch;
 	private FrameBuffer gameSnapshotFrameBuffer;
 	private Sprite gameSnapshotSprite;
+	
+	private GameControlsDialog controlsDialog;
 	
 	private MenuBox background;
 	private MenuBox banner;
@@ -125,19 +124,25 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 		int buttonPosX = 160;
 		int lowestButtonY = 150;
 		int buttonGapY = 40;
-		buttonBackToGame = new FocusButtonBuilder().setNinePatchConfig(BUTTON_CONFIG_FILE).setNinePatchConfigFocused(BUTTON_CONFIG_FOCUSED_FILE)
-				.setSize(buttonWidth, buttonHeight).setPosition(buttonPosX, lowestButtonY + 3f * (buttonHeight + buttonGapY)).build();
-		buttonControls = new FocusButtonBuilder().setNinePatchConfig(BUTTON_CONFIG_FILE).setNinePatchConfigFocused(BUTTON_CONFIG_FOCUSED_FILE)
-				.setSize(buttonWidth, buttonHeight).setPosition(buttonPosX, lowestButtonY + 2f * (buttonHeight + buttonGapY)).build();
-		buttonRestart = new FocusButtonBuilder().setNinePatchConfig(BUTTON_CONFIG_FILE).setNinePatchConfigFocused(BUTTON_CONFIG_FOCUSED_FILE)
-				.setSize(buttonWidth, buttonHeight).setPosition(buttonPosX, lowestButtonY + 1f * (buttonHeight + buttonGapY)).build();
-		buttonQuit = new FocusButtonBuilder().setNinePatchConfig(BUTTON_CONFIG_FILE).setNinePatchConfigFocused(BUTTON_CONFIG_FOCUSED_FILE)
-				.setSize(buttonWidth, buttonHeight).setPosition(buttonPosX, lowestButtonY).build();
+		buttonBackToGame = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
+				.setPosition(buttonPosX, lowestButtonY + 3f * (buttonHeight + buttonGapY)).build();
+		buttonControls = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
+				.setPosition(buttonPosX, lowestButtonY + 2f * (buttonHeight + buttonGapY)).build();
+		buttonRestart = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
+				.setPosition(buttonPosX, lowestButtonY + 1f * (buttonHeight + buttonGapY)).build();
+		buttonQuit = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
+				.setPosition(buttonPosX, lowestButtonY).build();
 		
-		buttonBackToGame.scaleBy(BUTTON_SCALE);
-		buttonControls.scaleBy(BUTTON_SCALE);
-		buttonRestart.scaleBy(BUTTON_SCALE);
-		buttonQuit.scaleBy(BUTTON_SCALE);
+		buttonBackToGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonControls.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonRestart.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		
+		controlsDialog = new GameControlsDialog();
 	}
 	
 	@Override
@@ -159,7 +164,7 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 			stateMachine.changeState(InputDirection.RIGHT);
 		}
 		if (action.equals(ACTION_SELECT) && isEventTypeHandled(type)) {
-			stateMachine.selectActionOnCurrentState();
+			stateMachine.executeSelectActionOnCurrentState();
 		}
 		return false;
 	}
@@ -201,24 +206,37 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 	}
 	
 	public void backToGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
+		removeInputListener();
 		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
-		game.getInputContext().removeListener(this);
 		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
 		game.setScreen(gameScreen);
 	}
 	
 	public void showControls() {
-		//TODO change to a new controls menu
+		Gdx.app.debug(getClass().getSimpleName(), "'Show Controlls' selected");
+		controlsDialog.setVisible(true);
+		stateMachine.changeState("button_controlsDialogBack");
 	}
 	
 	public void restartGame() {
-		//TODO starting a new game causes problems with singletons
-		//DwarfScrollerGame.getInstance().setScreen(new GameScreen());
-		//dispose();
+		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
+		gameScreen.dispose();
+		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
 	}
 	
 	public void quitGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Quit Game' selected");
 		Gdx.app.exit();
+	}
+	
+	public void closeControlsDialog() {
+		controlsDialog.setVisible(false);
+		stateMachine.changeState("button_controls");
+	}
+	
+	private void removeInputListener() {
+		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
 	}
 	
 	@Override
@@ -239,6 +257,8 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 		batch.end();
 		
 		drawTexts();
+		
+		drawControlsDialog();
 		
 		debugGridRenderer.render(delta);
 	}
@@ -262,6 +282,10 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 	private void drawBanners() {
 		banner.draw(batch, 125, 540, 650, 250);
 		itemMenuBanner.draw(batch, 640, 260, 200, 150);
+	}
+	
+	private void drawControlsDialog() {
+		controlsDialog.draw();
 	}
 	
 	private void drawTexts() {
@@ -288,14 +312,6 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 	}
 	
 	@Override
-	public void dispose() {
-		assetManager.unloadGroup(ASSET_GROUP_NAME);
-		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
-		
-		gameSnapshotFrameBuffer.dispose();
-	}
-	
-	@Override
 	protected void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
 		if (stateName.startsWith(statePrefixItems)) {
@@ -304,7 +320,7 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 		}
 		else if (stateName.startsWith(statePrefixButtons)) {
 			String buttonId = stateName.substring(statePrefixButtons.length());
-			FocusButton button;
+			FocusButton button = null;
 			switch (buttonId) {
 				case "backToGame":
 					button = buttonBackToGame;
@@ -318,10 +334,15 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 				case "quit":
 					button = buttonQuit;
 					break;
+				case "controlsDialogBack":
+					//dialog button; not handled here
+					break;
 				default:
 					throw new IllegalStateException("Unexpected button state identifier: " + statePrefixButtons + buttonId);
 			}
-			button.setFocused(true);
+			if (button != null) {
+				button.setFocused(true);				
+			}
 		}
 	}
 	
@@ -331,5 +352,13 @@ public class InGameMenuScreen extends ControlledMenu<InGameMenuScreen> implement
 		buttonRestart.setFocused(false);
 		buttonQuit.setFocused(false);
 		itemMenu.setHoveredIndex(-1);
+	}
+	
+	@Override
+	public void dispose() {
+		assetManager.unloadGroup(ASSET_GROUP_NAME);
+		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
+		gameSnapshotFrameBuffer.dispose();
+		controlsDialog.dispose();
 	}
 }

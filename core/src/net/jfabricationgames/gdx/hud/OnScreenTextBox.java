@@ -39,9 +39,6 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	protected static synchronized OnScreenTextBox createInstance(HeadsUpDisplay hud) {
-		if (instance != null) {
-			throw new IllegalStateException("An instance of OnScreenTextBox has already been created.");
-		}
 		instance = new OnScreenTextBox(hud);
 		return instance;
 	}

@@ -67,13 +67,13 @@ public class MenuStateMachine<T extends ControlledMenu<T>> {
 		throw new IllegalStateException("No initial state was defined. Config file was: " + statesConfig);
 	}
 	
-	private void changeState(String stateName) {
+	public void changeState(String stateName) {
 		String leavingState = currentState;
 		currentState = stateName;
 		menu.setFocusTo(stateName, leavingState);
 	}
 	
-	public void selectActionOnCurrentState() {
+	public void executeSelectActionOnCurrentState() {
 		MenuState state = states.get(currentState);
 		executeStateSelectAction(state);
 	}

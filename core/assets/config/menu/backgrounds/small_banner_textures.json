@@ -1,0 +1,14 @@
+{
+	right: {
+		atlas: packed/menu/menu.atlas,
+		texture: small_banner_right,
+	},
+	left: {
+		atlas: packed/menu/menu.atlas,
+		texture: small_banner_left,
+	},
+	mid: {
+		atlas: packed/menu/menu.atlas,
+		texture: small_banner_mid,
+	},
+}

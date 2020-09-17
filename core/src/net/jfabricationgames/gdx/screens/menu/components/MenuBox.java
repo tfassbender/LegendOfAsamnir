@@ -14,12 +14,17 @@ public abstract class MenuBox {
 		YELLOW_BOARD("config/menu/backgrounds/yellow_board_textures.json"), //
 		INVENTORY("config/menu/backgrounds/inventory_textures.json"), //
 		BIG_BANNER("config/menu/backgrounds/big_banner_textures.json"), //
-		YELLOW_PAPER("config/menu/backgrounds/yellow_paper_textures.json"); //
+		YELLOW_PAPER("config/menu/backgrounds/yellow_paper_textures.json"), //
+		SMALL_BANNER("config/menu/backgrounds/small_banner_textures.json"); //
 		
 		public final String configFile;
 		
 		private TextureType(String configFile) {
 			this.configFile = configFile;
+		}
+		
+		private static boolean isSingleLineTexture(TextureType type) {
+			return type == SMALL_BANNER;
 		}
 	}
 	
@@ -62,12 +67,31 @@ public abstract class MenuBox {
 		loadTextureParts();
 	}
 	
+	public MenuBox(int partsX, TextureType type) {
+		this.partsX = partsX;
+		this.partsY = 1;
+		this.type = type;
+		
+		if (!TextureType.isSingleLineTexture(type)) {
+			throw new IllegalStateException("The TextureType doesn't support single line. TextureType was: " + type);
+		}
+		
+		loadTextureParts();
+	}
+	
 	private void loadTextureParts() {
 		textureParts = new ObjectMap<>();
 		textureLoader = new TextureLoader(type.configFile);
-		for (Part part : Part.values()) {
-			TextureRegion texture = textureLoader.loadTexture(part.textureSuffix);
-			textureParts.put(part, texture);
+		if (TextureType.isSingleLineTexture(type)) {
+			textureParts.put(Part.LEFT, textureLoader.loadTexture(Part.LEFT.textureSuffix));
+			textureParts.put(Part.MID, textureLoader.loadTexture(Part.MID.textureSuffix));
+			textureParts.put(Part.RIGHT, textureLoader.loadTexture(Part.RIGHT.textureSuffix));
+		}
+		else {
+			for (Part part : Part.values()) {
+				TextureRegion texture = textureLoader.loadTexture(part.textureSuffix);
+				textureParts.put(part, texture);
+			}
 		}
 	}
 	
@@ -103,8 +127,14 @@ public abstract class MenuBox {
 	}
 	
 	private float summedHeight() {
-		return textureParts.get(Part.UP).getRegionHeight() + textureParts.get(Part.MID).getRegionHeight() * (partsY - 2)
-				+ textureParts.get(Part.DOWN).getRegionHeight();
+		if (TextureType.isSingleLineTexture(type)) {
+			return textureParts.get(Part.MID).getRegionHeight();
+		}
+		else {
+			return textureParts.get(Part.UP).getRegionHeight() + textureParts.get(Part.MID).getRegionHeight() * (partsY - 2)
+					+ textureParts.get(Part.DOWN).getRegionHeight();
+		}
+		
 	}
 	
 	protected TextureRegion getTextureRegion(int x, int y) {
@@ -112,37 +142,50 @@ public abstract class MenuBox {
 	}
 	
 	private Part getPartForPosition(int x, int y) {
-		if (x == 0) {
-			if (y == 0) {
-				return Part.DOWN_LEFT;
-			}
-			else if (y == partsY - 1) {
-				return Part.UP_LEFT;
-			}
-			else {
+		if (TextureType.isSingleLineTexture(type)) {
+			if (x == 0) {
 				return Part.LEFT;
 			}
-		}
-		else if (x == partsX - 1) {
-			if (y == 0) {
-				return Part.DOWN_RIGHT;
-			}
-			else if (y == partsY - 1) {
-				return Part.UP_RIGHT;
-			}
-			else {
+			else if (x == partsX - 1) {
 				return Part.RIGHT;
-			}
-		}
-		else {
-			if (y == 0) {
-				return Part.DOWN;
-			}
-			else if (y == partsY - 1) {
-				return Part.UP;
 			}
 			else {
 				return Part.MID;
+			}
+		}
+		else {
+			if (x == 0) {
+				if (y == 0) {
+					return Part.DOWN_LEFT;
+				}
+				else if (y == partsY - 1) {
+					return Part.UP_LEFT;
+				}
+				else {
+					return Part.LEFT;
+				}
+			}
+			else if (x == partsX - 1) {
+				if (y == 0) {
+					return Part.DOWN_RIGHT;
+				}
+				else if (y == partsY - 1) {
+					return Part.UP_RIGHT;
+				}
+				else {
+					return Part.RIGHT;
+				}
+			}
+			else {
+				if (y == 0) {
+					return Part.DOWN;
+				}
+				else if (y == partsY - 1) {
+					return Part.UP;
+				}
+				else {
+					return Part.MID;
+				}
 			}
 		}
 	}

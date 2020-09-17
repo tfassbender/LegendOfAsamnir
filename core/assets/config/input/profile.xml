@@ -181,28 +181,28 @@
 			<!-- input movement using WASD, controller pov or controller analog stick (should usually be the left analog stick). 
 				Works on all attached controllers -->
 			<action name="up">
-				<key code="W" />
+				<key code="Up" />
 				<controller>
 					<pov directions="north northWest northEast" />
 					<axis code="0" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="down">
-				<key code="S" />
+				<key code="Down" />
 				<controller>
 					<pov directions="south southWest southEast" />
 					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
 			<action name="left">
-				<key code="A" />
+				<key code="Left" />
 				<controller>
 					<pov directions="west southWest northWest" />
 					<axis code="1" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="right">
-				<key code="D" />
+				<key code="Right" />
 				<controller>
 					<pov directions="east southEast northEast" />
 					<axis code="1" threshold="0.5" />

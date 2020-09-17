@@ -8,6 +8,10 @@ public class MenuBackground extends MenuBox {
 		super(partsX, partsY, type);
 	}
 	
+	public MenuBackground(int partsX, TextureType type) {
+		super(partsX, type);
+	}
+	
 	@Override
 	protected void drawOnMenuField(SpriteBatch batch, int x, int y, float posX, float posY, float scaledWidth, float scaledHeight) {}
 }

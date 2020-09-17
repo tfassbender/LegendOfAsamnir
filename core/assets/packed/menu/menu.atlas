@@ -76,7 +76,7 @@ button_green
   index: -1
 button_green_focus
   rotate: false
-  xy: 876, 224
+  xy: 944, 292
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -132,14 +132,14 @@ button_wide_round_edges
   index: -1
 button_yellow
   rotate: false
-  xy: 977, 936
+  xy: 26, 1
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 button_yellow_focus
   rotate: false
-  xy: 910, 258
+  xy: 909, 866
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -230,14 +230,14 @@ inventory_down
   index: -1
 inventory_down_left
   rotate: false
-  xy: 944, 293
+  xy: 943, 901
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_down_right
   rotate: false
-  xy: 875, 833
+  xy: 977, 935
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
@@ -251,21 +251,21 @@ inventory_left
   index: -1
 inventory_mid
   rotate: false
-  xy: 828, 454
+  xy: 876, 216
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 inventory_mid_hover
   rotate: false
-  xy: 102, 25
+  xy: 910, 250
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 inventory_mid_selected
   rotate: false
-  xy: 842, 182
+  xy: 875, 824
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
@@ -286,14 +286,14 @@ inventory_up
   index: -1
 inventory_up_left
   rotate: false
-  xy: 909, 867
+  xy: 828, 429
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_up_right
   rotate: false
-  xy: 943, 901
+  xy: 876, 199
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
@@ -305,128 +305,149 @@ play_button_text
   orig: 159, 48
   offset: 0, 0
   index: -1
-yellow_board_down
+small_banner_left
   rotate: false
   xy: 808, 208
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_down_left
+small_banner_mid
   rotate: false
   xy: 842, 242
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_down_right
+small_banner_right
   rotate: false
   xy: 876, 276
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_left
+yellow_board_down
   rotate: false
   xy: 875, 884
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_mid
+yellow_board_down_left
   rotate: false
   xy: 909, 918
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_right
+yellow_board_down_right
   rotate: false
   xy: 943, 952
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_up
+yellow_board_left
   rotate: false
   xy: 977, 986
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_up_left
+yellow_board_mid
   rotate: false
   xy: 828, 480
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_board_up_right
+yellow_board_right
   rotate: false
   xy: 68, 17
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_down
+yellow_board_up
   rotate: false
   xy: 102, 51
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_down_left
+yellow_board_up_left
   rotate: false
   xy: 808, 174
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_down_right
+yellow_board_up_right
   rotate: false
   xy: 842, 208
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_left
+yellow_paper_down
   rotate: false
   xy: 876, 242
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_mid
+yellow_paper_down_left
   rotate: false
   xy: 910, 276
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_right
+yellow_paper_down_right
   rotate: false
   xy: 875, 850
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_up
+yellow_paper_left
   rotate: false
   xy: 909, 884
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_up_left
+yellow_paper_mid
   rotate: false
   xy: 943, 918
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-yellow_paper_up_right
+yellow_paper_right
   rotate: false
   xy: 977, 952
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+yellow_paper_up
+  rotate: false
+  xy: 828, 446
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+yellow_paper_up_left
+  rotate: false
+  xy: 102, 17
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+yellow_paper_up_right
+  rotate: false
+  xy: 842, 174
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

@@ -67,5 +67,8 @@
 		up: item_4,
 		left: item_7,
 		select: selectCurrentItem, 
+	},
+	button_controlsDialogBack: {
+		select: closeControlsDialog,
 	}
 }

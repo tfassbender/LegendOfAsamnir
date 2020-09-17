@@ -7,6 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 public class FocusButton {
 	
+	public static final String BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED = "config/menu/buttons/green_button_focused_nine_patch.json";
+	public static final String BUTTON_GREEN_NINEPATCH_CONFIG = "config/menu/buttons/green_button_nine_patch.json";
+	public static final String BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED = "config/menu/buttons/yellow_button_focused_nine_patch.json";
+	public static final String BUTTON_YELLOW_NINEPATCH_CONFIG = "config/menu/buttons/yellow_button_nine_patch.json";
+	
+	public static final float DEFAULT_BUTTON_SCALE = 2f;
+	
 	public static class FocusButtonBuilder {
 		
 		public String ninePatchConfig;

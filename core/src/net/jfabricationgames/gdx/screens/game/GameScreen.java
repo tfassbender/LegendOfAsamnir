@@ -252,11 +252,14 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
 	@Override
 	public void dispose() {
+		inputContext.removeListener(this);
+		assetManager.unloadGroup(ASSET_GROUP_NAME);
+		
 		batch.dispose();
 		map.dispose();
-		PhysicsWorld.getInstance().disposeWorld();
+		hud.dispose();
 		debugRenderer.dispose();
 		debugGridRenderer.dispose();
-		assetManager.unloadGroup(ASSET_GROUP_NAME);
+		inGameMenu.dispose();
 	}
 }
