@@ -33,10 +33,19 @@ public class InputContext {
 	protected ArrayMap<String, Array<PlayerValue>> controllerPovStates;
 	protected ArrayMap<PlayerValue, Array<String>> controllerPovActions;
 	protected ArrayMap<String, AxisThreshold> controllerAxisStates;
-	protected ArrayMap<PlayerValue, AxisThreshold> controllerAxisActions;
+	protected ArrayMap<PlayerValue, AxisThresholdPair> controllerAxisActions;
 	protected ArrayMap<String, PlayerAxis> namedAxes;
 	
 	private PriorityQueue<InputActionListener> listeners;
+	
+	/**
+	 * To store {@link AxisThreshold} objects for controller axis actions. One for a positive axis value and one for a negative axis value.
+	 */
+	protected static class AxisThresholdPair {
+		
+		public AxisThreshold lowerThreshold;
+		public AxisThreshold upperThreshold;
+	}
 	
 	public InputContext() {
 		initializeMaps();
@@ -332,18 +341,25 @@ public class InputContext {
 	protected boolean controllerAxisMoved(Controller controller, int axisCode, float value) {
 		if (isEventHandled(InputEvent.CONTROLLER_AXIS_THRESHOLD_PASSED)) {
 			int player = getPlayerOfController(controller);
-			AxisThreshold axisThreshold = controllerAxisActions.get(new PlayerValue(player, axisCode));
+			AxisThresholdPair axisThreshold = controllerAxisActions.get(new PlayerValue(player, axisCode));
 			if (axisThreshold != null) {
 				float axisValue = getAxisValue(player, axisCode);
-				boolean thresholdPassed = axisThreshold.isThresholdPassed(axisValue);
-				if (thresholdPassed && !axisThreshold.thresholdPassed) {
-					invokeListeners(axisThreshold.stateName, Type.CONTROLLER_AXIS_THRESHOLD_PASSED,
-							new Parameters().setPlayer(player).setAxisValue(axisValue).setAxisThreshold(axisThreshold.threshold));
-				}
-				axisThreshold.thresholdPassed = thresholdPassed;
+				processControllerAxisThresholdPassed(player, axisThreshold.lowerThreshold, axisValue);
+				processControllerAxisThresholdPassed(player, axisThreshold.upperThreshold, axisValue);
 			}
 		}
 		return false;
+	}
+	
+	private void processControllerAxisThresholdPassed(int player, AxisThreshold axisThreshold, float axisValue) {
+		if (axisThreshold != null) {
+			boolean thresholdPassed = axisThreshold.isThresholdPassed(axisValue);
+			if (thresholdPassed && !axisThreshold.thresholdPassed) {
+				invokeListeners(axisThreshold.stateName, Type.CONTROLLER_AXIS_THRESHOLD_PASSED,
+						new Parameters().setPlayer(player).setAxisValue(axisValue).setAxisThreshold(axisThreshold.threshold));
+			}
+			axisThreshold.thresholdPassed = thresholdPassed;			
+		}
 	}
 	
 	private float getAxisValue(int player, int axisCode) {

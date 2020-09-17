@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
+import net.jfabricationgames.gdx.input.InputContext.AxisThresholdPair;
 import net.jfabricationgames.gdx.input.struct.AxisThreshold;
 import net.jfabricationgames.gdx.input.struct.PlayerAxis;
 import net.jfabricationgames.gdx.input.struct.PlayerValue;
@@ -264,15 +265,29 @@ public class InputContextLoader {
 			
 			if (Math.abs(threshold) < InputProfile.CONTROLLER_AXIS_DEAD_ZONE) {
 				throw new IllegalArgumentException("The absolute value of the 'threshold' attribute must be greater than 0.01");
-				
 			}
-			AxisThreshold axisThreshold = new AxisThreshold(axisCode, player, threshold);
 			
 			if (readingContextType == ContextType.STATES) {
+				AxisThreshold axisThreshold = new AxisThreshold(axisCode, player, threshold);
 				context.controllerAxisStates.put(elementName, axisThreshold);
 			}
 			else if (readingContextType == ContextType.ACTIONS) {
-				context.controllerAxisActions.put(new PlayerValue(player, axisCode), new AxisThreshold(axisCode, player, threshold, elementName));
+				PlayerValue key = new PlayerValue(player, axisCode);
+				AxisThreshold axisThreshold = new AxisThreshold(axisCode, player, threshold, elementName);
+				
+				AxisThresholdPair thresholdPair = context.controllerAxisActions.get(key);
+				if (thresholdPair == null) {
+					thresholdPair = new AxisThresholdPair();
+				}
+				
+				if (threshold < 0) {
+					thresholdPair.lowerThreshold = axisThreshold;
+				}
+				else {
+					thresholdPair.upperThreshold = axisThreshold;
+				}
+				
+				context.controllerAxisActions.put(key, thresholdPair);
 			}
 			else {
 				throw new IllegalStateException("unexpected ContextType: " + readingContextType);
