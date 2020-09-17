@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.desktop.log;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
 public class LogConfiguration {
@@ -10,6 +11,7 @@ public class LogConfiguration {
 	}
 	
 	private static void setLogAdapter() {
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		LogAdapter logAdapter = new LogAdapter();
 		logAdapter.log("APPLICATION_START", "################################################################################");
 		logAdapter.log("APPLICATION_START", "#                                                                              #");

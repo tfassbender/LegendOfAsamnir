@@ -4,14 +4,18 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level - %msg%n" />
 		</Console>
-		<File name="LogFile" fileName="${sys:user.home}/.DwarfScrollerGDX/all.log" immediateFlush="false" append="true">
+		<File name="LogFile" fileName="${sys:user.home}/.DwarfScrollerGDX/log/all.log" immediateFlush="false" append="true">
+			<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level - %msg%n" />
+		</File>
+		<File name="errorFile" fileName="${sys:user.home}/.DwarfScrollerGDX/log/error.log" immediateFlush="false" append="true">
 			<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level - %msg%n" />
 		</File>
 	</Appenders>
 	<Loggers>
 		<Root level="debug">
 			<AppenderRef ref="Console" />
-			<AppenderRef ref="LogFile" />
+			<AppenderRef ref="LogFile" level="info" />
+			<AppenderRef ref="errorFile" level="error" />
 		</Root>
 	</Loggers>
 </Configuration>
