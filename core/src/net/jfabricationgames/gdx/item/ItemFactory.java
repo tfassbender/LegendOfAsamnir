@@ -49,6 +49,16 @@ public class ItemFactory extends AbstractFactory {
 		defaultValues = json.fromJson(ObjectMap.class, ObjectMap.class, Gdx.files.internal(config.defaultValuesConfig));
 	}
 	
+	public void createAndDropItem(String type, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
+		Item item = createItem(type, x, y, new MapProperties(), addBodyDelay);
+		if (renderAboveGameObjects) {
+			gameMap.addItemAboveGameObjects(item);
+		}
+		else {
+			gameMap.addItem(item);
+		}
+	}
+	
 	public void createAndAddItemAfterWorldStep(String type, float x, float y, boolean renderAboveGameObjects) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Item item = createItem(type, x, y, new MapProperties());
@@ -62,6 +72,10 @@ public class ItemFactory extends AbstractFactory {
 	}
 	
 	public Item createItem(String name, float x, float y, MapProperties properties) {
+		return createItem(name, x, y, properties, 0);
+	}
+	
+	private Item createItem(String name, float x, float y, MapProperties properties, float addBodyDelay) {
 		ItemTypeConfig typeConfig = typeConfigs.get(name);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: " + name
@@ -72,7 +86,13 @@ public class ItemFactory extends AbstractFactory {
 		
 		addDefaultProperties(name, properties);
 		Item item = new Item(typeConfig, sprite, properties, gameMap);
-		item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		if (addBodyDelay > 0) {
+			PhysicsWorld.getInstance().runDelayedAfterWorldStep(
+					() -> item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN), addBodyDelay);
+		}
+		else {
+			item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		}
 		
 		return item;
 	}

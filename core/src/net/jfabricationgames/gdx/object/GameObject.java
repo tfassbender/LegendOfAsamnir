@@ -29,9 +29,11 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 public class GameObject implements Hittable {
 	
 	protected static final String dropItemMapPropertiesKey = "drop";
+	protected static final float ITEM_DROP_PICKUP_DELAY = 1f;
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
+
 	
 	protected Sprite sprite;
 	protected MapProperties mapProperties;
@@ -153,7 +155,7 @@ public class GameObject implements Hittable {
 	}
 	
 	protected void dropItems() {
-		if (dropsItems()) {
+		if (doesDropItems()) {
 			double random = Math.random();
 			float summedProbability = 0f;
 			for (Entry<String, Float> entry : dropTypes.entries()) {
@@ -168,15 +170,15 @@ public class GameObject implements Hittable {
 		}
 	}
 	
-	private boolean dropsItems() {
+	private boolean doesDropItems() {
 		return dropTypes != null && !dropTypes.isEmpty();
 	}
 	
 	private void dropItem(String type) {
-		gameMap.getItemFactory().createAndAddItemAfterWorldStep(type,
+		gameMap.getItemFactory().createAndDropItem(type,
 				(body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD, //
 				(body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD, //
-				typeConfig.renderDropsAboveObject);
+				typeConfig.renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}
 	
 	public void remove() {

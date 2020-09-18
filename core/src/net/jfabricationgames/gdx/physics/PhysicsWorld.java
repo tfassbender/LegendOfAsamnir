@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.physics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -105,6 +106,20 @@ public class PhysicsWorld implements ContactListener {
 	
 	public void runAfterWorldStep(Runnable runnable) {
 		runAfterWorldStep.add(runnable);
+	}
+	
+	public void runDelayedAfterWorldStep(Runnable runnable, float delayTime) {
+		Thread delayThread = new Thread(() -> {
+			try {
+				Thread.sleep((int) (delayTime * 1000));
+				runAfterWorldStep(runnable);
+			}
+			catch (InterruptedException e) {
+				Gdx.app.error(getClass().getSimpleName(), "Delay thread - sleep interrupted");
+			}
+		});
+		delayThread.setDaemon(true);
+		delayThread.start();
 	}
 	
 	/**
