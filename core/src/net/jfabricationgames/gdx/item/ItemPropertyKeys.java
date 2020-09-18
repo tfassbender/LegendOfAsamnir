@@ -5,7 +5,9 @@ public enum ItemPropertyKeys {
 	HEALTH("health"), //
 	MANA("mana"), //
 	VALUE("value"), // 
-	ARMOR("armor"); //
+	ARMOR("armor"), //
+	AMMO("ammo"), 
+	AMMO_TYPE("ammoType"); //
 	
 	private final String propertyName;
 	

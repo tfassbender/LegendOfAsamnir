@@ -24,12 +24,21 @@
 	},
 	shield: {
 		texture: shield,
+		pickUpSound: pickup
 	},
+	arrow: {
+		texture: arrow
+		pickUpSound: pickup_ammo
+	},
+	bomb: {
+		texture: bomb
+		pickUpSound: pickup
+	}
 	//menu items
 	bow: {
 		texture: bow
 	},
 	jump: {
 		texture: jump
-	}
+	},
 }

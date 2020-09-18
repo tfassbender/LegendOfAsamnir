@@ -10,8 +10,16 @@
 	},
 	mana: {
 		mana: 20
-	}
+	},
 	shield: {
 		armor: 15
+	},
+	arrow: {
+		ammo: 10,
+		ammoType: arrow
+	},
+	bomb: {
+		ammo: 5
+		ammoType: bomb
 	}
 }

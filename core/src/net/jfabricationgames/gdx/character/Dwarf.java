@@ -20,6 +20,7 @@ import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
+import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -87,6 +88,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private float maxArmor = 100f;
 	private float increaseArmor = 0f;
 	private final float armorIncreasePerSecond = 25f;
+	
+	private int ammoArrow = 0;
+	private final int maxAmmoArrow = 30;
+	private int ammoBomb = 0;
+	private final int maxAmmoBomb = 15;
 	
 	private CharacterInputProcessor movementHandler;
 	
@@ -184,9 +190,17 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		if (activeSpecialAction != null) {
 			switch (activeSpecialAction) {
 				case BOW:
+					ItemAmmoType ammoType = ItemAmmoType.ARROW;//TODO allow bombs and other types too
 					if (attackCreator.allAttacksExecuted()) {
-						attackCreator.startAttack("arrow", movementHandler.getMovingDirection().getNormalizedDirectionVector());//TODO refactor "arrow"
-						return true;
+						if (hasAmmo(ammoType)) {
+							decreaseAmmo(ammoType);
+							attackCreator.startAttack(ammoType.name().toLowerCase(),
+									movementHandler.getMovingDirection().getNormalizedDirectionVector());
+							return true;
+						}
+						else {
+							//TODO play sound: no ammo left
+						}
 					}
 					break;
 				case JUMP:
@@ -197,6 +211,30 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		
 		return false;
+	}
+	
+	private boolean hasAmmo(ItemAmmoType ammoType) {
+		switch (ammoType) {
+			case ARROW:
+				return ammoArrow > 0;
+			case BOMB:
+				return ammoBomb > 0;
+			default:
+				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
+		}
+	}
+	
+	private void decreaseAmmo(ItemAmmoType ammoType) {
+		switch (ammoType) {
+			case ARROW:
+				ammoArrow = Math.max(ammoArrow - 1, 0);
+				break;
+			case BOMB:
+				ammoBomb = Math.max(ammoBomb - 1, 0);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
+		}
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
@@ -464,8 +502,32 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
 			increaseArmor = itemArmor;
 		}
+		if (item.containsProperty(ItemPropertyKeys.AMMO.getPropertyName())) {
+			int itemAmmo = item.getProperty(ItemPropertyKeys.AMMO.getPropertyName(), Float.class).intValue();
+			if (item.containsProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName())) {
+				ItemAmmoType ammoType = ItemAmmoType
+						.getByNameIgnoreCase(item.getProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName(), String.class));
+				increaseAmmo(itemAmmo, ammoType);
+			}
+			else {
+				throw new IllegalStateException("The ammo item has no ammo type defined. It should be added to default_values.json file.");
+			}
+		}
 		
 		item.pickUp();
+	}
+	
+	private void increaseAmmo(int itemAmmo, ItemAmmoType ammoType) {
+		switch (ammoType) {
+			case ARROW:
+				ammoArrow = Math.min(ammoArrow + itemAmmo, maxAmmoArrow);
+				break;
+			case BOMB:
+				ammoBomb = Math.min(ammoBomb + itemAmmo, maxAmmoBomb);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
+		}
 	}
 	
 	@Override

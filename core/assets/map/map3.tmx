@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="99">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="102">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
@@ -173,6 +173,15 @@
     <property name="displayText" value="Some text on the right sign."/>
     <property name="displayTextHeader" value="Right Sign:"/>
    </properties>
+   <point/>
+  </object>
+  <object id="99" name="item.arrow" x="768" y="661.333">
+   <point/>
+  </object>
+  <object id="100" name="item.arrow" x="736" y="662">
+   <point/>
+  </object>
+  <object id="101" name="item.bomb" x="640" y="661.333">
    <point/>
   </object>
  </objectgroup>

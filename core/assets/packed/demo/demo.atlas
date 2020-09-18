@@ -18,9 +18,23 @@ aim_marker_red
   orig: 5, 5
   offset: 0, 0
   index: -1
-axe
+arrow
   rotate: false
   xy: 762, 174
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+projectile_arrow
+  rotate: false
+  xy: 762, 174
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+axe
+  rotate: false
+  xy: 762, 156
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -214,9 +228,16 @@ bat_fly
   orig: 16, 24
   offset: 0, 0
   index: 5
+bomb
+  rotate: false
+  xy: 478, 8
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 bow
   rotate: false
-  xy: 762, 156
+  xy: 696, 108
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -377,7 +398,7 @@ chest_open
   index: 4
 coin
   rotate: false
-  xy: 478, 8
+  xy: 1846, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -398,7 +419,7 @@ dialog_skull
   index: 2
 dialog_skull
   rotate: false
-  xy: 1900, 176
+  xy: 550, 12
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -839,14 +860,14 @@ dwarf_spin_right
   index: 4
 exclamation
   rotate: false
-  xy: 550, 12
+  xy: 1918, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 interrogation
   rotate: false
-  xy: 550, 12
+  xy: 1918, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -1070,35 +1091,35 @@ gladiator_move
   index: 8
 hammer
   rotate: false
-  xy: 696, 108
+  xy: 496, 8
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 health
   rotate: false
-  xy: 1846, 172
+  xy: 1864, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 interrogation
   rotate: false
-  xy: 1916, 176
+  xy: 566, 12
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 2
 interrogation
   rotate: false
-  xy: 566, 12
+  xy: 1934, 176
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 3
 jump
   rotate: false
-  xy: 496, 8
+  xy: 514, 8
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1161,7 +1182,7 @@ key
   index: 8
 mana
   rotate: false
-  xy: 1864, 172
+  xy: 1882, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1572,16 +1593,9 @@ pot_hit
   orig: 32, 32
   offset: 0, 0
   index: 3
-projectile_arrow
-  rotate: false
-  xy: 514, 8
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
 shield
   rotate: false
-  xy: 1882, 172
+  xy: 532, 8
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1665,7 +1679,7 @@ signboard_hit
   index: 3
 sword
   rotate: false
-  xy: 532, 8
+  xy: 1900, 172
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

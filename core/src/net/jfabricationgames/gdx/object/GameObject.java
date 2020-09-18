@@ -29,7 +29,7 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 public class GameObject implements Hittable {
 	
 	protected static final String dropItemMapPropertiesKey = "drop";
-	protected static final float ITEM_DROP_PICKUP_DELAY = 1f;
+	protected static final float ITEM_DROP_PICKUP_DELAY = 0.75f;
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();

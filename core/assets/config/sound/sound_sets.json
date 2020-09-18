@@ -36,6 +36,9 @@
 					path: "sound/dwarf/spin_attack_charge.wav",
 					volume: 0.3
 				}
+				ammo_empty: {
+					path: "sound/dwarf/ammo_empty.mp3"
+				}
 			}
 		},
 		common: {
@@ -64,18 +67,34 @@
 				},
 				mana: {
 					path: "sound/item/mana.wav",
-				}
+				},
 				coin: {
 					path: "sound/item/coin.wav",
 					volume: 0.35
-				}
+				},
 				pickup: {
 					path: "sound/item/pickup.wav",
 					volume: 0.4
-				}
+				},
+				pickup_2: {
+					path: "sound/item/pickup_2.mp3",
+					volume: 0.6
+				},
+				pickup_3: {
+					path: "sound/item/pickup_3.mp3",
+					volume: 0.6
+				},
+				pickup_4: {
+					path: "sound/item/pickup_4.mp3",
+					volume: 0.6
+				},
+				pickup_ammo: {
+					path: "sound/item/pickup_ammo.mp3",
+					volume: 0.4
+				},
 				sell_buy_item: {
 					path: "sound/item/sell_buy_item.wav",
-				} 
+				}
 			}
 		},
 		object: {
