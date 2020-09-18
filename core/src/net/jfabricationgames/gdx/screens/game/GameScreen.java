@@ -22,7 +22,8 @@ import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
+import net.jfabricationgames.gdx.screens.menu.GameOverMenuScreen;
+import net.jfabricationgames.gdx.screens.menu.PauseMenuScreen;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
@@ -36,7 +37,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
-	public static final boolean RENDER_DEBUG_GRAPHICS = true;
+	public static final boolean RENDER_DEBUG_GRAPHICS = false;
 	public static final int VELOCITY_ITERATIONS = 6;
 	public static final int POSITION_ITERATIONS = 2;
 	
@@ -70,12 +71,16 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	private DebugGridRenderer debugGridRenderer;
 	private HeadsUpDisplay hud;
 	private GameMap map;
-	private InGameMenuScreen inGameMenu;
+	private PauseMenuScreen pauseMenu;
 	
 	private Box2DDebugRenderer debugRenderer;
 	private World world;
 	
+	private boolean gameOver;
+	
 	public GameScreen() {
+		gameOver = false;
+		
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
 		assetManager.finishLoading();
@@ -145,6 +150,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		moveCamera(delta);
 		moveCameraToPlayer();
 		
+		checkGameOver();
+		
 		if (RENDER_DEBUG_GRAPHICS) {
 			debugRenderer.render(world, camera.combined);
 		}
@@ -153,17 +160,17 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
 		if (action.equals(ACTION_SHOW_MENU) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
-			showInGameMenu();
+			showPauseMenu();
 			return true;
 		}
 		return false;
 	}
 	
-	private void showInGameMenu() {
-		if (inGameMenu == null) {
-			inGameMenu = new InGameMenuScreen(this, dwarf);
+	private void showPauseMenu() {
+		if (pauseMenu == null) {
+			pauseMenu = new PauseMenuScreen(this, dwarf);
 		}
-		inGameMenu.showMenu();
+		pauseMenu.showMenu();
 	}
 	
 	private void moveCamera(float delta) {
@@ -244,6 +251,17 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		camera.update();
 	}
 	
+	private void checkGameOver() {
+		if (!gameOver && dwarf.isGameOver()) {
+			gameOver = true;
+			showGameOverMenuScreen();
+		}
+	}
+	
+	private void showGameOverMenuScreen() {
+		new GameOverMenuScreen(this).showMenu();
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 		viewport.update(width, height, false);
@@ -260,6 +278,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		hud.dispose();
 		debugRenderer.dispose();
 		debugGridRenderer.dispose();
-		inGameMenu.dispose();
+		if (pauseMenu != null) {
+			pauseMenu.dispose();
+		}
 	}
 }

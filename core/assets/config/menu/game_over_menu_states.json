@@ -1,0 +1,11 @@
+{
+	button_restartGame: {
+		down: button_quit,
+		select: restartGame,
+		initial: true
+	},
+	button_quit: {
+		up: button_restartGame,
+		select: quitGame,
+	}
+}

@@ -11,7 +11,7 @@ public enum CharacterAction {
 	ATTACK_JUMP("dwarf_attack_jump_", "hit2", 20f, true, false, true, "jump_attack"), // attack while running
 	ATTACK_SPIN("dwarf_spin_", "spin_attack", 35f, true, false, true, "spin_attack"), // spin attack
 	HIT("dwarf_hit_", "damage", 0f, true, false, false, null), // dwarf got hit
-	DIE("dwarf_die_", "damage", 0f, true, false, true, null), // dwarf died
+	DIE("dwarf_die_", "die", 0f, true, false, true, null), // dwarf died
 	SHIELD_HIT("dwarf_shield_hit_", "shield_damage", 0f, true, false, true, null); // dwarf holding a shield (and gets hit)
 	
 	private final String animationPrefix;

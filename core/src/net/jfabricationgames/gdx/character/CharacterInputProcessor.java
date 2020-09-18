@@ -63,63 +63,65 @@ public class CharacterInputProcessor implements InputActionListener {
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
 		boolean characterActionSet = false;
 		
-		if (!characterActionSet && spinAttack) {
-			//hit and shield hit can only be interrupted by spin attacks (to free from near enemies)
-			if (getAction().isInterruptable() || getAction() == CharacterAction.HIT || getAction() == CharacterAction.SHIELD_HIT) {
-				inputCharacter.changeAction(CharacterAction.ATTACK_SPIN);
+		if (inputCharacter.isAlive()) {
+			if (!characterActionSet && spinAttack) {
+				//hit and shield hit can only be interrupted by spin attacks (to free from near enemies)
+				if (getAction().isInterruptable() || getAction() == CharacterAction.HIT || getAction() == CharacterAction.SHIELD_HIT) {
+					inputCharacter.changeAction(CharacterAction.ATTACK_SPIN);
+				}
 			}
-		}
-		if (!characterActionSet && attack) {
-			if (getAction().isInterruptable()) {
-				if (move && sprint) {
-					lastMoveDirection = getDirectionFromInputs();
+			if (!characterActionSet && attack) {
+				if (getAction().isInterruptable()) {
+					if (move && sprint) {
+						lastMoveDirection = getDirectionFromInputs();
+						jumpDirection = getDirectionFromInputs();
+						characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
+					}
+					else {
+						characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
+					}
+				}
+			}
+			if (!characterActionSet && block) {
+				if (getAction().isInterruptable()) {
+					characterActionSet = inputCharacter.changeAction(CharacterAction.BLOCK);
+				}
+			}
+			if (!characterActionSet && special) {
+				if (getAction().isInterruptable()) {
 					jumpDirection = getDirectionFromInputs();
-					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
-				}
-				else {
-					characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
+					characterActionSet = inputCharacter.executeSpecialAction();
 				}
 			}
-		}
-		if (!characterActionSet && block) {
-			if (getAction().isInterruptable()) {
-				characterActionSet = inputCharacter.changeAction(CharacterAction.BLOCK);
+			if (!characterActionSet && move) {
+				lastMoveDirection = getDirectionFromInputs();
+				if (getAction().isInterruptable() && getAction() != CharacterAction.RUN) {
+					characterActionSet = inputCharacter.changeAction(CharacterAction.RUN);
+				}
 			}
-		}
-		if (!characterActionSet && special) {
-			if (getAction().isInterruptable()) {
-				jumpDirection = getDirectionFromInputs();
-				characterActionSet = inputCharacter.executeSpecialAction();
+			else {
+				if (getAction() == CharacterAction.RUN) {
+					characterActionSet = inputCharacter.changeAction(CharacterAction.NONE);
+				}
 			}
-		}
-		if (!characterActionSet && move) {
-			lastMoveDirection = getDirectionFromInputs();
-			if (getAction().isInterruptable() && getAction() != CharacterAction.RUN) {
-				characterActionSet = inputCharacter.changeAction(CharacterAction.RUN);
-			}
-		}
-		else {
-			if (getAction() == CharacterAction.RUN) {
-				characterActionSet = inputCharacter.changeAction(CharacterAction.NONE);
-			}
-		}
-		
-		if (inputCharacter.getCurrentAction() == CharacterAction.NONE) {
-			sprint = false;
-			idleTime += delta;
 			
-			if (idleTime > timeTillIdleAnimation) {
-				if (inputCharacter.getCurrentAction() != CharacterAction.IDLE) {
-					inputCharacter.changeAction(CharacterAction.IDLE);
-				}
-				else if (inputCharacter.isAnimationFinished()) {
-					inputCharacter.changeAction(CharacterAction.NONE);
-					idleTime = 0;
+			if (inputCharacter.getCurrentAction() == CharacterAction.NONE) {
+				sprint = false;
+				idleTime += delta;
+				
+				if (idleTime > timeTillIdleAnimation) {
+					if (inputCharacter.getCurrentAction() != CharacterAction.IDLE) {
+						inputCharacter.changeAction(CharacterAction.IDLE);
+					}
+					else if (inputCharacter.isAnimationFinished()) {
+						inputCharacter.changeAction(CharacterAction.NONE);
+						idleTime = 0;
+					}
 				}
 			}
-		}
-		else {
-			idleTime = 0;
+			else {
+				idleTime = 0;
+			}
 		}
 	}
 	

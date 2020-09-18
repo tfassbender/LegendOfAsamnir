@@ -30,6 +30,7 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.texture.TextureLoader;
+import net.jfabricationgames.gdx.util.GameUtils;
 
 public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable {
 	
@@ -39,6 +40,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public static final float MOVING_SPEED_ATTACK = 150f;
 	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
+	private static final float TIME_TILL_GAME_OVER_MENU = 3f;
 	
 	private static final float PHYSICS_BODY_SIZE_FACTOR_X = 0.8f;
 	private static final float PHYSICS_BODY_SIZE_FACTOR_Y = 0.7f;
@@ -51,6 +53,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final String soundSetKey = "dwarf";
 	
 	private static final String spinAttackChargedSound = "spin_attack_charged";
+	
+	private boolean gameOver;
 	
 	private AnimationManager assetManager;
 	
@@ -151,25 +155,28 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public boolean changeAction(CharacterAction action) {
-		if (endurance < action.getEnduranceCosts()) {
-			return false;
+		if (isAlive() || action == CharacterAction.DIE) {
+			if (endurance < action.getEnduranceCosts()) {
+				return false;
+			}
+			if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && armor <= 0) {
+				return false;
+			}
+			this.action = action;
+			this.animation = getAnimation();
+			this.animation.resetStateTime();
+			
+			endurance = Math.max(0, endurance - action.getEnduranceCosts());
+			
+			playSound(action);
+			
+			if (action.isAttack()) {
+				attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
+			}
+			
+			return true;
 		}
-		if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && armor <= 0) {
-			return false;
-		}
-		this.action = action;
-		this.animation = getAnimation();
-		this.animation.resetStateTime();
-		
-		endurance = Math.max(0, endurance - action.getEnduranceCosts());
-		
-		playSound(action);
-		
-		if (action.isAttack()) {
-			attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
-		}
-		
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -389,6 +396,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
+	public boolean isAlive() {
+		return health > 0;
+	}
+	
+	@Override
 	public float getMana() {
 		return mana / maxMana;
 	}
@@ -452,7 +464,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
 			increaseArmor = itemArmor;
 		}
-		//TODO other item types
 		
 		item.pickUp();
 	}
@@ -468,24 +479,39 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void takeDamage(float damage) {
-		if (isBlocking()) {
-			takeArmorDamage(damage * 0.33f);
-			damage *= 0.1f;
-		}
-		health -= damage;
-		if (health <= 0) {
-			health = 0;
-			//TODO die
-			//TODO play death sound
-		}
-		else {
+		if (isAlive()) {
 			if (isBlocking()) {
-				changeAction(CharacterAction.SHIELD_HIT);
+				takeArmorDamage(damage * 0.33f);
+				damage *= 0.1f;
+			}
+			health -= damage;
+			if (health <= 0) {
+				health = 0;
+				die();
 			}
 			else {
-				changeAction(CharacterAction.HIT);
+				if (isBlocking()) {
+					changeAction(CharacterAction.SHIELD_HIT);
+				}
+				else {
+					changeAction(CharacterAction.HIT);
+				}
 			}
 		}
+	}
+	
+	private void die() {
+		playSound(CharacterAction.HIT);
+		changeAction(CharacterAction.DIE);
+		GameUtils.runDelayed(() -> gameOver(), TIME_TILL_GAME_OVER_MENU);
+	}
+	
+	private void gameOver() {
+		gameOver = true;
+	}
+	
+	public boolean isGameOver() {
+		return gameOver;
 	}
 	
 	public void takeArmorDamage(float damage) {
@@ -494,13 +520,15 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void pushByHit(Vector2 hitCenter, float force) {
-		Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
-		force *= 10f * body.getMass();
-		if (isBlocking()) {
-			force *= 0.33;
+		if (isAlive()) {
+			Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
+			force *= 10f * body.getMass();
+			if (isBlocking()) {
+				force *= 0.33;
+			}
+			
+			body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
 		}
-		
-		body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
 	}
 	
 	private boolean isBlocking() {

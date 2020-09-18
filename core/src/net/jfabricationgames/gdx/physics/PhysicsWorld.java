@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx.physics;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -11,6 +10,8 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+
+import net.jfabricationgames.gdx.util.GameUtils;
 
 /**
  * A singleton that keeps track of the current world instance.
@@ -109,17 +110,7 @@ public class PhysicsWorld implements ContactListener {
 	}
 	
 	public void runDelayedAfterWorldStep(Runnable runnable, float delayTime) {
-		Thread delayThread = new Thread(() -> {
-			try {
-				Thread.sleep((int) (delayTime * 1000));
-				runAfterWorldStep(runnable);
-			}
-			catch (InterruptedException e) {
-				Gdx.app.error(getClass().getSimpleName(), "Delay thread - sleep interrupted");
-			}
-		});
-		delayThread.setDaemon(true);
-		delayThread.start();
+		GameUtils.runDelayed(() -> runAfterWorldStep(runnable), delayTime);
 	}
 	
 	/**

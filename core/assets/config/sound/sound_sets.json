@@ -19,6 +19,11 @@
 					path: "sound/dwarf/damage.wav",
 					volume: 0.3
 				},
+				die: {
+					path: "sound/dwarf/die.mp3",
+					volume: 0.5,
+					delay: 0.1
+				}
 				shield_damage: {
 					path: "sound/object/metal_hit_1.wav"
 					volume: 0.9
@@ -139,6 +144,19 @@
 					volume: 0.2,
 					delay: 0.4
 				},
+			}
+		}
+		menu: {
+			sounds: {
+				enter_pause_menu: {
+					path: "sound/menu/enter_pause_menu.wav",
+					volume: 0.5
+				},
+				enter_game_over_menu: {
+					path: "sound/menu/enter_game_over_menu.mp3",
+					volume: 0.5
+					delay: 0.5
+				}
 			}
 		}
 	}
