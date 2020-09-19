@@ -14,6 +14,7 @@ public class MenuBox {
 		YELLOW_BOARD("config/menu/backgrounds/yellow_board_textures.json"), //
 		INVENTORY("config/menu/backgrounds/inventory_textures.json"), //
 		BIG_BANNER("config/menu/backgrounds/big_banner_textures.json"), //
+		BIG_BANNER_LOW("config/menu/backgrounds/big_banner_low_textures.json"), //
 		YELLOW_PAPER("config/menu/backgrounds/yellow_paper_textures.json"); //
 		
 		public final String configFile;

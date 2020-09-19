@@ -214,11 +214,15 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	private boolean hasAmmo(ItemAmmoType ammoType) {
+		return getAmmo(ammoType) > 0;
+	}
+	
+	public int getAmmo(ItemAmmoType ammoType) {
 		switch (ammoType) {
 			case ARROW:
-				return ammoArrow > 0;
+				return ammoArrow;
 			case BOMB:
-				return ammoBomb > 0;
+				return ammoBomb;
 			default:
 				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
 		}

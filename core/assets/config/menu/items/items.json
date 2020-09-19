@@ -1,10 +1,18 @@
 {
 	bow: {
-		atlas: packed/demo/demo.atlas,
+		atlas: packed/menu/menu.atlas,
 		texture: bow,
 	},
 	jump: {
-		atlas: packed/demo/demo.atlas,
+		atlas: packed/menu/menu.atlas,
 		texture: jump,
+	},
+	arrow: {
+		atlas: packed/menu/menu.atlas,
+		texture: arrow,
+	},
+	bomb: {
+		atlas: packed/menu/menu.atlas,
+		texture: bomb,
 	}
 }

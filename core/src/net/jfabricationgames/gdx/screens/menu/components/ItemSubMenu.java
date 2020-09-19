@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
-public class ItemMenu extends MenuBox {
+public class ItemSubMenu extends MenuBox {
 	
 	private static final String selectionTextureConfigName = "selected";
 	private static final String hoverTextureConfigName = "hover";
@@ -26,7 +26,7 @@ public class ItemMenu extends MenuBox {
 	private Array<String> items;
 	private Array<TextureRegion> itemTextures;
 	
-	public ItemMenu(int numItemsPerLine, int numItemRows, Array<String> items) {
+	public ItemSubMenu(int numItemsPerLine, int numItemRows, Array<String> items) {
 		super(numItemsPerLine + 2, numItemRows + 2, TextureType.INVENTORY);
 		this.numItemsPerLine = numItemsPerLine;
 		this.numItemLines = numItemRows;

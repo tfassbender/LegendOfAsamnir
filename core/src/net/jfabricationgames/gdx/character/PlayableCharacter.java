@@ -3,6 +3,8 @@ package net.jfabricationgames.gdx.character;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+import net.jfabricationgames.gdx.item.ItemAmmoType;
+
 public interface PlayableCharacter {
 	
 	public void render(float delta, SpriteBatch batch);
@@ -61,4 +63,6 @@ public interface PlayableCharacter {
 	public void setActiveSpecialAction(SpecialAction specialAction);
 	
 	public boolean isGameOver();
+	
+	public int getAmmo(ItemAmmoType ammoType);
 }

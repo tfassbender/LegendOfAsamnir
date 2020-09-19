@@ -84,6 +84,7 @@
 			atlasName: menu,
 			textureDirs: [
 				menu,
+				menu/items,
 				menu/buttons,
 				menu/background/big_banner,
 				menu/background/green_board,

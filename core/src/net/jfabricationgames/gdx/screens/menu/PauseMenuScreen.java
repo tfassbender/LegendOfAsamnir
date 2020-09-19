@@ -10,11 +10,13 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.SpecialAction;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
+import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.GameControlsDialog;
-import net.jfabricationgames.gdx.screens.menu.components.ItemMenu;
+import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 
 public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
@@ -31,7 +33,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final String statePrefixButtons = "button_";
 	
 	private static final String pauseMenuStatesConfig = "config/menu/in_game_menu_states.json";
-	private static final Array<String> items = new Array<String>(new String[] {"jump", "bow"});
+	private static final Array<String> items = new Array<>(new String[] {"jump", "bow"});
+	private static final Array<ItemAmmoType> ammoItems = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
 	private PlayableCharacter character;
 	private DebugGridRenderer debugGridRenderer;
@@ -39,9 +42,11 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private GameControlsDialog controlsDialog;
 	
 	private MenuBox background;
-	private MenuBox banner;
-	private ItemMenu itemMenu;
+	private MenuBox headerBanner;
+	private ItemSubMenu itemMenu;
 	private MenuBox itemMenuBanner;
+	private AmmoSubMenu ammoMenu;
+	private MenuBox ammoMenuBanner;
 	private FocusButton buttonBackToGame;
 	private FocusButton buttonControls;
 	private FocusButton buttonRestart;
@@ -69,9 +74,9 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	private void createComponents() {
 		background = new MenuBox(12, 8, MenuBox.TextureType.GREEN_BOARD);
-		banner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
+		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		
-		itemMenu = new ItemMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, items);
+		itemMenu = new ItemSubMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, items);
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
@@ -96,6 +101,9 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonControls.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonRestart.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		
+		ammoMenu = new AmmoSubMenu(ammoItems, character);
+		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
 		controlsDialog = new GameControlsDialog();
 	}
@@ -160,6 +168,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		batch.begin();
 		drawBackground();
 		drawItemMenu();
+		drawAmmoMenu();
 		drawButtons();
 		drawBanners();
 		batch.end();
@@ -180,6 +189,10 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		itemMenu.draw(batch, 625, 150, 400, 200);
 	}
 	
+	private void drawAmmoMenu() {
+		ammoMenu.draw(batch, 825, 370, 200, 110);
+	}
+	
 	private void drawButtons() {
 		buttonBackToGame.draw(batch);
 		buttonControls.draw(batch);
@@ -188,8 +201,9 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void drawBanners() {
-		banner.draw(batch, 125, 540, 650, 250);
+		headerBanner.draw(batch, 125, 540, 650, 250);
 		itemMenuBanner.draw(batch, 640, 260, 200, 150);
+		ammoMenuBanner.draw(batch, 800, 415, 250, 150);
 	}
 	
 	private void drawControlsDialog() {
@@ -197,6 +211,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void drawTexts() {
+		ammoMenu.drawAmmoTexts();
+		
 		screenTextWriter.setColor(Color.BLACK);
 		
 		screenTextWriter.setScale(1.5f);
@@ -204,6 +220,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		screenTextWriter.setScale(0.8f);
 		screenTextWriter.drawText("Items", 690, 345);
+		
+		screenTextWriter.drawText("Ammo", 860, 500);
 		
 		screenTextWriter.setScale(1.15f);
 		int buttonTextX = 160;
