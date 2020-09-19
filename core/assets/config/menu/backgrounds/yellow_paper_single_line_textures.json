@@ -1,0 +1,14 @@
+{
+	left: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_paper_single_line_left,
+	},
+	mid: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_paper_single_line_mid,
+	},
+	right: {
+		atlas: packed/menu/menu.atlas,
+		texture: yellow_paper_single_line_right,
+	},
+}

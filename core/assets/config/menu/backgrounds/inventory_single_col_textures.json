@@ -1,0 +1,14 @@
+{
+	up: {
+		atlas: packed/menu/menu.atlas,
+		texture: inventory_single_col_up,
+	},
+	mid: {
+		atlas: packed/menu/menu.atlas,
+		texture: inventory_single_col_mid,
+	},
+	down: {
+		atlas: packed/menu/menu.atlas,
+		texture: inventory_single_col_down,
+	},
+}

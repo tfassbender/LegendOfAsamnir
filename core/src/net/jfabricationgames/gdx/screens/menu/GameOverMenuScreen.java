@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Align;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
-import net.jfabricationgames.gdx.screens.menu.components.MenuBackground;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 
 public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
@@ -34,8 +33,8 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	}
 	
 	private void createComponents() {
-		background = new MenuBackground(12, 8, MenuBox.TextureType.GREEN_BOARD);
-		banner = new MenuBackground(6, 2, MenuBox.TextureType.BIG_BANNER);
+		background = new MenuBox(12, 8, MenuBox.TextureType.GREEN_BOARD);
+		banner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
 		int buttonHeight = 55;

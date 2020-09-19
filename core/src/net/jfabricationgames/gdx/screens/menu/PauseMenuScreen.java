@@ -15,7 +15,6 @@ import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.GameControlsDialog;
 import net.jfabricationgames.gdx.screens.menu.components.ItemMenu;
-import net.jfabricationgames.gdx.screens.menu.components.MenuBackground;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 
 public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
@@ -69,11 +68,11 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void createComponents() {
-		background = new MenuBackground(12, 8, MenuBox.TextureType.GREEN_BOARD);
-		banner = new MenuBackground(6, 2, MenuBox.TextureType.BIG_BANNER);
+		background = new MenuBox(12, 8, MenuBox.TextureType.GREEN_BOARD);
+		banner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		itemMenu = new ItemMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, items);
-		itemMenuBanner = new MenuBackground(4, 2, MenuBox.TextureType.BIG_BANNER);
+		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
 		int buttonHeight = 55;

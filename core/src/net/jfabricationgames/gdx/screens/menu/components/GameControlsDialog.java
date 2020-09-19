@@ -29,8 +29,8 @@ public class GameControlsDialog implements Disposable {
 	}
 	
 	private void createControls() {
-		background = new MenuBackground(12, 8, MenuBox.TextureType.YELLOW_PAPER);
-		banner = new MenuBackground(6, 2, MenuBox.TextureType.BIG_BANNER);
+		background = new MenuBox(12, 8, MenuBox.TextureType.YELLOW_PAPER);
+		banner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		buttonBackToMenu = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG)
 				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(935, 550).setSize(110, 40).build();
 		buttonBackToMenu.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
