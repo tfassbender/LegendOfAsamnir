@@ -16,7 +16,8 @@ public enum PhysicsCollisionType {
 	ITEM(PhysicsBodyCategories.CATEGORY_ITEM, PhysicsBodyCategories.MASK_ITEM), //
 	OBSTACLE(PhysicsBodyCategories.CATEGORY_OBSTACLE, PhysicsBodyCategories.MASK_OBSTACLE), //
 	OBSTACLE_SENSOR(PhysicsBodyCategories.CATEGORY_OBSTACLE_SENSOR, PhysicsBodyCategories.MASK_OBSTACLE_SENSOR),
-	MAP_OBJECT(PhysicsBodyCategories.CATEGORY_MAP_OBJECT, PhysicsBodyCategories.MASK_MAP_OBJECT); //
+	MAP_OBJECT(PhysicsBodyCategories.CATEGORY_MAP_OBJECT, PhysicsBodyCategories.MASK_MAP_OBJECT), //
+	EXPLOSION(PhysicsBodyCategories.CATEGORY_EXPLOSION, PhysicsBodyCategories.MASK_EXPLOSION); //
 	
 	public final short category;
 	public final short mask;

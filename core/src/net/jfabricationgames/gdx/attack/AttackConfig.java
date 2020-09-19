@@ -11,4 +11,6 @@ public class AttackConfig {
 	public float distFromCenter;
 	public float hitFixtureRadius;
 	public float pushForce;
+	public float explosionDamage;
+	public float explosionPushForce;
 }

@@ -1,9 +1,11 @@
 package net.jfabricationgames.gdx.item;
 
+import net.jfabricationgames.gdx.character.SpecialAction;
+
 public enum ItemAmmoType {
 	
-	ARROW,
-	BOMB;
+	ARROW, //
+	BOMB; //
 	
 	public static ItemAmmoType getByNameIgnoreCase(String name) {
 		for (ItemAmmoType type : values()) {
@@ -12,5 +14,16 @@ public enum ItemAmmoType {
 			}
 		}
 		throw new IllegalStateException("Unknown ItemAmmoType name: " + name);
+	}
+	
+	public static ItemAmmoType fromSpecialAction(SpecialAction specialAction) {
+		switch (specialAction) {
+			case BOMB:
+				return BOMB;
+			case BOW:
+				return ARROW;
+			default:
+				throw new IllegalStateException("No known ItemAmmoType for SpecialAction " + specialAction);
+		}
 	}
 }

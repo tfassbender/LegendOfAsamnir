@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="102">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="105">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
@@ -182,6 +182,15 @@
    <point/>
   </object>
   <object id="101" name="item.bomb" x="640" y="661.333">
+   <point/>
+  </object>
+  <object id="102" name="item.bomb" x="608.667" y="660.667">
+   <point/>
+  </object>
+  <object id="103" name="item.bomb" x="752" y="441.333">
+   <point/>
+  </object>
+  <object id="104" name="item.bomb" x="934" y="248.667">
    <point/>
   </object>
  </objectgroup>

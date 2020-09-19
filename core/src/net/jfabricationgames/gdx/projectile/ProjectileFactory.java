@@ -2,9 +2,12 @@ package net.jfabricationgames.gdx.projectile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -14,9 +17,28 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 public class ProjectileFactory extends AbstractFactory {
 	
 	private static final String configFile = "config/factory/projectile_factory.json";
+	private static final String animationConfigFile = "config/animation/projectiles.json";
 	private static Config config;
 	
 	private static ProjectileFactory instance;
+	
+	public static synchronized ProjectileFactory getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("The instance of ProjectileFactory has not yet been created. "
+					+ "Use the createInstance(GameMap) method to create the instance.");
+		}
+		return instance;
+	}
+	
+	public static synchronized ProjectileFactory createInstance(GameMap gameMap) {
+		if (instance != null && instance.gameMap.equals(gameMap)) {
+			Gdx.app.error(ProjectileFactory.class.getSimpleName(), "A ProjectileFactory for this game map has already been created.");
+		}
+		
+		AnimationManager.getInstance().loadAnimations(animationConfigFile);
+		instance = new ProjectileFactory(gameMap);
+		return instance;
+	}
 	
 	private ObjectMap<String, ProjectileTypeConfig> typeConfigs;
 	
@@ -34,22 +56,6 @@ public class ProjectileFactory extends AbstractFactory {
 		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
-	public static synchronized ProjectileFactory getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("The instance of ProjectileFactory has not yet been created. "
-					+ "Use the createInstance(GameMap) method to create the instance.");
-		}
-		return instance;
-	}
-	
-	public static synchronized ProjectileFactory createInstance(GameMap gameMap) {
-		if (instance != null && instance.gameMap.equals(gameMap)) {
-			Gdx.app.error(ProjectileFactory.class.getSimpleName(), "A ProjectileFactory for this game map has already been created.");
-		}
-		instance = new ProjectileFactory(gameMap);
-		return instance;
-	}
-	
 	@SuppressWarnings("unchecked")
 	private void loadTypeConfigs() {
 		typeConfigs = json.fromJson(ObjectMap.class, ProjectileTypeConfig.class, Gdx.files.internal(config.typesConfig));
@@ -62,12 +68,26 @@ public class ProjectileFactory extends AbstractFactory {
 					+ ". Either the type name is wrong or you have to add it to the projectileTypesConfig (see \"" + configFile + "\")");
 		}
 		
-		Sprite sprite = createSprite(position.x, position.y, typeConfig.texture);
+		Sprite sprite = null;
+		if (typeConfig.texture != null) {
+			sprite = createSprite(position.x, position.y, typeConfig.texture);
+		}
+		AnimationDirector<TextureRegion> animation = null;
+		if (typeConfig.animation != null) {
+			animation = AnimationManager.getInstance().getAnimationDirectorCopy(typeConfig.animation);
+		}
 		
 		Projectile projectile;
 		switch (type) {
 			case "arrow":
 				projectile = new Arrow(typeConfig, sprite);
+				break;
+			case "bomb":
+				projectile = new Bomb(typeConfig, sprite);
+				break;
+			case "explosion":
+				projectile = new Explosion(typeConfig, animation);
+				collisionType = PhysicsCollisionType.EXPLOSION;
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);

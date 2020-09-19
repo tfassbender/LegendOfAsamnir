@@ -33,7 +33,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final String statePrefixButtons = "button_";
 	
 	private static final String pauseMenuStatesConfig = "config/menu/in_game_menu_states.json";
-	private static final Array<String> items = new Array<>(new String[] {"jump", "bow"});
+	private static final Array<String> items = new Array<>(new String[] {"jump", "bow", "bomb"});
 	private static final Array<ItemAmmoType> ammoItems = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
 	private PlayableCharacter character;

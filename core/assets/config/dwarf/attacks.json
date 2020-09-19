@@ -24,7 +24,7 @@
 		damage: 5,
 		distFromCenter: 0,
 		hitFixtureRadius: 1.5,
-		pushForce: 3
+		pushForce: 3d
 	},
 	{
 		id: arrow,
@@ -35,4 +35,15 @@
 		damage: 10,
 		pushForce: 0.5
 	},
+	{
+		id: bomb,
+		type: PROJECTILE,
+		projectileType: bomb,
+		delay: 0,
+		duration: 1.5,
+		damage: 0,
+		pushForce: 0
+		explosionDamage: 20,
+		explosionPushForce: 3,
+	}
 ]

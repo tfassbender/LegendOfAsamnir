@@ -35,11 +35,11 @@ import net.jfabricationgames.gdx.util.GameUtils;
 
 public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable {
 	
-	public static final float MOVING_SPEED = 300f;
-	public static final float JUMPING_SPEED = 425f;
-	public static final float MOVING_SPEED_SPRINT = 425f;
-	public static final float MOVING_SPEED_ATTACK = 150f;
-	public static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
+	private static final float MOVING_SPEED = 300f;
+	private static final float JUMPING_SPEED = 425f;
+	private static final float MOVING_SPEED_SPRINT = 425f;
+	private static final float MOVING_SPEED_ATTACK = 150f;
+	private static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
 	private static final float TIME_TILL_GAME_OVER_MENU = 3f;
 	
@@ -57,7 +57,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private boolean gameOver;
 	
-	private AnimationManager assetManager;
+	private AnimationManager animationManager;
 	
 	private Body body;
 	private AttackCreator attackCreator;
@@ -105,8 +105,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private SoundSet soundSet;
 	
 	public Dwarf() {
-		assetManager = AnimationManager.getInstance();
-		assetManager.loadAnimations(assetConfigFileName);
+		animationManager = AnimationManager.getInstance();
+		animationManager.loadAnimations(assetConfigFileName);
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
 		
 		textureLoader = new TextureLoader(textureConfig);
@@ -190,17 +190,19 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		if (activeSpecialAction != null) {
 			switch (activeSpecialAction) {
 				case BOW:
-					ItemAmmoType ammoType = ItemAmmoType.ARROW;//TODO allow bombs and other types too
+				case BOMB:
+					ItemAmmoType ammoType = ItemAmmoType.fromSpecialAction(activeSpecialAction);
 					if (attackCreator.allAttacksExecuted()) {
 						if (hasAmmo(ammoType)) {
 							decreaseAmmo(ammoType);
 							attackCreator.startAttack(ammoType.name().toLowerCase(),
 									movementHandler.getMovingDirection().getNormalizedDirectionVector());
-							return true;
 						}
 						else {
-							//TODO play sound: no ammo left
+							//TODO delay between sounds
+							//soundSet.playSound(SOUND_AMMO_EMPTY);
 						}
+						return true;
 					}
 					break;
 				case JUMP:
@@ -250,7 +252,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 	}
 	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action) {
-		return assetManager.getAnimationDirector(getAnimationName(action));
+		return animationManager.getAnimationDirector(getAnimationName(action));
 	}
 	private String getAnimationName(CharacterAction action) {
 		return action.getAnimationName();

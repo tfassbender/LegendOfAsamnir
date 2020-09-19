@@ -97,6 +97,18 @@
 				}
 			}
 		},
+		projectile: {
+			sounds: {
+				arrow: {
+					path: "sound/projectile/arrow.wav"
+					volume: 0.3
+				},
+				explosion: {
+					path: "sound/projectile/explosion.wav"
+					volume: 0.5
+				},
+			}
+		}
 		object: {
 			sounds: {
 				wood_hit_1: {

@@ -4,8 +4,31 @@
 		textureScale: 1,
 		textureInitialRotation: 225,
 		
+		sound: arrow,
+		
 		range: 100,
-		speed: 40,
+		speed: 60,
 		dampingAfterObjectHit: 5,
+	},
+	bomb: {
+		texture: projectile_bomb,
+		textureScale: 1,
+		
+		speed: 50,
+		damping: 5,
+		dampingAfterObjectHit: 10,
+		
+		timeTillExplosion: 3,
+	},
+	explosion: {
+		animation: explosion,
+		textureScale: 0.05,
+		
+		sound: explosion,
+		
+		speed: 0,
+		damping: 0,
+		
+		multipleHitsPossible: true,
 	}
 }
