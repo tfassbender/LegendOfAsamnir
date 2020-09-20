@@ -49,7 +49,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	private static final float CAMERA_ZOOM_MAX = 2.0f;
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
 	
-	private static final float MOVEMENT_EDGE_OFFSET = 50f;
+	private static final float MOVEMENT_EDGE_OFFSET = 75f;
 	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET * WORLD_TO_SCREEN;
 	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET * WORLD_TO_SCREEN;
 	

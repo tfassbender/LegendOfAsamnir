@@ -40,9 +40,11 @@ public abstract class Projectile implements ContactListener {
 	
 	protected float damage;
 	protected float pushForce;
+	protected boolean pushForceAffectedByBlock = true;
 	
 	protected float explosionDamage;
 	protected float explosionPushForce;
+	protected boolean explosionPushForceAffectedByBlock;
 	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
@@ -116,6 +118,10 @@ public abstract class Projectile implements ContactListener {
 		this.pushForce = pushForce;
 	}
 	
+	public void setPushForceAffectedByBlock(boolean pushForceAffectedByBlock) {
+		this.pushForceAffectedByBlock = pushForceAffectedByBlock;
+	}
+	
 	public void update(float delta) {
 		distanceTraveled += delta * typeConfig.speed;
 		timeActive += delta;
@@ -158,6 +164,7 @@ public abstract class Projectile implements ContactListener {
 				collisionType);
 		explosion.setDamage(explosionDamage);
 		explosion.setPushForce(explosionPushForce);
+		explosion.setPushForceAffectedByBlock(explosionPushForceAffectedByBlock);
 		remove();
 	}
 	
@@ -184,7 +191,7 @@ public abstract class Projectile implements ContactListener {
 				Hittable hittable = ((Hittable) attackedUserData);
 				hittable.takeDamage(damage);
 				//enemies define the force themselves; the force parameter is a factor for this self defined force
-				hittable.pushByHit(body.getPosition().cpy(), pushForce);
+				hittable.pushByHit(body.getPosition().cpy(), pushForce, pushForceAffectedByBlock);
 			}
 			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
 			attackPerformed = true;
@@ -222,5 +229,9 @@ public abstract class Projectile implements ContactListener {
 	
 	public void setExplosionPushForce(float explosionPushForce) {
 		this.explosionPushForce = explosionPushForce;
+	}
+	
+	public void setExplosionPushForceAffectedByBlock(boolean explosionPushForceAffectedByBlock) {
+		this.explosionPushForceAffectedByBlock = explosionPushForceAffectedByBlock;
 	}
 }

@@ -33,7 +33,6 @@ public class GameObject implements Hittable {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
-
 	
 	protected Sprite sprite;
 	protected MapProperties mapProperties;
@@ -136,7 +135,7 @@ public class GameObject implements Hittable {
 	}
 	
 	@Override
-	public void pushByHit(Vector2 hitCenter, float force) {
+	public void pushByHit(Vector2 hitCenter, float force, boolean affectedByBlock) {
 		//objects don't get pushed by hits
 	}
 	
@@ -175,8 +174,7 @@ public class GameObject implements Hittable {
 	}
 	
 	private void dropItem(String type) {
-		gameMap.getItemFactory().createAndDropItem(type,
-				(body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD, //
+		gameMap.getItemFactory().createAndDropItem(type, (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD, //
 				(body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD, //
 				typeConfig.renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}

@@ -22,7 +22,7 @@
 		
 		pushForceDamage: 25,
 		pushForceHit: 40
-	}
+	},
 	mini_golem: {
 		animationsConfig: config/animation/enemy/mini_golem.json,
 		stateConfig: config/enemy/states/mini_golem.json,
@@ -34,5 +34,17 @@
 		
 		pushForceDamage: 35,
 		pushForceHit: 30
+	},
+	minotaur: {
+		animationsConfig: config/animation/enemy/minotaur.json,
+		stateConfig: config/enemy/states/minotaur.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/minotaur.json
+		
+		health: 150,
+		movingSpeed: 3.0,
+		
+		pushForceDamage: 15,
+		pushForceHit: 40
 	}
 }

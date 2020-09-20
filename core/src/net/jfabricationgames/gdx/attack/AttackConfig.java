@@ -11,6 +11,8 @@ public class AttackConfig {
 	public float distFromCenter;
 	public float hitFixtureRadius;
 	public float pushForce;
+	public boolean pushForceAffectedByBlock = true;
 	public float explosionDamage;
 	public float explosionPushForce;
+	public boolean explosionPushForceAffectedByBlock = false;
 }

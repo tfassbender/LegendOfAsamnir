@@ -175,6 +175,35 @@
 					volume: 0.2,
 					delay: 0.4
 				},
+				//minotaur
+				minotaur_attack_hit: {
+					path: "sound/enemy/attack/gladiator.wav",
+					volume: 0.7,
+					delay: 0.1
+				},
+				minotaur_attack_spin: {
+					path: "sound/dwarf/spin_attack.wav",
+					volume: 0.7
+					delay: 0.4
+				},
+				minotaur_attack_knock: {
+					path: "sound/object/wood_knock.wav",
+					volume: 1
+					delay: 0.5
+				},
+				minotaur_attack_stab: {
+					path: "sound/enemy/attack/stab.wav",
+					volume: 0.8
+					delay: 0.1
+				}
+				minotaur_taunt: {
+					path: "sound/enemy/taunt.wav",
+					volume: 1
+				}
+				minotaur_die: {
+					path: "sound/enemy/taunt.wav",
+					volume: 0.9,
+				}
 			}
 		}
 		menu: {

@@ -27,7 +27,7 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 	}
 	
 	protected boolean changeToAttackState() {
-		if (timeTillLastAttack >= timeBetweenAttacks) {
+		if (timeToAttack()) {
 			attackState.setAttackDirection(directionToTarget());
 			boolean changedState = stateMachine.setState(attackState);
 			if (changedState) {
@@ -37,6 +37,11 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 		}
 		return false;
 	}
+
+	protected boolean timeToAttack() {
+		return timeTillLastAttack >= timeBetweenAttacks;
+	}
+	
 	protected boolean inAttackState() {
 		return stateMachine.getCurrentState() == attackState;
 	}
@@ -52,7 +57,7 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 		return targetingPlayer.getPosition().sub(enemy.getPosition());
 	}
 	
-	protected float distanceToPlayer() {
+	protected float distanceToTarget() {
 		if (targetingPlayer == null) {
 			return Float.MAX_VALUE;
 		}
@@ -61,7 +66,7 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 	
 	@Override
 	public void calculateMove(float delta) {
-		if (stateMachine.getCurrentState() != attackState) {
+		if (!inAttackState()) {
 			timeTillLastAttack += delta;
 		}
 	}

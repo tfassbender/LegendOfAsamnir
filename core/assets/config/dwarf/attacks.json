@@ -25,6 +25,7 @@
 		distFromCenter: 0,
 		hitFixtureRadius: 1.5,
 		pushForce: 3d
+		pushForceAffectedByBlock: false,
 	},
 	{
 		id: arrow,
@@ -45,5 +46,6 @@
 		pushForce: 0
 		explosionDamage: 20,
 		explosionPushForce: 3,
+		explosionPushForceAffectedByBlock: false,
 	}
 ]

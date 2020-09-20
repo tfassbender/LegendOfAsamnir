@@ -10,6 +10,7 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.enemy.implementation.Gladiator;
 import net.jfabricationgames.gdx.enemy.implementation.MiniGolem;
+import net.jfabricationgames.gdx.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -64,6 +65,9 @@ public class EnemyFactory extends AbstractFactory {
 				break;
 			case "mini_golem":
 				enemy = new MiniGolem(typeConfig, properties);
+				break;
+			case "minotaur":
+				enemy = new Minotaur(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);

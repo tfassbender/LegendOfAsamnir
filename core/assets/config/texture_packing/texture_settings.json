@@ -78,6 +78,28 @@
 				enemy/mini_golem/mini_golem_die,
 				enemy/mini_golem/mini_golem_idle,
 				enemy/mini_golem/mini_golem_move,
+				
+				//minotaur
+				enemy/minotaur/minotaur_attack_hit,
+				enemy/minotaur/minotaur_attack_knock,
+				enemy/minotaur/minotaur_attack_spin,
+				enemy/minotaur/minotaur_attack_stab,
+				enemy/minotaur/minotaur_damage_high,
+				enemy/minotaur/minotaur_damage_low,
+				enemy/minotaur/minotaur_die,
+				enemy/minotaur/minotaur_idle,
+				enemy/minotaur/minotaur_move,
+				enemy/minotaur/minotaur_taunt,
+				
+				//spider
+				enemy/spider/spider_damage,
+				enemy/spider/spider_die,
+				enemy/spider/spider_emerge,
+				enemy/spider/spider_idle,
+				enemy/spider/spider_jump,
+				enemy/spider/spider_shoot,
+				enemy/spider/spider_move,
+				enemy/spider/spider_web,
 			]
 		},
 		menu: {

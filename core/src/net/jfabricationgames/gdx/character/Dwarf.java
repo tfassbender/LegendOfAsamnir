@@ -587,11 +587,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
-	public void pushByHit(Vector2 hitCenter, float force) {
+	public void pushByHit(Vector2 hitCenter, float force, boolean blockAffected) {
 		if (isAlive()) {
 			Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
 			force *= 10f * body.getMass();
-			if (isBlocking()) {
+			if (isBlocking() && blockAffected) {
 				force *= 0.33;
 			}
 			

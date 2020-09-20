@@ -1,0 +1,107 @@
+[
+	{
+		id: idle,
+		animation: minotaur_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			taunt, move, attack_hit, attack_knock, attack_spin, attack_stab, damage_low, damage_high, die
+		]
+	},
+	{
+		id: taunt,
+		animation: minotaur_taunt,
+		stateEnteringSound: minotaur_taunt,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			attack_hit, attack_knock, attack_spin, attack_stab, damage_low, damage_high, die
+		]
+	},
+	{
+		id: move,
+		animation: minotaur_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, attack_hit, attack_knock, attack_spin, attack_stab, damage_low, damage_high, die
+		]
+	},
+	{
+		id: attack_hit,
+		animation: minotaur_attack_hit,
+		stateEnteringSound: minotaur_attack_hit,
+		attack: attack_hit
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage_low, damage_high, die
+		]
+	},
+	{
+		id: attack_knock,
+		animation: minotaur_attack_knock,
+		stateEnteringSound: minotaur_attack_knock,
+		attack: attack_knock
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage_low, damage_high, die
+		]
+	},
+	{
+		id: attack_spin,
+		animation: minotaur_attack_spin,
+		stateEnteringSound: minotaur_attack_spin,
+		attack: attack_spin
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage_low, damage_high, die
+		]
+	},
+	{
+		id: attack_stab,
+		animation: minotaur_attack_stab,
+		stateEnteringSound: minotaur_attack_stab,
+		attack: attack_stab
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage_low, damage_high, die
+		]
+	},
+	{
+		id: damage_low,
+		animation: minotaur_damage_low,
+		endsWithAnimation: true,
+		stateEnteringSound: flesh_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			attack_hit, attack_knock, attack_spin, attack_stab, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: damage_high,
+		animation: minotaur_damage_high,
+		endsWithAnimation: true,
+		stateEnteringSound: flesh_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			attack_hit, attack_knock, attack_spin, attack_stab, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: minotaur_die,
+		endsWithAnimation: false,
+		stateEnteringSound: minotaur_die,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]

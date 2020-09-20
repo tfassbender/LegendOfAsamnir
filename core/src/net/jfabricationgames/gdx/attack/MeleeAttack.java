@@ -52,7 +52,7 @@ public class MeleeAttack extends Attack {
 					&& attackedObjectUserData instanceof Hittable) {
 				Hittable attackedObject = ((Hittable) attackedObjectUserData);
 				attackedObject.takeDamage(config.damage);
-				attackedObject.pushByHit(hitFixture.getBody().getPosition(), config.pushForce);
+				attackedObject.pushByHit(hitFixture.getBody().getPosition(), config.pushForce, config.pushForceAffectedByBlock);
 			}
 		}
 	}

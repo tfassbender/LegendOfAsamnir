@@ -133,7 +133,6 @@ public abstract class Enemy implements Hittable, ContactListener {
 		else {
 			ai.calculateMove(delta);
 			ai.executeMove();
-			
 		}
 	}
 	
@@ -204,13 +203,13 @@ public abstract class Enemy implements Hittable, ContactListener {
 				die();
 			}
 			else {
-				stateMachine.setState(getDamageStateName());
+				stateMachine.setState(getDamageStateName(damage));
 			}
 		}
 	}
 	
 	@Override
-	public void pushByHit(Vector2 hitCenter, float force) {
+	public void pushByHit(Vector2 hitCenter, float force, boolean blockAffected) {
 		if (hasBody()) {
 			Vector2 pushDirection = getPushDirection(getPosition(), hitCenter);
 			//enemies define the force to get pushed themselves (the player's attack is multiplied to this self defined force as a factor)
@@ -226,7 +225,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	/**
 	 * Returns the name of the state that shows the enemy taking damage. Override this method if the state is not named "damage".
 	 */
-	protected String getDamageStateName() {
+	protected String getDamageStateName(float damage) {
 		return "damage";
 	}
 	

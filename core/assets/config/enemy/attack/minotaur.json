@@ -1,0 +1,40 @@
+[
+	{
+		id: attack_hit,
+		delay: 0.1,
+		duration: 0,
+		damage: 25,
+		distFromCenter: 1,
+		hitFixtureRadius: 0.5,
+		pushForce: 150
+	},
+	{
+		id: attack_knock,
+		delay: 0.5,
+		duration: 0,
+		damage: 5,
+		distFromCenter: 0,
+		hitFixtureRadius: 4,
+		pushForce: 180
+		pushForceAffectedByBlock: false,
+	},
+	{
+		id: attack_spin,
+		delay: 0.4,
+		duration: 0,
+		damage: 10,
+		distFromCenter: 0,
+		hitFixtureRadius: 2,
+		pushForce: 150,
+		pushForceAffectedByBlock: false,
+	}
+	{
+		id: attack_stab,
+		delay: 0.1,
+		duration: 0,
+		damage: 20,
+		distFromCenter: 2,
+		hitFixtureRadius: 0.5,
+		pushForce: 150
+	}
+]

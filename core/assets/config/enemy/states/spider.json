@@ -1,0 +1,63 @@
+[
+	{
+		id: idle,
+		animation: spider_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, jump, attack, damage, die
+		]
+	},
+	{
+		id: move,
+		animation: spider_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, jump, attack, damage, die
+		]
+	},
+	{
+		id: jump,
+		animation: spider_jump,
+		stateEnteringSound: attack_spider,
+		attack: attack
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: attack,
+		animation: spider_attack,
+		stateEnteringSound: attack_spider,
+		attack: attack
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: damage,
+		animation: spider_damage,
+		endsWithAnimation: true,
+		stateEnteringSound: metal_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			attack, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: spider_die,
+		endsWithAnimation: false,
+		stateEnteringSound: flesh_hit_1,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]

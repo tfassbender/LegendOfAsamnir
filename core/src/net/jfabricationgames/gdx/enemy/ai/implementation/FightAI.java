@@ -35,7 +35,7 @@ public class FightAI extends AbstractAttackAI implements ArtificialIntelligence 
 			}
 			if (inAttackState()) {
 				attackState.flipAnimationToDirection(directionToTarget());
-				if (distanceToPlayer() > minDistanceToTargetPlayer) {
+				if (distanceToTarget() > minDistanceToTargetPlayer) {
 					enemy.moveTo(move.targetPosition);
 				}
 			}
@@ -43,5 +43,4 @@ public class FightAI extends AbstractAttackAI implements ArtificialIntelligence 
 		
 		subAI.executeMove();
 	}
-	
 }
