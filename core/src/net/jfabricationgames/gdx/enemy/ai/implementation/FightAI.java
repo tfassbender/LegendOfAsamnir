@@ -3,14 +3,15 @@ package net.jfabricationgames.gdx.enemy.ai.implementation;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.move.AIAttackingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.enemy.ai.util.AttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
 public class FightAI extends AbstractAttackAI implements ArtificialIntelligence {
 	
 	private float attackDistance;
 	
-	public FightAI(ArtificialIntelligence subAI, EnemyState attackState, float timeBetweenAttacks, float attackDistance) {
-		super(subAI, attackState, timeBetweenAttacks);
+	public FightAI(ArtificialIntelligence subAI, EnemyState attackState, AttackTimer attackTimer, float attackDistance) {
+		super(subAI, attackState, attackTimer);
 		this.attackDistance = attackDistance;
 	}
 	

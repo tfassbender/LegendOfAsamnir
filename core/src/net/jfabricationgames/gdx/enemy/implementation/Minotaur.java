@@ -11,6 +11,7 @@ import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.ActionAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.MinotaurAttackAI;
+import net.jfabricationgames.gdx.enemy.ai.util.RandomIntervalAttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
@@ -74,9 +75,10 @@ public class Minotaur extends Enemy {
 		attackDistances.put(attackSpinState, 2.5f);
 		attackDistances.put(attackStabState, 3f);
 		
-		float timeBetweenAttacks = 2f;
+		float minTimeBetweenAttacks = 1f;
+		float maxTimeBetweenAttacks = 2.5f;
 		
-		return new MinotaurAttackAI(ai, attackStates, attackDistances, timeBetweenAttacks);
+		return new MinotaurAttackAI(ai, attackStates, attackDistances, new RandomIntervalAttackTimer(minTimeBetweenAttacks, maxTimeBetweenAttacks));
 	}
 	
 	private ArtificialIntelligence createActionAI(ArtificialIntelligence ai) {

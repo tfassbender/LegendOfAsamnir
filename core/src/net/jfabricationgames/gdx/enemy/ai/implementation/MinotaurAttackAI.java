@@ -5,6 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.enemy.ai.util.AttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
 public class MinotaurAttackAI extends AbstractMultiAttackAI {
@@ -23,8 +24,8 @@ public class MinotaurAttackAI extends AbstractMultiAttackAI {
 	private Random random;
 	
 	public MinotaurAttackAI(ArtificialIntelligence subAI, ArrayMap<String, EnemyState> attackStates, ArrayMap<EnemyState, Float> attackDistances,
-			float timeBetweenAttacks) {
-		super(subAI, attackStates, attackDistances, timeBetweenAttacks);
+			AttackTimer attackTimer) {
+		super(subAI, attackStates, attackDistances, attackTimer);
 		
 		attackHit = attackStates.get("attack_hit");
 		attackKnock = attackStates.get("attack_knock");

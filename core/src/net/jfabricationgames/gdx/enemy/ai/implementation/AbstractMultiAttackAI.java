@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.move.AIAttackingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
+import net.jfabricationgames.gdx.enemy.ai.util.AttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
 public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
@@ -14,8 +15,8 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 	protected ArrayMap<EnemyState, Float> attackDistances;
 	
 	public AbstractMultiAttackAI(ArtificialIntelligence subAI, ArrayMap<String, EnemyState> attackStates, ArrayMap<EnemyState, Float> attackDistances,
-			float timeBetweenAttacks) {
-		super(subAI, null, timeBetweenAttacks);
+			AttackTimer attackTimer) {
+		super(subAI, null, attackTimer);
 		this.attackStates = attackStates;
 		this.attackDistances = attackDistances;
 	}

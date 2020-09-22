@@ -8,6 +8,7 @@ import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FightAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.RunAwayAI;
+import net.jfabricationgames.gdx.enemy.ai.util.FixedAttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
@@ -36,6 +37,6 @@ public class Bat extends Enemy {
 		EnemyState attackState = stateMachine.getState("attack");
 		ai = new BaseAI();
 		ai = new RunAwayAI(ai, movingState, idleState);
-		ai = new FightAI(ai, attackState, 0f, 2f);
+		ai = new FightAI(ai, attackState, new FixedAttackTimer(0f), 2f);
 	}
 }

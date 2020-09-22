@@ -6,24 +6,28 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.enemy.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.enemy.ai.util.AttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
 public abstract class AbstractAttackAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
 	
 	protected EnemyState attackState;
 	protected PlayableCharacter targetingPlayer;
+	protected AttackTimer attackTimer;
 	
-	protected float timeBetweenAttacks;
-	protected float timeTillLastAttack;
+	protected float timeTillNextAttack;
+	protected float timeSinceLastAttack;
 	
 	/** The distance till which the enemy follows the player (to not push him if to near) */
 	protected float minDistanceToTargetPlayer = 1f;
 	
-	public AbstractAttackAI(ArtificialIntelligence subAI, EnemyState attackState, float timeBetweenAttacks) {
+	public AbstractAttackAI(ArtificialIntelligence subAI, EnemyState attackState, AttackTimer attackTimer) {
 		super(subAI);
 		this.attackState = attackState;
-		this.timeBetweenAttacks = timeBetweenAttacks;
-		timeTillLastAttack = timeBetweenAttacks;
+		this.attackTimer = attackTimer;
+		
+		updateTimeTillNextAttack();
+		timeSinceLastAttack = timeTillNextAttack;
 	}
 	
 	protected boolean changeToAttackState() {
@@ -31,15 +35,21 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 			attackState.setAttackDirection(directionToTarget());
 			boolean changedState = stateMachine.setState(attackState);
 			if (changedState) {
-				timeTillLastAttack = 0;
+				timeSinceLastAttack = 0;
+				updateTimeTillNextAttack();
 			}
+			
 			return changedState;
 		}
 		return false;
 	}
-
+	
+	protected void updateTimeTillNextAttack() {
+		timeTillNextAttack = attackTimer.getTimeTillNextAttack();
+	}
+	
 	protected boolean timeToAttack() {
-		return timeTillLastAttack >= timeBetweenAttacks;
+		return timeSinceLastAttack >= timeTillNextAttack;
 	}
 	
 	protected boolean inAttackState() {
@@ -67,7 +77,7 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 	@Override
 	public void calculateMove(float delta) {
 		if (!inAttackState()) {
-			timeTillLastAttack += delta;
+			timeSinceLastAttack += delta;
 		}
 	}
 	
