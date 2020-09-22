@@ -23,31 +23,37 @@ public class DwarfScrollerGame extends Game {
 	
 	private static DwarfScrollerGame instance;
 	
+	private Runnable preGameConfigurator;
+	
 	private InputMultiplexer multiplexer;
-	
 	private InputProfile gameInputProfile;
-	
-	public static synchronized DwarfScrollerGame getInstance() {
+
+	public static synchronized DwarfScrollerGame createInstance(Runnable preGameConfigurator) {
 		if (instance == null) {
-			instance = new DwarfScrollerGame();
+			instance = new DwarfScrollerGame(preGameConfigurator);
 		}
 		return instance;
 	}
 	
-	private DwarfScrollerGame() {
-		
+	public static DwarfScrollerGame getInstance() {
+		return instance;
+	}
+	
+	private DwarfScrollerGame(Runnable preGameConfigurator) {
+		this.preGameConfigurator = preGameConfigurator;
 	}
 	
 	@Override
 	public void create() {
-		multiplexer = new InputMultiplexer();
-		Gdx.input.setInputProcessor(multiplexer);
-		
-		gameInputProfile = new InputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
+		preGameConfigurator.run();
 		
 		AssetGroupManager.initialize(ASSET_GROUP_MANAGER_CONFIG_PATH);
 		SoundManager.getInstance().loadConfig(SOUND_CONFIG_PATH);
 		FontManager.getInstance().load(FONT_CONFIG_PATH);
+		
+		multiplexer = new InputMultiplexer();
+		Gdx.input.setInputProcessor(multiplexer);
+		gameInputProfile = new InputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
 		
 		setScreen(new MainMenuScreen());
 	}

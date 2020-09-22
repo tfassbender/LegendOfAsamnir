@@ -35,7 +35,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			damage_low, damage_high, die
+			damage_high, die
 		]
 	},
 	{
@@ -46,7 +46,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			damage_low, damage_high, die
+			damage_high, die
 		]
 	},
 	{
@@ -57,7 +57,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			damage_low, damage_high, die
+			damage_high, die
 		]
 	},
 	{
@@ -68,7 +68,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			damage_low, damage_high, die
+			damage_high, die
 		]
 	},
 	{

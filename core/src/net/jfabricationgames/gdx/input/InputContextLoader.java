@@ -44,6 +44,7 @@ public class InputContextLoader {
 	protected void load(Element contextRoot) {
 		try {
 			context.name = contextRoot.getAttribute("name");
+			Gdx.app.log(getClass().getSimpleName(), "Loading context: " + context.name);
 			
 			readingContextType = ContextType.EVENTS;
 			Element eventsElement = contextRoot.getChildByName("events");
@@ -94,13 +95,27 @@ public class InputContextLoader {
 	private void loadEventElement(InputEvent inputEvent, Element eventElement) {
 		if (eventElement != null) {
 			if (eventElement.hasAttribute("listening")) {
-				context.handledEvents.put(inputEvent, Boolean.parseBoolean(eventElement.getAttribute("listening")));
+				boolean value = Boolean.parseBoolean(eventElement.getAttribute("listening"));
+				checkInputEventDuplicate(inputEvent, value, eventElement);
+				context.handledEvents.put(inputEvent, value);
 			}
 			else {
 				//the event has no "listening" attribute, so it is assumed to be true
+				checkInputEventDuplicate(inputEvent, true, eventElement);
 				context.handledEvents.put(inputEvent, true);
 			}
 		}
+	}
+	
+	private void checkInputEventDuplicate(InputEvent inputEvent, boolean newValue, Element eventElement) {
+		if (context.handledEvents.containsKey(inputEvent)) {
+			logDuplicateErrorMessage(inputEvent.name(), context.handledEvents.get(inputEvent), newValue, eventElement);
+		}
+	}
+	
+	private void logDuplicateErrorMessage(Object key, Object existingValue, Object newValue, Element eventElement) {
+		Gdx.app.error(getClass().getName(), "Duplicate key. The existing entry will be overwritten. Key: " + key + "   Existing Value: "
+				+ existingValue + "   New Value: " + newValue + "   Element: " + eventElement);
 	}
 	
 	/**
@@ -140,14 +155,22 @@ public class InputContextLoader {
 			}
 			
 			if (readingContextType == ContextType.STATES) {
+				checkDuplicateKey(context.keyStates, elementName, keyElement, keycode);
 				context.keyStates.put(elementName, keycode);
 			}
 			else if (readingContextType == ContextType.ACTIONS) {
+				checkDuplicateKey(context.keyActions, keycode, keyElement, elementName);
 				context.keyActions.put(keycode, elementName);
 			}
 			else {
 				throw new IllegalStateException("unexpected ContextType: " + readingContextType);
 			}
+		}
+	}
+
+	private <T> void checkDuplicateKey(ArrayMap<T, ?> map, T key, Element keyElement, Object newValue) {
+		if (map.containsKey(key) && map.get(key) != newValue) {
+			logDuplicateErrorMessage(key, map.get(key), newValue, keyElement);
 		}
 	}
 	
@@ -164,9 +187,11 @@ public class InputContextLoader {
 			}
 			
 			if (readingContextType == ContextType.STATES) {
+				checkDuplicateKey(context.buttonStates, elementName, buttonElement, buttoncode);
 				context.buttonStates.put(elementName, buttoncode);
 			}
 			else if (readingContextType == ContextType.ACTIONS) {
+				checkDuplicateKey(context.buttonStates, elementName, buttonElement, buttoncode);
 				context.buttonActions.put(buttoncode, elementName);
 			}
 			else {
@@ -210,11 +235,14 @@ public class InputContextLoader {
 			String code = controllerButtonElement.getAttribute("code");
 			int buttoncode = Integer.parseInt(code);
 			
+			PlayerValue key = new PlayerValue(player, buttoncode);
 			if (readingContextType == ContextType.STATES) {
-				context.controllerButtonStates.put(elementName, new PlayerValue(player, buttoncode));
+				checkDuplicateKey(context.controllerButtonStates, elementName, controllerButtonElement, key);
+				context.controllerButtonStates.put(elementName, key);
 			}
 			else if (readingContextType == ContextType.ACTIONS) {
-				context.controllerButtonActions.put(new PlayerValue(player, buttoncode), elementName);
+				checkDuplicateKey(context.controllerButtonActions, key, controllerButtonElement, elementName);
+				context.controllerButtonActions.put(key, elementName);
 			}
 			else {
 				throw new IllegalStateException("unexpected ContextType: " + readingContextType);
@@ -244,6 +272,7 @@ public class InputContextLoader {
 					Array<String> actions = context.controllerPovActions.get(playerDirection);
 					if (actions == null) {
 						actions = new Array<String>();
+						checkDuplicateKey(context.controllerPovActions, playerDirection, controllerPovElement, actions);
 						context.controllerPovActions.put(playerDirection, actions);
 					}
 					actions.add(elementName);
@@ -269,6 +298,7 @@ public class InputContextLoader {
 			
 			if (readingContextType == ContextType.STATES) {
 				AxisThreshold axisThreshold = new AxisThreshold(axisCode, player, threshold);
+				checkDuplicateKey(context.controllerAxisStates, elementName, controllerAxisElement, axisThreshold);
 				context.controllerAxisStates.put(elementName, axisThreshold);
 			}
 			else if (readingContextType == ContextType.ACTIONS) {
@@ -287,6 +317,7 @@ public class InputContextLoader {
 					thresholdPair.upperThreshold = axisThreshold;
 				}
 				
+				checkDuplicateKey(context.controllerAxisActions, key, controllerAxisElement, thresholdPair);
 				context.controllerAxisActions.put(key, thresholdPair);
 			}
 			else {
@@ -319,6 +350,7 @@ public class InputContextLoader {
 		int playerCode = Integer.parseInt(axisElement.getAttribute("player"));
 		
 		PlayerAxis playerAxis = new PlayerAxis(axisCode, playerCode);
+		checkDuplicateKey(context.namedAxes, elementName, axisElement, playerAxis);
 		context.namedAxes.put(elementName, playerAxis);
 	}
 }

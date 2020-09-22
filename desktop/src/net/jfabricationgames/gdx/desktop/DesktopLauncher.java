@@ -10,11 +10,10 @@ public class DesktopLauncher {
 	
 	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = createApplicationConfiguration();
-		new LwjglApplication(DwarfScrollerGame.getInstance(), config);
-		
-		configureLog();
+		DwarfScrollerGame game = DwarfScrollerGame.createInstance(() -> configureLog());
+		new LwjglApplication(game, config);
 	}
-
+	
 	private static LwjglApplicationConfiguration createApplicationConfiguration() {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "DwarfScrollerGDX";
@@ -23,7 +22,7 @@ public class DesktopLauncher {
 		config.vSyncEnabled = true;
 		return config;
 	}
-
+	
 	private static void configureLog() {
 		new LogConfiguration().configureLog();
 	}
