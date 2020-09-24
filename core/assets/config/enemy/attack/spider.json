@@ -7,5 +7,14 @@
 		distFromCenter: 0.5,
 		hitFixtureRadius: 0.35,
 		pushForce: 75
-	}
+	},
+	{
+		id: web,
+		type: PROJECTILE,
+		projectileType: web,
+		delay: 0.1,
+		duration: 0,
+		damage: 5,
+		pushForce: 25,
+	},
 ]

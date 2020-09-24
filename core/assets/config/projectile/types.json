@@ -30,5 +30,17 @@
 		damping: 0,
 		
 		multipleHitsPossible: true,
+	},
+	web: {
+		animation: spider_web,
+		removeAfterAnimationFinished: false,
+		textureScale: 0.1,
+		
+		range: 30,
+		removeIfRangeExceeded: false,
+		speed: 60,
+		dampingAfterObjectHit: 15,
+		
+		timeActive: 5,
 	}
 }

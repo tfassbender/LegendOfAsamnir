@@ -46,5 +46,17 @@
 		
 		pushForceDamage: 15,
 		pushForceHit: 40
+	},
+	spider: {
+		animationsConfig: config/animation/enemy/spider.json,
+		stateConfig: config/enemy/states/spider.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/spider.json,
+		
+		health: 20,
+		movingSpeed: 2.0,
+		
+		pushForceDamage: 35,
+		pushForceHit: 30
 	}
 }

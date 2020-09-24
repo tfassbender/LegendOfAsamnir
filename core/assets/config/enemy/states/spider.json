@@ -30,9 +30,8 @@
 	},
 	{
 		id: attack,
-		animation: spider_attack,
-		stateEnteringSound: attack_spider,
-		attack: attack
+		animation: spider_shoot,
+		attack: web
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
@@ -43,7 +42,7 @@
 		id: damage,
 		animation: spider_damage,
 		endsWithAnimation: true,
-		stateEnteringSound: metal_hit_2,
+		stateEnteringSound: flesh_hit_1,
 		followingState: idle,
 		interruptingStates: [
 			attack, die
@@ -55,7 +54,7 @@
 		id: die,
 		animation: spider_die,
 		endsWithAnimation: false,
-		stateEnteringSound: flesh_hit_1,
+		stateEnteringSound: flesh_hit_2,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true

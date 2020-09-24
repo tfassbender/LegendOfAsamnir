@@ -89,6 +89,9 @@ public class ProjectileFactory extends AbstractFactory {
 				projectile = new Explosion(typeConfig, animation);
 				collisionType = PhysicsCollisionType.EXPLOSION;
 				break;
+			case "web":
+				projectile = new Web(typeConfig, animation);
+				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);
 		}

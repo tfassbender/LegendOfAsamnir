@@ -25,8 +25,7 @@ public class Minotaur extends Enemy {
 	
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
-		return getDefaultPhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(1.2f).setHeight(1.8f).setDensity(10f)
-				.setLinearDamping(10f);
+		return getDefaultPhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(1.2f).setHeight(1.8f);
 	}
 	
 	@Override

@@ -56,7 +56,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		this.typeConfig = typeConfig;
 		this.properties = properties;
 		physicsBodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false)
-				.setCollisionType(PhysicsCollisionType.ENEMY);
+				.setCollisionType(PhysicsCollisionType.ENEMY).setDensity(10f).setLinearDamping(10f);
 		PhysicsWorld.getInstance().registerContactListener(this);
 		intendedMovement = new Vector2();
 		

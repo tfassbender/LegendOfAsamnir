@@ -22,7 +22,7 @@ public class MiniGolem extends Enemy {
 	
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
-		return getDefaultPhysicsBodyProperties().setRadius(0.3f).setDensity(10f).setLinearDamping(10f).setPhysicsBodyShape(PhysicsBodyShape.CIRCLE);
+		return getDefaultPhysicsBodyProperties().setRadius(0.3f).setPhysicsBodyShape(PhysicsBodyShape.CIRCLE);
 	}
 	
 	@Override

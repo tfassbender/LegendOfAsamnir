@@ -7,5 +7,11 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			name: spider_web,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
 	]
 }

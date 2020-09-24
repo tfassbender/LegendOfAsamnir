@@ -45,6 +45,9 @@ public abstract class Projectile implements ContactListener {
 	protected float explosionDamage;
 	protected float explosionPushForce;
 	protected boolean explosionPushForceAffectedByBlock;
+
+	private float imageOffsetX;
+	private float imageOffsetY;
 	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
@@ -67,7 +70,7 @@ public abstract class Projectile implements ContactListener {
 	
 	private void initialize() {
 		distanceTraveled = 0;
-		if (typeConfig.damping > 0 && isRangeDestricted()) {
+		if (typeConfig.damping > 0 && isRangeRestricted()) {
 			throw new IllegalStateException("A Projectile can not be range restricted AND use linear damping");
 		}
 		attackPerformed = false;
@@ -91,7 +94,10 @@ public abstract class Projectile implements ContactListener {
 				.setCollisionType(collisionType).setLinearDamping(typeConfig.damping);
 		body = PhysicsBodyCreator.createBody(world, bodyProperties);
 		body.setUserData(this);
+		addAdditionalPhysicsParts();
 	}
+	
+	protected void addAdditionalPhysicsParts() {}
 	
 	protected abstract PhysicsBodyProperties createShapePhysicsBodyProperties();
 	
@@ -130,33 +136,54 @@ public abstract class Projectile implements ContactListener {
 			animation.increaseStateTime(delta);
 			sprite = new Sprite(animation.getKeyFrame());
 			
-			if (animation.isAnimationFinished()) {
+			if (animation.isAnimationFinished() && typeConfig.removeAfterAnimationFinished) {
 				remove();
 			}
 		}
 		
 		if (reachedMaxRange()) {
+			if (isRangeRestricted()) {
+				remove();
+			}
+			else {
+				stopProjectile();
+			}
+		}
+		if (activeTimeOver()) {
 			remove();
 		}
 		if (explosionTimeReached()) {
 			explode();
 		}
 	}
-	
+
 	private boolean reachedMaxRange() {
-		return distanceTraveled > typeConfig.range && isRangeDestricted();
+		return distanceTraveled > typeConfig.range;
 	}
 	
-	private boolean isRangeDestricted() {
-		return typeConfig.range > 0;
+	private boolean isRangeRestricted() {
+		return typeConfig.range > 0 && typeConfig.removeIfRangeExceeded;
 	}
 	
+	private boolean activeTimeOver() {
+		return timeActive > typeConfig.timeActive && isTimeRestricted();
+	}
+	
+	private boolean isTimeRestricted() {
+		return typeConfig.timeActive > 0;
+	}
+
 	private boolean explosionTimeReached() {
 		return timeActive > typeConfig.timeTillExplosion && isExplosive();
 	}
 	
 	private boolean isExplosive() {
 		return typeConfig.timeTillExplosion > 0;
+	}
+
+	protected void stopProjectile() {
+		body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+		attackPerformed = true;
 	}
 	
 	private void explode() {
@@ -170,8 +197,13 @@ public abstract class Projectile implements ContactListener {
 	
 	public void draw(SpriteBatch batch) {
 		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale, sprite.getScaleY() * typeConfig.textureScale);
-		sprite.setPosition(body.getPosition().x - sprite.getOriginX(), body.getPosition().y - sprite.getOriginY());
+		sprite.setPosition(body.getPosition().x - sprite.getOriginX() + imageOffsetX, body.getPosition().y - sprite.getOriginY() + imageOffsetY);
 		sprite.draw(batch);
+	}
+	
+	protected void setImageOffset(float x, float y) {
+		this.imageOffsetX = x;
+		this.imageOffsetY = y;
 	}
 	
 	@Override
