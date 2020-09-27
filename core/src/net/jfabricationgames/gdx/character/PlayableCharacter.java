@@ -65,4 +65,6 @@ public interface PlayableCharacter {
 	public boolean isGameOver();
 	
 	public int getAmmo(ItemAmmoType ammoType);
+
+	public void setSlowedDown(boolean slowedDown);
 }

@@ -146,6 +146,7 @@
 		},
 		enemy: {
 			sounds: {
+				//common
 				flesh_hit_1: {
 					path: "sound/object/flesh_hit_1.wav",
 				},
@@ -164,12 +165,13 @@
 				rock_break: {
 					path: "sound/enemy/rock_break.wav",
 				},
-				//attack sounds
+				//gladiator
 				attack_gladiator: {
 					path: "sound/enemy/attack/gladiator.wav",
 					volume: 0.4,
 					delay: 0.1
 				},
+				//mini_golem
 				attack_mini_golem: {
 					path: "sound/enemy/attack/mini_golem.wav",
 					volume: 0.2,
@@ -203,6 +205,17 @@
 				minotaur_die: {
 					path: "sound/enemy/taunt.wav",
 					volume: 0.9,
+				}
+				//spider
+				spider_web: {
+					path: "sound/enemy/attack/spider_web.wav",
+					volume: 0.3
+					delay: 0.1
+				}
+				spider_attack: {
+					path: "sound/enemy/attack/spider_attack.wav",
+					volume: 0.5
+					delay: 0.3
 				}
 			}
 		}

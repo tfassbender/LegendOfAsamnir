@@ -1,7 +1,7 @@
 [
 	{
 		id: attack,
-		delay: 0.1,
+		delay: 0.3,
 		duration: 0,
 		damage: 15,
 		distFromCenter: 0.5,

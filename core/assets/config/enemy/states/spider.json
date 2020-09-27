@@ -5,7 +5,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			move, jump, attack, damage, die
+			move, attack_jump, attack, damage, die
 		]
 	},
 	{
@@ -14,13 +14,13 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			idle, jump, attack, damage, die
+			idle, attack_jump, attack, damage, die
 		]
 	},
 	{
-		id: jump,
+		id: attack_jump,
 		animation: spider_jump,
-		stateEnteringSound: attack_spider,
+		stateEnteringSound: spider_attack,
 		attack: attack
 		endsWithAnimation: true,
 		followingState: idle,
@@ -31,6 +31,7 @@
 	{
 		id: attack,
 		animation: spider_shoot,
+		stateEnteringSound: spider_web,
 		attack: web
 		endsWithAnimation: true,
 		followingState: idle,

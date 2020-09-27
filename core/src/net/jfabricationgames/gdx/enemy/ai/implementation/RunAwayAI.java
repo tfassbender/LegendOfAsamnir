@@ -74,4 +74,12 @@ public class RunAwayAI extends AbstractMovementAI implements ArtificialIntellige
 	private void stopRunningPlayer() {
 		player = null;
 	}
+	
+	public void setDistanceToKeepFromPlayer(float distanceToKeepFromPlayer) {
+		this.distanceToKeepFromPlayer = distanceToKeepFromPlayer;
+	}
+	
+	public void setDistanceToStopRunning(float distanceToStopRunning) {
+		this.distanceToStopRunning = distanceToStopRunning;
+	}
 }

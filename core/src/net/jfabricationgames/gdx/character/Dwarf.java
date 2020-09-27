@@ -65,6 +65,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private CharacterAction action;
 	private SpecialAction activeSpecialAction;
 	
+	private boolean slowedDown;
+	
 	private float health = 100f;
 	private float maxHealth = 100f;
 	private float increaseHealth = 0f;
@@ -384,16 +386,23 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public float getMovingSpeed(boolean sprint) {
-		if (action == CharacterAction.JUMP) {
-			return JUMPING_SPEED;
+		float speed;
+		speed = MOVING_SPEED;
+		if (sprint) {
+			speed = MOVING_SPEED_SPRINT;
 		}
 		if (action == CharacterAction.ATTACK) {
-			return MOVING_SPEED_ATTACK;
+			speed = MOVING_SPEED_ATTACK;
 		}
-		if (sprint) {
-			return MOVING_SPEED_SPRINT;
+		if (action == CharacterAction.JUMP) {
+			speed = JUMPING_SPEED;
 		}
-		return MOVING_SPEED;
+		
+		if (slowedDown) {
+			speed *= 0.25;
+		}
+		
+		return speed;
 	}
 	
 	@Override
@@ -476,6 +485,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public void setActiveSpecialAction(SpecialAction specialAction) {
 		this.activeSpecialAction = specialAction;
+	}
+	
+	@Override
+	public void setSlowedDown(boolean slowedDown) {
+		this.slowedDown = slowedDown;
 	}
 	
 	@Override

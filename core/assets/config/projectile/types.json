@@ -34,7 +34,7 @@
 	web: {
 		animation: spider_web,
 		removeAfterAnimationFinished: false,
-		textureScale: 0.1,
+		textureScale: 0.12,
 		
 		range: 30,
 		removeIfRangeExceeded: false,
