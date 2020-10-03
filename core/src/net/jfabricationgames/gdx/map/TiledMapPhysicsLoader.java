@@ -39,6 +39,8 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
  */
 public class TiledMapPhysicsLoader {
 	
+	private static final String LAYER_NAME_PHYSICS = "physics";
+	
 	private World world;
 	private float units;
 	private Array<Body> bodies;
@@ -69,7 +71,7 @@ public class TiledMapPhysicsLoader {
 	}
 	
 	public void createPhysics(Map map) {
-		createPhysics(map, "physics");
+		createPhysics(map, LAYER_NAME_PHYSICS);
 	}
 	
 	private void createPhysics(Map map, String layerName) {
@@ -110,7 +112,15 @@ public class TiledMapPhysicsLoader {
 			
 			MapProperties properties = object.getProperties();
 			String material = properties.get("material", String.class);
-			FixtureDef fixtureDef = materials.get(material);
+			FixtureDef fixtureDef = null;
+			if (material != null) {
+				fixtureDef = materials.get(material);
+			}
+			else {
+				Gdx.app.error(getClass().getSimpleName(),
+						"no material defined for map object at x: " + properties.get("x") + " y: " + properties.get("y"));
+				material = "default";
+			}
 			
 			if (fixtureDef == null) {
 				Gdx.app.error(getClass().getSimpleName(), "material does not exist " + material + " using default");

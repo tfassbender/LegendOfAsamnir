@@ -1,6 +1,8 @@
 package net.jfabricationgames.gdx.enemy.implementation;
 
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
@@ -9,6 +11,7 @@ import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FightAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
+import net.jfabricationgames.gdx.enemy.ai.implementation.PreDefinedMovementAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.RunAwayAI;
 import net.jfabricationgames.gdx.enemy.ai.util.FixedAttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
@@ -28,12 +31,22 @@ public class Spider extends Enemy {
 	@Override
 	protected void createAI() {
 		ai = new BaseAI();
+
+		ai = createPreDefinedMovementAI();
 		ai = createFollowAI();
 		ai = createRunAwayAI();
 		ai = createArcherFighterAI();
 		ai = createMeleeFightAI();
 	}
 	
+	private ArtificialIntelligence createPreDefinedMovementAI() {
+		Array<Vector2> positions = loadPositionsFromMapProperties();
+		EnemyState movingState = stateMachine.getState("move");
+		EnemyState idleState = stateMachine.getState("idle");
+		
+		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
+	}
+
 	private FollowAI createFollowAI() {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");

@@ -38,6 +38,15 @@
 				"textureMinFilter": "Linear",
 				"textureMagFilter": "Linear"
 			}
+		},
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/level_tutorial.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Linear",
+				"textureMagFilter": "Linear"
+			}
 		}
 	]
 }
