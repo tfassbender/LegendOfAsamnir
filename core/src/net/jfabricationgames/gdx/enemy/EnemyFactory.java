@@ -52,8 +52,8 @@ public class EnemyFactory extends AbstractFactory {
 	public Enemy createEnemy(String type, float x, float y, MapProperties properties) {
 		EnemyTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
-			throw new IllegalStateException("No type config known for type: " + type
-					+ ". Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
+			throw new IllegalStateException("No type config known for type: '" + type
+					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
 		}
 		
 		Enemy enemy;

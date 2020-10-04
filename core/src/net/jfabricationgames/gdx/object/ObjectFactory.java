@@ -44,8 +44,8 @@ public class ObjectFactory extends AbstractFactory {
 	public GameObject createObject(String type, float x, float y, MapProperties properties) {
 		ObjectTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
-			throw new IllegalStateException("No type config known for type: " + type
-					+ ". Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
+			throw new IllegalStateException("No type config known for type: '" + type
+					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
 		}
 		
 		Sprite sprite = createSprite(x, y, typeConfig.texture);

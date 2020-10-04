@@ -23,6 +23,9 @@ public class GameMap implements Disposable {
 	
 	public static final String MAP_MATERIALS_CONFIG_FILE = "config/map/materials.json";
 	
+	private static final int[] BACKGROUND_LAYERS = new int[] {0, 1};
+	private static final int[] TERRAIN_LAYERS = new int[] {2};
+	
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
 	
@@ -63,10 +66,12 @@ public class GameMap implements Disposable {
 		mapPhysicsLoader.createPhysics(map);
 	}
 	
-	public void render(float delta) {
+	public void renderBackground() {
 		renderer.setView(camera);
-		renderer.render();
-		
+		renderer.render(BACKGROUND_LAYERS);
+	}
+	
+	public void processAndRenderGameObject(float delta) {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		renderItems(delta);
@@ -117,6 +122,11 @@ public class GameMap implements Disposable {
 		for (Projectile projectile : projectiles) {
 			projectile.draw(batch);
 		}
+	}
+	
+	public void renderTerrain() {
+		renderer.setView(camera);
+		renderer.render(TERRAIN_LAYERS);
 	}
 	
 	public Vector2 getPlayerStartingPosition() {

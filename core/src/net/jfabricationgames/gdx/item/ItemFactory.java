@@ -78,8 +78,8 @@ public class ItemFactory extends AbstractFactory {
 	private Item createItem(String name, float x, float y, MapProperties properties, float addBodyDelay) {
 		ItemTypeConfig typeConfig = typeConfigs.get(name);
 		if (typeConfig == null) {
-			throw new IllegalStateException("No type config known for type: " + name
-					+ ". Either the type name is wrong or you have to add it to the itemTypesConfig (see \"" + configFile + "\")");
+			throw new IllegalStateException("No type config known for type: '" + name
+					+ "'. Either the type name is wrong or you have to add it to the itemTypesConfig (see \"" + configFile + "\")");
 		}
 		
 		Sprite sprite = createSprite(x, y, typeConfig.texture);
