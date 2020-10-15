@@ -35,6 +35,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private boolean actionExecuted = false;
+	private boolean changedBodyToSensor = false;
 	private AnimationDirector<TextureRegion> interactionAnimation;
 	
 	public InteractiveObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
@@ -59,12 +60,21 @@ public class InteractiveObject extends GameObject implements Interactive {
 			batch.draw(interactionTexture, x, y, sprite.getWidth() * 0.5f, sprite.getHeight() * 0.5f, interactionTexture.getRegionWidth(),
 					interactionTexture.getRegionHeight(), GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
 		}
+		
+		if (changeBodyToSensorAfterAction()) {
+			changedBodyToSensor = true;
+			changeBodyToSensor();
+		}
 	}
 	
 	private boolean showInteractionIcon() {
 		return canBeExecuted() //
 				&& (!interactionAnimation.isAnimationFinished() // the animation (to appear or disappear) is still playing 
 						|| interactionAnimation.getAnimation().getPlayMode() == PlayMode.NORMAL); // the interaction icon appeared and is to be shown (animation finished)
+	}
+	
+	private boolean changeBodyToSensorAfterAction() {
+		return actionExecuted && animation.isAnimationFinished() && typeConfig.changeBodyToSensorAfterAction && !changedBodyToSensor;
 	}
 	
 	@Override

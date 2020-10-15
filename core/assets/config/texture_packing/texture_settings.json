@@ -55,6 +55,7 @@
 				objects/animated/signboard/break,
 				objects/animated/map/idle,
 				objects/animated/map/unfold,
+				objects/animated/key_wall/key_wall_open,
 				
 				//##############################################################
 				//### enemies

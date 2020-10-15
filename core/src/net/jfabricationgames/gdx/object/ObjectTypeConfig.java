@@ -28,6 +28,7 @@ public class ObjectTypeConfig {
 	public boolean isSensor = false;
 	public boolean addSensor = false;
 	public float sensorRadius = 0.5f;
+	public boolean changeBodyToSensorAfterAction = false;
 	
 	public String hitSound;
 	public String destroySound;

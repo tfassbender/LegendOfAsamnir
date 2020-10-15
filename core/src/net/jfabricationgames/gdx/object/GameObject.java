@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -182,6 +183,12 @@ public class GameObject implements Hittable {
 	public void remove() {
 		gameMap.removeObject(this);
 		removePhysicsBody();
+	}
+	
+	protected void changeBodyToSensor() {
+		for (Fixture fixture : body.getFixtureList()) {
+			fixture.setSensor(true);
+		}
 	}
 	
 	protected void removePhysicsBody() {

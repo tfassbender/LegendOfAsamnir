@@ -73,5 +73,11 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			name: key_wall_open,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
 	]
 }

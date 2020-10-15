@@ -60,6 +60,7 @@ public class ObjectFactory extends AbstractFactory {
 			case "chest":
 			case "signboard":
 			case "directionboard":
+			case "key_wall":
 				object = new InteractiveObject(typeConfig, sprite, properties);
 				break;
 			default:

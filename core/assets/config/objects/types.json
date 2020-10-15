@@ -53,6 +53,7 @@
 		addSensor: true,
 		multipleActionExecutionsPossible: false,
 		textureAfterAction: chest_open_5,
+		changeBodyToSensorAfterAction: true,
 	
 		hitSound: wood_hit_2,
 		
@@ -95,5 +96,21 @@
 		multipleActionExecutionsPossible: true,
 		
 		hitSound: wood_hit_1
+	},
+	key_wall: {
+		texture: key_wall_open_1,
+		animationAction: key_wall_open,
+		
+		physicsBodySizeFactorX: 0.5,
+		physicsBodySizeFactorY: 0.6,
+		physicsBodyOffsetFactorX: 0.01,
+		physicsBodyOffsetFactorY: 0.05,
+		
+		addSensor: true,
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: key_wall_open_33,
+		changeBodyToSensorAfterAction: true,
+	
+		hitSound: metal_hit_1,
 	}
 }
