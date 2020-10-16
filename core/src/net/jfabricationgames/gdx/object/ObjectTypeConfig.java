@@ -7,6 +7,8 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class ObjectTypeConfig {
 	
+	public GameObjectType type;
+	
 	public String texture;
 	public String animationHit;
 	public String animationBreak;

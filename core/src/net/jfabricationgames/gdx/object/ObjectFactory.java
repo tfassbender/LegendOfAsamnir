@@ -51,16 +51,11 @@ public class ObjectFactory extends AbstractFactory {
 		Sprite sprite = createSprite(x, y, typeConfig.texture);
 		
 		GameObject object;
-		switch (type) {
-			case "barrel":
-			case "box":
-			case "pot":
+		switch (typeConfig.type) {
+			case DESTROYABLE:
 				object = new DestroyableObject(typeConfig, sprite, properties);
 				break;
-			case "chest":
-			case "signboard":
-			case "directionboard":
-			case "key_wall":
+			case INTERACTIVE:
 				object = new InteractiveObject(typeConfig, sprite, properties);
 				break;
 			default:

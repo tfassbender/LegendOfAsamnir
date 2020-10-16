@@ -1,5 +1,7 @@
 {
 	barrel: {
+		type: DESTROYABLE,
+		
 		texture: barrel,
 		animationHit: barrel_hit,
 		animationBreak: barrel_break,
@@ -8,7 +10,7 @@
 		physicsBodySizeFactorY: 0.5,
 		physicsBodyOffsetFactorX: 0.05,
 		physicsBodyOffsetFactorY: -0.15,
-	
+		
 		hitSound: wood_hit_2,
 		destroySound: wood_break,
 		health: 30,
@@ -17,10 +19,12 @@
 			coin: 0.5,
 			health: 0.1,
 			mana: 0.1,
-			shield: 0.1
+			shield: 0.1,
 		}
 	},
 	box: {
+		type: DESTROYABLE,
+		
 		texture: box,
 		animationHit: box_hit,
 		animationBreak: box_break,
@@ -29,7 +33,7 @@
 		physicsBodySizeFactorY: 0.5,
 		physicsBodyOffsetFactorX: 0.075,
 		physicsBodyOffsetFactorY: -0.125,
-	
+		
 		hitSound: wood_hit_1,
 		destroySound: wood_break,
 		health: 20,
@@ -37,10 +41,12 @@
 		drops: {
 			coin: 0.3,
 			health: 0.1,
-			shield: 0.1
+			shield: 0.1,
 		}
 	},
 	chest: {
+		type: INTERACTIVE,
+		
 		texture: chest,
 		animationHit: chest_hit,
 		animationAction: chest_open,
@@ -54,19 +60,21 @@
 		multipleActionExecutionsPossible: false,
 		textureAfterAction: chest_open_5,
 		changeBodyToSensorAfterAction: true,
-	
+		
 		hitSound: wood_hit_2,
 		
 		drops: {
 			coin: 0.5,
 			health: 0.25,
 			mana: 0.1,
-			shield: 0.15
+			shield: 0.15,
 		}
 		dropPositionOffsetY: -0.25,
 		renderDropsAboveObject: true,
 	},
 	pot: {
+		type: DESTROYABLE,
+		
 		texture: pot,
 		animationHit: pot_hit,
 		animationBreak: pot_break,
@@ -75,7 +83,7 @@
 		physicsBodySizeFactorY: 0.3,
 		physicsBodyOffsetFactorX: 0.05,
 		physicsBodyOffsetFactorY: -0.075,
-	
+		
 		destroySound: glass_break,
 		health: 5,
 		
@@ -84,6 +92,8 @@
 		}
 	},
 	signboard: {
+		type: INTERACTIVE,
+		
 		texture: signboard,
 		animationHit: signboard_hit,
 		
@@ -95,9 +105,11 @@
 		addSensor: true,
 		multipleActionExecutionsPossible: true,
 		
-		hitSound: wood_hit_1
+		hitSound: wood_hit_1,
 	},
 	key_wall: {
+		type: INTERACTIVE,
+		
 		texture: key_wall_open_1,
 		animationAction: key_wall_open,
 		
@@ -110,7 +122,7 @@
 		multipleActionExecutionsPossible: false,
 		textureAfterAction: key_wall_open_33,
 		changeBodyToSensorAfterAction: true,
-	
+		
 		hitSound: metal_hit_1,
 	}
 }
