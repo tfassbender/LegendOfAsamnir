@@ -1,22 +1,41 @@
 package net.jfabricationgames.gdx.animation;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+
+import net.jfabricationgames.gdx.screens.game.GameScreen;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AnimationDirector<T extends TextureRegion> {
 	
 	private float stateTime;
 	private Animation<T> animation;
 	
+	private AnimationSpriteConfig spriteConfig;
+	
 	public AnimationDirector(Animation<T> animation) {
 		this.animation = animation;
 	}
 	
 	/**
+	 * Draw the current key frame of this animation onto the {@link SpriteBatch}.<br>
+	 * ATTENTION: This method will throw an {@link IllegalStateException} if this AnimationDirector does not contain an AnimationSpriteConfig object.
+	 */
+	public void draw(SpriteBatch batch) {
+		if (spriteConfig == null) {
+			throw new IllegalStateException("No AnimationSpriteConfig. Please add an AnimationSpriteConfig in order to use the draw method");
+		}
+		T keyFrame = getKeyFrame();
+		float x = spriteConfig.x + ((spriteConfig.width - keyFrame.getRegionWidth()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
+		float y = spriteConfig.y + ((spriteConfig.height - keyFrame.getRegionHeight()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
+		batch.draw(keyFrame, x, y, spriteConfig.width * 0.5f, spriteConfig.height * 0.5f, keyFrame.getRegionWidth(), keyFrame.getRegionHeight(),
+				GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+	}
+	
+	/**
 	 * Get the frame at the current time.
-	 * 
-	 * @return The current frame.
 	 */
 	public T getKeyFrame() {
 		return getKeyFrame(0);
@@ -27,8 +46,6 @@ public class AnimationDirector<T extends TextureRegion> {
 	 * 
 	 * @param delta
 	 *        The time delta from the render method.
-	 * 		
-	 * @return The frame after the increased state time.
 	 */
 	public T getKeyFrame(float delta) {
 		increaseStateTime(delta);
@@ -59,17 +76,12 @@ public class AnimationDirector<T extends TextureRegion> {
 		stateTime = animation.getAnimationDuration();
 	}
 	
-	/**
-	 * Set the {@link PlayMode} of the underlying animation.
-	 */
 	public void setPlayMode(PlayMode playMode) {
 		animation.setPlayMode(playMode);
 	}
 	
 	/**
 	 * Get the {@link Animation} that this object holds.
-	 * 
-	 * @return The {@link Animation}
 	 */
 	public Animation<T> getAnimation() {
 		return animation;
@@ -86,5 +98,13 @@ public class AnimationDirector<T extends TextureRegion> {
 		for (TextureRegion region : animation.getKeyFrames()) {
 			region.flip(x, y);
 		}
+	}
+	
+	public AnimationSpriteConfig getSpriteConfig() {
+		return spriteConfig;
+	}
+	
+	public void setSpriteConfig(AnimationSpriteConfig spriteConfig) {
+		this.spriteConfig = spriteConfig;
 	}
 }

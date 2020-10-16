@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 
 public class DestroyableObject extends GameObject {
 	
@@ -58,7 +59,9 @@ public class DestroyableObject extends GameObject {
 	}
 	
 	protected AnimationDirector<TextureRegion> getDestroyAnimation() {
-		return animationManager.getAnimationDirector(typeConfig.animationBreak);
+		AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationBreak);
+		animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
+		return animation;
 	}
 	
 	private void playDestroySound() {

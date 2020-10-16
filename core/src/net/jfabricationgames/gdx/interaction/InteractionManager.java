@@ -54,7 +54,7 @@ public class InteractionManager {
 	}
 	
 	//do not declare static, because otherwise the animation will not be loaded before it's attempted to be used
-	public AnimationDirector<TextureRegion> getInteractionAnimation() {
+	public AnimationDirector<TextureRegion> getInteractionAnimationCopy() {
 		return AnimationManager.getInstance().getAnimationDirectorCopy(INTERACTION_ANIMATION);
 	}
 }

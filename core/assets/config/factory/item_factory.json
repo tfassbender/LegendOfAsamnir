@@ -1,5 +1,6 @@
 {
 	itemAtlas: packed/demo/demo.atlas,
+	itemAnimations: config/animation/items.json,
 	itemTypeConfig: config/items/types.json,
 	defaultValuesConfig: config/items/default_values.json 
 }

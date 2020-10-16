@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
@@ -42,10 +43,18 @@ public class InteractiveObject extends GameObject implements Interactive {
 		super(typeConfig, sprite, properties);
 		PhysicsWorld.getInstance().registerContactListener(this);
 		
-		interactionAnimation = InteractionManager.getInstance().getInteractionAnimation();
+		interactionAnimation = InteractionManager.getInstance().getInteractionAnimationCopy();
+		interactionAnimation.setSpriteConfig(createSpriteConfig());
 		//don't show the interaction animation on startup
 		playInteractionAnimationDisappear();
 		interactionAnimation.endAnimation();
+	}
+	
+	private AnimationSpriteConfig createSpriteConfig() {
+		AnimationSpriteConfig spriteConfig = AnimationSpriteConfig.fromSprite(sprite);
+		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.3f);
+		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.3f);
+		return spriteConfig;
 	}
 	
 	@Override
@@ -54,17 +63,18 @@ public class InteractiveObject extends GameObject implements Interactive {
 		
 		if (showInteractionIcon()) {
 			interactionAnimation.increaseStateTime(delta);
-			TextureRegion interactionTexture = interactionAnimation.getKeyFrame();
-			float x = sprite.getX() + (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.6f);
-			float y = sprite.getY() + (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.6f);
-			batch.draw(interactionTexture, x, y, sprite.getWidth() * 0.5f, sprite.getHeight() * 0.5f, interactionTexture.getRegionWidth(),
-					interactionTexture.getRegionHeight(), GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+			interactionAnimation.draw(batch);
 		}
 		
 		if (changeBodyToSensorAfterAction()) {
 			changedBodyToSensor = true;
 			changeBodyToSensor();
 		}
+	}
+	
+	protected boolean showHitAnimation() {
+		return typeConfig.animationHit != null
+				&& (!actionExecuted || typeConfig.hitAnimationAfterAction || typeConfig.multipleActionExecutionsPossible);
 	}
 	
 	private boolean showInteractionIcon() {
@@ -74,7 +84,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private boolean changeBodyToSensorAfterAction() {
-		return actionExecuted && animation.isAnimationFinished() && typeConfig.changeBodyToSensorAfterAction && !changedBodyToSensor;
+		return actionExecuted && animation != null && animation.isAnimationFinished() && typeConfig.changeBodyToSensorAfterAction
+				&& !changedBodyToSensor;
 	}
 	
 	@Override
@@ -88,11 +99,6 @@ public class InteractiveObject extends GameObject implements Interactive {
 			actionExecuted = true;
 			if (typeConfig.textureAfterAction != null) {
 				sprite = createSprite(typeConfig.textureAfterAction);
-			}
-			
-			if (!typeConfig.hitAnimationAfterAction && !typeConfig.multipleActionExecutionsPossible) {
-				//reset the hit animation because it will not be played anymore after the action was executed
-				typeConfig.animationHit = null;
 			}
 		}
 	}

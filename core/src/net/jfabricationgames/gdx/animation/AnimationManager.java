@@ -106,7 +106,7 @@ public class AnimationManager {
 	 */
 	public Animation<TextureRegion> getAnimationCopy(String name) {
 		Animation<TextureRegion> animation = getAnimation(name);
-		return new Animation<TextureRegion>(animation.getFrameDuration(), animation.getKeyFrames());
+		return new Animation<TextureRegion>(animation.getFrameDuration(), new Array<>(animation.getKeyFrames()), animation.getPlayMode());
 	}
 	
 	/**

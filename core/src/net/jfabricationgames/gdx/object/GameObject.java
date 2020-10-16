@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -118,11 +119,7 @@ public class GameObject implements Hittable {
 	public void draw(float delta, SpriteBatch batch) {
 		if (animation != null && !animation.isAnimationFinished()) {
 			animation.increaseStateTime(delta);
-			TextureRegion region = animation.getKeyFrame();
-			float x = sprite.getX() + ((sprite.getWidth() - region.getRegionWidth()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
-			float y = sprite.getY() + ((sprite.getHeight() - region.getRegionHeight()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
-			batch.draw(region, x, y, sprite.getWidth() * 0.5f, sprite.getHeight() * 0.5f, region.getRegionWidth(), region.getRegionHeight(),
-					GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+			animation.draw(batch);
 		}
 		else {
 			sprite.draw(batch);
@@ -141,15 +138,23 @@ public class GameObject implements Hittable {
 	}
 	
 	protected AnimationDirector<TextureRegion> getHitAnimation() {
-		if (typeConfig.animationHit != null) {
-			return animationManager.getAnimationDirector(typeConfig.animationHit);
+		if (showHitAnimation()) {
+			AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationHit);
+			animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
+			return animation;
 		}
 		return null;
 	}
 	
+	protected boolean showHitAnimation() {
+		return typeConfig.animationHit != null;
+	}
+	
 	protected AnimationDirector<TextureRegion> getActionAnimation() {
 		if (typeConfig.animationAction != null) {
-			return animationManager.getAnimationDirector(typeConfig.animationAction);
+			AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationAction);
+			animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
+			return animation;
 		}
 		return null;
 	}

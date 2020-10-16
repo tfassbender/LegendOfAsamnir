@@ -2,10 +2,13 @@ package net.jfabricationgames.gdx.item;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -31,6 +34,7 @@ public class ItemFactory extends AbstractFactory {
 		loadDefaultValues();
 		
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
+		AnimationManager.getInstance().loadAnimations(config.itemAnimations);
 		atlas = assetManager.get(config.itemAtlas);
 		world = PhysicsWorld.getInstance().getWorld();
 	}
@@ -83,9 +87,10 @@ public class ItemFactory extends AbstractFactory {
 		}
 		
 		Sprite sprite = createSprite(x, y, typeConfig.texture);
+		AnimationDirector<TextureRegion> animation = createAnimation(x, y, typeConfig.animation);
 		
 		addDefaultProperties(name, properties);
-		Item item = new Item(typeConfig, sprite, properties, gameMap);
+		Item item = new Item(typeConfig, sprite, animation, properties, gameMap);
 		if (addBodyDelay > 0) {
 			PhysicsWorld.getInstance().runDelayedAfterWorldStep(
 					() -> item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN), addBodyDelay);
@@ -110,6 +115,7 @@ public class ItemFactory extends AbstractFactory {
 	public static class Config {
 		
 		public String itemAtlas;
+		public String itemAnimations;
 		public String itemTypeConfig;
 		public String defaultValuesConfig;
 	}

@@ -1,0 +1,11 @@
+{
+	configList: 
+	[
+		{
+			name: key,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: LOOP
+		},
+	]
+}

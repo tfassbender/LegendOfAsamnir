@@ -2397,14 +2397,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_idle
   rotate: false
   xy: 4010, 92
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_jump
   rotate: false
   xy: 4010, 92
@@ -2489,195 +2489,195 @@ spider_die
   orig: 32, 32
   offset: 0, 0
   index: 9
-spider_idle
+spider_emerge
   rotate: false
   xy: 3092, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
-spider_idle
-  rotate: false
-  xy: 3092, 58
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 3
+  index: 1
 spider_idle
   rotate: false
   xy: 3126, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
-spider_jump
+  index: 2
+spider_idle
+  rotate: false
+  xy: 3126, 58
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+spider_idle
   rotate: false
   xy: 3160, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
+  index: 5
 spider_jump
   rotate: false
   xy: 3194, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 2
 spider_jump
   rotate: false
   xy: 3228, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 3
 spider_jump
   rotate: false
   xy: 3262, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 4
 spider_jump
   rotate: false
   xy: 3296, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
+  index: 5
 spider_jump
   rotate: false
   xy: 3330, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 7
+  index: 6
 spider_jump
   rotate: false
   xy: 3364, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 7
 spider_jump
   rotate: false
   xy: 3398, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 9
-spider_move
+  index: 8
+spider_jump
   rotate: false
   xy: 3432, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 9
 spider_move
   rotate: false
   xy: 3466, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
+  index: 1
 spider_move
   rotate: false
   xy: 3500, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 2
 spider_move
   rotate: false
   xy: 3534, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 3
 spider_move
   rotate: false
   xy: 3568, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 4
 spider_move
   rotate: false
   xy: 3602, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
-spider_shoot
+  index: 5
+spider_move
   rotate: false
   xy: 3636, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
+  index: 6
 spider_shoot
   rotate: false
   xy: 3670, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 2
 spider_shoot
   rotate: false
   xy: 3704, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
-spider_web
+  index: 3
+spider_shoot
   rotate: false
   xy: 3738, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_web
   rotate: false
   xy: 3772, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
+  index: 1
 spider_web
   rotate: false
   xy: 3806, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 2
 spider_web
   rotate: false
   xy: 3840, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 3
 spider_web
   rotate: false
   xy: 3874, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 4
 spider_web
   rotate: false
   xy: 3908, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
-spieder_emerge
+  index: 5
+spider_web
   rotate: false
   xy: 3942, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 6
 sword
   rotate: false
   xy: 3624, 40

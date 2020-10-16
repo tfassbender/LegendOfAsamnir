@@ -1,19 +1,22 @@
 package net.jfabricationgames.gdx.item;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.sound.SoundManager;
-import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.sound.SoundManager;
+import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class Item {
 	
@@ -21,6 +24,7 @@ public class Item {
 	
 	protected static ItemTypeConfig defaultTypeConfig;
 	
+	private AnimationDirector<TextureRegion> animation;
 	private Sprite sprite;
 	private MapProperties properties;
 	private Body body;
@@ -29,11 +33,16 @@ public class Item {
 	protected ItemTypeConfig typeConfig;
 	protected String pickUpSoundName;
 	
-	public Item(ItemTypeConfig typeConfig, Sprite sprite, MapProperties properties, GameMap gameMap) {
+	public Item(ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties, GameMap gameMap) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
+		this.animation = animation;
 		this.properties = properties;
 		this.gameMap = gameMap;
+		
+		if (animation == null && sprite == null) {
+			Gdx.app.error(getClass().getSimpleName(), "Neither an animation nor a sprite was set for this item.");
+		}
 		
 		readTypeConfig();
 	}
@@ -53,7 +62,13 @@ public class Item {
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
-		sprite.draw(batch);
+		if (animation != null) {
+			animation.increaseStateTime(delta);
+			animation.draw(batch);
+		}
+		else if (sprite != null) {
+			sprite.draw(batch);			
+		}
 	}
 	
 	public void pickUp() {

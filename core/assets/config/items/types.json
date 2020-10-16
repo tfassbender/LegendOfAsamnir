@@ -34,6 +34,10 @@
 		texture: bomb
 		pickUpSound: pickup
 	}
+	key: {
+		animation: key,
+		pickUpSound: pickup_4
+	}
 	//menu items
 	bow: {
 		texture: bow
