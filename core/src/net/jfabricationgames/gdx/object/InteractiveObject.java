@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
@@ -78,7 +79,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private boolean showInteractionIcon() {
-		return canBeExecuted() //
+		return canBeExecutedByConfig() //
 				&& (!interactionAnimation.isAnimationFinished() // the animation (to appear or disappear) is still playing 
 						|| interactionAnimation.getAnimation().getPlayMode() == PlayMode.NORMAL); // the interaction icon appeared and is to be shown (animation finished)
 	}
@@ -89,8 +90,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	@Override
-	public void interact() {
-		if (canBeExecuted()) {
+	public void interact(CharacterItemContainer itemContainer) {
+		if (canBeExecuted(itemContainer)) {
 			if (typeConfig.animationAction != null) {
 				animation = getActionAnimation();
 			}
@@ -103,8 +104,11 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	private boolean canBeExecuted() {
+	private boolean canBeExecutedByConfig() {
 		return typeConfig.multipleActionExecutionsPossible || !actionExecuted;
+	}
+	protected boolean canBeExecuted(CharacterItemContainer itemContainer) {
+		return canBeExecutedByConfig();
 	}
 	
 	@Override

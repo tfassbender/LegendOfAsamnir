@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="419">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="439">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
@@ -13,7 +13,7 @@
  </layer>
  <layer id="2" name="terrain" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="3" name="objects">
@@ -289,31 +289,68 @@
   <object id="408" name="enemy.mini_golem" x="2702.67" y="820">
    <point/>
   </object>
-  <object id="409" name="object.barrel" x="2798.67" y="820">
+  <object id="409" name="object.barrel" x="2799" y="822">
    <properties>
     <property name="drop" value="{health: 1}"/>
    </properties>
    <point/>
   </object>
   <object id="410" name="object.chest" x="2926.67" y="557.333">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
    <point/>
   </object>
-  <object id="411" name="enemy.gladiator" x="2883.33" y="1013.33">
+  <object id="411" name="enemy.gladiator" x="2883.33" y="991.966">
    <point/>
   </object>
-  <object id="412" name="enemy.gladiator" x="2937.33" y="1013.33">
+  <object id="412" name="enemy.gladiator" x="2936.24" y="991.512">
    <point/>
   </object>
-  <object id="413" name="enemy.gladiator" x="2995.33" y="1015.33">
+  <object id="413" name="enemy.gladiator" x="2999.33" y="990.966">
    <point/>
   </object>
   <object id="414" name="item.health" x="2816.67" y="984">
    <point/>
   </object>
-  <object id="415" name="object.key_wall" x="621.5" y="1192.5">
+  <object id="415" name="object.key_wall" x="623" y="1175.5">
    <point/>
   </object>
   <object id="418" name="item.key" x="256.5" y="1751.5">
+   <point/>
+  </object>
+  <object id="420" name="object.signboard" x="557.5" y="1138.5">
+   <properties>
+    <property name="displayText" value="Some pathes may be blocked. You'll need a key to unlock it. Most of these doors can be unlocked by any key (that was found in the same level). But some require special keys."/>
+    <property name="displayTextHeader" value="Locked Doors"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="429" name="object.key_wall" x="2766.75" y="980">
+   <point/>
+  </object>
+  <object id="431" name="object.key_wall" x="1119.76" y="2673.85">
+   <properties>
+    <property name="key_key" value="Master Key 3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="432" name="object.key_wall" x="1184.36" y="2674.36">
+   <properties>
+    <property name="key_key" value="Master Key 2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="433" name="object.key_wall" x="1248.18" y="2673.79">
+   <properties>
+    <property name="key_key" value="Master Key 1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="438" name="item.key" x="2936.09" y="1014.97">
+   <properties>
+    <property name="key_key" value="Master Key 1"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
@@ -998,7 +1035,11 @@
     <property name="material" value="water"/>
    </properties>
   </object>
-  <object id="209" x="799" y="1407.83" width="34" height="190.833"/>
+  <object id="209" x="799" y="1407.83" width="34" height="190.833">
+   <properties>
+    <property name="material" value="wood"/>
+   </properties>
+  </object>
   <object id="211" x="205" y="2033" width="35" height="60.5">
    <properties>
     <property name="material" value="water"/>
@@ -1189,7 +1230,11 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="260" x="959" y="2175.5" width="33" height="318.5"/>
+  <object id="260" x="959" y="2175.5" width="33" height="318.5">
+   <properties>
+    <property name="material" value="wood"/>
+   </properties>
+  </object>
   <object id="261" x="992" y="2206.5" width="31" height="349.5">
    <properties>
     <property name="material" value="wood"/>
@@ -1205,22 +1250,22 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="266" x="1090" y="2336.67" width="28.6667" height="316.667">
+  <object id="266" x="1090" y="2336.67" width="28.6667" height="283">
    <properties>
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="267" x="1121.33" y="2368" width="32" height="285.333">
+  <object id="267" x="1121.33" y="2368" width="32" height="252.333">
    <properties>
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="268" x="1156" y="2432" width="28.6667" height="221.333">
+  <object id="268" x="1156" y="2432" width="28.6667" height="156.666">
    <properties>
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="269" x="1187.33" y="2530.67" width="61.6667" height="122.667">
+  <object id="269" x="1187.33" y="2530.67" width="61.6667" height="89.667">
    <properties>
     <property name="material" value="wood"/>
    </properties>
@@ -1250,12 +1295,12 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="278" x="1217.33" y="2717.83" width="63.3333" height="62.8333">
+  <object id="278" x="1154" y="2751.16" width="125.333" height="29.5">
    <properties>
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="279" x="1086.67" y="2719.5" width="129.333" height="47.1667">
+  <object id="279" x="1086.67" y="2751.5" width="65.9997" height="15.1667">
    <properties>
     <property name="material" value="wood"/>
    </properties>
@@ -1755,7 +1800,7 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="386" x="1250" y="2560" width="30" height="92.5">
+  <object id="386" x="1250" y="2560" width="30" height="60.5">
    <properties>
     <property name="material" value="wood"/>
    </properties>
@@ -1788,6 +1833,36 @@
   <object id="392" x="1635" y="1062.5" width="27" height="85">
    <properties>
     <property name="material" value="wood"/>
+   </properties>
+  </object>
+  <object id="421" x="581" y="1192.5" width="85.5" height="22">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="422" x="581.5" y="1216" width="22.5" height="61">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="434" x="1092.33" y="2697" width="215.667" height="20">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="435" x="1283.67" y="2718" width="24" height="63.3333">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="436" x="1283.33" y="2566.67" width="23.6667" height="86.6667">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="437" x="1090.67" y="2632" width="191.667" height="21.6667">
+   <properties>
+    <property name="material" value="stone"/>
    </properties>
   </object>
  </objectgroup>

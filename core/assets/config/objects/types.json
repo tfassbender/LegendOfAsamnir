@@ -4,16 +4,12 @@
 		
 		texture: barrel,
 		animationHit: barrel_hit,
-		animationBreak: barrel_break,
+		hitSound: wood_hit_2,
 		
 		physicsBodySizeFactorX: 0.3,
 		physicsBodySizeFactorY: 0.5,
 		physicsBodyOffsetFactorX: 0.05,
 		physicsBodyOffsetFactorY: -0.15,
-		
-		hitSound: wood_hit_2,
-		destroySound: wood_break,
-		health: 30,
 		
 		drops: {
 			coin: 0.5,
@@ -21,31 +17,70 @@
 			mana: 0.1,
 			shield: 0.1,
 		}
+		
+		destroySound: wood_break,
+		animationBreak: barrel_break,
+		health: 30,
 	},
 	box: {
 		type: DESTROYABLE,
 		
 		texture: box,
 		animationHit: box_hit,
-		animationBreak: box_break,
+		hitSound: wood_hit_1,
 		
 		physicsBodySizeFactorX: 0.3,
 		physicsBodySizeFactorY: 0.5,
 		physicsBodyOffsetFactorX: 0.075,
 		physicsBodyOffsetFactorY: -0.125,
 		
-		hitSound: wood_hit_1,
-		destroySound: wood_break,
-		health: 20,
-		
 		drops: {
 			coin: 0.3,
 			health: 0.1,
 			shield: 0.1,
 		}
+		
+		animationBreak: box_break,
+		destroySound: wood_break,
+		health: 20,
+	},
+	pot: {
+		type: DESTROYABLE,
+		
+		texture: pot,
+		animationHit: pot_hit,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.3,
+		physicsBodyOffsetFactorX: 0.05,
+		physicsBodyOffsetFactorY: -0.075,
+		
+		drops: {
+			coin: 0.75,
+		}
+		
+		animationBreak: pot_break,
+		destroySound: glass_break,
+		health: 5,
+	},
+	signboard: {
+		type: INTERACTIVE,
+		
+		texture: signboard,
+		animationHit: signboard_hit,
+		hitSound: wood_hit_1,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.3,
+		physicsBodyOffsetFactorX: 0.05,
+		physicsBodyOffsetFactorY: -0.075,
+		
+		addSensor: true,
+		
+		multipleActionExecutionsPossible: true,
 	},
 	chest: {
-		type: INTERACTIVE,
+		type: LOCKED,
 		
 		texture: chest,
 		animationHit: chest_hit,
@@ -71,47 +106,14 @@
 		}
 		dropPositionOffsetY: -0.25,
 		renderDropsAboveObject: true,
-	},
-	pot: {
-		type: DESTROYABLE,
 		
-		texture: pot,
-		animationHit: pot_hit,
-		animationBreak: pot_break,
-		
-		physicsBodySizeFactorX: 0.3,
-		physicsBodySizeFactorY: 0.3,
-		physicsBodyOffsetFactorX: 0.05,
-		physicsBodyOffsetFactorY: -0.075,
-		
-		destroySound: glass_break,
-		health: 5,
-		
-		drops: {
-			coin: 0.75,
-		}
-	},
-	signboard: {
-		type: INTERACTIVE,
-		
-		texture: signboard,
-		animationHit: signboard_hit,
-		
-		physicsBodySizeFactorX: 0.3,
-		physicsBodySizeFactorY: 0.3,
-		physicsBodyOffsetFactorX: 0.05,
-		physicsBodyOffsetFactorY: -0.075,
-		
-		addSensor: true,
-		multipleActionExecutionsPossible: true,
-		
-		hitSound: wood_hit_1,
+		defaultLocked: false,
 	},
 	key_wall: {
-		type: INTERACTIVE,
+		type: LOCKED,
 		
 		texture: key_wall_open_1,
-		animationAction: key_wall_open,
+		hitSound: metal_hit_1,
 		
 		physicsBodySizeFactorX: 0.5,
 		physicsBodySizeFactorY: 0.6,
@@ -119,10 +121,13 @@
 		physicsBodyOffsetFactorY: 0.05,
 		
 		addSensor: true,
+		sensorRadius: 0.6,
+		
 		multipleActionExecutionsPossible: false,
 		textureAfterAction: key_wall_open_33,
 		changeBodyToSensorAfterAction: true,
+		animationAction: key_wall_open,
 		
-		hitSound: metal_hit_1,
+		defaultLocked: true,
 	}
 }

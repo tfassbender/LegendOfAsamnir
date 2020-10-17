@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 
 public class InteractionManager {
 	
@@ -35,13 +36,13 @@ public class InteractionManager {
 		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 	}
 	
-	public void interact(PlayableCharacter character) {
+	public void interact(PlayableCharacter character, CharacterItemContainer itemContainer) {
 		if (!interactivesInRange.isEmpty()) {
 			InteractionManager.character = character;
 			interactivesInRange.sort(distanceComparator);
 			
 			Interactive nearest = interactivesInRange.first();
-			nearest.interact();
+			nearest.interact(itemContainer);
 		}
 	}
 	

@@ -90,7 +90,7 @@ public class ItemFactory extends AbstractFactory {
 		AnimationDirector<TextureRegion> animation = createAnimation(x, y, typeConfig.animation);
 		
 		addDefaultProperties(name, properties);
-		Item item = new Item(typeConfig, sprite, animation, properties, gameMap);
+		Item item = new Item(name, typeConfig, sprite, animation, properties, gameMap);
 		if (addBodyDelay > 0) {
 			PhysicsWorld.getInstance().runDelayedAfterWorldStep(
 					() -> item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN), addBodyDelay);

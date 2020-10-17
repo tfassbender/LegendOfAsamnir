@@ -8,8 +8,10 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.character.container.data.KeyItem;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -30,10 +32,13 @@ public class Item {
 	private Body body;
 	private GameMap gameMap;
 	
+	protected final String itemName;
 	protected ItemTypeConfig typeConfig;
 	protected String pickUpSoundName;
 	
-	public Item(ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties, GameMap gameMap) {
+	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties,
+			GameMap gameMap) {
+		this.itemName = itemName;
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
 		this.animation = animation;
@@ -67,7 +72,7 @@ public class Item {
 			animation.draw(batch);
 		}
 		else if (sprite != null) {
-			sprite.draw(batch);			
+			sprite.draw(batch);
 		}
 	}
 	
@@ -88,6 +93,10 @@ public class Item {
 		}
 	}
 	
+	public ObjectMap<String, String> getKeyProperties() {
+		return KeyItem.getKeyProperties(properties);
+	}
+	
 	public boolean containsProperty(String property) {
 		return properties.containsKey(property);
 	}
@@ -96,8 +105,12 @@ public class Item {
 		return properties.get(property, clazz);
 	}
 	
+	public String getItemName() {
+		return itemName;
+	}
+	
 	@Override
 	public String toString() {
-		return "Item [properties=" + properties + "]";
+		return "Item [name=" + itemName + "; properties=" + properties + "]";
 	}
 }

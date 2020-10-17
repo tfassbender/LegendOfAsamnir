@@ -58,8 +58,11 @@ public class ObjectFactory extends AbstractFactory {
 			case INTERACTIVE:
 				object = new InteractiveObject(typeConfig, sprite, properties);
 				break;
+			case LOCKED:
+				object = new LockedObject(typeConfig, sprite, properties);
+				break;
 			default:
-				throw new IllegalStateException("Unknown object type: " + type);
+				throw new IllegalStateException("Unknown GameObjectType \"" + typeConfig.type + "\" of object type \"" + type + "\"");
 		}
 		object.setGameMap(gameMap);
 		object.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);

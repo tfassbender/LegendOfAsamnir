@@ -18,10 +18,11 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
+import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -65,37 +66,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private CharacterAction action;
 	private SpecialAction activeSpecialAction;
 	
-	private boolean slowedDown;
-	
-	private float health = 100f;
-	private float maxHealth = 100f;
-	private float increaseHealth = 0f;
-	private final float healthIncreasePerSecond = 25f;
-	
-	private float mana = 100f;
-	private float maxMana = 100f;
-	private float increaseMana = 0f;
-	private float manaIncreasePerSecond = 25f;
-	
-	private float endurance = 100f;
-	private float maxEndurance = 100f;
-	private float increaseEndurance = 0f;
-	private float enduranceIncreasePerSecond = 25f;
-	
-	private float enduranceChargeMoving = 7.5f;
-	private float enduranceChargeIdle = 15f;
-	private float enduranceCostsSprint = 15f;
-	
-	private float armor = 100f;
-	private float maxArmor = 100f;
-	private float increaseArmor = 0f;
-	private final float armorIncreasePerSecond = 25f;
-	
-	private int ammoArrow = 0;
-	private final int maxAmmoArrow = 30;
-	private int ammoBomb = 0;
-	private final int maxAmmoBomb = 15;
-	
 	private CharacterInputProcessor movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
@@ -106,7 +76,13 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private SoundSet soundSet;
 	
+	private CharacterPropertiesContainer properties;
+	private CharacterItemContainer itemContainer;
+	
 	public Dwarf() {
+		properties = new CharacterPropertiesContainer();
+		itemContainer = new CharacterItemContainer(properties);
+		
 		animationManager = AnimationManager.getInstance();
 		animationManager.loadAnimations(assetConfigFileName);
 		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
@@ -125,7 +101,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		animation = getAnimation();
 		
 		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
-		movementHandler = new CharacterInputProcessor(this);
+		movementHandler = new CharacterInputProcessor(this, itemContainer);
 	}
 	
 	private Body createPhysicsBody() {
@@ -164,17 +140,17 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public boolean changeAction(CharacterAction action) {
 		if (isAlive() || action == CharacterAction.DIE) {
-			if (endurance < action.getEnduranceCosts()) {
+			if (!properties.hasEnoughEndurance(action)) {
 				return false;
 			}
-			if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && armor <= 0) {
+			if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && !properties.hasBlock()) {
 				return false;
 			}
 			this.action = action;
 			this.animation = getAnimation();
 			this.animation.resetStateTime();
 			
-			endurance = Math.max(0, endurance - action.getEnduranceCosts());
+			properties.reduceEnduranceForAction(action);
 			
 			playSound(action);
 			
@@ -195,8 +171,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 				case BOMB:
 					ItemAmmoType ammoType = ItemAmmoType.fromSpecialAction(activeSpecialAction);
 					if (attackCreator.allAttacksExecuted()) {
-						if (hasAmmo(ammoType)) {
-							decreaseAmmo(ammoType);
+						if (itemContainer.hasAmmo(ammoType)) {
+							itemContainer.decreaseAmmo(ammoType);
 							attackCreator.startAttack(ammoType.name().toLowerCase(),
 									movementHandler.getMovingDirection().getNormalizedDirectionVector());
 						}
@@ -217,32 +193,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return false;
 	}
 	
-	private boolean hasAmmo(ItemAmmoType ammoType) {
-		return getAmmo(ammoType) > 0;
-	}
-	
+	@Override
 	public int getAmmo(ItemAmmoType ammoType) {
-		switch (ammoType) {
-			case ARROW:
-				return ammoArrow;
-			case BOMB:
-				return ammoBomb;
-			default:
-				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
-		}
-	}
-	
-	private void decreaseAmmo(ItemAmmoType ammoType) {
-		switch (ammoType) {
-			case ARROW:
-				ammoArrow = Math.max(ammoArrow - 1, 0);
-				break;
-			case BOMB:
-				ammoBomb = Math.max(ammoBomb - 1, 0);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
-		}
+		return itemContainer.getAmmo(ammoType);
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
@@ -271,7 +224,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
-		updateStats(delta);
+		properties.updateStats(delta, action);
 		attackCreator.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
@@ -285,41 +238,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		animation.increaseStateTime(delta);
 		if (animation.isAnimationFinished()) {
 			changeAction(CharacterAction.NONE);
-		}
-	}
-	
-	private void updateStats(float delta) {
-		//recharge endurance by time
-		endurance = Math.min(endurance + delta * getEnduranceCharge(), maxEndurance);
-		
-		//increase health, mana and endurance
-		if (increaseHealth > 0f) {
-			float increaseStep = Math.min(delta * healthIncreasePerSecond, increaseHealth);
-			increaseHealth -= increaseStep;
-			health = Math.min(health + increaseStep, maxHealth);
-		}
-		if (increaseMana > 0f) {
-			float increaseStep = Math.min(delta * manaIncreasePerSecond, increaseMana);
-			increaseMana -= increaseStep;
-			mana = Math.min(mana + increaseStep, maxMana);
-		}
-		if (increaseEndurance > 0f) {
-			float increaseStep = Math.min(delta * enduranceIncreasePerSecond, increaseEndurance);
-			increaseEndurance -= increaseStep;
-			endurance = Math.min(endurance + increaseStep, maxEndurance);
-		}
-		if (increaseArmor > 0f) {
-			float increaseStep = Math.min(delta * armorIncreasePerSecond, increaseArmor);
-			increaseArmor -= increaseStep;
-			armor = Math.min(armor + increaseStep, maxArmor);
-		}
-	}
-	private float getEnduranceCharge() {
-		if (action == CharacterAction.NONE || action == CharacterAction.IDLE) {
-			return enduranceChargeIdle;
-		}
-		else {
-			return enduranceChargeMoving;
 		}
 	}
 	
@@ -351,18 +269,17 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		float aimMarkerOffsetY = -0.1f;
 		Vector2 aimMarkerOffset = movementHandler.getMovingDirection().getNormalizedDirectionVector().scl(aimMarkerDistanceFactor).add(0,
 				aimMarkerOffsetY);
-		Vector2 aimMarkerSize = new Vector2(5f, 5f);
-		draw(batch, aimMarkerSprite, aimMarkerOffset, aimMarkerSize);
+		float aimMarkerSize = 5f;
+		draw(batch, aimMarkerSprite, aimMarkerOffset, aimMarkerSize, aimMarkerSize);
 	}
 	
 	private void draw(SpriteBatch batch, TextureRegion frame) {
-		Vector2 size = new Vector2(frame.getRegionWidth(), frame.getRegionHeight());
 		//use null as offset parameter to not create a new empty vector every time
-		draw(batch, frame, null, size);
+		draw(batch, frame, null, frame.getRegionWidth(), frame.getRegionHeight());
 	}
-	private void draw(SpriteBatch batch, TextureRegion frame, Vector2 offset, Vector2 size) {
-		float originX = 0.5f * size.x + PHYSICS_BODY_POSITION_OFFSET.x * size.x;
-		float originY = 0.5f * size.y + PHYSICS_BODY_POSITION_OFFSET.y * size.y;
+	private void draw(SpriteBatch batch, TextureRegion frame, Vector2 offset, float width, float height) {
+		float originX = 0.5f * width + PHYSICS_BODY_POSITION_OFFSET.x * width;
+		float originY = 0.5f * height + PHYSICS_BODY_POSITION_OFFSET.y * height;
 		float x = body.getPosition().x - originX;
 		float y = body.getPosition().y - originY;
 		if (offset != null) {
@@ -373,7 +290,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		batch.draw(frame, // textureRegion
 				x, y, // x, y
 				originX, originY, //originX, originY
-				size.x, size.y, // width, height
+				width, height, // width, height
 				GameScreen.WORLD_TO_SCREEN, // scaleX
 				GameScreen.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation
@@ -398,7 +315,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			speed = JUMPING_SPEED;
 		}
 		
-		if (slowedDown) {
+		if (properties.isSlowedDown()) {
 			speed *= 0.25;
 		}
 		
@@ -407,14 +324,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void reduceEnduranceForSprinting(float delta) {
-		endurance -= enduranceCostsSprint * delta;
-		if (endurance < 0) {
-			endurance = 0;
-		}
+		properties.reduceEnduranceForSprinting(delta);
 	}
 	@Override
 	public boolean isExhausted() {
-		return endurance < 1e-5;
+		return properties.isExhausted();
 	}
 	
 	@Override
@@ -445,27 +359,27 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public float getHealth() {
-		return health / maxHealth;
+		return properties.getHealthPercentual();
 	}
 	
 	@Override
 	public boolean isAlive() {
-		return health > 0;
+		return properties.isAlive();
 	}
 	
 	@Override
 	public float getMana() {
-		return mana / maxMana;
+		return properties.getManaPercentual();
 	}
 	
 	@Override
 	public float getEndurance() {
-		return endurance / maxEndurance;
+		return properties.getEndurancePercentual();
 	}
 	
 	@Override
 	public float getArmor() {
-		return armor / maxArmor;
+		return properties.getArmorPercentual();
 	}
 	
 	@Override
@@ -489,7 +403,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void setSlowedDown(boolean slowedDown) {
-		this.slowedDown = slowedDown;
+		properties.setSlowedDown(slowedDown);
 	}
 	
 	@Override
@@ -502,52 +416,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_SENSOR, fixtureA, fixtureB);
 			
 			if (sensorCollidingUserData instanceof Item) {
-				collectItem((Item) sensorCollidingUserData);
+				itemContainer.collectItem((Item) sensorCollidingUserData);
 			}
 		}
 		
 		attackCreator.handleAttackDamage(contact);
-	}
-	
-	private void collectItem(Item item) {
-		if (item.containsProperty(ItemPropertyKeys.HEALTH.getPropertyName())) {
-			float itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Float.class);
-			increaseHealth = itemHealth;
-		}
-		if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
-			float itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Float.class);
-			increaseMana = itemMana;
-		}
-		if (item.containsProperty(ItemPropertyKeys.ARMOR.getPropertyName())) {
-			float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
-			increaseArmor = itemArmor;
-		}
-		if (item.containsProperty(ItemPropertyKeys.AMMO.getPropertyName())) {
-			int itemAmmo = item.getProperty(ItemPropertyKeys.AMMO.getPropertyName(), Float.class).intValue();
-			if (item.containsProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName())) {
-				ItemAmmoType ammoType = ItemAmmoType
-						.getByNameIgnoreCase(item.getProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName(), String.class));
-				increaseAmmo(itemAmmo, ammoType);
-			}
-			else {
-				throw new IllegalStateException("The ammo item has no ammo type defined. It should be added to default_values.json file.");
-			}
-		}
-		
-		item.pickUp();
-	}
-	
-	private void increaseAmmo(int itemAmmo, ItemAmmoType ammoType) {
-		switch (ammoType) {
-			case ARROW:
-				ammoArrow = Math.min(ammoArrow + itemAmmo, maxAmmoArrow);
-				break;
-			case BOMB:
-				ammoBomb = Math.min(ammoBomb + itemAmmo, maxAmmoBomb);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected ItemAmmoType: " + ammoType);
-		}
 	}
 	
 	@Override
@@ -566,9 +439,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 				takeArmorDamage(damage * 0.33f);
 				damage *= 0.1f;
 			}
-			health -= damage;
-			if (health <= 0) {
-				health = 0;
+			properties.takeDamage(damage);
+			if (!properties.isAlive()) {
 				die();
 			}
 			else {
@@ -597,7 +469,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	public void takeArmorDamage(float damage) {
-		armor = Math.max(armor - damage, 0);
+		properties.takeArmorDamage(damage);
 	}
 	
 	@Override
