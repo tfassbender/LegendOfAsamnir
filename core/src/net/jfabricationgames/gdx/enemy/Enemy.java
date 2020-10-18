@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
@@ -21,6 +22,7 @@ import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -90,8 +92,14 @@ public abstract class Enemy implements Hittable, ContactListener {
 	protected Array<Vector2> loadPositionsFromMapProperties() {
 		String predefinedMovingPositions = properties.get(MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS, String.class);
 		if (predefinedMovingPositions != null) {
-			Json json = new Json();
-			return (Array<Vector2>) json.fromJson(Array.class, Vector2.class, predefinedMovingPositions);
+			try {
+				Json json = new Json();
+				return (Array<Vector2>) json.fromJson(Array.class, Vector2.class, predefinedMovingPositions);
+			}
+			catch (SerializationException e) {
+				throw new IllegalStateException("A predefined movement string could not be parsed: \"" + predefinedMovingPositions
+						+ "\". Complete map properties: " + TiledMapLoader.mapPropertiesToString(properties, true), e);
+			}
 		}
 		return null;
 	}
@@ -217,7 +225,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 			body.applyForceToCenter(pushDirection.x * force, pushDirection.y * force, true);
 		}
 	}
-
+	
 	private boolean hasBody() {
 		return body != null;
 	}

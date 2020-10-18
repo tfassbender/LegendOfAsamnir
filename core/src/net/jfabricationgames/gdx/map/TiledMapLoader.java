@@ -22,6 +22,29 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class TiledMapLoader {
 	
+	public static String mapPropertiesToString(MapProperties properties, boolean includePosition) {
+		StringBuilder sb = new StringBuilder();
+		
+		Array<String> excludedKeys = new Array<>();
+		if (!includePosition) {
+			excludedKeys.addAll("x", "y", "width", "height");
+		}
+		
+		sb.append('{');
+		Iterator<String> keys = properties.getKeys();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			String value = properties.get(key).toString();
+			if (!excludedKeys.contains(key, false)) {
+				sb.append('\"').append(key).append('\"').append(": ").append('\"').append(value).append("\", ");
+			}
+		}
+		sb.setLength(sb.length() - 2);
+		sb.append('}');
+		
+		return sb.toString();
+	}
+	
 	private String mapAsset;
 	private GameMap gameMap;
 
@@ -94,34 +117,13 @@ public class TiledMapLoader {
 				case "enemy":
 					enemies.add(enemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
 					break;
+				default:
+					throw new IllegalStateException("Unknown map object found: " + name + ". Properties: " + mapPropertiesToString(properties, true)); 
 			}
 		}
 		
 		gameMap.items = items;
 		gameMap.objects = objects;
 		gameMap.enemies = enemies;
-	}
-	
-	private String mapPropertiesToString(MapProperties properties, boolean includePosition) {
-		StringBuilder sb = new StringBuilder();
-		
-		Array<String> excludedKeys = new Array<>();
-		if (!includePosition) {
-			excludedKeys.addAll("x", "y", "width", "height");
-		}
-		
-		sb.append('{');
-		Iterator<String> keys = properties.getKeys();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			String value = properties.get(key).toString();
-			if (!excludedKeys.contains(key, false)) {
-				sb.append('\"').append(key).append('\"').append(": ").append('\"').append(value).append("\", ");
-			}
-		}
-		sb.setLength(sb.length() - 2);
-		sb.append('}');
-		
-		return sb.toString();
 	}
 }
