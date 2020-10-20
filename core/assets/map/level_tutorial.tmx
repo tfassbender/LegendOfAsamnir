@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="620">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="711">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="5" name="background_2" width="100" height="100" locked="1">
@@ -13,10 +13,10 @@
  </layer>
  <layer id="2" name="terrain" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <objectgroup id="3" name="objects" locked="1">
+ <objectgroup id="3" name="objects">
   <object id="1" name="player.startingPosition" x="240.833" y="308.5">
    <point/>
   </object>
@@ -296,9 +296,9 @@
    </properties>
    <point/>
   </object>
-  <object id="410" name="object.chest" x="2926.67" y="557.333">
+  <object id="410" name="object.chest" x="2928" y="533">
    <properties>
-    <property name="drop" value="{key: 1}"/>
+    <property name="drop" value="{shield: 1}"/>
    </properties>
    <point/>
   </object>
@@ -311,7 +311,7 @@
   <object id="413" name="enemy.gladiator" x="2999.33" y="990.966">
    <point/>
   </object>
-  <object id="414" name="item.health" x="2816.67" y="984">
+  <object id="414" name="item.health" x="2816.67" y="980">
    <point/>
   </object>
   <object id="415" name="object.key_wall" x="623" y="1175.5">
@@ -328,6 +328,9 @@
    <point/>
   </object>
   <object id="429" name="object.key_wall" x="2766.75" y="980">
+   <properties>
+    <property name="key_key" value="Labyrinth"/>
+   </properties>
    <point/>
   </object>
   <object id="431" name="object.key_wall" x="1119.76" y="2673.85">
@@ -502,6 +505,90 @@
    <point/>
   </object>
   <object id="619" name="item.arrow" x="689" y="1959">
+   <point/>
+  </object>
+  <object id="625" name="item.key" x="2928" y="561">
+   <properties>
+    <property name="key_key" value="Labyrinth"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="690" name="object.key_wall" x="2544" y="1748">
+   <point/>
+  </object>
+  <object id="691" name="object.key_wall" x="2415" y="2006">
+   <point/>
+  </object>
+  <object id="692" name="object.key_wall" x="2352" y="2129">
+   <point/>
+  </object>
+  <object id="693" name="object.key_wall" x="2352" y="2226">
+   <point/>
+  </object>
+  <object id="694" name="object.key_wall" x="2191" y="2259">
+   <point/>
+  </object>
+  <object id="695" name="object.key_wall" x="2288" y="2869">
+   <point/>
+  </object>
+  <object id="696" name="object.key_wall" x="2544" y="2803">
+   <point/>
+  </object>
+  <object id="697" name="object.key_wall" x="2672" y="2483">
+   <point/>
+  </object>
+  <object id="698" name="object.key_wall" x="2736" y="2355">
+   <point/>
+  </object>
+  <object id="699" name="object.chest" x="2208" y="1728">
+   <point/>
+  </object>
+  <object id="700" name="object.chest" x="2480" y="1810">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="701" name="item.key" x="2799" y="2194">
+   <point/>
+  </object>
+  <object id="702" name="object.chest" x="2672" y="2064">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="703" name="item.key" x="2063" y="2226">
+   <point/>
+  </object>
+  <object id="704" name="object.chest" x="2063" y="2064">
+   <point/>
+  </object>
+  <object id="705" name="item.key" x="2382" y="2451">
+   <point/>
+  </object>
+  <object id="706" name="item.key" x="2255" y="2353">
+   <point/>
+  </object>
+  <object id="707" name="object.chest" x="2544" y="2513">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="708" name="item.key" x="2048" y="2944">
+   <point/>
+  </object>
+  <object id="709" name="object.chest" x="2976" y="2752">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="710" name="item.key" x="2992" y="2386">
+   <properties>
+    <property name="key_key" value="Master Key 3"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
@@ -1436,12 +1523,12 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="276" x="972.667" y="2908" width="211.333" height="32.6667">
+  <object id="276" x="1057" y="2908" width="127" height="32.6667">
    <properties>
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="277" x="974" y="2941.33" width="178" height="52.6667">
+  <object id="277" x="1089" y="2941.33" width="63" height="52.67">
    <properties>
     <property name="material" value="wood"/>
    </properties>
@@ -2176,7 +2263,7 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="471" x="1408.33" y="2784" width="64" height="188.667">
+  <object id="471" x="1408.33" y="2784" width="64" height="210">
    <properties>
     <property name="material" value="wood"/>
    </properties>
@@ -2191,7 +2278,7 @@
     <property name="material" value="wood"/>
    </properties>
   </object>
-  <object id="474" x="1696" y="2912" width="319.667" height="59.6667">
+  <object id="474" x="1696" y="2912" width="319.667" height="82">
    <properties>
     <property name="material" value="wood"/>
    </properties>
@@ -2694,6 +2781,332 @@
   <object id="578" x="2660.5" y="1319.75" width="22.75" height="22.25">
    <properties>
     <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="620" x="1029" y="2922" width="22" height="20">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="621" x="1221" y="2952" width="22" height="22">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="622" x="974" y="2963" width="95" height="31">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="623" x="973" y="2931" width="64" height="32">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="624" x="973" y="2908" width="31" height="23">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="626" x="2015" y="1832" width="349" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="627" x="2405" y="1660" width="22" height="193">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="629" x="2533" y="1660" width="24" height="66">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="630" x="2532" y="1769" width="24" height="63">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="631" x="2427" y="1832" width="288" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="632" x="2469" y="1853" width="23" height="33">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="633" x="2757" y="1833" width="267" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="634" x="2821" y="1897" width="151" height="20">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="635" x="2948" y="1917" width="24" height="128"/>
+  <object id="636" x="2819" y="2024" width="129" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="637" x="2113" y="1994" width="283" height="20">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="638" x="2341" y="2014" width="22" height="95">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="639" x="2436" y="1993" width="311" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="640" x="2468" y="1929" width="23" height="64">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="641" x="2596" y="2014" width="24" height="96">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="642" x="2598" y="2153" width="22" height="95">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="643" x="2725" y="2014" width="22" height="320">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="644" x="2747" y="2121" width="224" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="645" x="2747" y="2249" width="226" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="646" x="2340" y="2248" width="385" height="22">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="647" x="2080" y="2121" width="59" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="649" x="2047" y="2249" width="124" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="650" x="2341" y="2153" width="22" height="53">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="651" x="2213" y="2153" width="128" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="652" x="2213" y="2174" width="22" height="224">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="653" x="2235" y="2377" width="225" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="654" x="2437" y="2398" width="23" height="224">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="655" x="2460" y="2601" width="191" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="656" x="2629" y="2270" width="22" height="331">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="657" x="2533" y="2622" width="22" height="160">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="658" x="2533" y="2825" width="22" height="71">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="659" x="2309" y="2857" width="224" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="660" x="2341" y="2878" width="54" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="661" x="2341" y="2953" width="54" height="40">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="662" x="2203" y="2857" width="65" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="663" x="2172" y="2812" width="31" height="66">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="664" x="2145" y="2845" width="27" height="65">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="665" x="2085" y="2877" width="60" height="33">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="666" x="2725" y="2377" width="22" height="96">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="667" x="2693" y="2473" width="278" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="668" x="2757" y="2889" width="268" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="669" x="2661" y="2697" width="22" height="213">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="670" x="2683" y="2697" width="342" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="671" x="2756" y="2793" width="269" height="21">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="672" x="2897" y="2270" width="76" height="20">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="673" x="2803" y="2494" width="168" height="20">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="675" x="2897" y="2290" width="128" height="60">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="676" x="2899" y="2418" width="126" height="27">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="677" x="2962" y="2445" width="63" height="34">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="678" x="2994" y="2480" width="31" height="190">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="679" x="2897" y="2514" width="97" height="156">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="680" x="2866" y="2514" width="31" height="125">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="681" x="2834" y="2514" width="32" height="93">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="682" x="2803" y="2514" width="31" height="60">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="683" x="2995" y="2930" width="30" height="65">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="684" x="2962" y="2962" width="33" height="33">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="685" x="2482" y="2963" width="316" height="31">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="686" x="2483" y="2930" width="123" height="33">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="687" x="2514" y="2897" width="92" height="33">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="688" x="2162" y="2963" width="156" height="31">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+  </object>
+  <object id="689" x="2227" y="2930" width="59" height="32">
+   <properties>
+    <property name="material" value="water"/>
    </properties>
   </object>
  </objectgroup>
