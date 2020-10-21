@@ -3,6 +3,8 @@ package net.jfabricationgames.gdx.map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -30,6 +32,7 @@ public class GameMap implements Disposable {
 	private OrthogonalTiledMapRenderer renderer;
 	
 	private SpriteBatch batch;
+	private ShapeRenderer shapeRenderer;
 	
 	protected TiledMap map;
 	protected Vector2 playerStartingPosition;
@@ -44,11 +47,11 @@ public class GameMap implements Disposable {
 	protected ItemFactory itemFactory;
 	protected ObjectFactory objectFactory;
 	protected EnemyFactory enemyFactory;
-
 	
 	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
 		batch = new SpriteBatch();
+		shapeRenderer = new ShapeRenderer();
 		
 		itemsAboveGameObjects = new Array<>();
 		projectiles = new Array<>();
@@ -82,6 +85,11 @@ public class GameMap implements Disposable {
 		processProjectiles(delta);
 		renderProjectiles();
 		batch.end();
+		
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		renderEnemyHealthBars();
+		shapeRenderer.end();
 	}
 	
 	private void renderItems(float delta) {
@@ -121,6 +129,12 @@ public class GameMap implements Disposable {
 	private void renderProjectiles() {
 		for (Projectile projectile : projectiles) {
 			projectile.draw(batch);
+		}
+	}
+	
+	private void renderEnemyHealthBars() {
+		for (Enemy enemy : enemies) {
+			enemy.drawHealthBar(shapeRenderer);
 		}
 	}
 	

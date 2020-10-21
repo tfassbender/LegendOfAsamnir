@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.enemy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
@@ -25,6 +27,7 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
@@ -33,6 +36,8 @@ public abstract class Enemy implements Hittable, ContactListener {
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
+	
+	protected EnemyHealthBarRenderer healthBarRenderer;
 	
 	protected EnemyTypeConfig typeConfig;
 	protected EnemyStateMachine stateMachine;
@@ -60,6 +65,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 				.setCollisionType(PhysicsCollisionType.ENEMY).setDensity(10f).setLinearDamping(10f);
 		PhysicsWorld.getInstance().registerContactListener(this);
 		intendedMovement = new Vector2();
+		healthBarRenderer = new EnemyHealthBarRenderer();
 		
 		readTypeConfig();
 		initializeAttackCreator();
@@ -156,20 +162,26 @@ public abstract class Enemy implements Hittable, ContactListener {
 			stateMachine.flipTextureToMovementDirection(region, intendedMovement);
 			getAnimation().draw(batch);
 		}
-		if (usesHealthBar()) {
-			drawHealthBar();
-		}
-	}
-
-	private boolean usesHealthBar() {
-		return typeConfig.usesHealthBar;
 	}
 	
-	private void drawHealthBar() {
-		// TODO Auto-generated method stub
-		
+	public void drawHealthBar(ShapeRenderer shapeRenderer) {
+		if (drawHealthBar()) {
+			AnimationSpriteConfig spriteConfig = getAnimation().getSpriteConfig();
+			float x = body.getPosition().x - spriteConfig.width * 0.5f * GameScreen.WORLD_TO_SCREEN + typeConfig.healthBarOffsetX;
+			float y = body.getPosition().y + spriteConfig.height * 0.5f * GameScreen.WORLD_TO_SCREEN + typeConfig.healthBarOffsetY;
+			float width = getAnimation().getSpriteConfig().width * typeConfig.healthBarWidthFactor;
+			healthBarRenderer.drawHealthBar(shapeRenderer, getPercentualHealth(), x, y, width);
+		}
 	}
-
+	
+	private boolean drawHealthBar() {
+		return typeConfig.usesHealthBar && getPercentualHealth() < 1 && isAlive();
+	}
+	
+	private float getPercentualHealth() {
+		return health / typeConfig.health;
+	}
+	
 	public void moveTo(float x, float y) {
 		moveTo(new Vector2(x, y), false);
 	}

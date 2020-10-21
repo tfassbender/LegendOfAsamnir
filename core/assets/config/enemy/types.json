@@ -47,7 +47,10 @@
 		pushForceDamage: 15,
 		pushForceHit: 40,
 		
-		usesHealthBar: true
+		usesHealthBar: true,
+		healthBarOffsetX: 1,
+		healthBarOffsetY: -1,
+		healthBarWidthFactor: 0.5,
 	},
 	spider: {
 		animationsConfig: config/animation/enemy/spider.json,
