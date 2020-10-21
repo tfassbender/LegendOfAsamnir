@@ -17,8 +17,17 @@ public class AnimationDirector<T extends TextureRegion> {
 	
 	public AnimationDirector(Animation<T> animation) {
 		this.animation = animation;
+		initializeSpriteConfigWithoutPosition();
 	}
 	
+	private void initializeSpriteConfigWithoutPosition() {
+		// null-check is needed because of the DummyAnimationDirector
+		if (animation != null) {
+			T keyFrame = animation.getKeyFrame(0);
+			spriteConfig = new AnimationSpriteConfig().setWidth(keyFrame.getRegionWidth()).setHeight(keyFrame.getRegionHeight());			
+		}
+	}
+
 	/**
 	 * Draw the current key frame of this animation onto the {@link SpriteBatch}.<br>
 	 * ATTENTION: This method will throw an {@link IllegalStateException} if this AnimationDirector does not contain an AnimationSpriteConfig object.

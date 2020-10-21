@@ -22,7 +22,9 @@
 	{
 		id: die,
 		animation: bat_die,
-		endsWithAnimation: false,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
 		stateEnteringSound: flesh_hit_1,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,

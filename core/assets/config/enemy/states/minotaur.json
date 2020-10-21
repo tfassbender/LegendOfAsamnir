@@ -98,7 +98,9 @@
 	{
 		id: die,
 		animation: minotaur_die,
-		endsWithAnimation: false,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 3f,
+		followingState: END,
 		stateEnteringSound: minotaur_die,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,

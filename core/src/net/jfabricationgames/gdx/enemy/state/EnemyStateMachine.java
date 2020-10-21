@@ -10,11 +10,16 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 
 public class EnemyStateMachine {
 	
 	public static final float ANGLE_FLIP_THRESHOLD_DEGREES = 10f;
+	public static final EnemyState END_STATE = new EnemyState(new DummyAnimationDirector<TextureRegion>(), new EnemyStateConfig(), null);
+	public static final String END_STATE_NAME = "END";
+	
+	private float timeSinceAnimationEnded;
 	
 	private AnimationManager animationManager;
 	
@@ -55,6 +60,11 @@ public class EnemyStateMachine {
 			EnemyState state = new EnemyState(animationManager.getAnimationDirector(config.animation), config, attackCreator);
 			states.put(config.id, state);
 		}
+		
+		if (states.containsKey(END_STATE_NAME)) {
+			throw new IllegalStateException("The state config must not contain a state named 'END', because thats a special state.");
+		}
+		states.put(END_STATE_NAME, END_STATE);
 	}
 	
 	private void linkStates(Array<EnemyStateConfig> stateConfig) {
@@ -90,10 +100,19 @@ public class EnemyStateMachine {
 	/**
 	 * Change states that end on the animations end (if the animation has ended).
 	 */
-	public void updateState() {
-		if (currentState.getAnimation().isAnimationFinished() && currentState.config.endsWithAnimation) {
+	public void updateState(float delta) {
+		if (currentState.getAnimation().isAnimationFinished() && currentState.config.endsWithAnimation && afterAnimationDelayEnded(delta)) {
 			setState(currentState.followingState);
 		}
+	}
+
+	private boolean afterAnimationDelayEnded(float delta) {
+		timeSinceAnimationEnded += delta;
+		return timeSinceAnimationEnded > currentState.config.changeStateAfterAnimationDelay;
+	}
+	
+	public boolean isInEndState() {
+		return currentState == END_STATE;
 	}
 	
 	public boolean setState(String id) {
@@ -105,6 +124,8 @@ public class EnemyStateMachine {
 			leavingState.leaveState();
 			currentState = state;
 			currentState.enterState(leavingState);
+			
+			timeSinceAnimationEnded = 0;
 			return true;
 		}
 		return false;

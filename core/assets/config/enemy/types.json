@@ -45,7 +45,9 @@
 		movingSpeed: 3.0,
 		
 		pushForceDamage: 15,
-		pushForceHit: 40
+		pushForceHit: 40,
+		
+		usesHealthBar: true
 	},
 	spider: {
 		animationsConfig: config/animation/enemy/spider.json,

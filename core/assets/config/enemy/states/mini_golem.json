@@ -32,6 +32,8 @@
 		id: damage,
 		animation: mini_golem_damage,
 		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
 		stateEnteringSound: rock_hit,
 		followingState: idle,
 		interruptingStates: [
@@ -43,7 +45,9 @@
 	{
 		id: die,
 		animation: mini_golem_die,
-		endsWithAnimation: false,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
 		stateEnteringSound: rock_break,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,

@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
-	public static final boolean RENDER_DEBUG_GRAPHICS = false;
+	public static final boolean RENDER_DEBUG_GRAPHICS = true;
 	public static final int VELOCITY_ITERATIONS = 6;
 	public static final int POSITION_ITERATIONS = 2;
 	
@@ -101,15 +101,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 				true, /* velocities */
 				false /* contacts */);
 		
-		map = new GameMap("map/level_tutorial.tmx", camera);
+		map = new GameMap("map/map3.tmx", camera);
+		//map = new GameMap("map/level_tutorial.tmx", camera);
 		
 		dwarf = new Dwarf();
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
-		
-		//take some damage to test the items (only for demo)
-		//dwarf.takeDamage(50f);
-		//dwarf.takeArmorDamage(60f);
 		
 		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
 		

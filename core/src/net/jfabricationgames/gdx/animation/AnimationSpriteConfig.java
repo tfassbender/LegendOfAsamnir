@@ -18,4 +18,24 @@ public class AnimationSpriteConfig {
 	public float y;
 	public float width;
 	public float height;
+	
+	public AnimationSpriteConfig setX(float x) {
+		this.x = x;
+		return this;
+	}
+	
+	public AnimationSpriteConfig setY(float y) {
+		this.y = y;
+		return this;
+	}
+	
+	public AnimationSpriteConfig setWidth(float width) {
+		this.width = width;
+		return this;
+	}
+	
+	public AnimationSpriteConfig setHeight(float height) {
+		this.height = height;
+		return this;
+	}
 }

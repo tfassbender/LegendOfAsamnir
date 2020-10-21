@@ -25,7 +25,6 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
@@ -130,11 +129,11 @@ public abstract class Enemy implements Hittable, ContactListener {
 	}
 	
 	public void act(float delta) {
-		stateMachine.updateState();
+		stateMachine.updateState(delta);
 		attackCreator.handleAttacks(delta);
 		
 		if (!isAlive()) {
-			if (getAnimation() == null || getAnimation().isAnimationFinished()) {
+			if (stateMachine.isInEndState()) {
 				remove();
 			}
 		}
@@ -149,17 +148,28 @@ public abstract class Enemy implements Hittable, ContactListener {
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
-		if (getAnimation() != null && !getAnimation().isAnimationFinished()) {
+		if (getAnimation() != null) {
 			getAnimation().increaseStateTime(delta);
 			TextureRegion region = getAnimation().getKeyFrame();
+			getAnimation().getSpriteConfig().setX((body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX))
+					.setY((body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY));
 			stateMachine.flipTextureToMovementDirection(region, intendedMovement);
-			float x = body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX;
-			float y = body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY;
-			batch.draw(region, x, y, region.getRegionWidth() * 0.5f, region.getRegionHeight() * 0.5f, region.getRegionWidth(),
-					region.getRegionHeight(), GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+			getAnimation().draw(batch);
+		}
+		if (usesHealthBar()) {
+			drawHealthBar();
 		}
 	}
+
+	private boolean usesHealthBar() {
+		return typeConfig.usesHealthBar;
+	}
 	
+	private void drawHealthBar() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void moveTo(float x, float y) {
 		moveTo(new Vector2(x, y), false);
 	}

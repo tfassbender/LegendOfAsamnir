@@ -73,6 +73,14 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
+	@Override
+	public void takeDamage(float damage) {
+		if (animation == null) {
+			animation = getHitAnimation();			
+		}
+		playHitSound();
+	}
+	
 	protected boolean showHitAnimation() {
 		return typeConfig.animationHit != null
 				&& (!actionExecuted || typeConfig.hitAnimationAfterAction || typeConfig.multipleActionExecutionsPossible);

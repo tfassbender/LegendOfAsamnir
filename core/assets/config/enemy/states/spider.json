@@ -54,7 +54,9 @@
 	{
 		id: die,
 		animation: spider_die,
-		endsWithAnimation: false,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
 		stateEnteringSound: flesh_hit_2,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,

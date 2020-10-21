@@ -10,6 +10,7 @@ public class EnemyStateConfig {
 	public String stateEnteringSound;
 	
 	public boolean endsWithAnimation = true;
+	public float changeStateAfterAnimationDelay = 0f;
 	public String followingState;
 	
 	public Array<String> interruptingStates;
