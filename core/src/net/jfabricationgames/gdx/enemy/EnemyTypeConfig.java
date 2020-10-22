@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.enemy;
 
+import com.badlogic.gdx.utils.ObjectMap;
+
 public class EnemyTypeConfig {
 	
 	public String animationsConfig;//the animation config file that is to be loaded (by the factory)
@@ -17,4 +19,9 @@ public class EnemyTypeConfig {
 	public float healthBarOffsetX;
 	public float healthBarOffsetY;
 	public float healthBarWidthFactor;
+	
+	public ObjectMap<String, Float> drops;
+	public float dropPositionOffsetX;
+	public float dropPositionOffsetY;
+	public boolean renderDropsAboveObject = false;
 }

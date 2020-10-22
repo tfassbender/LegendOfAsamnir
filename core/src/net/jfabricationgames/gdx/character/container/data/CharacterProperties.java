@@ -28,4 +28,6 @@ public class CharacterProperties {
 	public float maxArmor = 100f;
 	public float increaseArmor = 0f;
 	public final float armorIncreasePerSecond = 25f;
+	
+	public int coins;
 }

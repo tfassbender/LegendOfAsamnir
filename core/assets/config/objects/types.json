@@ -13,9 +13,8 @@
 		
 		drops: {
 			coin: 0.5,
-			health: 0.1,
-			mana: 0.1,
-			shield: 0.1,
+			big_coin: 0.2,
+			arrow: 0.1,
 		}
 		
 		destroySound: wood_break,
@@ -36,8 +35,8 @@
 		
 		drops: {
 			coin: 0.3,
-			health: 0.1,
-			shield: 0.1,
+			big_coin: 0.1,
+			arrow: 0.1,
 		}
 		
 		animationBreak: box_break,
@@ -57,6 +56,7 @@
 		
 		drops: {
 			coin: 0.75,
+			big_coin: 0.05,
 		}
 		
 		animationBreak: pot_break,
@@ -100,9 +100,8 @@
 		
 		drops: {
 			coin: 0.5,
-			health: 0.25,
-			mana: 0.1,
-			shield: 0.15,
+			big_coin: 0.3,
+			arrow: 0.1,
 		}
 		dropPositionOffsetY: -0.25,
 		renderDropsAboveObject: true,

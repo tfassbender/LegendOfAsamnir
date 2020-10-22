@@ -9,7 +9,11 @@
 		movingSpeed: 3,
 		
 		pushForceDamage: 50,
-		pushForceHit: 25
+		pushForceHit: 25,
+		
+		drops: {
+			coin: 0.3,
+		}
 	},
 	gladiator: {
 		animationsConfig: config/animation/enemy/gladiator.json,
@@ -21,7 +25,12 @@
 		movingSpeed: 1.5
 		
 		pushForceDamage: 25,
-		pushForceHit: 40
+		pushForceHit: 40,
+		
+		drops: {
+			coin: 0.5,
+			big_coin: 0.2,
+		}
 	},
 	mini_golem: {
 		animationsConfig: config/animation/enemy/mini_golem.json,
@@ -33,7 +42,11 @@
 		movingSpeed: 0.75
 		
 		pushForceDamage: 35,
-		pushForceHit: 30
+		pushForceHit: 30,
+		
+		drops: {
+			coin: 0.4,
+		}
 	},
 	minotaur: {
 		animationsConfig: config/animation/enemy/minotaur.json,
@@ -62,6 +75,11 @@
 		movingSpeed: 2.0,
 		
 		pushForceDamage: 35,
-		pushForceHit: 30
+		pushForceHit: 30,
+		
+		drops: {
+			coin: 0.5,
+			big_coin: 0.2,
+		}
 	}
 }

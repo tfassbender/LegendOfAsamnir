@@ -103,6 +103,9 @@
    <point/>
   </object>
   <object id="80" name="enemy.bat" x="224" y="640">
+   <properties>
+    <property name="drop" value="{big_coin: 1}"/>
+   </properties>
    <point/>
   </object>
   <object id="82" name="enemy.gladiator" x="224" y="256">

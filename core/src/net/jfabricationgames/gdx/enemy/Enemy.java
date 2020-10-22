@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
@@ -23,6 +24,7 @@ import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
+import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -50,6 +52,8 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	private PhysicsBodyProperties physicsBodyProperties;
 	
+	protected ObjectMap<String, Float> dropTypes;
+	
 	protected float health;
 	protected float movingSpeed;
 	
@@ -68,15 +72,21 @@ public abstract class Enemy implements Hittable, ContactListener {
 		healthBarRenderer = new EnemyHealthBarRenderer();
 		
 		readTypeConfig();
+		readMapProperties(properties);
 		initializeAttackCreator();
 		initializeStates();
 		createAI();
 		ai.setEnemy(this);
+		
 	}
 	
 	protected void readTypeConfig() {
 		health = typeConfig.health;
 		movingSpeed = typeConfig.movingSpeed;
+	}
+	
+	private void readMapProperties(MapProperties mapProperties) {
+		dropTypes = ItemDropUtil.processMapProperties(mapProperties, typeConfig.drops);
 	}
 	
 	private void initializeAttackCreator() {
@@ -140,6 +150,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		
 		if (!isAlive()) {
 			if (stateMachine.isInEndState()) {
+				dropItems();
 				remove();
 			}
 		}
@@ -268,6 +279,12 @@ public abstract class Enemy implements Hittable, ContactListener {
 	 */
 	protected String getDieStateName() {
 		return "die";
+	}
+
+	protected void dropItems() {
+		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
+		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
+		ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
 	}
 	
 	public void remove() {

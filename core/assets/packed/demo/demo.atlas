@@ -228,23 +228,30 @@ bat_fly
   orig: 16, 24
   offset: 0, 0
   index: 5
-bomb
+big_coin
   rotate: false
   xy: 3552, 40
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bomb
+  rotate: false
+  xy: 658, 10
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 projectile_bomb
   rotate: false
-  xy: 3552, 40
+  xy: 658, 10
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 bow
   rotate: false
-  xy: 658, 10
+  xy: 3570, 40
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -405,7 +412,7 @@ chest_open
   index: 4
 coin
   rotate: false
-  xy: 3570, 40
+  xy: 676, 10
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -419,21 +426,21 @@ destroyable_wall
   index: -1
 dialog_skull
   rotate: false
-  xy: 730, 14
+  xy: 3642, 44
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 dialog_skull
   rotate: false
-  xy: 730, 0
+  xy: 748, 14
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 2
 dialog_skull
   rotate: false
-  xy: 3642, 44
+  xy: 748, 0
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -874,21 +881,21 @@ dwarf_spin_right
   index: 4
 exclamation
   rotate: false
-  xy: 746, 14
+  xy: 3658, 44
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 interrogation
   rotate: false
-  xy: 746, 14
+  xy: 3658, 44
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 exclamation
   rotate: false
-  xy: 746, 0
+  xy: 764, 14
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -1154,35 +1161,35 @@ gladiator_move
   index: 8
 hammer
   rotate: false
-  xy: 676, 10
+  xy: 3588, 40
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 health
   rotate: false
-  xy: 3588, 40
+  xy: 694, 10
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 interrogation
   rotate: false
-  xy: 3658, 44
+  xy: 764, 0
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 2
 interrogation
   rotate: false
-  xy: 762, 14
+  xy: 3674, 44
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 3
 jump
   rotate: false
-  xy: 694, 10
+  xy: 3606, 40
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1476,7 +1483,7 @@ key_wall_open
   index: 33
 mana
   rotate: false
-  xy: 3606, 40
+  xy: 712, 10
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2302,7 +2309,7 @@ pot_hit
   index: 3
 shield
   rotate: false
-  xy: 712, 10
+  xy: 3624, 40
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2404,14 +2411,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_idle
   rotate: false
   xy: 4010, 92
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_jump
   rotate: false
   xy: 4010, 92
@@ -2687,7 +2694,7 @@ spider_web
   index: 6
 sword
   rotate: false
-  xy: 3624, 40
+  xy: 730, 10
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

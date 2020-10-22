@@ -6,7 +6,10 @@
 		health: 35
 	},
 	coin: {
-		value: 10
+		value: 1
+	},
+	coin: {
+		value: 5
 	},
 	mana: {
 		mana: 20

@@ -18,6 +18,10 @@
 		texture: coin,
 		pickUpSound: coin,
 	},
+	big_coin: {
+		texture: big_coin,
+		pickUpSound: coin,
+	}
 	mana: {
 		texture: mana,
 		pickUpSound: mana

@@ -116,4 +116,11 @@ public class CharacterPropertiesContainer {
 	public void takeArmorDamage(float damage) {
 		properties.armor = Math.max(properties.armor - damage, 0);
 	}
+	
+	public void increaseCoins(int coins) {
+		properties.coins += coins;
+	}
+	public int getCoins() {
+		return properties.coins;
+	}
 }

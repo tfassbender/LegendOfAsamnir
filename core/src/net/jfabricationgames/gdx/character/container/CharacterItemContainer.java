@@ -51,6 +51,10 @@ public class CharacterItemContainer {
 		if (item.getItemName().equals(ITEM_NAME_KEY)) {
 			characterKeyContainer.addKey(item);
 		}
+		if (item.containsProperty(ItemPropertyKeys.VALUE.getPropertyName())) {
+			int itemValue = item.getProperty(ItemPropertyKeys.VALUE.getPropertyName(), Float.class).intValue();
+			characterProperties.increaseCoins(itemValue);
+		}
 		
 		item.pickUp();
 	}

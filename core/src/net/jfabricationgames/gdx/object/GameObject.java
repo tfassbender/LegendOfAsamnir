@@ -9,9 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
@@ -19,19 +17,17 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attributes.Hittable;
+import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class GameObject implements Hittable {
-	
-	protected static final String dropItemMapPropertiesKey = "drop";
-	protected static final float ITEM_DROP_PICKUP_DELAY = 0.75f;
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
@@ -63,19 +59,7 @@ public class GameObject implements Hittable {
 	}
 	
 	private void processMapProperties() {
-		if (mapProperties.containsKey(dropItemMapPropertiesKey)) {
-			String droppedItemConfig = mapProperties.get(dropItemMapPropertiesKey, String.class);
-			dropTypes = readDroppedItemConfig(droppedItemConfig);
-		}
-		else {
-			dropTypes = typeConfig.drops;
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	private ObjectMap<String, Float> readDroppedItemConfig(String droppedItemConfig) {
-		Json json = new Json();
-		return json.fromJson(ObjectMap.class, Float.class, droppedItemConfig);
+		dropTypes = ItemDropUtil.processMapProperties(mapProperties, typeConfig.drops);
 	}
 	
 	protected void readTypeConfig() {
@@ -160,29 +144,9 @@ public class GameObject implements Hittable {
 	}
 	
 	protected void dropItems() {
-		if (doesDropItems()) {
-			double random = Math.random();
-			float summedProbability = 0f;
-			for (Entry<String, Float> entry : dropTypes.entries()) {
-				String dropType = entry.key;
-				float dropProbability = entry.value;
-				if (random <= summedProbability + dropProbability) {
-					dropItem(dropType);
-					return;
-				}
-				summedProbability += dropProbability;
-			}
-		}
-	}
-	
-	private boolean doesDropItems() {
-		return dropTypes != null && !dropTypes.isEmpty();
-	}
-	
-	private void dropItem(String type) {
-		gameMap.getItemFactory().createAndDropItem(type, (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD, //
-				(body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD, //
-				typeConfig.renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
+		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
+		ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
 	}
 	
 	public void remove() {
