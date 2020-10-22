@@ -12,6 +12,7 @@ public class CharacterKeyContainer {
 	private static final String SPECIAL_KEY_MESSAGE_HEADER = "Special Key";
 	
 	private CharacterItemProperties properties;
+	private int numNormalKeys = 0;
 	
 	public CharacterKeyContainer(CharacterItemProperties properties) {
 		this.properties = properties;
@@ -24,6 +25,21 @@ public class CharacterKeyContainer {
 		if (KeyItem.isSpecialKey(key.mapProperties)) {
 			displaySpecialKeyProperties(key);
 		}
+		
+		countKeys();
+	}
+
+	private void countKeys() {
+		numNormalKeys = 0;
+		for (KeyItem key : properties.keys) {
+			if (!key.isSpecialKey()) {
+				numNormalKeys++;
+			}
+		}
+	}
+	
+	public int getNumNormalKeys() {
+		return numNormalKeys;
 	}
 	
 	private void displaySpecialKeyProperties(KeyItem key) {
@@ -43,6 +59,8 @@ public class CharacterKeyContainer {
 		}
 		
 		properties.keys.removeValue(keyItem, true);
+		
+		countKeys();
 	}
 	
 	private KeyItem getKeyItem(ObjectMap<String, String> requiredProperties) {

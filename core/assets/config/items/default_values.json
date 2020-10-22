@@ -8,7 +8,7 @@
 	coin: {
 		value: 1
 	},
-	coin: {
+	big_coin: {
 		value: 5
 	},
 	mana: {

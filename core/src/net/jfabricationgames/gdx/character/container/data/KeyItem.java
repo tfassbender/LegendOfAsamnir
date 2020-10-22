@@ -76,7 +76,10 @@ public class KeyItem {
 	public KeyItem(ObjectMap<String, String> mapProperties) {
 		this.mapProperties = mapProperties;
 	}
-
-
+	
 	public ObjectMap<String, String> mapProperties;
+	
+	public boolean isSpecialKey() {
+		return isSpecialKey(mapProperties);
+	}
 }

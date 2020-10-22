@@ -1,0 +1,10 @@
+{
+	coin: {
+		atlas: packed/demo/demo.atlas,
+		texture: coin
+	},
+	key: {
+		atlas: packed/demo/demo.atlas,
+		texture: key_1
+	},
+}

@@ -53,6 +53,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	private PhysicsBodyProperties physicsBodyProperties;
 	
 	protected ObjectMap<String, Float> dropTypes;
+	private boolean droppedItems;
 	
 	protected float health;
 	protected float movingSpeed;
@@ -61,6 +62,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	private float imageOffsetY;
 	
 	protected Vector2 intendedMovement;
+
 	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		this.typeConfig = typeConfig;
@@ -149,8 +151,10 @@ public abstract class Enemy implements Hittable, ContactListener {
 		attackCreator.handleAttacks(delta);
 		
 		if (!isAlive()) {
-			if (stateMachine.isInEndState()) {
+			if (!droppedItems) {
 				dropItems();
+			}
+			if (stateMachine.isInEndState()) {
 				remove();
 			}
 		}
@@ -285,6 +289,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
 		ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
+		droppedItems = true;
 	}
 	
 	public void remove() {

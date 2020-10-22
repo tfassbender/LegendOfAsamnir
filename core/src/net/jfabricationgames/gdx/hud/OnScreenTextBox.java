@@ -16,17 +16,15 @@ import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
 public class OnScreenTextBox implements Disposable, InputActionListener {
 	
-	public static final String DEFAULT_FONT_NAME = "vikingMedium";
-	
-	private static final Color[] textBoxColors = new Color[] { //
+	private static final Color[] TEXTURE_CONFIG = new Color[] { //
 			new Color(0.95f, 0.95f, 0.95f, 1f), // bottom-left
 			new Color(0.9f, 0.9f, 0.9f, 1f), // bottom-right
 			new Color(0.99f, 0.99f, 0.99f, 1f), // top-right
 			new Color(0.9f, 0.9f, 0.9f, 1f)// top-left
 	};
 	
-	private static final float textScale = 1f;
-	private static final int displayableLines = 5;
+	private static final float TEXT_SCALE = 1f;
+	private static final int DISPLAYABLE_LINES = 5;
 	
 	private static OnScreenTextBox instance;
 	
@@ -91,7 +89,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		headerOffsetY = textOffsetX * 1.2f;
 		
 		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont(DEFAULT_FONT_NAME);
+		screenTextWriter.setFont(HeadsUpDisplay.DEFAULT_FONT_NAME);
 		
 		InputContext inputContext = DwarfScrollerGame.getInstance().getInputContext();
 		inputContext.addListener(this);
@@ -125,7 +123,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		shapeRenderer.setColor(Color.BLACK);
 		shapeRenderer.rect(textBoxX, textBoxY, textBoxWidth, textBoxHeight);
 		shapeRenderer.rect(textBoxX + textBoxEdge, textBoxY + textBoxEdge, textBoxWidth - 2f * textBoxEdge, textBoxHeight - 2f * textBoxEdge,
-				textBoxColors[0], textBoxColors[1], textBoxColors[2], textBoxColors[3]);
+				TEXTURE_CONFIG[0], TEXTURE_CONFIG[1], TEXTURE_CONFIG[2], TEXTURE_CONFIG[3]);
 		
 		shapeRenderer.end();
 	}
@@ -134,12 +132,12 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		batch.begin();
 		
 		if (headerText != null) {
-			screenTextWriter.setScale(1.25f * textScale);
+			screenTextWriter.setScale(1.25f * TEXT_SCALE);
 			screenTextWriter.setColor(Color.RED);
 			screenTextWriter.drawText(headerText, textBoxX + textOffsetX, textBoxY + textBoxHeight - headerOffsetY);
 		}
 		
-		screenTextWriter.setScale(textScale);
+		screenTextWriter.setScale(TEXT_SCALE);
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.drawText(text, textBoxX + textOffsetX, textBoxY + textBoxHeight - textOffsetY, displayedTextIndices[0],
 				displayedTextIndices[0] + displayedCharacters, textWidth, Align.left, true);
@@ -171,7 +169,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	private void calculateTextLayout() {
-		screenTextWriter.setScale(textScale);
+		screenTextWriter.setScale(TEXT_SCALE);
 		textLayout = screenTextWriter.createGlyphLayout(text, textWidth, Align.left, true);
 	}
 	
@@ -180,7 +178,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		displayedTextIndices = getDisplayedTextIndices();
 		resetDisplayedCharacters();
 	}
-
+	
 	private void resetDisplayedCharacters() {
 		displayedCharacters = 0;
 		timeSincePageStarted = 0;
@@ -188,7 +186,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	
 	public void nextPage() {
 		if (hasNextPage()) {
-			firstDisplayedLine += displayableLines;
+			firstDisplayedLine += DISPLAYABLE_LINES;
 			displayedTextIndices = getDisplayedTextIndices();
 			timeSincePageStarted = 0;
 			displayedCharacters = 0;
@@ -196,7 +194,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	private boolean hasNextPage() {
-		return textLayout.runs.size > firstDisplayedLine + displayableLines;
+		return textLayout.runs.size > firstDisplayedLine + DISPLAYABLE_LINES;
 	}
 	
 	private int[] getDisplayedTextIndices() {
@@ -212,7 +210,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		indices[1] = indices[0];
 		
 		//find the end index
-		for (int i = 0; i < displayableLines && i + firstDisplayedLine < textLayout.runs.size; i++) {
+		for (int i = 0; i < DISPLAYABLE_LINES && i + firstDisplayedLine < textLayout.runs.size; i++) {
 			//increase the end index by the number of characters in the displayed lines
 			indices[1] += textLayout.runs.get(i + firstDisplayedLine).glyphs.size + 1;//+1 for line breaks (I think...)
 		}

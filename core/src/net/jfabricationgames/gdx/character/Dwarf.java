@@ -383,6 +383,16 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
+	public int getCoins() {
+		return properties.getCoins();
+	}
+	
+	@Override
+	public int getNormalKeys() {
+		return itemContainer.getNumNormalKeys();
+	}
+	
+	@Override
 	public Vector2 getPosition() {
 		return body.getPosition().cpy();
 	}

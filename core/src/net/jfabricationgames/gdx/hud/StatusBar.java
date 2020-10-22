@@ -13,7 +13,7 @@ import net.jfabricationgames.gdx.texture.TextureLoader;
 
 public class StatusBar implements Disposable {
 	
-	private static final String textureConfig = "config/hud/status_bar/textures.json";
+	private static final String TEXTURE_CONFIG = "config/hud/status_bar/textures.json";
 	
 	private final float healthBarHeightPercent = 0.55f;
 	private final float armorBarHeightPercent = 0.25f;//takes a part of the health bar
@@ -117,7 +117,7 @@ public class StatusBar implements Disposable {
 	}
 	
 	private void loadIcons() {
-		TextureLoader textureLoader = new TextureLoader(textureConfig);
+		TextureLoader textureLoader = new TextureLoader(TEXTURE_CONFIG);
 		healthIcon = textureLoader.loadTexture("health");
 		armorIcon = textureLoader.loadTexture("shield");
 		manaIcon = textureLoader.loadTexture("mana");

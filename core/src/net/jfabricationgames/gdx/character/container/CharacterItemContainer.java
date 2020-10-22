@@ -100,6 +100,10 @@ public class CharacterItemContainer {
 		}
 	}
 	
+	public int getNumNormalKeys() {
+		return characterKeyContainer.getNumNormalKeys();
+	}
+	
 	public boolean containsKey(ObjectMap<String, String> keyProperties) {
 		return characterKeyContainer.containsKey(keyProperties);
 	}
