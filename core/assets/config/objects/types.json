@@ -129,5 +129,20 @@
 		animationAction: key_wall_open,
 		
 		defaultLocked: true,
-	}
+	},
+	destroyable_wall: {
+		type: DESTROYABLE,
+		
+		texture: destroyable_wall,
+		hitSound: rock_hit,
+		
+		physicsBodySizeFactorX: 0.5,
+		physicsBodySizeFactorY: 0.5,
+		physicsBodyOffsetFactorX: 0,
+		physicsBodyOffsetFactorY: 0.01,
+		
+		destroySound: rock_break,
+		health: 20,
+		minDamage: 20
+	},
 }

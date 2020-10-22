@@ -41,6 +41,7 @@ public class ObjectTypeConfig {
 	public String animationBreak;
 	public String destroySound;
 	public float health = 0f;
+	public float minDamage = 0f;
 	
 	//****************************************
 	//*** Interactive Objects

@@ -30,15 +30,17 @@ public class DestroyableObject extends GameObject {
 	
 	@Override
 	public void takeDamage(float damage) {
-		health -= damage;
-		
-		if (health <= 0) {
-			destroy();
+		if (damage >= typeConfig.minDamage) {
+			health -= damage;
+			
+			if (health <= 0) {
+				destroy();
+				return;
+			}
 		}
-		else {
-			animation = getHitAnimation();
-			playHitSound();
-		}
+
+		animation = getHitAnimation();
+		playHitSound();
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
@@ -59,6 +61,10 @@ public class DestroyableObject extends GameObject {
 	}
 	
 	protected AnimationDirector<TextureRegion> getDestroyAnimation() {
+		if (typeConfig.animationBreak == null) {
+			return null;
+		}
+		
 		AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationBreak);
 		animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
 		return animation;

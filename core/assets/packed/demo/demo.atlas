@@ -13,7 +13,7 @@ aim_marker_gray
   index: -1
 aim_marker_red
   rotate: false
-  xy: 3304, 25
+  xy: 4051, 119
   size: 5, 5
   orig: 5, 5
   offset: 0, 0
@@ -408,6 +408,13 @@ coin
   xy: 3570, 40
   size: 16, 16
   orig: 16, 16
+  offset: 0, 0
+  index: -1
+destroyable_wall
+  rotate: false
+  xy: 4060, 158
+  size: 30, 30
+  orig: 30, 30
   offset: 0, 0
   index: -1
 dialog_skull
@@ -1497,7 +1504,7 @@ map_idle
   index: 2
 map_idle
   rotate: false
-  xy: 4060, 156
+  xy: 4058, 124
   size: 30, 32
   orig: 30, 32
   offset: 0, 0

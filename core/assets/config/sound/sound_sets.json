@@ -141,7 +141,13 @@
 				switch: {
 					path: "sound/object/switch.mp3",
 					volume: 0.75
-				}
+				},
+				rock_hit: {
+					path: "sound/enemy/rock_hit.wav",
+				},
+				rock_break: {
+					path: "sound/enemy/rock_break.wav",
+				},
 			}
 		},
 		enemy: {
