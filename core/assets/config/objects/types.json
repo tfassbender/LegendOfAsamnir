@@ -142,6 +142,6 @@
 		
 		destroySound: rock_break,
 		health: 20,
-		minDamage: 20
+		requiredAttackType: BOMB,
 	},
 }

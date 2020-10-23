@@ -1,6 +1,10 @@
 package net.jfabricationgames.gdx.projectile;
 
+import net.jfabricationgames.gdx.attack.AttackType;
+
 public class ProjectileTypeConfig {
+
+	public AttackType attackType;
 	
 	public String texture;
 	public String animation;

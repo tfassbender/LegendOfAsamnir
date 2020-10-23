@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
@@ -74,9 +75,9 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	@Override
-	public void takeDamage(float damage) {
+	public void takeDamage(float damage, AttackType attackType) {
 		if (animation == null) {
-			animation = getHitAnimation();			
+			animation = getHitAnimation();
 		}
 		playHitSound();
 	}

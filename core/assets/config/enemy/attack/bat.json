@@ -1,6 +1,7 @@
 [
 	{
 		id: attack,
+		type: HIT,
 		delay: 0,
 		duration: 0,
 		damage: 5,

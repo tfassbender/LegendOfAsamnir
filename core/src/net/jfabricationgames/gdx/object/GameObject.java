@@ -16,7 +16,8 @@ import net.jfabricationgames.gdx.animation.AnimationFrame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
-import net.jfabricationgames.gdx.attributes.Hittable;
+import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -111,7 +112,7 @@ public class GameObject implements Hittable {
 	}
 	
 	@Override
-	public void takeDamage(float damage) {
+	public void takeDamage(float damage, AttackType attackType) {
 		animation = getHitAnimation();
 		playHitSound();
 	}

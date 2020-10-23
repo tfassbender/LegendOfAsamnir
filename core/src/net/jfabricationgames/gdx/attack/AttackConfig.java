@@ -3,7 +3,7 @@ package net.jfabricationgames.gdx.attack;
 public class AttackConfig {
 	
 	public String id;
-	public AttackType type = AttackType.MELEE;
+	public AttackType type;
 	public String projectileType;
 	public float delay;
 	public float duration;

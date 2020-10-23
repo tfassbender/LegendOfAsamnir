@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.enemy.implementation;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
@@ -31,6 +32,13 @@ public class Minotaur extends Enemy {
 	@Override
 	protected void addAdditionalPhysicsParts() {
 		EnemyPhysicsUtil.addSensor(body, 10f);
+	}
+	
+	@Override
+	public void takeDamage(float damage, AttackType attackType) {
+		if (attackType.isSubTypeOf(AttackType.MELEE)) {
+			super.takeDamage(damage, attackType);
+		}
 	}
 	
 	@Override

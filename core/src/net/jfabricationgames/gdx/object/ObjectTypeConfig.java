@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.object;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class ObjectTypeConfig {
@@ -41,7 +42,7 @@ public class ObjectTypeConfig {
 	public String animationBreak;
 	public String destroySound;
 	public float health = 0f;
-	public float minDamage = 0f;
+	public AttackType requiredAttackType = AttackType.ATTACK;
 	
 	//****************************************
 	//*** Interactive Objects

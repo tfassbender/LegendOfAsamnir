@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.attributes;
+package net.jfabricationgames.gdx.attack;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public interface Hittable {
 	
-	public void takeDamage(float damage);
+	public void takeDamage(float damage, AttackType melee);
 	
 	public void pushByHit(Vector2 hitCenter, float force, boolean blockAffected);
 	

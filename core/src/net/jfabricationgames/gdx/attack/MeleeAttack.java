@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
-import net.jfabricationgames.gdx.attributes.Hittable;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -51,7 +50,7 @@ public class MeleeAttack extends Attack {
 			if (attackedObjectUserData != null && attackUserData == hitFixtureProperties.body.getUserData()
 					&& attackedObjectUserData instanceof Hittable) {
 				Hittable attackedObject = ((Hittable) attackedObjectUserData);
-				attackedObject.takeDamage(config.damage);
+				attackedObject.takeDamage(config.damage, AttackType.MELEE);
 				attackedObject.pushByHit(hitFixture.getBody().getPosition(), config.pushForce, config.pushForceAffectedByBlock);
 			}
 		}

@@ -1,6 +1,7 @@
 [
 	{
 		id: attack_hit,
+		type: HIT,
 		delay: 0.1,
 		duration: 0,
 		damage: 25,
@@ -10,6 +11,7 @@
 	},
 	{
 		id: attack_knock,
+		type: NOVA,
 		delay: 0.5,
 		duration: 0,
 		damage: 5,
@@ -20,6 +22,7 @@
 	},
 	{
 		id: attack_spin,
+		type: SPIN_ATTACK,
 		delay: 0.4,
 		duration: 0,
 		damage: 10,
@@ -30,6 +33,7 @@
 	}
 	{
 		id: attack_stab,
+		type: HIT,
 		delay: 0.1,
 		duration: 0,
 		damage: 20,

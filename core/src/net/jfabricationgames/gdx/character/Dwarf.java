@@ -17,7 +17,8 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
-import net.jfabricationgames.gdx.attributes.Hittable;
+import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
@@ -443,7 +444,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	public void endContact(Contact contact) {}
 	
 	@Override
-	public void takeDamage(float damage) {
+	public void takeDamage(float damage, AttackType attackType) {
 		if (isAlive()) {
 			if (isBlocking()) {
 				takeArmorDamage(damage * 0.33f);

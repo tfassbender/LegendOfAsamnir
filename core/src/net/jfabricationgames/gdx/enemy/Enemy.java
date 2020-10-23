@@ -21,7 +21,8 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackCreator;
-import net.jfabricationgames.gdx.attributes.Hittable;
+import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
@@ -29,9 +30,9 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public abstract class Enemy implements Hittable, ContactListener {
 	
@@ -240,7 +241,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	}
 	
 	@Override
-	public void takeDamage(float damage) {
+	public void takeDamage(float damage, AttackType attackType) {
 		if (isAlive()) {
 			health -= damage;
 			

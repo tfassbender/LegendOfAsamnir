@@ -1,6 +1,7 @@
 [
 	{
 		id: attack,
+		type: HIT,
 		delay: 0.3,
 		duration: 0,
 		damage: 15,
@@ -10,7 +11,7 @@
 	},
 	{
 		id: web,
-		type: PROJECTILE,
+		type: WEB,
 		projectileType: web,
 		delay: 0.1,
 		duration: 0,

@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.attributes.Hittable;
+import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -221,7 +221,7 @@ public abstract class Projectile implements ContactListener {
 			
 			if (attackedUserData instanceof Hittable) {
 				Hittable hittable = ((Hittable) attackedUserData);
-				hittable.takeDamage(damage);
+				hittable.takeDamage(damage, typeConfig.attackType);
 				//enemies define the force themselves; the force parameter is a factor for this self defined force
 				hittable.pushByHit(body.getPosition().cpy(), pushForce, pushForceAffectedByBlock);
 			}

@@ -1,5 +1,7 @@
 {
 	arrow: {
+		attackType: ARROW,
+		
 		texture: projectile_arrow,
 		textureScale: 1,
 		textureInitialRotation: 225,
@@ -11,6 +13,8 @@
 		dampingAfterObjectHit: 5,
 	},
 	bomb: {
+		attackType: BOMB,
+		
 		texture: projectile_bomb,
 		textureScale: 1,
 		
@@ -21,6 +25,8 @@
 		timeTillExplosion: 3,
 	},
 	explosion: {
+		attackType: BOMB,
+		
 		animation: explosion,
 		textureScale: 0.05,
 		
@@ -32,6 +38,8 @@
 		multipleHitsPossible: true,
 	},
 	web: {
+		attackType: WEB,
+		
 		animation: spider_web,
 		removeAfterAnimationFinished: false,
 		textureScale: 0.12,
