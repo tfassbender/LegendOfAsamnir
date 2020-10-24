@@ -21,6 +21,9 @@ import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
@@ -176,11 +179,16 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 							itemContainer.decreaseAmmo(ammoType);
 							attackCreator.startAttack(ammoType.name().toLowerCase(),
 									movementHandler.getMovingDirection().getNormalizedDirectionVector());
+							
+							if (!itemContainer.hasAmmo(ammoType)) {
+								fireOutOfAmmoEvent(ammoType);
+							}
 						}
 						else {
 							//TODO delay between sounds
 							//soundSet.playSound(SOUND_AMMO_EMPTY);
 						}
+						
 						return true;
 					}
 					break;
@@ -192,6 +200,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		
 		return false;
+	}
+	
+	private void fireOutOfAmmoEvent(ItemAmmoType ammoType) {
+		EventConfig eventConfig = new EventConfig().setEventType(EventType.OUT_OF_AMMO).setStringValue(ammoType.name());
+		EventHandler.getInstance().fireEvent(eventConfig);
 	}
 	
 	@Override

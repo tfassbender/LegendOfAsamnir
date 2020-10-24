@@ -19,7 +19,13 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class EnemyFactory extends AbstractFactory {
 	
-	private static final String configFile = "config/factory/enemy_factory.json";
+	private static final String ENEMY_NAME_SPIDER = "spider";
+	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
+	private static final String ENEMY_NAME_MINI_GOLEM = "mini_golem";
+	private static final String ENEMY_NAME_GLADIATOR = "gladiator";
+	private static final String ENEMY_NAME_BAT = "bat";
+	
+	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	private static Config config;
 	
 	private Map<String, EnemyTypeConfig> typeConfigs;
@@ -28,7 +34,7 @@ public class EnemyFactory extends AbstractFactory {
 		this.gameMap = gameMap;
 		
 		if (config == null) {
-			config = loadConfig(Config.class, configFile);
+			config = loadConfig(Config.class, CONFIG_FILE);
 		}
 		
 		loadTypeConfigs();
@@ -53,24 +59,24 @@ public class EnemyFactory extends AbstractFactory {
 		EnemyTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: '" + type
-					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
+					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + CONFIG_FILE + "\")");
 		}
 		
 		Enemy enemy;
 		switch (type) {
-			case "bat":
+			case ENEMY_NAME_BAT:
 				enemy = new Bat(typeConfig, properties);
 				break;
-			case "gladiator":
+			case ENEMY_NAME_GLADIATOR:
 				enemy = new Gladiator(typeConfig, properties);
 				break;
-			case "mini_golem":
+			case ENEMY_NAME_MINI_GOLEM:
 				enemy = new MiniGolem(typeConfig, properties);
 				break;
-			case "minotaur":
+			case ENEMY_NAME_MINOTAUR:
 				enemy = new Minotaur(typeConfig, properties);
 				break;
-			case "spider":
+			case ENEMY_NAME_SPIDER:
 				enemy = new Spider(typeConfig, properties);
 				break;
 			default:
@@ -80,6 +86,13 @@ public class EnemyFactory extends AbstractFactory {
 		enemy.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return enemy;
+	}
+	
+	public void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			Enemy gameObject = createEnemy(type, x, y, mapProperties);
+			gameMap.addEnemy(gameObject);
+		});
 	}
 	
 	public static class Config {

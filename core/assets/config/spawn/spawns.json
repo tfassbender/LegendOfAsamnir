@@ -1,0 +1,20 @@
+{
+	playerOutOfAmmo_arrows: {
+		spawnType: item.arrow,
+		events: [playerOutOfAmmo_arrows]
+		spawnOnGameStart: true,
+	},
+	playerOutOfAmmo_bombs: {
+		spawnType: item.bomb,
+		events: [playerOutOfAmmo_bombs]
+		spawnOnGameStart: true,
+	},
+	gameStart_potDroppingBigCoin: {
+		spawnType: object.pot,
+		spawnTypeMapProperties: "{drop: \"{big_coin: 1}\"}",
+	}
+	gameStart_miniGolemMovingAndDroppingBigCoin: {
+		spawnType: enemy.mini_golem,
+		spawnTypeMapProperties: "{drop: \"{big_coin: 1}\", predefinedMovementPositions: \"[{x:0, y:-2}, {x:0, y:0}]\"}",
+	}
+}

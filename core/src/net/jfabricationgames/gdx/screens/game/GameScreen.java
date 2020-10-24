@@ -17,6 +17,9 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
@@ -113,6 +116,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(40f, 40f);
 		debugGridRenderer.stopDebug();
+		
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
 	}
 	
 	private void initializeCamerasAndViewports() {

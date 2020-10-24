@@ -10,6 +10,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.enemy.Enemy;
@@ -21,6 +23,11 @@ import net.jfabricationgames.gdx.object.ObjectFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class TiledMapLoader {
+	
+	public static final String OBJECT_NAME_PLAYER = "player";
+	public static final String OBJECT_NAME_ITEM = "item";
+	public static final String OBJECT_NAME_OBJECT = "object";
+	public static final String OBJECT_NAME_ENEMY = "enemy";
 	
 	public static String mapPropertiesToString(MapProperties properties, boolean includePosition) {
 		StringBuilder sb = new StringBuilder();
@@ -45,9 +52,23 @@ public class TiledMapLoader {
 		return sb.toString();
 	}
 	
+	public static MapProperties createMapPropertiesFromString(String jsonConfig) {
+		MapProperties mapProperties = new MapProperties();
+		
+		Json json = new Json();
+		@SuppressWarnings("unchecked")
+		ObjectMap<String, String> properties = json.fromJson(ObjectMap.class, String.class, jsonConfig);
+		
+		for (ObjectMap.Entry<String, String> property : properties) {
+			mapProperties.put(property.key, property.value);
+		}
+		
+		return mapProperties;
+	}
+	
 	private String mapAsset;
 	private GameMap gameMap;
-
+	
 	private ItemFactory itemFactory;
 	private ObjectFactory objectFactory;
 	private EnemyFactory enemyFactory;
@@ -63,10 +84,6 @@ public class TiledMapLoader {
 	
 	public void load() {
 		gameMap.map = AssetGroupManager.getInstance().get(mapAsset);
-		loadMapProperties();
-	}
-	
-	private void loadMapProperties() {
 		loadMapObjects();
 	}
 	
@@ -103,22 +120,22 @@ public class TiledMapLoader {
 					+ rectangle.width + ", h: " + rectangle.height + "] properties: " + mapPropertiesToString(properties, false));
 			
 			switch (parts[0]) {
-				case "player":
+				case OBJECT_NAME_PLAYER:
 					if (parts[1].equals("startingPosition")) {
 						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y).scl(GameScreen.WORLD_TO_SCREEN);
 					}
 					break;
-				case "item":
+				case OBJECT_NAME_ITEM:
 					items.add(itemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
-				case "object":
+				case OBJECT_NAME_OBJECT:
 					objects.add(objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties));
 					break;
-				case "enemy":
+				case OBJECT_NAME_ENEMY:
 					enemies.add(enemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				default:
-					throw new IllegalStateException("Unknown map object found: " + name + ". Properties: " + mapPropertiesToString(properties, true)); 
+					throw new IllegalStateException("Unknown map object found: " + name + ". Properties: " + mapPropertiesToString(properties, true));
 			}
 		}
 		

@@ -20,6 +20,7 @@ import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -176,7 +177,7 @@ public class GameObject implements Hittable {
 	
 	@Override
 	public String toString() {
-		return "MapObject [type=" + typeConfig + ", properties=" + mapProperties + "]";
+		return "MapObject [type=" + typeConfig + ", properties=" + TiledMapLoader.mapPropertiesToString(mapProperties, true) + "]";
 	}
 	
 	protected void setGameMap(GameMap gameMap) {

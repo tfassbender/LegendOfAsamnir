@@ -144,4 +144,9 @@
 		health: 20,
 		requiredAttackType: BOMB,
 	},
+	spawnPoint: {
+		type: SPAWN_POINT,
+		
+		texture: empty,
+	},
 }

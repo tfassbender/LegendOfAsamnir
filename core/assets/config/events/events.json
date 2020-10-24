@@ -1,0 +1,13 @@
+{
+	gameStarted: {
+		eventType: GAME_START,
+	},
+	playerOutOfAmmo_arrows: {
+		eventType: OUT_OF_AMMO,
+		stringValue: ARROW,
+	},
+	playerOutOfAmmo_bombs: {
+		eventType: OUT_OF_AMMO,
+		stringValue: BOMB,
+	},
+}

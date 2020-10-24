@@ -11,6 +11,7 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
@@ -61,6 +62,9 @@ public class ObjectFactory extends AbstractFactory {
 			case LOCKED:
 				object = new LockedObject(typeConfig, sprite, properties);
 				break;
+			case SPAWN_POINT:
+				object = new SpawnPoint(typeConfig, sprite, properties);
+				break;
 			default:
 				throw new IllegalStateException("Unknown GameObjectType \"" + typeConfig.type + "\" of object type \"" + type + "\"");
 		}
@@ -69,6 +73,13 @@ public class ObjectFactory extends AbstractFactory {
 		object.setTextureAtlas(atlas);
 		
 		return object;
+	}
+	
+	public void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			GameObject gameObject = createObject(type, x, y, mapProperties);
+			gameMap.addObject(gameObject);
+		});
 	}
 	
 	public static class Config {

@@ -64,8 +64,11 @@ public class ItemFactory extends AbstractFactory {
 	}
 	
 	public void createAndAddItemAfterWorldStep(String type, float x, float y, boolean renderAboveGameObjects) {
+		createAndAddItemAfterWorldStep(type, x, y, new MapProperties(), renderAboveGameObjects);
+	}
+	public void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			Item item = createItem(type, x, y, new MapProperties());
+			Item item = createItem(type, x, y, mapProperties);
 			if (renderAboveGameObjects) {
 				gameMap.addItemAboveGameObjects(item);
 			}
