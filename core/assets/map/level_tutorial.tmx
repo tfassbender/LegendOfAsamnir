@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="793">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="797">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
@@ -826,6 +826,21 @@
    <point/>
   </object>
   <object id="792" name="item.shield" x="1072" y="2705">
+   <point/>
+  </object>
+  <object id="793" name="object.destroyable_wall" x="2576" y="2737">
+   <point/>
+  </object>
+  <object id="794" name="object.destroyable_wall" x="2608" y="2737">
+   <point/>
+  </object>
+  <object id="795" name="object.destroyable_wall" x="2640" y="2737">
+   <point/>
+  </object>
+  <object id="796" name="object.spawnPoint" x="2447" y="2929">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_bombs"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
