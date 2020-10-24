@@ -133,6 +133,14 @@ Game objects are usually added to the game from the map properties, just like it
 
 The other properties define the box2d physics properties of the object, which usually stay to the default values.
 
+### Spawn Points
+
+Spawn points are special Game Objects, that can be used to spawn new Items, Game Objects or Enemies. They can be added to the map, just like all other Game Objects. These objects use an Event Handling Service, that informs them on every fired event. If the event triggers a spawn, a new object is spawned on the map. The events and spawns can be configured in the json files [events.json](core/assets/config/events/events.json) and [spawns.json](core/assets/config/spawn/spawns.json). The Spawn Points, that are added in the tiled map, have to use a map property 'spawn', that references a spawn config from the [spawns.json](core/assets/config/spawn/spawns.json) file by name. This spawn config defines, what is to be spawned and when it is spawned.
+
+The following image shows the connections between these config files and objects:
+
+![Spawns and Events](core/data/documentation/event_and_spawn_classes.png)
+
 ## Maps
 
 Tiled maps are used to create a map with textures, physics and objects. Enemies, Items and game objects can be defined within the map's *objects* layer, like explained in the sections [Enemies](#enemies), [Items](#items) and [Game objects](#game-objects). Physics objects (like walls) can be defined in the physics layer of the map. **Note:** The map's physics objects have to be created by polygons with at most *8* points. The material of the physics objects must be set in the custom properties of every map object, where the key is called *material* and the name references a material name that is defined in the materials json configuration file: [materials.json](core/assets/config/map/materials.json). Within the materials configuratino file the name of the material can be defined, along with the usual box2d physics properties: *density*, *restitution* and *friction*
