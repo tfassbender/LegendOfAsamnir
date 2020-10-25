@@ -187,6 +187,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 						else {
 							//TODO delay between sounds
 							//soundSet.playSound(SOUND_AMMO_EMPTY);
+							return false;
 						}
 						
 						return true;
