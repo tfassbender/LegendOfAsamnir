@@ -44,12 +44,12 @@ public class Minotaur extends Enemy {
 	@Override
 	protected void createAI() {
 		ai = new BaseAI();
-		ai = createFollowAI();
+		ai = createFollowAI(ai);
 		ai = createMinotaurAttackAI(ai);
 		ai = createActionAI(ai);
 	}
 	
-	private FollowAI createFollowAI() {
+	private FollowAI createFollowAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		

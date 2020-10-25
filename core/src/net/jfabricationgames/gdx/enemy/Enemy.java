@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -247,10 +248,17 @@ public abstract class Enemy implements Hittable, ContactListener {
 			
 			if (!isAlive()) {
 				die();
+				changeBodyToSensor();
 			}
 			else {
 				stateMachine.setState(getDamageStateName(damage));
 			}
+		}
+	}
+	
+	protected void changeBodyToSensor() {
+		for (Fixture fixture : body.getFixtureList()) {
+			fixture.setSensor(true);
 		}
 	}
 	

@@ -92,12 +92,12 @@ public class GameObject implements Hittable {
 	}
 	
 	protected Sprite createSprite(String textureName) {
-		AnimationFrame animationFrame = AnimationFrame.getAnimationFrame(typeConfig.textureAfterAction);
+		AnimationFrame animationFrame = AnimationFrame.getAnimationFrame(textureName);
 		TextureRegion textureRegion = animationFrame.findRegion(textureAtlas);
 		
 		Sprite sprite = new Sprite(textureRegion);
-		sprite.setX(body.getPosition().x - sprite.getWidth() * 0.5f);
-		sprite.setY(body.getPosition().y - sprite.getHeight() * 0.5f);
+		sprite.setX(this.sprite.getX());
+		sprite.setY(this.sprite.getY());
 		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
 		return sprite;
 	}

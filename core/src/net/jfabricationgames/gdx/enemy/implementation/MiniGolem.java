@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
+import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FightAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
@@ -35,14 +36,30 @@ public class MiniGolem extends Enemy {
 	
 	@Override
 	protected void createAI() {
+		ai = new BaseAI();
+		ai = createPreDefinedMovementAI(ai);
+		ai = createFollowAI(ai);
+		ai = createFightAI(ai);
+	}
+	
+	private PreDefinedMovementAI createPreDefinedMovementAI(ArtificialIntelligence ai) {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
+		
+		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
+	}
+	
+	private FollowAI createFollowAI(ArtificialIntelligence ai) {
+		EnemyState movingState = stateMachine.getState("move");
+		EnemyState idleState = stateMachine.getState("idle");
+		
+		return new FollowAI(ai, movingState, idleState);
+	}
+	
+	private FightAI createFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
-		ai = new BaseAI();
-		ai = new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
-		ai = new FollowAI(ai, movingState, idleState);
-		ai = new FightAI(ai, attackState, new FixedAttackTimer(1f), 1.25f);
+		return new FightAI(ai, attackState, new FixedAttackTimer(1f), 1.25f);
 	}
 }

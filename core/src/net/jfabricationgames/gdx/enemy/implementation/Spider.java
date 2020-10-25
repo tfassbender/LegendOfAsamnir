@@ -31,15 +31,14 @@ public class Spider extends Enemy {
 	@Override
 	protected void createAI() {
 		ai = new BaseAI();
-
-		ai = createPreDefinedMovementAI();
-		ai = createFollowAI();
-		ai = createRunAwayAI();
-		ai = createArcherFighterAI();
-		ai = createMeleeFightAI();
+		ai = createPreDefinedMovementAI(ai);
+		ai = createFollowAI(ai);
+		ai = createRunAwayAI(ai);
+		ai = createArcherFighterAI(ai);
+		ai = createMeleeFightAI(ai);
 	}
 	
-	private ArtificialIntelligence createPreDefinedMovementAI() {
+	private ArtificialIntelligence createPreDefinedMovementAI(ArtificialIntelligence ai) {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
@@ -47,7 +46,7 @@ public class Spider extends Enemy {
 		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
 	}
 
-	private FollowAI createFollowAI() {
+	private FollowAI createFollowAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		
@@ -57,7 +56,7 @@ public class Spider extends Enemy {
 		return followAI;
 	}
 	
-	private ArtificialIntelligence createRunAwayAI() {
+	private ArtificialIntelligence createRunAwayAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		
@@ -68,7 +67,7 @@ public class Spider extends Enemy {
 		return runAwayAI;
 	}
 	
-	private ArtificialIntelligence createMeleeFightAI() {
+	private ArtificialIntelligence createMeleeFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack_jump");
 		
 		FightAI fightAi = new FightAI(ai, attackState, new FixedAttackTimer(1f), DISTANCE_MELEE_ATTACK);
@@ -76,7 +75,7 @@ public class Spider extends Enemy {
 		return fightAi;
 	}
 	
-	private ArtificialIntelligence createArcherFighterAI() {
+	private ArtificialIntelligence createArcherFighterAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
 		FightAI fightAi = new FightAI(ai, attackState, new FixedAttackTimer(2.5f), MIN_DISTANCE_TO_PLAYER);
