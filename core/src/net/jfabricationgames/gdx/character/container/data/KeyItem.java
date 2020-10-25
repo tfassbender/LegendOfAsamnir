@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 public class KeyItem {
 	
 	public static final String KEY_PROPERTY_PREFIX = "key_";
-	public static final String COMMON_REQUIRED_PROPERTY = KEY_PROPERTY_PREFIX + "level";
+	public static final String COMMON_REQUIRED_PROPERTY = KEY_PROPERTY_PREFIX + "level_";
 	
 	public static ObjectMap<String, String> getKeyProperties(MapProperties properties) {
 		ObjectMap<String, String> keyProperties = new ObjectMap<>();

@@ -10,6 +10,8 @@ import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 
 public class LockedObject extends InteractiveObject {
 	
+	private static final String MAP_PROPERTY_KEY_LOCKED = "locked";
+	
 	private static final String LOCK_MESSAGE_HEADER = "Locked";
 	private static final String LOCK_MESSAGE_TEXT_SIMPLE_KEY = "I'll need a key to unlock this.";
 	private static final String LOCK_MESSAGE_TEXT_SPECIAL_KEY = "I'll need a special key to unlock this.";
@@ -41,7 +43,7 @@ public class LockedObject extends InteractiveObject {
 	}
 	
 	private boolean lockedByMapProperty() {
-		return mapProperties.get("locked", false, Boolean.class);
+		return mapProperties.get(MAP_PROPERTY_KEY_LOCKED, false, Boolean.class);
 	}
 	
 	private boolean canBeUnlocked(CharacterItemContainer itemContainer) {
