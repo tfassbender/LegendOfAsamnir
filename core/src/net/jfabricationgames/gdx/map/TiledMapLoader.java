@@ -54,6 +54,9 @@ public class TiledMapLoader {
 	
 	public static MapProperties createMapPropertiesFromString(String jsonConfig) {
 		MapProperties mapProperties = new MapProperties();
+		if (jsonConfig == null) {
+			return mapProperties;
+		}
 		
 		Json json = new Json();
 		@SuppressWarnings("unchecked")

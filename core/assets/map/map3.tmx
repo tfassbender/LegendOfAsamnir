@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="114">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="116">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -216,15 +216,28 @@
   <object id="111" name="object.destroyable_wall" x="752" y="305">
    <point/>
   </object>
-  <object id="112" name="object.spawnPoint" x="753" y="785">
+  <object id="112" name="object.spawnPoint" x="752" y="785">
    <properties>
     <property name="spawn" value="gameStart_potDroppingBigCoin"/>
    </properties>
    <point/>
   </object>
-  <object id="113" name="object.spawnPoint" x="784" y="784">
+  <object id="113" name="object.spawnPoint" x="784" y="785">
    <properties>
     <property name="spawn" value="gameStart_miniGolemMovingAndDroppingBigCoin"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="114" name="object.key_wall" x="896" y="800">
+   <properties>
+    <property name="key_key" value="special_key"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="115" name="object.chest" x="960" y="800">
+   <properties>
+    <property name="specialDropMapProperties" value="{key_key: special_key}"/>
+    <property name="specialDropType" value="key"/>
    </properties>
    <point/>
   </object>

@@ -54,7 +54,10 @@ public class ItemFactory extends AbstractFactory {
 	}
 	
 	public void createAndDropItem(String type, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
-		Item item = createItem(type, x, y, new MapProperties(), addBodyDelay);
+		createAndDropItem(type, new MapProperties(), x, y, renderAboveGameObjects, addBodyDelay);
+	}
+	public void createAndDropItem(String type, MapProperties mapProperties, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
+		Item item = createItem(type, x, y, mapProperties, addBodyDelay);
 		if (renderAboveGameObjects) {
 			gameMap.addItemAboveGameObjects(item);
 		}

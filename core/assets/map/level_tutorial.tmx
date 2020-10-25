@@ -653,7 +653,7 @@
   </object>
   <object id="730" name="enemy.spider" x="2624" y="1760">
    <properties>
-    <property name="predefinedMovementPositions" value="[{x: 0, y: 5}, {x: 0, y: 0}]"/>
+    <property name="predefinedMovementPositions" value="[{x: 5, y: 0}, {x: 0, y: 0}]"/>
    </properties>
    <point/>
   </object>

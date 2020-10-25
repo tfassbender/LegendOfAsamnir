@@ -9,12 +9,15 @@ import net.jfabricationgames.gdx.map.GameMap;
 
 public class ItemDropUtil {
 	
-	public static final String DROP_ITEM_MAP_PROPERTY_KEY = "drop";
+	public static final String MAP_PROPERTY_KEY_DROP_ITEM = "drop";
+	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE = "specialDropType";
+	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES = "specialDropMapProperties";
+	
 	public static final float ITEM_DROP_PICKUP_DELAY = 0.75f;
 	
 	public static ObjectMap<String, Float> processMapProperties(MapProperties mapProperties, ObjectMap<String, Float> defaultDrops) {
-		if (mapProperties.containsKey(ItemDropUtil.DROP_ITEM_MAP_PROPERTY_KEY)) {
-			String droppedItemConfig = mapProperties.get(ItemDropUtil.DROP_ITEM_MAP_PROPERTY_KEY, String.class);
+		if (mapProperties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_DROP_ITEM)) {
+			String droppedItemConfig = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_DROP_ITEM, String.class);
 			return readDroppedItemConfig(droppedItemConfig);
 		}
 		return defaultDrops;
@@ -47,6 +50,10 @@ public class ItemDropUtil {
 	}
 	
 	private static void dropItem(String type, GameMap gameMap, float x, float y, boolean renderDropsAboveObject) {
-		gameMap.getItemFactory().createAndDropItem(type, x, y, renderDropsAboveObject, ItemDropUtil.ITEM_DROP_PICKUP_DELAY);
+		gameMap.getItemFactory().createAndDropItem(type, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+	}
+	
+	public static void dropItem(String type, MapProperties mapProperties, GameMap gameMap, float x, float y, boolean renderDropsAboveObject) {
+		gameMap.getItemFactory().createAndDropItem(type, mapProperties, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}
 }
