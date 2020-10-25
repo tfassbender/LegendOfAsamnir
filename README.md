@@ -8,13 +8,15 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 
 ## Overview
 
-- [Structure of the game and packages](#Structure-of-the-game-and-packages)
-- [Globally used classes](#Globally-used-classes)
-- [Inputs](#Inputs)
-- [Enemies](#Enemies)
-- [Items and game objects](#Items-and-game-objects)
-- [Maps](#Maps)
-- [Others](#Others)
+- [Structure of the game and packages](#structure-of-the-game-and-packages)
+- [Globally used classes](#globally-used-classes)
+- [Inputs](#inputs)
+- [Enemies](#enemies)
+- [Attacks](#attacks)
+- [Items](#items)
+- [Game Objects](#game-objects)
+- [Maps](#maps)
+- [Others](#others)
 
 ## Structure of the game and packages
 
@@ -91,47 +93,128 @@ An enemy can be in different states, which can be interrupted by other states, o
 - **flipAnimationToMovingDirection:** Indicates whether the animation images of this state should be flipped to follow the moving direction (e.g. for the `move` state, so the enemy will not run backwards). The default value of this property is `true`.
 - **flipAnimationOnEnteringOnly:** Indicates whether the animation should be flipped to the current direction, only once when entering the state. This can be usefull e.g. for the `die` state, because the direction of this animation usually doesn't change.
 
-### Attacks
+## Attacks
 
-Attacks are used to add a hit fixture to the enemy body. Hit fixtures are box2d sensors, that apply damage to the player, when colliding. The attacks are usually referenced from the enemy's states and are executed as soon as a state is entered. An example file, that defines the attacks of an enemy is the [gladiator.json](core/assets/config/enemy/attack/gladiator.json) file. The possible attributes are:
+Attacks are used to add a hit fixture to the enemy body. Hit fixtures are Box2D sensors, that apply damage to the player, enemies or objects, when colliding. The attacks are usually referenced from the player's or enemy's states and are executed as soon as a state is entered. An example file, that defines the attacks of an enemy is the [spider.json](core/assets/config/enemy/attack/spider.json) file. The possible attributes are:
 
 - **id:** A string to identify the attack (and reference it form the states configuration).
+- **type:** An [AttackType](core/src/net/jfabricationgames/gdx/attack/AttackType.java), that is used to differ between different attack (like melee attacks and projectile attacks)
 - **delay:** A delay (in seconds) before the attack starts. This can be usefull, because the animation may show the enemy charging before actually attacking, so the attack appears in the correct moment.
 - **duration:** Defines how long the hit fixture will stay active before being removed. The default value is `0`, which leads to the hit fixture being added for only one render step.
 - **damage:** The damage that the attack will deal to the player.
 - **distFromCenter:** The distance, that the hit fixture will have from the center of the enemies body (in the direction of the attack).
 - **hitFixtureRadius:** The radius of the hit fixture.
 - **pushForce:** The force whith which the player will be pushed back when hit by the attack.
+- **pushForceAffectedByBlock:** Defines whether the push force can be lowered by the players shield.
+- **explosionDamage:** The damage that is dealt by a projectile attack, that creates an explosion (like bombs).
+- **explosionPushForce:** The push force of an explosion, that is created by a projectile attack.
+- **explosionPushForceAffectedByBlock:** Defines whether the push force of an explosion, that is created by a projectile attack, can be lowered by the players shield.
 
-## Items and game objects
+There are several types of attacks, but they can be divided into two classes: **Melee Attacks** and **Projectile Attacks**
 
-### Items
+### Melee Attacks
+
+Melee Attacks are quite simple attacks. They create a hit fixture (a Box2D sensor, with a mask to hit the targeted objects / enemies) that is created near the executing character (a player, an enemy, ...) and deals a defined damage to the target if a collision is found by Box2D. Melee attacks are executed in the [MeleeAttack](core/src/net/jfabricationgames/gdx/attack/MeleeAttack.java) class. For the configuration of attacks see [Attacks](#attacks).
+
+### Projectile Attacks
+
+Projectile Attacks are attacks that don't just create a hit fixture, that deals damage, but create a projectile that moves in the map like a new map object. A projectile attack is created using the [ProjectileAttack](core/src/net/jfabricationgames/gdx/attack/ProjectileAttack.java) class, that creates a [Projectile](core/src/net/jfabricationgames/gdx/projectile/Projectile.java). This projectile behaves like a Game Object but also like an attack. Because all projectiles can show very different behavior there are multiple projectile subclasses like [Arrow](core/src/net/jfabricationgames/gdx/projectile/Arrow.java) (a quite simple projectile that moves in a straight line and deals damage), [Bomb](core/src/net/jfabricationgames/gdx/projectile/Bomb.java) (a projectile that waits some time before exploding, which creates an explosion. The explosion is also a projectile) or [Web](core/src/net/jfabricationgames/gdx/projectile/Web.java) (a projectile that deals damage to the player and slows him down if he's in it's range).
+
+## Items
+
+### Adding Items
 
 Items are usually added to the game from the map properties, where they can be defined and configured using the map object properties. To add an item to the map, an object has to be added to the objects layer of the map and named `item.item_name` where *item_name* is the name of an item, that is configured in the item configuration json file: [types.json](core/assets/config/items/types.json). The fields that can be configured in the json configuration file are:
 
-- **textureName:** The texture that will be used for the item.
+- **texture:** The texture that will be used for the item.
+- **animation:** The animation that will be used for the item.
 - **physicsObjectRadius:** The radius of the item's physics body (default is 0.1).
 - **pickUpSoundName:** The sound that will be played when the item is picked up by the player. The name references a sound, that is configured in the sound set config file [sound_sets.json](core/assets/config/sound/sound_sets.json) under the *item* sound set.
 
 The properties that an item has, can be configured in the map, using the custom properties of an object.
 
-### Game objects
+### Dropping Items
+
+Game objects and enemies can drop items at any time. What items they do drop can be defined either in the type config files [config/objects/types.json](core/assets/config/objects/types.json) and [config/enemy/types.json](core/assets/config/enemy/types.json), or in the map properties of every object that is added to the map, by using the map property key *drops*. The drop types, that are configured in the type config files define the default, that is used if no *drops* are configured in the map properties. Both configurations use a key-value map in JSON format, that defines the names of the items, that can be dropped, mapped to the probability to drop this item.  
+The following example from the object type config file [types.json](core/assets/config/objects/types.json) shows a drop config, that has a 50% probability of dropping a *coin* item, a 20% probability of dropping a *big_coin* item and a 10% probability of dropping an *arrow* item:
+
+
+```javascript
+{
+  barrel: {
+    // ...
+    drops: {
+      coin: 0.5,
+      big_coin: 0.2,
+      arrow: 0.1,
+    }
+    
+    //...
+  },
+  //...
+}
+```
+
+The items are dropped onto the map using the [ItemDropUtil](core/src/net/jfabricationgames/gdx/item/ItemDropUtil.java) class, that defines the static method `dropItems(ObjectMap<String, Float>, GameMap, float, float, boolean)` to randomly choose an item from the map and drop it at a position on the map.
+
+To drop a special item (like a special key to open a door), a different configuration must be used, because the normal drop items can't have special map properties. To drop special items the dropping object or enemy has to define the map property keys *specialDropType* (which defines the item type that is dropped by it's name) and *specialDropMapProperties* (which defines the map properties of the dropped object in JSON representation).
+
+## Game Objects
 
 Game objects are usually added to the game from the map properties, just like items. Unlike items, game objects don't have custom properties, but define the customizable properties for every object type in the configuration json file: [types.json](core/assets/config/objects/types.json). In this file all types of objects can be configured using the following properties:
 
-- **textureName:** The name of the texture that is shown for the game object.
-- **animationHit:** The animation that is shown when the player hits a game object.
-- **animationBreak:** The animation that is shown when the player breaks a game object (like a barrel or a wooden box).
-- **animationAction:** The animation that is shwn when the object's action is executed (e.g. opening a chest).
-- **physicsBodySizeFactorX:** The size factor of the physics body in x direction (where *1* would be the whole size of the texture).
-- **physicsBodySizeFactorY:** The size factor of the physics body in y direction (where *1* would be the whole size of the texture).
-- **physicsBodyOffsetFactorX:** The offset factor of the physics body in x direction (where *0* would be the left edge of the texture).
-- **physicsBodyOffsetFactorY:** The size factor of the physics body in x direction (where *0* would be the bottom edge of the texture).
-- **hitSound:** The sound that is played when the player hits the object. The name references a sound from the sound config file [sound_sets.json](core/assets/config/sound/sound_sets.json), under the *object* sound set.
-- **destroySound:** The sound that is played when the player destroys the object. The name references a sound from the sound config file [sound_sets.json](core/assets/config/sound/sound_sets.json), under the *object* sound set.
-- **health:** The initial health points of the object.
+- **Config for all Game Objects**
+  - **type:** The [GameObjectType](core/src/net/jfabricationgames/gdx/object/GameObjectType.java) of this object.
+  - **texture:** The name of the texture that is shown for the game object.
+  - **animationHit:** The animation that is shown when the player hits a game object.
+  - **hitSound:** The sound that is played when the player hits the object. The name references a sound from the sound config file [sound_sets.json](core/assets/config/sound/sound_sets.json), under the *object* sound set.
 
-The other properties define the box2d physics properties of the object, which usually stay to the default values.
+  - **physicsBodySizeFactorX:** The size factor of the physics body in x direction (where *1* would be the whole size of the texture).
+  - **physicsBodySizeFactorY:** The size factor of the physics body in y direction (where *1* would be the whole size of the texture).
+  - **physicsBodyOffsetFactorX:** The offset factor of the physics body in x direction (where *0* would be the left edge of the texture).
+  - **physicsBodyOffsetFactorY:** The size factor of the physics body in x direction (where *0* would be the bottom edge of the texture).
+  - **isSensor:** Defines whether the whole body of the object should be a sensor.
+  - **addSensor:** Defines whether a sensor is to be added to the body.
+  - **sensorRadius:** Defines the radius of the sensor that might be added to the body.
+
+  - **drops:** The items that the object may drop. See [Dropping Items](#dropping-items) for more details.
+  - **dropPositionOffsetX:** The offset to change the position where items will be dropped.
+  - **dropPositionOffsetY:** The offset to change the position where items will be dropped.
+  - **renderDropsAboveObject:** Defines whether dropped items will be rendered above the object or underneath it.
+
+- **Config for Destroyable Objects**
+  - **animationBreak:** The animation that is shown when the player breaks a game object (like a barrel or a wooden box).
+  - **destroySound:** The sound that is played when the player destroys the object. The name references a sound from the sound config file [sound_sets.json](core/assets/config/sound/sound_sets.json), under the *object* sound set.
+  - **health:** The initial health points of the object.
+  - **requiredAttackType:** An [AttackType](core/src/net/jfabricationgames/gdx/attack/AttackType.java) that is needed to damage this object. Only this attack type or a subtype of this type will be able to deal damage to the object. The default is *AttackType.ATTACK*, which means that all attacks will damage the object.
+
+- **Config for InteractiveObjects**
+  - **animationAction:** The animation that is shown when the object's action is executed (e.g. opening a chest).
+  - **textureAfterAction:** The texture that will be used after the execution of the action.
+  - **multipleActionExecutionsPossible:** Defines whether the action can be executed multiple times or only once.
+  - **hitAnimationAfterAction:** Defines whether the hit animation is still shown after the execution of the action (which could be false if a different texture is used after the execution).
+  - **changeBodyToSensorAfterAction:** Defines whether the body of the object is to be changed to a sensor after the execution of the action (after the animation).
+  
+- **Config for LockedObjects**
+  - **defaultLocked:** Defines whether a locked object's default is locked or unlocked. Changes from the default have to be defined in the map properties.
+
+Some other properties define the Box2D physics properties (like density or friction) of the object, which usually stay to the default values.
+
+The Game Objects are split up into multiple subclasses, for the different types of actions they can be used for. The following image shows the class structure of these classes:
+
+![Game Object class structure](core/data/documentation/game_object_classes.png)
+
+### Destroyable Objects
+
+Destroyable objects are quite simple objects, that can be destroyed by the player and usually drop some items (see [Dropping Items](#dropping-items)). They define animations for taking damage and being destroyed.
+
+### Interactive Objects
+
+Interactive Objects are used to let the player interact with the map. They use a sensor to find a player that is near and show an iteraction icon (a bubble with a question mark) to inform the player that an interaction is possible. They are used to display text on the screen (for dialogs with NPCs or other information) or for chests, that can be opened and drop items (see [Dropping Items](#dropping-items)).
+
+### Locked Objects
+
+A locked object is a special kind of [Interactive Object](#iteractive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a `boolean` value. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/container/data/KeyItem.java) class.
 
 ### Spawn Points
 
