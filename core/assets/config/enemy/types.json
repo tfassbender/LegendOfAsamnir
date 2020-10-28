@@ -82,4 +82,40 @@
 			big_coin: 0.2,
 		}
 	}
+	mimic_chest: {
+		animationsConfig: config/animation/enemy/mimic_chest.json,
+		stateConfig: config/enemy/states/mimic_chest.json,
+		initialState: waiting,
+		attackConfig: config/enemy/attack/mimic_chest.json,
+		
+		health: 20,
+		movingSpeed: 2.0,
+		
+		pushForceDamage: 35,
+		pushForceHit: 30,
+		
+		drops: {
+			coin: 0.3,
+			big_coin: 0.4,
+			arrow: 0.2,
+		}
+	}
+	mimic_barrel: {
+		animationsConfig: config/animation/enemy/mimic_barrel.json,
+		stateConfig: config/enemy/states/mimic_barrel.json,
+		initialState: waiting,
+		attackConfig: config/enemy/attack/mimic_barrel.json,
+		
+		health: 30,
+		movingSpeed: 2.0,
+		
+		pushForceDamage: 35,
+		pushForceHit: 30,
+		
+		drops: {
+			coin: 0.4,
+			big_coin: 0.2,
+			arrow: 0.1,
+		}
+	}
 }

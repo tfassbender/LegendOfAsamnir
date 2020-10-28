@@ -171,6 +171,18 @@
 				rock_break: {
 					path: "sound/enemy/rock_break.wav",
 				},
+				wood_hit_1: {
+					path: "sound/object/wood_hit_1.wav",
+				},
+				wood_hit_2: {
+					path: "sound/object/wood_hit_2.wav",
+				},
+				wood_knock: {
+					path: "sound/object/wood_knock.wav",
+				},
+				wood_break: {
+					path: "sound/object/wood_break_1.wav",
+				},
 				//gladiator
 				attack_gladiator: {
 					path: "sound/enemy/attack/gladiator.wav",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="797">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="837">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
@@ -841,6 +841,120 @@
    <properties>
     <property name="spawn" value="playerOutOfAmmo_bombs"/>
    </properties>
+   <point/>
+  </object>
+  <object id="797" name="enemy.mimic_chest" x="2976" y="2848">
+   <point/>
+  </object>
+  <object id="798" name="enemy.mimic_chest" x="2976" y="2944">
+   <point/>
+  </object>
+  <object id="799" name="enemy.mimic_chest" x="2448" y="241">
+   <point/>
+  </object>
+  <object id="800" name="enemy.mimic_chest" x="224" y="2016">
+   <point/>
+  </object>
+  <object id="801" name="enemy.mimic_barrel" x="1904" y="1713">
+   <point/>
+  </object>
+  <object id="802" name="object.barrel" x="1360" y="1905">
+   <point/>
+  </object>
+  <object id="803" name="enemy.mimic_barrel" x="1360" y="1937">
+   <point/>
+  </object>
+  <object id="804" name="object.barrel" x="1519" y="2609">
+   <point/>
+  </object>
+  <object id="805" name="object.barrel" x="1457" y="2193">
+   <point/>
+  </object>
+  <object id="806" name="object.barrel" x="1840" y="2129">
+   <point/>
+  </object>
+  <object id="807" name="object.barrel" x="1840" y="2161">
+   <point/>
+  </object>
+  <object id="810" name="item.coin" x="1968.67" y="593.667">
+   <point/>
+  </object>
+  <object id="811" name="item.coin" x="1968.67" y="657.667">
+   <point/>
+  </object>
+  <object id="812" name="item.big_coin" x="2030.67" y="403.667">
+   <point/>
+  </object>
+  <object id="813" name="item.coin" x="1968.67" y="625.667">
+   <point/>
+  </object>
+  <object id="814" name="object.chest" x="1936" y="206">
+   <point/>
+  </object>
+  <object id="815" name="object.box" x="1936" y="242">
+   <point/>
+  </object>
+  <object id="816" name="object.box" x="1935" y="273">
+   <point/>
+  </object>
+  <object id="817" name="object.box" x="1903" y="273">
+   <point/>
+  </object>
+  <object id="818" name="item.coin" x="2447.67" y="336.667">
+   <point/>
+  </object>
+  <object id="819" name="item.coin" x="2415.67" y="336.667">
+   <point/>
+  </object>
+  <object id="820" name="item.coin" x="2160.67" y="625.667">
+   <point/>
+  </object>
+  <object id="821" name="item.coin" x="2160.67" y="527.667">
+   <point/>
+  </object>
+  <object id="822" name="item.coin" x="2160.67" y="657.667">
+   <point/>
+  </object>
+  <object id="823" name="item.coin" x="2160.67" y="689.667">
+   <point/>
+  </object>
+  <object id="824" name="item.coin" x="2095.67" y="816.667">
+   <point/>
+  </object>
+  <object id="825" name="item.coin" x="2095.67" y="848.667">
+   <point/>
+  </object>
+  <object id="826" name="item.coin" x="2417" y="720">
+   <point/>
+  </object>
+  <object id="827" name="item.coin" x="2385" y="752">
+   <point/>
+  </object>
+  <object id="828" name="object.barrel" x="2417" y="752">
+   <point/>
+  </object>
+  <object id="829" name="item.coin" x="2542.67" y="466.667">
+   <point/>
+  </object>
+  <object id="830" name="item.coin" x="2542.67" y="434.667">
+   <point/>
+  </object>
+  <object id="831" name="item.coin" x="2528.67" y="240.667">
+   <point/>
+  </object>
+  <object id="832" name="item.coin" x="2560.67" y="240.667">
+   <point/>
+  </object>
+  <object id="833" name="item.coin" x="2592.67" y="240.667">
+   <point/>
+  </object>
+  <object id="834" name="item.coin" x="2863.67" y="369.667">
+   <point/>
+  </object>
+  <object id="835" name="item.coin" x="2863.67" y="401.667">
+   <point/>
+  </object>
+  <object id="836" name="item.coin" x="2863.67" y="433.667">
    <point/>
   </object>
  </objectgroup>

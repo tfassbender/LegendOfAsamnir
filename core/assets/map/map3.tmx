@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="116">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="120">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -239,6 +239,18 @@
     <property name="specialDropMapProperties" value="{key_key: special_key}"/>
     <property name="specialDropType" value="key"/>
    </properties>
+   <point/>
+  </object>
+  <object id="116" name="enemy.mimic_chest" x="559" y="146">
+   <point/>
+  </object>
+  <object id="117" name="enemy.mimic_barrel" x="688" y="148">
+   <point/>
+  </object>
+  <object id="118" name="enemy.mimic_chest" x="496" y="145">
+   <point/>
+  </object>
+  <object id="119" name="enemy.mimic_barrel" x="720" y="148">
    <point/>
   </object>
  </objectgroup>

@@ -1,0 +1,73 @@
+[
+	{
+		id: waiting,
+		animation: mimic_chest_waiting,
+		endsWithAnimation: true,
+		followingState: waiting,
+		interruptingStates: [
+			surprise, damage, die
+		]
+	},
+	{
+		id: surprise,
+		animation: mimic_chest_surprise,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: idle,
+		animation: mimic_chest_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, attack, damage, die
+		]
+	},
+	{
+		id: move,
+		animation: mimic_chest_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, attack, damage, die
+		]
+	},
+	{
+		id: attack,
+		animation: mimic_chest_move,
+		//stateEnteringSound: attack_mini_golem,
+		attack: attack
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: damage,
+		animation: mimic_chest_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		stateEnteringSound: wood_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			attack, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: mimic_chest_die,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
+		stateEnteringSound: wood_break,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]

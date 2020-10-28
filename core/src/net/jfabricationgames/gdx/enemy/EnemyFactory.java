@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.enemy.implementation.Gladiator;
+import net.jfabricationgames.gdx.enemy.implementation.Mimic;
 import net.jfabricationgames.gdx.enemy.implementation.MiniGolem;
 import net.jfabricationgames.gdx.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.enemy.implementation.Spider;
@@ -19,11 +20,13 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class EnemyFactory extends AbstractFactory {
 	
-	private static final String ENEMY_NAME_SPIDER = "spider";
-	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
-	private static final String ENEMY_NAME_MINI_GOLEM = "mini_golem";
-	private static final String ENEMY_NAME_GLADIATOR = "gladiator";
 	private static final String ENEMY_NAME_BAT = "bat";
+	private static final String ENEMY_NAME_GLADIATOR = "gladiator";
+	private static final String ENEMY_NAME_MINI_GOLEM = "mini_golem";
+	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
+	private static final String ENEMY_NAME_SPIDER = "spider";
+	private static final String ENEMY_NAME_MIMIC_CHEST = "mimic_chest";
+	private static final String ENEMY_NAME_MIMIC_BARREL = "mimic_barrel";
 	
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	private static Config config;
@@ -78,6 +81,10 @@ public class EnemyFactory extends AbstractFactory {
 				break;
 			case ENEMY_NAME_SPIDER:
 				enemy = new Spider(typeConfig, properties);
+				break;
+			case ENEMY_NAME_MIMIC_CHEST:
+			case ENEMY_NAME_MIMIC_BARREL:
+				enemy = new Mimic(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);

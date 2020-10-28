@@ -101,6 +101,20 @@
 				enemy/spider/spider_shoot,
 				enemy/spider/spider_move,
 				enemy/spider/spider_web,
+				
+				//mimic_barrel
+				enemy/mimic_barrel/mimic_barrel_die,
+				enemy/mimic_barrel/mimic_barrel_idle,
+				enemy/mimic_barrel/mimic_barrel_move,
+				enemy/mimic_barrel/mimic_barrel_surprise,
+				enemy/mimic_barrel/mimic_barrel_waiting,
+				
+				//mimic_barrel
+				enemy/mimic_chest/mimic_chest_die,
+				enemy/mimic_chest/mimic_chest_idle,
+				enemy/mimic_chest/mimic_chest_move,
+				enemy/mimic_chest/mimic_chest_surprise,
+				enemy/mimic_chest/mimic_chest_waiting,
 			]
 		},
 		menu: {

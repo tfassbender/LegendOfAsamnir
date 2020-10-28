@@ -60,6 +60,6 @@ public class Bat extends Enemy {
 	private FightAI createFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
-		return new FightAI(ai, attackState, new FixedAttackTimer(0f), 2f);
+		return new FightAI(ai, attackState, new FixedAttackTimer(0.3f), 2f);
 	}
 }
