@@ -118,4 +118,21 @@
 			arrow: 0.1,
 		}
 	}
+	cobra: {
+		animationsConfig: config/animation/enemy/cobra.json,
+		stateConfig: config/enemy/states/cobra.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/cobra.json,
+		
+		health: 20,
+		movingSpeed: 1.0,
+		
+		pushForceDamage: 35,
+		pushForceHit: 30,
+		
+		drops: {
+			coin: 0.4,
+			big_coin: 0.3,
+		}
+	}
 }

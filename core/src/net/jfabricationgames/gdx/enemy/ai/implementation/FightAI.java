@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.enemy.ai.implementation;
 
+import com.badlogic.gdx.math.Vector2;
+
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.move.AIAttackingMove;
 import net.jfabricationgames.gdx.enemy.ai.move.MoveType;
@@ -37,11 +39,15 @@ public class FightAI extends AbstractAttackAI implements ArtificialIntelligence 
 			if (inAttackState()) {
 				attackState.flipAnimationToDirection(directionToTarget());
 				if (distanceToTarget() > minDistanceToTargetPlayer) {
-					enemy.moveTo(move.targetPosition);
+					attackMoveTo(move.targetPosition);
 				}
 			}
 		}
 		
 		subAI.executeMove();
+	}
+	
+	protected void attackMoveTo(Vector2 targetPosition) {
+		enemy.moveTo(targetPosition);
 	}
 }

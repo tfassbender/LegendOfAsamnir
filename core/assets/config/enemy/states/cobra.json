@@ -1,0 +1,54 @@
+[
+	{
+		id: idle,
+		animation: cobra_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, attack, damage, die
+		]
+	},
+	{
+		id: move,
+		animation: cobra_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, attack, damage, die
+		]
+	},
+	{
+		id: attack,
+		animation: cobra_attack,
+		stateEnteringSound: attack_gladiator,
+		attack: attack
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: damage,
+		animation: cobra_damage,
+		endsWithAnimation: true,
+		stateEnteringSound: flesh_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			attack, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: cobra_die,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
+		stateEnteringSound: flesh_hit_1,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]

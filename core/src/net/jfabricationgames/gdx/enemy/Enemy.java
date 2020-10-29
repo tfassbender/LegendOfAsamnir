@@ -64,7 +64,6 @@ public abstract class Enemy implements Hittable, ContactListener {
 	private float imageOffsetY;
 	
 	protected Vector2 intendedMovement;
-
 	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		this.typeConfig = typeConfig;
@@ -199,17 +198,12 @@ public abstract class Enemy implements Hittable, ContactListener {
 		return health / typeConfig.health;
 	}
 	
-	public void moveTo(float x, float y) {
-		moveTo(new Vector2(x, y), false);
-	}
 	public void moveTo(Vector2 pos) {
-		moveTo(pos, false);
+		moveTo(pos, 1f);
 	}
-	public void moveTo(Vector2 pos, boolean slowDown) {
+	public void moveTo(Vector2 pos, float speedFactor) {
 		Vector2 direction = pos.cpy().sub(getPosition());
-		if (!slowDown || direction.len() > movingSpeed) {
-			direction.nor().scl(movingSpeed);
-		}
+		direction.nor().scl(movingSpeed * speedFactor);
 		
 		move(direction);
 	}
@@ -293,7 +287,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 	protected String getDieStateName() {
 		return "die";
 	}
-
+	
 	protected void dropItems() {
 		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;

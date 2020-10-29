@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.enemy.implementation.Bat;
+import net.jfabricationgames.gdx.enemy.implementation.Cobra;
 import net.jfabricationgames.gdx.enemy.implementation.Gladiator;
 import net.jfabricationgames.gdx.enemy.implementation.Mimic;
 import net.jfabricationgames.gdx.enemy.implementation.MiniGolem;
@@ -27,6 +28,7 @@ public class EnemyFactory extends AbstractFactory {
 	private static final String ENEMY_NAME_SPIDER = "spider";
 	private static final String ENEMY_NAME_MIMIC_CHEST = "mimic_chest";
 	private static final String ENEMY_NAME_MIMIC_BARREL = "mimic_barrel";
+	private static final String ENEMY_NAME_COBRA = "cobra";
 	
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	private static Config config;
@@ -85,6 +87,9 @@ public class EnemyFactory extends AbstractFactory {
 			case ENEMY_NAME_MIMIC_CHEST:
 			case ENEMY_NAME_MIMIC_BARREL:
 				enemy = new Mimic(typeConfig, properties);
+				break;
+			case ENEMY_NAME_COBRA:
+				enemy = new Cobra(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);

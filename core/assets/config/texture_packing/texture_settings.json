@@ -115,6 +115,13 @@
 				enemy/mimic_chest/mimic_chest_move,
 				enemy/mimic_chest/mimic_chest_surprise,
 				enemy/mimic_chest/mimic_chest_waiting,
+				
+				//cobra
+				enemy/cobra/cobra_attack,
+				enemy/cobra/cobra_damage,
+				enemy/cobra/cobra_die,
+				enemy/cobra/cobra_idle,
+				enemy/cobra/cobra_move,
 			]
 		},
 		menu: {
