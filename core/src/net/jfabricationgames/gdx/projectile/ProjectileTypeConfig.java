@@ -11,6 +11,7 @@ public class ProjectileTypeConfig {
 	public boolean removeAfterAnimationFinished = true;
 	public float textureScale = 1f;
 	public float textureInitialRotation;
+	public boolean rotateTextureToMovementDirection = false;
 	
 	public String sound;
 	

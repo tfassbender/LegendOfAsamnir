@@ -39,12 +39,6 @@ public class Web extends Projectile {
 		changeBodyToSensor();
 	}
 	
-	private void changeBodyToSensor() {
-		for (Fixture fixture : body.getFixtureList()) {
-			fixture.setSensor(true);
-		}
-	}
-	
 	@Override
 	public void remove() {
 		if (!touchingPlayer) {

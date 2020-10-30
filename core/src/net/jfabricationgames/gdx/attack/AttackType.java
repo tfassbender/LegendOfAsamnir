@@ -10,7 +10,8 @@ public enum AttackType {
 	PROJECTILE(ATTACK), //
 	ARROW(PROJECTILE), //
 	BOMB(PROJECTILE), //
-	WEB(PROJECTILE); //
+	WEB(PROJECTILE), //
+	FIREBALL(PROJECTILE); //
 	
 	private final AttackType superType;
 	

@@ -42,7 +42,7 @@ public class Bat extends Enemy {
 		ai = createFightAI(ai);
 	}
 	
-	private PreDefinedMovementAI createPreDefinedMovementAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createPreDefinedMovementAI(ArtificialIntelligence ai) {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = movingState;
@@ -50,14 +50,14 @@ public class Bat extends Enemy {
 		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
 	}
 	
-	private RunAwayAI createRunAwayAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createRunAwayAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = movingState;
 		
 		return new RunAwayAI(ai, movingState, idleState);
 	}
 	
-	private FightAI createFightAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
 		return new FightAI(ai, attackState, new FixedAttackTimer(0.3f), 2f);

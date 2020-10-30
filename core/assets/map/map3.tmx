@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="126">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="128">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -269,6 +269,12 @@
    <point/>
   </object>
   <object id="125" name="enemy.fire_elemental" x="1408" y="352">
+   <point/>
+  </object>
+  <object id="126" name="enemy.imp" x="1359" y="625">
+   <point/>
+  </object>
+  <object id="127" name="enemy.imp" x="1359" y="722">
    <point/>
   </object>
  </objectgroup>

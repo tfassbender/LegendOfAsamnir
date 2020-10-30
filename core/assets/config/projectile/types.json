@@ -5,6 +5,7 @@
 		texture: projectile_arrow,
 		textureScale: 1,
 		textureInitialRotation: 225,
+		rotateTextureToMovementDirection: true,
 		
 		sound: arrow,
 		
@@ -50,5 +51,21 @@
 		dampingAfterObjectHit: 15,
 		
 		timeActive: 5,
-	}
+	},
+	imp_fire: {
+		attackType: FIREBALL,
+		
+		animation: imp_fire,
+		removeAfterAnimationFinished: true,
+		textureScale: 0.05,
+		rotateTextureToMovementDirection: true,
+		
+		range: 30,
+		removeIfRangeExceeded: false,
+		speed: 75,
+		dampingAfterObjectHit: 15,
+		
+		timeActive: 5,
+	},
+	
 }

@@ -40,20 +40,20 @@ public class Mimic extends Enemy {
 		ai = createMimicSupriseAI(ai);
 	}
 	
-	private FollowAI createFollowAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createFollowAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		
 		return new FollowAI(ai, movingState, idleState);
 	}
 	
-	private FightAI createFightAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
 		return new FightAI(ai, attackState, new FixedAttackTimer(0.5f), 1.25f);
 	}
 	
-	private MimicSurpriseAI createMimicSupriseAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createMimicSupriseAI(ArtificialIntelligence ai) {
 		EnemyState waitingState = stateMachine.getState("waiting");
 		EnemyState surpriseState = stateMachine.getState("surprise");
 		

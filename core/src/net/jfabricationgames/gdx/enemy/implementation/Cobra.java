@@ -10,7 +10,6 @@ import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FastAttackFightAI;
-import net.jfabricationgames.gdx.enemy.ai.implementation.FightAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.PreDefinedMovementAI;
 import net.jfabricationgames.gdx.enemy.ai.util.FixedAttackTimer;
@@ -43,7 +42,7 @@ public class Cobra extends Enemy {
 		ai = createFastAttackFightAI(ai);
 	}
 	
-	private PreDefinedMovementAI createPreDefinedMovementAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createPreDefinedMovementAI(ArtificialIntelligence ai) {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = movingState;
@@ -51,14 +50,14 @@ public class Cobra extends Enemy {
 		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
 	}
 	
-	private FollowAI createFollowAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createFollowAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		
 		return new FollowAI(ai, movingState, idleState);
 	}
 	
-	private FightAI createFastAttackFightAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createFastAttackFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
 		return new FastAttackFightAI(ai, attackState, new FixedAttackTimer(1f), 2.5f, 5f, 0.1f);

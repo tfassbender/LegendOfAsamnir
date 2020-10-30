@@ -138,6 +138,14 @@
 				//enemy/elemental_ice/elemental_ice_jump,
 				enemy/elemental_ice/elemental_ice_move,
 				//enemy/elemental_ice/elemental_ice_sleep,
+				
+				// imp
+				enemy/imp/imp_attack,
+				enemy/imp/imp_damage,
+				enemy/imp/imp_die,
+				enemy/imp/imp_fire,
+				enemy/imp/imp_idle,
+				enemy/imp/imp_move,
 			]
 		},
 		menu: {

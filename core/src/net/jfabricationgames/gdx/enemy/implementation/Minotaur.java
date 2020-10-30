@@ -49,7 +49,7 @@ public class Minotaur extends Enemy {
 		ai = createActionAI(ai);
 	}
 	
-	private FollowAI createFollowAI(ArtificialIntelligence ai) {
+	private ArtificialIntelligence createFollowAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		

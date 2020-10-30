@@ -29,6 +29,16 @@ public class Spider extends Enemy {
 	}
 	
 	@Override
+	protected PhysicsBodyProperties definePhysicsBodyProperties() {
+		return getDefaultPhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(0.3f);
+	}
+	
+	@Override
+	protected void addAdditionalPhysicsParts() {
+		EnemyPhysicsUtil.addSensor(body, 6f);
+	}
+	
+	@Override
 	protected void createAI() {
 		ai = new BaseAI();
 		ai = createPreDefinedMovementAI(ai);
@@ -45,8 +55,8 @@ public class Spider extends Enemy {
 		
 		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
 	}
-
-	private FollowAI createFollowAI(ArtificialIntelligence ai) {
+	
+	private ArtificialIntelligence createFollowAI(ArtificialIntelligence ai) {
 		EnemyState movingState = stateMachine.getState("move");
 		EnemyState idleState = stateMachine.getState("idle");
 		
@@ -82,15 +92,5 @@ public class Spider extends Enemy {
 		fightAi.setMinDistanceToTargetPlayer(MIN_DISTANCE_TO_PLAYER);
 		
 		return fightAi;
-	}
-	
-	@Override
-	protected PhysicsBodyProperties definePhysicsBodyProperties() {
-		return getDefaultPhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(0.3f);
-	}
-	
-	@Override
-	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 6f);
 	}
 }

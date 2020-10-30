@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.projectile;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -45,9 +46,11 @@ public abstract class Projectile implements ContactListener {
 	protected float explosionDamage;
 	protected float explosionPushForce;
 	protected boolean explosionPushForceAffectedByBlock;
-
+	
 	private float imageOffsetX;
 	private float imageOffsetY;
+	
+	private float animationRotation;
 	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
@@ -104,13 +107,25 @@ public abstract class Projectile implements ContactListener {
 	protected void startProjectile(Vector2 direction) {
 		Vector2 movement = direction.nor().scl(typeConfig.speed);
 		
-		prepareProjectile(direction);
+		rotateProjectile(direction);
 		
 		//apply the movement force only once because the linear damping is set to zero
 		body.applyForceToCenter(movement.scl(body.getMass() * 10), true);
 	}
 	
-	protected void prepareProjectile(Vector2 direction) {}
+	protected void rotateProjectile(Vector2 direction) {
+		if (typeConfig.rotateTextureToMovementDirection) {
+			float angle = direction.angle();
+			float rotation = angle - typeConfig.textureInitialRotation + getSpriteVectorAngleOffset();
+			body.setTransform(body.getPosition().x, body.getPosition().y, MathUtils.degreesToRadians * angle);
+			sprite.setRotation(rotation);
+			animationRotation = rotation;
+		}
+	}
+	
+	protected float getSpriteVectorAngleOffset() {
+		return 0;
+	}
 	
 	protected void setGameMap(GameMap gameMap) {
 		this.gameMap = gameMap;
@@ -135,6 +150,7 @@ public abstract class Projectile implements ContactListener {
 		if (animation != null) {
 			animation.increaseStateTime(delta);
 			sprite = new Sprite(animation.getKeyFrame());
+			sprite.setRotation(animationRotation);
 			
 			if (animation.isAnimationFinished() && typeConfig.removeAfterAnimationFinished) {
 				remove();
@@ -156,7 +172,7 @@ public abstract class Projectile implements ContactListener {
 			explode();
 		}
 	}
-
+	
 	private boolean reachedMaxRange() {
 		return distanceTraveled > typeConfig.range;
 	}
@@ -172,7 +188,7 @@ public abstract class Projectile implements ContactListener {
 	private boolean isTimeRestricted() {
 		return typeConfig.timeActive > 0;
 	}
-
+	
 	private boolean explosionTimeReached() {
 		return timeActive > typeConfig.timeTillExplosion && isExplosive();
 	}
@@ -180,10 +196,20 @@ public abstract class Projectile implements ContactListener {
 	private boolean isExplosive() {
 		return typeConfig.timeTillExplosion > 0;
 	}
-
+	
 	protected void stopProjectile() {
-		body.setLinearDamping(typeConfig.dampingAfterObjectHit);
-		attackPerformed = true;
+		if (body != null) {
+			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+			attackPerformed = true;			
+		}
+	}
+	
+	protected void changeBodyToSensor() {
+		if (body != null) {
+			for (Fixture fixture : body.getFixtureList()) {
+				fixture.setSensor(true);
+			}			
+		}
 	}
 	
 	private void explode() {

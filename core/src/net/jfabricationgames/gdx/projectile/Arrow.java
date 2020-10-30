@@ -1,8 +1,6 @@
 package net.jfabricationgames.gdx.projectile;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
@@ -21,9 +19,7 @@ public class Arrow extends Projectile {
 	}
 	
 	@Override
-	protected void prepareProjectile(Vector2 direction) {
-		float angle = direction.angle();
-		body.setTransform(body.getPosition().x, body.getPosition().y, MathUtils.degreesToRadians * angle);
-		sprite.setRotation(angle - typeConfig.textureInitialRotation + ANGLE_OFFSET_SPRITE_VECTOR);
+	protected float getSpriteVectorAngleOffset() {
+		return ANGLE_OFFSET_SPRITE_VECTOR;
 	}
 }

@@ -13,5 +13,11 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			name: imp_fire,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		}
 	]
 }

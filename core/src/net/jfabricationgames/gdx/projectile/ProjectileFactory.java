@@ -16,6 +16,11 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class ProjectileFactory extends AbstractFactory {
 	
+	private static final String PROJECTILE_TYPE_IMP_FIRE = "imp_fire";
+	private static final String PROJECTILE_TYPE_WEB = "web";
+	private static final String PROJECTILE_TYPE_EXPLOSION = "explosion";
+	private static final String PROJECTILE_NAME_BOMB = "bomb";
+	private static final String PROJECTILE_NAME_ARROW = "arrow";
 	private static final String configFile = "config/factory/projectile_factory.json";
 	private static final String animationConfigFile = "config/animation/projectiles.json";
 	private static Config config;
@@ -79,18 +84,21 @@ public class ProjectileFactory extends AbstractFactory {
 		
 		Projectile projectile;
 		switch (type) {
-			case "arrow":
+			case PROJECTILE_NAME_ARROW:
 				projectile = new Arrow(typeConfig, sprite);
 				break;
-			case "bomb":
+			case PROJECTILE_NAME_BOMB:
 				projectile = new Bomb(typeConfig, sprite);
 				break;
-			case "explosion":
+			case PROJECTILE_TYPE_EXPLOSION:
 				projectile = new Explosion(typeConfig, animation);
 				collisionType = PhysicsCollisionType.EXPLOSION;
 				break;
-			case "web":
+			case PROJECTILE_TYPE_WEB:
 				projectile = new Web(typeConfig, animation);
+				break;
+			case PROJECTILE_TYPE_IMP_FIRE:
+				projectile = new ImpFireball(typeConfig, animation);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);
