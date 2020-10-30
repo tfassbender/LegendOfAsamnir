@@ -153,6 +153,20 @@
 		enemy: {
 			sounds: {
 				//common
+				hit_1: {
+					path: "sound/enemy/attack/hit_1.wav",
+					volume: 0.4,
+				}
+				hit_2: {
+					path: "sound/enemy/attack/hit_2.wav",
+					volume: 0.4,
+				}
+				hit_3: {
+					path: "sound/enemy/attack/hit_3.wav",
+				}
+				hit_4: {
+					path: "sound/enemy/attack/hit_4.wav",
+				}
 				flesh_hit_1: {
 					path: "sound/object/flesh_hit_1.wav",
 				},
@@ -234,6 +248,24 @@
 					path: "sound/enemy/attack/spider_attack.wav",
 					volume: 0.5
 					delay: 0.3
+				}
+				//cobra
+				attack_cobra: {
+					path: "sound/enemy/attack/hit_2.wav",
+					volume: 0.4,
+					delay: 0.4
+				},
+				//fire elemental
+				fire_elemental_hit: {
+					path: "sound/enemy/attack/hit_1.wav",
+					volume: 0.2,
+					delay: 0.4,
+				}
+				//ice elemental
+				ice_elemental_hit: {
+					path: "sound/enemy/attack/hit_1.wav",
+					volume: 0.2,
+					delay: 0.3,
 				}
 			}
 		}

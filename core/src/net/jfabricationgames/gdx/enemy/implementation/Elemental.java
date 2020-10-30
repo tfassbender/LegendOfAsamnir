@@ -9,7 +9,6 @@ import net.jfabricationgames.gdx.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.enemy.ai.BaseAI;
-import net.jfabricationgames.gdx.enemy.ai.implementation.FastAttackFightAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FightAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.PreDefinedMovementAI;
@@ -18,35 +17,35 @@ import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
-public class Cobra extends Enemy {
+public class Elemental extends Enemy {
 	
-	public Cobra(EnemyTypeConfig typeConfig, MapProperties properties) {
+	public Elemental(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
 		setImageOffset(0f, 0.3f);
 	}
-	
+
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
-		return getDefaultPhysicsBodyProperties().setRadius(0.4f).setPhysicsBodyShape(PhysicsBodyShape.CIRCLE);
+		return getDefaultPhysicsBodyProperties().setRadius(0.3f).setPhysicsBodyShape(PhysicsBodyShape.CIRCLE);
 	}
-	
+
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 5f);
+		EnemyPhysicsUtil.addSensor(body, 6f);
 	}
-	
+
 	@Override
 	protected void createAI() {
 		ai = new BaseAI();
 		ai = createPreDefinedMovementAI(ai);
 		ai = createFollowAI(ai);
-		ai = createFastAttackFightAI(ai);
+		ai = createFightAI(ai);
 	}
 	
 	private PreDefinedMovementAI createPreDefinedMovementAI(ArtificialIntelligence ai) {
 		Array<Vector2> positions = loadPositionsFromMapProperties();
 		EnemyState movingState = stateMachine.getState("move");
-		EnemyState idleState = movingState;
+		EnemyState idleState = stateMachine.getState("idle");
 		
 		return new PreDefinedMovementAI(ai, movingState, idleState, true, positions);
 	}
@@ -58,9 +57,9 @@ public class Cobra extends Enemy {
 		return new FollowAI(ai, movingState, idleState);
 	}
 	
-	private FightAI createFastAttackFightAI(ArtificialIntelligence ai) {
+	private FightAI createFightAI(ArtificialIntelligence ai) {
 		EnemyState attackState = stateMachine.getState("attack");
 		
-		return new FastAttackFightAI(ai, attackState, new FixedAttackTimer(1f), 2.5f, 5f, 0.1f);
+		return new FightAI(ai, attackState, new FixedAttackTimer(1f), 1.25f);
 	}
 }

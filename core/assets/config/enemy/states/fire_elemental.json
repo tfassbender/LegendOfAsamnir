@@ -1,7 +1,7 @@
 [
 	{
 		id: idle,
-		animation: cobra_idle,
+		animation: elemental_fire_idle,
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
@@ -10,7 +10,7 @@
 	},
 	{
 		id: move,
-		animation: cobra_move,
+		animation: elemental_fire_move,
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
@@ -19,8 +19,8 @@
 	},
 	{
 		id: attack,
-		animation: cobra_attack,
-		stateEnteringSound: attack_cobra,
+		animation: elemental_fire_attack,
+		stateEnteringSound: fire_elemental_hit,
 		attack: attack
 		endsWithAnimation: true,
 		followingState: idle,
@@ -30,9 +30,9 @@
 	},
 	{
 		id: damage,
-		animation: cobra_damage,
+		animation: elemental_fire_damage,
 		endsWithAnimation: true,
-		stateEnteringSound: flesh_hit_2,
+		stateEnteringSound: hit_2,
 		followingState: idle,
 		interruptingStates: [
 			attack, die
@@ -42,11 +42,11 @@
 	},
 	{
 		id: die,
-		animation: cobra_die,
+		animation: elemental_fire_die,
 		endsWithAnimation: true,
 		changeStateAfterAnimationDelay: 1f,
 		followingState: END,
-		stateEnteringSound: flesh_hit_1,
+		stateEnteringSound: hit_2,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true

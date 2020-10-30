@@ -122,6 +122,22 @@
 				enemy/cobra/cobra_die,
 				enemy/cobra/cobra_idle,
 				enemy/cobra/cobra_move,
+				
+				// fire elemental
+				enemy/elemental_fire/elemental_fire_attack,
+				enemy/elemental_fire/elemental_fire_damage,
+				enemy/elemental_fire/elemental_fire_die,
+				enemy/elemental_fire/elemental_fire_idle,
+				enemy/elemental_fire/elemental_fire_move,
+				
+				// ice elemental
+				enemy/elemental_ice/elemental_ice_attack,
+				enemy/elemental_ice/elemental_ice_damage,
+				enemy/elemental_ice/elemental_ice_die,
+				enemy/elemental_ice/elemental_ice_idle,
+				//enemy/elemental_ice/elemental_ice_jump,
+				enemy/elemental_ice/elemental_ice_move,
+				//enemy/elemental_ice/elemental_ice_sleep,
 			]
 		},
 		menu: {

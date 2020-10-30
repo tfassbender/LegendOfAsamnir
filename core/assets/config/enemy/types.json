@@ -81,7 +81,7 @@
 			coin: 0.5,
 			big_coin: 0.2,
 		}
-	}
+	},
 	mimic_chest: {
 		animationsConfig: config/animation/enemy/mimic_chest.json,
 		stateConfig: config/enemy/states/mimic_chest.json,
@@ -99,7 +99,7 @@
 			big_coin: 0.4,
 			arrow: 0.2,
 		}
-	}
+	},
 	mimic_barrel: {
 		animationsConfig: config/animation/enemy/mimic_barrel.json,
 		stateConfig: config/enemy/states/mimic_barrel.json,
@@ -117,7 +117,7 @@
 			big_coin: 0.2,
 			arrow: 0.1,
 		}
-	}
+	},
 	cobra: {
 		animationsConfig: config/animation/enemy/cobra.json,
 		stateConfig: config/enemy/states/cobra.json,
@@ -134,5 +134,37 @@
 			coin: 0.4,
 			big_coin: 0.3,
 		}
-	}
+	},
+	fire_elemental: {
+		animationsConfig: config/animation/enemy/fire_elemental.json,
+		stateConfig: config/enemy/states/fire_elemental.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/fire_elemental.json,
+		
+		health: 15,
+		movingSpeed: 1.5
+		
+		pushForceDamage: 45,
+		pushForceHit: 25,
+		
+		drops: {
+			coin: 0.5,
+		}
+	},
+	ice_elemental: {
+		animationsConfig: config/animation/enemy/ice_elemental.json,
+		stateConfig: config/enemy/states/ice_elemental.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/ice_elemental.json,
+		
+		health: 15,
+		movingSpeed: 1.5
+		
+		pushForceDamage: 45,
+		pushForceHit: 25,
+		
+		drops: {
+			coin: 0.5,
+		}
+	},
 }
