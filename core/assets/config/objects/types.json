@@ -146,6 +146,7 @@
 	},
 	spawnPoint: {
 		type: SPAWN_POINT,
+		collsitionType: CONFIG_OBJECT,
 		
 		texture: empty,
 	},
