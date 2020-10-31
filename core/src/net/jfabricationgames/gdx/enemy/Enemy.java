@@ -291,7 +291,17 @@ public abstract class Enemy implements Hittable, ContactListener {
 	protected void dropItems() {
 		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
-		ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
+		
+
+		if (properties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
+			String specialDropType = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
+			String specialDropMapProperties = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
+			MapProperties mapProperties = TiledMapLoader.createMapPropertiesFromString(specialDropMapProperties);
+			ItemDropUtil.dropItem(specialDropType, mapProperties, gameMap, x, y, typeConfig.renderDropsAboveObject);
+		}
+		else {
+			ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
+		}
 		droppedItems = true;
 	}
 	
