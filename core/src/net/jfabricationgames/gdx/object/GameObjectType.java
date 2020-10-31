@@ -5,4 +5,5 @@ public enum GameObjectType {
 	INTERACTIVE, //
 	LOCKED, // 
 	SPAWN_POINT, //
+	EVENT_OBJECT, //
 }

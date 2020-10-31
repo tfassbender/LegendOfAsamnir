@@ -23,10 +23,12 @@ import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
+import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -38,7 +40,7 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 import net.jfabricationgames.gdx.util.GameUtils;
 
-public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable {
+public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable, EventListener {
 	
 	private static final float MOVING_SPEED = 300f;
 	private static final float JUMPING_SPEED = 425f;
@@ -59,6 +61,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final String soundSetKey = "dwarf";
 	
 	private static final String spinAttackChargedSound = "spin_attack_charged";
+	
+	private static final String EVENT_KEY_RESPAWN_CHECKPOINT = "respawnCheckpoint";
 	
 	private boolean gameOver;
 	
@@ -83,6 +87,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private CharacterPropertiesContainer properties;
 	private CharacterItemContainer itemContainer;
 	
+	private Vector2 respawnPoint;
+	
 	public Dwarf() {
 		properties = new CharacterPropertiesContainer();
 		itemContainer = new CharacterItemContainer(properties);
@@ -106,6 +112,8 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		
 		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
 		movementHandler = new CharacterInputProcessor(this, itemContainer);
+		
+		EventHandler.getInstance().registerEventListener(this);
 	}
 	
 	private Body createPhysicsBody() {
@@ -414,6 +422,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	public void setPosition(float x, float y) {
 		body.setTransform(x, y, 0);
+		respawnPoint = new Vector2(x, y);
 	}
 	
 	@Override
@@ -515,8 +524,31 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
+	public void eventFired(EventConfig event) {
+		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EVENT_KEY_RESPAWN_CHECKPOINT)) {
+			if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
+				EventObject respawnObject = (EventObject) event.parameterObject;
+				respawnPoint = respawnObject.getEventObjectCenterPosition();
+			}
+		}
+	}
+	
+	@Override
+	public void respawn() {
+		setPosition(respawnPoint.x, respawnPoint.y);
+		properties.increaseHealth(100f);
+		properties.takeArmorDamage(100f);
+		properties.increaseArmor(50f);
+		properties.reduceCoins(50);
+		gameOver = false;
+		
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.PLAYER_RESPAWNED));
+	}
+	
+	@Override
 	public void dispose() {
 		soundSet.dispose();
 		PhysicsWorld.getInstance().removeContactListener(this);
+		EventHandler.getInstance().removeEventListener(this);
 	}
 }

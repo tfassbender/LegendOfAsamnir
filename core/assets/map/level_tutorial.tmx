@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="837">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="849">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
@@ -36,7 +36,7 @@
   </object>
   <object id="4" name="object.signboard" x="431" y="372.5">
    <properties>
-    <property name="displayText" value="Some objects can be destroyed. Try to hit them using the [BLUE]left mouse key [BLACK]or the [BLUE]controller button B."/>
+    <property name="displayText" value="Some objects can be destroyed. Try to hit them using the left mouse key or the controller button B."/>
     <property name="displayTextHeader" value="objects"/>
    </properties>
    <point/>
@@ -64,7 +64,7 @@
   </object>
   <object id="11" name="object.signboard" x="436.667" y="533.333">
    <properties>
-    <property name="displayText" value="To fight enemies you need to get close to them to hit them with your [RED]mighty battle axe! [BLACK]But if you come close to enemies they will also try to hit you. So try to defend yourself with your [RED]shield. [BLACK]To use the shield press the [BLUE]right mouse button [BLACK]or the [BLUE]controller button A."/>
+    <property name="displayText" value="To fight enemies you need to get close to them to hit them with your mighty battle axe! But if you come close to enemies they will also try to hit you. So try to defend yourself with your shield. To use the shield press the right mouse button or the controller button A."/>
     <property name="displayTextHeader" value="enemies"/>
    </properties>
    <point/>
@@ -77,7 +77,7 @@
   </object>
   <object id="13" name="object.signboard" x="643.75" y="841.667">
    <properties>
-    <property name="displayText" value="After fighthing an enemy your HP and Shield might be lowered. To recharge them use health or shield items. There might be some in this cheest. Open it using the [BLUE] E key [BLACK] or the [BLUE]controller button Y."/>
+    <property name="displayText" value="After fighthing an enemy your HP and Shield might be lowered. To recharge them use health or shield items. There might be some in this cheest. Open it using the E key or the controller button Y."/>
     <property name="displayTextHeader" value="health and shield items"/>
    </properties>
    <point/>
@@ -90,13 +90,14 @@
   </object>
   <object id="15" name="object.signboard" x="222.667" y="926.667">
    <properties>
-    <property name="displayText" value="Dwarfs are known to be [RED]mighty wariors[BLACK] and the [RED]greatest blacksmithes in all nine worlds[BLACK]. But not as gread swimmers. So stay away from water."/>
+    <property name="displayText" value="Dwarfs are known to be mighty wariors and the greatest blacksmithes in all nine worlds. But they are no gread swimmers. So stay away from water."/>
+    <property name="displayTextHeader" value="Water"/>
    </properties>
    <point/>
   </object>
   <object id="16" name="object.signboard" x="431" y="1247">
    <properties>
-    <property name="displayText" value="Some enemies are stronger than others. They can take more damage and deal more damage to you. They also behave different. But all of them have one thing in common. [RED] They can be killed!"/>
+    <property name="displayText" value="Some enemies are stronger than others. They can take more damage and deal more damage to you. They also behave different. But all of them have one thing in common. They can be killed!"/>
     <property name="displayTextHeader" value="Enemy types"/>
    </properties>
    <point/>
@@ -124,7 +125,7 @@
   </object>
   <object id="22" name="object.signboard" x="491" y="1470">
    <properties>
-    <property name="displayText" value="To get rid of bats the [RED] spin attack[BLACK] is very usefull. To activate it, push and hold down the [BLUE]left mouse button[BLACK] or the [BLUE]controller button B, till you hear a sound that indicates that the attack is charged. Then release the attack button and use the spin attack to [RED]crush your enemies!"/>
+    <property name="displayText" value="To get rid of bats the spin attack is very usefull. To activate it, push and hold down the left mouse button or the controller button B, till you hear a sound that indicates that the attack is charged. Then release the attack button and use the spin attack to crush your enemies!"/>
     <property name="displayTextHeader" value="Spin attack"/>
    </properties>
    <point/>
@@ -158,7 +159,7 @@
   </object>
   <object id="150" name="object.signboard" x="936" y="1013">
    <properties>
-    <property name="displayText" value="You can run faster for some time by pushing the [BLUE]shift key[BLACK] or by [BLUE] pushing down the analog stick of the controller[BLACK]. But that will cost endurance. If you have no endurance left you can not run faster anymore and can not attack for some time."/>
+    <property name="displayText" value="You can run faster for some time by pushing the shift key or by pushing down the analog stick of the controller. But that will cost endurance. If you have no endurance left you can not run faster anymore and can not attack for some time."/>
     <property name="displayTextHeader" value="Sprint"/>
    </properties>
    <point/>
@@ -231,7 +232,7 @@
   </object>
   <object id="210" name="object.signboard" x="810.333" y="1369.67">
    <properties>
-    <property name="displayText" value="Arrows can be used to attack distant enemies. To use arrows they have to be chosen in the pause menu. Use the [BLUE]escape key [BLACK]or the [BLUE]controller button 'start' [BLACK] to open the menu. They can be shot using the [BLUE]space key [BLACK] or the [BLUE]controller button X[BLACK]."/>
+    <property name="displayText" value="Arrows can be used to attack distant enemies. To use arrows they have to be chosen in the pause menu. Use the escape key or the controller button 'start' to open the menu. They can be shot using the space key or the controller button X."/>
     <property name="displayTextHeader" value="Arrows"/>
    </properties>
    <point/>
@@ -405,7 +406,7 @@
    </properties>
    <point/>
   </object>
-  <object id="591" name="enemy.spider" x="527" y="1943">
+  <object id="591" name="enemy.imp" x="527" y="1943">
    <point/>
   </object>
   <object id="592" name="enemy.bat" x="568" y="1987">
@@ -432,10 +433,10 @@
   <object id="596" name="enemy.spider" x="563" y="2231">
    <point/>
   </object>
-  <object id="597" name="enemy.gladiator" x="1257" y="2438">
+  <object id="597" name="enemy.cobra" x="1257" y="2438">
    <point/>
   </object>
-  <object id="598" name="enemy.gladiator" x="1376" y="2497">
+  <object id="598" name="enemy.cobra" x="1376" y="2497">
    <point/>
   </object>
   <object id="599" name="enemy.gladiator" x="1280" y="1565">
@@ -675,7 +676,7 @@
   <object id="737" name="item.coin" x="2464" y="1696">
    <point/>
   </object>
-  <object id="738" name="enemy.gladiator" x="2704" y="1969">
+  <object id="738" name="enemy.cobra" x="2704" y="1969">
    <point/>
   </object>
   <object id="739" name="enemy.spider" x="2671" y="2225">
@@ -705,22 +706,22 @@
   <object id="747" name="enemy.bat" x="2160" y="2193">
    <point/>
   </object>
-  <object id="748" name="enemy.bat" x="2880" y="1792">
+  <object id="748" name="enemy.ice_elemental" x="2880" y="1792">
    <point/>
   </object>
-  <object id="749" name="enemy.bat" x="2720" y="1696">
+  <object id="749" name="enemy.fire_elemental" x="2720" y="1696">
    <point/>
   </object>
-  <object id="750" name="enemy.bat" x="2272" y="2528">
+  <object id="750" name="enemy.ice_elemental" x="2272" y="2528">
    <point/>
   </object>
-  <object id="751" name="enemy.bat" x="2400" y="2528">
+  <object id="751" name="enemy.fire_elemental" x="2400" y="2528">
    <point/>
   </object>
   <object id="752" name="enemy.spider" x="2336" y="2784">
    <point/>
   </object>
-  <object id="753" name="enemy.gladiator" x="2479" y="2800">
+  <object id="753" name="enemy.cobra" x="2479" y="2800">
    <point/>
   </object>
   <object id="754" name="item.health" x="2511" y="2673">
@@ -729,7 +730,7 @@
   <object id="755" name="item.shield" x="2511" y="2707">
    <point/>
   </object>
-  <object id="757" name="enemy.spider" x="2752" y="2624">
+  <object id="757" name="enemy.imp" x="2752" y="2624">
    <point/>
   </object>
   <object id="758" name="item.health" x="2862" y="2321">
@@ -956,6 +957,61 @@
   </object>
   <object id="836" name="item.coin" x="2863.67" y="433.667">
    <point/>
+  </object>
+  <object id="837" name="object.eventObject" x="576" y="1152" width="32" height="32">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="839" name="object.eventObject" x="1089" y="177" width="61" height="108">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="840" name="object.eventObject" x="1330" y="1103" width="60" height="64">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="841" name="object.eventObject" x="1888" y="320" width="32" height="32">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="842" name="object.eventObject" x="2976" y="512" width="47" height="32">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="843" name="object.eventObject" x="2272" y="1120" width="32" height="32">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="844" name="object.eventObject" x="2016" y="1856" width="64" height="96">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="845" name="object.eventObject" x="2176" y="2208" width="32" height="32">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="846" name="object.eventObject" x="1504" y="1760" width="96" height="96">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="847" name="object.eventObject" x="464" y="2080" width="45" height="31">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="848" name="object.eventObject" x="1056" y="2656" width="32" height="32">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="4" name="physics" locked="1">

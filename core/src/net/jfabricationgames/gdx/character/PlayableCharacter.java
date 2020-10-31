@@ -67,4 +67,6 @@ public interface PlayableCharacter {
 	public int getAmmo(ItemAmmoType ammoType);
 
 	public void setSlowedDown(boolean slowedDown);
+
+	public void respawn();
 }

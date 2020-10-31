@@ -149,16 +149,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	private void playInteractionAnimationAppear() {
-		interactionAnimation.setPlayMode(PlayMode.NORMAL);
-		interactionAnimation.resetStateTime();
-	}
-	private void playInteractionAnimationDisappear() {
-		interactionAnimation.setPlayMode(PlayMode.REVERSED);
-		interactionAnimation.resetStateTime();
-	}
-	
-	private boolean isPlayableCharacterContact(Contact contact) {
+	protected boolean isPlayableCharacterContact(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		
@@ -171,6 +162,15 @@ public class InteractiveObject extends GameObject implements Interactive {
 			}
 		}
 		return false;
+	}
+	
+	private void playInteractionAnimationAppear() {
+		interactionAnimation.setPlayMode(PlayMode.NORMAL);
+		interactionAnimation.resetStateTime();
+	}
+	private void playInteractionAnimationDisappear() {
+		interactionAnimation.setPlayMode(PlayMode.REVERSED);
+		interactionAnimation.resetStateTime();
 	}
 	
 	@Override

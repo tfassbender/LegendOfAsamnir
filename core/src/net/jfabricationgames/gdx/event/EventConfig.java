@@ -10,6 +10,8 @@ public class EventConfig {
 	public boolean booleanValue;
 	public String stringValue;
 	
+	public Object parameterObject;
+	
 	public EventConfig setEventType(EventType eventType) {
 		this.eventType = eventType;
 		return this;
@@ -32,6 +34,11 @@ public class EventConfig {
 	
 	public EventConfig setStringValue(String stringValue) {
 		this.stringValue = stringValue;
+		return this;
+	}
+	
+	public EventConfig setParameterObject(Object parameterObject) {
+		this.parameterObject = parameterObject;
 		return this;
 	}
 	

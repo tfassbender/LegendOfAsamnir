@@ -150,4 +150,9 @@
 		
 		texture: empty,
 	},
+	eventObject: {
+		type: EVENT_OBJECT,
+		
+		texture: empty,
+	}
 }

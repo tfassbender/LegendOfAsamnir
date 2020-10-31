@@ -60,7 +60,7 @@ public class GameObject implements Hittable {
 		readTypeConfig();
 	}
 	
-	private void processMapProperties() {
+	protected void processMapProperties() {
 		dropTypes = ItemDropUtil.processMapProperties(mapProperties, typeConfig.drops);
 	}
 	

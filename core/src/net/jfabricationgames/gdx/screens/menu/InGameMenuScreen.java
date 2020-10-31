@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -33,10 +34,12 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	protected ScreenTextWriter screenTextWriter;
 	protected Viewport viewport;
 	protected SpriteBatch batch;
+	protected PlayableCharacter player;
 	
-	public InGameMenuScreen(String statesConfig, GameScreen gameScreen) {
+	public InGameMenuScreen(String statesConfig, GameScreen gameScreen, PlayableCharacter player) {
 		super(statesConfig);
 		this.gameScreen = gameScreen;
+		this.player = player;
 		
 		gameSnapshotFrameBuffer = new FrameBuffer(Format.RGB888, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, false);
 		screenTextWriter = new ScreenTextWriter();
@@ -58,12 +61,31 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		game.setScreen(this);
 	}
 	
+	public void backToGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
+		removeInputListener();
+		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
+		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
+		game.setScreen(gameScreen);
+	}
+	
+	protected void removeInputListener() {
+		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
+	}
+	
 	protected abstract String getInputContextName();
 
 	public void restartGame() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
 		gameScreen.dispose();
 		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+	}
+	
+	public void respawnInLastCheckpoint() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Respawn' selected");
+		player.respawn();
+		backToGame();
+		gameScreen.setGameOver(false);
 	}
 	
 	public void quitGame() {

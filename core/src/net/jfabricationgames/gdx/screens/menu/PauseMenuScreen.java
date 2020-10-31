@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.SpecialAction;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
@@ -36,7 +35,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final Array<String> items = new Array<>(new String[] {"jump", "bow", "bomb"});
 	private static final Array<ItemAmmoType> ammoItems = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
-	private PlayableCharacter character;
 	private DebugGridRenderer debugGridRenderer;
 	
 	private GameControlsDialog controlsDialog;
@@ -52,9 +50,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private FocusButton buttonRestart;
 	private FocusButton buttonQuit;
 	
-	public PauseMenuScreen(GameScreen gameScreen, PlayableCharacter character) {
-		super(pauseMenuStatesConfig, gameScreen);
-		this.character = character;
+	public PauseMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
+		super(pauseMenuStatesConfig, gameScreen, player);
 		
 		debugGridRenderer = new DebugGridRenderer();
 		debugGridRenderer.setLineOffsets(50f, 50f);
@@ -102,7 +99,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonRestart.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		
-		ammoMenu = new AmmoSubMenu(ammoItems, character);
+		ammoMenu = new AmmoSubMenu(ammoItems, player);
 		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
 		controlsDialog = new GameControlsDialog();
@@ -121,7 +118,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	public void selectCurrentItem() {
 		itemMenu.selectHoveredItem();
 		SpecialAction specialAction = SpecialAction.findByNameIgnoringCase(itemMenu.getSelectedItem());
-		character.setActiveSpecialAction(specialAction);
+		player.setActiveSpecialAction(specialAction);
 	}
 	
 	@Override
@@ -137,14 +134,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		return INPUT_CONTEXT_NAME;
 	}
 	
-	public void backToGame() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
-		removeInputListener();
-		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
-		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
-		game.setScreen(gameScreen);
-	}
-	
 	public void showControls() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Show Controlls' selected");
 		controlsDialog.setVisible(true);
@@ -154,10 +143,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	public void closeControlsDialog() {
 		controlsDialog.setVisible(false);
 		stateMachine.changeState("button_controls");
-	}
-	
-	private void removeInputListener() {
-		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
 	}
 	
 	@Override

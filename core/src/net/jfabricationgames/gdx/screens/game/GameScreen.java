@@ -40,7 +40,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
-	public static final boolean RENDER_DEBUG_GRAPHICS = true;
+	public static final boolean RENDER_DEBUG_GRAPHICS = false;
 	public static final int VELOCITY_ITERATIONS = 6;
 	public static final int POSITION_ITERATIONS = 2;
 	
@@ -104,8 +104,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 				true, /* velocities */
 				false /* contacts */);
 		
-		map = new GameMap("map/map3.tmx", camera);
-		//map = new GameMap("map/level_tutorial.tmx", camera);
+		//map = new GameMap("map/map3.tmx", camera);
+		map = new GameMap("map/level_tutorial.tmx", camera);
 		
 		dwarf = new Dwarf();
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
@@ -263,7 +263,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	}
 	
 	private void showGameOverMenuScreen() {
-		new GameOverMenuScreen(this).showMenu();
+		new GameOverMenuScreen(this, dwarf).showMenu();
 	}
 	
 	@Override
@@ -285,5 +285,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		if (pauseMenu != null) {
 			pauseMenu.dispose();
 		}
+	}
+	
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
 	}
 }

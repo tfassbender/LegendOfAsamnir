@@ -120,6 +120,9 @@ public class CharacterPropertiesContainer {
 	public void increaseCoins(int coins) {
 		properties.coins += coins;
 	}
+	public void reduceCoins(int coins) {
+		properties.coins = Math.max(properties.coins - coins, 0);
+	}
 	public int getCoins() {
 		return properties.coins;
 	}
