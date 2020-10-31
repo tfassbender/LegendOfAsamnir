@@ -64,8 +64,5 @@
 		removeIfRangeExceeded: false,
 		speed: 75,
 		dampingAfterObjectHit: 15,
-		
-		timeActive: 5,
 	},
-	
 }

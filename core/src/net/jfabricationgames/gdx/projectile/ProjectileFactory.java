@@ -66,7 +66,7 @@ public class ProjectileFactory extends AbstractFactory {
 		typeConfigs = json.fromJson(ObjectMap.class, ProjectileTypeConfig.class, Gdx.files.internal(config.typesConfig));
 	}
 	
-	public Projectile createProjectile(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType) {
+	public Projectile createProjectileAndAddToMap(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType) {
 		ProjectileTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: " + type

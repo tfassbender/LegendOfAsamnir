@@ -107,20 +107,20 @@ public abstract class Projectile implements ContactListener {
 	protected void startProjectile(Vector2 direction) {
 		Vector2 movement = direction.nor().scl(typeConfig.speed);
 		
-		rotateProjectile(direction);
+		if (typeConfig.rotateTextureToMovementDirection) {
+			rotateProjectile(direction);
+		}
 		
 		//apply the movement force only once because the linear damping is set to zero
 		body.applyForceToCenter(movement.scl(body.getMass() * 10), true);
 	}
 	
 	protected void rotateProjectile(Vector2 direction) {
-		if (typeConfig.rotateTextureToMovementDirection) {
-			float angle = direction.angle();
-			float rotation = angle - typeConfig.textureInitialRotation + getSpriteVectorAngleOffset();
-			body.setTransform(body.getPosition().x, body.getPosition().y, MathUtils.degreesToRadians * angle);
-			sprite.setRotation(rotation);
-			animationRotation = rotation;
-		}
+		float angle = direction.angle();
+		float rotation = angle - typeConfig.textureInitialRotation + getSpriteVectorAngleOffset();
+		body.setTransform(body.getPosition().x, body.getPosition().y, MathUtils.degreesToRadians * angle);
+		sprite.setRotation(rotation);
+		animationRotation = rotation;
 	}
 	
 	protected float getSpriteVectorAngleOffset() {
@@ -186,7 +186,7 @@ public abstract class Projectile implements ContactListener {
 	}
 	
 	private boolean isTimeRestricted() {
-		return typeConfig.timeActive > 0;
+		return typeConfig.timeActive >= 0;
 	}
 	
 	private boolean explosionTimeReached() {
@@ -198,23 +198,27 @@ public abstract class Projectile implements ContactListener {
 	}
 	
 	protected void stopProjectile() {
-		if (body != null) {
+		if (hasBody()) {
 			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
-			attackPerformed = true;			
+			attackPerformed = true;
 		}
 	}
 	
 	protected void changeBodyToSensor() {
-		if (body != null) {
+		if (hasBody()) {
 			for (Fixture fixture : body.getFixtureList()) {
 				fixture.setSensor(true);
-			}			
+			}
 		}
 	}
 	
+	protected boolean hasBody() {
+		return body != null;
+	}
+	
 	private void explode() {
-		Projectile explosion = ProjectileFactory.getInstance().createProjectile(EXPLOSION_PROJECTILE_TYPE, body.getPosition(), Vector2.Zero,
-				collisionType);
+		Projectile explosion = ProjectileFactory.getInstance().createProjectileAndAddToMap(EXPLOSION_PROJECTILE_TYPE, body.getPosition(),
+				Vector2.Zero, collisionType);
 		explosion.setDamage(explosionDamage);
 		explosion.setPushForce(explosionPushForce);
 		explosion.setPushForceAffectedByBlock(explosionPushForceAffectedByBlock);
@@ -247,9 +251,9 @@ public abstract class Projectile implements ContactListener {
 			
 			if (attackedUserData instanceof Hittable) {
 				Hittable hittable = ((Hittable) attackedUserData);
-				hittable.takeDamage(damage, typeConfig.attackType);
 				//enemies define the force themselves; the force parameter is a factor for this self defined force
 				hittable.pushByHit(body.getPosition().cpy(), pushForce, pushForceAffectedByBlock);
+				hittable.takeDamage(damage, typeConfig.attackType);
 			}
 			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
 			attackPerformed = true;

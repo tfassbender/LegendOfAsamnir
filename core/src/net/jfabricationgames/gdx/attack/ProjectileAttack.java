@@ -16,7 +16,7 @@ public class ProjectileAttack extends Attack {
 	
 	@Override
 	protected void start() {
-		Projectile projectile = ProjectileFactory.getInstance().createProjectile(config.projectileType, body.getPosition(), direction, collisionType);
+		Projectile projectile = ProjectileFactory.getInstance().createProjectileAndAddToMap(config.projectileType, body.getPosition(), direction, collisionType);
 		projectile.setDamage(config.damage);
 		projectile.setPushForce(config.pushForce);
 		projectile.setPushForceAffectedByBlock(config.pushForceAffectedByBlock);
