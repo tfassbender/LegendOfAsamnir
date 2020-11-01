@@ -31,7 +31,7 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 	}
 	
 	protected boolean changeToAttackState() {
-		if (timeToAttack()) {
+		if (timeToAttack() && targetAlive()) {
 			attackState.setAttackDirection(directionToTarget());
 			boolean changedState = stateMachine.setState(attackState);
 			if (changedState) {
@@ -42,6 +42,10 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence im
 			return changedState;
 		}
 		return false;
+	}
+
+	private boolean targetAlive() {
+		return targetingPlayer != null && targetingPlayer.isAlive();
 	}
 	
 	protected void updateTimeTillNextAttack() {

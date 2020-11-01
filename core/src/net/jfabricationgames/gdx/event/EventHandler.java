@@ -5,6 +5,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.event.global.GlobalEventListener;
+
 public class EventHandler {
 	
 	public static final String EVENT_GAME_STARTED = "gameStarted";
@@ -23,12 +25,17 @@ public class EventHandler {
 	private EventHandler() {
 		listeners = new Array<>();
 		loadEvents();
+		createGlobalEventListener();
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void loadEvents() {
 		Json json = new Json();
 		events = json.fromJson(ObjectMap.class, EventConfig.class, Gdx.files.internal(EVENT_CONFIG_FILE));
+	}
+	
+	private void createGlobalEventListener() {
+		GlobalEventListener.create(this);
 	}
 	
 	public void fireEvent(EventConfig event) {

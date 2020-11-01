@@ -3553,9 +3553,16 @@ pot_hit
   orig: 32, 32
   offset: 0, 0
   index: 3
-shield
+scroll
   rotate: false
   xy: 1178, 680
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+shield
+  rotate: false
+  xy: 1298, 808
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -3657,14 +3664,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_idle
   rotate: false
   xy: 1042, 792
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_jump
   rotate: false
   xy: 1042, 792
@@ -3940,7 +3947,7 @@ spider_web
   index: 6
 sword
   rotate: false
-  xy: 1298, 808
+  xy: 1178, 662
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

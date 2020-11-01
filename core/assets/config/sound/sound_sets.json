@@ -94,6 +94,10 @@
 				},
 				sell_buy_item: {
 					path: "sound/item/sell_buy_item.wav",
+				},
+				levelEnd: {
+					path: "sound/dwarf/rune.wav",
+					volume: 0.6
 				}
 			}
 		},

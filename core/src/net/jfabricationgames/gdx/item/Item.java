@@ -22,15 +22,15 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class Item {
 	
-	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
+	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
 	protected static ItemTypeConfig defaultTypeConfig;
 	
-	private AnimationDirector<TextureRegion> animation;
-	private Sprite sprite;
-	private MapProperties properties;
-	private Body body;
-	private GameMap gameMap;
+	protected AnimationDirector<TextureRegion> animation;
+	protected Sprite sprite;
+	protected MapProperties properties;
+	protected Body body;
+	protected GameMap gameMap;
 	
 	protected final String itemName;
 	protected ItemTypeConfig typeConfig;

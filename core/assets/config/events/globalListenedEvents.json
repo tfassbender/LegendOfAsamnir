@@ -1,0 +1,24 @@
+{
+	demoLevelEndReached: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demoLevelEnded,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Demo end reached",
+			displayText: "You've killed the boss and reached the end of this demo level.",
+		}
+	},
+	tutorialLevelEndReached: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: tutorialLevelEnded,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "The End ... so far ...",
+			displayText: "Wait, what?! You've killed the boss?! This must be a bug... Jokes asside, you've reached the end of this demo level. Congratulations! (More content comming soon)",
+		}
+	}
+}

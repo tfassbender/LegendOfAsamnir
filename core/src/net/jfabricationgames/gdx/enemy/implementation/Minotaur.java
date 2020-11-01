@@ -14,14 +14,20 @@ import net.jfabricationgames.gdx.enemy.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.enemy.ai.implementation.MinotaurAttackAI;
 import net.jfabricationgames.gdx.enemy.ai.util.RandomIntervalAttackTimer;
 import net.jfabricationgames.gdx.enemy.state.EnemyState;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
-public class Minotaur extends Enemy {
+public class Minotaur extends Enemy implements EventListener {
 	
 	public Minotaur(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
 		setImageOffset(0f, -0.2f);
+		
+		EventHandler.getInstance().registerEventListener(this);
 	}
 	
 	@Override
@@ -105,5 +111,22 @@ public class Minotaur extends Enemy {
 		else {
 			return "damage_low";
 		}
+	}
+	
+	@Override
+	public void eventFired(EventConfig event) {
+		if (event.eventType == EventType.PLAYER_RESPAWNED) {
+			resetHealthToMaximum();
+		}
+	}
+	
+	private void resetHealthToMaximum() {
+		health = typeConfig.health;
+	}
+	
+	@Override
+	public void remove() {
+		EventHandler.getInstance().removeEventListener(this);
+		super.remove();
 	}
 }

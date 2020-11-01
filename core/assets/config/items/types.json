@@ -41,6 +41,11 @@
 	key: {
 		animation: key,
 		pickUpSound: pickup_4
+	},
+	levelEnd: {
+		type: EVENT_ITEM,
+		texture: scroll,
+		pickUpSound: levelEnd
 	}
 	//menu items
 	bow: {
