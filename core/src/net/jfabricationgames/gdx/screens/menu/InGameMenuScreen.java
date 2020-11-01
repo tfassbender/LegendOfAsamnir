@@ -2,8 +2,8 @@ package net.jfabricationgames.gdx.screens.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -52,7 +52,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		assetManager.loadGroup(ASSET_GROUP_NAME);
 		assetManager.finishLoading();
 	}
-
+	
 	@Override
 	public void showMenu() {
 		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
@@ -60,6 +60,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		game.getInputContext().addListener(this);
 		game.setScreen(this);
 	}
+	
+	protected abstract String getInputContextName();
 	
 	public void backToGame() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
@@ -73,8 +75,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
 	}
 	
-	protected abstract String getInputContextName();
-
 	public void restartGame() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
 		gameScreen.dispose();
@@ -85,7 +85,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		Gdx.app.debug(getClass().getSimpleName(), "'Respawn' selected");
 		player.respawn();
 		backToGame();
-		gameScreen.setGameOver(false);
 	}
 	
 	public void quitGame() {

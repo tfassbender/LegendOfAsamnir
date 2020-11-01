@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object.event;
+package net.jfabricationgames.gdx.object;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
@@ -14,8 +14,6 @@ import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -26,6 +24,7 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 public class EventObject extends GameObject implements ContactListener {
 	
 	public static final String EVENT_PARAMETER_MAP_PROPERTY_KEY = "eventParameter";
+	public static final String EVENT_KEY_RESPAWN_CHECKPOINT = "respawnCheckpoint";
 	
 	private String eventParameter;
 	private Vector2 eventObjectCenter;

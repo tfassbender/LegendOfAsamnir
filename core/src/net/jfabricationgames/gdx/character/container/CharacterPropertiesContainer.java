@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.character.container;
 
+import com.badlogic.gdx.math.Vector2;
+
 import net.jfabricationgames.gdx.character.CharacterAction;
 import net.jfabricationgames.gdx.character.container.data.CharacterProperties;
 
@@ -125,5 +127,23 @@ public class CharacterPropertiesContainer {
 	}
 	public int getCoins() {
 		return properties.coins;
+	}
+	
+	public void changeStatsAfterRespawn() {
+		properties.health = 0f;
+		properties.increaseHealth = properties.maxHealth;
+		properties.armor = 0f;
+		properties.increaseArmor = properties.maxArmor * 0.5f;
+		properties.mana = 0f;
+		properties.increaseMana = properties.maxMana;
+		properties.endurance = 0f;
+		reduceCoins(50);
+	}
+	
+	public Vector2 getRespawnPoint() {
+		return properties.respawnPoint;
+	}
+	public void setRespawnPoint(Vector2 respawnPoint) {
+		properties.respawnPoint = respawnPoint;
 	}
 }

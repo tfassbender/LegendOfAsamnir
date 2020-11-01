@@ -28,7 +28,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.object.event.EventObject;
+import net.jfabricationgames.gdx.object.EventObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -62,8 +62,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private static final String spinAttackChargedSound = "spin_attack_charged";
 	
-	private static final String EVENT_KEY_RESPAWN_CHECKPOINT = "respawnCheckpoint";
-	
 	private boolean gameOver;
 	
 	private AnimationManager animationManager;
@@ -86,8 +84,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private CharacterPropertiesContainer properties;
 	private CharacterItemContainer itemContainer;
-	
-	private Vector2 respawnPoint;
 	
 	public Dwarf() {
 		properties = new CharacterPropertiesContainer();
@@ -149,6 +145,21 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return textureLoader.loadTexture("aim_marker");
 	}
 	
+	private AnimationDirector<TextureRegion> getAnimation() {
+		if (action != CharacterAction.NONE && action != CharacterAction.BLOCK) {
+			return getAnimation(action);
+		}
+		else {
+			return new DummyAnimationDirector<TextureRegion>();
+		}
+	}
+	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action) {
+		return animationManager.getAnimationDirector(getAnimationName(action));
+	}
+	private String getAnimationName(CharacterAction action) {
+		return action.getAnimationName();
+	}
+	
 	@Override
 	public boolean changeAction(CharacterAction action) {
 		if (isAlive() || action == CharacterAction.DIE) {
@@ -173,6 +184,15 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			return true;
 		}
 		return false;
+	}
+	
+	private void playSound(CharacterAction action) {
+		if (action.getSound() != null) {
+			playSound(action.getSound());
+		}
+	}
+	private void playSound(String sound) {
+		soundSet.playSound(sound);
 	}
 	
 	@Override
@@ -221,30 +241,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return itemContainer.getAmmo(ammoType);
 	}
 	
-	private AnimationDirector<TextureRegion> getAnimation() {
-		if (action != CharacterAction.NONE && action != CharacterAction.BLOCK) {
-			return getAnimation(action);
-		}
-		else {
-			return new DummyAnimationDirector<TextureRegion>();
-		}
-	}
-	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action) {
-		return animationManager.getAnimationDirector(getAnimationName(action));
-	}
-	private String getAnimationName(CharacterAction action) {
-		return action.getAnimationName();
-	}
-	
-	private void playSound(CharacterAction action) {
-		if (action.getSound() != null) {
-			playSound(action.getSound());
-		}
-	}
-	private void playSound(String sound) {
-		soundSet.playSound(sound);
-	}
-	
+	@Override
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
 		properties.updateStats(delta, action);
@@ -287,15 +284,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		return movementHandler.isDrawDirectionRight() != frame.isFlipX();
 	}
 	
-	private void drawAimMarker(SpriteBatch batch) {
-		float aimMarkerDistanceFactor = 0.5f;
-		float aimMarkerOffsetY = -0.1f;
-		Vector2 aimMarkerOffset = movementHandler.getMovingDirection().getNormalizedDirectionVector().scl(aimMarkerDistanceFactor).add(0,
-				aimMarkerOffsetY);
-		float aimMarkerSize = 5f;
-		draw(batch, aimMarkerSprite, aimMarkerOffset, aimMarkerSize, aimMarkerSize);
-	}
-	
 	private void draw(SpriteBatch batch, TextureRegion frame) {
 		//use null as offset parameter to not create a new empty vector every time
 		draw(batch, frame, null, frame.getRegionWidth(), frame.getRegionHeight());
@@ -317,6 +305,15 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 				GameScreen.WORLD_TO_SCREEN, // scaleX
 				GameScreen.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation
+	}
+	
+	private void drawAimMarker(SpriteBatch batch) {
+		float aimMarkerDistanceFactor = 0.5f;
+		float aimMarkerOffsetY = -0.1f;
+		Vector2 aimMarkerOffset = movementHandler.getMovingDirection().getNormalizedDirectionVector().scl(aimMarkerDistanceFactor).add(0,
+				aimMarkerOffsetY);
+		float aimMarkerSize = 5f;
+		draw(batch, aimMarkerSprite, aimMarkerOffset, aimMarkerSize, aimMarkerSize);
 	}
 	
 	@Override
@@ -422,7 +419,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	public void setPosition(float x, float y) {
 		body.setTransform(x, y, 0);
-		respawnPoint = new Vector2(x, y);
+		properties.setRespawnPoint(new Vector2(x, y));
 	}
 	
 	@Override
@@ -488,6 +485,10 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 	}
 	
+	private void takeArmorDamage(float damage) {
+		properties.takeArmorDamage(damage);
+	}
+	
 	private void die() {
 		playSound(CharacterAction.HIT);
 		changeAction(CharacterAction.DIE);
@@ -498,12 +499,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		gameOver = true;
 	}
 	
+	@Override
 	public boolean isGameOver() {
 		return gameOver;
-	}
-	
-	public void takeArmorDamage(float damage) {
-		properties.takeArmorDamage(damage);
 	}
 	
 	@Override
@@ -525,21 +523,19 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	@Override
 	public void eventFired(EventConfig event) {
-		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EVENT_KEY_RESPAWN_CHECKPOINT)) {
+		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EventObject.EVENT_KEY_RESPAWN_CHECKPOINT)) {
 			if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
 				EventObject respawnObject = (EventObject) event.parameterObject;
-				respawnPoint = respawnObject.getEventObjectCenterPosition();
+				properties.setRespawnPoint(respawnObject.getEventObjectCenterPosition().cpy());
 			}
 		}
 	}
 	
 	@Override
 	public void respawn() {
+		Vector2 respawnPoint = properties.getRespawnPoint();
 		setPosition(respawnPoint.x, respawnPoint.y);
-		properties.increaseHealth(100f);
-		properties.takeArmorDamage(100f);
-		properties.increaseArmor(50f);
-		properties.reduceCoins(50);
+		properties.changeStatsAfterRespawn();
 		gameOver = false;
 		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.PLAYER_RESPAWNED));

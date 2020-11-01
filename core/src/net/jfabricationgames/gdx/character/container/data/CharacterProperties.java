@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.character.container.data;
 
+import com.badlogic.gdx.math.Vector2;
 
 public class CharacterProperties {
 
@@ -30,4 +31,6 @@ public class CharacterProperties {
 	public final float armorIncreasePerSecond = 25f;
 	
 	public int coins;
+
+	public Vector2 respawnPoint;
 }

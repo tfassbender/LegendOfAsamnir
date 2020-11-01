@@ -19,6 +19,7 @@ import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.input.InputActionListener;
@@ -28,7 +29,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.menu.GameOverMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.PauseMenuScreen;
 
-public class GameScreen extends ScreenAdapter implements InputActionListener {
+public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener {
 	
 	public static final float WORLD_TO_SCREEN = 0.04f;
 	public static final float SCREEN_TO_WORLD = 1f / WORLD_TO_SCREEN;
@@ -117,6 +118,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		debugGridRenderer.setLineOffsets(40f, 40f);
 		debugGridRenderer.stopDebug();
 		
+		EventHandler.getInstance().registerEventListener(this);
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
 	}
 	
@@ -161,20 +163,16 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		}
 	}
 	
-	@Override
-	public boolean onAction(String action, Type type, Parameters parameters) {
-		if (action.equals(ACTION_SHOW_MENU) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
-			showPauseMenu();
-			return true;
-		}
-		return false;
+	private void renderDebugGraphics(float delta) {
+		debugGridRenderer.updateCamera(camera);
+		debugGridRenderer.render(delta);
 	}
 	
-	private void showPauseMenu() {
-		if (pauseMenu == null) {
-			pauseMenu = new PauseMenuScreen(this, dwarf);
-		}
-		pauseMenu.showMenu();
+	private void renderGameGraphics(float delta) {
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		dwarf.render(delta, batch);
+		batch.end();
 	}
 	
 	private void moveCamera(float delta) {
@@ -219,18 +217,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		camera.update();
 	}
 	
-	private void renderDebugGraphics(float delta) {
-		debugGridRenderer.updateCamera(camera);
-		debugGridRenderer.render(delta);
-	}
-	
-	private void renderGameGraphics(float delta) {
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		dwarf.render(delta, batch);
-		batch.end();
-	}
-	
 	private void moveCameraToPlayer() {
 		Vector2 dwarfPosition = dwarf.getPosition();
 		
@@ -267,6 +253,29 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	}
 	
 	@Override
+	public boolean onAction(String action, Type type, Parameters parameters) {
+		if (action.equals(ACTION_SHOW_MENU) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
+			showPauseMenu();
+			return true;
+		}
+		return false;
+	}
+	
+	private void showPauseMenu() {
+		if (pauseMenu == null) {
+			pauseMenu = new PauseMenuScreen(this, dwarf);
+		}
+		pauseMenu.showMenu();
+	}
+	
+	@Override
+	public void eventFired(EventConfig event) {
+		if (event.eventType == EventType.PLAYER_RESPAWNED) {
+			gameOver = false;
+		}
+	}
+	
+	@Override
 	public void resize(int width, int height) {
 		viewport.update(width, height, false);
 		viewportHud.update(width, height, false);
@@ -274,6 +283,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 	
 	@Override
 	public void dispose() {
+		EventHandler.getInstance().removeEventListener(this);
 		inputContext.removeListener(this);
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
 		
@@ -285,9 +295,5 @@ public class GameScreen extends ScreenAdapter implements InputActionListener {
 		if (pauseMenu != null) {
 			pauseMenu.dispose();
 		}
-	}
-	
-	public void setGameOver(boolean gameOver) {
-		this.gameOver = gameOver;
 	}
 }
