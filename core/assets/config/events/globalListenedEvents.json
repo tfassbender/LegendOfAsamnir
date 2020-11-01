@@ -20,5 +20,27 @@
 			displayTextHeader: "The End ... so far ...",
 			displayText: "Wait, what?! You've killed the boss?! This must be a bug... Jokes asside, you've reached the end of this demo level. Congratulations! (More content comming soon)",
 		}
+	},
+	tutorialStartingPointReached: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: tutorialStartingPointReached,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Signboards",
+			displayText: "You can interact with signboards to read the text by moving close to them and pressing the E key or the controller button Y. Also press the E key or the controller button Y to close the message boxes or make the text appear faster.",
+		}
+	}
+	pickedUpAxe: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: pickedUpAxe,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Mighty Battle Axe",
+			displayText: "It's dangerous to go alone! Take this.",
+		}
 	}
 }

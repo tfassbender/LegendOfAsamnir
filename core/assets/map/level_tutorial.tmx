@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="866">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="870">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
@@ -51,15 +51,6 @@
    <properties>
     <property name="drop" value="{health: 1}"/>
    </properties>
-   <point/>
-  </object>
-  <object id="7" name="item.coin" x="376.667" y="284.667">
-   <point/>
-  </object>
-  <object id="8" name="item.coin" x="406.667" y="284.667">
-   <point/>
-  </object>
-  <object id="10" name="item.shield" x="457.333" y="286">
    <point/>
   </object>
   <object id="11" name="object.signboard" x="436.667" y="533.333">
@@ -1052,6 +1043,19 @@
     <property name="eventParameter" value="tutorialLevelEnded"/>
    </properties>
    <point/>
+  </object>
+  <object id="867" name="object.eventObject" x="302" y="325" width="32" height="32">
+   <properties>
+    <property name="eventParameter" value="tutorialStartingPointReached"/>
+   </properties>
+  </object>
+  <object id="868" name="item.axe" x="432" y="304">
+   <point/>
+  </object>
+  <object id="869" name="object.eventObject" x="426" y="298" width="12" height="12">
+   <properties>
+    <property name="eventParameter" value="pickedUpAxe"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="4" name="physics" locked="1">
