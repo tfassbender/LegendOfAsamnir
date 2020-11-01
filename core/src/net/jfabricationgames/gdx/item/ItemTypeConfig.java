@@ -8,4 +8,5 @@ public class ItemTypeConfig {
 	public String animation;
 	public float physicsObjectRadius = 0.1f;
 	public String pickUpSound;
+	public int costs;
 }

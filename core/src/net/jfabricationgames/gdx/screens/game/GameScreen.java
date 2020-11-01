@@ -105,8 +105,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 				true, /* velocities */
 				false /* contacts */);
 		
-		//map = new GameMap("map/map3.tmx", camera);
-		map = new GameMap("map/level_tutorial.tmx", camera);
+		map = new GameMap("map/map3.tmx", camera);
+		//map = new GameMap("map/level_tutorial.tmx", camera);
 		
 		dwarf = new Dwarf();
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();

@@ -408,6 +408,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
+	public int getCoinsForHud() {
+		return properties.getCoinsForHud();
+	}
+	
+	@Override
 	public int getNormalKeys() {
 		return itemContainer.getNumNormalKeys();
 	}
@@ -447,7 +452,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_SENSOR, fixtureA, fixtureB);
 			
 			if (sensorCollidingUserData instanceof Item) {
-				itemContainer.collectItem((Item) sensorCollidingUserData);
+				itemContainer.collectItem((Item) sensorCollidingUserData, this);
 			}
 		}
 		
@@ -528,6 +533,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 				EventObject respawnObject = (EventObject) event.parameterObject;
 				properties.setRespawnPoint(respawnObject.getEventObjectCenterPosition().cpy());
 			}
+		}
+		if (event.eventType == EventType.TAKE_PLAYERS_COINS) {
+			properties.reduceCoins(event.intValue);
 		}
 	}
 	

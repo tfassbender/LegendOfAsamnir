@@ -25,4 +25,14 @@
 		ammo: 5
 		ammoType: bomb
 	}
+	buyable_health: {
+		health: 20
+	},
+	buyable_shield: {
+		armor: 15
+	},
+	buyable_arrow: {
+		ammo: 10,
+		ammoType: arrow
+	},
 }

@@ -2,7 +2,9 @@ package net.jfabricationgames.gdx.character.container;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.data.CharacterItemProperties;
+import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
@@ -24,39 +26,41 @@ public class CharacterItemContainer {
 		characterKeyContainer = new CharacterKeyContainer(properties);
 	}
 	
-	public void collectItem(Item item) {
-		if (item.containsProperty(ItemPropertyKeys.HEALTH.getPropertyName())) {
-			float itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Float.class);
-			characterProperties.increaseHealth(itemHealth);
-		}
-		if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
-			float itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Float.class);
-			characterProperties.increaseMana(itemMana);
-		}
-		if (item.containsProperty(ItemPropertyKeys.ARMOR.getPropertyName())) {
-			float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
-			characterProperties.increaseArmor(itemArmor);
-		}
-		if (item.containsProperty(ItemPropertyKeys.AMMO.getPropertyName())) {
-			int itemAmmo = item.getProperty(ItemPropertyKeys.AMMO.getPropertyName(), Float.class).intValue();
-			if (item.containsProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName())) {
-				ItemAmmoType ammoType = ItemAmmoType
-						.getByNameIgnoreCase(item.getProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName(), String.class));
-				increaseAmmo(itemAmmo, ammoType);
+	public <T extends PlayableCharacter & StatsCharacter> void collectItem(Item item, T player) {
+		if (item.canBePicked(player)) {
+			if (item.containsProperty(ItemPropertyKeys.HEALTH.getPropertyName())) {
+				float itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Float.class);
+				characterProperties.increaseHealth(itemHealth);
 			}
-			else {
-				throw new IllegalStateException("The ammo item has no ammo type defined. It should be added to default_values.json file.");
+			if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
+				float itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Float.class);
+				characterProperties.increaseMana(itemMana);
 			}
+			if (item.containsProperty(ItemPropertyKeys.ARMOR.getPropertyName())) {
+				float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
+				characterProperties.increaseArmor(itemArmor);
+			}
+			if (item.containsProperty(ItemPropertyKeys.AMMO.getPropertyName())) {
+				int itemAmmo = item.getProperty(ItemPropertyKeys.AMMO.getPropertyName(), Float.class).intValue();
+				if (item.containsProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName())) {
+					ItemAmmoType ammoType = ItemAmmoType
+							.getByNameIgnoreCase(item.getProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName(), String.class));
+					increaseAmmo(itemAmmo, ammoType);
+				}
+				else {
+					throw new IllegalStateException("The ammo item has no ammo type defined. It should be added to default_values.json file.");
+				}
+			}
+			if (item.getItemName().equals(ITEM_NAME_KEY)) {
+				characterKeyContainer.addKey(item);
+			}
+			if (item.containsProperty(ItemPropertyKeys.VALUE.getPropertyName())) {
+				int itemValue = item.getProperty(ItemPropertyKeys.VALUE.getPropertyName(), Float.class).intValue();
+				characterProperties.increaseCoins(itemValue);
+			}
+			
+			item.pickUp();
 		}
-		if (item.getItemName().equals(ITEM_NAME_KEY)) {
-			characterKeyContainer.addKey(item);
-		}
-		if (item.containsProperty(ItemPropertyKeys.VALUE.getPropertyName())) {
-			int itemValue = item.getProperty(ItemPropertyKeys.VALUE.getPropertyName(), Float.class).intValue();
-			characterProperties.increaseCoins(itemValue);
-		}
-		
-		item.pickUp();
 	}
 	
 	private void increaseAmmo(int itemAmmo, ItemAmmoType ammoType) {

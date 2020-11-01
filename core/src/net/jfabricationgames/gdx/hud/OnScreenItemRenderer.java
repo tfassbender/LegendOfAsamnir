@@ -58,7 +58,7 @@ public class OnScreenItemRenderer implements Disposable {
 	}
 	
 	private void drawText() {
-		int coins = character.getCoins();
+		int coins = character.getCoinsForHud();
 		int keys = character.getNormalKeys();
 		
 		screenTextWriter.setScale(TEXT_SCALE);

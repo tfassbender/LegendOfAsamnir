@@ -157,4 +157,8 @@ public class ScreenTextWriter {
 			return glyphLayout;
 		}
 	}
+	
+	public SpriteBatch getBatch() {
+		return batch;
+	}
 }

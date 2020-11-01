@@ -3,7 +3,7 @@ package net.jfabricationgames.gdx.character.container.data;
 import com.badlogic.gdx.math.Vector2;
 
 public class CharacterProperties {
-
+	
 	public boolean slowedDown;
 	
 	public float health = 100f;
@@ -30,7 +30,11 @@ public class CharacterProperties {
 	public float increaseArmor = 0f;
 	public final float armorIncreasePerSecond = 25f;
 	
-	public int coins;
-
+	public float coins;
+	public float maxCoins = 999;
+	public float decreaseCoins;
+	public final float coinsDecreasePerSecond = 20f;
+	
 	public Vector2 respawnPoint;
+	
 }

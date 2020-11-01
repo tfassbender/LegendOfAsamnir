@@ -69,4 +69,6 @@ public interface PlayableCharacter {
 	public void setSlowedDown(boolean slowedDown);
 
 	public void respawn();
+	
+	public int getCoins();
 }

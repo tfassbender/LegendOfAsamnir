@@ -105,6 +105,9 @@ public class ItemFactory extends AbstractFactory {
 			case EVENT_ITEM:
 				item = new EventItem(name, typeConfig, sprite, animation, properties, gameMap);
 				break;
+			case BUYABLE_ITEM:
+				item = new BuyableItem(name, typeConfig, sprite, animation, properties, gameMap);
+				break;
 			default:
 				throw new IllegalStateException("Unknown ItemType \"" + typeConfig.type + "\" of object type \"" + name + "\"");
 		}

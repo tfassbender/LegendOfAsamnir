@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.data.KeyItem;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -74,6 +75,10 @@ public class Item {
 		else if (sprite != null) {
 			sprite.draw(batch);
 		}
+	}
+	
+	public boolean canBePicked(PlayableCharacter player) {
+		return true;
 	}
 	
 	public void pickUp() {

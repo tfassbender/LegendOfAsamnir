@@ -37,7 +37,7 @@
 	bomb: {
 		texture: bomb
 		pickUpSound: pickup
-	}
+	},
 	key: {
 		animation: key,
 		pickUpSound: pickup_4
@@ -46,7 +46,25 @@
 		type: EVENT_ITEM,
 		texture: scroll,
 		pickUpSound: levelEnd
-	}
+	},
+	buyable_health: {
+		type: BUYABLE_ITEM,
+		texture: health,
+		pickUpSound: health_small,
+		costs: 30,
+	},
+	buyable_shield: {
+		type: BUYABLE_ITEM,
+		texture: shield,
+		pickUpSound: pickup
+		costs: 20,
+	},
+	buyable_arrow: {
+		type: BUYABLE_ITEM,
+		texture: arrow,
+		pickUpSound: pickup_ammo
+		costs: 25,
+	},
 	//menu items
 	bow: {
 		texture: bow

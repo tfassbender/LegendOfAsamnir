@@ -7,4 +7,5 @@ public enum EventType {
 	OUT_OF_AMMO, //
 	EVENT_OBJECT_TOUCHED, //
 	EVENT_ITEM_PICKED_UP, //
+	TAKE_PLAYERS_COINS, //
 }

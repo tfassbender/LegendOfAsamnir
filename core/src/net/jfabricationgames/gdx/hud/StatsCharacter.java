@@ -7,6 +7,6 @@ public interface StatsCharacter {
 	public float getMana();
 	public float getEndurance();
 	public float getArmor();
-	public int getCoins();
 	public int getNormalKeys();
+	public int getCoinsForHud();
 }

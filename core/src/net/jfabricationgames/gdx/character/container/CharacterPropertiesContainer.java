@@ -37,6 +37,14 @@ public class CharacterPropertiesContainer {
 			properties.increaseArmor -= increaseStep;
 			properties.armor = Math.min(properties.armor + increaseStep, properties.maxArmor);
 		}
+		if (properties.decreaseCoins > 0f) {
+			float decreaseStep = Math.min(delta * properties.coinsDecreasePerSecond, properties.decreaseCoins);
+			properties.decreaseCoins -= decreaseStep;
+			properties.coins = Math.max(Math.min(properties.coins - decreaseStep, properties.maxCoins), 0);
+			if (properties.coins == 0 && properties.decreaseCoins > 0) {
+				properties.decreaseCoins = 0;
+			}
+		}
 	}
 	private float getEnduranceCharge(CharacterAction action) {
 		if (action == CharacterAction.NONE || action == CharacterAction.IDLE) {
@@ -123,10 +131,16 @@ public class CharacterPropertiesContainer {
 		properties.coins += coins;
 	}
 	public void reduceCoins(int coins) {
-		properties.coins = Math.max(properties.coins - coins, 0);
+		properties.decreaseCoins = coins;
+	}
+	/**
+	 * Shows the decrease of coins if properties.decreaseCoins is greater than 0.
+	 */
+	public int getCoinsForHud() {
+		return (int) Math.round(properties.coins);
 	}
 	public int getCoins() {
-		return properties.coins;
+		return (int) Math.round(properties.coins - properties.decreaseCoins);
 	}
 	
 	public void changeStatsAfterRespawn() {
