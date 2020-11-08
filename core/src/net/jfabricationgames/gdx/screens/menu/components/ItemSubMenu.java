@@ -44,7 +44,12 @@ public class ItemSubMenu extends MenuBox {
 	private void loadItemTextures() {
 		itemTextures = new Array<>(items.size);
 		for (String item : items) {
-			itemTextures.add(itemTextureLoader.loadTexture(item));
+			if (item != null) {
+				itemTextures.add(itemTextureLoader.loadTexture(item));
+			}
+			else {
+				itemTextures.add(null);
+			}
 		}
 	}
 	
@@ -70,8 +75,10 @@ public class ItemSubMenu extends MenuBox {
 		
 		if (index >= 0 && items.size > index) {
 			TextureRegion itemTexture = itemTextures.get(index);
-			batch.draw(itemTexture, posX + scaledWidth * borderFactor, posY + scaledHeight * borderFactor, scaledWidth * sizeFactor,
-					scaledHeight * sizeFactor);
+			if (itemTexture != null) {
+				batch.draw(itemTexture, posX + scaledWidth * borderFactor, posY + scaledHeight * borderFactor, scaledWidth * sizeFactor,
+						scaledHeight * sizeFactor);
+			}
 		}
 	}
 	

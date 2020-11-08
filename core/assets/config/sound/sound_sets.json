@@ -277,12 +277,20 @@
 			sounds: {
 				enter_pause_menu: {
 					path: "sound/menu/enter_pause_menu.wav",
-					volume: 0.5
+					volume: 0.5,
 				},
 				enter_game_over_menu: {
 					path: "sound/menu/enter_game_over_menu.mp3",
-					volume: 0.5
-					delay: 0.5
+					volume: 0.5,
+					delay: 0.5,
+				},
+				buy: {
+					path: "sound/item/sell_buy_item.wav",
+					volume: 0.5,
+				},
+				error: {
+					path: "sound/common/error.wav",
+					volume: 0.5,
 				}
 			}
 		}

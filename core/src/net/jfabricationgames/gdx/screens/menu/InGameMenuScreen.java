@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -27,6 +28,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	public static final String ASSET_GROUP_NAME = "main_menu";
 	public static final String FONT_NAME = "vikingMedium";
 	
+	public static final String SOUND_ERROR = "error";
+	
 	protected GameScreen gameScreen;
 	protected FrameBuffer gameSnapshotFrameBuffer;
 	protected Sprite gameSnapshotSprite;
@@ -35,6 +38,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	protected Viewport viewport;
 	protected SpriteBatch batch;
 	protected PlayableCharacter player;
+	protected DebugGridRenderer debugGridRenderer;
 	
 	public InGameMenuScreen(String statesConfig, GameScreen gameScreen, PlayableCharacter player) {
 		super(statesConfig);
@@ -51,6 +55,10 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
 		assetManager.finishLoading();
+		
+		debugGridRenderer = new DebugGridRenderer();
+		debugGridRenderer.setLineOffsets(50f, 50f);
+		debugGridRenderer.stopDebug();
 	}
 	
 	@Override
@@ -112,5 +120,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	public void dispose() {
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
 		gameSnapshotFrameBuffer.dispose();
+		removeInputListener();
 	}
 }

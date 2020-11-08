@@ -78,6 +78,7 @@
 		addSensor: true,
 		
 		multipleActionExecutionsPossible: true,
+		interactiveAction: SHOW_ON_SCREEN_TEXT,
 	},
 	chest: {
 		type: LOCKED,
@@ -154,5 +155,25 @@
 		type: EVENT_OBJECT,
 		
 		texture: empty,
-	}
+	},
+	shop: {
+		type: INTERACTIVE,
+		
+		texture: shop,
+		hitSound: wood_hit_2,
+		
+		textureSizeFactorX: 0.75,
+		textureSizeFactorY: 0.75,
+		
+		physicsBodySizeFactorX: 0.75,
+		physicsBodySizeFactorY: 0.5,
+		physicsBodyOffsetFactorX: 0,
+		physicsBodyOffsetFactorY: 0,
+		
+		addSensor: true,
+		sensorRadius: 1,
+		
+		multipleActionExecutionsPossible: true,
+		interactiveAction: OPEN_SHOP_MENU,
+	},
 }

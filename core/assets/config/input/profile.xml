@@ -223,6 +223,67 @@
 		</actions>
 	</context>
 	
+	<context name="shopMenu">
+		<events>
+			<KEY_DOWN />
+			<TOUCH_DOWN />
+			<CONTROLLER_BUTTON_DOWN />
+			<CONTROLLER_POV_CHANGED />
+			<CONTROLLER_AXIS_THRESHOLD_PASSED />
+		</events>
+		<actions>
+			<action name="up">
+				<key code="Up" />
+				<controller>
+					<pov directions="north northWest northEast" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="down">
+				<key code="Down" />
+				<controller>
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
+			</action>
+			<action name="left">
+				<key code="Left" />
+				<controller>
+					<pov directions="west southWest northWest" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="right">
+				<key code="Right" />
+				<controller>
+					<pov directions="east southEast northEast" />
+					<axis code="1" threshold="0.5" />
+				</controller>
+			</action>
+
+			<action name="backToGame">
+				<key code="Escape" />
+				<controller>
+					<button code="7" />
+				</controller>
+			</action>
+			
+			<action name="backToGame_interactButton">
+				<key code="E" />
+				<controller>
+					<button code="3" />
+				</controller>
+			</action>
+			
+			<action name="select">
+				<key code="Enter" />
+				<controller>
+					<button code="0" />
+				</controller>
+			</action>
+		</actions>
+	</context>
+	
 	<!-- The context for simple menus contains movement (for inputs) and selecting an option -->
 	<context name="simpleMenu">
 		<events>

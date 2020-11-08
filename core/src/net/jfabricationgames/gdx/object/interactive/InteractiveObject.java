@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.interactive;
 
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,27 +15,16 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.ObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class InteractiveObject extends GameObject implements Interactive {
-	
-	private enum Properties {
-		
-		DISPLAY_TEXT("displayText"), // text that is displayed in the OnScreenTextBox
-		DISPLAY_TEXT_HEADER("displayTextHeader"); // header that is displayed in the OnScreenTextBox (only if DISPLAY_TEXT is defined)
-		
-		public final String mapPropertiesKey;
-		
-		private Properties(String mapPropertiesKey) {
-			this.mapPropertiesKey = mapPropertiesKey;
-		}
-	}
 	
 	private boolean actionExecuted = false;
 	private boolean changedBodyToSensor = false;
@@ -74,19 +63,6 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	@Override
-	public void takeDamage(float damage, AttackType attackType) {
-		if (animation == null) {
-			animation = getHitAnimation();
-		}
-		playHitSound();
-	}
-	
-	protected boolean showHitAnimation() {
-		return typeConfig.animationHit != null
-				&& (!actionExecuted || typeConfig.hitAnimationAfterAction || typeConfig.multipleActionExecutionsPossible);
-	}
-	
 	private boolean showInteractionIcon() {
 		return canBeExecutedByConfig() //
 				&& (!interactionAnimation.isAnimationFinished() // the animation (to appear or disappear) is still playing 
@@ -96,6 +72,20 @@ public class InteractiveObject extends GameObject implements Interactive {
 	private boolean changeBodyToSensorAfterAction() {
 		return actionExecuted && animation != null && animation.isAnimationFinished() && typeConfig.changeBodyToSensorAfterAction
 				&& !changedBodyToSensor;
+	}
+	
+	@Override
+	public void takeDamage(float damage, AttackType attackType) {
+		if (animation == null) {
+			animation = getHitAnimation();
+		}
+		playHitSound();
+	}
+	
+	@Override
+	protected boolean showHitAnimation() {
+		return typeConfig.animationHit != null
+				&& (!actionExecuted || typeConfig.hitAnimationAfterAction || typeConfig.multipleActionExecutionsPossible);
 	}
 	
 	@Override
@@ -113,11 +103,11 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	private boolean canBeExecutedByConfig() {
-		return typeConfig.multipleActionExecutionsPossible || !actionExecuted;
-	}
 	protected boolean canBeExecuted(CharacterItemContainer itemContainer) {
 		return canBeExecutedByConfig();
+	}
+	private boolean canBeExecutedByConfig() {
+		return typeConfig.multipleActionExecutionsPossible || !actionExecuted;
 	}
 	
 	@Override
@@ -126,11 +116,16 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private void performAction() {
-		if (mapProperties.containsKey(Properties.DISPLAY_TEXT.mapPropertiesKey)) {
-			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(mapProperties.get(Properties.DISPLAY_TEXT_HEADER.mapPropertiesKey, String.class));
-			onScreenTextBox.setText(mapProperties.get(Properties.DISPLAY_TEXT.mapPropertiesKey, String.class));
+		if (typeConfig.interactiveAction != null) {
+			typeConfig.interactiveAction.execute(this);
 		}
+	}
+	
+	/**
+	 * Makes the MapProperties available in the InteractiveAction enum
+	 */
+	protected MapProperties getMapProperties() {
+		return mapProperties;
 	}
 	
 	@Override

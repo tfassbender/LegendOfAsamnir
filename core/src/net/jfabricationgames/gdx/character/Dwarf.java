@@ -28,7 +28,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.object.EventObject;
+import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -536,6 +536,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		if (event.eventType == EventType.TAKE_PLAYERS_COINS) {
 			properties.reduceCoins(event.intValue);
+		}
+		if (event.eventType == EventType.PLAYER_BUY_ITEM) {
+			itemContainer.collectItem((Item) event.parameterObject, this);
 		}
 	}
 	

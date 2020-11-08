@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.object.interactive.InteractiveAction;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class ObjectTypeConfig {
@@ -13,6 +14,9 @@ public class ObjectTypeConfig {
 	public String texture;
 	public String animationHit;
 	public String hitSound;
+	
+	public float textureSizeFactorX = 1f;
+	public float textureSizeFactorY = 1f;
 	
 	public float physicsBodySizeFactorX = 1f;
 	public float physicsBodySizeFactorY = 1f;
@@ -53,6 +57,7 @@ public class ObjectTypeConfig {
 	public boolean multipleActionExecutionsPossible = false;
 	public boolean hitAnimationAfterAction = false;
 	public boolean changeBodyToSensorAfterAction = false;
+	public InteractiveAction interactiveAction;
 	
 	//****************************************
 	//*** Locked Objects

@@ -131,7 +131,7 @@ public class CharacterPropertiesContainer {
 		properties.coins += coins;
 	}
 	public void reduceCoins(int coins) {
-		properties.decreaseCoins = coins;
+		properties.decreaseCoins += coins;
 	}
 	/**
 	 * Shows the decrease of coins if properties.decreaseCoins is greater than 0.

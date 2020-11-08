@@ -312,6 +312,13 @@ green_board_up_right
   orig: 32, 32
   offset: 0, 0
   index: -1
+health
+  rotate: false
+  xy: 256, 132
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 inventory_down
   rotate: false
   xy: 0, 0
@@ -321,14 +328,14 @@ inventory_down
   index: -1
 inventory_down_left
   rotate: false
-  xy: 274, 133
+  xy: 328, 133
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_down_right
   rotate: false
-  xy: 291, 133
+  xy: 345, 133
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
@@ -419,21 +426,28 @@ inventory_up
   index: -1
 inventory_up_left
   rotate: false
-  xy: 308, 133
+  xy: 362, 133
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_up_right
   rotate: false
-  xy: 325, 133
+  xy: 379, 133
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 jump
   rotate: false
-  xy: 256, 132
+  xy: 274, 132
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+mana
+  rotate: false
+  xy: 292, 132
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -443,6 +457,13 @@ play_button_text
   xy: 0, 86
   size: 159, 48
   orig: 159, 48
+  offset: 0, 0
+  index: -1
+shield
+  rotate: false
+  xy: 310, 132
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 small_banner_left

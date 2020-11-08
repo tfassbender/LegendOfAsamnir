@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.event;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
@@ -14,11 +14,13 @@ import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.ObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class EventObject extends GameObject implements ContactListener {
@@ -44,7 +46,9 @@ public class EventObject extends GameObject implements ContactListener {
 		
 		eventObjectCenter = new Vector2(x, y);
 		
-		PhysicsBodyProperties properties = physicsBodyProperties.setX(x).setY(y).setWidth(width).setHeight(height);
+		PhysicsBodyProperties properties = physicsBodyProperties.setX(x).setY(y).setWidth(width).setHeight(height)
+				//change the collision type to OBSTACLE_SENSOR to not interact with projectiles
+				.setCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR);
 		body = PhysicsBodyCreator.createRectangularBody(world, properties);
 		body.setUserData(this);
 		
@@ -66,13 +70,14 @@ public class EventObject extends GameObject implements ContactListener {
 		}
 	}
 	
-	protected boolean isPlayableCharacterContact(Contact contact) {
+	private boolean isPlayableCharacterContact(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		
-		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.OBSTACLE, fixtureA, fixtureB)) {
-			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.OBSTACLE, fixtureA, fixtureB);
-			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.OBSTACLE, fixtureA, fixtureB);
+		//use the collision type OBSTACLE_SENSOR here, because the event object is changed to this type (see createPhysicsBody)
+		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB)) {
+			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
+			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
 			
 			if (sensorUserData == this && sensorCollidingUserData != null && sensorCollidingUserData instanceof PlayableCharacter) {
 				return true;

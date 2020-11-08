@@ -28,6 +28,7 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.menu.GameOverMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.PauseMenuScreen;
+import net.jfabricationgames.gdx.screens.menu.ShopMenuScreen;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener {
 	
@@ -75,7 +76,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private DebugGridRenderer debugGridRenderer;
 	private HeadsUpDisplay hud;
 	private GameMap map;
+	
 	private PauseMenuScreen pauseMenu;
+	private ShopMenuScreen shopMenu;
 	
 	private Box2DDebugRenderer debugRenderer;
 	private World world;
@@ -273,8 +276,18 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		if (event.eventType == EventType.PLAYER_RESPAWNED) {
 			gameOver = false;
 		}
+		if (event.eventType == EventType.SHOW_IN_GAME_SHOP_MENU) {
+			showShopMenu();
+		}
 	}
 	
+	private void showShopMenu() {
+		if (shopMenu == null) {
+			shopMenu = new ShopMenuScreen(this, dwarf);
+		}
+		shopMenu.showMenu();
+	}
+
 	@Override
 	public void resize(int width, int height) {
 		viewport.update(width, height, false);

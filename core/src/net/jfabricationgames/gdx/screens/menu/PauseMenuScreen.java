@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.SpecialAction;
-import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
@@ -20,7 +19,7 @@ import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 
 public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
-	private static final String INPUT_CONTEXT_NAME = "pauseMenu";
+	public static final String INPUT_CONTEXT_NAME = "pauseMenu";
 	
 	private static final String SOUND_ENTER_PAUSE_MENU = "enter_pause_menu";
 	private static final String ACTION_BACK_TO_GAME = "backToGame";
@@ -28,14 +27,12 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final int ITEM_MENU_ITEMS_PER_LINE = 4;
 	private static final int ITEM_MENU_LINES = 2;
 	
-	private static final String statePrefixItems = "item_";
-	private static final String statePrefixButtons = "button_";
+	private static final String STATE_PREFIX_ITEM = "item_";
+	private static final String STATE_PREFIX_BUTTON = "button_";
 	
-	private static final String pauseMenuStatesConfig = "config/menu/in_game_menu_states.json";
-	private static final Array<String> items = new Array<>(new String[] {"jump", "bow", "bomb"});
-	private static final Array<ItemAmmoType> ammoItems = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
-	
-	private DebugGridRenderer debugGridRenderer;
+	private static final String PAUSE_MENU_STATES_CONFIG = "config/menu/pause_menu_states.json";
+	private static final Array<String> ITEMS = new Array<>(new String[] {"jump", "bow", "bomb"});
+	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
 	private GameControlsDialog controlsDialog;
 	
@@ -51,11 +48,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private FocusButton buttonQuit;
 	
 	public PauseMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
-		super(pauseMenuStatesConfig, gameScreen, player);
-		
-		debugGridRenderer = new DebugGridRenderer();
-		debugGridRenderer.setLineOffsets(50f, 50f);
-		debugGridRenderer.stopDebug();
+		super(PAUSE_MENU_STATES_CONFIG, gameScreen, player);
 		
 		initialize();
 	}
@@ -73,7 +66,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		background = new MenuBox(12, 8, MenuBox.TextureType.GREEN_BOARD);
 		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		
-		itemMenu = new ItemSubMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, items);
+		itemMenu = new ItemSubMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, ITEMS);
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
@@ -99,7 +92,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonRestart.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		
-		ammoMenu = new AmmoSubMenu(ammoItems, player);
+		ammoMenu = new AmmoSubMenu(AMMO_ITEMS, player);
 		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
 		controlsDialog = new GameControlsDialog();
@@ -225,12 +218,12 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	@Override
 	protected void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
-		if (stateName.startsWith(statePrefixItems)) {
-			int itemIndex = Integer.parseInt(stateName.substring(statePrefixItems.length())) - 1;
+		if (stateName.startsWith(STATE_PREFIX_ITEM)) {
+			int itemIndex = Integer.parseInt(stateName.substring(STATE_PREFIX_ITEM.length())) - 1;
 			itemMenu.setHoveredIndex(itemIndex);
 		}
-		else if (stateName.startsWith(statePrefixButtons)) {
-			String buttonId = stateName.substring(statePrefixButtons.length());
+		else if (stateName.startsWith(STATE_PREFIX_BUTTON)) {
+			String buttonId = stateName.substring(STATE_PREFIX_BUTTON.length());
 			FocusButton button = null;
 			switch (buttonId) {
 				case "backToGame":
@@ -249,7 +242,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 					//dialog button; not handled here
 					break;
 				default:
-					throw new IllegalStateException("Unexpected button state identifier: " + statePrefixButtons + buttonId);
+					throw new IllegalStateException("Unexpected button state identifier: " + STATE_PREFIX_BUTTON + buttonId);
 			}
 			if (button != null) {
 				button.setFocused(true);
@@ -268,7 +261,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	@Override
 	public void dispose() {
 		super.dispose();
-		removeInputListener();
 		controlsDialog.dispose();
 	}
 }

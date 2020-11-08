@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.interactive;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.data.KeyItem;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.object.ObjectTypeConfig;
 
 public class LockedObject extends InteractiveObject {
 	

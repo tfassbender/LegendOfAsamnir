@@ -11,6 +11,10 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.object.destroyable.DestroyableObject;
+import net.jfabricationgames.gdx.object.event.EventObject;
+import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
+import net.jfabricationgames.gdx.object.interactive.LockedObject;
 import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -50,6 +54,7 @@ public class ObjectFactory extends AbstractFactory {
 		}
 		
 		Sprite sprite = createSprite(x, y, typeConfig.texture);
+		sprite.setScale(typeConfig.textureSizeFactorX * GameScreen.WORLD_TO_SCREEN, typeConfig.textureSizeFactorY * GameScreen.WORLD_TO_SCREEN);
 		
 		GameObject object;
 		switch (typeConfig.type) {

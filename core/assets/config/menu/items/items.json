@@ -14,5 +14,17 @@
 	bomb: {
 		atlas: packed/menu/menu.atlas,
 		texture: bomb,
+	},
+	health: {
+		atlas: packed/menu/menu.atlas,
+		texture: health,
+	},
+	shield: {
+		atlas: packed/menu/menu.atlas,
+		texture: shield,
+	},
+	mana: {
+		atlas: packed/menu/menu.atlas,
+		texture: mana,
 	}
 }
