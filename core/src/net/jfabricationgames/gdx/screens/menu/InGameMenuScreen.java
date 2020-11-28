@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
@@ -27,8 +28,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	
 	public static final String ASSET_GROUP_NAME = "main_menu";
 	public static final String FONT_NAME = "vikingMedium";
-	
 	public static final String SOUND_ERROR = "error";
+	public static final String ANIMATION_CONFIG_FILE = "config/animation/menu.json";
 	
 	protected GameScreen gameScreen;
 	protected FrameBuffer gameSnapshotFrameBuffer;
@@ -44,6 +45,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		super(statesConfig);
 		this.gameScreen = gameScreen;
 		this.player = player;
+		
+		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 		
 		gameSnapshotFrameBuffer = new FrameBuffer(Format.RGB888, VIRTUAL_WIDTH, VIRTUAL_HEIGHT, false);
 		screenTextWriter = new ScreenTextWriter();

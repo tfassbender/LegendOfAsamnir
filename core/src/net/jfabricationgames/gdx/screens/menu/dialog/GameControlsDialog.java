@@ -1,30 +1,15 @@
-package net.jfabricationgames.gdx.screens.menu.components;
+package net.jfabricationgames.gdx.screens.menu.dialog;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
+import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
-import net.jfabricationgames.gdx.text.ScreenTextWriter;
+import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 
-public class GameControlsDialog implements Disposable {
-	
-	private MenuBox background;
-	private MenuBox banner;
-	private FocusButton buttonBackToMenu;
-	
-	private boolean visible;
-	
-	private SpriteBatch batch;
-	private ScreenTextWriter screenTextWriter;
+public class GameControlsDialog extends InGameMenuDialog {
 	
 	public GameControlsDialog() {
-		batch = new SpriteBatch();
-		
-		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont(InGameMenuScreen.FONT_NAME);
-		
 		createControls();
 	}
 	
@@ -102,17 +87,5 @@ public class GameControlsDialog implements Disposable {
 		screenTextWriter.drawText("B", textColThreeX, textRowOneY - 6f * textRowOffset);
 		screenTextWriter.drawText("A", textColThreeX, textRowOneY - 7f * textRowOffset);
 		screenTextWriter.drawText("START", textColThreeX, textRowOneY - 8f * textRowOffset);
-	}
-	
-	public boolean isVisible() {
-		return visible;
-	}
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
-	
-	@Override
-	public void dispose() {
-		batch.dispose();
 	}
 }

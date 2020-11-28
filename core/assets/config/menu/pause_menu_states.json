@@ -1,14 +1,14 @@
 {
 	button_backToGame: {
 		down: button_controls,
-		right: item_1,
+		right: button_showMap,
 		select: backToGame
 		initial: true,
 	},
 	button_controls: {
 		up: button_backToGame,
 		down: button_restartGame,
-		right: item_1,
+		right: button_showMap,
 		select: showControls, 
 	},
 	button_restartGame: {
@@ -22,25 +22,34 @@
 		right: item_5,
 		select: quitGame,
 	},
+	button_showMap: {
+		left: button_controls,
+		down: item_1,
+		select: showMap,
+	},
 	item_1: {
+		up: button_showMap,
 		down: item_5,
 		left: button_restartGame,
 		right: item_2,
 		select: selectCurrentItem,
 	},
 	item_2: {
+		up: button_showMap,
 		down: item_6,
 		left: item_1,
 		right: item_3,
 		select: selectCurrentItem, 
 	},
 	item_3: {
+		up: button_showMap,
 		down: item_7,
 		left: item_2,
 		right: item_4,
 		select: selectCurrentItem, 
 	},
 	item_4: {
+		up: button_showMap,
 		down: item_8,
 		left: item_3,
 		select: selectCurrentItem, 
@@ -70,5 +79,8 @@
 	},
 	button_controlsDialogBack: {
 		select: closeControlsDialog,
+	}
+	button_mapDialogBack: {
+		select: closeMapDialog,
 	}
 }

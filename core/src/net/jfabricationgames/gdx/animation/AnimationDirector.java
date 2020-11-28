@@ -24,10 +24,10 @@ public class AnimationDirector<T extends TextureRegion> {
 		// null-check is needed because of the DummyAnimationDirector
 		if (animation != null) {
 			T keyFrame = animation.getKeyFrame(0);
-			spriteConfig = new AnimationSpriteConfig().setWidth(keyFrame.getRegionWidth()).setHeight(keyFrame.getRegionHeight());			
+			spriteConfig = new AnimationSpriteConfig().setWidth(keyFrame.getRegionWidth()).setHeight(keyFrame.getRegionHeight());
 		}
 	}
-
+	
 	/**
 	 * Draw the current key frame of this animation onto the {@link SpriteBatch}.<br>
 	 * ATTENTION: This method will throw an {@link IllegalStateException} if this AnimationDirector does not contain an AnimationSpriteConfig object.
@@ -41,6 +41,15 @@ public class AnimationDirector<T extends TextureRegion> {
 		float y = spriteConfig.y + ((spriteConfig.height - keyFrame.getRegionHeight()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
 		batch.draw(keyFrame, x, y, spriteConfig.width * 0.5f, spriteConfig.height * 0.5f, keyFrame.getRegionWidth(), keyFrame.getRegionHeight(),
 				GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+	}
+	
+	public void drawInMenu(SpriteBatch batch) {
+		if (spriteConfig == null) {
+			throw new IllegalStateException("No AnimationSpriteConfig. Please add an AnimationSpriteConfig in order to use the draw method");
+		}
+		
+		T keyFrame = getKeyFrame();
+		batch.draw(keyFrame, spriteConfig.x, spriteConfig.y, spriteConfig.width, spriteConfig.height);
 	}
 	
 	/**

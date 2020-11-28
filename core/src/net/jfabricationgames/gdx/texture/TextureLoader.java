@@ -11,7 +11,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 
 public class TextureLoader {
 	
-	public static final String DEFAULT_TEXTURE_NAME = "texture";
+	private static final String DEFAULT_TEXTURE_NAME = "texture";
 	
 	private static Json json = new Json();
 	
@@ -65,5 +65,9 @@ public class TextureLoader {
 					+ configFile + "\"; Requested Texture is: \"" + texture + "\"");
 		}
 		return region;
+	}
+	
+	public TextureRegion loadDefaultTexture() {
+		return loadTexture(DEFAULT_TEXTURE_NAME);
 	}
 }

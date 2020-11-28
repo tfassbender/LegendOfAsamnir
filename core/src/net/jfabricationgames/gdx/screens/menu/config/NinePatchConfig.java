@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screens.menu.components;
+package net.jfabricationgames.gdx.screens.menu.config;
 
 import net.jfabricationgames.gdx.texture.TextureConfig;
 

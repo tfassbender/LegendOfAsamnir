@@ -3,9 +3,13 @@ package net.jfabricationgames.gdx.screens.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.SpecialAction;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
@@ -13,12 +17,13 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
-import net.jfabricationgames.gdx.screens.menu.components.GameControlsDialog;
+import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
+import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 
 public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
-	
+
 	public static final String INPUT_CONTEXT_NAME = "pauseMenu";
 	
 	private static final String SOUND_ENTER_PAUSE_MENU = "enter_pause_menu";
@@ -30,11 +35,15 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final String STATE_PREFIX_ITEM = "item_";
 	private static final String STATE_PREFIX_BUTTON = "button_";
 	
+	private static final String MAP_ANIMATION_IDLE = "map_idle";
+	private static final String MAP_CONFIG_TUTORIAL = "config/menu/maps/tutorial.json";
+	
 	private static final String PAUSE_MENU_STATES_CONFIG = "config/menu/pause_menu_states.json";
 	private static final Array<String> ITEMS = new Array<>(new String[] {"jump", "bow", "bomb"});
 	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
 	private GameControlsDialog controlsDialog;
+	private GameMapDialog mapDialog;
 	
 	private MenuBox background;
 	private MenuBox headerBanner;
@@ -42,10 +51,13 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private MenuBox itemMenuBanner;
 	private AmmoSubMenu ammoMenu;
 	private MenuBox ammoMenuBanner;
+	private MenuBox mapBanner;
+	private AnimationDirector<TextureRegion> mapAnimation;
 	private FocusButton buttonBackToGame;
 	private FocusButton buttonControls;
 	private FocusButton buttonRestart;
 	private FocusButton buttonQuit;
+	private FocusButton buttonShowMap;
 	
 	public PauseMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
 		super(PAUSE_MENU_STATES_CONFIG, gameScreen, player);
@@ -74,18 +86,26 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		int buttonPosX = 160;
 		int lowestButtonY = 150;
 		int buttonGapY = 40;
-		buttonBackToGame = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
-				.setPosition(buttonPosX, lowestButtonY + 3f * (buttonHeight + buttonGapY)).build();
-		buttonControls = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
-				.setPosition(buttonPosX, lowestButtonY + 2f * (buttonHeight + buttonGapY)).build();
-		buttonRestart = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
-				.setPosition(buttonPosX, lowestButtonY + 1f * (buttonHeight + buttonGapY)).build();
-		buttonQuit = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED).setSize(buttonWidth, buttonHeight)
-				.setPosition(buttonPosX, lowestButtonY).build();
+		buttonBackToGame = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(buttonWidth, buttonHeight) //
+				.setPosition(buttonPosX, lowestButtonY + 3f * (buttonHeight + buttonGapY)) //
+				.build();
+		buttonControls = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(buttonWidth, buttonHeight) //
+				.setPosition(buttonPosX, lowestButtonY + 2f * (buttonHeight + buttonGapY)) //
+				.build();
+		buttonRestart = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(buttonWidth, buttonHeight) //
+				.setPosition(buttonPosX, lowestButtonY + 1f * (buttonHeight + buttonGapY)) //
+				.build();
+		buttonQuit = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(buttonWidth, buttonHeight) //
+				.setPosition(buttonPosX, lowestButtonY) //
+				.build();
 		
 		buttonBackToGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonControls.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
@@ -95,7 +115,17 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		ammoMenu = new AmmoSubMenu(AMMO_ITEMS, player);
 		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
+		mapBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
+		buttonShowMap = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(120, 35) //
+				.setPosition(625, 373) //
+				.build();
+		buttonShowMap.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		mapAnimation = AnimationManager.getInstance().getAnimationDirector(MAP_ANIMATION_IDLE);
+		
 		controlsDialog = new GameControlsDialog();
+		mapDialog = new GameMapDialog(MAP_CONFIG_TUTORIAL);
 	}
 	
 	@Override
@@ -133,9 +163,20 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		stateMachine.changeState("button_controlsDialogBack");
 	}
 	
+	public void showMap() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Show Map' selected");
+		mapDialog.setVisible(true);
+		stateMachine.changeState("button_mapDialogBack");
+	}
+	
 	public void closeControlsDialog() {
 		controlsDialog.setVisible(false);
 		stateMachine.changeState("button_controls");
+	}
+	
+	public void closeMapDialog() {
+		mapDialog.setVisible(false);
+		stateMachine.changeState("button_showMap");
 	}
 	
 	@Override
@@ -146,6 +187,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		batch.begin();
 		drawBackground();
 		drawItemMenu();
+		drawMap(delta);
 		drawAmmoMenu();
 		drawButtons();
 		drawBanners();
@@ -154,6 +196,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		drawTexts();
 		
 		drawControlsDialog();
+		drawMapDialog();
 		
 		debugGridRenderer.render(delta);
 	}
@@ -167,8 +210,19 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		itemMenu.draw(batch, 625, 150, 400, 200);
 	}
 	
+	private void drawMap(float delta) {
+		mapAnimation.setSpriteConfig(new AnimationSpriteConfig().setX(670).setY(430).setWidth(80).setHeight(80));
+		if (buttonShowMap.hasFocus()) {
+			mapAnimation.increaseStateTime(delta);			
+		}
+		else {
+			mapAnimation.resetStateTime();
+		}
+		mapAnimation.drawInMenu(batch);
+	}
+	
 	private void drawAmmoMenu() {
-		ammoMenu.draw(batch, 825, 370, 200, 110);
+		ammoMenu.draw(batch, 825, 380, 200, 110);
 	}
 	
 	private void drawButtons() {
@@ -176,16 +230,22 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonControls.draw(batch);
 		buttonRestart.draw(batch);
 		buttonQuit.draw(batch);
+		buttonShowMap.draw(batch);
 	}
 	
 	private void drawBanners() {
 		headerBanner.draw(batch, 125, 540, 650, 250);
 		itemMenuBanner.draw(batch, 640, 260, 200, 150);
-		ammoMenuBanner.draw(batch, 800, 415, 250, 150);
+		ammoMenuBanner.draw(batch, 800, 465, 250, 150);
+		mapBanner.draw(batch, 610, 465, 200, 150);
 	}
 	
 	private void drawControlsDialog() {
 		controlsDialog.draw();
+	}
+	
+	private void drawMapDialog() {
+		mapDialog.draw();
 	}
 	
 	private void drawTexts() {
@@ -199,7 +259,12 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		screenTextWriter.setScale(0.8f);
 		screenTextWriter.drawText("Items", 690, 345);
 		
-		screenTextWriter.drawText("Ammo", 860, 500);
+		screenTextWriter.drawText("Ammo", 860, 550);
+		
+		screenTextWriter.drawText("Map", 670, 550);
+		
+		screenTextWriter.setScale(0.55f);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonShowMap) + "Show Map", 675, 408, 80, Align.center, false);
 		
 		screenTextWriter.setScale(1.15f);
 		int buttonTextX = 160;
@@ -238,7 +303,11 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				case "quit":
 					button = buttonQuit;
 					break;
+				case "showMap":
+					button = buttonShowMap;
+					break;
 				case "controlsDialogBack":
+				case "mapDialogBack":
 					//dialog button; not handled here
 					break;
 				default:
@@ -255,6 +324,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonControls.setFocused(false);
 		buttonRestart.setFocused(false);
 		buttonQuit.setFocused(false);
+		buttonShowMap.setFocused(false);
 		itemMenu.setHoveredIndex(-1);
 	}
 	
@@ -262,5 +332,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	public void dispose() {
 		super.dispose();
 		controlsDialog.dispose();
+		mapDialog.dispose();
 	}
 }

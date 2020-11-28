@@ -3671,14 +3671,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_idle
   rotate: false
   xy: 1280, 758
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_jump
   rotate: false
   xy: 1280, 758

@@ -161,6 +161,13 @@
 				menu/background/small_banner,
 				menu/background/yellow_board,
 				menu/background/yellow_paper,
+				
+				//mini maps
+				map/mini_maps,
+				
+				//map texture
+				objects/animated/map/idle,
+				objects/animated/map/unfold,
 			]
 		},
 	}
