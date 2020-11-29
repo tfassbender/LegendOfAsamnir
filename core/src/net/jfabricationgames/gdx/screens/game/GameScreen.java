@@ -294,6 +294,16 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public String getGameMapConfigPath() {
 		return map.getGlobalMapProperties().get(GameMap.GlobalMapPropertyKeys.MINI_MAP_CONFIG_PATH.getKey(), String.class);
 	}
+	
+	/**
+	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right) 
+	 */
+	public Vector2 getPlayersPositionOnMap() {
+		Vector2 playersRelativePosition = dwarf.getPosition().cpy().scl(SCREEN_TO_WORLD);
+		playersRelativePosition.x /= map.getMapWidth();
+		playersRelativePosition.y /= map.getMapHeight();
+		return playersRelativePosition;
+	}
 
 	@Override
 	public void resize(int width, int height) {

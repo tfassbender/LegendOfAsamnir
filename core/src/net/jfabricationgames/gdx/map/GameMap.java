@@ -26,7 +26,8 @@ public class GameMap implements Disposable {
 	
 	public enum GlobalMapPropertyKeys {
 		
-		MINI_MAP_CONFIG_PATH("mini_map_config_path");
+		MINI_MAP_CONFIG_PATH("mini_map_config_path"), MAP_WIDTH_IN_TILE_DIMENSIONS("width"), MAP_HEIGHT_IN_TILE_DIMENSIONS(
+				"height"), MAP_TILE_WIDTH_IN_PIXELS("tilewidth"), MAP_TILE_HEIGHT_IN_PIXELS("tileheight");
 		
 		private final String key;
 		
@@ -213,6 +214,15 @@ public class GameMap implements Disposable {
 	
 	public MapProperties getGlobalMapProperties() {
 		return map.getProperties();
+	}
+	
+	public float getMapWidth() {
+		return map.getProperties().get(GlobalMapPropertyKeys.MAP_WIDTH_IN_TILE_DIMENSIONS.getKey(), Integer.class) //
+				* map.getProperties().get(GlobalMapPropertyKeys.MAP_TILE_WIDTH_IN_PIXELS.getKey(), Integer.class);
+	}
+	public float getMapHeight() {
+		return map.getProperties().get(GlobalMapPropertyKeys.MAP_HEIGHT_IN_TILE_DIMENSIONS.getKey(), Integer.class) //
+				* map.getProperties().get(GlobalMapPropertyKeys.MAP_TILE_HEIGHT_IN_PIXELS.getKey(), Integer.class);
 	}
 	
 	@Override
