@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -22,6 +23,21 @@ import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class GameMap implements Disposable {
+	
+	public enum GlobalMapPropertyKeys {
+		
+		MINI_MAP_CONFIG_PATH("mini_map_config_path");
+		
+		private final String key;
+		
+		private GlobalMapPropertyKeys(String key) {
+			this.key = key;
+		}
+		
+		public String getKey() {
+			return key;
+		}
+	}
 	
 	public static final String MAP_MATERIALS_CONFIG_FILE = "config/map/materials.json";
 	public static final int[] BACKGROUND_LAYERS = new int[] {0, 1};
@@ -183,13 +199,6 @@ public class GameMap implements Disposable {
 		projectiles.removeValue(projectile, false);
 	}
 	
-	@Override
-	public void dispose() {
-		renderer.dispose();
-		map.dispose();
-		batch.dispose();
-	}
-	
 	public ItemFactory getItemFactory() {
 		return itemFactory;
 	}
@@ -200,5 +209,16 @@ public class GameMap implements Disposable {
 	
 	public EnemyFactory getEnemyFactory() {
 		return enemyFactory;
+	}
+	
+	public MapProperties getGlobalMapProperties() {
+		return map.getProperties();
+	}
+	
+	@Override
+	public void dispose() {
+		renderer.dispose();
+		map.dispose();
+		batch.dispose();
 	}
 }

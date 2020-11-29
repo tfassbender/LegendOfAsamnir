@@ -8,7 +8,7 @@ import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
-public class InGameMenuDialog implements Disposable {
+public abstract  class InGameMenuDialog implements Disposable {
 	
 	protected MenuBox background;
 	protected MenuBox banner;

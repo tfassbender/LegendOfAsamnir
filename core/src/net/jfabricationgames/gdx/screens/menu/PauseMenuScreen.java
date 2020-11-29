@@ -17,13 +17,13 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
-import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
-import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
+import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
 
 public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
-
+	
 	public static final String INPUT_CONTEXT_NAME = "pauseMenu";
 	
 	private static final String SOUND_ENTER_PAUSE_MENU = "enter_pause_menu";
@@ -36,9 +36,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final String STATE_PREFIX_BUTTON = "button_";
 	
 	private static final String MAP_ANIMATION_IDLE = "map_idle";
-	private static final String MAP_CONFIG_TUTORIAL = "config/menu/maps/tutorial.json";
-	
 	private static final String PAUSE_MENU_STATES_CONFIG = "config/menu/pause_menu_states.json";
+	
 	private static final Array<String> ITEMS = new Array<>(new String[] {"jump", "bow", "bomb"});
 	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
@@ -125,7 +124,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		mapAnimation = AnimationManager.getInstance().getAnimationDirector(MAP_ANIMATION_IDLE);
 		
 		controlsDialog = new GameControlsDialog();
-		mapDialog = new GameMapDialog(MAP_CONFIG_TUTORIAL);
+		mapDialog = new GameMapDialog(gameScreen.getGameMapConfigPath());
 	}
 	
 	@Override
@@ -213,7 +212,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private void drawMap(float delta) {
 		mapAnimation.setSpriteConfig(new AnimationSpriteConfig().setX(670).setY(430).setWidth(80).setHeight(80));
 		if (buttonShowMap.hasFocus()) {
-			mapAnimation.increaseStateTime(delta);			
+			mapAnimation.increaseStateTime(delta);
 		}
 		else {
 			mapAnimation.resetStateTime();

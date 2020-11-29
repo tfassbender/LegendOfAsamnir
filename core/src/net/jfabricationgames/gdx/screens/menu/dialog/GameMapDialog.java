@@ -25,6 +25,13 @@ public class GameMapDialog extends InGameMenuDialog {
 	}
 	
 	private void loadConfig(String mapConfigPath) {
+		if (mapConfigPath == null) {
+			Gdx.app.debug(getClass().getSimpleName(), "No map config given in current map. Mini-Map will not be shown.");
+			config = new MapConfig();
+			config.name = "Map";
+			return;
+		}
+		
 		Gdx.app.debug(getClass().getSimpleName(), "Loading map config from file: " + mapConfigPath);
 		Json json = new Json();
 		config = json.fromJson(MapConfig.class, Gdx.files.internal(mapConfigPath));
@@ -36,7 +43,7 @@ public class GameMapDialog extends InGameMenuDialog {
 		background = new MenuBox(12, 8, MenuBox.TextureType.YELLOW_PAPER);
 		banner = new MenuBox(8, 2, MenuBox.TextureType.BIG_BANNER);
 		buttonBackToMenu = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(935, 550).setSize(110, 40).build();
+				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(835, 550).setSize(110, 40).build();
 		buttonBackToMenu.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonBackToMenu.setFocused(true);
 	}
@@ -45,11 +52,13 @@ public class GameMapDialog extends InGameMenuDialog {
 		if (visible) {
 			batch.begin();
 			
-			background.draw(batch, 20, -20, 1150, 640);
-			banner.draw(batch, 80, 480, 600, 200);
+			background.draw(batch, 120, -20, 950, 640);
+			banner.draw(batch, 200, 480, 600, 200);
 			buttonBackToMenu.draw(batch);
 			
-			batch.draw(mapTexture, 100 + (1000 - config.textureHeight) / 2, 40 + (500 - config.textureHeight) / 2, config.textureWidth, config.textureHeight);
+			if (mapTexture != null) {
+				batch.draw(mapTexture, 100 + (1000 - config.textureHeight) / 2, 40 + (500 - config.textureHeight) / 2, config.textureWidth, config.textureHeight);
+			}
 			
 			batch.end();
 			
@@ -63,9 +72,14 @@ public class GameMapDialog extends InGameMenuDialog {
 	private void drawText() {
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.2f);
-		screenTextWriter.drawText(config.name, 155, 594, 450, Align.center, false);
+		screenTextWriter.drawText(config.name, 275, 594, 450, Align.center, false);
 		
 		screenTextWriter.setScale(0.8f);
-		screenTextWriter.drawText(InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS + "Back", 970, 593);
+		screenTextWriter.drawText(InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS + "Back", 870, 593);
+		
+		if (mapTexture == null) {
+			screenTextWriter.setScale(1.5f);
+			screenTextWriter.drawText("No Map Available for this level", 200, 350, 790, Align.center, true);
+		}
 	}
 }

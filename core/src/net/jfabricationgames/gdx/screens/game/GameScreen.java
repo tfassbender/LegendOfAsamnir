@@ -108,8 +108,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 				true, /* velocities */
 				false /* contacts */);
 		
-		map = new GameMap("map/map3.tmx", camera);
-		//map = new GameMap("map/level_tutorial.tmx", camera);
+		//map = new GameMap("map/map3.tmx", camera);
+		map = new GameMap("map/level_tutorial.tmx", camera);
 		
 		dwarf = new Dwarf();
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
@@ -286,6 +286,13 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			shopMenu = new ShopMenuScreen(this, dwarf);
 		}
 		shopMenu.showMenu();
+	}
+
+	/**
+	 * Get the path of the configuration file, for the mini-map from the current game map or null if the property is not set.
+	 */
+	public String getGameMapConfigPath() {
+		return map.getGlobalMapProperties().get(GameMap.GlobalMapPropertyKeys.MINI_MAP_CONFIG_PATH.getKey(), String.class);
 	}
 
 	@Override
