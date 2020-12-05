@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="160">
+ <properties>
+  <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
+ </properties>
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -372,9 +375,6 @@ Arrows: 25 Coins..</property>
     <property name="fastTravelPointId" value="test_map_point_2"/>
     <property name="fastTravelPointName" value="Down Left"/>
    </properties>
-   <point/>
-  </object>
-  <object id="159" name="object.fastTravelPoint" x="336" y="1425">
    <point/>
   </object>
  </objectgroup>

@@ -1,0 +1,9 @@
+{
+	name: Test Map 3,
+	texture: {
+		atlas: packed/menu/menu.atlas,
+		texture: mini_map_test_map_3
+	},
+	textureWidth: 500,
+	textureHeight: 500,
+}

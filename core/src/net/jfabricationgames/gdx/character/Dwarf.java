@@ -19,6 +19,7 @@ import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.character.container.CharacterFastTravelContainer;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -84,10 +85,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	
 	private CharacterPropertiesContainer properties;
 	private CharacterItemContainer itemContainer;
+	private CharacterFastTravelContainer fastTravelContainer;
 	
 	public Dwarf() {
 		properties = new CharacterPropertiesContainer();
 		itemContainer = new CharacterItemContainer(properties);
+		fastTravelContainer = new CharacterFastTravelContainer();
 		
 		animationManager = AnimationManager.getInstance();
 		animationManager.loadAnimations(assetConfigFileName);
@@ -445,6 +448,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public CharacterItemContainer getItemContainer() {
 		return itemContainer;
+	}
+	
+	@Override
+	public CharacterFastTravelContainer getFastTravelContainer() {
+		return fastTravelContainer;
 	}
 	
 	@Override

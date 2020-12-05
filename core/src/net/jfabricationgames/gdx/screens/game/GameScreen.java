@@ -10,12 +10,14 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.Dwarf;
+import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -108,10 +110,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 				true, /* velocities */
 				false /* contacts */);
 		
+		// create the dwarf before the map, because it contains event listeners that listen for events that are fired when the map is created
+		dwarf = new Dwarf();
+		
 		map = new GameMap("map/map3.tmx", camera);
 		//map = new GameMap("map/level_tutorial.tmx", camera);
 		
-		dwarf = new Dwarf();
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
@@ -287,7 +291,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		}
 		shopMenu.showMenu();
 	}
-
+	
 	/**
 	 * Get the path of the configuration file, for the mini-map from the current game map or null if the property is not set.
 	 */
@@ -296,7 +300,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	/**
-	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right) 
+	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right)
 	 */
 	public Vector2 getPlayersPositionOnMap() {
 		Vector2 playersRelativePosition = dwarf.getPosition().cpy().scl(SCREEN_TO_WORLD);
@@ -304,7 +308,19 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		playersRelativePosition.y /= map.getMapHeight();
 		return playersRelativePosition;
 	}
-
+	
+	public Array<CharacterFastTravelProperties> getFastTravelPositions() {
+		return dwarf.getFastTravelContainer().getFastTravelPositions();
+	}
+	
+	public float getMapWidth() {
+		return map.getMapWidth();
+	}
+	
+	public float getMapHeight() {
+		return map.getMapHeight();
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 		viewport.update(width, height, false);

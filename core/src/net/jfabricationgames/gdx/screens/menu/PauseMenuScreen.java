@@ -124,7 +124,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		mapAnimation = AnimationManager.getInstance().getAnimationDirector(MAP_ANIMATION_IDLE);
 		
 		controlsDialog = new GameControlsDialog();
-		mapDialog = new GameMapDialog(gameScreen.getGameMapConfigPath(), gameScreen.getPlayersPositionOnMap());
+		mapDialog = new GameMapDialog(gameScreen);
 	}
 	
 	@Override
@@ -149,7 +149,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		closeControlsDialog();
 		closeMapDialog();
-		mapDialog.updatePlayersRelativePositionOnMap(gameScreen.getPlayersPositionOnMap());
+		mapDialog.updateMapConfig(gameScreen);
 		
 		takeGameSnapshot();
 		playMenuSound(SOUND_ENTER_PAUSE_MENU);

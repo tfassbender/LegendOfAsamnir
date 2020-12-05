@@ -54,4 +54,10 @@ public class FastTravelPointEventDto {
 		this.positionOnMapY = positionOnMapY;
 		return this;
 	}
+	
+	@Override
+	public String toString() {
+		return "FastTravelPointEventDto [fastTravelPointId=" + fastTravelPointId + ", fastTravelPointName=" + fastTravelPointName + ", enabled="
+				+ enabled + ", positionOnMapX=" + positionOnMapX + ", positionOnMapY=" + positionOnMapY + "]";
+	}
 }

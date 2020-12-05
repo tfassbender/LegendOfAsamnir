@@ -125,9 +125,9 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private void executeInteraction() {
+		actionExecuted = true;
 		performAction();
 		dropItems();
-		actionExecuted = true;
 		if (typeConfig.textureAfterAction != null) {
 			sprite = createSprite(typeConfig.textureAfterAction);
 		}

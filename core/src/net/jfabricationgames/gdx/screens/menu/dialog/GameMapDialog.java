@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
+import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
@@ -29,12 +32,28 @@ public class GameMapDialog extends InGameMenuDialog {
 	private MapConfig config;
 	private Vector2 playersRelativePositionOnMap;
 	
-	public GameMapDialog(String mapConfigPath, Vector2 playersRelativePositionOnMap) {
-		this.playersRelativePositionOnMap = playersRelativePositionOnMap;
-		loadConfig(mapConfigPath);
+	private Array<CharacterFastTravelProperties> fastTravelPoints;
+	
+	private float mapWidth;
+	private float mapHeight;
+	
+	public GameMapDialog(GameScreen gameScreen) {
+		updateMapConfig(gameScreen);
+		
+		loadConfig(gameScreen.getGameMapConfigPath());
 		createControls();
 		
 		shapeRenderer = new ShapeRenderer();
+	}
+	
+	public void updateMapConfig(GameScreen gameScreen) {
+		playersRelativePositionOnMap = gameScreen.getPlayersPositionOnMap();
+		fastTravelPoints = gameScreen.getFastTravelPositions();
+		mapWidth = gameScreen.getMapWidth();
+		mapHeight = gameScreen.getMapHeight();
+		
+		playerPositionPointerBlinkOn = true;
+		playerPositionPointerBlinkTimer = 0;
 	}
 	
 	private void loadConfig(String mapConfigPath) {
@@ -79,22 +98,10 @@ public class GameMapDialog extends InGameMenuDialog {
 			
 			batch.end();
 			
-			if (hasMapTexture()) {
-				updateBlinkingPlayersPosition(delta);
-				
-				if (playerPositionPointerBlinkOn) {
-					shapeRenderer.begin(ShapeType.Filled);
-					
-					float playerPositionX = mapTextureX + (config.textureWidth * playersRelativePositionOnMap.x);
-					float playerPositionY = mapTextureY + (config.textureHeight * playersRelativePositionOnMap.y);
-					float markerRadius = 5;
-					
-					shapeRenderer.setColor(Color.RED);
-					shapeRenderer.circle(playerPositionX, playerPositionY, markerRadius);
-					
-					shapeRenderer.end();
-				}
-			}
+			shapeRenderer.begin(ShapeType.Filled);
+			drawPlayerPosition(delta, mapTextureX, mapTextureY);
+			drawFastTravelPoints(delta, mapTextureX, mapTextureY);
+			shapeRenderer.end();
 			
 			//drawing the map and the text in the same batch won't work for some reason
 			batch.begin();
@@ -107,11 +114,47 @@ public class GameMapDialog extends InGameMenuDialog {
 		return mapTexture != null;
 	}
 	
+	private void drawPlayerPosition(float delta, float mapTextureX, float mapTextureY) {
+		if (hasMapTexture()) {
+			updateBlinkingPlayersPosition(delta);
+			
+			if (playerPositionPointerBlinkOn) {
+				float playerPositionX = mapTextureX + (config.textureWidth * playersRelativePositionOnMap.x);
+				float playerPositionY = mapTextureY + (config.textureHeight * playersRelativePositionOnMap.y);
+				float markerRadius = 5;
+				
+				shapeRenderer.setColor(Color.RED);
+				shapeRenderer.circle(playerPositionX, playerPositionY, markerRadius);
+			}
+		}
+	}
+	
 	private void updateBlinkingPlayersPosition(float delta) {
 		playerPositionPointerBlinkTimer += delta;
 		if (playerPositionPointerBlinkTimer > PLAYER_POSITION_POINTER_BLINK_DELAY) {
 			playerPositionPointerBlinkTimer -= PLAYER_POSITION_POINTER_BLINK_DELAY;
 			playerPositionPointerBlinkOn = !playerPositionPointerBlinkOn;
+		}
+	}
+	
+	private void drawFastTravelPoints(float delta, float mapTextureX, float mapTextureY) {
+		for (CharacterFastTravelProperties fastTravelPoint : fastTravelPoints) {
+			float relativePositionX = fastTravelPoint.positionOnMapX * GameScreen.SCREEN_TO_WORLD / mapWidth;
+			float relativePositionY = fastTravelPoint.positionOnMapY * GameScreen.SCREEN_TO_WORLD / mapHeight;
+			
+			float positionX = mapTextureX + (config.textureWidth * relativePositionX);
+			float positionY = mapTextureY + (config.textureHeight * relativePositionY);
+			
+			float markerRadius = 6;
+			
+			if (fastTravelPoint.enabled) {
+				shapeRenderer.setColor(Color.ORANGE);
+			}
+			else {
+				shapeRenderer.setColor(Color.LIGHT_GRAY);
+			}
+			
+			shapeRenderer.circle(positionX, positionY, markerRadius);
 		}
 	}
 	
@@ -127,12 +170,6 @@ public class GameMapDialog extends InGameMenuDialog {
 			screenTextWriter.setScale(1.5f);
 			screenTextWriter.drawText("No Map Available for this level", 200, 350, 790, Align.center, true);
 		}
-	}
-	
-	public void updatePlayersRelativePositionOnMap(Vector2 position) {
-		this.playersRelativePositionOnMap = position;
-		playerPositionPointerBlinkOn = true;
-		playerPositionPointerBlinkTimer = 0;
 	}
 	
 	@Override

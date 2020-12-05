@@ -36,5 +36,4 @@ public class CharacterProperties {
 	public final float coinsDecreasePerSecond = 20f;
 	
 	public Vector2 respawnPoint;
-	
 }
