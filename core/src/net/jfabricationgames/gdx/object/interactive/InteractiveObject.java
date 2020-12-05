@@ -26,6 +26,8 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class InteractiveObject extends GameObject implements Interactive {
 	
+	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
+	
 	private boolean actionExecuted = false;
 	private boolean changedBodyToSensor = false;
 	private AnimationDirector<TextureRegion> interactionAnimation;
@@ -46,6 +48,23 @@ public class InteractiveObject extends GameObject implements Interactive {
 		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.3f);
 		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.3f);
 		return spriteConfig;
+	}
+	
+	@Override
+	public void postAddToGameMap() {
+		super.postAddToGameMap();
+		
+		if (isActivateOnStartup()) {
+			executeInteraction();
+		}
+	}
+	
+	public boolean isActivateOnStartup() {
+		return Boolean.parseBoolean(mapProperties.get(MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP, "false", String.class));
+	}
+	
+	public boolean isActionExecuted() {
+		return actionExecuted;
 	}
 	
 	@Override
@@ -94,12 +113,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 			if (typeConfig.animationAction != null) {
 				animation = getActionAnimation();
 			}
-			performAction();
-			dropItems();
-			actionExecuted = true;
-			if (typeConfig.textureAfterAction != null) {
-				sprite = createSprite(typeConfig.textureAfterAction);
-			}
+			executeInteraction();
 		}
 	}
 	
@@ -108,6 +122,15 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	private boolean canBeExecutedByConfig() {
 		return typeConfig.multipleActionExecutionsPossible || !actionExecuted;
+	}
+	
+	private void executeInteraction() {
+		performAction();
+		dropItems();
+		actionExecuted = true;
+		if (typeConfig.textureAfterAction != null) {
+			sprite = createSprite(typeConfig.textureAfterAction);
+		}
 	}
 	
 	@Override
@@ -131,8 +154,14 @@ public class InteractiveObject extends GameObject implements Interactive {
 	@Override
 	public void beginContact(Contact contact) {
 		if (isPlayableCharacterContact(contact)) {
-			InteractionManager.getInstance().movedInRange(this);
-			playInteractionAnimationAppear();
+			if (typeConfig.interactByContact) {
+				PlayableCharacter playableCharacter = getPlayableCharacterByContact(contact);
+				interact(playableCharacter.getItemContainer());
+			}
+			else {
+				InteractionManager.getInstance().movedInRange(this);
+				playInteractionAnimationAppear();
+			}
 		}
 	}
 	
@@ -157,6 +186,22 @@ public class InteractiveObject extends GameObject implements Interactive {
 			}
 		}
 		return false;
+	}
+	
+	protected PlayableCharacter getPlayableCharacterByContact(Contact contact) {
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		
+		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB)) {
+			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
+			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
+			
+			if (sensorUserData == this && sensorCollidingUserData != null && sensorCollidingUserData instanceof PlayableCharacter) {
+				return (PlayableCharacter) sensorCollidingUserData;
+			}
+		}
+		
+		return null;
 	}
 	
 	private void playInteractionAnimationAppear() {

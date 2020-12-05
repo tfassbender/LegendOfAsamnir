@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 
 public enum InteractiveAction {
@@ -28,6 +29,14 @@ public enum InteractiveAction {
 		public void execute(InteractiveObject object) {
 			//fire an event that is handled by the GameScreen
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SHOW_IN_GAME_SHOP_MENU));
+		}
+	},
+	ENABLE_FAST_TRAVEL_POINT {
+		
+		@Override
+		public void execute(InteractiveObject object) {
+			FastTravelPointEventDto eventDto = FastTravelPointEventDto.createFromGameObject(object, object.getMapProperties());
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.FAST_TRAVEL_POINT_ENABLED).setParameterObject(eventDto));
 		}
 	};
 	

@@ -178,6 +178,7 @@ public class GameMap implements Disposable {
 	
 	public void addObject(GameObject object) {
 		objects.add(object);
+		object.postAddToGameMap();
 	}
 	
 	public void removeObject(GameObject gameObject) {

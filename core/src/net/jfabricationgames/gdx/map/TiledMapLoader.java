@@ -132,7 +132,9 @@ public class TiledMapLoader {
 					items.add(itemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				case OBJECT_NAME_OBJECT:
-					objects.add(objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties));
+					GameObject gameObject = objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties);
+					objects.add(gameObject);
+					gameObject.postAddToGameMap();
 					break;
 				case OBJECT_NAME_ENEMY:
 					enemies.add(enemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));

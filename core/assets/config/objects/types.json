@@ -147,7 +147,7 @@
 	},
 	spawnPoint: {
 		type: SPAWN_POINT,
-		collsitionType: CONFIG_OBJECT,
+		collisionType: CONFIG_OBJECT,
 		
 		texture: empty,
 	},
@@ -176,4 +176,17 @@
 		multipleActionExecutionsPossible: true,
 		interactiveAction: OPEN_SHOP_MENU,
 	},
+	fastTravelPoint: {
+		type: INTERACTIVE,
+		
+		texture: rainbow_bridge_disabled,
+		textureAfterAction: rainbow_bridge_enabled,
+		
+		collisionType: OBSTACLE_SENSOR,
+		isSensor: true,
+		interactByContact: true,
+		
+		initAction: REGISTER_FAST_TRAVEL_POINT,
+		interactiveAction: ENABLE_FAST_TRAVEL_POINT,
+	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="157">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="160">
  <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -357,6 +357,24 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
   <object id="156" name="object.shop" x="336" y="144">
+   <point/>
+  </object>
+  <object id="157" name="object.fastTravelPoint" x="143" y="400">
+   <properties>
+    <property name="fastTravelPointId" value="test_map_point_1"/>
+    <property name="fastTravelPointName" value="Left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="158" name="object.fastTravelPoint" x="160" y="1440">
+   <properties>
+    <property name="activateOnStartup" value="true"/>
+    <property name="fastTravelPointId" value="test_map_point_2"/>
+    <property name="fastTravelPointName" value="Down Left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="159" name="object.fastTravelPoint" x="336" y="1425">
    <point/>
   </object>
  </objectgroup>

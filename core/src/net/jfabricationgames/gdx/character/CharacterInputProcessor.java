@@ -1,7 +1,6 @@
 package net.jfabricationgames.gdx.character;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
-import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
@@ -22,7 +21,6 @@ public class CharacterInputProcessor implements InputActionListener {
 	private static final String ACTION_INTERACT = "interact";
 	
 	private PlayableCharacter inputCharacter;
-	private CharacterItemContainer itemContainer;
 	
 	private boolean moveUp = false;
 	private boolean moveDown = false;
@@ -49,9 +47,8 @@ public class CharacterInputProcessor implements InputActionListener {
 	
 	private boolean spinAttackCharged;
 	
-	public CharacterInputProcessor(PlayableCharacter inputCharacter, CharacterItemContainer itemContainer) {
+	public CharacterInputProcessor(PlayableCharacter inputCharacter) {
 		this.inputCharacter = inputCharacter;
-		this.itemContainer = itemContainer;
 		timeTillIdleAnimation = inputCharacter.getTimeTillIdleAnimation();
 		timeTillSpinAttack = inputCharacter.getHoldTimeTillSpinAttack();
 		jumpDirection = MovingDirection.NONE;
@@ -318,7 +315,7 @@ public class CharacterInputProcessor implements InputActionListener {
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
 		if (action.equals(ACTION_INTERACT) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
-			InteractionManager.getInstance().interact(inputCharacter, itemContainer);
+			InteractionManager.getInstance().interact(inputCharacter, inputCharacter.getItemContainer());
 		}
 		return false;
 	}

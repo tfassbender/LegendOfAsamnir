@@ -107,7 +107,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		animation = getAnimation();
 		
 		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
-		movementHandler = new CharacterInputProcessor(this, itemContainer);
+		movementHandler = new CharacterInputProcessor(this);
 		
 		EventHandler.getInstance().registerEventListener(this);
 	}
@@ -440,6 +440,11 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public void setSlowedDown(boolean slowedDown) {
 		properties.setSlowedDown(slowedDown);
+	}
+	
+	@Override
+	public CharacterItemContainer getItemContainer() {
+		return itemContainer;
 	}
 	
 	@Override

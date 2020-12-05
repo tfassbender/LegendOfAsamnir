@@ -66,11 +66,24 @@ public class GameObject implements Hittable {
 	
 	protected void readTypeConfig() {
 		physicsBodyProperties = new PhysicsBodyProperties().setType(typeConfig.bodyType).setSensor(typeConfig.isSensor).setDensity(typeConfig.density)
-				.setFriction(typeConfig.friction).setRestitution(typeConfig.restitution).setCollisionType(typeConfig.collsitionType);
+				.setFriction(typeConfig.friction).setRestitution(typeConfig.restitution).setCollisionType(typeConfig.collisionType);
 		physicsBodySizeFactor = new Vector2(typeConfig.physicsBodySizeFactorX, typeConfig.physicsBodySizeFactorY);
 		physicsBodyOffsetFactor = new Vector2(typeConfig.physicsBodyOffsetFactorX, typeConfig.physicsBodyOffsetFactorY);
 		
 		hitSound = typeConfig.hitSound;
+	}
+	
+	/**
+	 * Called by the GameMap or the TiledMapLoader directly after the GameObject was added.
+	 */
+	public void postAddToGameMap() {
+		executeInitAction();
+	}
+	
+	private void executeInitAction() {
+		if (typeConfig.initAction != null) {
+			typeConfig.initAction.execute(this);
+		}
 	}
 	
 	protected void createPhysicsBody(World world, float x, float y) {
@@ -195,5 +208,9 @@ public class GameObject implements Hittable {
 	
 	protected void setTextureAtlas(TextureAtlas textureAtlas) {
 		this.textureAtlas = textureAtlas;
+	}
+	
+	public Vector2 getPosition() {
+		return body != null ? body.getPosition().cpy() : null;
 	}
 }

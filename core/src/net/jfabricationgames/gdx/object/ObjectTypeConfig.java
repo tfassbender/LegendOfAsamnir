@@ -27,11 +27,12 @@ public class ObjectTypeConfig {
 	public float density = 0f;
 	public float friction = 0f;
 	public float restitution = 0f;
-	public PhysicsCollisionType collsitionType = PhysicsCollisionType.OBSTACLE;
+	public PhysicsCollisionType collisionType = PhysicsCollisionType.OBSTACLE;
 	public boolean isSensor = false;
 	public boolean addSensor = false;
 	public float sensorRadius = 0.5f;
 	
+	public GameObjectAction initAction; // an action that is executed after the game object was added to the map
 	
 	// map the default drop types to the probability to drop them. The probability sum must be <= 1.
 	public ObjectMap<String, Float> drops;
@@ -57,7 +58,8 @@ public class ObjectTypeConfig {
 	public boolean multipleActionExecutionsPossible = false;
 	public boolean hitAnimationAfterAction = false;
 	public boolean changeBodyToSensorAfterAction = false;
-	public InteractiveAction interactiveAction;
+	public boolean interactByContact = false;
+	public InteractiveAction interactiveAction; // references a value from the InteractiveAction enum
 	
 	//****************************************
 	//*** Locked Objects
