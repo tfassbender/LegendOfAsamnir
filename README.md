@@ -120,6 +120,16 @@ Melee Attacks are quite simple attacks. They create a hit fixture (a Box2D senso
 
 Projectile Attacks are attacks that don't just create a hit fixture, that deals damage, but create a projectile that moves in the map like a new map object. A projectile attack is created using the [ProjectileAttack](core/src/net/jfabricationgames/gdx/attack/ProjectileAttack.java) class, that creates a [Projectile](core/src/net/jfabricationgames/gdx/projectile/Projectile.java). This projectile behaves like a Game Object but also like an attack. Because all projectiles can show very different behavior there are multiple projectile subclasses like [Arrow](core/src/net/jfabricationgames/gdx/projectile/Arrow.java) (a quite simple projectile that moves in a straight line and deals damage), [Bomb](core/src/net/jfabricationgames/gdx/projectile/Bomb.java) (a projectile that waits some time before exploding, which creates an explosion. The explosion is also a projectile) or [Web](core/src/net/jfabricationgames/gdx/projectile/Web.java) (a projectile that deals damage to the player and slows him down if he's in it's range).
 
+### Creating Attack Objects
+
+Attacks can be created using an [AttackCreator](core/src/net/jfabricationgames/gdx/attack/AttackCreator.java) instance. Every object that is able to attack others (usually an enemy or a player) has an instance of an AttackCreator, that keeps track of all the attacks of the object. It can be used to start attacks by it's startAttack methods that take the name of the attack, the direction and optionally the Box2D [PhysicsCollisionType](core/src/net/jfabricationgames/gdx/physics/PhysicsCollisionType.java) to create an attack using an [AttackFactory](core/src/net/jfabricationgames/gdx/attack/AttackFactory.java). After creating the Attack, the AttackCreator keeps the attacks, handles them and removes them after they are over.
+
+The attacks that can be used are defined in configuration files, that are given to the AttackCreator as constructor parameters. These configuration files define all attacks of the attacking object as a list of [AttackConfig](core/src/net/jfabricationgames/gdx/attack/AttackConfig.java) objects, that define the behaviour of the attack. An example for an attack configuration file is [minotaur.json](core/assets/config/enemy/attack/minotaur.json). The attacks, that are configured in these files can be created in the AttackCreator and are referenced by their **id**.
+
+The call hierarchy, that is used to create an attack (from an enemy object) is shown in the diagram below:
+
+![Attack creation hierarchy](core/data/documentation/create_attack_call_hierarchy.png)
+
 ## Items
 
 ### Adding Items
@@ -158,6 +168,10 @@ The following example from the object type config file [types.json](core/assets/
 The items are dropped onto the map using the [ItemDropUtil](core/src/net/jfabricationgames/gdx/item/ItemDropUtil.java) class, that defines the static method `dropItems(ObjectMap<String, Float>, GameMap, float, float, boolean)` to randomly choose an item from the map and drop it at a position on the map.
 
 To drop a special item (like a special key to open a door), a different configuration must be used, because the normal drop items can't have special map properties. To drop special items the dropping object or enemy has to define the map property keys *specialDropType* (which defines the item type that is dropped by it's name) and *specialDropMapProperties* (which defines the map properties of the dropped object in JSON representation).
+
+### Event Items
+
+Event items are special types of items, that fire an event when picked up. The event type is an 'EVENT_ITEM_PICKED_UP' object from the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter can be configured in the map properties of the event item. The parameter object of the event is the picked up item itself. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file.
 
 ## Game Objects
 
@@ -223,6 +237,10 @@ Spawn points are special Game Objects, that can be used to spawn new Items, Game
 The following image shows the connections between these config files and objects:
 
 ![Spawns and Events](core/data/documentation/event_and_spawn_classes.png)
+
+### Event Objects
+
+Event Objects are game objects that can be placed on the tiled map and are added to the game map in the same size and position. These objects are not visible, but react to the player touching them. When the touch of a player is registered, the event object fires an event, that can be handled by all registered event listeners. The Type of the event is an 'EVENT_OBJECT_TOUCHED' object of the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter of the fired event can be configured in the map properties. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file.
 
 ## Maps
 
