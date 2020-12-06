@@ -8,4 +8,6 @@ public class MapConfig {
 	public TextureConfig texture;
 	public int textureWidth = 500;
 	public int textureHeight = 500;
+	
+	public String mapStateConfigFile;
 }

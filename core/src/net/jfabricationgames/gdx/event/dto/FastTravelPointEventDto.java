@@ -24,6 +24,9 @@ public class FastTravelPointEventDto {
 				.setPositionOnMapY(posY);
 	}
 	
+	/**
+	 * The fastTravelPointId must be equal in the map config of the object and in the map state config file (in config/menu/maps/...)
+	 */
 	public String fastTravelPointId;
 	public String fastTravelPointName;
 	public boolean enabled;

@@ -41,8 +41,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	protected PlayableCharacter player;
 	protected DebugGridRenderer debugGridRenderer;
 	
-	public InGameMenuScreen(String statesConfig, GameScreen gameScreen, PlayableCharacter player) {
-		super(statesConfig);
+	public InGameMenuScreen(GameScreen gameScreen, PlayableCharacter player, String... stateConfigFiles) {
+		super(stateConfigFiles);
 		this.gameScreen = gameScreen;
 		this.player = player;
 		
@@ -74,33 +74,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	
 	protected abstract String getInputContextName();
 	
-	public void backToGame() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
-		removeInputListener();
-		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
-		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
-		game.setScreen(gameScreen);
-	}
-	
 	protected void removeInputListener() {
 		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
-	}
-	
-	public void restartGame() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
-		gameScreen.dispose();
-		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
-	}
-	
-	public void respawnInLastCheckpoint() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Respawn' selected");
-		player.respawn();
-		backToGame();
-	}
-	
-	public void quitGame() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Quit Game' selected");
-		Gdx.app.exit();
 	}
 	
 	protected void takeGameSnapshot() {
@@ -124,5 +99,34 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
 		gameSnapshotFrameBuffer.dispose();
 		removeInputListener();
+	}
+	
+	//****************************************************************
+	//*** State machine methods (called via reflection)
+	//****************************************************************
+	
+	public void backToGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
+		removeInputListener();
+		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
+		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
+		game.setScreen(gameScreen);
+	}
+	
+	public void respawnInLastCheckpoint() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Respawn' selected");
+		player.respawn();
+		backToGame();
+	}
+	
+	public void restartGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
+		gameScreen.dispose();
+		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+	}
+	
+	public void quitGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Quit Game' selected");
+		Gdx.app.exit();
 	}
 }

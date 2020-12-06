@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="160">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="162">
  <properties>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
  </properties>
@@ -374,6 +374,21 @@ Arrows: 25 Coins..</property>
     <property name="activateOnStartup" value="true"/>
     <property name="fastTravelPointId" value="test_map_point_2"/>
     <property name="fastTravelPointName" value="Down Left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="160" name="object.fastTravelPoint" x="1200" y="1007">
+   <properties>
+    <property name="activateOnStartup" value="true"/>
+    <property name="fastTravelPointId" value="test_map_point_4"/>
+    <property name="fastTravelPointName" value="Down Right"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="161" name="object.fastTravelPoint" x="1056" y="479">
+   <properties>
+    <property name="fastTravelPointId" value="test_map_point_3"/>
+    <property name="fastTravelPointName" value="Right"/>
    </properties>
    <point/>
   </object>

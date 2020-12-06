@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="871">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="883">
  <properties>
   <property name="mini_map_config_path" value="config/menu/maps/tutorial.json"/>
  </properties>
@@ -117,7 +117,7 @@
    </properties>
    <point/>
   </object>
-  <object id="22" name="object.signboard" x="491" y="1470">
+  <object id="22" name="object.signboard" x="496" y="1490">
    <properties>
     <property name="displayText" value="To get rid of bats the spin attack is very usefull. To activate it, push and hold down the left mouse button or the controller button B, till you hear a sound that indicates that the attack is charged. Then release the attack button and use the spin attack to crush your enemies!"/>
     <property name="displayTextHeader" value="Spin attack"/>
@@ -1061,6 +1061,69 @@
    </properties>
   </object>
   <object id="870" name="object.shop" x="2288" y="1041">
+   <point/>
+  </object>
+  <object id="871" name="object.fastTravelPoint" x="272" y="1457">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_beginning"/>
+    <property name="fastTravelPointName" value="Beginning"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="872" name="object.signboard" x="304" y="1457">
+   <properties>
+    <property name="displayText" value="Fast Travel Points can be used to quickly move to some points on the map. Most of them need to be enabled by touching them. To fast travel to such a point open the menu using the Escape Key or the Controller Button Start, go to the map and select a point to travel to."/>
+    <property name="displayTextHeader" value="Fast Travel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="873" name="object.fastTravelPoint" x="1455" y="1200">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_big_map_entrance"/>
+    <property name="fastTravelPointName" value="Big Map Entrance"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="874" name="object.fastTravelPoint" x="2256" y="1169">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_shop"/>
+    <property name="fastTravelPointName" value="Shop"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="876" name="object.fastTravelPoint" x="2896" y="787">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_labyrinth"/>
+    <property name="fastTravelPointName" value="Labyrinth"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="877" name="object.fastTravelPoint" x="2769" y="2452">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_dungeon"/>
+    <property name="fastTravelPointName" value="Dungeon"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="879" name="object.fastTravelPoint" x="688" y="1841">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_hidden_key_area"/>
+    <property name="fastTravelPointName" value="Hidden Area"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="880" name="object.fastTravelPoint" x="1984" y="1876">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_dungeon_entrance"/>
+    <property name="fastTravelPointName" value="Dungeon Entrance"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="882" name="object.fastTravelPoint" x="960" y="2736">
+   <properties>
+    <property name="fastTravelPointId" value="tutorial_boss"/>
+    <property name="fastTravelPointName" value="Boss"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

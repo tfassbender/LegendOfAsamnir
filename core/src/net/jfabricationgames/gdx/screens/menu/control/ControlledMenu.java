@@ -19,12 +19,16 @@ public abstract class ControlledMenu<T extends ControlledMenu<T>> extends Screen
 	public static final String ACTION_SELECTION_DOWN = "down";
 	public static final String ACTION_SELECTION_UP = "up";
 	
+	public static final String SOUND_ERROR = "error";
+	
 	protected MenuStateMachine<T> stateMachine;
 	
 	private SoundSet soundSet;
 	
-	public ControlledMenu(String statesConfig) {
-		stateMachine = new MenuStateMachine<T>(this, statesConfig);
+	public ControlledMenu(String... stateConfigFiles) {
+		if (stateConfigFiles != null) {
+			stateMachine = new MenuStateMachine<T>(this, stateConfigFiles);
+		}
 		soundSet = SoundManager.getInstance().loadSoundSet("menu");
 	}
 	

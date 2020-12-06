@@ -51,7 +51,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private FocusButton buttonBackToGame;
 	
 	public ShopMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
-		super(SHOP_MENU_STATES_CONFIG, gameScreen, player);
+		super(gameScreen, player, SHOP_MENU_STATES_CONFIG);
 		
 		initialize();
 	}

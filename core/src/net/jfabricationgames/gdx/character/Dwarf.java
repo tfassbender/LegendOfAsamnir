@@ -22,6 +22,7 @@ import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.container.CharacterFastTravelContainer;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
+import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -540,7 +541,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
-	public void eventFired(EventConfig event) {
+	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EventObject.EVENT_KEY_RESPAWN_CHECKPOINT)) {
 			if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
 				EventObject respawnObject = (EventObject) event.parameterObject;
@@ -552,6 +553,12 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 		}
 		if (event.eventType == EventType.PLAYER_BUY_ITEM) {
 			itemContainer.collectItem((Item) event.parameterObject, this);
+		}
+		if (event.eventType == EventType.FAST_TRAVEL_TO_MAP_POSITION) {
+			CharacterFastTravelProperties fastTravelTargetPoint = fastTravelContainer.getFastTravelPropertiesById(event.stringValue);
+			if (fastTravelTargetPoint.enabled) {
+				setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
+			}
 		}
 	}
 	

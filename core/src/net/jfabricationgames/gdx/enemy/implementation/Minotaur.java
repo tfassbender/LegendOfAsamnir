@@ -114,7 +114,7 @@ public class Minotaur extends Enemy implements EventListener {
 	}
 	
 	@Override
-	public void eventFired(EventConfig event) {
+	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.PLAYER_RESPAWNED) {
 			resetHealthToMaximum();
 		}

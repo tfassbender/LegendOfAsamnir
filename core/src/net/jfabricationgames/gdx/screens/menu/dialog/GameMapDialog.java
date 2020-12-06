@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.screens.menu.dialog;
 
+import java.util.function.Consumer;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,17 +13,24 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screens.menu.config.MapConfig;
+import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
 public class GameMapDialog extends InGameMenuDialog {
 	
 	private static final float PLAYER_POSITION_POINTER_BLINK_DELAY = 0.75f;
+	private static final Color COLOR_FAST_TRAVEL_POINT_DISABLED = Color.DARK_GRAY;
+	private static final Color COLOR_FAST_TRAVEL_POINT_ENABLED = new Color(0.93f, 0.48f, 0f, 1f);
+	private static final Color COLOR_FAST_TRAVEL_POINT_SELECTED = new Color(0.78f, 0.27f, 0.11f, 1f);
 	
 	private float playerPositionPointerBlinkTimer = 0;
 	private boolean playerPositionPointerBlinkOn = true;
@@ -33,11 +42,18 @@ public class GameMapDialog extends InGameMenuDialog {
 	private Vector2 playersRelativePositionOnMap;
 	
 	private Array<CharacterFastTravelProperties> fastTravelPoints;
+	private String selectedFastTravelPointId;
 	
 	private float mapWidth;
 	private float mapHeight;
 	
-	public GameMapDialog(GameScreen gameScreen) {
+	private Runnable backToGameCallback;
+	private Consumer<String> playMenuSoundConsumer;
+	
+	public GameMapDialog(GameScreen gameScreen, Runnable backToGameCallback, Consumer<String> playMenuSoundConsumer) {
+		this.backToGameCallback = backToGameCallback;
+		this.playMenuSoundConsumer = playMenuSoundConsumer;
+		
 		updateMapConfig(gameScreen);
 		
 		loadConfig(gameScreen.getGameMapConfigPath());
@@ -78,6 +94,10 @@ public class GameMapDialog extends InGameMenuDialog {
 				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(835, 550).setSize(110, 40).build();
 		buttonBackToMenu.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonBackToMenu.setFocused(true);
+	}
+	
+	public String getMapStateConfigFile() {
+		return config.mapStateConfigFile;
 	}
 	
 	public void draw(float delta) {
@@ -147,11 +167,14 @@ public class GameMapDialog extends InGameMenuDialog {
 			
 			float markerRadius = 6;
 			
-			if (fastTravelPoint.enabled) {
-				shapeRenderer.setColor(Color.ORANGE);
+			if (fastTravelPoint.fastTravelPointId.equals(selectedFastTravelPointId)) {
+				shapeRenderer.setColor(COLOR_FAST_TRAVEL_POINT_SELECTED);
+			}
+			else if (fastTravelPoint.enabled) {
+				shapeRenderer.setColor(COLOR_FAST_TRAVEL_POINT_ENABLED);
 			}
 			else {
-				shapeRenderer.setColor(Color.LIGHT_GRAY);
+				shapeRenderer.setColor(COLOR_FAST_TRAVEL_POINT_DISABLED);
 			}
 			
 			shapeRenderer.circle(positionX, positionY, markerRadius);
@@ -164,7 +187,7 @@ public class GameMapDialog extends InGameMenuDialog {
 		screenTextWriter.drawText(config.name, 275, 594, 450, Align.center, false);
 		
 		screenTextWriter.setScale(0.8f);
-		screenTextWriter.drawText(InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS + "Back", 870, 593);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToMenu) + "Back", 870, 593);
 		
 		if (mapTexture == null) {
 			screenTextWriter.setScale(1.5f);
@@ -172,9 +195,54 @@ public class GameMapDialog extends InGameMenuDialog {
 		}
 	}
 	
+	private String getButtonTextColorEncoding(FocusButton button) {
+		return button.hasFocus() ? InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS : InGameMenuScreen.TEXT_COLOR_ENCODING_NORMAL;
+	}
+	
+	public void setFocusToBackButton() {
+		buttonBackToMenu.setFocused(true);
+		selectedFastTravelPointId = null;
+	}
+	
+	public void setFocusTo(String stateName) {
+		CharacterFastTravelProperties fastTravelProperties = getFastTravelPropertiesById(stateName);
+		if (fastTravelProperties != null) {
+			selectedFastTravelPointId = fastTravelProperties.fastTravelPointId;
+			buttonBackToMenu.setFocused(false);
+		}
+	}
+	
+	private CharacterFastTravelProperties getFastTravelPropertiesById(String stateName) {
+		for (CharacterFastTravelProperties fastTravelProperty : fastTravelPoints) {
+			if (stateName.equals(fastTravelProperty.fastTravelPointId)) {
+				return fastTravelProperty;
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public void dispose() {
 		super.dispose();
 		shapeRenderer.dispose();
+	}
+	
+	//****************************************************************
+	//*** State machine methods (called via reflection)
+	//****************************************************************
+	
+	public void selectFastTravelPoint() {
+		Gdx.app.debug(getClass().getSimpleName(), "selectFastTravelPoint was invoked.");
+		if (selectedFastTravelPointId != null) {
+			CharacterFastTravelProperties fastTravelTargetProperties = getFastTravelPropertiesById(selectedFastTravelPointId);
+			if (fastTravelTargetProperties.enabled) {
+				EventHandler.getInstance()
+						.fireEvent(new EventConfig().setEventType(EventType.FAST_TRAVEL_TO_MAP_POSITION).setStringValue(selectedFastTravelPointId));
+				backToGameCallback.run();
+			}
+			else {
+				playMenuSoundConsumer.accept(ControlledMenu.SOUND_ERROR);
+			}
+		}
 	}
 }

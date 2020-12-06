@@ -44,7 +44,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
-	public static final boolean RENDER_DEBUG_GRAPHICS = true;
+	public static final boolean RENDER_DEBUG_GRAPHICS = false;
 	public static final int VELOCITY_ITERATIONS = 6;
 	public static final int POSITION_ITERATIONS = 2;
 	
@@ -113,8 +113,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		// create the dwarf before the map, because it contains event listeners that listen for events that are fired when the map is created
 		dwarf = new Dwarf();
 		
-		map = new GameMap("map/map3.tmx", camera);
-		//map = new GameMap("map/level_tutorial.tmx", camera);
+		//map = new GameMap("map/map3.tmx", camera);
+		map = new GameMap("map/level_tutorial.tmx", camera);
 		
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
@@ -276,7 +276,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	@Override
-	public void eventFired(EventConfig event) {
+	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.PLAYER_RESPAWNED) {
 			gameOver = false;
 		}

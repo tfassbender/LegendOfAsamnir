@@ -19,6 +19,7 @@ import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screens.menu.control.MenuStateMachine;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
 
@@ -59,18 +60,19 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private FocusButton buttonShowMap;
 	
 	public PauseMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
-		super(PAUSE_MENU_STATES_CONFIG, gameScreen, player);
+		super(gameScreen, player, (String[]) null);
 		
 		initialize();
 	}
 	
 	private void initialize() {
 		createComponents();
+		createDialogs();
 		
 		itemMenu.setHoveredIndex(0);
 		itemMenu.selectHoveredItem();
 		
-		stateMachine.changeToInitialState();
+		initializeStateMachine();
 	}
 	
 	private void createComponents() {
@@ -122,9 +124,16 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				.build();
 		buttonShowMap.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		mapAnimation = AnimationManager.getInstance().getAnimationDirector(MAP_ANIMATION_IDLE);
-		
+	}
+	
+	private void createDialogs() {
 		controlsDialog = new GameControlsDialog();
-		mapDialog = new GameMapDialog(gameScreen);
+		mapDialog = new GameMapDialog(gameScreen, this::backToGame, this::playMenuSound);
+	}
+	
+	private void initializeStateMachine() {
+		stateMachine = new MenuStateMachine<PauseMenuScreen>(this, PAUSE_MENU_STATES_CONFIG, mapDialog.getMapStateConfigFile());
+		stateMachine.changeToInitialState();
 	}
 	
 	@Override
@@ -137,12 +146,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		return super.onAction(action, type, parameters);
 	}
 	
-	public void selectCurrentItem() {
-		itemMenu.selectHoveredItem();
-		SpecialAction specialAction = SpecialAction.findByNameIgnoringCase(itemMenu.getSelectedItem());
-		player.setActiveSpecialAction(specialAction);
-	}
-	
 	@Override
 	public void showMenu() {
 		super.showMenu();
@@ -153,35 +156,13 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		takeGameSnapshot();
 		playMenuSound(SOUND_ENTER_PAUSE_MENU);
-
+		
 		stateMachine.changeToInitialState();
 	}
 	
 	@Override
 	protected String getInputContextName() {
 		return INPUT_CONTEXT_NAME;
-	}
-	
-	public void showControls() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Show Controlls' selected");
-		controlsDialog.setVisible(true);
-		stateMachine.changeState("button_controlsDialogBack");
-	}
-	
-	public void showMap() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Show Map' selected");
-		mapDialog.setVisible(true);
-		stateMachine.changeState("button_mapDialogBack");
-	}
-	
-	public void closeControlsDialog() {
-		controlsDialog.setVisible(false);
-		stateMachine.changeState("button_controls");
-	}
-	
-	public void closeMapDialog() {
-		mapDialog.setVisible(false);
-		stateMachine.changeState("button_showMap");
 	}
 	
 	@Override
@@ -311,8 +292,10 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				case "showMap":
 					button = buttonShowMap;
 					break;
-				case "controlsDialogBack":
 				case "mapDialogBack":
+					mapDialog.setFocusToBackButton();
+					break;
+				case "controlsDialogBack":
 					//dialog button; not handled here
 					break;
 				default:
@@ -322,6 +305,9 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				button.setFocused(true);
 			}
 		}
+		
+		//will be ignored if the state is not known in the map dialog
+		mapDialog.setFocusTo(stateName);
 	}
 	
 	private void unfocusAll() {
@@ -338,5 +324,42 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		super.dispose();
 		controlsDialog.dispose();
 		mapDialog.dispose();
+	}
+	
+	//****************************************************************
+	//*** State machine methods (called via reflection)
+	//****************************************************************
+	
+	public void showControls() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Show Controlls' selected");
+		controlsDialog.setVisible(true);
+		stateMachine.changeState("button_controlsDialogBack");
+	}
+	
+	public void showMap() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Show Map' selected");
+		mapDialog.setVisible(true);
+		mapDialog.setFocusToBackButton();
+		stateMachine.changeState("button_mapDialogBack");
+	}
+	
+	public void selectCurrentItem() {
+		itemMenu.selectHoveredItem();
+		SpecialAction specialAction = SpecialAction.findByNameIgnoringCase(itemMenu.getSelectedItem());
+		player.setActiveSpecialAction(specialAction);
+	}
+	
+	public void closeControlsDialog() {
+		controlsDialog.setVisible(false);
+		stateMachine.changeState("button_controls");
+	}
+	
+	public void closeMapDialog() {
+		mapDialog.setVisible(false);
+		stateMachine.changeState("button_showMap");
+	}
+	
+	public void selectFastTravelPoint() {
+		mapDialog.selectFastTravelPoint();
 	}
 }

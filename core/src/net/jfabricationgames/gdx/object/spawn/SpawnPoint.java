@@ -91,7 +91,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	@Override
-	public void eventFired(EventConfig event) {
+	public void handleEvent(EventConfig event) {
 		if (isEventHandled(event)) {
 			spawn();
 		}

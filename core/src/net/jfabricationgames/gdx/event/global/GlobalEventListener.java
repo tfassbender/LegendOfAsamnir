@@ -30,7 +30,7 @@ public class GlobalEventListener implements EventListener {
 	}
 	
 	@Override
-	public void eventFired(EventConfig event) {
+	public void handleEvent(EventConfig event) {
 		for (GlobalEventConfig eventConfig : events.values()) {
 			if (eventConfig.event.equals(event)) {
 				eventConfig.executionType.execute(eventConfig.executionParameters);

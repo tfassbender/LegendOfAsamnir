@@ -40,7 +40,7 @@ public class EventHandler {
 	
 	public void fireEvent(EventConfig event) {
 		for (EventListener listener : listeners) {
-			listener.eventFired(event);
+			listener.handleEvent(event);
 		}
 	}
 	

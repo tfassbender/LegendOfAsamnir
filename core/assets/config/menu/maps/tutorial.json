@@ -6,4 +6,6 @@
 	},
 	textureWidth: 500,
 	textureHeight: 500,
+	
+	mapStateConfigFile: config/menu/maps/tutorial_fast_travel_states.json,
 }

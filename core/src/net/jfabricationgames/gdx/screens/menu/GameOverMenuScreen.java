@@ -15,7 +15,7 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	
 	private static final String INPUT_CONTEXT_NAME = "simpleMenu";
 	private static final String SOUND_ENTER_GAME_OVER_MENU = "enter_game_over_menu";
-	private static final String gameOverMenuStatesConfig = "config/menu/game_over_menu_states.json";
+	private static final String GAME_OVER_MENU_STATE_CONFIG = "config/menu/game_over_menu_states.json";
 	
 	private MenuBox background;
 	private MenuBox banner;
@@ -23,7 +23,7 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	private FocusButton buttonQuit;
 	
 	public GameOverMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
-		super(gameOverMenuStatesConfig, gameScreen, player);
+		super(gameScreen, player, GAME_OVER_MENU_STATE_CONFIG);
 		initialize();
 	}
 	

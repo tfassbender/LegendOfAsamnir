@@ -28,10 +28,11 @@ public class CharacterFastTravelContainer implements EventListener {
 	}
 	
 	@Override
-	public void eventFired(EventConfig event) {
+	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.FAST_TRAVEL_POINT_REGISTERED || event.eventType == EventType.FAST_TRAVEL_POINT_ENABLED) {
 			if (event.parameterObject != null && event.parameterObject instanceof FastTravelPointEventDto) {
-				Gdx.app.debug(getClass().getSimpleName(), "Fast travel point registered: event type: " + event.eventType + " object: " + event.parameterObject);
+				Gdx.app.debug(getClass().getSimpleName(),
+						"Fast travel point registered: event type: " + event.eventType + " object: " + event.parameterObject);
 				
 				FastTravelPointEventDto fastTravelDto = (FastTravelPointEventDto) event.parameterObject;
 				if (fastTravelDto.fastTravelPointId == null) {
@@ -41,5 +42,10 @@ public class CharacterFastTravelContainer implements EventListener {
 				fastTravelProperties.put(fastTravelDto.fastTravelPointId, CharacterFastTravelProperties.fromDto(fastTravelDto));
 			}
 		}
+	}
+	
+	public CharacterFastTravelProperties getFastTravelPropertiesById(String fastTravelPointId) {
+		CharacterFastTravelProperties fastTravelProperty = fastTravelProperties.get(fastTravelPointId);
+		return fastTravelProperty;
 	}
 }
