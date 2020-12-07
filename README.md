@@ -13,6 +13,7 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [Inputs](#inputs)
 - [Enemies](#enemies)
 - [Attacks](#attacks)
+- [Events](#events)
 - [Items](#items)
 - [Game Objects](#game-objects)
 - [Maps](#maps)
@@ -130,6 +131,18 @@ The call hierarchy, that is used to create an attack (from an enemy object) is s
 
 ![Attack creation hierarchy](core/data/documentation/create_attack_call_hierarchy.png)
 
+## Events
+
+The event handling system of the game uses a singleton class [EventHandler](core/src/net/jfabricationgames/gdx/event/EventHandler.java) that is used for firing events and substribing [EventListener](core/src/net/jfabricationgames/gdx/event/EventListener.java)s. The events that are fired are [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) objects, that define the type of the fired event as a value of the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum and other parameters.
+
+### Configured Events
+
+Some events are configured in the configuration file [events.json](core/assets/config/events/events.json). These events are fired from the code on specific events (e.g. the game is started). And can be received from game objects, that can be configured in the map (see [Spawn Points](#spawn-points)).
+
+### Global Events
+
+Events that are not created in code, but in configuration (e.g. when touching an event object on the map) can be handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java). This EventListener listens to all fired events and compares them to the event config of the events, that are configured in the JSON file [globalListenedEvents](core/assets/config/events/globalListenedEvents.json). If they match, the event is executed (e.g. to show a text on the screen when the player reaches a position or picks up a special item. See [Event Items](#event-items) and [Event Objects](#event-objects)). The *executionType*, that is configured in the global events is a value of the [GlobalEventExecutionType](core/src/net/jfabricationgames/gdx/event/global/GlobalEventExecutionType.java) enum, that defines how the event is to be executed.
+
 ## Items
 
 ### Adding Items
@@ -171,7 +184,7 @@ To drop a special item (like a special key to open a door), a different configur
 
 ### Event Items
 
-Event items are special types of items, that fire an event when picked up. The event type is an 'EVENT_ITEM_PICKED_UP' object from the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter can be configured in the map properties of the event item. The parameter object of the event is the picked up item itself. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file.
+Event items are special types of items, that fire an event when picked up. The event type is an 'EVENT_ITEM_PICKED_UP' object from the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter can be configured in the map properties of the event item. The parameter object of the event is the picked up item itself. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file. See [Events](#events) for more details.
 
 ## Game Objects
 
@@ -190,6 +203,8 @@ Game objects are usually added to the game from the map properties, just like it
   - **isSensor:** Defines whether the whole body of the object should be a sensor.
   - **addSensor:** Defines whether a sensor is to be added to the body.
   - **sensorRadius:** Defines the radius of the sensor that might be added to the body.
+  
+  - **initAction:** A value from the [GameObjectAction](core/src/net/jfabricationgames/gdx/object/GameObjectAction.java) enum, that is executed after the game object was added to the map
 
   - **drops:** The items that the object may drop. See [Dropping Items](#dropping-items) for more details.
   - **dropPositionOffsetX:** The offset to change the position where items will be dropped.
@@ -240,11 +255,25 @@ The following image shows the connections between these config files and objects
 
 ### Event Objects
 
-Event Objects are game objects that can be placed on the tiled map and are added to the game map in the same size and position. These objects are not visible, but react to the player touching them. When the touch of a player is registered, the event object fires an event, that can be handled by all registered event listeners. The Type of the event is an 'EVENT_OBJECT_TOUCHED' object of the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter of the fired event can be configured in the map properties. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file.
+Event Objects are game objects that can be placed on the tiled map and are added to the game map in the same size and position. These objects are not visible, but react to the player touching them. When the touch of a player is registered, the event object fires an event, that can be handled by all registered event listeners. The Type of the event is an 'EVENT_OBJECT_TOUCHED' object of the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter of the fired event can be configured in the map properties. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file. See [Events](#events) for more details.
 
 ## Maps
 
 Tiled maps are used to create a map with textures, physics and objects. Enemies, Items and game objects can be defined within the map's *objects* layer, like explained in the sections [Enemies](#enemies), [Items](#items) and [Game objects](#game-objects). Physics objects (like walls) can be defined in the physics layer of the map. **Note:** The map's physics objects have to be created by polygons with at most *8* points. The material of the physics objects must be set in the custom properties of every map object, where the key is called *material* and the name references a material name that is defined in the materials json configuration file: [materials.json](core/assets/config/map/materials.json). Within the materials configuratino file the name of the material can be defined, along with the usual box2d physics properties: *density*, *restitution* and *friction*
+
+### Global Map Properties
+
+There are several properties that can be configured for objects on the map. The map itself has only one property that needs to be configured: **mini_map_config_path**. The value of this property is the path to the main config file of this map. This file is a JSON file that can be deserialized to a [MapConfig](core/src/net/jfabricationgames/gdx/screens/menu/config/MapConfig.java) object. An example for such a file is [tutorial.json](core/assets/config/menu/maps/tutorial.json).
+
+### Fast Travel
+
+Fast travel positions can be created by adding [Game objects](#game-objects) to the map (and configuring them) and configuring their use in map configuration files. The objects that need to be added to the map need to be named *object.fastTravelPoint*. The configurable map properties of these objects are:
+
+- **fastTravelPointId:** The Id of the fast travel point which needs to be unique over all maps, to identify the fast travel point.
+- **fastTravelPointName:** The name of the fast travel point that is shown to the user.
+- **activeOnStartup:** A boolean flag that indicates whether the fast travel point is active when the game is started, or it needs to be activated by touching it (the default value is *false*)
+
+The second part of configuration is done in a separate config file, that defines the UI buttons, that are used to select the fast travel points on the mini-map in the menu. This configuration is a JSON object, that maps the **fastTravelPointId**s (that reference the ones in the map object config by name) to [MenuState](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuState.java) objects, that define the selection and iteraction of the fast travel points in the UI. This file needs to be referenced from the map config file. An example for such a file is [tutorial_fast_travel_states.json](core/assets/config/menu/maps/tutorial_fast_travel_states.json).
 
 ## Others
 
