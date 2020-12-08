@@ -17,6 +17,7 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [Items](#items)
 - [Game Objects](#game-objects)
 - [Maps](#maps)
+- [Menus](#menus)
 - [Others](#others)
 
 ## Structure of the game and packages
@@ -274,6 +275,25 @@ Fast travel positions can be created by adding [Game objects](#game-objects) to 
 - **activeOnStartup:** A boolean flag that indicates whether the fast travel point is active when the game is started, or it needs to be activated by touching it (the default value is *false*)
 
 The second part of configuration is done in a separate config file, that defines the UI buttons, that are used to select the fast travel points on the mini-map in the menu. This configuration is a JSON object, that maps the **fastTravelPointId**s (that reference the ones in the map object config by name) to [MenuState](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuState.java) objects, that define the selection and iteraction of the fast travel points in the UI. This file needs to be referenced from the map config file. An example for such a file is [tutorial_fast_travel_states.json](core/assets/config/menu/maps/tutorial_fast_travel_states.json).
+
+## Menus
+
+In game menus are libGDX screens, that can be shown to stop the games execution. Thex usually extend the abstract class [InGameMenuScreen](core/src/net/jfabricationgames/gdx/screens/menu/InGameMenuScreen.java). Since InGameMenuScreen extends the abstract class [ControlledMenu](core/src/net/jfabricationgames/gdx/screens/menu/control/ControlledMenu.java) all in game menus are by default controlled menus, which can be controlled using the keyboard or controller.
+
+### Menu State Machine
+
+To use keyboard or controller buttons to navigate in the menu, every in game menu has a [MenuStateMachine](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuStateMachine.java). This state machine holds the states and transitions between the states of the menu. The states and transitions are modeled as [MenuState](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuState.java) objects.
+
+To initialize a MenuStateMachine, it is given an array of file names, that lead to one or more configuration files, that contain a list of MenuState objects, serialized as JSON objects. An example of such a config file is [pause_menu_states.json](core/assets/config/menu/pause_menu_states.json), which defines the button states and transitions for the pause menu. In addition to the main state config file there can be other files that are also passed to the MenuStateMachine as constructor parameters, that define additional states, that may add more states and transitions. The methods that are defined as *select* object in the configuration of a MenuState are called via reflection in the menu class that holds the MenuStateMachine.
+
+An example for such a file is [tutorial_fast_travel_states.json](core/assets/config/menu/maps/tutorial_fast_travel_states.json) which defines the states and transitions for the fast travel points on the mini map (see [Fast Travel](#fast-travel)).
+
+### Menu Components
+
+There are some components, that can be used in all menus. The most important ones are:
+
+- **[MenuBox](core/src/net/jfabricationgames/gdx/screens/menu/components/MenuBox.java):** A background for menus, dialogs or other components, that uses nine-patch images to display the controll (the central parts of the nine-patch can be multiplied, to not stretch the images).
+- **[FocusButton](core/src/net/jfabricationgames/gdx/screens/menu/components/FocusButton.java):** A button for menus, that can be focused and triggered. For the button image a nine-patch is used.
 
 ## Others
 
