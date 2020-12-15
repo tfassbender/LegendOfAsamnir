@@ -48,6 +48,7 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	private static final float JUMPING_SPEED = 425f;
 	private static final float MOVING_SPEED_SPRINT = 425f;
 	private static final float MOVING_SPEED_ATTACK = 150f;
+	private static final float MOVING_SPEED_CUTSCENE = 3.5f;
 	private static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
 	private static final float TIME_TILL_GAME_OVER_MENU = 3f;
@@ -362,6 +363,31 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
+	public void moveTo(Vector2 position) {
+		Vector2 direction = position.cpy().sub(getPosition());
+		direction.nor().scl(MOVING_SPEED_CUTSCENE);
+		
+		move(direction.x, direction.y);
+	}
+	
+	@Override
+	public void changeToMovingState() {
+		if (action != CharacterAction.RUN) {
+			changeAction(CharacterAction.RUN);
+		}
+	}
+	
+	@Override
+	public Vector2 getPosition() {
+		return body.getPosition().cpy();
+	}
+	
+	public void setPosition(float x, float y) {
+		body.setTransform(x, y, 0);
+		properties.setRespawnPoint(new Vector2(x, y));
+	}
+	
+	@Override
 	public float getTimeTillIdleAnimation() {
 		return TIME_TILL_IDLE_ANIMATION;
 	}
@@ -419,16 +445,6 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	@Override
 	public int getNormalKeys() {
 		return itemContainer.getNumNormalKeys();
-	}
-	
-	@Override
-	public Vector2 getPosition() {
-		return body.getPosition().cpy();
-	}
-	
-	public void setPosition(float x, float y) {
-		body.setTransform(x, y, 0);
-		properties.setRespawnPoint(new Vector2(x, y));
 	}
 	
 	@Override

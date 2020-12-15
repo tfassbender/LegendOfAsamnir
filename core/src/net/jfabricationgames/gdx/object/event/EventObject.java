@@ -25,10 +25,14 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class EventObject extends GameObject implements ContactListener {
 	
-	public static final String EVENT_PARAMETER_MAP_PROPERTY_KEY = "eventParameter";
+	public static final String MAP_PROPERTY_KEY_EVENT_PARAMETER = "eventParameter";
+	public static final String MAP_PROPERTY_KEY_MULTIPLE_EXECUTIONS_POSSIBLE = "singleExecution";
+	
 	public static final String EVENT_KEY_RESPAWN_CHECKPOINT = "respawnCheckpoint";
 	
 	private String eventParameter;
+	private boolean singleExecution;
+	private boolean executed = false;
 	private Vector2 eventObjectCenter;
 	
 	public EventObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
@@ -58,18 +62,20 @@ public class EventObject extends GameObject implements ContactListener {
 	@Override
 	protected void processMapProperties() {
 		super.processMapProperties();
-		eventParameter = mapProperties.get(EVENT_PARAMETER_MAP_PROPERTY_KEY, String.class);
+		eventParameter = mapProperties.get(MAP_PROPERTY_KEY_EVENT_PARAMETER, String.class);
+		singleExecution = Boolean.parseBoolean(mapProperties.get(MAP_PROPERTY_KEY_MULTIPLE_EXECUTIONS_POSSIBLE, "false", String.class));
 	}
 	
 	@Override
 	public void beginContact(Contact contact) {
-		if (isPlayableCharacterContact(contact)) {
+		if (isPlayableCharacterContact(contact) && canBeExecuted()) {
 			EventConfig event = new EventConfig().setEventType(EventType.EVENT_OBJECT_TOUCHED).setStringValue(eventParameter)
 					.setParameterObject(this);
 			EventHandler.getInstance().fireEvent(event);
+			executed = true;
 		}
 	}
-	
+
 	private boolean isPlayableCharacterContact(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
@@ -84,6 +90,10 @@ public class EventObject extends GameObject implements ContactListener {
 			}
 		}
 		return false;
+	}
+	
+	private boolean canBeExecuted() {
+		return !singleExecution || !executed;
 	}
 	
 	@Override

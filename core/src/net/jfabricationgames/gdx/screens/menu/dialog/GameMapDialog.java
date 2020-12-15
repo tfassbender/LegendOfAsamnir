@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -233,6 +234,12 @@ public class GameMapDialog extends InGameMenuDialog {
 	
 	public void selectFastTravelPoint() {
 		Gdx.app.debug(getClass().getSimpleName(), "selectFastTravelPoint was invoked.");
+		
+		if (CutsceneHandler.getInstance().isCutsceneActive()) {
+			playMenuSoundConsumer.accept(ControlledMenu.SOUND_ERROR);
+			return;
+		}
+		
 		if (selectedFastTravelPointId != null) {
 			CharacterFastTravelProperties fastTravelTargetProperties = getFastTravelPropertiesById(selectedFastTravelPointId);
 			if (fastTravelTargetProperties.enabled) {

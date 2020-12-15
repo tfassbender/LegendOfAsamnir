@@ -1,4 +1,7 @@
 {
+	// ********************************************************
+	// *** demo level
+	// ********************************************************
 	demoLevelEndReached: {
 		event: {
 			eventType: EVENT_ITEM_PICKED_UP,
@@ -10,6 +13,31 @@
 			displayText: "You've killed the boss and reached the end of this demo level.",
 		}
 	},
+	demoLevel_startCutscene: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demoLevel_startCutscene,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demoLevelCutscene,
+		}
+	},
+	demoLevel_cutsceneEnds: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demoLevel_cutsceneEnded,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Demo cutscene event",
+			displayText: "Event fired from demo cutscene.",
+		}
+	}
+	
+	// ********************************************************
+	// *** tutorial level
+	// ********************************************************
 	tutorialLevelEndReached: {
 		event: {
 			eventType: EVENT_ITEM_PICKED_UP,

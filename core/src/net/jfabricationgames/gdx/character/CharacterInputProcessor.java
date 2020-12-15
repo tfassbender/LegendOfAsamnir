@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.character;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
@@ -58,6 +59,11 @@ public class CharacterInputProcessor implements InputActionListener {
 	}
 	
 	public void handleInputs(float delta) {
+		if (CutsceneHandler.getInstance().isCutsceneActive()) {
+			resetInputFlags();
+			return;
+		}
+		
 		readInputs(delta);
 		
 		boolean move = moveUp || moveDown || moveLeft || moveRight;

@@ -24,7 +24,11 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.enemy.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -35,7 +39,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public abstract class Enemy implements Hittable, ContactListener {
+public abstract class Enemy implements Hittable, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
@@ -45,25 +49,26 @@ public abstract class Enemy implements Hittable, ContactListener {
 	
 	protected EnemyTypeConfig typeConfig;
 	protected EnemyStateMachine stateMachine;
+	protected EnemyState movingState;
 	protected ArtificialIntelligence ai;
 	protected AttackCreator attackCreator;
+	protected CutsceneHandler cutsceneHandler;
 	
 	protected MapProperties properties;
 	protected GameMap gameMap;
 	protected Body body;
-	
-	private PhysicsBodyProperties physicsBodyProperties;
-	
-	protected ObjectMap<String, Float> dropTypes;
-	private boolean droppedItems;
+	protected Vector2 intendedMovement;
 	
 	protected float health;
 	protected float movingSpeed;
 	
+	protected ObjectMap<String, Float> dropTypes;
+	protected boolean droppedItems;
+	
+	private PhysicsBodyProperties physicsBodyProperties;
+	
 	private float imageOffsetX;
 	private float imageOffsetY;
-	
-	protected Vector2 intendedMovement;
 	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		this.typeConfig = typeConfig;
@@ -73,14 +78,15 @@ public abstract class Enemy implements Hittable, ContactListener {
 		PhysicsWorld.getInstance().registerContactListener(this);
 		intendedMovement = new Vector2();
 		healthBarRenderer = new EnemyHealthBarRenderer();
+		cutsceneHandler = CutsceneHandler.getInstance();
 		
 		readTypeConfig();
 		readMapProperties(properties);
 		initializeAttackCreator();
 		initializeStates();
 		createAI();
+		setMovingState();
 		ai.setEnemy(this);
-		
 	}
 	
 	protected void readTypeConfig() {
@@ -105,6 +111,17 @@ public abstract class Enemy implements Hittable, ContactListener {
 	 * Create the {@link ArtificialIntelligence} that controls this enemy.
 	 */
 	protected abstract void createAI();
+	
+	private void setMovingState() {
+		movingState = stateMachine.getState(getMovingStateName());
+		if (movingState == null) {
+			throw new IllegalStateException("Moving state not found. Maybe the 'getMovingStateName()' method needs to be overwritten?");
+		}
+	}
+	
+	protected String getMovingStateName() {
+		return "move";
+	}
 	
 	@SuppressWarnings("unchecked")
 	protected Array<Vector2> loadPositionsFromMapProperties() {
@@ -159,7 +176,7 @@ public abstract class Enemy implements Hittable, ContactListener {
 				remove();
 			}
 		}
-		else {
+		else if (!cutsceneHandler.isCutsceneActive()) {
 			ai.calculateMove(delta);
 			ai.executeMove();
 		}
@@ -198,6 +215,24 @@ public abstract class Enemy implements Hittable, ContactListener {
 		return health / typeConfig.health;
 	}
 	
+	@Override
+	public String getUnitId() {
+		return properties.get(CutsceneControlledUnit.MAP_PROPERTIES_KEY_UNIT_ID, String.class);
+	}
+	
+	@Override
+	public void changeToMovingState() {
+		if (!stateMachine.getCurrentState().equals(movingState)) {
+			stateMachine.setState(movingState);
+		}
+	}
+	
+	@Override
+	public Vector2 getPosition() {
+		return new Vector2(body.getPosition());
+	}
+	
+	@Override
 	public void moveTo(Vector2 pos) {
 		moveTo(pos, 1f);
 	}
@@ -220,10 +255,6 @@ public abstract class Enemy implements Hittable, ContactListener {
 		intendedMovement = delta;
 		float force = 10f * body.getMass();
 		body.applyForceToCenter(delta.x * force, delta.y * force, true);
-	}
-	
-	public Vector2 getPosition() {
-		return new Vector2(body.getPosition());
 	}
 	
 	protected void setImageOffset(float x, float y) {
@@ -292,7 +323,6 @@ public abstract class Enemy implements Hittable, ContactListener {
 		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
 		
-
 		if (properties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
 			String specialDropType = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
 			String specialDropMapProperties = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);

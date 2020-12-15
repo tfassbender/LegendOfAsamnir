@@ -24,7 +24,7 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 
 The structure of the libGDX project is documented by [libGDX](https://libgdx.badlogicgames.com/documentation/gettingstarted/Creating%20Projects.html). The mayority of the classes is to be found in the `core` project.
 
-The main class of the project is the class [DwarfScrollerGame](core/src/net/jfabricationgames/gdx/DwarfScrollerGame.java), which is instantiated by the desctop project (see libGDX documentation for details). This class contains some config paths, initializes [global classes](#Globally-used-classes) and sets the screen, so the execution is directed to the active screen (the first one will be the main menu).
+The main class of the project is the class [DwarfScrollerGame](core/src/net/jfabricationgames/gdx/DwarfScrollerGame.java), which is instantiated by the desctop project (see libGDX documentation for details). This class contains some config paths, initializes [global classes](#globally-used-classes) and sets the screen, so the execution is directed to the active screen (the first one will be the main menu).
 
 The screens, that handle the whole game (when the screen is active), are placed in the `screens` package. Here the [GameScreen](core/src/net/jfabricationgames/gdx/screens/GameScreen.java) class is the central class, that is called from the libGDX engine, on every render step.
 
@@ -86,7 +86,7 @@ The following image shows the call hierarchy of the AI classes:
 
 An enemy can be in different states, which can be interrupted by other states, or changed to other states when the state ends. Therefore the enemy states are designed as a (kind of) [state pattern](https://en.wikipedia.org/wiki/State_pattern). These states of the enemy and the transitions between the states can be configured in json configuration files. An example of a state configuration file for the gladiator is the [gladiator.json](https://github.com/tfassbender/DwarfScrollerGDX/blob/master/core/assets/config/enemy/states/gladiator.json) file. It defines a list of states, that are identified by their id. The states may define the following attributes:
 
-- **id:** A string to identify the state (within this enemy the id has to be unique)
+- **id:** A string to identify the state (within this enemy the id has to be unique).
 - **animation:** The animation that is to be played in the state. The animation references the animation name, that is defined in the animation config file, for this enemy. For the gladiator this configuration file is the [gladiator.json](core/assets/config/animation/enemy/gladiator.json) file. The animation will be started when the state is entered.
 - **attack:** An attack, that is executed when entering the state. The name references an attack from the attack configuration file. See the [Attacks](#attacks) section for more details on attacks.
 - **endsWithAnimation:** Defines whether the state ends when the animation of this state is over. If set to true a **followingState** has to be defined.
@@ -205,7 +205,7 @@ Game objects are usually added to the game from the map properties, just like it
   - **addSensor:** Defines whether a sensor is to be added to the body.
   - **sensorRadius:** Defines the radius of the sensor that might be added to the body.
   
-  - **initAction:** A value from the [GameObjectAction](core/src/net/jfabricationgames/gdx/object/GameObjectAction.java) enum, that is executed after the game object was added to the map
+  - **initAction:** A value from the [GameObjectAction](core/src/net/jfabricationgames/gdx/object/GameObjectAction.java) enum, that is executed after the game object was added to the map.
 
   - **drops:** The items that the object may drop. See [Dropping Items](#dropping-items) for more details.
   - **dropPositionOffsetX:** The offset to change the position where items will be dropped.
@@ -244,7 +244,7 @@ Interactive Objects are used to let the player interact with the map. They use a
 
 ### Locked Objects
 
-A locked object is a special kind of [Interactive Object](#iteractive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a `boolean` value. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/container/data/KeyItem.java) class.
+A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a `boolean` value. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/container/data/KeyItem.java) class.
 
 ### Spawn Points
 
@@ -257,6 +257,11 @@ The following image shows the connections between these config files and objects
 ### Event Objects
 
 Event Objects are game objects that can be placed on the tiled map and are added to the game map in the same size and position. These objects are not visible, but react to the player touching them. When the touch of a player is registered, the event object fires an event, that can be handled by all registered event listeners. The Type of the event is an 'EVENT_OBJECT_TOUCHED' object of the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) enum. The string parameter of the fired event can be configured in the map properties. Usually these events are handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), whichs events are configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file. See [Events](#events) for more details.
+
+Map properties that can be configured in the event object are:
+
+- **eventParameter:** The string parameter that will be added to the event that is fired.
+- **singleExecution:** Determines whether the event can be fired only once (on the first contact with the player). The type of the parameter is a String (that will be parsed into a boolean). The default is false.
 
 ## Maps
 

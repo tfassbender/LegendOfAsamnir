@@ -105,7 +105,7 @@ public class EnemyStateMachine {
 			setState(currentState.followingState);
 		}
 	}
-
+	
 	private boolean afterAnimationDelayEnded(float delta) {
 		timeSinceAnimationEnded += delta;
 		return timeSinceAnimationEnded > currentState.config.changeStateAfterAnimationDelay;
@@ -115,20 +115,36 @@ public class EnemyStateMachine {
 		return currentState == END_STATE;
 	}
 	
+	/**
+	 * Changes the state to the given state id without checking if this is possible in the state configuration.<br>
+	 * Should only be used in Cutscenes.
+	 */
+	public void forceStateChange(String id) {
+		changeState(getState(id));
+	}
+	
 	public boolean setState(String id) {
 		return setState(getState(id));
 	}
 	public boolean setState(EnemyState state) {
-		if (currentState.interruptingStates.contains(state) || followsOnCurrentState(state)) {
-			EnemyState leavingState = currentState;
-			leavingState.leaveState();
-			currentState = state;
-			currentState.enterState(leavingState);
-			
-			timeSinceAnimationEnded = 0;
+		if (isStateChangeAllowed(state)) {
+			changeState(state);
 			return true;
 		}
 		return false;
+	}
+	
+	private boolean isStateChangeAllowed(EnemyState state) {
+		return currentState.interruptingStates.contains(state) || followsOnCurrentState(state);
+	}
+	
+	private void changeState(EnemyState state) {
+		EnemyState leavingState = currentState;
+		leavingState.leaveState();
+		currentState = state;
+		currentState.enterState(leavingState);
+		
+		timeSinceAnimationEnded = 0;
 	}
 	
 	private boolean followsOnCurrentState(EnemyState state) {

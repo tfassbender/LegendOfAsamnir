@@ -10,6 +10,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -264,6 +267,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	private void close() {
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.ON_SCREEN_TEXT_ENDED));
 		text = null;
 	}
 	

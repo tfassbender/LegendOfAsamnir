@@ -1,8 +1,10 @@
 package net.jfabricationgames.gdx.event.global;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -16,7 +18,7 @@ public class GlobalEventListener implements EventListener {
 		new GlobalEventListener(eventHandler);
 	}
 	
-	private ObjectMap<String, GlobalEventConfig> events;
+	private Map<String, GlobalEventConfig> events;//don't use an libGDX ObjectMap here, because an iterator that works nested is needed
 	
 	private GlobalEventListener(EventHandler eventHandler) {
 		eventHandler.registerEventListener(this);
@@ -26,7 +28,7 @@ public class GlobalEventListener implements EventListener {
 	@SuppressWarnings("unchecked")
 	private void loadGlobalEvents() {
 		Json json = new Json();
-		events = json.fromJson(ObjectMap.class, GlobalEventConfig.class, Gdx.files.internal(GLOBAL_EVENTS_CONFIG_FILE));
+		events = json.fromJson(HashMap.class, GlobalEventConfig.class, Gdx.files.internal(GLOBAL_EVENTS_CONFIG_FILE));
 	}
 	
 	@Override

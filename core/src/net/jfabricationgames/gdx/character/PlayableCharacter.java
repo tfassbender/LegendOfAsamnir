@@ -5,9 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.character.container.CharacterFastTravelContainer;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 
-public interface PlayableCharacter {
+public interface PlayableCharacter extends CutsceneMoveableUnit {
 	
 	public void render(float delta, SpriteBatch batch);
 	

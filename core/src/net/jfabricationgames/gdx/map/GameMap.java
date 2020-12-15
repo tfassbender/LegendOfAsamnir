@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
@@ -26,8 +28,11 @@ public class GameMap implements Disposable {
 	
 	public enum GlobalMapPropertyKeys {
 		
-		MINI_MAP_CONFIG_PATH("mini_map_config_path"), MAP_WIDTH_IN_TILE_DIMENSIONS("width"), MAP_HEIGHT_IN_TILE_DIMENSIONS(
-				"height"), MAP_TILE_WIDTH_IN_PIXELS("tilewidth"), MAP_TILE_HEIGHT_IN_PIXELS("tileheight");
+		MINI_MAP_CONFIG_PATH("mini_map_config_path"), //
+		MAP_WIDTH_IN_TILE_DIMENSIONS("width"), //
+		MAP_HEIGHT_IN_TILE_DIMENSIONS("height"), //
+		MAP_TILE_WIDTH_IN_PIXELS("tilewidth"), // 
+		MAP_TILE_HEIGHT_IN_PIXELS("tileheight");
 		
 		private final String key;
 		
@@ -44,12 +49,6 @@ public class GameMap implements Disposable {
 	public static final int[] BACKGROUND_LAYERS = new int[] {0, 1};
 	public static final int[] TERRAIN_LAYERS = new int[] {2};
 	
-	private OrthographicCamera camera;
-	private OrthogonalTiledMapRenderer renderer;
-	
-	private SpriteBatch batch;
-	private ShapeRenderer shapeRenderer;
-	
 	protected TiledMap map;
 	protected Vector2 playerStartingPosition;
 	
@@ -63,6 +62,16 @@ public class GameMap implements Disposable {
 	protected ItemFactory itemFactory;
 	protected ObjectFactory objectFactory;
 	protected EnemyFactory enemyFactory;
+	
+	private OrthographicCamera camera;
+	private OrthogonalTiledMapRenderer renderer;
+	
+	private SpriteBatch batch;
+	private ShapeRenderer shapeRenderer;
+	
+	private PlayableCharacter player;
+	
+	private CutsceneHandler cutsceneHandler;
 	
 	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
@@ -83,6 +92,9 @@ public class GameMap implements Disposable {
 		
 		TiledMapPhysicsLoader mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
 		mapPhysicsLoader.createPhysics(map);
+		
+		cutsceneHandler = CutsceneHandler.getInstance();
+		cutsceneHandler.setGameMap(this);
 	}
 	
 	public void renderBackground() {
@@ -96,6 +108,8 @@ public class GameMap implements Disposable {
 		renderItems(delta);
 		renderObjects(delta);
 		renderItemsAboveGameObjects(delta);
+		
+		processCutscene(delta);
 		processEnemies(delta);
 		renderEnemies(delta);
 		processProjectiles(delta);
@@ -124,6 +138,10 @@ public class GameMap implements Disposable {
 		for (Item item : itemsAboveGameObjects) {
 			item.draw(delta, batch);
 		}
+	}
+	
+	private void processCutscene(float delta) {
+		cutsceneHandler.act(delta);
 	}
 	
 	private void processEnemies(float delta) {
@@ -161,6 +179,14 @@ public class GameMap implements Disposable {
 	
 	public Vector2 getPlayerStartingPosition() {
 		return playerStartingPosition;
+	}
+	
+	public PlayableCharacter getPlayer() {
+		return player;
+	}
+	
+	public void setPlayer(PlayableCharacter player) {
+		this.player = player;
 	}
 	
 	public void addItem(Item item) {
@@ -224,6 +250,28 @@ public class GameMap implements Disposable {
 	public float getMapHeight() {
 		return map.getProperties().get(GlobalMapPropertyKeys.MAP_HEIGHT_IN_TILE_DIMENSIONS.getKey(), Integer.class) //
 				* map.getProperties().get(GlobalMapPropertyKeys.MAP_TILE_HEIGHT_IN_PIXELS.getKey(), Integer.class);
+	}
+	
+	public Object getUnitById(String unitId) {
+		for (Enemy enemy : enemies) {
+			if (unitId.equals(enemy.getUnitId())) {
+				return enemy;
+			}
+		}
+		
+		for (GameObject object : objects) {
+			if (unitId.equals(object.getUnitId())) {
+				return object;
+			}
+		}
+		
+		for (Item item : items) {
+			if (unitId.equals(item.getUnitId())) {
+				return item;
+			}
+		}
+		
+		return null;
 	}
 	
 	@Override

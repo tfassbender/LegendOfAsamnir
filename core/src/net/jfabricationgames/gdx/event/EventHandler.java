@@ -39,7 +39,9 @@ public class EventHandler {
 	}
 	
 	public void fireEvent(EventConfig event) {
-		for (EventListener listener : listeners) {
+		//don't use a foreach loop here, because the iterator won't work nested
+		for (int i = 0; i < listeners.size; i++) {
+			EventListener listener = listeners.get(i);
 			listener.handleEvent(event);
 		}
 	}
