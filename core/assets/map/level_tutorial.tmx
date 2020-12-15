@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="883">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="884">
  <properties>
   <property name="mini_map_config_path" value="config/menu/maps/tutorial.json"/>
  </properties>
@@ -235,6 +235,7 @@
    <properties>
     <property name="specialDropMapProperties" value="{key_key: Minotaur Key}"/>
     <property name="specialDropType" value="key"/>
+    <property name="unitId" value="minotaur"/>
    </properties>
    <point/>
   </object>
@@ -1121,10 +1122,17 @@
   </object>
   <object id="882" name="object.fastTravelPoint" x="960" y="2736">
    <properties>
+    <property name="activateOnStartup" value="false"/>
     <property name="fastTravelPointId" value="tutorial_boss"/>
     <property name="fastTravelPointName" value="Boss"/>
    </properties>
    <point/>
+  </object>
+  <object id="883" name="object.eventObject" x="912" y="2609" width="33" height="158">
+   <properties>
+    <property name="eventParameter" value="tutorialLevel_startMinotaurCutscene"/>
+    <property name="singleExecution" value="true"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="4" name="physics" locked="1">

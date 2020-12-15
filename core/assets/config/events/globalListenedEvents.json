@@ -71,4 +71,14 @@
 			displayText: "It's dangerous to go alone! Take this.",
 		}
 	}
+	tutorialLevel_startMinotaurCutscene: {
+	    event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: tutorialLevel_startMinotaurCutscene,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: tutorialLevel_minotaurCutscene,
+		}
+	}
 }

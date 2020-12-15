@@ -1,0 +1,84 @@
+{
+	id: tutorialLevel_minotaurCutscene,
+	controlledActions: {
+		initial: {
+			type: WAIT,
+			executionDelayInSeconds: 1f,
+			startsWithCutscene: true,
+			
+			executes: [
+				moveCloser,
+			],
+		},
+		moveCloser: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: -5, y: 0},
+			
+			executes: [
+				taunt,
+			],
+		}
+		taunt: {
+			type: CHANGE_STATE,
+			controlledUnitId: minotaur, // references a unit id that is defined in the map properties of the unit
+			controlledUnitState: taunt, // references a state from an enemy's config file (config/enemy/states/enemy_name.json)
+			
+			executes: [
+				waitAfterFirstTaunt,
+			],
+		},
+		waitAfterFirstTaunt: {
+			type: WAIT,
+			executionDelayInSeconds: 1.5f,
+			
+			executes: [
+				movePlayer,
+				moveMinotaur,
+			],
+		}
+		movePlayer: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: -2, y: 0},
+		},
+		moveMinotaur: {
+			type: MOVE,
+			controlledUnitId: minotaur,
+			controlledUnitTarget: {x: -7, y: 0},
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			
+			executes: [
+				taunt_2
+			],
+		},
+		taunt_2: {
+			type: CHANGE_STATE,
+			controlledUnitId: minotaur,
+			controlledUnitState: taunt,
+			
+			executionDelayInSeconds: 1f,
+			
+			executes: [
+				attack_knock,
+			],
+		},
+		attack_knock: {
+			type: CHANGE_STATE,
+			controlledUnitId: minotaur,
+			controlledUnitState: attack_knock,
+			controlledUnitAttackTargetDirection: {x: 0, y: 1},
+			
+			executionDelayInSeconds: 2f,
+			
+			executes: [
+				end,
+			],
+		},
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 1.5f,
+		}
+	}
+}
