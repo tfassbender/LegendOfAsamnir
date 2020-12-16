@@ -26,7 +26,7 @@
 	demoLevel_cutsceneEnds: {
 		event: {
 			eventType: CUTSCENE_EVENT,
-			stringValue: demoLevel_cutsceneEnded,
+			stringValue: demoLevel_cutsceneEnds,
 		},
 		executionType: SHOW_ON_SCREEN_TEXT,
 		executionParameters: {

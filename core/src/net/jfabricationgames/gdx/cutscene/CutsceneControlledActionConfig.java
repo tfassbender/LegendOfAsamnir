@@ -12,12 +12,14 @@ public class CutsceneControlledActionConfig {
 	public float executionDelayInSeconds = 0f;
 	
 	public String globalEvent;
+	public boolean waitForEventToFinish; // only works for events that show an on-screen text; others will wait infinitely
 	
 	public String controlledUnitId;
 	public String controlledUnitState;
 	public Vector2 controlledUnitAttackTargetDirection; // if the state that is activated is an attack state, there needs to be a target direction
 	
 	public Vector2 controlledUnitTarget;
+	public float speedFactor = 1f;
 	public String targetPositionRelativeToUnitId; // the id of the unit that the controlledUnitTarget vector is related to
 	public boolean updatePositionRelativeToTarget = false;
 }

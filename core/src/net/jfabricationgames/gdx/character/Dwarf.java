@@ -363,9 +363,9 @@ public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, Con
 	}
 	
 	@Override
-	public void moveTo(Vector2 position) {
+	public void moveTo(Vector2 position, float speedFactor) {
 		Vector2 direction = position.cpy().sub(getPosition());
-		direction.nor().scl(MOVING_SPEED_CUTSCENE);
+		direction.nor().scl(MOVING_SPEED_CUTSCENE * speedFactor);
 		
 		move(direction.x, direction.y);
 	}

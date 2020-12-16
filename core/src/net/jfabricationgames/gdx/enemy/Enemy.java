@@ -232,10 +232,10 @@ public abstract class Enemy implements Hittable, ContactListener, CutsceneContro
 		return new Vector2(body.getPosition());
 	}
 	
-	@Override
 	public void moveTo(Vector2 pos) {
 		moveTo(pos, 1f);
 	}
+	@Override
 	public void moveTo(Vector2 pos, float speedFactor) {
 		Vector2 direction = pos.cpy().sub(getPosition());
 		direction.nor().scl(movingSpeed * speedFactor);

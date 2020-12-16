@@ -47,15 +47,15 @@ public abstract class AbstractCutsceneAction {
 			controlledUnit = gameMap.getPlayer();
 		}
 		else {
-			controlledUnit = gameMap.getUnitById(actionConfig.controlledUnitId);
+			controlledUnit = gameMap.getUnitById(unitId);
 		}
 		
 		if (controlledUnit == null) {
-			throw new IllegalStateException("The controlled unit with the id '" + actionConfig.controlledUnitId + "' was not found.");
+			throw new IllegalStateException("The controlled unit with the id '" + unitId + "' was not found.");
 		}
 		if (!clazz.isAssignableFrom(controlledUnit.getClass())) {
-			throw new IllegalStateException("The controlled unit with the id '" + actionConfig.controlledUnitId
-					+ "' cannot be cast to the requested class '" + clazz.getSimpleName() + "'");
+			throw new IllegalStateException(
+					"The controlled unit with the id '" + unitId + "' cannot be cast to the requested class '" + clazz.getSimpleName() + "'");
 		}
 		return clazz.cast(controlledUnit);
 	}

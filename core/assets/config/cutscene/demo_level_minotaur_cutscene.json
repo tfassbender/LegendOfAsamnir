@@ -31,12 +31,13 @@
 		movePlayer: {
 			type: MOVE,
 			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: eventObject_startMinotaurCutscene,
 			controlledUnitTarget: {x: 0, y: -2},
 		},
 		moveMinotaur: {
 			type: MOVE,
 			controlledUnitId: demo_minotaur,
-			controlledUnitTarget: {x: 0, y: -5},
+			controlledUnitTarget: {x: 0, y: -3.5},
 			targetPositionRelativeToUnitId: PLAYER,
 			updatePositionRelativeToTarget: true,
 			
@@ -69,7 +70,10 @@
 		},
 		end: {
 			type: EVENT,
+			
 			globalEvent: demoLevel_cutsceneEnds,
+			waitForEventToFinish: true,
+			
 			executionDelayInSeconds: 1f,
 		}
 	}

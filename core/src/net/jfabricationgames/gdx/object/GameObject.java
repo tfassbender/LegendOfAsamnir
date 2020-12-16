@@ -19,6 +19,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
+import net.jfabricationgames.gdx.cutscene.action.CutscenePositioningUnit;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
@@ -30,7 +31,7 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class GameObject implements Hittable, CutsceneControlledUnit {
+public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePositioningUnit {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
@@ -216,6 +217,7 @@ public class GameObject implements Hittable, CutsceneControlledUnit {
 		this.textureAtlas = textureAtlas;
 	}
 	
+	@Override
 	public Vector2 getPosition() {
 		return body != null ? body.getPosition().cpy() : null;
 	}

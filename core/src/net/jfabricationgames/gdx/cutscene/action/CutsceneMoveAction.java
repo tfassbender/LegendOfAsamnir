@@ -14,24 +14,24 @@ public class CutsceneMoveAction extends AbstractCutsceneAction {
 	public CutsceneMoveAction(CutsceneControlledActionConfig actionConfig) {
 		super(actionConfig);
 		controlledUnit = getControlledUnitAs(CutsceneMoveableUnit.class);
-		target = findTarget();
+		findTarget();
 	}
 	
-	private Vector2 findTarget() {
+	private void findTarget() {
 		if (actionConfig.controlledUnitId.equals(actionConfig.targetPositionRelativeToUnitId) && actionConfig.updatePositionRelativeToTarget) {
 			throw new IllegalStateException(
 					"The target position can't be relative to the controlled unit AND be updated. The unit will never reach the target.");
 		}
 		
-		CutsceneMoveableUnit unit;
+		CutscenePositioningUnit unit;
 		if (actionConfig.targetPositionRelativeToUnitId != null) {
-			unit = getUnitAs(actionConfig.targetPositionRelativeToUnitId, CutsceneMoveableUnit.class);
+			unit = getUnitAs(actionConfig.targetPositionRelativeToUnitId, CutscenePositioningUnit.class);
 		}
 		else {
-			unit = getControlledUnitAs(CutsceneMoveableUnit.class);
+			unit = getControlledUnitAs(CutscenePositioningUnit.class);
 		}
 		
-		return unit.getPosition().cpy().add(actionConfig.controlledUnitTarget);
+		target = unit.getPosition().cpy().add(actionConfig.controlledUnitTarget);
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class CutsceneMoveAction extends AbstractCutsceneAction {
 	
 	private void moveControlledUnitToTarget() {
 		controlledUnit.changeToMovingState();
-		controlledUnit.moveTo(target);
+		controlledUnit.moveTo(target, actionConfig.speedFactor);
 	}
 	
 	@Override

@@ -393,10 +393,11 @@ Arrows: 25 Coins..</property>
    </properties>
    <point/>
   </object>
-  <object id="162" name="object.eventObject" x="1184" y="1024" width="32" height="32">
+  <object id="162" name="object.eventObject" x="1120" y="1024" width="160" height="32">
    <properties>
     <property name="eventParameter" value="demoLevel_startCutscene"/>
     <property name="singleExecution" value="true"/>
+    <property name="unitId" value="eventObject_startMinotaurCutscene"/>
    </properties>
   </object>
  </objectgroup>

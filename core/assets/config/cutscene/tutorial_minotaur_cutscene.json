@@ -13,6 +13,7 @@
 		moveCloser: {
 			type: MOVE,
 			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: eventObject_startTutorialMinotaurCutscene,
 			controlledUnitTarget: {x: -5, y: 0},
 			
 			executes: [
@@ -40,12 +41,13 @@
 		movePlayer: {
 			type: MOVE,
 			controlledUnitId: PLAYER,
+			speedFactor: 0.5f,
 			controlledUnitTarget: {x: -2, y: 0},
 		},
 		moveMinotaur: {
 			type: MOVE,
 			controlledUnitId: minotaur,
-			controlledUnitTarget: {x: -7, y: 0},
+			controlledUnitTarget: {x: -4, y: 0},
 			targetPositionRelativeToUnitId: PLAYER,
 			updatePositionRelativeToTarget: true,
 			

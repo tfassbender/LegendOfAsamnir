@@ -1122,7 +1122,7 @@
   </object>
   <object id="882" name="object.fastTravelPoint" x="960" y="2736">
    <properties>
-    <property name="activateOnStartup" value="false"/>
+    <property name="activateOnStartup" value="true"/>
     <property name="fastTravelPointId" value="tutorial_boss"/>
     <property name="fastTravelPointName" value="Boss"/>
    </properties>
@@ -1132,6 +1132,7 @@
    <properties>
     <property name="eventParameter" value="tutorialLevel_startMinotaurCutscene"/>
     <property name="singleExecution" value="true"/>
+    <property name="unitId" value="eventObject_startTutorialMinotaurCutscene"/>
    </properties>
   </object>
  </objectgroup>
