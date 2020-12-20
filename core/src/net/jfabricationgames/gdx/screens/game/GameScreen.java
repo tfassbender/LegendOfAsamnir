@@ -1,12 +1,10 @@
 package net.jfabricationgames.gdx.screens.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -16,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.Dwarf;
 import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
 import net.jfabricationgames.gdx.debug.DebugGridRenderer;
@@ -34,6 +33,8 @@ import net.jfabricationgames.gdx.screens.menu.ShopMenuScreen;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener {
 	
+	public static final boolean DEBUG = false;
+	
 	public static final float WORLD_TO_SCREEN = 0.04f;
 	public static final float SCREEN_TO_WORLD = 1f / WORLD_TO_SCREEN;
 	public static final float SCENE_WIDTH = 12.80f;
@@ -44,25 +45,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
-	public static final boolean RENDER_DEBUG_GRAPHICS = false;
 	public static final int VELOCITY_ITERATIONS = 6;
 	public static final int POSITION_ITERATIONS = 2;
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	public static final String ASSET_GROUP_NAME = "game";
-	
-	private static final float CAMERA_SPEED = 150.0f * WORLD_TO_SCREEN;
-	private static final float CAMERA_ZOOM_SPEED = 2.0f;
-	private static final float CAMERA_ZOOM_MAX = 2.0f;
-	private static final float CAMERA_ZOOM_MIN = 0.25f;
-	
-	private static final float MOVEMENT_EDGE_OFFSET = 75f;
-	private static final float MOVEMENT_RANGE_X = SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET * WORLD_TO_SCREEN;
-	private static final float MOVEMENT_RANGE_Y = SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET * WORLD_TO_SCREEN;
-	
-	private static final String INPUT_AXIS_CAMERA_VERTICAL_MOVMENT = "camera_vertical_move_axis";
-	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
-	private static final float INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD = 0.3f;
 	
 	private static final String ACTION_SHOW_MENU = "menu";
 	
@@ -70,6 +57,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private OrthographicCamera cameraHud;
 	private Viewport viewport;
 	private Viewport viewportHud;
+	private CameraMovementHandler cameraMovementHandler;
+	
 	private SpriteBatch batch;
 	
 	private AssetGroupManager assetManager;
@@ -120,6 +109,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
+		cameraMovementHandler = new CameraMovementHandler(camera, dwarf);
+		
 		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
 		
 		debugGridRenderer = new DebugGridRenderer();
@@ -161,12 +152,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		renderGameGraphics(delta);
 		map.renderTerrain();
 		hud.render(delta);
-		moveCamera(delta);
-		moveCameraToPlayer();
+		cameraMovementHandler.moveCamera(delta);
 		
 		checkGameOver();
 		
-		if (RENDER_DEBUG_GRAPHICS) {
+		if (DEBUG) {
 			debugRenderer.render(world, camera.combined);
 		}
 	}
@@ -181,72 +171,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		batch.begin();
 		dwarf.render(delta, batch);
 		batch.end();
-	}
-	
-	private void moveCamera(float delta) {
-		float cameraMovementAxisVertically = inputContext.getControllerAxisValue(INPUT_AXIS_CAMERA_VERTICAL_MOVMENT);
-		float cameraMovementAxisHorizontally = inputContext.getControllerAxisValue(INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT);
-		float cameraMovementSpeedX = 0;
-		float cameraMovementSpeedY = 0;
-		if (Math.abs(cameraMovementAxisHorizontally) > INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD) {
-			cameraMovementSpeedX = CAMERA_SPEED * cameraMovementAxisHorizontally * delta;
-		}
-		if (Math.abs(cameraMovementAxisVertically) > INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD) {
-			cameraMovementSpeedY = -CAMERA_SPEED * cameraMovementAxisVertically * delta;
-		}
-		
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-			cameraMovementSpeedX = -CAMERA_SPEED * delta;
-		}
-		else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			cameraMovementSpeedX = CAMERA_SPEED * delta;
-		}
-		
-		if (Gdx.input.isKeyPressed(Keys.UP)) {
-			cameraMovementSpeedY = CAMERA_SPEED * delta;
-		}
-		else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-			cameraMovementSpeedY = -CAMERA_SPEED * delta;
-		}
-		
-		camera.position.x += cameraMovementSpeedX;
-		camera.position.y += cameraMovementSpeedY;
-		
-		if (Gdx.input.isKeyPressed(Keys.PAGE_UP)) {
-			camera.zoom -= CAMERA_ZOOM_SPEED * delta;
-		}
-		else if (Gdx.input.isKeyPressed(Keys.PAGE_DOWN)) {
-			camera.zoom += CAMERA_ZOOM_SPEED * delta;
-		}
-		
-		camera.zoom = MathUtils.clamp(camera.zoom, CAMERA_ZOOM_MIN, CAMERA_ZOOM_MAX);
-		
-		//update the camera to re-calculate the matrices
-		camera.update();
-	}
-	
-	private void moveCameraToPlayer() {
-		Vector2 dwarfPosition = dwarf.getPosition();
-		
-		//movement in positive X and Y direction
-		float deltaX = camera.position.x - dwarfPosition.x;
-		float deltaY = camera.position.y - dwarfPosition.y;
-		float movementXPos = deltaX - MOVEMENT_RANGE_X;
-		float movementYPos = deltaY - MOVEMENT_RANGE_Y;
-		
-		//movement in negative X and Y direction
-		deltaX = dwarfPosition.x - camera.position.x;
-		deltaY = dwarfPosition.y - camera.position.y;
-		float movementXNeg = deltaX - MOVEMENT_RANGE_X;
-		float movementYNeg = deltaY - MOVEMENT_RANGE_Y;
-		
-		camera.position.x -= Math.max(movementXPos, 0);
-		camera.position.y -= Math.max(movementYPos, 0);
-		
-		camera.position.x += Math.max(movementXNeg, 0);
-		camera.position.y += Math.max(movementYNeg, 0);
-		
-		camera.update();
 	}
 	
 	private void checkGameOver() {
