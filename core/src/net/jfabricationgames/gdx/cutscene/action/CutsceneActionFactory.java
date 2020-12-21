@@ -1,10 +1,11 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 
 public abstract class CutsceneActionFactory {
 	
-	public static AbstractCutsceneAction createAction(CutsceneControlledActionConfig actionConfig) {
+	public static AbstractCutsceneAction createAction(CutsceneControlledActionConfig actionConfig, CutsceneHandler handler) {
 		switch (actionConfig.type) {
 			case CHANGE_STATE:
 				return new CutsceneChangeStateAction(actionConfig);
@@ -12,6 +13,8 @@ public abstract class CutsceneActionFactory {
 				return new CutsceneEventAction(actionConfig);
 			case MOVE:
 				return new CutsceneMoveAction(actionConfig);
+			case MOVE_CAMERA:
+				return new CutsceneMoveCameraAction(actionConfig, handler.createIsUnitMovingFunction());
 			case WAIT:
 				return new CutsceneWaitAction(actionConfig);
 			default:

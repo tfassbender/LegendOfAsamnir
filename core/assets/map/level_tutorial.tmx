@@ -231,7 +231,7 @@
    </properties>
    <point/>
   </object>
-  <object id="281" name="enemy.minotaur" x="544.667" y="2666.67">
+  <object id="281" name="enemy.minotaur" x="448.667" y="2666.67">
    <properties>
     <property name="specialDropMapProperties" value="{key_key: Minotaur Key}"/>
     <property name="specialDropType" value="key"/>
@@ -1122,7 +1122,7 @@
   </object>
   <object id="882" name="object.fastTravelPoint" x="960" y="2736">
    <properties>
-    <property name="activateOnStartup" value="true"/>
+    <property name="activateOnStartup" value="false"/>
     <property name="fastTravelPointId" value="tutorial_boss"/>
     <property name="fastTravelPointName" value="Boss"/>
    </properties>

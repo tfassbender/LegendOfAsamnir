@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveCameraAction;
+import net.jfabricationgames.gdx.cutscene.function.IsUnitMovingFunction;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -57,6 +59,19 @@ public class CutsceneHandler implements EventListener {
 		return activeCutsceneId != null;
 	}
 	
+	public boolean isCameraControlledByCutscene() {
+		return isCutsceneActive() && isCameraMovementActionActive();
+	}
+	
+	private boolean isCameraMovementActionActive() {
+		for (AbstractCutsceneAction action : executedActions) {
+			if (action instanceof CutsceneMoveCameraAction) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.START_CUTSCENE) {
@@ -100,8 +115,12 @@ public class CutsceneHandler implements EventListener {
 	
 	private void addExecutedAction(CutsceneControlledActionConfig actionConfig, String actionId) {
 		Gdx.app.debug(getClass().getSimpleName(), "adding action config for cutscene '" + activeCutsceneId + "'; actionId: '" + actionId + "'");
-		AbstractCutsceneAction action = CutsceneActionFactory.createAction(actionConfig);
+		AbstractCutsceneAction action = CutsceneActionFactory.createAction(actionConfig, this);
 		executedActions.add(action);
+	}
+	
+	public IsUnitMovingFunction createIsUnitMovingFunction() {
+		return new IsUnitMovingFunction(executedActions);
 	}
 	
 	public void act(float delta) {
@@ -115,7 +134,7 @@ public class CutsceneHandler implements EventListener {
 			action.increaseExecutionTime(delta);
 			
 			if (action.isExecutionDelayPassed()) {
-				action.execute();
+				action.execute(delta);
 				
 				if (action.isExecutionFinished()) {
 					createFollowingActions(action);

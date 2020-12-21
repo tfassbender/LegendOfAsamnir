@@ -8,18 +8,26 @@
 			
 			executes: [
 				moveCloser,
+				moveCamera,
 			],
 		},
 		moveCloser: {
 			type: MOVE,
 			controlledUnitId: PLAYER,
 			targetPositionRelativeToUnitId: eventObject_startTutorialMinotaurCutscene,
-			controlledUnitTarget: {x: -5, y: 0},
+			controlledUnitTarget: {x: -5, y: 1},
 			
 			executes: [
 				taunt,
 			],
 		}
+		moveCamera: {
+			type: MOVE_CAMERA,
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			controlledUnitTarget: {x: -3, y: 0},
+			speedFactor: 3.5f,
+		},
 		taunt: {
 			type: CHANGE_STATE,
 			controlledUnitId: minotaur, // references a unit id that is defined in the map properties of the unit
@@ -42,12 +50,12 @@
 			type: MOVE,
 			controlledUnitId: PLAYER,
 			speedFactor: 0.5f,
-			controlledUnitTarget: {x: -2, y: 0},
+			controlledUnitTarget: {x: -1, y: 0},
 		},
 		moveMinotaur: {
 			type: MOVE,
 			controlledUnitId: minotaur,
-			controlledUnitTarget: {x: -4, y: 0},
+			controlledUnitTarget: {x: -4.5, y: 0},
 			targetPositionRelativeToUnitId: PLAYER,
 			updatePositionRelativeToTarget: true,
 			

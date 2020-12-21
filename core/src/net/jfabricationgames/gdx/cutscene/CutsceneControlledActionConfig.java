@@ -22,4 +22,6 @@ public class CutsceneControlledActionConfig {
 	public float speedFactor = 1f;
 	public String targetPositionRelativeToUnitId; // the id of the unit that the controlledUnitTarget vector is related to
 	public boolean updatePositionRelativeToTarget = false;
+	
+	public boolean cameraFollowsTarget = true;
 }

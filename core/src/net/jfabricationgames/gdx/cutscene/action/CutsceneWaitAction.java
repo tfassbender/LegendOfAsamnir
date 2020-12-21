@@ -9,7 +9,7 @@ public class CutsceneWaitAction extends AbstractCutsceneAction {
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(float delta) {
 		//do nothing here; only wait
 	}
 	

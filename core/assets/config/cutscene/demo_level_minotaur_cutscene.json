@@ -25,6 +25,7 @@
 			
 			executes: [
 				movePlayer,
+				moveCamera,
 				moveMinotaur,
 			],
 		}
@@ -33,6 +34,13 @@
 			controlledUnitId: PLAYER,
 			targetPositionRelativeToUnitId: eventObject_startMinotaurCutscene,
 			controlledUnitTarget: {x: 0, y: -2},
+		},
+		moveCamera: {
+			type: MOVE_CAMERA,
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			controlledUnitTarget: {x: 0, y: -1.5},
+			speedFactor: 5f,
 		},
 		moveMinotaur: {
 			type: MOVE,

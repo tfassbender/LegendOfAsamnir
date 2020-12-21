@@ -11,7 +11,7 @@ public class CutsceneChangeStateAction extends AbstractCutsceneAction {
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(float delta) {
 		Enemy enemy = getControlledUnitAs(Enemy.class);
 		EnemyState state = enemy.getStateMachine().getState(actionConfig.controlledUnitState);
 		state.setAttackDirection(actionConfig.controlledUnitAttackTargetDirection);

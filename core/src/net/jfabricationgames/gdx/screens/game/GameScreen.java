@@ -109,7 +109,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
 		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
-		cameraMovementHandler = new CameraMovementHandler(camera, dwarf);
+		cameraMovementHandler = CameraMovementHandler.createInstance(camera, dwarf);
 		
 		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
 		

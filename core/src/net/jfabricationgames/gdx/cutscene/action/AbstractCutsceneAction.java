@@ -22,7 +22,7 @@ public abstract class AbstractCutsceneAction {
 		this.actionConfig = actionConfig;
 	}
 	
-	public abstract void execute();
+	public abstract void execute(float delta);
 	public abstract boolean isExecutionFinished();
 	
 	public void increaseExecutionTime(float delta) {
@@ -58,5 +58,9 @@ public abstract class AbstractCutsceneAction {
 					"The controlled unit with the id '" + unitId + "' cannot be cast to the requested class '" + clazz.getSimpleName() + "'");
 		}
 		return clazz.cast(controlledUnit);
+	}
+
+	public CutsceneControlledActionConfig getActionConfig() {
+		return actionConfig;
 	}
 }

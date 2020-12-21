@@ -16,6 +16,8 @@ public class CameraMovementHandler {
 	
 	public static final float CAMERA_MOVEMENT_SPEED = 150.0f * GameScreen.WORLD_TO_SCREEN;
 	
+	private static CameraMovementHandler instance;
+	
 	private static final float CAMERA_ZOOM_SPEED = 2.0f;
 	private static final float CAMERA_ZOOM_MAX = 2.0f;
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
@@ -28,13 +30,30 @@ public class CameraMovementHandler {
 	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
 	private static final float INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD = 0.3f;
 	
+	public static synchronized CameraMovementHandler createInstance(OrthographicCamera camera, PlayableCharacter player) {
+		if (instance != null) {
+			throw new IllegalStateException("The instance of CameraMovementHandler has already been created. "
+					+ "Use the getInstance() method to get the instance instead of creating one.");
+		}
+		instance = new CameraMovementHandler(camera, player);
+		return instance;
+	}
+	
+	public static CameraMovementHandler getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("The instance of CameraMovementHandler has not yet been created. "
+					+ "Use the createInstance(OrtographicCamera, PlayableCharacter) method to create an instance.");
+		}
+		return instance;
+	}
+	
 	private OrthographicCamera camera;
 	private PlayableCharacter player;
 	private CutsceneHandler cutsceneHandler;
 	
 	private InputContext inputContext;
 	
-	public CameraMovementHandler(OrthographicCamera camera, PlayableCharacter player) {
+	private CameraMovementHandler(OrthographicCamera camera, PlayableCharacter player) {
 		this.camera = camera;
 		this.player = player;
 		cutsceneHandler = CutsceneHandler.getInstance();
@@ -43,7 +62,7 @@ public class CameraMovementHandler {
 	}
 	
 	public void moveCamera(float delta) {
-		if (!cutsceneHandler.isCutsceneActive()) {
+		if (!cutsceneHandler.isCameraControlledByCutscene()) {
 			if (GameScreen.DEBUG) {
 				moveDebugCamera(delta);
 			}
@@ -51,6 +70,15 @@ public class CameraMovementHandler {
 		}
 		
 		camera.update();
+	}
+	
+	public void moveCamera(float deltaX, float deltaY) {
+		camera.position.x += deltaX;
+		camera.position.y += deltaY;
+	}
+	
+	public Vector2 getCameraPosition() {
+		return new Vector2(camera.position.x, camera.position.y);
 	}
 	
 	private void moveDebugCamera(float delta) {
@@ -89,11 +117,6 @@ public class CameraMovementHandler {
 		}
 		
 		camera.zoom = MathUtils.clamp(camera.zoom, CAMERA_ZOOM_MIN, CAMERA_ZOOM_MAX);
-	}
-	
-	private void moveCamera(float deltaX, float deltaY) {
-		camera.position.x += deltaX;
-		camera.position.y += deltaY;
 	}
 	
 	private void moveCameraToPlayer() {

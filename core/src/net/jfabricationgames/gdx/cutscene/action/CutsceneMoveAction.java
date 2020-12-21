@@ -1,15 +1,10 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
-import com.badlogic.gdx.math.Vector2;
-
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 
-public class CutsceneMoveAction extends AbstractCutsceneAction {
-	
-	public static final float MAX_DISTANCE_TO_TARGET_POINT = 0.1f;
+public class CutsceneMoveAction extends AbstractCutsceneMoveAction {
 	
 	private CutsceneMoveableUnit controlledUnit;
-	private Vector2 target;
 	
 	public CutsceneMoveAction(CutsceneControlledActionConfig actionConfig) {
 		super(actionConfig);
@@ -17,25 +12,8 @@ public class CutsceneMoveAction extends AbstractCutsceneAction {
 		findTarget();
 	}
 	
-	private void findTarget() {
-		if (actionConfig.controlledUnitId.equals(actionConfig.targetPositionRelativeToUnitId) && actionConfig.updatePositionRelativeToTarget) {
-			throw new IllegalStateException(
-					"The target position can't be relative to the controlled unit AND be updated. The unit will never reach the target.");
-		}
-		
-		CutscenePositioningUnit unit;
-		if (actionConfig.targetPositionRelativeToUnitId != null) {
-			unit = getUnitAs(actionConfig.targetPositionRelativeToUnitId, CutscenePositioningUnit.class);
-		}
-		else {
-			unit = getControlledUnitAs(CutscenePositioningUnit.class);
-		}
-		
-		target = unit.getPosition().cpy().add(actionConfig.controlledUnitTarget);
-	}
-	
 	@Override
-	public void execute() {
+	public void execute(float delta) {
 		if (actionConfig.updatePositionRelativeToTarget) {
 			findTarget();
 		}
@@ -45,7 +23,7 @@ public class CutsceneMoveAction extends AbstractCutsceneAction {
 	
 	private void moveControlledUnitToTarget() {
 		controlledUnit.changeToMovingState();
-		controlledUnit.moveTo(target, actionConfig.speedFactor);
+		controlledUnit.moveTo(target.cpy(), actionConfig.speedFactor);
 	}
 	
 	@Override
