@@ -52,5 +52,21 @@
 		up: tutorial_hidden_key_area,
 		right: tutorial_dungeon,
 		select: selectFastTravelPoint,
+	},
+	
+	// **********************************************************
+	// *** debug fast travel points
+	// **********************************************************
+	
+	tutorial_debug_1: {
+		debug: true,
+		
+		down: button_mapDialogBack,
+		select: selectFastTravelPoint,
+		
+		reachableFrom: [{
+				fromState: button_mapDialogBack,
+				direction: UP,
+			}],
 	}
 }

@@ -33,6 +33,8 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePositioningUnit {
 	
+	public static final String MAP_PROPERTY_KEY_DEBUG_OBJECT = "debugObject";
+	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	
@@ -41,7 +43,7 @@ public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePos
 	protected Body body;
 	protected GameMap gameMap;
 	protected TextureAtlas textureAtlas;
-	protected ObjectTypeConfig typeConfig;
+	protected GameObjectTypeConfig typeConfig;
 	protected ObjectMap<String, Float> dropTypes;
 	
 	protected AnimationManager animationManager;
@@ -52,7 +54,7 @@ public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePos
 	protected Vector2 physicsBodySizeFactor;
 	protected Vector2 physicsBodyOffsetFactor;
 	
-	public GameObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
+	public GameObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
 		this.mapProperties = mapProperties;

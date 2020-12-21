@@ -14,7 +14,7 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectTypeConfig;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class SpawnPoint extends GameObject implements EventListener, Disposable {
@@ -48,7 +48,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	
 	private SpawnConfig spawnConfig;
 	
-	public SpawnPoint(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
+	public SpawnPoint(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
 		super(typeConfig, sprite, mapProperties);
 		loadSpawnConfigFromMapProperties();
 		EventHandler.getInstance().registerEventListener(this);

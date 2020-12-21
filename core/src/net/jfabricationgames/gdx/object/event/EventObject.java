@@ -15,7 +15,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectTypeConfig;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -35,7 +35,7 @@ public class EventObject extends GameObject implements ContactListener {
 	private boolean executed = false;
 	private Vector2 eventObjectCenter;
 	
-	public EventObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
+	public EventObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
 		super(typeConfig, sprite, mapProperties);
 		PhysicsWorld.getInstance().registerContactListener(this);
 	}

@@ -1,11 +1,14 @@
 package net.jfabricationgames.gdx.screens.menu.control;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 public class MenuStateMachine<T extends ControlledMenu<T>> {
 	
@@ -148,6 +151,33 @@ public class MenuStateMachine<T extends ControlledMenu<T>> {
 		String leavingState = currentState;
 		currentState = stateName;
 		menu.setFocusTo(stateName, leavingState);
+	}
+	
+	public void removeDebugStates() {
+		Array<String> removedStates = new Array<>();
+		for (Iterator<Entry<String, MenuState>> iterator = states.iterator(); iterator.hasNext();) {
+			Entry<String, MenuState> stateEntry = iterator.next();
+			MenuState state = stateEntry.value;
+			if (state.debug) {
+				iterator.remove();
+				removedStates.add(stateEntry.key);
+			}
+		}
+		
+		for (MenuState state : states.values()) {
+			if (removedStates.contains(state.up, false)) {
+				state.up = null;
+			}
+			if (removedStates.contains(state.down, false)) {
+				state.down = null;
+			}
+			if (removedStates.contains(state.left, false)) {
+				state.left = null;
+			}
+			if (removedStates.contains(state.right, false)) {
+				state.right = null;
+			}
+		}
 	}
 	
 	public void executeSelectActionOnCurrentState() {

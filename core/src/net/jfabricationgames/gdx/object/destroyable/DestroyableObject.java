@@ -9,7 +9,7 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectTypeConfig;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class DestroyableObject extends GameObject {
 	
@@ -18,7 +18,7 @@ public class DestroyableObject extends GameObject {
 	
 	protected String destroySound;
 	
-	public DestroyableObject(ObjectTypeConfig type, Sprite sprite, MapProperties properties) {
+	public DestroyableObject(GameObjectTypeConfig type, Sprite sprite, MapProperties properties) {
 		super(type, sprite, properties);
 		destroyed = false;
 	}

@@ -7,7 +7,7 @@ import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.object.interactive.InteractiveAction;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-public class ObjectTypeConfig {
+public class GameObjectTypeConfig {
 	
 	public GameObjectType type;
 	

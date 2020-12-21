@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="884">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="885">
  <properties>
   <property name="mini_map_config_path" value="config/menu/maps/tutorial.json"/>
  </properties>
@@ -1122,7 +1122,6 @@
   </object>
   <object id="882" name="object.fastTravelPoint" x="960" y="2736">
    <properties>
-    <property name="activateOnStartup" value="false"/>
     <property name="fastTravelPointId" value="tutorial_boss"/>
     <property name="fastTravelPointName" value="Boss"/>
    </properties>
@@ -1134,6 +1133,15 @@
     <property name="singleExecution" value="true"/>
     <property name="unitId" value="eventObject_startTutorialMinotaurCutscene"/>
    </properties>
+  </object>
+  <object id="884" name="object.fastTravelPoint" x="1040" y="2733">
+   <properties>
+    <property name="activateOnStartup" value="true"/>
+    <property name="debugObject" value="true"/>
+    <property name="fastTravelPointId" value="tutorial_debug_1"/>
+    <property name="fastTravelPointName" value="debug_1"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="4" name="physics" locked="1">

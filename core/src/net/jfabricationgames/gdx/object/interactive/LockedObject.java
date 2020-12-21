@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.data.KeyItem;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.object.ObjectTypeConfig;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class LockedObject extends InteractiveObject {
 	
@@ -19,7 +19,7 @@ public class LockedObject extends InteractiveObject {
 	
 	private ObjectMap<String, String> keyProperties;
 	
-	public LockedObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
+	public LockedObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
 		super(typeConfig, sprite, properties);
 		
 		keyProperties = KeyItem.getKeyProperties(properties);

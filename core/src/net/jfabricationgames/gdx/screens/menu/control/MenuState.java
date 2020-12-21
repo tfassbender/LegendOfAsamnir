@@ -8,6 +8,7 @@ public class MenuState {
 	public String right;
 	public String select;
 	public boolean initial;
+	public boolean debug;
 	
 	/**
 	 * Used for states with multiple config files to configure additional ways to reach states (e.g. the mini-map states can be reached from the back

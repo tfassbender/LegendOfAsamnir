@@ -133,6 +133,10 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	private void initializeStateMachine() {
 		stateMachine = new MenuStateMachine<PauseMenuScreen>(this, PAUSE_MENU_STATES_CONFIG, mapDialog.getMapStateConfigFile());
+		if (!GameScreen.DEBUG) {
+			stateMachine.removeDebugStates();
+		}
+		
 		stateMachine.changeToInitialState();
 	}
 	

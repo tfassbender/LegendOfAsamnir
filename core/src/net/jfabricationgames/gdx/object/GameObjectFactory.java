@@ -19,14 +19,14 @@ import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public class ObjectFactory extends AbstractFactory {
+public class GameObjectFactory extends AbstractFactory {
 	
 	private static final String configFile = "config/factory/object_factory.json";
 	private static Config config;
 	
-	private Map<String, ObjectTypeConfig> typeConfigs;
+	private Map<String, GameObjectTypeConfig> typeConfigs;
 	
-	public ObjectFactory(GameMap gameMap) {
+	public GameObjectFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
 		
 		if (config == null) {
@@ -43,11 +43,11 @@ public class ObjectFactory extends AbstractFactory {
 	
 	@SuppressWarnings("unchecked")
 	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(HashMap.class, ObjectTypeConfig.class, Gdx.files.internal(config.objectTypesConfig));
+		typeConfigs = json.fromJson(HashMap.class, GameObjectTypeConfig.class, Gdx.files.internal(config.objectTypesConfig));
 	}
 	
 	public GameObject createObject(String type, float x, float y, MapProperties properties) {
-		ObjectTypeConfig typeConfig = typeConfigs.get(type);
+		GameObjectTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: '" + type
 					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");

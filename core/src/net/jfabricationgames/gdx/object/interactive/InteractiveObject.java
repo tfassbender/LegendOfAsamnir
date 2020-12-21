@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectTypeConfig;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -32,7 +32,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	private boolean changedBodyToSensor = false;
 	private AnimationDirector<TextureRegion> interactionAnimation;
 	
-	public InteractiveObject(ObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
+	public InteractiveObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
 		super(typeConfig, sprite, properties);
 		PhysicsWorld.getInstance().registerContactListener(this);
 		

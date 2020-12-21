@@ -19,7 +19,7 @@ import net.jfabricationgames.gdx.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectFactory;
+import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -60,7 +60,7 @@ public class GameMap implements Disposable {
 	protected Array<Projectile> projectiles;
 	
 	protected ItemFactory itemFactory;
-	protected ObjectFactory objectFactory;
+	protected GameObjectFactory objectFactory;
 	protected EnemyFactory enemyFactory;
 	
 	private OrthographicCamera camera;
@@ -83,7 +83,7 @@ public class GameMap implements Disposable {
 		ProjectileFactory.createInstance(this);
 		
 		itemFactory = new ItemFactory(this);
-		objectFactory = new ObjectFactory(this);
+		objectFactory = new GameObjectFactory(this);
 		enemyFactory = new EnemyFactory(this);
 		
 		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
@@ -231,7 +231,7 @@ public class GameMap implements Disposable {
 		return itemFactory;
 	}
 	
-	public ObjectFactory getObjectFactory() {
+	public GameObjectFactory getObjectFactory() {
 		return objectFactory;
 	}
 	

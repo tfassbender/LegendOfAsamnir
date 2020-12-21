@@ -19,7 +19,7 @@ import net.jfabricationgames.gdx.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.ObjectFactory;
+import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class TiledMapLoader {
@@ -73,7 +73,7 @@ public class TiledMapLoader {
 	private GameMap gameMap;
 	
 	private ItemFactory itemFactory;
-	private ObjectFactory objectFactory;
+	private GameObjectFactory objectFactory;
 	private EnemyFactory enemyFactory;
 	
 	public TiledMapLoader(String mapAsset, GameMap gameMap) {
@@ -113,6 +113,12 @@ public class TiledMapLoader {
 				continue;
 			}
 			
+			if (isDebugObject(properties) && !GameScreen.DEBUG) {
+				Gdx.app.debug(getClass().getSimpleName(),
+						"Debug object will not be added, because the game is not in debug mode: " + mapPropertiesToString(properties, true));
+				continue;
+			}
+			
 			String[] parts = name.split("[.]");
 			
 			if (parts.length != 2) {
@@ -147,5 +153,9 @@ public class TiledMapLoader {
 		gameMap.items = items;
 		gameMap.objects = objects;
 		gameMap.enemies = enemies;
+	}
+	
+	private boolean isDebugObject(MapProperties properties) {
+		return Boolean.parseBoolean(properties.get(GameObject.MAP_PROPERTY_KEY_DEBUG_OBJECT, "false", String.class));
 	}
 }
