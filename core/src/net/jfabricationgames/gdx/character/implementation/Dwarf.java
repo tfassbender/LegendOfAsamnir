@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character;
+package net.jfabricationgames.gdx.character.implementation;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,6 +19,7 @@ import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.CharacterFastTravelContainer;
 import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.container.CharacterPropertiesContainer;
@@ -27,7 +28,6 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.object.event.EventObject;
@@ -42,7 +42,7 @@ import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 import net.jfabricationgames.gdx.util.GameUtils;
 
-public class Dwarf implements PlayableCharacter, StatsCharacter, Disposable, ContactListener, Hittable, EventListener {
+public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hittable, EventListener {
 	
 	private static final float MOVING_SPEED = 300f;
 	private static final float JUMPING_SPEED = 425f;

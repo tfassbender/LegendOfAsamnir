@@ -2,8 +2,8 @@ package net.jfabricationgames.gdx.character.container;
 
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.character.CharacterAction;
 import net.jfabricationgames.gdx.character.container.data.CharacterProperties;
+import net.jfabricationgames.gdx.character.implementation.CharacterAction;
 
 public class CharacterPropertiesContainer {
 	

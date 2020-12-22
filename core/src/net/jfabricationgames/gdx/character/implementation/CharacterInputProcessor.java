@@ -1,6 +1,7 @@
-package net.jfabricationgames.gdx.character;
+package net.jfabricationgames.gdx.character.implementation;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;

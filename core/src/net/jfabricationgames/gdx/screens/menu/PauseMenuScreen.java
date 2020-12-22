@@ -11,7 +11,7 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
-import net.jfabricationgames.gdx.character.SpecialAction;
+import net.jfabricationgames.gdx.character.implementation.SpecialAction;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;

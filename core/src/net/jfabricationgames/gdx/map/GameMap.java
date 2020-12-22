@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.character.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.enemy.Enemy;
 import net.jfabricationgames.gdx.enemy.EnemyFactory;
@@ -75,6 +76,10 @@ public class GameMap implements Disposable {
 	
 	public GameMap(String mapAsset, OrthographicCamera camera) {
 		this.camera = camera;
+		
+		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
+		player = PlayerFactory.createPlayer();
+		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		
@@ -89,6 +94,7 @@ public class GameMap implements Disposable {
 		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
 		loader.load();//initializes the map
 		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN, batch);
+		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
 		TiledMapPhysicsLoader mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
 		mapPhysicsLoader.createPhysics(map);
@@ -114,6 +120,8 @@ public class GameMap implements Disposable {
 		renderEnemies(delta);
 		processProjectiles(delta);
 		renderProjectiles();
+		
+		renderPlayer(delta);
 		batch.end();
 		
 		shapeRenderer.setProjectionMatrix(camera.combined);
@@ -166,6 +174,10 @@ public class GameMap implements Disposable {
 		}
 	}
 	
+	private void renderPlayer(float delta) {
+		player.render(delta, batch);
+	}
+	
 	private void renderEnemyHealthBars() {
 		for (Enemy enemy : enemies) {
 			enemy.drawHealthBar(shapeRenderer);
@@ -183,10 +195,6 @@ public class GameMap implements Disposable {
 	
 	public PlayableCharacter getPlayer() {
 		return player;
-	}
-	
-	public void setPlayer(PlayableCharacter player) {
-		this.player = player;
 	}
 	
 	public void addItem(Item item) {

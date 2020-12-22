@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -15,9 +14,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
-import net.jfabricationgames.gdx.character.Dwarf;
+import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
-import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -59,14 +57,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private Viewport viewportHud;
 	private CameraMovementHandler cameraMovementHandler;
 	
-	private SpriteBatch batch;
-	
 	private AssetGroupManager assetManager;
 	private InputContext inputContext;
-	private Dwarf dwarf;
-	private DebugGridRenderer debugGridRenderer;
 	private HeadsUpDisplay hud;
 	private GameMap map;
+	private PlayableCharacter player;
 	
 	private PauseMenuScreen pauseMenu;
 	private ShopMenuScreen shopMenu;
@@ -74,51 +69,17 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private Box2DDebugRenderer debugRenderer;
 	private World world;
 	
-	private boolean gameOver;
+	private boolean gameOver = false;
 	
 	public GameScreen() {
-		gameOver = false;
-		
-		assetManager = AssetGroupManager.getInstance();
-		assetManager.loadGroup(ASSET_GROUP_NAME);
-		assetManager.finishLoading();
-		
-		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
+		createAssetManager();
 		initializeCamerasAndViewports();
-		
-		inputContext = DwarfScrollerGame.getInstance().getInputContext();
-		inputContext.addListener(this);
-		
-		batch = new SpriteBatch();
-		
-		world = PhysicsWorld.getInstance().createWorld(new Vector2(0, 0f), true);
-		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
-				false, /* joints */
-				false, /* aabbs */
-				true, /* inactive bodies */
-				true, /* velocities */
-				false /* contacts */);
-		
-		// create the dwarf before the map, because it contains event listeners that listen for events that are fired when the map is created
-		dwarf = new Dwarf();
-		
-		//map = new GameMap("map/map3.tmx", camera);
-		map = new GameMap("map/level_tutorial.tmx", camera);
-		map.setPlayer(dwarf);
-		
-		Vector2 playerStartingPosition = map.getPlayerStartingPosition();
-		dwarf.setPosition(playerStartingPosition.x, playerStartingPosition.y);
-		
-		cameraMovementHandler = CameraMovementHandler.createInstance(camera, dwarf);
-		
-		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, dwarf);
-		
-		debugGridRenderer = new DebugGridRenderer();
-		debugGridRenderer.setLineOffsets(40f, 40f);
-		debugGridRenderer.stopDebug();
-		
-		EventHandler.getInstance().registerEventListener(this);
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
+		initializeInputContext();
+		createBox2DWorld();
+		createGameMap();
+		createHud();
+		createCameraMovementHandler();
+		initializeEventHandling();
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -137,6 +98,47 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		cameraHud.update();
 	}
 	
+	private void createAssetManager() {
+		assetManager = AssetGroupManager.getInstance();
+		assetManager.loadGroup(ASSET_GROUP_NAME);
+		assetManager.finishLoading();
+	}
+	
+	private void initializeInputContext() {
+		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
+		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		inputContext.addListener(this);
+	}
+	
+	private void createBox2DWorld() {
+		world = PhysicsWorld.getInstance().createWorld(new Vector2(0, 0f), true);
+		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
+				false, /* joints */
+				false, /* aabbs */
+				true, /* inactive bodies */
+				true, /* velocities */
+				false /* contacts */);
+	}
+	
+	private void createGameMap() {
+		//map = new GameMap("map/map3.tmx", camera);
+		map = new GameMap("map/level_tutorial.tmx", camera);
+		player = map.getPlayer();
+	}
+	
+	private void createHud() {
+		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, player);
+	}
+	
+	private void createCameraMovementHandler() {
+		cameraMovementHandler = CameraMovementHandler.createInstance(camera, player);
+	}
+	
+	private void initializeEventHandling() {
+		EventHandler.getInstance().registerEventListener(this);
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
+	}
+	
 	@Override
 	public void render(float delta) {
 		//clear the screen (with a black screen)
@@ -148,10 +150,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		
 		map.renderBackground();
 		map.processAndRenderGameObject(delta);
-		renderDebugGraphics(delta);
-		renderGameGraphics(delta);
 		map.renderTerrain();
 		hud.render(delta);
+		
 		cameraMovementHandler.moveCamera(delta);
 		
 		checkGameOver();
@@ -161,27 +162,15 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		}
 	}
 	
-	private void renderDebugGraphics(float delta) {
-		debugGridRenderer.updateCamera(camera);
-		debugGridRenderer.render(delta);
-	}
-	
-	private void renderGameGraphics(float delta) {
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		dwarf.render(delta, batch);
-		batch.end();
-	}
-	
 	private void checkGameOver() {
-		if (!gameOver && dwarf.isGameOver()) {
+		if (!gameOver && player.isGameOver()) {
 			gameOver = true;
 			showGameOverMenuScreen();
 		}
 	}
 	
 	private void showGameOverMenuScreen() {
-		new GameOverMenuScreen(this, dwarf).showMenu();
+		new GameOverMenuScreen(this, player).showMenu();
 	}
 	
 	@Override
@@ -195,7 +184,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void showPauseMenu() {
 		if (pauseMenu == null) {
-			pauseMenu = new PauseMenuScreen(this, dwarf);
+			pauseMenu = new PauseMenuScreen(this, player);
 		}
 		pauseMenu.showMenu();
 	}
@@ -212,7 +201,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void showShopMenu() {
 		if (shopMenu == null) {
-			shopMenu = new ShopMenuScreen(this, dwarf);
+			shopMenu = new ShopMenuScreen(this, player);
 		}
 		shopMenu.showMenu();
 	}
@@ -228,14 +217,14 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right)
 	 */
 	public Vector2 getPlayersPositionOnMap() {
-		Vector2 playersRelativePosition = dwarf.getPosition().cpy().scl(SCREEN_TO_WORLD);
+		Vector2 playersRelativePosition = player.getPosition().cpy().scl(SCREEN_TO_WORLD);
 		playersRelativePosition.x /= map.getMapWidth();
 		playersRelativePosition.y /= map.getMapHeight();
 		return playersRelativePosition;
 	}
 	
 	public Array<CharacterFastTravelProperties> getFastTravelPositions() {
-		return dwarf.getFastTravelContainer().getFastTravelPositions();
+		return player.getFastTravelContainer().getFastTravelPositions();
 	}
 	
 	public float getMapWidth() {
@@ -258,11 +247,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		inputContext.removeListener(this);
 		assetManager.unloadGroup(ASSET_GROUP_NAME);
 		
-		batch.dispose();
 		map.dispose();
 		hud.dispose();
 		debugRenderer.dispose();
-		debugGridRenderer.dispose();
 		if (pauseMenu != null) {
 			pauseMenu.dispose();
 		}
