@@ -116,14 +116,8 @@ public class TiledMapPhysicsLoader {
 			if (material != null) {
 				fixtureDef = materials.get(material);
 			}
-			else {
-				Gdx.app.error(getClass().getSimpleName(),
-						"no material defined for map object at x: " + properties.get("x") + " y: " + properties.get("y"));
-				material = "default";
-			}
 			
 			if (fixtureDef == null) {
-				Gdx.app.error(getClass().getSimpleName(), "material does not exist " + material + " using default");
 				fixtureDef = materials.get("default");
 			}
 			

@@ -30,6 +30,10 @@ public class CameraMovementHandler {
 	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
 	private static final float INPUT_AXIS_CAMERA_MOVEMENT_THRESHOLD = 0.3f;
 	
+	public static synchronized boolean isInstanceCreated() {
+		return instance != null;
+	}
+	
 	public static synchronized CameraMovementHandler createInstance(OrthographicCamera camera, PlayableCharacter player) {
 		if (instance != null) {
 			throw new IllegalStateException("The instance of CameraMovementHandler has already been created. "
@@ -37,6 +41,15 @@ public class CameraMovementHandler {
 		}
 		instance = new CameraMovementHandler(camera, player);
 		return instance;
+	}
+	
+	public static synchronized CameraMovementHandler createInstanceIfAbsent(OrthographicCamera camera, PlayableCharacter player) {
+		if (isInstanceCreated()) {
+			return getInstance();
+		}
+		else {
+			return createInstance(camera, player);
+		}
 	}
 	
 	public static CameraMovementHandler getInstance() {

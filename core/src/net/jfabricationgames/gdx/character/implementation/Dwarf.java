@@ -45,18 +45,21 @@ import net.jfabricationgames.gdx.util.GameUtils;
 public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hittable, EventListener {
 	
 	private static final float MOVING_SPEED = 300f;
-	private static final float JUMPING_SPEED = 425f;
+	private static final float MOVING_SPEED_JUMP = 425f;
 	private static final float MOVING_SPEED_SPRINT = 425f;
 	private static final float MOVING_SPEED_ATTACK = 150f;
 	private static final float MOVING_SPEED_CUTSCENE = 3.5f;
+	
 	private static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
 	private static final float TIME_TILL_GAME_OVER_MENU = 3f;
 	
-	private static final float PHYSICS_BODY_SIZE_FACTOR_X = 0.8f;
+	private static final float PHYSICS_BODY_SIZE_FACTOR_X = 0.6f;
 	private static final float PHYSICS_BODY_SIZE_FACTOR_Y = 0.7f;
 	private static final float PHYSICS_BODY_SENSOR_RADIUS = 0.6f;
 	private static final Vector2 PHYSICS_BODY_POSITION_OFFSET = new Vector2(0f, -0.15f);
+	
+	private static final float DRAWING_DIRECTION_OFFSET = 0.1f;
 	
 	private static final String assetConfigFileName = "config/animation/dwarf.json";
 	private static final String attackConfigFileName = "config/dwarf/attacks.json";
@@ -302,6 +305,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			x += offset.x;
 			y += offset.y;
 		}
+		x += getDrawingDirectionOffset();
 		
 		batch.draw(frame, // textureRegion
 				x, y, // x, y
@@ -310,6 +314,15 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				GameScreen.WORLD_TO_SCREEN, // scaleX
 				GameScreen.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation
+	}
+	
+	private float getDrawingDirectionOffset() {
+		if (movementHandler.isDrawDirectionRight()) {
+			return DRAWING_DIRECTION_OFFSET;
+		}
+		else {
+			return -DRAWING_DIRECTION_OFFSET;
+		}
 	}
 	
 	private void drawAimMarker(SpriteBatch batch) {
@@ -337,7 +350,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			speed = MOVING_SPEED_ATTACK;
 		}
 		if (action == CharacterAction.JUMP) {
-			speed = JUMPING_SPEED;
+			speed = MOVING_SPEED_JUMP;
 		}
 		
 		if (properties.isSlowedDown()) {

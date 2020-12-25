@@ -68,7 +68,7 @@ public class AssetGroupManager implements Disposable, AssetErrorListener {
 			}
 		}
 		else {
-			Gdx.app.log(getClass().getSimpleName(), "error loading group: " + groupName + ", not found");
+			Gdx.app.error(getClass().getSimpleName(), "error loading group: " + groupName + ", not found");
 		}
 	}
 	
@@ -122,7 +122,11 @@ public class AssetGroupManager implements Disposable, AssetErrorListener {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void error(AssetDescriptor asset, Throwable throwable) {
-		Gdx.app.log(getClass().getSimpleName(), "error loading: " + asset.fileName + " - message: " + throwable.getMessage());
+		String additionalInformation = "";
+		if (throwable.getMessage().endsWith(".tmx") && throwable.getCause() != null && throwable.getCause().getCause() instanceof NullPointerException) {
+			additionalInformation = " - This error usually occures when the tiled map is set to infinite size.";
+		}
+		Gdx.app.error(getClass().getSimpleName(), "error loading: " + asset.fileName + additionalInformation, throwable);
 	}
 	
 	private void loadGroups(String assetFile) {

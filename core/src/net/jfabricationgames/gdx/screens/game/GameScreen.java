@@ -122,6 +122,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void createGameMap() {
 		//map = new GameMap("map/map3.tmx", camera);
+		//map = new GameMap("map/map4.tmx", camera);
 		map = new GameMap("map/level_tutorial.tmx", camera);
 		player = map.getPlayer();
 	}
@@ -131,7 +132,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createCameraMovementHandler() {
-		cameraMovementHandler = CameraMovementHandler.createInstance(camera, player);
+		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera, player);
 	}
 	
 	private void initializeEventHandling() {
