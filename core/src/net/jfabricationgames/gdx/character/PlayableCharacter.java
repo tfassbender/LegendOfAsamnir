@@ -10,8 +10,9 @@ import net.jfabricationgames.gdx.character.implementation.SpecialAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
+import net.jfabricationgames.gdx.map.GameMapObject;
 
-public interface PlayableCharacter extends StatsCharacter, CutsceneMoveableUnit {
+public interface PlayableCharacter extends StatsCharacter, GameMapObject, CutsceneMoveableUnit {
 	
 	public void render(float delta, SpriteBatch batch);
 	
@@ -83,4 +84,6 @@ public interface PlayableCharacter extends StatsCharacter, CutsceneMoveableUnit 
 	public CharacterItemContainer getItemContainer();
 	
 	public CharacterFastTravelContainer getFastTravelContainer();
+
+	public void reAddToWorld();
 }

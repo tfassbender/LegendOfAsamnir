@@ -9,6 +9,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -21,6 +23,7 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectFactory;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -74,11 +77,8 @@ public class GameMap implements Disposable {
 	
 	private CutsceneHandler cutsceneHandler;
 	
-	public GameMap(String mapAsset, OrthographicCamera camera) {
+	public GameMap(OrthographicCamera camera) {
 		this.camera = camera;
-		
-		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
-		player = PlayerFactory.createPlayer();
 		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
@@ -91,20 +91,80 @@ public class GameMap implements Disposable {
 		objectFactory = new GameObjectFactory(this);
 		enemyFactory = new EnemyFactory(this);
 		
+		cutsceneHandler = CutsceneHandler.getInstance();
+		cutsceneHandler.setGameMap(this);
+		
+		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
+		player = PlayerFactory.createPlayer();
+	}
+	
+	public void showMap(String mapAsset) {
+		removeCurrentMapIfPresent();
+		
+		player.reAddToWorld();
+		
 		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
-		loader.load();//initializes the map
+		loader.loadMap();
 		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN, batch);
-		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
+		renderer.setView(camera);
 		
 		TiledMapPhysicsLoader mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
 		mapPhysicsLoader.createPhysics(map);
 		
-		cutsceneHandler = CutsceneHandler.getInstance();
-		cutsceneHandler.setGameMap(this);
+		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
+	}
+	
+	private void removeCurrentMapIfPresent() {
+		if (isMapInitialized()) {
+			removeGameObjects();
+			removeBodiesFromWorld();
+			clearObjectLists();
+		}
+	}
+	
+	private void removeGameObjects() {
+		for (Item item : items) {
+			item.removeFromMap();
+		}
+		for (Item item : itemsAboveGameObjects) {
+			item.removeFromMap();
+		}
+		for (GameObject object : objects) {
+			object.removeFromMap();
+		}
+		for (Enemy enemy : enemies) {
+			enemy.removeFromMap();
+		}
+		for (Projectile projectile : projectiles) {
+			projectile.removeFromMap();
+		}
+		player.removeFromMap();
+	}
+	
+	private void removeBodiesFromWorld() {
+		World world = PhysicsWorld.getInstance().getWorld();
+		Gdx.app.debug(getClass().getSimpleName(), "removeCurrentMap - world locked: " + world.isLocked());
+		
+		Array<Body> bodies = new Array<Body>();
+		world.getBodies(bodies);
+		for (Body body : bodies) {
+			world.destroyBody(body);
+		}
+	}
+	
+	private void clearObjectLists() {
+		items.clear();
+		itemsAboveGameObjects.clear();
+		objects.clear();
+		enemies.clear();
+		projectiles.clear();
+	}
+	
+	private boolean isMapInitialized() {
+		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && projectiles != null;
 	}
 	
 	public void renderBackground() {
-		renderer.setView(camera);
 		renderer.render(BACKGROUND_LAYERS);
 	}
 	
@@ -205,9 +265,10 @@ public class GameMap implements Disposable {
 		itemsAboveGameObjects.add(item);
 	}
 	
-	public void removeItem(Item item) {
+	public void removeItem(Item item, Body body) {
 		items.removeValue(item, false);
 		itemsAboveGameObjects.removeValue(item, false);
+		removePhysicsBody(body);
 	}
 	
 	public void addObject(GameObject object) {
@@ -215,24 +276,31 @@ public class GameMap implements Disposable {
 		object.postAddToGameMap();
 	}
 	
-	public void removeObject(GameObject gameObject) {
+	public void removeObject(GameObject gameObject, Body body) {
 		objects.removeValue(gameObject, false);
+		removePhysicsBody(body);
 	}
 	
 	public void addEnemy(Enemy enemy) {
 		enemies.add(enemy);
 	}
 	
-	public void removeEnemy(Enemy enemy) {
+	public void removeEnemy(Enemy enemy, Body body) {
 		enemies.removeValue(enemy, false);
+		removePhysicsBody(body);
 	}
 	
 	public void addProjectile(Projectile projectile) {
 		projectiles.add(projectile);
 	}
 	
-	public void removeProjectile(Projectile projectile) {
+	public void removeProjectile(Projectile projectile, Body body) {
 		projectiles.removeValue(projectile, false);
+		removePhysicsBody(body);
+	}
+	
+	private void removePhysicsBody(Body body) {
+		PhysicsWorld.getInstance().removeBodyWhenPossible(body);
 	}
 	
 	public ItemFactory getItemFactory() {

@@ -61,12 +61,12 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	private static final float DRAWING_DIRECTION_OFFSET = 0.1f;
 	
-	private static final String assetConfigFileName = "config/animation/dwarf.json";
-	private static final String attackConfigFileName = "config/dwarf/attacks.json";
-	private static final String textureConfig = "config/dwarf/textures.json";
-	private static final String soundSetKey = "dwarf";
+	private static final String ASSET_CONFIG_FILE_NAME = "config/animation/dwarf.json";
+	private static final String ATTACK_CONFIG_FILE_NAME = "config/dwarf/attacks.json";
+	private static final String TEXTURE_CONFIG_FILE_NAME = "config/dwarf/textures.json";
 	
-	private static final String spinAttackChargedSound = "spin_attack_charged";
+	private static final String SOUND_SET_KEY = "dwarf";
+	private static final String SPIN_ATTACK_CHARGED_SOUND = "spin_attack_charged";
 	
 	private boolean gameOver;
 	
@@ -98,10 +98,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		fastTravelContainer = new CharacterFastTravelContainer();
 		
 		animationManager = AnimationManager.getInstance();
-		animationManager.loadAnimations(assetConfigFileName);
-		soundSet = SoundManager.getInstance().loadSoundSet(soundSetKey);
+		animationManager.loadAnimations(ASSET_CONFIG_FILE_NAME);
+		soundSet = SoundManager.getInstance().loadSoundSet(SOUND_SET_KEY);
 		
-		textureLoader = new TextureLoader(textureConfig);
+		textureLoader = new TextureLoader(TEXTURE_CONFIG_FILE_NAME);
 		idleDwarfSprite = getIdleSprite();
 		blockSprite = getShieldSprite();
 		aimMarkerSprite = getAimMarkerSprite();
@@ -113,11 +113,16 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		activeSpecialAction = SpecialAction.JUMP;
 		
 		animation = getAnimation();
-		
-		attackCreator = new AttackCreator(attackConfigFileName, body, PhysicsCollisionType.PLAYER_ATTACK);
+
+		attackCreator = new AttackCreator(ATTACK_CONFIG_FILE_NAME, body, PhysicsCollisionType.PLAYER_ATTACK);
 		movementHandler = new CharacterInputProcessor(this);
 		
 		EventHandler.getInstance().registerEventListener(this);
+	}
+	
+	public void reAddToWorld() {
+		body = createPhysicsBody();
+		attackCreator = new AttackCreator(ATTACK_CONFIG_FILE_NAME, body, PhysicsCollisionType.PLAYER_ATTACK);
 	}
 	
 	private Body createPhysicsBody() {
@@ -138,11 +143,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		return body;
 	}
 	
-	private void registerAsContactListener() {
-		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
-		physicsWorld.registerContactListener(this);
-	}
-	
 	private TextureRegion getIdleSprite() {
 		return textureLoader.loadTexture("idle");
 	}
@@ -151,6 +151,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	private TextureRegion getAimMarkerSprite() {
 		return textureLoader.loadTexture("aim_marker");
+	}
+	
+	private void registerAsContactListener() {
+		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
+		physicsWorld.registerContactListener(this);
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {
@@ -412,7 +417,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public void playSpinAttackChargedSound() {
-		playSound(spinAttackChargedSound);
+		playSound(SPIN_ATTACK_CHARGED_SOUND);
 	}
 	
 	@Override
@@ -550,6 +555,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	@Override
 	public boolean isGameOver() {
 		return gameOver;
+	}
+	
+	@Override
+	public void removeFromMap() {
+		PhysicsWorld.getInstance().removeBodyWhenPossible(body);
 	}
 	
 	@Override

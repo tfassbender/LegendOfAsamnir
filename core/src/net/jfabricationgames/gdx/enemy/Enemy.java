@@ -32,6 +32,7 @@ import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -39,7 +40,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public abstract class Enemy implements Hittable, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
+public abstract class Enemy implements Hittable, GameMapObject, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
@@ -336,14 +337,14 @@ public abstract class Enemy implements Hittable, ContactListener, CutsceneContro
 	}
 	
 	public void remove() {
-		gameMap.removeEnemy(this);
-		removePhysicsBody();
+		gameMap.removeEnemy(this, body);
+		PhysicsWorld.getInstance().removeContactListener(this);
+		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
-	private void removePhysicsBody() {
-		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
-		PhysicsWorld.getInstance().removeContactListener(this);
-		body = null;
+	@Override
+	public void removeFromMap() {
+		remove();
 	}
 	
 	@Override

@@ -112,6 +112,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createBox2DWorld() {
+		if (world != null) {
+			world.dispose();
+			debugRenderer.dispose();
+		}
+		
 		world = PhysicsWorld.getInstance().createWorld(new Vector2(0, 0f), true);
 		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
 				false, /* joints */
@@ -122,8 +127,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createGameMap() {
-		String gameMapPath = GameMapManager.getInstance().getInitialMapFilePath();
-		map = new GameMap(gameMapPath, camera);
+		map = new GameMap(camera);
+		map.showMap(GameMapManager.getInstance().getInitialMapFilePath());
 		player = map.getPlayer();
 	}
 	
@@ -205,6 +210,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			shopMenu = new ShopMenuScreen(this, player);
 		}
 		shopMenu.showMenu();
+	}
+	
+	public void restartGame() {
+		Gdx.app.log(getClass().getSimpleName(), "--- Restarting Game ------------------------------------------------------------");
+		map.showMap(GameMapManager.getInstance().getInitialMapFilePath());
 	}
 	
 	/**

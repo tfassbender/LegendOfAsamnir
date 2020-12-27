@@ -22,6 +22,7 @@ import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutscenePositioningUnit;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -31,7 +32,7 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePositioningUnit {
+public class GameObject implements Hittable, GameMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
 	
 	public static final String MAP_PROPERTY_KEY_DEBUG_OBJECT = "debugObject";
 	
@@ -182,9 +183,14 @@ public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePos
 		}
 	}
 	
+	@Override
+	public void removeFromMap() {
+		remove();
+	}
+	
 	public void remove() {
-		gameMap.removeObject(this);
-		removePhysicsBody();
+		gameMap.removeObject(this, body);
+		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
 	protected void changeBodyToSensor() {
@@ -195,7 +201,7 @@ public class GameObject implements Hittable, CutsceneControlledUnit, CutscenePos
 	
 	protected void removePhysicsBody() {
 		if (body != null) {
-			PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+			PhysicsWorld.getInstance().removeBodyWhenPossible(body);
 			body = null;
 		}
 	}

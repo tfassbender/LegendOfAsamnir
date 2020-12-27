@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -25,7 +26,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public abstract class Projectile implements ContactListener {
+public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	private static final String SOUND_SET_PROJECTILE = "projectile";
 	private static final String EXPLOSION_PROJECTILE_TYPE = "explosion";
@@ -273,16 +274,16 @@ public abstract class Projectile implements ContactListener {
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	
-	public void remove() {
-		attackPerformed = true;
-		removePhysicsBody();
-		gameMap.removeProjectile(this);
+	@Override
+	public void removeFromMap() {
+		remove();
 	}
 	
-	private void removePhysicsBody() {
-		PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
+	public void remove() {
+		attackPerformed = true;
+		gameMap.removeProjectile(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
-		body = null;
+		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
 	public void setExplosionDamage(float explosionDamage) {

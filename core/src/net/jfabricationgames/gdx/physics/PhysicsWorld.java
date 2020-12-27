@@ -64,11 +64,8 @@ public class PhysicsWorld implements ContactListener {
 		this.contactListeners.removeValue(contactListener, true);
 	}
 	
-	/**
-	 * Mark a body to be deleted after the world step is over.
-	 */
-	public void destroyBodyAfterWorldStep(Body body) {
-		bodiesToRemove.add(body);
+	public boolean isInWorldStepExecution() {
+		return world.isLocked();
 	}
 	
 	/**
@@ -153,6 +150,21 @@ public class PhysicsWorld implements ContactListener {
 	public void endContact(Contact contact) {
 		for (ContactListener listener : contactListeners) {
 			listener.endContact(contact);
+		}
+	}
+	
+	/**
+	 * If the world is within a world step execution, mark the body to be removed after the world step. Otherwise the body is removed directly.
+	 */
+	public void removeBodyWhenPossible(Body body) {
+		if (body != null) {
+			if (isInWorldStepExecution()) {
+				bodiesToRemove.add(body);
+			}
+			else {
+				body.setUserData(null);
+				world.destroyBody(body);
+			}
 		}
 	}
 }

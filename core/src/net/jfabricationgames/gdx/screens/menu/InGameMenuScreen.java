@@ -106,7 +106,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	//****************************************************************
 	
 	public void backToGame() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Back To Game' selected");
 		removeInputListener();
 		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
 		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
@@ -121,8 +120,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	
 	public void restartGame() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
-		gameScreen.dispose();
-		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+		gameScreen.restartGame();
+		backToGame();
 	}
 	
 	public void quitGame() {

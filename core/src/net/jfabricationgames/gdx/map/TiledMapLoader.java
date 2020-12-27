@@ -85,7 +85,7 @@ public class TiledMapLoader {
 		this.enemyFactory = gameMap.enemyFactory;
 	}
 	
-	public void load() {
+	public void loadMap() {
 		gameMap.map = AssetGroupManager.getInstance().get(mapAsset);
 		loadMapObjects();
 	}

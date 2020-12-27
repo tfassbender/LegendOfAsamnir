@@ -15,14 +15,14 @@ import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.container.data.KeyItem;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
-import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Item implements CutsceneControlledUnit {
+public class Item implements GameMapObject, CutsceneControlledUnit {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
@@ -87,11 +87,15 @@ public class Item implements CutsceneControlledUnit {
 		remove();
 	}
 	
+	@Override
+	public void removeFromMap() {
+		remove();
+	}
+	
 	public void remove() {
 		if (gameMap != null) {
-			gameMap.removeItem(this);
-			PhysicsWorld.getInstance().destroyBodyAfterWorldStep(body);
-			body = null;
+			gameMap.removeItem(this, body);
+			body = null;// set the body to null to avoid strange errors in native Box2D methods
 		}
 	}
 	
