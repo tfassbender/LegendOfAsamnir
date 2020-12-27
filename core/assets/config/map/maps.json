@@ -1,0 +1,26 @@
+[
+	// testing
+	{
+		name: test_map_1,
+		map: "map/map.tmx",
+	},
+	{
+		name: test_map_2,
+		map: "map/map2.tmx",
+	},
+	{
+		name: test_map_3,
+		map: "map/map3.tmx",
+	},
+	{
+		name: test_map_4,
+		map: "map/map4.tmx",
+	}
+	
+	// demo / tutorial
+	{
+		name: level_tutorial
+		map: "map/level_tutorial.tmx",
+		initial: true
+	}
+]

@@ -125,7 +125,7 @@ public class TiledMapLoader {
 				throw new IllegalStateException("Object name couldn't be parsed (unexpected format): " + name);
 			}
 			
-			Gdx.app.log(getClass().getSimpleName(), "Processing map object: " + name + " at [x: " + rectangle.x + ", y: " + rectangle.y + ", w: "
+			Gdx.app.debug(getClass().getSimpleName(), "Processing map object: " + name + " at [x: " + rectangle.x + ", y: " + rectangle.y + ", w: "
 					+ rectangle.width + ", h: " + rectangle.height + "] properties: " + mapPropertiesToString(properties, false));
 			
 			switch (parts[0]) {

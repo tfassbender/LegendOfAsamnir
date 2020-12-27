@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.menu.GameOverMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.PauseMenuScreen;
@@ -121,9 +122,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createGameMap() {
-		//map = new GameMap("map/map3.tmx", camera);
-		//map = new GameMap("map/map4.tmx", camera);
-		map = new GameMap("map/level_tutorial.tmx", camera);
+		String gameMapPath = GameMapManager.getInstance().getInitialMapFilePath();
+		map = new GameMap(gameMapPath, camera);
 		player = map.getPlayer();
 	}
 	
