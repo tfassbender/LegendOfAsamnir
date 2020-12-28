@@ -3,7 +3,7 @@
  <properties>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
  </properties>
- <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
+ <tileset firstgid="1" source="tileset/rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
    eJztmUtOwzAQhuc+tJwhUJ47RFVBIc2qKqhFgm7b8/QQ3I7pwpIV2eOJ4zyM/sW3++XxF8eOY0+IaAJAh9wyd5lwL3i8MReZUCo8ZsxuYG4SeLww04FZDOxRMFcOnplfi7knd92Rh69fPpaeuhvm0mLtyZnaqT1C7WmBBzzgAQ94wMPm/J0+KDgO7LEleT9Xf85a+vYIcYJHrx4FyfvCXN6rUHsfzFMEnyPzSA084AEPeMADHvCAx3/3CP1HpeZLqGufwedy3u7CHiONxys1O5uOwZyrFw2yTT3GNA98WY3HA/MT4DEDDylj+G7pNhYPrZvPtQ+PFcn3ujbmrlqTP2erWt8067pZi2PmeUnuvtbv2KtaXrqDN9l3ilvb23rY41SRe+xLRxsSMWv70lEv5LFyPEeJph5tkTw089THPkEbMfUA6JI/byEWOA==

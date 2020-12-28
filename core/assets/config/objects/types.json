@@ -115,7 +115,7 @@
 		texture: key_wall_open_1,
 		hitSound: metal_hit_1,
 		
-		physicsBodySizeFactorX: 0.5,
+		physicsBodySizeFactorX: 0.7,
 		physicsBodySizeFactorY: 0.6,
 		physicsBodyOffsetFactorX: 0.01,
 		physicsBodyOffsetFactorY: 0.05,

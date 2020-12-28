@@ -3,7 +3,7 @@
  <properties>
   <property name="mini_map_config_path" value="config/menu/maps/tutorial.json"/>
  </properties>
- <tileset firstgid="1" source="rpg_nature_tileset_small.tsx"/>
+ <tileset firstgid="1" source="tileset/rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">
   <data encoding="base64" compression="zlib">
    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
@@ -37,14 +37,14 @@
    </properties>
    <point/>
   </object>
-  <object id="4" name="object.signboard" x="431" y="372.5">
+  <object id="4" name="object.signboard" x="434" y="372.5">
    <properties>
     <property name="displayText" value="Some objects can be destroyed. Try to hit them using the left mouse key or the controller button B."/>
     <property name="displayTextHeader" value="objects"/>
    </properties>
    <point/>
   </object>
-  <object id="5" name="object.pot" x="462" y="371.833">
+  <object id="5" name="object.pot" x="461" y="374.833">
    <properties>
     <property name="drop" value="{coin: 1}"/>
    </properties>
@@ -1051,6 +1051,7 @@
   <object id="867" name="object.eventObject" x="302" y="325" width="32" height="32">
    <properties>
     <property name="eventParameter" value="tutorialStartingPointReached"/>
+    <property name="singleExecution" value="true"/>
    </properties>
   </object>
   <object id="868" name="item.axe" x="432" y="304">
@@ -1059,6 +1060,7 @@
   <object id="869" name="object.eventObject" x="426" y="298" width="12" height="12">
    <properties>
     <property name="eventParameter" value="pickedUpAxe"/>
+    <property name="singleExecution" value="true"/>
    </properties>
   </object>
   <object id="870" name="object.shop" x="2288" y="1041">

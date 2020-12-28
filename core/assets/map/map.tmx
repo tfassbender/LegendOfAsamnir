@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="128" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="15">
- <tileset firstgid="1" source="rpg_nature_tileset.tsx"/>
+ <tileset firstgid="1" source="tileset/rpg_nature_tileset.tsx"/>
  <layer id="1" name="background" width="50" height="50">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACu3ZzRLBMBSG4XM7yi2gFGPrd7BXM1i4/5V0xuJMtWmaZJyT8S3eHYmHSdpURkRZS0NW22tSCA7Z5qaCxR2FshYWx9G0ZXHHQFknOFQFh666HLmp/MQdpWczIceu9vlD2wg7xqZJQFMljtD5Y40Dh7wjp+49wtVxJf89quoW4HD5DlLYr2I49vS954TsXQchxy/XKhxwwKHHEXot8b322OatHGuWiyOFXByh974u98V956h+jxdLen34zqFtnWt1LE2PhlaJOdrGr48NBxxwwBHDMXIMDjh8HfX3/4vjTM3/510Sc/QNjnjrPOYZVtIh+fw0piPm+bbv89M+9yWasznu1HyW09jT4kAoVm/8AujzECcAAA==
