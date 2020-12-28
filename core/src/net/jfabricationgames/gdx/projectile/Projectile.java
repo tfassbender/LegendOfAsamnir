@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Hittable;
@@ -92,11 +91,11 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		physicsWorld.registerContactListener(this);
 	}
 	
-	protected void createPhysicsBody(World world, Vector2 position, PhysicsCollisionType collisionType) {
+	protected void createPhysicsBody(Vector2 position, PhysicsCollisionType collisionType) {
 		this.collisionType = collisionType;
 		PhysicsBodyProperties bodyProperties = createShapePhysicsBodyProperties().setType(BodyType.DynamicBody).setX(position.x).setY(position.y)
 				.setCollisionType(collisionType).setLinearDamping(typeConfig.damping);
-		body = PhysicsBodyCreator.createBody(world, bodyProperties);
+		body = PhysicsBodyCreator.createBody(bodyProperties);
 		body.setUserData(this);
 		addAdditionalPhysicsParts();
 	}

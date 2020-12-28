@@ -21,15 +21,13 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
-import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 /**
  * Populates the Box2D world with static bodies using data from a map object.
@@ -41,9 +39,7 @@ public class TiledMapPhysicsLoader {
 	
 	private static final String LAYER_NAME_PHYSICS = "physics";
 	
-	private World world;
 	private float units;
-	private Array<Body> bodies;
 	private ObjectMap<String, FixtureDef> materials;
 	
 	/**
@@ -58,10 +54,7 @@ public class TiledMapPhysicsLoader {
 	 */
 	public TiledMapPhysicsLoader(float unitsPerPixel, FileHandle materialsFile) {
 		this.units = unitsPerPixel;
-		bodies = new Array<Body>();
 		materials = new ObjectMap<String, FixtureDef>();
-		
-		world = PhysicsWorld.getInstance().getWorld();
 		
 		Gdx.app.log(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
 		
@@ -123,25 +116,12 @@ public class TiledMapPhysicsLoader {
 			
 			fixtureDef.shape = shape;
 			
-			Body body = world.createBody(bodyDef);
+			Body body = PhysicsBodyCreator.createBody(bodyDef);
 			body.createFixture(fixtureDef);
-			
-			bodies.add(body);
 			
 			fixtureDef.shape = null;
 			shape.dispose();
 		}
-	}
-	
-	/**
-	 * Destroys every static body that has been created using the manager.
-	 */
-	public void destroyPhysics() {
-		for (Body body : bodies) {
-			world.destroyBody(body);
-		}
-		
-		bodies.clear();
 	}
 	
 	private void loadMaterialsFile(FileHandle materialsFile) {

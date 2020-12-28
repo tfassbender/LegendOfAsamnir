@@ -1,7 +1,9 @@
 package net.jfabricationgames.gdx.physics;
 
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -28,6 +30,8 @@ public class PhysicsWorld implements ContactListener {
 	}
 	
 	private World world;
+	private Box2DDebugRenderer debugRenderer;
+	
 	private Array<ContactListener> contactListeners;
 	private Array<Body> bodiesToRemove;
 	private ArrayMap<Body, Array<Fixture>> fixturesToRemove;
@@ -38,17 +42,27 @@ public class PhysicsWorld implements ContactListener {
 		fixturesToRemove = new ArrayMap<>();
 	}
 	
-	public World createWorld(Vector2 gravity, boolean doSleep) {
+	public void createWorld(Vector2 gravity, boolean doSleep) {
 		disposeWorld();
 		world = new World(gravity, doSleep);
 		world.setContactListener(this);
+		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
+				false, /* joints */
+				false, /* aabbs */
+				true, /* inactive bodies */
+				true, /* velocities */
+				false /* contacts */);
+		
 		contactListeners = new Array<>();
 		runAfterWorldStep = new Array<>();
-		return world;
 	}
 	
-	public World getWorld() {
-		return world;
+	public void removeBodiesFromWorld() {
+		Array<Body> bodies = new Array<Body>();
+		world.getBodies(bodies);
+		for (Body body : bodies) {
+			world.destroyBody(body);
+		}
 	}
 	
 	public void disposeWorld() {
@@ -57,11 +71,29 @@ public class PhysicsWorld implements ContactListener {
 		}
 	}
 	
+	protected World getWorld() {
+		return world;
+	}
+
 	public void registerContactListener(ContactListener contactListener) {
 		this.contactListeners.add(contactListener);
 	}
 	public void removeContactListener(ContactListener contactListener) {
 		this.contactListeners.removeValue(contactListener, true);
+	}
+	
+	public void step(float timeStep, int velocityIterations, int positionIterations) {
+		world.step(timeStep, velocityIterations, positionIterations);
+		afterWorldStep();
+	}
+	
+	private void afterWorldStep() {
+		removeBodiesAndFixtures();
+		executeRunnables();
+	}
+
+	public void renderDebugGraphics(Matrix4 combinedCameraMatrix) {
+		debugRenderer.render(world, combinedCameraMatrix);
 	}
 	
 	public boolean isInWorldStepExecution() {
@@ -108,14 +140,6 @@ public class PhysicsWorld implements ContactListener {
 	
 	public void runDelayedAfterWorldStep(Runnable runnable, float delayTime) {
 		GameUtils.runDelayed(() -> runAfterWorldStep(runnable), delayTime);
-	}
-	
-	/**
-	 * Call after the world step is over to execute everything that could not be done while the world was locked.
-	 */
-	public void afterWorldStep() {
-		removeBodiesAndFixtures();
-		executeRunnables();
 	}
 	
 	private void executeRunnables() {

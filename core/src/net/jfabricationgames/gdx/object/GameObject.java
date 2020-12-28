@@ -8,7 +8,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
@@ -91,7 +90,7 @@ public class GameObject implements Hittable, GameMapObject, CutsceneControlledUn
 		}
 	}
 	
-	protected void createPhysicsBody(World world, float x, float y) {
+	protected void createPhysicsBody(float x, float y) {
 		float width = sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.x;
 		float height = sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.y;
 		
@@ -99,7 +98,7 @@ public class GameObject implements Hittable, GameMapObject, CutsceneControlledUn
 		y += sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * physicsBodyOffsetFactor.y;
 		
 		PhysicsBodyProperties properties = physicsBodyProperties.setX(x).setY(y).setWidth(width).setHeight(height);
-		body = PhysicsBodyCreator.createRectangularBody(world, properties);
+		body = PhysicsBodyCreator.createRectangularBody(properties);
 		body.setUserData(this);
 		
 		if (typeConfig.addSensor) {

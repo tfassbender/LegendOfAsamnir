@@ -12,7 +12,6 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
-import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class ProjectileFactory extends AbstractFactory {
 	
@@ -58,7 +57,6 @@ public class ProjectileFactory extends AbstractFactory {
 		
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		atlas = assetManager.get(config.atlas);
-		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -104,7 +102,7 @@ public class ProjectileFactory extends AbstractFactory {
 				throw new IllegalStateException("Unknown object type: " + type);
 		}
 		projectile.setGameMap(gameMap);
-		projectile.createPhysicsBody(world, position, collisionType);
+		projectile.createPhysicsBody(position, collisionType);
 		projectile.startProjectile(direction);
 		
 		gameMap.addProjectile(projectile);

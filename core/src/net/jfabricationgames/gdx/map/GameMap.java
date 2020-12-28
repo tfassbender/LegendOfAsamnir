@@ -10,7 +10,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -122,6 +121,9 @@ public class GameMap implements Disposable {
 		}
 	}
 	
+	/**
+	 * Remove the game objects first, to avoid using their bodies again (what would lead to segmentation faults in the native box2d methods)
+	 */
 	private void removeGameObjects() {
 		for (Item item : items) {
 			item.removeFromMap();
@@ -142,14 +144,8 @@ public class GameMap implements Disposable {
 	}
 	
 	private void removeBodiesFromWorld() {
-		World world = PhysicsWorld.getInstance().getWorld();
-		Gdx.app.debug(getClass().getSimpleName(), "removeCurrentMap - world locked: " + world.isLocked());
-		
-		Array<Body> bodies = new Array<Body>();
-		world.getBodies(bodies);
-		for (Body body : bodies) {
-			world.destroyBody(body);
-		}
+		Gdx.app.debug(getClass().getSimpleName(), "removeCurrentMap - world locked: " + PhysicsWorld.getInstance().isInWorldStepExecution());
+		PhysicsWorld.getInstance().removeBodiesFromWorld();
 	}
 	
 	private void clearObjectLists() {

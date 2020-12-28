@@ -5,8 +5,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -67,8 +65,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private PauseMenuScreen pauseMenu;
 	private ShopMenuScreen shopMenu;
 	
-	private Box2DDebugRenderer debugRenderer;
-	private World world;
+	private PhysicsWorld physicsWorld;
 	
 	private boolean gameOver = false;
 	
@@ -112,18 +109,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createBox2DWorld() {
-		if (world != null) {
-			world.dispose();
-			debugRenderer.dispose();
-		}
-		
-		world = PhysicsWorld.getInstance().createWorld(new Vector2(0, 0f), true);
-		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
-				false, /* joints */
-				false, /* aabbs */
-				true, /* inactive bodies */
-				true, /* velocities */
-				false /* contacts */);
+		physicsWorld = PhysicsWorld.getInstance();
+		physicsWorld.createWorld(new Vector2(0, 0f), true);
 	}
 	
 	private void createGameMap() {
@@ -151,8 +138,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		world.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-		PhysicsWorld.getInstance().afterWorldStep();
+		physicsWorld.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		
 		map.renderBackground();
 		map.processAndRenderGameObject(delta);
@@ -164,7 +150,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		checkGameOver();
 		
 		if (DEBUG) {
-			debugRenderer.render(world, camera.combined);
+			physicsWorld.renderDebugGraphics(camera.combined);
 		}
 	}
 	
@@ -260,7 +246,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		
 		map.dispose();
 		hud.dispose();
-		debugRenderer.dispose();
 		if (pauseMenu != null) {
 			pauseMenu.dispose();
 		}

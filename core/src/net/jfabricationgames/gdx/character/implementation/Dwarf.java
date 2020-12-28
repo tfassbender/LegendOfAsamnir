@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
@@ -113,7 +112,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		activeSpecialAction = SpecialAction.JUMP;
 		
 		animation = getAnimation();
-
+		
 		attackCreator = new AttackCreator(ATTACK_CONFIG_FILE_NAME, body, PhysicsCollisionType.PLAYER_ATTACK);
 		movementHandler = new CharacterInputProcessor(this);
 		
@@ -126,14 +125,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	private Body createPhysicsBody() {
-		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
-		World world = physicsWorld.getWorld();
-		
 		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
 				.setWidth(idleDwarfSprite.getRegionWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
 				.setHeight(idleDwarfSprite.getRegionHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
 				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
-		Body body = PhysicsBodyCreator.createOctagonBody(world, bodyProperties);
+		Body body = PhysicsBodyCreator.createOctagonBody(bodyProperties);
 		body.setSleepingAllowed(false);
 		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(PHYSICS_BODY_SENSOR_RADIUS)
 				.setCollisionType(PhysicsCollisionType.PLAYER_SENSOR);

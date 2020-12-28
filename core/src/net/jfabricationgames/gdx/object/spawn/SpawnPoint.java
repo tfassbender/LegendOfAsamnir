@@ -3,7 +3,6 @@ package net.jfabricationgames.gdx.object.spawn;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
@@ -85,8 +84,8 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	@Override
-	protected void createPhysicsBody(World world, float x, float y) {
-		super.createPhysicsBody(world, x, y);
+	protected void createPhysicsBody(float x, float y) {
+		super.createPhysicsBody(x, y);
 		changeBodyToSensor();
 	}
 	

@@ -12,7 +12,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -143,10 +142,10 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 	/**
 	 * Called from the factory to create a box2d physics body for this enemy.
 	 */
-	public void createPhysicsBody(World world, float x, float y) {
+	public void createPhysicsBody(float x, float y) {
 		PhysicsBodyProperties properties = definePhysicsBodyProperties();
 		properties.setX(x).setY(y);
-		body = PhysicsBodyCreator.createBody(world, properties);
+		body = PhysicsBodyCreator.createBody(properties);
 		addAdditionalPhysicsParts();
 		body.setUserData(this);
 		//add the body to the attackCreator, because it needed to be initialized before the body was created

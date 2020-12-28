@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -41,7 +40,7 @@ public class EventObject extends GameObject implements ContactListener {
 	}
 	
 	@Override
-	protected void createPhysicsBody(World world, float x, float y) {
+	protected void createPhysicsBody(float x, float y) {
 		float width = mapProperties.get("width", Float.class) * GameScreen.WORLD_TO_SCREEN;
 		float height = mapProperties.get("height", Float.class) * GameScreen.WORLD_TO_SCREEN;
 		
@@ -53,7 +52,7 @@ public class EventObject extends GameObject implements ContactListener {
 		PhysicsBodyProperties properties = physicsBodyProperties.setX(x).setY(y).setWidth(width).setHeight(height)
 				//change the collision type to OBSTACLE_SENSOR to not interact with projectiles
 				.setCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR);
-		body = PhysicsBodyCreator.createRectangularBody(world, properties);
+		body = PhysicsBodyCreator.createRectangularBody(properties);
 		body.setUserData(this);
 		
 		changeBodyToSensor();
@@ -75,7 +74,7 @@ public class EventObject extends GameObject implements ContactListener {
 			executed = true;
 		}
 	}
-
+	
 	private boolean isPlayableCharacterContact(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();

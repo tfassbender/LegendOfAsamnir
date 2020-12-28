@@ -10,13 +10,17 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.World;
 
 public abstract class PhysicsBodyCreator {
 	
-	public static Body createBody(World world, PhysicsBodyProperties properties) {
+	public static Body createBody(BodyDef bodyDef) {
+		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
+		return body;
+	}
+	
+	public static Body createBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = world.createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addFixture(properties);
@@ -36,9 +40,9 @@ public abstract class PhysicsBodyCreator {
 		}
 	}
 	
-	public static Body createOctagonBody(World world, PhysicsBodyProperties properties) {
+	public static Body createOctagonBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = world.createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addOctagonFixture(properties);
@@ -60,9 +64,9 @@ public abstract class PhysicsBodyCreator {
 		return fixture;
 	}
 	
-	public static Body createCircularBody(World world, PhysicsBodyProperties properties) {
+	public static Body createCircularBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = world.createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addCircularFixture(properties);
@@ -81,9 +85,9 @@ public abstract class PhysicsBodyCreator {
 		return fixture;
 	}
 	
-	public static Body createRectangularBody(World world, PhysicsBodyProperties properties) {
+	public static Body createRectangularBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = world.createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addRectangularFixture(properties);

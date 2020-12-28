@@ -36,7 +36,6 @@ public class ItemFactory extends AbstractFactory {
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		AnimationManager.getInstance().loadAnimations(config.itemAnimations);
 		atlas = assetManager.get(config.itemAtlas);
-		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -114,10 +113,10 @@ public class ItemFactory extends AbstractFactory {
 		
 		if (addBodyDelay > 0) {
 			PhysicsWorld.getInstance().runDelayedAfterWorldStep(
-					() -> item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN), addBodyDelay);
+					() -> item.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN), addBodyDelay);
 		}
 		else {
-			item.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+			item.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		}
 		
 		return item;

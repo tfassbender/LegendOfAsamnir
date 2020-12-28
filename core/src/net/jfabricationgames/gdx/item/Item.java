@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
@@ -61,10 +60,10 @@ public class Item implements GameMapObject, CutsceneControlledUnit {
 		}
 	}
 	
-	protected void createPhysicsBody(World world, float x, float y) {
+	protected void createPhysicsBody(float x, float y) {
 		PhysicsBodyProperties properties = new PhysicsBodyProperties().setType(BodyType.StaticBody).setX(x).setY(y).setSensor(false)
 				.setRadius(typeConfig.physicsObjectRadius).setCollisionType(PhysicsCollisionType.ITEM);
-		body = PhysicsBodyCreator.createCircularBody(world, properties);
+		body = PhysicsBodyCreator.createCircularBody(properties);
 		body.setUserData(this);
 	}
 	

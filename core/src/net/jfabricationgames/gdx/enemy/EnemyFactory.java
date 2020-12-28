@@ -49,8 +49,6 @@ public class EnemyFactory extends AbstractFactory {
 		
 		loadTypeConfigs();
 		loadEnemyAnimations();
-		
-		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -107,7 +105,7 @@ public class EnemyFactory extends AbstractFactory {
 				throw new IllegalStateException("Unknown enemy type: " + type);
 		}
 		enemy.gameMap = gameMap;
-		enemy.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		enemy.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return enemy;
 	}

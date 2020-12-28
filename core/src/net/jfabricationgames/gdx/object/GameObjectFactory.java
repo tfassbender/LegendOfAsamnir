@@ -38,7 +38,6 @@ public class GameObjectFactory extends AbstractFactory {
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		AnimationManager.getInstance().loadAnimations(config.objectAnimations);
 		atlas = assetManager.get(config.objectAtlas);
-		world = PhysicsWorld.getInstance().getWorld();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -77,7 +76,7 @@ public class GameObjectFactory extends AbstractFactory {
 				throw new IllegalStateException("Unknown GameObjectType \"" + typeConfig.type + "\" of object type \"" + type + "\"");
 		}
 		object.setGameMap(gameMap);
-		object.createPhysicsBody(world, x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		object.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		object.setTextureAtlas(atlas);
 		
 		return object;
