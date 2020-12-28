@@ -110,13 +110,21 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void createBox2DWorld() {
 		physicsWorld = PhysicsWorld.getInstance();
-		physicsWorld.createWorld(new Vector2(0, 0f), true);
+		physicsWorld.createWorld();
 	}
 	
 	private void createGameMap() {
 		map = new GameMap(camera);
 		map.showMap(GameMapManager.getInstance().getInitialMapFilePath());
 		player = map.getPlayer();
+	}
+	
+	private void changeMap(String mapName) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			String mapAsset = GameMapManager.getInstance().getMapFilePath(mapName);
+			map.showMap(mapAsset);
+			player = map.getPlayer();
+		});
 	}
 	
 	private void createHud() {
@@ -188,6 +196,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		}
 		if (event.eventType == EventType.SHOW_IN_GAME_SHOP_MENU) {
 			showShopMenu();
+		}
+		if (event.eventType == EventType.CHANGE_MAP) {
+			changeMap(event.stringValue);
 		}
 	}
 	

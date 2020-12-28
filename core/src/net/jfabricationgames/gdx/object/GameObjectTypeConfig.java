@@ -59,6 +59,8 @@ public class GameObjectTypeConfig {
 	public boolean hitAnimationAfterAction = false;
 	public boolean changeBodyToSensorAfterAction = false;
 	public boolean interactByContact = false;
+	public float interactionMarkerOffsetX = 0f;
+	public float interactionMarkerOffsetY = 0f;
 	public InteractiveAction interactiveAction; // references a value from the InteractiveAction enum
 	
 	//****************************************

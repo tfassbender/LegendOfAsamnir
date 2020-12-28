@@ -22,6 +22,9 @@ public class PhysicsWorld implements ContactListener {
 	
 	private static PhysicsWorld instance;
 	
+	private static final Vector2 WORLD_GRAVITY = new Vector2(0f, 0f);
+	private static final boolean WORLD_SLEEP = true;
+	
 	public static synchronized PhysicsWorld getInstance() {
 		if (instance == null) {
 			instance = new PhysicsWorld();
@@ -42,9 +45,9 @@ public class PhysicsWorld implements ContactListener {
 		fixturesToRemove = new ArrayMap<>();
 	}
 	
-	public void createWorld(Vector2 gravity, boolean doSleep) {
+	public void createWorld() {
 		disposeWorld();
-		world = new World(gravity, doSleep);
+		world = new World(WORLD_GRAVITY, WORLD_SLEEP);
 		world.setContactListener(this);
 		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
 				false, /* joints */
@@ -74,7 +77,7 @@ public class PhysicsWorld implements ContactListener {
 	protected World getWorld() {
 		return world;
 	}
-
+	
 	public void registerContactListener(ContactListener contactListener) {
 		this.contactListeners.add(contactListener);
 	}
@@ -91,7 +94,7 @@ public class PhysicsWorld implements ContactListener {
 		removeBodiesAndFixtures();
 		executeRunnables();
 	}
-
+	
 	public void renderDebugGraphics(Matrix4 combinedCameraMatrix) {
 		debugRenderer.render(world, combinedCameraMatrix);
 	}

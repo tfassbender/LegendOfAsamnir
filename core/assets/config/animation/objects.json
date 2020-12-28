@@ -79,5 +79,11 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			name: door_open,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
 	]
 }

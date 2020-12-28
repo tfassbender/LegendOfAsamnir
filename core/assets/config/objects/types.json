@@ -128,6 +128,9 @@
 		changeBodyToSensorAfterAction: true,
 		animationAction: key_wall_open,
 		
+		interactionMarkerOffsetX: 0.15f,
+		interactionMarkerOffsetY: 0.15f,
+		
 		defaultLocked: true,
 	},
 	destroyable_wall: {
@@ -188,5 +191,29 @@
 		
 		initAction: REGISTER_FAST_TRAVEL_POINT,
 		interactiveAction: ENABLE_FAST_TRAVEL_POINT,
-	}
+	},
+	door: {
+		type: INTERACTIVE,
+		
+		texture: door_open_1,
+		hitSound: wood_hit_1,
+		
+		physicsBodySizeFactorX: 0.75,
+		physicsBodySizeFactorY: 0.8,
+		physicsBodyOffsetFactorX: 0,
+		physicsBodyOffsetFactorY: 0.10,
+		
+		addSensor: true,
+		sensorRadius: 0.8,
+		
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: door_open_5,
+		changeBodyToSensorAfterAction: true,
+		animationAction: door_open,
+		
+		interactionMarkerOffsetX: 0.15f,
+		interactionMarkerOffsetY: 0.15f,
+		
+		defaultLocked: true,
+	},
 }

@@ -33,7 +33,17 @@
 			displayTextHeader: "Demo cutscene event",
 			displayText: "Event fired from demo cutscene.",
 		}
-	}
+	},
+	demoLevelChangeToNextMap: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: go_to_map_4,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: test_map_4,
+		}
+	},
 	
 	// ********************************************************
 	// *** tutorial level

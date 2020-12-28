@@ -11,6 +11,7 @@
 	{
 		name: test_map_3,
 		map: "map/map3.tmx",
+		initial: true
 	},
 	{
 		name: test_map_4,

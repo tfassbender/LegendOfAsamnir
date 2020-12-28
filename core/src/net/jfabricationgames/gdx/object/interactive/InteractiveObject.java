@@ -26,6 +26,9 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class InteractiveObject extends GameObject implements Interactive {
 	
+	private static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X = 0.3f;
+	private static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y = 0.3f;
+
 	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
 	
 	private boolean actionExecuted = false;
@@ -45,8 +48,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	private AnimationSpriteConfig createSpriteConfig() {
 		AnimationSpriteConfig spriteConfig = AnimationSpriteConfig.fromSprite(sprite);
-		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.3f);
-		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.3f);
+		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X + typeConfig.interactionMarkerOffsetX);
+		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.interactionMarkerOffsetY);
 		return spriteConfig;
 	}
 	

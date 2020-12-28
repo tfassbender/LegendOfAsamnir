@@ -33,6 +33,16 @@ public enum GlobalEventExecutionType {
 			String cutsceneId = parameters.get(MAP_KEY_CUTSCENE_ID);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.START_CUTSCENE).setStringValue(cutsceneId));
 		}
+	},
+	CHANGE_MAP {
+
+		private static final String MAP_KEY_TARGET_MAP = "map";
+		
+		@Override
+		public void execute(ObjectMap<String, String> parameters) {
+			String targetMap = parameters.get(MAP_KEY_TARGET_MAP);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CHANGE_MAP).setStringValue(targetMap));
+		}
 	};
 	
 	public abstract void execute(ObjectMap<String, String> parameters);
