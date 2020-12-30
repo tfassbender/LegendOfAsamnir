@@ -15,8 +15,9 @@ public abstract class PhysicsBodyCategories {
 	public static final short CATEGORY_OBSTACLE = 0x0080;
 	public static final short CATEGORY_OBSTACLE_SENSOR = 0x0100;
 	public static final short CATEGORY_MAP_OBJECT = 0x0200;
-	public static final short CATEGORY_EXPLOSION = 0x0400;
-	public static final short CATEGORY_CONFIG_OBJECT = 0x0800;
+	public static final short CATEGORY_MAP_GROUND = 0x0400;
+	public static final short CATEGORY_EXPLOSION = 0x0800;
+	public static final short CATEGORY_CONFIG_OBJECT = 0x1000;
 	
 	// **********************************************************************
 	// *** masks
@@ -34,6 +35,7 @@ public abstract class PhysicsBodyCategories {
 	public static final short MASK_OBSTACLE = CATEGORY_PLAYER | CATEGORY_PLAYER_ATTACK | CATEGORY_ENEMY | CATEGORY_EXPLOSION;
 	public static final short MASK_OBSTACLE_SENSOR = CATEGORY_PLAYER;
 	public static final short MASK_MAP_OBJECT = MASK_EVERYTHING;
+	public static final short MASK_MAP_GROUND = CATEGORY_PLAYER | CATEGORY_ENEMY;
 	public static final short MASK_EXPLOSION = CATEGORY_PLAYER | CATEGORY_ENEMY | CATEGORY_OBSTACLE;
 	public static final short MASK_CONFIG_OBJECT = MASK_NONE;
 }

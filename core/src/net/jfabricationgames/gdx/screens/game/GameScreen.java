@@ -43,9 +43,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
-	public static final int VELOCITY_ITERATIONS = 6;
-	public static final int POSITION_ITERATIONS = 2;
-	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	public static final String ASSET_GROUP_NAME = "game";
 	
@@ -150,7 +147,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		physicsWorld.step(1 / 60f, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+		map.beforeWorldStep();
+		physicsWorld.step(1f / 60f);
+		map.afterWorldStep();
 		
 		map.renderBackground();
 		map.processAndRenderGameObject(delta);

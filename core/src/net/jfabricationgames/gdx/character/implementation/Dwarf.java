@@ -29,7 +29,10 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
+import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.object.event.EventObject;
+import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -90,6 +93,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private CharacterPropertiesContainer properties;
 	private CharacterItemContainer itemContainer;
 	private CharacterFastTravelContainer fastTravelContainer;
+	
+	private GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	
 	public Dwarf() {
 		properties = new CharacterPropertiesContainer();
@@ -372,7 +377,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public void move(float deltaX, float deltaY) {
-		float force = 10f * body.getMass();
+		float force = 10f * groundProperties.movementSpeedFactor * body.getMass();
 		body.applyForceToCenter(deltaX * force, deltaY * force, true);
 	}
 	
@@ -504,7 +509,17 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	@Override
-	public void preSolve(Contact contact, Manifold oldManifold) {}
+	public void preSolve(Contact contact, Manifold oldManifold) {
+		GameMapGroundType updatedGroundProperties = GameMapGroundType.handleGameMapGroundContact(contact, PhysicsCollisionType.PLAYER, groundProperties);
+		if (updatedGroundProperties != null) {
+			groundProperties = updatedGroundProperties;
+		}
+	}
+	
+	@BeforeWorldStep
+	public void resetGroundProperties() {
+		groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
+	}
 	
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {}

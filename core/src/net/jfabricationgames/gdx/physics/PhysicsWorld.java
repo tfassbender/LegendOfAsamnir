@@ -20,6 +20,9 @@ import net.jfabricationgames.gdx.util.GameUtils;
  */
 public class PhysicsWorld implements ContactListener {
 	
+	public static final int VELOCITY_ITERATIONS = 6;
+	public static final int POSITION_ITERATIONS = 2;
+	
 	private static PhysicsWorld instance;
 	
 	private static final Vector2 WORLD_GRAVITY = new Vector2(0f, 0f);
@@ -85,8 +88,8 @@ public class PhysicsWorld implements ContactListener {
 		this.contactListeners.removeValue(contactListener, true);
 	}
 	
-	public void step(float timeStep, int velocityIterations, int positionIterations) {
-		world.step(timeStep, velocityIterations, positionIterations);
+	public void step(float timeStep) {
+		world.step(timeStep, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		afterWorldStep();
 	}
 	

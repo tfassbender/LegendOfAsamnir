@@ -31,8 +31,10 @@ import net.jfabricationgames.gdx.enemy.state.EnemyState;
 import net.jfabricationgames.gdx.enemy.state.EnemyStateMachine;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
+import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -58,6 +60,8 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 	protected GameMap gameMap;
 	protected Body body;
 	protected Vector2 intendedMovement;
+	
+	private GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	
 	protected float health;
 	protected float movingSpeed;
@@ -253,7 +257,7 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 	
 	private void move(Vector2 delta) {
 		intendedMovement = delta;
-		float force = 10f * body.getMass();
+		float force = 10f * groundProperties.movementSpeedFactor * body.getMass();
 		body.applyForceToCenter(delta.x * force, delta.y * force, true);
 	}
 	
@@ -359,11 +363,23 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 	
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		ai.preSolve(contact, oldManifold);
+		GameMapGroundType updatedGroundProperties = GameMapGroundType.handleGameMapGroundContact(contact, PhysicsCollisionType.ENEMY,
+				groundProperties);
+		if (updatedGroundProperties != null) {
+			groundProperties = updatedGroundProperties;
+		}
+		else {
+			ai.preSolve(contact, oldManifold);
+		}
 	}
 	
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
 		ai.postSolve(contact, impulse);
+	}
+	
+	@BeforeWorldStep
+	public void resetGroundProperties() {
+		groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	}
 }

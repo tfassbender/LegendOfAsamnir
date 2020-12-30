@@ -1,0 +1,5 @@
+{
+	stairs: {
+		movementSpeedFactor: 0.4,
+	}
+}

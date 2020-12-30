@@ -1,5 +1,9 @@
 package net.jfabricationgames.gdx.map;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,10 +27,13 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectFactory;
+import net.jfabricationgames.gdx.physics.AfterWorldStep;
+import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameMap implements Disposable {
 	
@@ -53,6 +60,14 @@ public class GameMap implements Disposable {
 	public static final String MAP_KEY_TERRAIN_LAYERS = "terrain_layers";
 	public static final int[] BACKGROUND_LAYERS_DEFAULT = new int[] {0, 1};
 	public static final int[] TERRAIN_LAYERS_DEFAULT = new int[] {2};
+	
+	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = createDefaultGroundProperties();
+	
+	public static GameMapGroundType createDefaultGroundProperties() {
+		GameMapGroundType defaultProperties = new GameMapGroundType();
+		defaultProperties.movementSpeedFactor = 1f;
+		return defaultProperties;
+	}
 	
 	protected TiledMap map;
 	protected Vector2 playerStartingPosition;
@@ -185,6 +200,43 @@ public class GameMap implements Disposable {
 	
 	private boolean isMapInitialized() {
 		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && projectiles != null;
+	}
+	
+	public void beforeWorldStep() {
+		executeAnnotatedMethodsOnAllObjects(BeforeWorldStep.class);
+	}
+	
+	public void afterWorldStep() {
+		executeAnnotatedMethodsOnAllObjects(AfterWorldStep.class);
+	}
+	
+	private void executeAnnotatedMethodsOnAllObjects(Class<? extends Annotation> annotation) {
+		executeAnnotatedMethods(annotation, player);
+		executeAnnotatedMethods(annotation, items);
+		executeAnnotatedMethods(annotation, itemsAboveGameObjects);
+		executeAnnotatedMethods(annotation, objects);
+		executeAnnotatedMethods(annotation, enemies);
+		executeAnnotatedMethods(annotation, projectiles);
+	}
+	
+	private void executeAnnotatedMethods(Class<? extends Annotation> annotation, Array<?> mapObjects) {
+		for (Object mapObject : mapObjects) {
+			executeAnnotatedMethods(annotation, mapObject);
+		}
+	}
+	
+	private void executeAnnotatedMethods(Class<? extends Annotation> annotation, Object mapObject) {
+		Class<?> mapObjectType = mapObject.getClass();
+		Array<Method> annotatedMethods = AnnotationUtil.getMethodsAnnotatedWith(mapObjectType, annotation);
+		for (Method method : annotatedMethods) {
+			try {
+				method.invoke(mapObject, new Object[0]);
+			}
+			catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				Gdx.app.error(getClass().getSimpleName(), "could not invoke method '" + method.getName() + "' annotated '"
+						+ annotation.getSimpleName() + "' on object of type '" + mapObjectType.getSimpleName() + "'");
+			}
+		}
 	}
 	
 	public void renderBackground() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="125" height="132" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="136">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="125" height="132" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_4.json"/>
@@ -21,8 +21,11 @@
    eJzt01lOFFEAheGCqo0ojcNSRG2QNbAC0YZFsANkWIMksAAGfWUQCFtQgVdoEE8nvrSppDtC7BT5vuTPzX27ycktCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAZtsfL4qDdJiO0rea8zidpNPxUb+Wh3CVHa9TN92k25rzV7rr7V2O+rXcR3csm6Yn2fFpmkitNFlzPkvP02ZVFFvVqF/Ov5rIv22lV9lyKr1Ob9LbmrNd+u+Pxef82Y30PhvOpw/pY83Z+eu/v7B5I41lt7Oq/3+3y8H36TRj80Z6md3mqv7/3SkH3xfSos0bqffPl7L5cs5PaSWtloPva2nd5o3U++c7afvPuZv2hrh/SV9t3kjvstts+p5+pJ/pfIj7Rbq0OQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwH/1G91IViM=
   </data>
  </layer>
- <objectgroup id="3" name="objects" locked="1">
+ <objectgroup id="3" name="objects">
   <object id="1" name="player.startingPosition" x="329" y="676">
+   <point/>
+  </object>
+  <object id="137" name="enemy.mini_golem" x="256" y="464">
    <point/>
   </object>
  </objectgroup>
@@ -193,7 +196,7 @@
    <polygon points="0,0 5,-12 18,-12 23,0"/>
   </object>
  </objectgroup>
- <objectgroup id="7" name="ground_physics">
+ <objectgroup id="7" name="ground_physics" locked="1">
   <object id="135" x="240" y="503" width="32" height="4">
    <properties>
     <property name="ground" value="stairs"/>
