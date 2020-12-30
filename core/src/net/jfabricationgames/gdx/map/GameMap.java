@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.character.PlayableCharacter;
 import net.jfabricationgames.gdx.character.PlayerFactory;
@@ -48,12 +49,16 @@ public class GameMap implements Disposable {
 		}
 	}
 	
-	public static final String MAP_MATERIALS_CONFIG_FILE = "config/map/materials.json";
-	public static final int[] BACKGROUND_LAYERS = new int[] {0, 1};
-	public static final int[] TERRAIN_LAYERS = new int[] {2};
+	public static final String MAP_KEY_BACKGROUND_LAYERS = "background_layers";
+	public static final String MAP_KEY_TERRAIN_LAYERS = "terrain_layers";
+	public static final int[] BACKGROUND_LAYERS_DEFAULT = new int[] {0, 1};
+	public static final int[] TERRAIN_LAYERS_DEFAULT = new int[] {2};
 	
 	protected TiledMap map;
 	protected Vector2 playerStartingPosition;
+	
+	private int[] backgroundLayers;
+	private int[] terrainLayers;
 	
 	//the lists are initialized in the factories
 	protected Array<Item> items;
@@ -104,10 +109,13 @@ public class GameMap implements Disposable {
 		
 		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
 		loader.loadMap();
+		
 		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN, batch);
 		renderer.setView(camera);
 		
-		TiledMapPhysicsLoader mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD, Gdx.files.internal(MAP_MATERIALS_CONFIG_FILE));
+		loadLayersFromMapProperties();
+		
+		TiledMapPhysicsLoader mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD);
 		mapPhysicsLoader.createPhysics(map);
 		
 		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
@@ -156,12 +164,31 @@ public class GameMap implements Disposable {
 		projectiles.clear();
 	}
 	
+	private void loadLayersFromMapProperties() {
+		String backgroundLayersJson = map.getProperties().get(MAP_KEY_BACKGROUND_LAYERS, String.class);
+		String terrainLayersJson = map.getProperties().get(MAP_KEY_TERRAIN_LAYERS, String.class);
+		
+		Json json = new Json();
+		if (backgroundLayersJson != null) {
+			backgroundLayers = json.fromJson(int[].class, backgroundLayersJson);
+		}
+		else {
+			backgroundLayers = BACKGROUND_LAYERS_DEFAULT;
+		}
+		if (terrainLayersJson != null) {
+			terrainLayers = json.fromJson(int[].class, terrainLayersJson);
+		}
+		else {
+			terrainLayers = TERRAIN_LAYERS_DEFAULT;
+		}
+	}
+	
 	private boolean isMapInitialized() {
 		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && projectiles != null;
 	}
 	
 	public void renderBackground() {
-		renderer.render(BACKGROUND_LAYERS);
+		renderer.render(backgroundLayers);
 	}
 	
 	public void processAndRenderGameObject(float delta) {
@@ -242,7 +269,7 @@ public class GameMap implements Disposable {
 	
 	public void renderTerrain() {
 		renderer.setView(camera);
-		renderer.render(TERRAIN_LAYERS);
+		renderer.render(terrainLayers);
 	}
 	
 	public Vector2 getPlayerStartingPosition() {

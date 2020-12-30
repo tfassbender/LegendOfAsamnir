@@ -3,19 +3,22 @@
 	{
 		name: test_map_1,
 		map: "map/map.tmx",
+		//initial: true
 	},
 	{
 		name: test_map_2,
 		map: "map/map2.tmx",
+		//initial: true
 	},
 	{
 		name: test_map_3,
 		map: "map/map3.tmx",
-		initial: true
+		//initial: true
 	},
 	{
 		name: test_map_4,
 		map: "map/map4.tmx",
+		initial: true
 	}
 	
 	// demo / tutorial
