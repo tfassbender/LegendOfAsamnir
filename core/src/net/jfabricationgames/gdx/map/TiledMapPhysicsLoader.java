@@ -48,6 +48,9 @@ public class TiledMapPhysicsLoader {
 	
 	private static final FixtureDef GROUND_FIXTURE_DEF = createGroundFixtureDef();
 	
+	protected static ObjectMap<String, FixtureDef> materials;
+	protected static ObjectMap<String, GameMapGroundType> groundTypes;
+	
 	private static FixtureDef createGroundFixtureDef() {
 		FixtureDef groundFixtureDef = new FixtureDef();
 		
@@ -62,8 +65,6 @@ public class TiledMapPhysicsLoader {
 	}
 	
 	private float worldUnitsPerPixel;
-	private ObjectMap<String, FixtureDef> materials;
-	private ObjectMap<String, GameMapGroundType> groundTypes;
 	
 	/**
 	 * @param unitsPerPixel
@@ -71,7 +72,6 @@ public class TiledMapPhysicsLoader {
 	 */
 	public TiledMapPhysicsLoader(float unitsPerPixel) {
 		this.worldUnitsPerPixel = unitsPerPixel;
-		materials = new ObjectMap<String, FixtureDef>();
 		
 		Gdx.app.log(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
 		
@@ -80,15 +80,15 @@ public class TiledMapPhysicsLoader {
 	}
 	
 	public void createPhysics(Map map) {
-		createSolidObjectPhysics(map);
-		createGroundPhysics(map);
+		createPhysics(map, LAYER_NAME_SOLID_OBJECT_PHYSICS, this::createSolidObjectPhysics);
+		createPhysics(map, LAYER_NAME_GROUND_PHYSICS, this::createGroundPhysics);
 	}
 	
-	private void createSolidObjectPhysics(Map map) {
-		MapLayer layer = map.getLayers().get(LAYER_NAME_SOLID_OBJECT_PHYSICS);
+	private void createPhysics(Map map, String layerName, PhysicsCreationMethod physicsCreationMethod) {
+		MapLayer layer = map.getLayers().get(layerName);
 		
 		if (layer == null) {
-			Gdx.app.error(getClass().getSimpleName(), "layer " + LAYER_NAME_SOLID_OBJECT_PHYSICS + " does not exist");
+			Gdx.app.error(getClass().getSimpleName(), "layer " + layerName + " does not exist");
 			return;
 		}
 		
@@ -120,74 +120,42 @@ public class TiledMapPhysicsLoader {
 				continue;
 			}
 			
-			MapProperties properties = object.getProperties();
-			String material = properties.get(MAP_PROPERTY_KEY_MATERIAL, String.class);
-			FixtureDef fixtureDef = null;
-			if (material != null) {
-				fixtureDef = materials.get(material);
-			}
-			
-			if (fixtureDef == null) {
-				fixtureDef = materials.get("default");
-			}
-			
-			fixtureDef.shape = shape;
-			
-			Body body = PhysicsBodyCreator.createBody(bodyDef);
-			body.createFixture(fixtureDef);
-			
-			fixtureDef.shape = null;
-			shape.dispose();
+			physicsCreationMethod.apply(object, shape, bodyDef);
 		}
 	}
 	
-	private void createGroundPhysics(Map map) {
-		MapLayer layer = map.getLayers().get(LAYER_NAME_GROUND_PHYSICS);
-		
-		if (layer == null) {
-			Gdx.app.error(getClass().getSimpleName(), "layer " + LAYER_NAME_GROUND_PHYSICS + " does not exist");
-			return;
+	private void createSolidObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
+		MapProperties properties = object.getProperties();
+		String material = properties.get(MAP_PROPERTY_KEY_MATERIAL, String.class);
+		FixtureDef fixtureDef = null;
+		if (material != null) {
+			fixtureDef = materials.get(material);
 		}
 		
-		for (MapObject object : layer.getObjects()) {
-			
-			if (object instanceof TextureMapObject) {
-				continue;
-			}
-			
-			Shape shape;
-			BodyDef bodyDef = new BodyDef();
-			bodyDef.type = BodyDef.BodyType.StaticBody;
-			
-			if (object instanceof RectangleMapObject) {
-				RectangleMapObject rectangle = (RectangleMapObject) object;
-				shape = getRectangle(rectangle);
-			}
-			else if (object instanceof PolygonMapObject) {
-				shape = getPolygon((PolygonMapObject) object);
-			}
-			else if (object instanceof PolylineMapObject) {
-				shape = getPolyline((PolylineMapObject) object);
-			}
-			else if (object instanceof CircleMapObject) {
-				shape = getCircle((CircleMapObject) object);
-			}
-			else {
-				Gdx.app.error(getClass().getSimpleName(), "non suported shape " + object);
-				continue;
-			}
-			
-			MapProperties properties = object.getProperties();
-			String groundType = properties.get(MAP_PROPERTY_KEY_GROUND_TYPE, String.class);
-			
-			GROUND_FIXTURE_DEF.shape = shape;
-			Body body = PhysicsBodyCreator.createBody(bodyDef);
-			body.createFixture(GROUND_FIXTURE_DEF);
-			body.setUserData(groundTypes.get(groundType));
-			GROUND_FIXTURE_DEF.shape = null;
-			
-			shape.dispose();
+		if (fixtureDef == null) {
+			fixtureDef = materials.get("default");
 		}
+		
+		fixtureDef.shape = shape;
+		
+		Body body = PhysicsBodyCreator.createBody(bodyDef);
+		body.createFixture(fixtureDef);
+		
+		fixtureDef.shape = null;
+		shape.dispose();
+	}
+	
+	private void createGroundPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
+		MapProperties properties = object.getProperties();
+		String groundType = properties.get(MAP_PROPERTY_KEY_GROUND_TYPE, String.class);
+		
+		GROUND_FIXTURE_DEF.shape = shape;
+		Body body = PhysicsBodyCreator.createBody(bodyDef);
+		body.createFixture(GROUND_FIXTURE_DEF);
+		body.setUserData(groundTypes.get(groundType));
+		
+		GROUND_FIXTURE_DEF.shape = null;
+		shape.dispose();
 	}
 	
 	private Shape getRectangle(RectangleMapObject rectangleObject) {
@@ -237,6 +205,13 @@ public class TiledMapPhysicsLoader {
 	}
 	
 	private void loadMaterials() {
+		if (materials != null) {
+			Gdx.app.debug(getClass().getSimpleName(), "materials already loaded");
+			return;
+		}
+		
+		materials = new ObjectMap<String, FixtureDef>();
+		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 1.0f;
@@ -281,6 +256,11 @@ public class TiledMapPhysicsLoader {
 	
 	@SuppressWarnings("unchecked")
 	private void loadGroundTypes() {
+		if (groundTypes != null) {
+			Gdx.app.debug(getClass().getSimpleName(), "ground types already loaded");
+			return;
+		}
+		
 		Gdx.app.log(getClass().getSimpleName(), "loading ground types file: " + MAP_GROUND_TYPES_CONFIG_FILE);
 		
 		try {
@@ -290,5 +270,11 @@ public class TiledMapPhysicsLoader {
 		catch (Exception e) {
 			Gdx.app.error(getClass().getSimpleName(), "error loading config file '" + MAP_GROUND_TYPES_CONFIG_FILE + "': " + e.getMessage());
 		}
+	}
+	
+	@FunctionalInterface
+	private interface PhysicsCreationMethod {
+		
+		public void apply(MapObject object, Shape shape, BodyDef bodyDef);
 	}
 }

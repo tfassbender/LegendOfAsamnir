@@ -1,4 +1,7 @@
 {
+	web: {
+		movementSpeedFactor: 0.25,
+	},
 	stairs: {
 		movementSpeedFactor: 0.4,
 	}

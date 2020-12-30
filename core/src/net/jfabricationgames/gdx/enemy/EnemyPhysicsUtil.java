@@ -13,4 +13,10 @@ public abstract class EnemyPhysicsUtil {
 				.setCollisionType(PhysicsCollisionType.ENEMY_SENSOR);
 		PhysicsBodyCreator.addCircularFixture(sensorProperties);
 	}
+	
+	public static void addCircularGroundFixture(Body body, float radius, String groundType) {
+		PhysicsBodyProperties properties = new PhysicsBodyProperties().setBody(body).setRadius(radius)
+				.setCollisionType(PhysicsCollisionType.MAP_GROUND);
+		PhysicsBodyCreator.addCircularFixture(properties);
+	}
 }

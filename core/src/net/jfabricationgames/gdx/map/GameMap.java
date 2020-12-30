@@ -61,12 +61,10 @@ public class GameMap implements Disposable {
 	public static final int[] BACKGROUND_LAYERS_DEFAULT = new int[] {0, 1};
 	public static final int[] TERRAIN_LAYERS_DEFAULT = new int[] {2};
 	
-	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = createDefaultGroundProperties();
+	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = new GameMapGroundType();
 	
-	public static GameMapGroundType createDefaultGroundProperties() {
-		GameMapGroundType defaultProperties = new GameMapGroundType();
-		defaultProperties.movementSpeedFactor = 1f;
-		return defaultProperties;
+	public static GameMapGroundType getGroundTypeByName(String name) {
+		return TiledMapPhysicsLoader.groundTypes.get(name);
 	}
 	
 	protected TiledMap map;

@@ -75,8 +75,6 @@ public interface PlayableCharacter extends StatsCharacter, GameMapObject, Cutsce
 	
 	public int getAmmo(ItemAmmoType ammoType);
 	
-	public void setSlowedDown(boolean slowedDown);
-	
 	public void respawn();
 	
 	public int getCoins();

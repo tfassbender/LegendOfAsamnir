@@ -19,6 +19,10 @@ public class GameMapGroundType {
 				contact.setEnabled(false);
 				return applyGameMapGroundEffects(groundProperties, (GameMapGroundType) collidingUserData);
 			}
+			else if (collidingUserData instanceof GameMapGroundTypeContainer) {
+				contact.setEnabled(false);
+				return applyGameMapGroundEffects(groundProperties, ((GameMapGroundTypeContainer) collidingUserData).getGameMapGroundType());
+			}
 		}
 		
 		return null;
@@ -26,12 +30,12 @@ public class GameMapGroundType {
 	
 	private static GameMapGroundType applyGameMapGroundEffects(GameMapGroundType groundProperties, GameMapGroundType collidingGroundType) {
 		if (groundProperties == GameMap.DEFAULT_GROUND_PROPERTIES) {
-			groundProperties = GameMap.createDefaultGroundProperties();
+			groundProperties = new GameMapGroundType();
 		}
 		groundProperties.movementSpeedFactor = Math.min(groundProperties.movementSpeedFactor, collidingGroundType.movementSpeedFactor);
 		
 		return groundProperties;
 	}
 	
-	public float movementSpeedFactor;
+	public float movementSpeedFactor = 1f;
 }

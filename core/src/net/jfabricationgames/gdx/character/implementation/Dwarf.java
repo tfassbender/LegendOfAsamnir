@@ -359,10 +359,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			speed = MOVING_SPEED_JUMP;
 		}
 		
-		if (properties.isSlowedDown()) {
-			speed *= 0.25;
-		}
-		
 		return speed;
 	}
 	
@@ -474,11 +470,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	@Override
 	public void setActiveSpecialAction(SpecialAction specialAction) {
 		this.activeSpecialAction = specialAction;
-	}
-	
-	@Override
-	public void setSlowedDown(boolean slowedDown) {
-		properties.setSlowedDown(slowedDown);
 	}
 	
 	@Override
