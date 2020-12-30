@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -115,7 +116,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void createGameMap() {
 		map = new GameMap(camera);
-		map.showMap(GameMapManager.getInstance().getInitialMapFilePath());
+		GameMapManager gameMapManager = GameMapManager.getInstance();
+		String initialMapPath = gameMapManager.getMapFilePath(gameMapManager.getInitialMapName());
+		map.showMap(initialMapPath);
 		player = map.getPlayer();
 	}
 	
@@ -124,6 +127,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			String mapAsset = GameMapManager.getInstance().getMapFilePath(mapName);
 			map.showMap(mapAsset);
 			player = map.getPlayer();
+			InteractionManager.getInstance().resetInteractions();
 		});
 	}
 	
@@ -211,7 +215,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	public void restartGame() {
 		Gdx.app.log(getClass().getSimpleName(), "--- Restarting Game ------------------------------------------------------------");
-		map.showMap(GameMapManager.getInstance().getInitialMapFilePath());
+		changeMap(GameMapManager.getInstance().getInitialMapName());
 	}
 	
 	/**

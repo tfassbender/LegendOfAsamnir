@@ -38,10 +38,10 @@ public class GameMapManager {
 		throw new IllegalStateException("A map with the name '" + mapName + "' is not found in the config file.");
 	}
 	
-	public String getInitialMapFilePath() {
+	public String getInitialMapName() {
 		for (GameMapConfig config : mapFiles) {
 			if (config.initial) {
-				return config.map;
+				return config.name;
 			}
 		}
 		throw new IllegalStateException("The configuration file '" + GAME_MAPS_CONFIG_FILE_PATH + "' does not configure an initial map.");

@@ -58,4 +58,8 @@ public class InteractionManager {
 	public AnimationDirector<TextureRegion> getInteractionAnimationCopy() {
 		return AnimationManager.getInstance().getAnimationDirectorCopy(INTERACTION_ANIMATION);
 	}
+	
+	public void resetInteractions() {
+		interactivesInRange.clear();
+	}
 }
