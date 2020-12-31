@@ -23,6 +23,18 @@
 			cutsceneId: demoLevelCutscene,
 		}
 	},
+	demoLevel_showText: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demoLevel_showText,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "First Text",
+			displayText: "First Text, that is shown in this cutscene.",
+			colorHeader: #FF0000
+		}
+	},
 	demoLevel_cutsceneEnds: {
 		event: {
 			eventType: CUTSCENE_EVENT,
@@ -32,6 +44,7 @@
 		executionParameters: {
 			displayTextHeader: "Demo cutscene event",
 			displayText: "Event fired from demo cutscene.",
+			colorHeader: #ff00ff
 		}
 	},
 	demoLevelChangeToNextMap: {

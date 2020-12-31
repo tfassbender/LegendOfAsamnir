@@ -61,9 +61,10 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	
 	private ScreenTextWriter screenTextWriter;
 	
-	private String text;
 	private GlyphLayout textLayout;
+	private String text;
 	private String headerText;
+	private Color headerColor = Color.RED;
 	
 	private int firstDisplayedLine = 0;
 	private int[] displayedTextIndices;
@@ -136,7 +137,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		
 		if (headerText != null) {
 			screenTextWriter.setScale(1.25f * TEXT_SCALE);
-			screenTextWriter.setColor(Color.RED);
+			screenTextWriter.setColor(headerColor);
 			screenTextWriter.drawText(headerText, textBoxX + textOffsetX, textBoxY + textBoxHeight - headerOffsetY);
 		}
 		
@@ -159,10 +160,6 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		shapeRenderer.triangle(1200f, 55f, 1230f, 55f, 1215f, 35f);
 		
 		shapeRenderer.end();
-	}
-	
-	public String getText() {
-		return text;
 	}
 	
 	public void setText(String text) {
@@ -227,7 +224,11 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	public void setHeaderText(String headerText) {
+		setHeaderText(headerText, Color.RED);
+	}
+	public void setHeaderText(String headerText, Color headerColor) {
 		this.headerText = headerText;
+		this.headerColor = headerColor;
 	}
 	
 	@Override

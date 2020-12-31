@@ -1,11 +1,13 @@
 package net.jfabricationgames.gdx.event.global;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.util.GameUtils;
 
 public enum GlobalEventExecutionType {
 	
@@ -13,14 +15,16 @@ public enum GlobalEventExecutionType {
 		
 		private static final String MAP_KEY_DISPLAY_TEXT = "displayText";
 		private static final String MAP_KEY_DISPLAY_TEXT_HEADER = "displayTextHeader";
+		private static final String MAP_KEY_COLOR_HEADER = "colorHeader";
 		
 		@Override
 		public void execute(ObjectMap<String, String> parameters) {
 			String displayText = parameters.get(MAP_KEY_DISPLAY_TEXT);
 			String displayTextHeader = parameters.get(MAP_KEY_DISPLAY_TEXT_HEADER);
+			String colorHeader = parameters.get(MAP_KEY_COLOR_HEADER);
 			
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(displayTextHeader);
+			onScreenTextBox.setHeaderText(displayTextHeader, GameUtils.getColorFromRGB(colorHeader, Color.RED));
 			onScreenTextBox.setText(displayText);
 		}
 	},
@@ -35,7 +39,7 @@ public enum GlobalEventExecutionType {
 		}
 	},
 	CHANGE_MAP {
-
+		
 		private static final String MAP_KEY_TARGET_MAP = "map";
 		
 		@Override

@@ -160,6 +160,7 @@
   </object>
   <object id="96" name="object.signboard" x="447.333" y="568.667">
    <properties>
+    <property name="colorHeader" value="#ff00ff"/>
     <property name="displayText" value="Lorem ipsum dingsum..."/>
     <property name="displayTextHeader" value="Header Dings"/>
    </properties>

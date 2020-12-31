@@ -73,16 +73,26 @@
 			executionDelayInSeconds: 0.5f,
 			
 			executes: [
-				end,
+				showText,
 			],
+		},
+		showText: {
+			type: EVENT,
+			
+			globalEvent: demoLevel_showText,
+			waitForEventToFinish: true,
+			
+			executionDelayInSeconds: 1f,
+			
+			executes: [
+				end,
+			]
 		},
 		end: {
 			type: EVENT,
 			
 			globalEvent: demoLevel_cutsceneEnds,
 			waitForEventToFinish: true,
-			
-			executionDelayInSeconds: 1f,
 		}
 	}
 }
