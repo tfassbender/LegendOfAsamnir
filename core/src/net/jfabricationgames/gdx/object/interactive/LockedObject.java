@@ -26,14 +26,14 @@ public class LockedObject extends InteractiveObject {
 	}
 	
 	@Override
-	protected boolean canBeExecuted(CharacterItemContainer itemContainer) {
-		if (!super.canBeExecuted(itemContainer)) {
+	protected boolean canBeExecuted() {
+		if (!super.canBeExecuted()) {
 			return false;
 		}
 		if (!typeConfig.defaultLocked && !lockedByMapProperty()) {
 			return true;
 		}
-		if (canBeUnlocked(itemContainer)) {
+		if (canBeUnlocked()) {
 			return true;
 		}
 		else {
@@ -47,7 +47,8 @@ public class LockedObject extends InteractiveObject {
 		return mapProperties.get(MAP_PROPERTY_KEY_LOCKED, false, Boolean.class);
 	}
 	
-	private boolean canBeUnlocked(CharacterItemContainer itemContainer) {
+	private boolean canBeUnlocked() {
+		CharacterItemContainer itemContainer = CharacterItemContainer.getInstance();
 		if (itemContainer.containsKey(keyProperties)) {
 			itemContainer.takeKey(keyProperties);
 			return true;

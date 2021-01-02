@@ -16,5 +16,6 @@ public enum EventType {
 	START_CUTSCENE, //
 	CUTSCENE_EVENT, //
 	ON_SCREEN_TEXT_ENDED, //
-	CHANGE_MAP, //
+	CHANGE_MAP, // 
+	SET_ITEM, //
 }

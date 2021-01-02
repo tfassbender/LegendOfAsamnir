@@ -13,9 +13,18 @@ import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 
 public class CharacterFastTravelContainer implements EventListener {
 	
+	private static CharacterFastTravelContainer instance;
+	
+	public static synchronized CharacterFastTravelContainer getInstance() {
+		if (instance == null) {
+			instance = new CharacterFastTravelContainer();
+		}
+		return instance;
+	}
+	
 	private ObjectMap<String, CharacterFastTravelProperties> fastTravelProperties = new ObjectMap<>();
 	
-	public CharacterFastTravelContainer() {
+	private CharacterFastTravelContainer() {
 		EventHandler.getInstance().registerEventListener(this);
 	}
 	

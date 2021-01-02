@@ -13,6 +13,16 @@
 			displayText: "You've killed the boss and reached the end of this demo level.",
 		}
 	},
+	demoLevelEndReached_pickedItem: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demoLevelEnded,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: demoLevel_endReached,
+		}
+	},
 	demoLevel_startCutscene: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,

@@ -13,15 +13,21 @@ public class CharacterItemContainer {
 	
 	private static final String ITEM_NAME_KEY = "key";
 	
+	private static CharacterItemContainer instance;
+	
+	public static synchronized CharacterItemContainer getInstance() {
+		if (instance == null) {
+			instance = new CharacterItemContainer();
+		}
+		return instance;
+	}
+	
 	private CharacterPropertiesContainer characterProperties;
 	private CharacterKeyContainer characterKeyContainer;
 	private CharacterItemProperties properties;
 	
-	public CharacterItemContainer() {
-		this(null);
-	}
-	public CharacterItemContainer(CharacterPropertiesContainer characterProperties) {
-		this.characterProperties = characterProperties;
+	private CharacterItemContainer() {
+		characterProperties = CharacterPropertiesContainer.getInstance();
 		properties = new CharacterItemProperties();
 		characterKeyContainer = new CharacterKeyContainer(properties);
 	}
@@ -114,5 +120,17 @@ public class CharacterItemContainer {
 	
 	public void takeKey(ObjectMap<String, String> keyProperties) {
 		characterKeyContainer.takeKey(keyProperties);
+	}
+	
+	public void addSpecialItem(String itemId) {
+		properties.specialItems.add(itemId);
+	}
+	
+	public boolean containsSpecialItem(String itemId) {
+		return properties.specialItems.contains(itemId);
+	}
+	
+	public void removeSpecialItem(String itemId) {
+		properties.specialItems.remove(itemId);
 	}
 }

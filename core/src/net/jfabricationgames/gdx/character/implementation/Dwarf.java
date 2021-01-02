@@ -97,9 +97,9 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	
 	public Dwarf() {
-		properties = new CharacterPropertiesContainer();
-		itemContainer = new CharacterItemContainer(properties);
-		fastTravelContainer = new CharacterFastTravelContainer();
+		properties = CharacterPropertiesContainer.getInstance();
+		itemContainer = CharacterItemContainer.getInstance();
+		fastTravelContainer = CharacterFastTravelContainer.getInstance();
 		
 		animationManager = AnimationManager.getInstance();
 		animationManager.loadAnimations(ASSET_CONFIG_FILE_NAME);
@@ -473,16 +473,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	@Override
-	public CharacterItemContainer getItemContainer() {
-		return itemContainer;
-	}
-	
-	@Override
-	public CharacterFastTravelContainer getFastTravelContainer() {
-		return fastTravelContainer;
-	}
-	
-	@Override
 	public void beginContact(Contact contact) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
@@ -501,7 +491,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		GameMapGroundType updatedGroundProperties = GameMapGroundType.handleGameMapGroundContact(contact, PhysicsCollisionType.PLAYER, groundProperties);
+		GameMapGroundType updatedGroundProperties = GameMapGroundType.handleGameMapGroundContact(contact, PhysicsCollisionType.PLAYER,
+				groundProperties);
 		if (updatedGroundProperties != null) {
 			groundProperties = updatedGroundProperties;
 		}
@@ -600,6 +591,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			if (fastTravelTargetPoint.enabled) {
 				setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
 			}
+		}
+		if (event.eventType == EventType.SET_ITEM) {
+			String itemId = event.stringValue;
+			itemContainer.addSpecialItem(itemId);
 		}
 	}
 	

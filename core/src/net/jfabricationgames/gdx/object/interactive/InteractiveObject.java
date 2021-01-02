@@ -14,7 +14,6 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.PlayableCharacter;
-import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -28,7 +27,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	private static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X = 0.3f;
 	private static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y = 0.3f;
-
+	
 	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
 	
 	private boolean actionExecuted = false;
@@ -48,8 +47,10 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	private AnimationSpriteConfig createSpriteConfig() {
 		AnimationSpriteConfig spriteConfig = AnimationSpriteConfig.fromSprite(sprite);
-		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X + typeConfig.interactionMarkerOffsetX);
-		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.interactionMarkerOffsetY);
+		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
+				+ typeConfig.interactionMarkerOffsetX);
+		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y
+				+ typeConfig.interactionMarkerOffsetY);
 		return spriteConfig;
 	}
 	
@@ -111,8 +112,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	@Override
-	public void interact(CharacterItemContainer itemContainer) {
-		if (canBeExecuted(itemContainer)) {
+	public void interact() {
+		if (canBeExecuted()) {
 			if (typeConfig.animationAction != null) {
 				animation = getActionAnimation();
 			}
@@ -120,7 +121,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	protected boolean canBeExecuted(CharacterItemContainer itemContainer) {
+	protected boolean canBeExecuted() {
 		return canBeExecutedByConfig();
 	}
 	private boolean canBeExecutedByConfig() {
@@ -137,7 +138,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	@Override
-	public float getDistanceFromDwarf(PlayableCharacter character) {
+	public float getDistanceToPlayer(PlayableCharacter character) {
 		return character.getPosition().sub(body.getPosition()).len();
 	}
 	
@@ -158,8 +159,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	public void beginContact(Contact contact) {
 		if (isPlayableCharacterContact(contact)) {
 			if (typeConfig.interactByContact) {
-				PlayableCharacter playableCharacter = getPlayableCharacterByContact(contact);
-				interact(playableCharacter.getItemContainer());
+				interact();
 			}
 			else {
 				InteractionManager.getInstance().movedInRange(this);
@@ -189,22 +189,6 @@ public class InteractiveObject extends GameObject implements Interactive {
 			}
 		}
 		return false;
-	}
-	
-	protected PlayableCharacter getPlayableCharacterByContact(Contact contact) {
-		Fixture fixtureA = contact.getFixtureA();
-		Fixture fixtureB = contact.getFixtureB();
-		
-		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB)) {
-			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
-			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
-			
-			if (sensorUserData == this && sensorCollidingUserData != null && sensorCollidingUserData instanceof PlayableCharacter) {
-				return (PlayableCharacter) sensorCollidingUserData;
-			}
-		}
-		
-		return null;
 	}
 	
 	private void playInteractionAnimationAppear() {

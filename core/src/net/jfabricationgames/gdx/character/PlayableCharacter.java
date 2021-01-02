@@ -3,8 +3,6 @@ package net.jfabricationgames.gdx.character;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.character.container.CharacterFastTravelContainer;
-import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.character.implementation.CharacterAction;
 import net.jfabricationgames.gdx.character.implementation.SpecialAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
@@ -16,18 +14,10 @@ public interface PlayableCharacter extends StatsCharacter, GameMapObject, Cutsce
 	
 	public void render(float delta, SpriteBatch batch);
 	
-	/**
-	 * @param x
-	 *        Movement in x direction (in world units).
-	 * @param y
-	 *        Movement in y direction (in world units).
-	 */
 	public void move(float x, float y);
 	
 	/**
 	 * Get the current moving speed of the character, depending on the current action and the "sprint" state.
-	 * 
-	 * @return The current moving speed (per second) in world units.
 	 */
 	public float getMovingSpeed(boolean sprint);
 	
@@ -79,9 +69,5 @@ public interface PlayableCharacter extends StatsCharacter, GameMapObject, Cutsce
 	
 	public int getCoins();
 	
-	public CharacterItemContainer getItemContainer();
-	
-	public CharacterFastTravelContainer getFastTravelContainer();
-
 	public void reAddToWorld();
 }

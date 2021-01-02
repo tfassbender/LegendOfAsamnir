@@ -7,11 +7,21 @@ import net.jfabricationgames.gdx.character.implementation.CharacterAction;
 
 public class CharacterPropertiesContainer {
 	
+	private static CharacterPropertiesContainer instance;
+	
+	public static synchronized CharacterPropertiesContainer getInstance() {
+		if (instance == null) {
+			instance = new CharacterPropertiesContainer();
+		}
+		return instance;
+	}
+	
 	private CharacterProperties properties;
 	
-	public CharacterPropertiesContainer() {
+	private CharacterPropertiesContainer() {
 		properties = new CharacterProperties();
 	}
+	
 	public void updateStats(float delta, CharacterAction action) {
 		//recharge endurance by time
 		properties.endurance = Math.min(properties.endurance + delta * getEnduranceCharge(action), properties.maxEndurance);

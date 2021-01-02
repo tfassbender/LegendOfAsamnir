@@ -35,7 +35,7 @@ public class GlobalEventListener implements EventListener {
 	public void handleEvent(EventConfig event) {
 		for (GlobalEventConfig eventConfig : events.values()) {
 			if (eventConfig.event.equals(event)) {
-				eventConfig.executionType.execute(eventConfig.executionParameters);
+				eventConfig.executionType.execute(eventConfig);
 			}
 		}
 	}

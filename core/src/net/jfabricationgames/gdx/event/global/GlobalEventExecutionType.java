@@ -1,7 +1,6 @@
 package net.jfabricationgames.gdx.event.global;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -18,10 +17,10 @@ public enum GlobalEventExecutionType {
 		private static final String MAP_KEY_COLOR_HEADER = "colorHeader";
 		
 		@Override
-		public void execute(ObjectMap<String, String> parameters) {
-			String displayText = parameters.get(MAP_KEY_DISPLAY_TEXT);
-			String displayTextHeader = parameters.get(MAP_KEY_DISPLAY_TEXT_HEADER);
-			String colorHeader = parameters.get(MAP_KEY_COLOR_HEADER);
+		public void execute(GlobalEventConfig eventConfig) {
+			String displayText = eventConfig.executionParameters.get(MAP_KEY_DISPLAY_TEXT);
+			String displayTextHeader = eventConfig.executionParameters.get(MAP_KEY_DISPLAY_TEXT_HEADER);
+			String colorHeader = eventConfig.executionParameters.get(MAP_KEY_COLOR_HEADER);
 			
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 			onScreenTextBox.setHeaderText(displayTextHeader, GameUtils.getColorFromRGB(colorHeader, Color.RED));
@@ -33,8 +32,8 @@ public enum GlobalEventExecutionType {
 		private static final String MAP_KEY_CUTSCENE_ID = "cutsceneId";
 		
 		@Override
-		public void execute(ObjectMap<String, String> parameters) {
-			String cutsceneId = parameters.get(MAP_KEY_CUTSCENE_ID);
+		public void execute(GlobalEventConfig eventConfig) {
+			String cutsceneId = eventConfig.executionParameters.get(MAP_KEY_CUTSCENE_ID);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.START_CUTSCENE).setStringValue(cutsceneId));
 		}
 	},
@@ -43,11 +42,28 @@ public enum GlobalEventExecutionType {
 		private static final String MAP_KEY_TARGET_MAP = "map";
 		
 		@Override
-		public void execute(ObjectMap<String, String> parameters) {
-			String targetMap = parameters.get(MAP_KEY_TARGET_MAP);
+		public void execute(GlobalEventConfig eventConfig) {
+			String targetMap = eventConfig.executionParameters.get(MAP_KEY_TARGET_MAP);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CHANGE_MAP).setStringValue(targetMap));
+		}
+	},
+	CONDITIONAL_EVENT {
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			eventConfig.condition.execute();
+		}
+	},
+	SET_ITEM {
+
+		private static final String MAP_KEY_ITEM_NAME = "item";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String item = eventConfig.executionParameters.get(MAP_KEY_ITEM_NAME);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SET_ITEM).setStringValue(item));
 		}
 	};
 	
-	public abstract void execute(ObjectMap<String, String> parameters);
+	public abstract void execute(GlobalEventConfig eventConfig);
 }
