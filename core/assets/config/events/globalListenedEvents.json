@@ -20,7 +20,7 @@
 		},
 		executionType: SET_ITEM,
 		executionParameters: {
-			item: demoLevel_endReached,
+			item: demoLevel_endItem,
 		}
 	},
 	demoLevel_startCutscene: {
@@ -62,7 +62,22 @@
 			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: go_to_map_4,
 		},
-		executionType: CHANGE_MAP,
+		executionType: CONDITIONAL_EVENT,
+		condition: {
+			conditionId: demoLevel_endItemCollected,
+			thenCase: {
+				type: EVENT,
+				eventConfig: {
+					executionType: CHANGE_MAP,
+					executionParameters: {
+						map: test_map_4,
+					}
+				}
+			},
+			elseCase: {
+				type: NO_EXECUTION,
+			}
+		}
 		executionParameters: {
 			map: test_map_4,
 		}
