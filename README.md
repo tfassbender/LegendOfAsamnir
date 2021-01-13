@@ -158,8 +158,8 @@ The condition names have to be unique to be correctly loaded [ConditionHandler](
 The conditions can be configured with the following parameters:
 
 - **conditionType:** The type of the condition, that determines how the condition is executed. The type has to be one of the enum constants of the enum [ConditionType](core/src/net/jfabricationgames/gdx/condition/ConditionType.java). This parameter is mandatory.
-- **parameters:** A map of String parameters, that can be used in the check of the condition in the [ConditionType] core/src/net/jfabricationgames/gdx/condition/ConditionType.java) enum.
-- **conditionalParameters:** A map of [Condition](core/src/net/jfabricationgames/gdx/condition/Condition.java) parameters, to define concatenated conditions (using the concatenations `AND`, `OR` or `NOT` of the [ConditionType] core/src/net/jfabricationgames/gdx/condition/ConditionType.java) enum).
+- **parameters:** A map of String parameters, that can be used in the check of the condition in the [ConditionType](core/src/net/jfabricationgames/gdx/condition/ConditionType.java) enum.
+- **conditionalParameters:** A map of [Condition](core/src/net/jfabricationgames/gdx/condition/Condition.java) parameters, to define concatenated conditions (using the concatenations `AND`, `OR` or `NOT` of the [ConditionType](core/src/net/jfabricationgames/gdx/condition/ConditionType.java) enum).
 
 ### Conditions in Events
 
@@ -218,7 +218,7 @@ A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/C
 
 - **type:** A [CutsceneControlledActionType](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionType.java) that defines how the action is executed.
 - **executes:** The actions that are executed after this action ends. The actions are referenced by their names.
-- **startsWithCutscene: ** A boolean flag, that defines whether this action should be started immediately when the cutscene is started. Each cutscene has to define exactly one action, that starts with the cutscene. The default value of this property is false.
+- **startsWithCutscene:** A boolean flag, that defines whether this action should be started immediately when the cutscene is started. Each cutscene has to define exactly one action, that starts with the cutscene. The default value of this property is false.
 - **executionDelayInSeconds:** Defines the time that is waited before starting the action. The default value is 0.
 - **globalEvent:** A String value that is added to an [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is fired, when this action is executed. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the EventConfig that is fired is `CUTSCENE_EVENT`. This event can be registered by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java) that handles the event (see [Global Events](#global-events) for more details on how global events work).
 - **waitForEventToFinish:** A boolean flag, that defines whether the execution of this action should wait for the fired event to be finished. This will only work for events that show text on the screen. The event (and this action) then end as soon as the text on the screen is confirmed by the user. For other events this will not work, but wait infinitely.
