@@ -14,6 +14,8 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [Enemies](#enemies)
 - [Attacks](#attacks)
 - [Events](#events)
+- [Conditions](#conditions)
+- [Cutscenes](#cutscenes)
 - [Items](#items)
 - [Game Objects](#game-objects)
 - [Maps](#maps)
@@ -144,6 +146,112 @@ Some events are configured in the configuration file [events.json](core/assets/c
 
 Events that are not created in code, but in configuration (e.g. when touching an event object on the map) can be handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java). This EventListener listens to all fired events and compares them to the event config of the events, that are configured in the JSON file [globalListenedEvents](core/assets/config/events/globalListenedEvents.json). If they match, the event is executed (e.g. to show a text on the screen when the player reaches a position or picks up a special item. See [Event Items](#event-items) and [Event Objects](#event-objects)). The *executionType*, that is configured in the global events is a value of the [GlobalEventExecutionType](core/src/net/jfabricationgames/gdx/event/global/GlobalEventExecutionType.java) enum, that defines how the event is to be executed.
 
+### Conditional Events
+
+Global events can be executed only under given conditions. See [Conditions in Events](#conditions-in-events) for more details.
+
+## Conditions
+
+Conditions can be used to add conditional executions to the game (e.g. the text of an interaction with an NPC, that changes if the player has completed a quest). The conditions can be configured in the configuration json file: [conditions.json](core/assets/config/condition/conditions.json).
+
+The condition names have to be unique to be correctly loaded [ConditionHandler](core/src/net/jfabricationgames/gdx/condition/ConditionHandler.java), where the conditions can be checked by calling the `checkCondition(String)` method, with the id of the condition that is to be checked. The method returns whether the condition is met or not (by returning a boolean).  
+The conditions can be configured with the following parameters:
+
+- **conditionType:** The type of the condition, that determines how the condition is executed. The type has to be one of the enum constants of the enum [ConditionType](core/src/net/jfabricationgames/gdx/condition/ConditionType.java). This parameter is mandatory.
+- **parameters:** A map of String parameters, that can be used in the check of the condition in the [ConditionType] core/src/net/jfabricationgames/gdx/condition/ConditionType.java) enum.
+- **conditionalParameters:** A map of [Condition](core/src/net/jfabricationgames/gdx/condition/Condition.java) parameters, to define concatenated conditions (using the concatenations `AND`, `OR` or `NOT` of the [ConditionType] core/src/net/jfabricationgames/gdx/condition/ConditionType.java) enum).
+
+### Conditions in Events
+
+To actually use the conditions that are defined in the [conditions.json](core/assets/config/condition/conditions.json) file, they can be used in events (see [Events](#events) for more information on events). To be used in [Global Events](#global-events), the conditions need to be added to the configuration json file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json). An example of a conditional global event is the global event `demoLevelChangeToNextMap`, that is defined in [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json):
+
+```javascript
+{
+  //...
+  demoLevelChangeToNextMap: {
+    event: {
+      eventType: EVENT_OBJECT_TOUCHED,
+      stringValue: go_to_map_4,
+    },
+    executionType: CONDITIONAL_EVENT,
+    condition: {
+      conditionId: demoLevel_endItemCollected,
+      thenCase: {
+        type: EVENT,
+        eventConfig: {
+          executionType: CHANGE_MAP,
+          executionParameters: {
+            map: test_map_4,
+          }
+        }
+      },
+      elseCase: {
+        type: NO_EXECUTION,
+      }
+    }
+    executionParameters: {
+      map: test_map_4,
+    }
+  },
+  //...
+}
+```
+
+In this conditional, global event the `event` parameter, defines what is needed to execute the event (see [Global Events](#global-events), that decides what will be executed, based on the condition. The `executionType` of the event has to be `CONDITIONAL_EVENT`, for the event to be executed as conditional event. The `condition` parameter defines a [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that contains a `conditionId` (which is a String parameter), a `thenCase` and an `elseCase` (which both are [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects).   
+The `conditionId` references the name of a condition, that was defined in the json configuration file [conditions.json](core/assets/config/condition/conditions.json). Whenever the event is executed, it checks the defined condition and then executes either the `thenCase` (if the condition is met) or the `elseCase` (if the condition is not met).  
+The `thenCase` and the `elseCase` are both [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects, that need to have a `type` parameter that references an enum constant of the [ConditionExecutableType](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutableType.java) enum.  
+The [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) type again defines parameters, that can be used to fire events, for cascading [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java)s or for other executions.  
+If a case must not be executed it can't be left out, but needs to be defined with a `NO_EXECUTION` type, like the `elseCase` in the example above.
+
+## Cutscenes
+
+Cutscenes can be used for special, predefined scenes, in which neither the player nor other game objects (like enemies) have control over what is happening. The complete situation is only managed by the cutscene. This can be useful for interactions with NPCs, or to introduce a boss fight.
+
+All cutscenes, that are configured in the game, need to be configured in an own file (which is usually placed in the [config/cutscene](core/assets/config/cutscene) directory. The json config file [cutscenes.json](core/assets/config/cutscene/cutscenes.json) is a special file in this directory, that has to be placed there with exactly this name. It defines a list of all other cutscene configuration files as a json-array.
+
+### Configuring Cutscenes
+
+An example of a cutscene configuration file is [demo_level_minotaur_cutscene.json](core/assets/config/cutscene/demo_level_minotaur_cutscene.json). It defines an `id`, which is the name that can be used to attain the cutscene, and a map named `controlledActions`, which defines the actions of the cutscene.  
+The actions, defined in the `controlledActions` map are a key value pairs, that map a name of the action to a [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) object, that defines how this action of the cutscene is to be interpreted and executed.
+
+A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) defines the following parameters:
+
+- **type:** A [CutsceneControlledActionType](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionType.java) that defines how the action is executed.
+- **executes:** The actions that are executed after this action ends. The actions are referenced by their names.
+- **startsWithCutscene: ** A boolean flag, that defines whether this action should be started immediately when the cutscene is started. Each cutscene has to define exactly one action, that starts with the cutscene. The default value of this property is false.
+- **executionDelayInSeconds:** Defines the time that is waited before starting the action. The default value is 0.
+- **globalEvent:** A String value that is added to an [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is fired, when this action is executed. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the EventConfig that is fired is `CUTSCENE_EVENT`. This event can be registered by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java) that handles the event (see [Global Events](#global-events) for more details on how global events work).
+- **waitForEventToFinish:** A boolean flag, that defines whether the execution of this action should wait for the fired event to be finished. This will only work for events that show text on the screen. The event (and this action) then end as soon as the text on the screen is confirmed by the user. For other events this will not work, but wait infinitely.
+- **controlledUnitId:** The id of a unit, that is controlled by this cutscene. This id needs to match a `unitId` of a unit in the current game map. The unit id is added to the map object with the parameter `unitId` in the map properties. The player character can always be reached by the unit id `PLAYER`.
+- **controlledUnitState:** The state to which a controlled enemy is changed. This parameter has to match a state that is defined in the enemy's config file (see [Enemy States](#states)).
+- **controlledUnitAttackTargetDirection:** A direction vector to which the attack of a unit is directed (if the state to which was changed is an attack state).
+- **controlledUnitTarget:** The target to which the controlled unit is moved. The movement is always relative to the target unit (one of the next parameters).
+- **speedFactor:** The speed with witch the unit is moved (relative to the normal speed of this unit). The default is 1f, which means the unit moves as fast as usual.
+- **targetPositionRelativeToUnitId:** The id of a unit that is the relative target point for the controlledUnitTarget (one of the previous parameters).
+- **updatePositionRelativeToTarget:** A boolean flag, that defines whether target position of the controlled unit is to be updated, relative to the targetPositionRelativeToUnitId parameter. This can be useful if the relative target is also moving. The default is false.
+- **cameraFollowsTarget:** A boolean flag, that defines whether the camera has to follow the current controlled unit. If this parameter is set to false the camera will only move if it is moved by this cutscene. The default value is false.
+
+### Activating Cutscenes
+
+Cutscenes are usually started by a [Global Event](#global-events), that's type is set to `START_CUTSCENE`. The global event has to be configured to be activated when the cutscene is meant to be started. A cutscene that is configured to be started when the player touches an event object on the map is configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file:
+
+```javascript
+{
+  //...
+  demoLevel_startCutscene: {
+    event: {
+      eventType: EVENT_OBJECT_TOUCHED,
+      stringValue: demoLevel_startCutscene,
+    },
+    executionType: START_CUTSCENE,
+    executionParameters: {
+      cutsceneId: demoLevelCutscene,
+    }
+  },
+  //...
+}
+```
+
 ## Items
 
 ### Adding Items
@@ -267,6 +375,29 @@ Map properties that can be configured in the event object are:
 
 Tiled maps are used to create a map with textures, physics and objects. Enemies, Items and game objects can be defined within the map's *objects* layer, like explained in the sections [Enemies](#enemies), [Items](#items) and [Game objects](#game-objects). Physics objects (like walls) can be defined in the physics layer of the map. **Note:** The map's physics objects have to be created by polygons with at most *8* points. The material of the physics objects must be set in the custom properties of every map object, where the key is called *material* and the name references a material name that is defined in the materials json configuration file: [materials.json](core/assets/config/map/materials.json). Within the materials configuratino file the name of the material can be defined, along with the usual box2d physics properties: *density*, *restitution* and *friction*
 
+### Loading and Changing Maps
+
+All maps that will be used in the game have to be configured in the json configuration file [maps.json](core/assets/config/map/maps.json). This file includes all maps, that can be loaded and used in the game, with their names and path. When the game is started, the map configuration is loaded into the [GameMapManager](core/src/net/jfabricationgames/gdx/map/GameMapManager.java), where they can be referenced by the configured name.
+
+The map, that is configured with the `initial: true` parameter, will be the first map to be loaded when the game is started. If there are multiple maps, that are configured to be the initial map, the first one wins. To change a map the method `changeMap(String)` in the [GameScreen](core/src/net/jfabricationgames/gdx/screens/game/GameScreen.java) class is to be used. This method is private and can not be called directly. To change the map from within the game execution, an event with the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) `CHANGE_MAP` has to be used. The following example shows a global event, that is configured to change the map, when the player touches an event object on the map:
+
+```javascript
+{
+  //...
+  demoLevelChangeToNextMap: {
+    event: {
+      eventType: EVENT_OBJECT_TOUCHED,
+      stringValue: go_to_next_map,
+    },
+    executionType: CHANGE_MAP,
+    executionParameters: {
+      map: test_map_4,
+    }
+  },
+  //...
+}
+```
+
 ### Global Map Properties
 
 There are several properties that can be configured for objects on the map. The map itself has only one property that needs to be configured: **mini_map_config_path**. The value of this property is the path to the main config file of this map. This file is a JSON file that can be deserialized to a [MapConfig](core/src/net/jfabricationgames/gdx/screens/menu/config/MapConfig.java) object. An example for such a file is [tutorial.json](core/assets/config/menu/maps/tutorial.json).
@@ -280,6 +411,10 @@ Fast travel positions can be created by adding [Game objects](#game-objects) to 
 - **activeOnStartup:** A boolean flag that indicates whether the fast travel point is active when the game is started, or it needs to be activated by touching it (the default value is *false*)
 
 The second part of configuration is done in a separate config file, that defines the UI buttons, that are used to select the fast travel points on the mini-map in the menu. This configuration is a JSON object, that maps the **fastTravelPointId**s (that reference the ones in the map object config by name) to [MenuState](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuState.java) objects, that define the selection and iteraction of the fast travel points in the UI. This file needs to be referenced from the map config file. An example for such a file is [tutorial_fast_travel_states.json](core/assets/config/menu/maps/tutorial_fast_travel_states.json).
+
+### Ground Physics
+
+Ground physics are objects, that can be added to the ground layer of a map. These objects interact with the player, with enemies or other game objects and can be used to change the behavior of them, while touching the ground objects (e.g. the player is slowed down when he climbs up a wall or stairs). The types of ground physics have to be configured in the json configuration file [ground_types.json](core/assets/config/map/ground_types.json). The type of ground, that is applied for a map object in the ground layer is to be defined in the map properties of this map object, with the property key **ground** and a value that matches one of the configured names in the [ground_types.json](core/assets/config/map/ground_types.json) config file. 
 
 ## Menus
 
