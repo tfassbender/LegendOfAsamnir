@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;

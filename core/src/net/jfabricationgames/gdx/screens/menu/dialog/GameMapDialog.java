@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
-import net.jfabricationgames.gdx.character.container.data.CharacterFastTravelProperties;
+import net.jfabricationgames.gdx.character.player.container.data.CharacterFastTravelProperties;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;

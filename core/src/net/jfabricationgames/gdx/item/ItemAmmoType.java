@@ -1,6 +1,6 @@
 package net.jfabricationgames.gdx.item;
 
-import net.jfabricationgames.gdx.character.implementation.SpecialAction;
+import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 
 public enum ItemAmmoType {
 	

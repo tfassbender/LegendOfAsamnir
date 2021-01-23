@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
-import net.jfabricationgames.gdx.character.container.data.KeyItem;
+import net.jfabricationgames.gdx.character.player.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.character.player.container.data.KeyItem;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 

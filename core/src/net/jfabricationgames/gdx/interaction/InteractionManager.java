@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 
 public class InteractionManager {
 	

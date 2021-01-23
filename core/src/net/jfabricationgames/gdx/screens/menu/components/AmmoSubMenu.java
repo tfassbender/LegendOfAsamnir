@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import net.jfabricationgames.gdx.character.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;

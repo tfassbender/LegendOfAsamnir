@@ -10,8 +10,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.character.PlayableCharacter;
-import net.jfabricationgames.gdx.character.container.data.KeyItem;
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.container.data.KeyItem;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapObject;

@@ -1,6 +1,6 @@
 package net.jfabricationgames.gdx.condition;
 
-import net.jfabricationgames.gdx.character.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.character.player.container.CharacterItemContainer;
 
 public enum ConditionType {
 	

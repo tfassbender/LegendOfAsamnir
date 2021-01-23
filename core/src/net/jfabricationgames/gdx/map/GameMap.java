@@ -18,11 +18,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 
-import net.jfabricationgames.gdx.character.PlayableCharacter;
-import net.jfabricationgames.gdx.character.PlayerFactory;
+import net.jfabricationgames.gdx.character.enemy.Enemy;
+import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
-import net.jfabricationgames.gdx.enemy.Enemy;
-import net.jfabricationgames.gdx.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;

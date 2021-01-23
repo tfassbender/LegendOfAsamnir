@@ -14,8 +14,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
-import net.jfabricationgames.gdx.enemy.Enemy;
-import net.jfabricationgames.gdx.enemy.EnemyFactory;
+import net.jfabricationgames.gdx.character.enemy.Enemy;
+import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;

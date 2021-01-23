@@ -1,8 +1,8 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
+import net.jfabricationgames.gdx.character.enemy.Enemy;
+import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
-import net.jfabricationgames.gdx.enemy.Enemy;
-import net.jfabricationgames.gdx.enemy.state.EnemyState;
 
 public class CutsceneChangeStateAction extends AbstractCutsceneAction {
 	
@@ -13,7 +13,7 @@ public class CutsceneChangeStateAction extends AbstractCutsceneAction {
 	@Override
 	public void execute(float delta) {
 		Enemy enemy = getControlledUnitAs(Enemy.class);
-		EnemyState state = enemy.getStateMachine().getState(actionConfig.controlledUnitState);
+		CharacterState state = enemy.getStateMachine().getState(actionConfig.controlledUnitState);
 		state.setAttackDirection(actionConfig.controlledUnitAttackTargetDirection);
 		enemy.getStateMachine().setState(state);
 	}
