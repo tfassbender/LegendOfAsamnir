@@ -8,7 +8,7 @@ import net.jfabricationgames.gdx.character.ai.move.MoveType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
-public class RunAwayAI extends AbstractMovementAI implements ArtificialIntelligence {
+public class RunAwayAI extends AbstractMovementAI {
 	
 	private PlayableCharacter player;
 	

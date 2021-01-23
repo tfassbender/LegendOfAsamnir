@@ -125,8 +125,8 @@ public class Minotaur extends Enemy implements EventListener {
 	}
 	
 	@Override
-	public void remove() {
+	public void removeFromMap() {
 		EventHandler.getInstance().removeEventListener(this);
-		super.remove();
+		super.removeFromMap();
 	}
 }

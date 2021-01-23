@@ -9,7 +9,7 @@ import net.jfabricationgames.gdx.character.ai.move.MoveType;
 import net.jfabricationgames.gdx.character.ai.util.AttackTimer;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
-public class FightAI extends AbstractAttackAI implements ArtificialIntelligence {
+public class FightAI extends AbstractAttackAI {
 	
 	private float attackDistance;
 	

@@ -7,7 +7,7 @@ import net.jfabricationgames.gdx.character.ai.move.MoveType;
 import net.jfabricationgames.gdx.character.ai.util.FixedAttackTimer;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
-public class MimicSurpriseAI extends AbstractAttackAI implements ArtificialIntelligence {
+public class MimicSurpriseAI extends AbstractAttackAI {
 	
 	private CharacterState waitingState;
 	

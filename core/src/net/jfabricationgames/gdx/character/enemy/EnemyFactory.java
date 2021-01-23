@@ -104,7 +104,7 @@ public class EnemyFactory extends AbstractFactory {
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);
 		}
-		enemy.gameMap = gameMap;
+		enemy.setGameMap(gameMap);
 		enemy.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return enemy;

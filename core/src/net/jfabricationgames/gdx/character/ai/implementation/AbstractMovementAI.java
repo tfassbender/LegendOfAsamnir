@@ -4,7 +4,7 @@ import net.jfabricationgames.gdx.character.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
-public abstract class AbstractMovementAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
+public abstract class AbstractMovementAI extends AbstractArtificialIntelligence {
 	
 	protected CharacterState movingState;
 	protected CharacterState idleState;

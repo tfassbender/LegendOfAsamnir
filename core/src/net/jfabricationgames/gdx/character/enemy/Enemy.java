@@ -5,13 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -19,64 +15,41 @@ import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
-import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
-import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
-import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
-import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
-import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public abstract class Enemy implements Hittable, GameMapObject, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
-	
-	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
-	
-	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
+public abstract class Enemy extends AbstractCharacter implements Hittable, GameMapObject {
 	
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	
 	protected EnemyTypeConfig typeConfig;
-	protected CharacterStateMachine stateMachine;
-	protected CharacterState movingState;
-	protected ArtificialIntelligence ai;
 	protected AttackCreator attackCreator;
-	protected CutsceneHandler cutsceneHandler;
 	
-	protected MapProperties properties;
-	protected GameMap gameMap;
-	protected Body body;
 	protected Vector2 intendedMovement;
 	
-	private GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
-	
 	protected float health;
-	protected float movingSpeed;
 	
 	protected ObjectMap<String, Float> dropTypes;
 	protected boolean droppedItems;
 	
 	private PhysicsBodyProperties physicsBodyProperties;
 	
-	private float imageOffsetX;
-	private float imageOffsetY;
-	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
+		super(properties);
 		this.typeConfig = typeConfig;
-		this.properties = properties;
 		physicsBodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false)
 				.setCollisionType(PhysicsCollisionType.ENEMY).setDensity(10f).setLinearDamping(10f);
 		PhysicsWorld.getInstance().registerContactListener(this);
@@ -177,7 +150,7 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 				dropItems();
 			}
 			if (stateMachine.isInEndState()) {
-				remove();
+				removeFromMap();
 			}
 		}
 		else if (!cutsceneHandler.isCutsceneActive()) {
@@ -219,34 +192,6 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 		return health / typeConfig.health;
 	}
 	
-	@Override
-	public String getUnitId() {
-		return properties.get(CutsceneControlledUnit.MAP_PROPERTIES_KEY_UNIT_ID, String.class);
-	}
-	
-	@Override
-	public void changeToMovingState() {
-		if (!stateMachine.getCurrentState().equals(movingState)) {
-			stateMachine.setState(movingState);
-		}
-	}
-	
-	@Override
-	public Vector2 getPosition() {
-		return new Vector2(body.getPosition());
-	}
-	
-	public void moveTo(Vector2 pos) {
-		moveTo(pos, 1f);
-	}
-	@Override
-	public void moveTo(Vector2 pos, float speedFactor) {
-		Vector2 direction = pos.cpy().sub(getPosition());
-		direction.nor().scl(movingSpeed * speedFactor);
-		
-		move(direction);
-	}
-	
 	public void moveToDirection(float x, float y) {
 		moveToDirection(new Vector2(x, y));
 	}
@@ -255,15 +200,9 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 		move(direction);
 	}
 	
-	private void move(Vector2 delta) {
+	public void move(Vector2 delta) {
 		intendedMovement = delta;
-		float force = 10f * groundProperties.movementSpeedFactor * body.getMass();
-		body.applyForceToCenter(delta.x * force, delta.y * force, true);
-	}
-	
-	protected void setImageOffset(float x, float y) {
-		this.imageOffsetX = x;
-		this.imageOffsetY = y;
+		super.move(delta);
 	}
 	
 	public CharacterStateMachine getStateMachine() {
@@ -339,47 +278,16 @@ public abstract class Enemy implements Hittable, GameMapObject, ContactListener,
 		droppedItems = true;
 	}
 	
-	public void remove() {
+	@Override
+	public void removeFromMap() {
 		gameMap.removeEnemy(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
 	@Override
-	public void removeFromMap() {
-		remove();
-	}
-	
-	@Override
 	public void beginContact(Contact contact) {
-		ai.beginContact(contact);
+		super.beginContact(contact);
 		attackCreator.handleAttackDamage(contact);
-	}
-	
-	@Override
-	public void endContact(Contact contact) {
-		ai.endContact(contact);
-	}
-	
-	@Override
-	public void preSolve(Contact contact, Manifold oldManifold) {
-		GameMapGroundType updatedGroundProperties = GameMapGroundType.handleGameMapGroundContact(contact, PhysicsCollisionType.ENEMY,
-				groundProperties);
-		if (updatedGroundProperties != null) {
-			groundProperties = updatedGroundProperties;
-		}
-		else {
-			ai.preSolve(contact, oldManifold);
-		}
-	}
-	
-	@Override
-	public void postSolve(Contact contact, ContactImpulse impulse) {
-		ai.postSolve(contact, impulse);
-	}
-	
-	@BeforeWorldStep
-	public void resetGroundProperties() {
-		groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	}
 }

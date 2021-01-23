@@ -8,7 +8,7 @@ import net.jfabricationgames.gdx.character.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
-public class PreDefinedMovementAI extends AbstractMovementAI implements ArtificialIntelligence {
+public class PreDefinedMovementAI extends AbstractMovementAI {
 	
 	private Array<Vector2> relativePositions;
 	private Array<Vector2> absolutePositions;

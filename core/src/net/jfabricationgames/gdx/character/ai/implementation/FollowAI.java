@@ -11,7 +11,7 @@ import net.jfabricationgames.gdx.character.state.CharacterState;
 /**
  * An AI implementation that follows the player when he's in a range in which he's noticed by the enemy.
  */
-public class FollowAI extends AbstractMovementAI implements ArtificialIntelligence {
+public class FollowAI extends AbstractMovementAI {
 	
 	private PlayableCharacter playerToFollow;
 	

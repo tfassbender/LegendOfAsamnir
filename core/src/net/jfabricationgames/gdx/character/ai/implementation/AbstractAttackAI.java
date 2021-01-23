@@ -9,7 +9,7 @@ import net.jfabricationgames.gdx.character.ai.util.AttackTimer;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
-public abstract class AbstractAttackAI extends AbstractArtificialIntelligence implements ArtificialIntelligence {
+public abstract class AbstractAttackAI extends AbstractArtificialIntelligence {
 	
 	protected CharacterState attackState;
 	protected PlayableCharacter targetingPlayer;
