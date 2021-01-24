@@ -147,6 +147,28 @@
 				enemy/imp/imp_fire,
 				enemy/imp/imp_idle,
 				enemy/imp/imp_move,
+				
+				//##############################################################
+				//### NPCs
+				//##############################################################
+				
+				// adventurer
+				npc/adventurer/adventurer_attack,
+				npc/adventurer/adventurer_attack_2,
+				npc/adventurer/adventurer_attack_3,
+				npc/adventurer/adventurer_damage,
+				npc/adventurer/adventurer_die,
+				npc/adventurer/adventurer_idle,
+				npc/adventurer/adventurer_jump,
+				npc/adventurer/adventurer_move,
+				
+				// adventurer female
+				npc/adventurer_female/adventurer_female_attack,
+				npc/adventurer_female/adventurer_female_attack_2,
+				npc/adventurer_female/adventurer_female_damage,
+				npc/adventurer_female/adventurer_female_die,
+				npc/adventurer_female/adventurer_female_idle,
+				npc/adventurer_female/adventurer_female_move,
 			]
 		},
 		menu: {

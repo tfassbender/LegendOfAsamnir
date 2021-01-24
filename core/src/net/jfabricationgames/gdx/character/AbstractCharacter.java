@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.character;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -17,10 +18,13 @@ import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
+import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
+import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-public abstract class AbstractCharacter implements ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
+public abstract class AbstractCharacter implements GameMapObject, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
@@ -53,6 +57,25 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 		this.imageOffsetX = x;
 		this.imageOffsetY = y;
 	}
+	
+	/**
+	 * Called from the factory to create a box2d physics body for this character.
+	 */
+	public void createPhysicsBody(float x, float y) {
+		PhysicsBodyProperties properties = definePhysicsBodyProperties();
+		properties.setX(x).setY(y);
+		body = PhysicsBodyCreator.createBody(properties);
+		addAdditionalPhysicsParts();
+		body.setUserData(this);
+	}
+	
+	protected abstract PhysicsBodyProperties definePhysicsBodyProperties();
+	
+	protected abstract void addAdditionalPhysicsParts();
+	
+	public abstract void act(float delta);
+	
+	public abstract void draw(float delta, SpriteBatch batch);
 	
 	@Override
 	public String getUnitId() {

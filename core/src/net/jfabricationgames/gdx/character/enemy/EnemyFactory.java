@@ -1,10 +1,8 @@
 package net.jfabricationgames.gdx.character.enemy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
@@ -38,7 +36,7 @@ public class EnemyFactory extends AbstractFactory {
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	private static Config config;
 	
-	private Map<String, EnemyTypeConfig> typeConfigs;
+	private ObjectMap<String, EnemyTypeConfig> typeConfigs;
 	
 	public EnemyFactory(GameMap gameMap) {
 		this.gameMap = gameMap;
@@ -53,7 +51,7 @@ public class EnemyFactory extends AbstractFactory {
 	
 	@SuppressWarnings("unchecked")
 	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(HashMap.class, EnemyTypeConfig.class, Gdx.files.internal(config.enemyTypesConfig));
+		typeConfigs = json.fromJson(ObjectMap.class, EnemyTypeConfig.class, Gdx.files.internal(config.enemyTypesConfig));
 	}
 	
 	private void loadEnemyAnimations() {
@@ -117,9 +115,8 @@ public class EnemyFactory extends AbstractFactory {
 		});
 	}
 	
-	public static class Config {
+	private static class Config {
 		
-		public String enemyAtlas;
 		public String enemyTypesConfig;
 	}
 }

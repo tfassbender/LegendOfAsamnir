@@ -23,15 +23,13 @@ import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
-import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
-import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public abstract class Enemy extends AbstractCharacter implements Hittable, GameMapObject {
+public abstract class Enemy extends AbstractCharacter implements Hittable {
 	
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	
@@ -116,22 +114,12 @@ public abstract class Enemy extends AbstractCharacter implements Hittable, GameM
 		return null;
 	}
 	
-	/**
-	 * Called from the factory to create a box2d physics body for this enemy.
-	 */
 	public void createPhysicsBody(float x, float y) {
-		PhysicsBodyProperties properties = definePhysicsBodyProperties();
-		properties.setX(x).setY(y);
-		body = PhysicsBodyCreator.createBody(properties);
-		addAdditionalPhysicsParts();
-		body.setUserData(this);
+		super.createPhysicsBody(x, y);
+		
 		//add the body to the attackCreator, because it needed to be initialized before the body was created
 		attackCreator.setBody(body);
 	}
-	
-	protected abstract PhysicsBodyProperties definePhysicsBodyProperties();
-	
-	protected abstract void addAdditionalPhysicsParts();
 	
 	protected PhysicsBodyProperties getDefaultPhysicsBodyProperties() {
 		return physicsBodyProperties.clone();

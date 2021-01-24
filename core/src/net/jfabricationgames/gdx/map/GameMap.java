@@ -20,6 +20,8 @@ import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
+import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
+import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
@@ -78,11 +80,13 @@ public class GameMap implements Disposable {
 	protected Array<Item> itemsAboveGameObjects;
 	protected Array<GameObject> objects;
 	protected Array<Enemy> enemies;
+	protected Array<NonPlayableCharacter> nonPlayableCharacters;
 	protected Array<Projectile> projectiles;
 	
 	protected ItemFactory itemFactory;
 	protected GameObjectFactory objectFactory;
 	protected EnemyFactory enemyFactory;
+	protected NonPlayableCharacterFactory npcFactory;
 	
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
@@ -107,6 +111,7 @@ public class GameMap implements Disposable {
 		itemFactory = new ItemFactory(this);
 		objectFactory = new GameObjectFactory(this);
 		enemyFactory = new EnemyFactory(this);
+		npcFactory = new NonPlayableCharacterFactory(this);
 		
 		cutsceneHandler = CutsceneHandler.getInstance();
 		cutsceneHandler.setGameMap(this);
@@ -158,6 +163,9 @@ public class GameMap implements Disposable {
 		for (Enemy enemy : enemies) {
 			enemy.removeFromMap();
 		}
+		for (NonPlayableCharacter npc : nonPlayableCharacters) {
+			npc.removeFromMap();
+		}
 		for (Projectile projectile : projectiles) {
 			projectile.removeFromMap();
 		}
@@ -174,6 +182,7 @@ public class GameMap implements Disposable {
 		itemsAboveGameObjects.clear();
 		objects.clear();
 		enemies.clear();
+		nonPlayableCharacters.clear();
 		projectiles.clear();
 	}
 	
@@ -197,7 +206,7 @@ public class GameMap implements Disposable {
 	}
 	
 	private boolean isMapInitialized() {
-		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && projectiles != null;
+		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null && projectiles != null;
 	}
 	
 	public void beforeWorldStep() {
@@ -214,6 +223,7 @@ public class GameMap implements Disposable {
 		executeAnnotatedMethods(annotation, itemsAboveGameObjects);
 		executeAnnotatedMethods(annotation, objects);
 		executeAnnotatedMethods(annotation, enemies);
+		executeAnnotatedMethods(annotation, nonPlayableCharacters);
 		executeAnnotatedMethods(annotation, projectiles);
 	}
 	
@@ -251,6 +261,8 @@ public class GameMap implements Disposable {
 		processCutscene(delta);
 		processEnemies(delta);
 		renderEnemies(delta);
+		processNpcs(delta);
+		renderNpcs(delta);
 		processProjectiles(delta);
 		renderProjectiles();
 		
@@ -293,6 +305,17 @@ public class GameMap implements Disposable {
 	private void renderEnemies(float delta) {
 		for (Enemy enemy : enemies) {
 			enemy.draw(delta, batch);
+		}
+	}
+
+	private void processNpcs(float delta) {
+		for (NonPlayableCharacter npc : nonPlayableCharacters) {
+			npc.act(delta);
+		}
+	}
+	private void renderNpcs(float delta) {
+		for (NonPlayableCharacter npc : nonPlayableCharacters) {
+			npc.draw(delta, batch);
 		}
 	}
 	
@@ -362,6 +385,15 @@ public class GameMap implements Disposable {
 		enemies.removeValue(enemy, false);
 		removePhysicsBody(body);
 	}
+
+	public void addNpc(NonPlayableCharacter npc) {
+		nonPlayableCharacters.add(npc);
+	}
+	
+	public void removeNpc(NonPlayableCharacter npc, Body body) {
+		nonPlayableCharacters.removeValue(npc, false);
+		removePhysicsBody(body);
+	}
 	
 	public void addProjectile(Projectile projectile) {
 		projectiles.add(projectile);
@@ -388,6 +420,10 @@ public class GameMap implements Disposable {
 		return enemyFactory;
 	}
 	
+	public NonPlayableCharacterFactory getNpcFactory() {
+		return npcFactory;
+	}
+	
 	public MapProperties getGlobalMapProperties() {
 		return map.getProperties();
 	}
@@ -405,6 +441,12 @@ public class GameMap implements Disposable {
 		for (Enemy enemy : enemies) {
 			if (unitId.equals(enemy.getUnitId())) {
 				return enemy;
+			}
+		}
+		
+		for (NonPlayableCharacter npc : nonPlayableCharacters) {
+			if (unitId.equals(npc.getUnitId())) {
+				return npc;
 			}
 		}
 		
