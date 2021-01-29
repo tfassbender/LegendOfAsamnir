@@ -2,12 +2,12 @@ package net.jfabricationgames.gdx.character.enemy.implementation;
 
 import com.badlogic.gdx.maps.MapProperties;
 
+import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.BaseAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
-import net.jfabricationgames.gdx.character.ai.util.FixedAttackTimer;
+import net.jfabricationgames.gdx.character.ai.util.timer.FixedAttackTimer;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
-import net.jfabricationgames.gdx.character.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
@@ -29,7 +29,7 @@ public class Mimic extends Enemy {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 4f);
+		CharacterPhysicsUtil.addEnemySensor(body, 4f);
 	}
 	
 	@Override

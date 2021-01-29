@@ -56,7 +56,7 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + CONFIG_FILE + "\")");
 		}
 		
-		NonPlayableCharacter npc = new NonPlayableCharacter(properties);
+		NonPlayableCharacter npc = new NonPlayableCharacter(typeConfig, properties);
 		npc.setGameMap(gameMap);
 		npc.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		

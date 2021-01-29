@@ -8,6 +8,7 @@ public class EnemyTypeConfig {
 	public String stateConfig;//the state config file that is to be loaded (by the EnemyStateMachine)
 	public String initialState;
 	public String attackConfig;
+	public String aiConfig;
 	
 	public float health;
 	public float movingSpeed;

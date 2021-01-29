@@ -4,13 +4,13 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.BaseAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
-import net.jfabricationgames.gdx.character.ai.util.FixedAttackTimer;
+import net.jfabricationgames.gdx.character.ai.util.timer.FixedAttackTimer;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
-import net.jfabricationgames.gdx.character.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
@@ -31,7 +31,7 @@ public class Cobra extends Enemy {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 5f);
+		CharacterPhysicsUtil.addEnemySensor(body, 5f);
 	}
 	
 	@Override

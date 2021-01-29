@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.character;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.state.CharacterState;
@@ -23,6 +25,7 @@ import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public abstract class AbstractCharacter implements GameMapObject, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
 	
@@ -47,6 +50,8 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	public AbstractCharacter(MapProperties properties) {
 		this.properties = properties;
+		
+		PhysicsWorld.getInstance().registerContactListener(this);
 	}
 	
 	public void setGameMap(GameMap gameMap) {
@@ -75,7 +80,22 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	public abstract void act(float delta);
 	
-	public abstract void draw(float delta, SpriteBatch batch);
+	public void draw(float delta, SpriteBatch batch) {
+		if (getAnimation() != null) {
+			getAnimation().increaseStateTime(delta);
+			TextureRegion region = getAnimation().getKeyFrame();
+			getAnimation().getSpriteConfig().setX((body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX))
+					.setY((body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY));
+			updateTextureDirection(region);
+			getAnimation().draw(batch);
+		}
+	}
+	
+	protected abstract void updateTextureDirection(TextureRegion region);
+	
+	protected AnimationDirector<TextureRegion> getAnimation() {
+		return stateMachine.getCurrentState().getAnimation();
+	}
 	
 	@Override
 	public String getUnitId() {

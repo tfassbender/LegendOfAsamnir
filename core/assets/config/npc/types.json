@@ -1,3 +1,4 @@
 {
 	adventurer: config/npc/adventurer.json,
+	adventurer_female: config/npc/adventurer_female.json,
 }

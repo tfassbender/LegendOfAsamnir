@@ -4,13 +4,13 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.BaseAI;
 import net.jfabricationgames.gdx.character.ai.implementation.ActionAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
-import net.jfabricationgames.gdx.character.ai.util.RandomIntervalAttackTimer;
+import net.jfabricationgames.gdx.character.ai.util.timer.RandomIntervalAttackTimer;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
-import net.jfabricationgames.gdx.character.enemy.EnemyPhysicsUtil;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.character.enemy.ai.MinotaurAttackAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
@@ -37,7 +37,7 @@ public class Minotaur extends Enemy implements EventListener {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addSensor(body, 10f);
+		CharacterPhysicsUtil.addEnemySensor(body, 10f);
 	}
 	
 	@Override

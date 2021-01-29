@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.enemy;
+package net.jfabricationgames.gdx.character;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -6,9 +6,15 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 
-public abstract class EnemyPhysicsUtil {
+public abstract class CharacterPhysicsUtil {
 	
-	public static void addSensor(Body body, float radius) {
+	public static void addNpcSensor(Body body, float radius) {
+		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(radius)
+				.setCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR);
+		PhysicsBodyCreator.addCircularFixture(sensorProperties);
+	}
+	
+	public static void addEnemySensor(Body body, float radius) {
 		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(radius)
 				.setCollisionType(PhysicsCollisionType.ENEMY_SENSOR);
 		PhysicsBodyCreator.addCircularFixture(sensorProperties);

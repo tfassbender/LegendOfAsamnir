@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.move.AIAttackingMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
-import net.jfabricationgames.gdx.character.ai.util.AttackTimer;
+import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
 public abstract class AbstractMultiAttackAI extends AbstractAttackAI {

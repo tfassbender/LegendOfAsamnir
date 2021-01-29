@@ -37,6 +37,7 @@
 		stateConfig: config/enemy/states/mini_golem.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/mini_golem.json
+		aiConfig: config/enemy/ai/mini_golem.json
 		
 		health: 15,
 		movingSpeed: 0.75

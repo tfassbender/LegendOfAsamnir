@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 
 import net.jfabricationgames.gdx.character.ai.AbstractArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.character.ai.util.AttackTimer;
+import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 

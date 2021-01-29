@@ -16,6 +16,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
+import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
+import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -28,6 +30,7 @@ public class TiledMapLoader {
 	public static final String OBJECT_NAME_ITEM = "item";
 	public static final String OBJECT_NAME_OBJECT = "object";
 	public static final String OBJECT_NAME_ENEMY = "enemy";
+	public static final String OBJECT_NAME_NPC = "npc";
 	
 	public static String mapPropertiesToString(MapProperties properties, boolean includePosition) {
 		StringBuilder sb = new StringBuilder();
@@ -75,6 +78,7 @@ public class TiledMapLoader {
 	private ItemFactory itemFactory;
 	private GameObjectFactory objectFactory;
 	private EnemyFactory enemyFactory;
+	private NonPlayableCharacterFactory npcFactory;
 	
 	public TiledMapLoader(String mapAsset, GameMap gameMap) {
 		this.mapAsset = mapAsset;
@@ -83,6 +87,7 @@ public class TiledMapLoader {
 		this.itemFactory = gameMap.itemFactory;
 		this.objectFactory = gameMap.objectFactory;
 		this.enemyFactory = gameMap.enemyFactory;
+		this.npcFactory = gameMap.npcFactory;
 	}
 	
 	public void loadMap() {
@@ -95,6 +100,7 @@ public class TiledMapLoader {
 		Array<Item> items = new Array<>();
 		Array<GameObject> objects = new Array<>();
 		Array<Enemy> enemies = new Array<>();
+		Array<NonPlayableCharacter> npcs = new Array<>();
 		
 		MapObjects mapObjects = gameMap.map.getLayers().get("objects").getObjects();
 		
@@ -145,6 +151,9 @@ public class TiledMapLoader {
 				case OBJECT_NAME_ENEMY:
 					enemies.add(enemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
 					break;
+				case OBJECT_NAME_NPC:
+					npcs.add(npcFactory.createNpc(parts[1], rectangle.x, rectangle.y, properties));
+					break;
 				default:
 					throw new IllegalStateException("Unknown map object found: " + name + ". Properties: " + mapPropertiesToString(properties, true));
 			}
@@ -153,6 +162,7 @@ public class TiledMapLoader {
 		gameMap.items = items;
 		gameMap.objects = objects;
 		gameMap.enemies = enemies;
+		gameMap.nonPlayableCharacters = npcs;
 	}
 	
 	private boolean isDebugObject(MapProperties properties) {

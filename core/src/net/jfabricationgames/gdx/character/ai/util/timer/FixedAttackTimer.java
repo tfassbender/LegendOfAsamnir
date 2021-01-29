@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.ai.util;
+package net.jfabricationgames.gdx.character.ai.util.timer;
 
 public class FixedAttackTimer implements AttackTimer {
 	

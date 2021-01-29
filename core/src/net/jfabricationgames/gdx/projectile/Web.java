@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.character.enemy.EnemyPhysicsUtil;
+import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapGroundTypeContainer;
@@ -30,7 +30,7 @@ public class Web extends Projectile implements GameMapGroundTypeContainer {
 	
 	@Override
 	protected void addAdditionalPhysicsParts() {
-		EnemyPhysicsUtil.addCircularGroundFixture(body, 1f, GROUND_TYPE_WEB);
+		CharacterPhysicsUtil.addCircularGroundFixture(body, 1f, GROUND_TYPE_WEB);
 	}
 	
 	@Override

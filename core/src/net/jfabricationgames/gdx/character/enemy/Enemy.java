@@ -1,6 +1,6 @@
 package net.jfabricationgames.gdx.character.enemy;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
@@ -13,13 +13,13 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.SerializationException;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
@@ -50,7 +50,7 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		this.typeConfig = typeConfig;
 		physicsBodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false)
 				.setCollisionType(PhysicsCollisionType.ENEMY).setDensity(10f).setLinearDamping(10f);
-		PhysicsWorld.getInstance().registerContactListener(this);
+		
 		intendedMovement = new Vector2();
 		healthBarRenderer = new EnemyHealthBarRenderer();
 		cutsceneHandler = CutsceneHandler.getInstance();
@@ -87,6 +87,16 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 	 */
 	protected abstract void createAI();
 	
+	protected void createAiFromConfiguration() {
+		ArtificialIntelligenceConfig aiConfig = loadAiConfig();
+		ai = aiConfig.type.buildAI(aiConfig, stateMachine, properties);
+	}
+	
+	private ArtificialIntelligenceConfig loadAiConfig() {
+		Json json = new Json();
+		return json.fromJson(ArtificialIntelligenceConfig.class, Gdx.files.internal(typeConfig.aiConfig));
+	}
+	
 	private void setMovingState() {
 		movingState = stateMachine.getState(getMovingStateName());
 		if (movingState == null) {
@@ -98,6 +108,7 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		return "move";
 	}
 	
+	//TODO remove if not used anymore
 	@SuppressWarnings("unchecked")
 	protected Array<Vector2> loadPositionsFromMapProperties() {
 		String predefinedMovingPositions = properties.get(MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS, String.class);
@@ -114,6 +125,7 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		return null;
 	}
 	
+	@Override
 	public void createPhysicsBody(float x, float y) {
 		super.createPhysicsBody(x, y);
 		
@@ -125,10 +137,7 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		return physicsBodyProperties.clone();
 	}
 	
-	private AnimationDirector<TextureRegion> getAnimation() {
-		return stateMachine.getCurrentState().getAnimation();
-	}
-	
+	@Override
 	public void act(float delta) {
 		stateMachine.updateState(delta);
 		attackCreator.handleAttacks(delta);
@@ -151,15 +160,9 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		return health > 0;
 	}
 	
-	public void draw(float delta, SpriteBatch batch) {
-		if (getAnimation() != null) {
-			getAnimation().increaseStateTime(delta);
-			TextureRegion region = getAnimation().getKeyFrame();
-			getAnimation().getSpriteConfig().setX((body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX))
-					.setY((body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY));
-			stateMachine.flipTextureToMovementDirection(region, intendedMovement);
-			getAnimation().draw(batch);
-		}
+	@Override
+	protected void updateTextureDirection(TextureRegion region) {
+		stateMachine.flipTextureToMovementDirection(region, intendedMovement);
 	}
 	
 	public void drawHealthBar(ShapeRenderer shapeRenderer) {
@@ -188,6 +191,7 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		move(direction);
 	}
 	
+	@Override
 	public void move(Vector2 delta) {
 		intendedMovement = delta;
 		super.move(delta);
