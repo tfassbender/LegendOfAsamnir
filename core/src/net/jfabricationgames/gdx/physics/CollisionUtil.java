@@ -1,8 +1,31 @@
 package net.jfabricationgames.gdx.physics;
 
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+
 public abstract class CollisionUtil {
+	
+	public static boolean isPlayableCharacterContact(Object collidingObject, PhysicsCollisionType collisionType, Contact contact) {
+		return CollisionUtil.getObjectCollidingWith(collidingObject, collisionType, contact, PlayableCharacter.class) != null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T getObjectCollidingWith(Object collidingObject, PhysicsCollisionType collisionType, Contact contact, Class<T> collidingType) {
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		
+		if (CollisionUtil.containsCollisionType(collisionType, fixtureA, fixtureB)) {
+			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(collisionType, fixtureA, fixtureB);
+			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(collisionType, fixtureA, fixtureB);
+			
+			if (sensorUserData == collidingObject && collidingType.isAssignableFrom(sensorCollidingUserData.getClass())) {
+				return (T) sensorCollidingUserData;
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * Checks whether at least one of the fixtures is of the given collision type

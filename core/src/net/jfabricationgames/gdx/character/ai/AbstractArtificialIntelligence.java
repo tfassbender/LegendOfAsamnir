@@ -5,9 +5,9 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
-import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -16,7 +16,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	
 	/** The next sub-AI in the decorator chain */
 	protected ArtificialIntelligence subAI;
-	protected Enemy enemy;
+	protected AbstractCharacter character;
 	protected CharacterStateMachine stateMachine;
 	
 	public AbstractArtificialIntelligence(ArtificialIntelligence subAI) {
@@ -52,10 +52,10 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	}
 	
 	@Override
-	public void setEnemy(Enemy enemy) {
-		this.enemy = enemy;
-		this.stateMachine = enemy.getStateMachine();
-		subAI.setEnemy(enemy);
+	public void setCharacter(AbstractCharacter character) {
+		this.character = character;
+		this.stateMachine = character.getStateMachine();
+		subAI.setCharacter(character);
 	}
 	
 	@Override
@@ -91,8 +91,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.ENEMY_SENSOR, fixtureA, fixtureB);
 			
-			// if the sensor touches a PlayableCharacter -> start following him
-			if (sensorUserData == enemy && collidingType.isAssignableFrom(sensorCollidingUserData.getClass())) {
+			if (sensorUserData == character && collidingType.isAssignableFrom(sensorCollidingUserData.getClass())) {
 				return (T) sensorCollidingUserData;
 			}
 		}

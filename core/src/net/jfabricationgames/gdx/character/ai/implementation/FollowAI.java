@@ -36,7 +36,7 @@ public class FollowAI extends AbstractMovementAI {
 	}
 	
 	private float distanceToPlayer() {
-		return enemy.getPosition().sub(playerToFollow.getPosition()).len();
+		return character.getPosition().sub(playerToFollow.getPosition()).len();
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class FollowAI extends AbstractMovementAI {
 		if (isExecutedByMe(move)) {
 			if (move.movementTarget != null) {
 				if (inMovingState() || changeToMovingState()) {
-					enemy.moveTo(move.movementTarget);
+					character.moveTo(move.movementTarget);
 					move.executed();
 				}
 			}

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
@@ -18,15 +17,10 @@ import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
-import net.jfabricationgames.gdx.physics.CollisionUtil;
-import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class InteractiveObject extends GameObject implements Interactive {
-	
-	private static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X = 0.3f;
-	private static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y = 0.3f;
 	
 	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
 	
@@ -47,9 +41,9 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	private AnimationSpriteConfig createSpriteConfig() {
 		AnimationSpriteConfig spriteConfig = AnimationSpriteConfig.fromSprite(sprite);
-		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
+		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
 				+ typeConfig.interactionMarkerOffsetX);
-		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y
+		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y
 				+ typeConfig.interactionMarkerOffsetY);
 		return spriteConfig;
 	}
@@ -174,21 +168,6 @@ public class InteractiveObject extends GameObject implements Interactive {
 			InteractionManager.getInstance().movedOutOfRange(this);
 			playInteractionAnimationDisappear();
 		}
-	}
-	
-	protected boolean isPlayableCharacterContact(Contact contact) {
-		Fixture fixtureA = contact.getFixtureA();
-		Fixture fixtureB = contact.getFixtureB();
-		
-		if (CollisionUtil.containsCollisionType(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB)) {
-			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
-			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.OBSTACLE_SENSOR, fixtureA, fixtureB);
-			
-			if (sensorUserData == this && sensorCollidingUserData != null && sensorCollidingUserData instanceof PlayableCharacter) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	private void playInteractionAnimationAppear() {

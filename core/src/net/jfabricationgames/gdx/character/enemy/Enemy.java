@@ -8,10 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackCreator;
@@ -22,7 +20,6 @@ import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
-import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -32,12 +29,12 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class Enemy extends AbstractCharacter implements Hittable {
 	
+	private static final String STATE_NAME_MOVE = "move";
+	
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	
 	protected EnemyTypeConfig typeConfig;
 	protected AttackCreator attackCreator;
-	
-	protected Vector2 intendedMovement;
 	
 	protected float health;
 	
@@ -54,7 +51,6 @@ public class Enemy extends AbstractCharacter implements Hittable {
 		
 		intendedMovement = new Vector2();
 		healthBarRenderer = new EnemyHealthBarRenderer();
-		cutsceneHandler = CutsceneHandler.getInstance();
 		
 		readTypeConfig();
 		readMapProperties(properties);
@@ -62,7 +58,7 @@ public class Enemy extends AbstractCharacter implements Hittable {
 		initializeStates();
 		createAI();
 		setMovingState();
-		ai.setEnemy(this);
+		ai.setCharacter(this);
 		
 		setImageOffset(typeConfig.imageOffsetX, typeConfig.imageOffsetY);
 	}
@@ -93,7 +89,7 @@ public class Enemy extends AbstractCharacter implements Hittable {
 		createAiFromConfiguration();
 	}
 	
-	protected void createAiFromConfiguration() {
+	private void createAiFromConfiguration() {
 		ArtificialIntelligenceConfig aiConfig = loadAiConfig();
 		ai = aiConfig.type.buildAI(aiConfig, stateMachine, properties);
 	}
@@ -104,31 +100,10 @@ public class Enemy extends AbstractCharacter implements Hittable {
 	}
 	
 	private void setMovingState() {
-		movingState = stateMachine.getState(getMovingStateName());
+		movingState = stateMachine.getState(STATE_NAME_MOVE);
 		if (movingState == null) {
 			throw new IllegalStateException("Moving state not found. Maybe the 'getMovingStateName()' method needs to be overwritten?");
 		}
-	}
-	
-	protected String getMovingStateName() {
-		return "move";
-	}
-	
-	//TODO remove if not used anymore
-	@SuppressWarnings("unchecked")
-	protected Array<Vector2> loadPositionsFromMapProperties() {
-		String predefinedMovingPositions = properties.get(MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS, String.class);
-		if (predefinedMovingPositions != null) {
-			try {
-				Json json = new Json();
-				return (Array<Vector2>) json.fromJson(Array.class, Vector2.class, predefinedMovingPositions);
-			}
-			catch (SerializationException e) {
-				throw new IllegalStateException("A predefined movement string could not be parsed: \"" + predefinedMovingPositions
-						+ "\". Complete map properties: " + TiledMapLoader.mapPropertiesToString(properties, true), e);
-			}
-		}
-		return null;
 	}
 	
 	@Override
@@ -204,20 +179,6 @@ public class Enemy extends AbstractCharacter implements Hittable {
 	
 	public void moveToDirection(float x, float y) {
 		moveToDirection(new Vector2(x, y));
-	}
-	public void moveToDirection(Vector2 pos) {
-		Vector2 direction = pos.cpy().nor().scl(movingSpeed);
-		move(direction);
-	}
-	
-	@Override
-	public void move(Vector2 delta) {
-		intendedMovement = delta;
-		super.move(delta);
-	}
-	
-	public CharacterStateMachine getStateMachine() {
-		return stateMachine;
 	}
 	
 	@Override

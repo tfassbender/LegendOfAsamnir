@@ -1,3 +1,24 @@
 {
 	animationsConfig: config/animation/npc/adventurer.json,
+	stateConfig: config/npc/states/adventurer.json,
+	initialState: idle,
+	aiConfig: {
+		type: PRE_DEFINED_MOVEMENT_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: move,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
+	
+	imageOffsetX: 0f,
+	imageOffsetY: 0.2f,
+	
+	movingSpeed: 1f,
+	
+	interactionEventId: adventurer,
 }

@@ -69,7 +69,7 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 			if (inAttackState()) {
 				attackState.flipAnimationToDirection(directionToTarget());
 				if (distanceToTarget() > minDistanceToTargetPlayer) {
-					enemy.moveTo(move.targetPosition);
+					character.moveTo(move.targetPosition);
 				}
 			}
 		}

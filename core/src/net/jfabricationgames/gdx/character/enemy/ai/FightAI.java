@@ -49,6 +49,6 @@ public class FightAI extends AbstractAttackAI {
 	}
 	
 	protected void attackMoveTo(Vector2 targetPosition) {
-		enemy.moveTo(targetPosition);
+		character.moveTo(targetPosition);
 	}
 }

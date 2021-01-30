@@ -73,7 +73,7 @@ public class TiledMapPhysicsLoader {
 	public TiledMapPhysicsLoader(float unitsPerPixel) {
 		this.worldUnitsPerPixel = unitsPerPixel;
 		
-		Gdx.app.log(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
+		Gdx.app.debug(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
 		
 		loadMaterials();
 		loadGroundTypes();
@@ -88,7 +88,7 @@ public class TiledMapPhysicsLoader {
 		MapLayer layer = map.getLayers().get(layerName);
 		
 		if (layer == null) {
-			Gdx.app.error(getClass().getSimpleName(), "layer " + layerName + " does not exist");
+			Gdx.app.log(getClass().getSimpleName(), "layer " + layerName + " does not exist. Skipping.");
 			return;
 		}
 		

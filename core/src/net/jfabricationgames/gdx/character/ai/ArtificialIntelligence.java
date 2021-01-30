@@ -2,9 +2,9 @@ package net.jfabricationgames.gdx.character.ai;
 
 import com.badlogic.gdx.physics.box2d.ContactListener;
 
+import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
-import net.jfabricationgames.gdx.character.enemy.Enemy;
 
 /**
  * An Artificial Intelligence that is build using a decorator pattern, so multiple AI functions can be combined into one.<br>
@@ -27,5 +27,5 @@ public interface ArtificialIntelligence extends ContactListener {
 	public void setMove(MoveType moveType, AIMove aiMove);
 	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz);
 	
-	public void setEnemy(Enemy enemy);
+	public void setCharacter(AbstractCharacter character);
 }

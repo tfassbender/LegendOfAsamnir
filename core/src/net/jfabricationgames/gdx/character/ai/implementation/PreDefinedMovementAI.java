@@ -55,7 +55,7 @@ public class PreDefinedMovementAI extends AbstractMovementAI {
 		
 		if (positionsDefined) {
 			if (updateAbsolutePositions) {
-				updateAbsolutePositions(enemy.getPosition());
+				updateAbsolutePositions(character.getPosition());
 				updateAbsolutePositions = false;
 			}
 			
@@ -78,7 +78,7 @@ public class PreDefinedMovementAI extends AbstractMovementAI {
 						targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
 					}
 					else {
-						enemy.moveTo(targetPoint);
+						character.moveTo(targetPoint);
 					}
 					move.executed();
 				}
@@ -89,6 +89,6 @@ public class PreDefinedMovementAI extends AbstractMovementAI {
 	}
 	
 	private boolean reachedTargetPoint(Vector2 targetPoint) {
-		return new Vector2(targetPoint).sub(enemy.getPosition()).len() <= distanceToReachTargetPoint;
+		return new Vector2(targetPoint).sub(character.getPosition()).len() <= distanceToReachTargetPoint;
 	}
 }

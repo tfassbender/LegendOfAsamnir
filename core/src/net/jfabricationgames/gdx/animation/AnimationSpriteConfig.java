@@ -14,6 +14,15 @@ public class AnimationSpriteConfig {
 		return spriteConfig;
 	}
 	
+	public AnimationSpriteConfig() {}
+	
+	public AnimationSpriteConfig(AnimationSpriteConfig spriteConfig) {
+		this.x = spriteConfig.x;
+		this.y = spriteConfig.y;
+		this.width = spriteConfig.width;
+		this.height = spriteConfig.height;
+	}
+	
 	public float x;
 	public float y;
 	public float width;

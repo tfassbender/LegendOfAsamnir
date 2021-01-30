@@ -14,6 +14,9 @@ public class InteractionManager {
 	public static final String ANIMATION_CONFIG_FILE = "config/animation/interaction.json";
 	public static final String INTERACTION_ANIMATION = "interrogation";
 	
+	public static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X = 0.3f;
+	public static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y = 0.3f;
+	
 	private static PlayableCharacter character;
 	private static final Comparator<Interactive> distanceComparator = (i1, i2) -> Float.compare(i1.getDistanceToPlayer(character),
 			i2.getDistanceToPlayer(character));

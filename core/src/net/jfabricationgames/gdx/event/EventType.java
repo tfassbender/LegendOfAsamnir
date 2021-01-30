@@ -17,5 +17,6 @@ public enum EventType {
 	CUTSCENE_EVENT, //
 	ON_SCREEN_TEXT_ENDED, //
 	CHANGE_MAP, // 
-	SET_ITEM, //
+	SET_ITEM, 
+	NPC_INTERACTION, //
 }

@@ -39,7 +39,7 @@ public class FastAttackFightAI extends FightAI {
 	@Override
 	protected void attackMoveTo(Vector2 targetPosition) {
 		if (timeSinceAttackStateEntered >= attackSpeedDelay) {
-			enemy.moveTo(targetPosition, attackSpeedFactor);
+			character.moveTo(targetPosition, attackSpeedFactor);
 		}
 		else {
 			super.attackMoveTo(targetPosition);

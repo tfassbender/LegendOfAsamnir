@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -23,6 +24,7 @@ import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
+import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -227,5 +229,9 @@ public class GameObject implements Hittable, GameMapObject, CutsceneControlledUn
 	@Override
 	public Vector2 getPosition() {
 		return body != null ? body.getPosition().cpy() : null;
+	}
+	
+	protected boolean isPlayableCharacterContact(Contact contact) {
+		return CollisionUtil.isPlayableCharacterContact(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact);
 	}
 }

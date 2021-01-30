@@ -96,7 +96,7 @@ public class TiledMapLoader {
 	}
 	
 	private void loadMapObjects() {
-		Gdx.app.log(getClass().getSimpleName(), "--- Loading map objects --------------------------------------------------------------");
+		Gdx.app.debug(getClass().getSimpleName(), "--- Loading map objects --------------------------------------------------------------");
 		Array<Item> items = new Array<>();
 		Array<GameObject> objects = new Array<>();
 		Array<Enemy> enemies = new Array<>();

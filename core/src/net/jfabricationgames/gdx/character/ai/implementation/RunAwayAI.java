@@ -24,10 +24,10 @@ public class RunAwayAI extends AbstractMovementAI {
 		subAI.calculateMove(delta);
 		
 		if (player != null) {
-			float distanceToPlayer = enemy.getPosition().sub(player.getPosition()).len();
+			float distanceToPlayer = character.getPosition().sub(player.getPosition()).len();
 			if (distanceToPlayer < distanceToKeepFromPlayer && distanceToPlayer > distanceToStopRunning) {
 				AIPositionChangingMove move = new AIPositionChangingMove(this);
-				move.movementDirection = enemy.getPosition().sub(player.getPosition());
+				move.movementDirection = character.getPosition().sub(player.getPosition());
 				setMove(MoveType.MOVE, move);
 			}
 		}
@@ -38,7 +38,7 @@ public class RunAwayAI extends AbstractMovementAI {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			if (inMovingState() || changeToMovingState()) {
-				enemy.moveToDirection(move.movementDirection);
+				character.moveToDirection(move.movementDirection);
 				move.executed();
 			}
 		}

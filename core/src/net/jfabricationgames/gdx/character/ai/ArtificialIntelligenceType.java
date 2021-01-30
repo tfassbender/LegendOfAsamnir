@@ -17,8 +17,6 @@ import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerFactory;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
-import net.jfabricationgames.gdx.character.npc.ai.PlayerContactAI;
-import net.jfabricationgames.gdx.character.npc.ai.PlayerInteractionAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
@@ -132,31 +130,6 @@ public enum ArtificialIntelligenceType {
 			CharacterState surpriseState = stateMachine.getState(aiConfig.stateNameSurprise);
 			
 			return new MimicSurpriseAI(subAI, waitingState, surpriseState, aiConfig.attackDistance);
-		}
-	},
-	
-	//*****************************************************
-	//*** NPC AIs
-	//*****************************************************
-	
-	PLAYER_CONTACT_AI {
-		
-		@Override
-		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
-				MapProperties mapProperties) {
-			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
-			
-			return new PlayerContactAI(subAI);
-		}
-	},
-	PLAYER_INTERACTION_AI {
-		
-		@Override
-		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
-				MapProperties mapProperties) {
-			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
-			
-			return new PlayerInteractionAI(subAI);
 		}
 	};
 	

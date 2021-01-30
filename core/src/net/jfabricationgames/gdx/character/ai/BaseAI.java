@@ -5,9 +5,9 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
-import net.jfabricationgames.gdx.character.enemy.Enemy;
 
 /**
  * The basis for the subAI field of the {@link AbstractArtificialIntelligence} class. <br>
@@ -44,7 +44,7 @@ public class BaseAI extends AbstractArtificialIntelligence implements Artificial
 	public void executeMove() {}
 	
 	@Override
-	public void setEnemy(Enemy enemy) {}
+	public void setCharacter(AbstractCharacter character) {}
 	
 	@Override
 	public void beginContact(Contact contact) {}

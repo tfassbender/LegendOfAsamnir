@@ -66,5 +66,6 @@ public class GameObjectTypeConfig {
 	//****************************************
 	//*** Locked Objects
 	//****************************************
+	
 	public boolean defaultLocked = true;
 }

@@ -82,6 +82,29 @@
 			map: test_map_4,
 		}
 	},
+	demoLevel_interactWithAdventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: adventurer,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Adventurer",
+			displayText: "Don't disturb me! I need to run arround!",
+		}
+	},
+	demoLevel_interactWithFemaleAdventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: adventurer_female,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Female Adventurer",
+			displayText: "Hello There...",
+			colorHeader: #ff00ff
+		}
+	},
 	
 	// ********************************************************
 	// *** tutorial level

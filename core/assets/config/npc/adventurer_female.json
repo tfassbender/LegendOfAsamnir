@@ -1,3 +1,15 @@
 {
 	animationsConfig: config/animation/npc/adventurer_female.json,
+	stateConfig: config/npc/states/adventurer_female.json,
+	initialState: idle,
+	aiConfig: {
+		type: BASE_AI
+	}
+	
+	imageOffsetX: 0f,
+	imageOffsetY: 0.2f,
+	
+	movingSpeed: 1f,
+	
+	interactionEventId: adventurer_female,
 }

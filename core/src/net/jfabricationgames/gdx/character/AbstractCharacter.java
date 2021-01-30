@@ -42,6 +42,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	protected GameMap gameMap;
 	protected Body body;
 	
+	protected Vector2 intendedMovement;
 	protected float movingSpeed;
 	protected float imageOffsetX;
 	protected float imageOffsetY;
@@ -52,6 +53,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		this.properties = properties;
 		
 		PhysicsWorld.getInstance().registerContactListener(this);
+		cutsceneHandler = CutsceneHandler.getInstance();
 	}
 	
 	public void setGameMap(GameMap gameMap) {
@@ -81,13 +83,14 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	public abstract void act(float delta);
 	
 	public void draw(float delta, SpriteBatch batch) {
-		if (getAnimation() != null) {
-			getAnimation().increaseStateTime(delta);
-			TextureRegion region = getAnimation().getKeyFrame();
-			getAnimation().getSpriteConfig().setX((body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX))
+		AnimationDirector<TextureRegion> animation = getAnimation();
+		if (animation != null) {
+			animation.increaseStateTime(delta);
+			TextureRegion region = animation.getKeyFrame();
+			animation.getSpriteConfig().setX((body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX))
 					.setY((body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY));
 			updateTextureDirection(region);
-			getAnimation().draw(batch);
+			animation.draw(batch);
 		}
 	}
 	
@@ -95,6 +98,10 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	protected AnimationDirector<TextureRegion> getAnimation() {
 		return stateMachine.getCurrentState().getAnimation();
+	}
+	
+	public CharacterStateMachine getStateMachine() {
+		return stateMachine;
 	}
 	
 	@Override
@@ -127,8 +134,14 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	}
 	
 	public void move(Vector2 delta) {
+		intendedMovement = delta;
 		float force = 10f * groundProperties.movementSpeedFactor * body.getMass();
 		body.applyForceToCenter(delta.x * force, delta.y * force, true);
+	}
+	
+	public void moveToDirection(Vector2 pos) {
+		Vector2 direction = pos.cpy().nor().scl(movingSpeed);
+		move(direction);
 	}
 	
 	@Override

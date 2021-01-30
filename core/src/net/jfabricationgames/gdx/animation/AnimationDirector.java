@@ -125,4 +125,8 @@ public class AnimationDirector<T extends TextureRegion> {
 	public void setSpriteConfig(AnimationSpriteConfig spriteConfig) {
 		this.spriteConfig = spriteConfig;
 	}
+
+	public AnimationSpriteConfig getSpriteConfigCopy() {
+		return new AnimationSpriteConfig(spriteConfig);
+	}
 }

@@ -9,6 +9,18 @@ public class NonPlayableCharacterTypeConfig {
 	public String initialState;
 	public ArtificialIntelligenceConfig aiConfig;
 	
-	public float bodyWidth = 1f;
-	public float bodyHeight = 1.5f;
+	public float bodyWidth = 0.7f;
+	public float bodyHeight = 0.8f;
+	public float movingSpeed = 1f;
+	
+	public boolean interactByContact = false;
+	public float interactionMarkerOffsetX;
+	public float interactionMarkerOffsetY;
+	public String interactionEventId;
+	
+	public boolean addSensor = true;
+	public float sensorRadius = 1f;
+	
+	public float imageOffsetX;
+	public float imageOffsetY;
 }

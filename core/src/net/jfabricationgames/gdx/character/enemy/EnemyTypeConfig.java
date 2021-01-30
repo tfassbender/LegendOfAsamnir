@@ -13,7 +13,7 @@ public class EnemyTypeConfig {
 	public String aiConfig;
 	
 	public float health;
-	public float movingSpeed;
+	public float movingSpeed = 1f;
 	
 	public float imageOffsetX;
 	public float imageOffsetY;

@@ -61,21 +61,21 @@ public abstract class AbstractAttackAI extends AbstractArtificialIntelligence {
 	}
 	
 	protected boolean targetInRange(float attackDistance) {
-		return targetingPlayer != null && targetingPlayer.getPosition().cpy().sub(enemy.getPosition()).len() <= attackDistance;
+		return targetingPlayer != null && targetingPlayer.getPosition().cpy().sub(character.getPosition()).len() <= attackDistance;
 	}
 	
 	protected Vector2 directionToTarget() {
 		if (targetingPlayer == null) {
 			return Vector2.Zero;
 		}
-		return targetingPlayer.getPosition().sub(enemy.getPosition());
+		return targetingPlayer.getPosition().sub(character.getPosition());
 	}
 	
 	protected float distanceToTarget() {
 		if (targetingPlayer == null) {
 			return Float.MAX_VALUE;
 		}
-		return enemy.getPosition().sub(targetingPlayer.getPosition()).len();
+		return character.getPosition().sub(targetingPlayer.getPosition()).len();
 	}
 	
 	@Override
