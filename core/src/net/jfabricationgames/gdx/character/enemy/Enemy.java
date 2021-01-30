@@ -18,6 +18,7 @@ import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
+import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
@@ -62,6 +63,8 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 		createAI();
 		setMovingState();
 		ai.setEnemy(this);
+		
+		setImageOffset(typeConfig.imageOffsetX, typeConfig.imageOffsetY);
 	}
 	
 	protected void readTypeConfig() {
@@ -138,6 +141,19 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 	
 	protected PhysicsBodyProperties getDefaultPhysicsBodyProperties() {
 		return physicsBodyProperties.clone();
+	}
+	
+	@Override
+	protected PhysicsBodyProperties definePhysicsBodyProperties() {
+		return getDefaultPhysicsBodyProperties().setRadius(typeConfig.bodyRadius).setWidth(typeConfig.bodyWidth).setHeight(typeConfig.bodyHeight)
+				.setPhysicsBodyShape(typeConfig.bodyShape);
+	}
+	
+	@Override
+	protected void addAdditionalPhysicsParts() {
+		if (typeConfig.addSensor) {
+			CharacterPhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
+		}
 	}
 	
 	@Override

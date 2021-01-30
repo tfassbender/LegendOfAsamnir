@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.BaseAI;
 import net.jfabricationgames.gdx.character.ai.implementation.ActionAI;
@@ -18,26 +17,13 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
-import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class Minotaur extends Enemy implements EventListener {
 	
 	public Minotaur(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
-		setImageOffset(0f, -0.2f);
 		
 		EventHandler.getInstance().registerEventListener(this);
-	}
-	
-	@Override
-	protected PhysicsBodyProperties definePhysicsBodyProperties() {
-		return getDefaultPhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(1.2f).setHeight(1.8f);
-	}
-	
-	@Override
-	protected void addAdditionalPhysicsParts() {
-		CharacterPhysicsUtil.addEnemySensor(body, 10f);
 	}
 	
 	@Override

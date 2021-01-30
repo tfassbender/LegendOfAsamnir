@@ -9,6 +9,15 @@
 		health: 1,
 		movingSpeed: 3,
 		
+		imageOffsetX: 0f,
+		imageOffsetY: -0.2f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 6f,
+		
 		pushForceDamage: 50,
 		pushForceHit: 25,
 		
@@ -24,7 +33,16 @@
 		aiConfig: config/enemy/ai/gladiator.json,
 		
 		health: 35,
-		movingSpeed: 1.5
+		movingSpeed: 1.5,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.1f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 4f,
 		
 		pushForceDamage: 25,
 		pushForceHit: 40,
@@ -42,7 +60,16 @@
 		aiConfig: config/enemy/ai/mini_golem.json
 		
 		health: 15,
-		movingSpeed: 0.75
+		movingSpeed: 0.75,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.4f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 3f,
 		
 		pushForceDamage: 35,
 		pushForceHit: 30,
@@ -59,6 +86,16 @@
 		
 		health: 150,
 		movingSpeed: 3.0,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: -0.2f,
+		
+		bodyShape: OCTAGON,
+		bodyWidth: 1.2f,
+		bodyHeight: 1.8f,
+		
+		addSensor: true,
+		sensorRadius: 10f,
 		
 		pushForceDamage: 15,
 		pushForceHit: 40,
@@ -78,6 +115,15 @@
 		health: 20,
 		movingSpeed: 2.0,
 		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.5f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 6f,
+		
 		pushForceDamage: 35,
 		pushForceHit: 30,
 		
@@ -95,6 +141,16 @@
 		
 		health: 20,
 		movingSpeed: 2.0,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.2f,
+		
+		bodyShape: RECTANGLE,
+		bodyWidth: 0.5f,
+		bodyHeight: 0.5f,
+		
+		addSensor: true,
+		sensorRadius: 4f,
 		
 		pushForceDamage: 35,
 		pushForceHit: 30,
@@ -115,6 +171,16 @@
 		health: 30,
 		movingSpeed: 2.0,
 		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.1f,
+		
+		bodyShape: RECTANGLE,
+		bodyWidth: 0.5f,
+		bodyHeight: 0.7f,
+		
+		addSensor: true,
+		sensorRadius: 4f,
+		
 		pushForceDamage: 35,
 		pushForceHit: 30,
 		
@@ -134,6 +200,15 @@
 		health: 20,
 		movingSpeed: 1.0,
 		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.3f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 5f,
+		
 		pushForceDamage: 35,
 		pushForceHit: 30,
 		
@@ -150,7 +225,16 @@
 		aiConfig: config/enemy/ai/elemental.json,
 		
 		health: 15,
-		movingSpeed: 1.5
+		movingSpeed: 1.5,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.3f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 6f,
 		
 		pushForceDamage: 45,
 		pushForceHit: 25,
@@ -169,6 +253,15 @@
 		health: 15,
 		movingSpeed: 1.5
 		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.3f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 6f,
+		
 		pushForceDamage: 45,
 		pushForceHit: 25,
 		
@@ -185,6 +278,15 @@
 		
 		health: 20,
 		movingSpeed: 2.5,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.3f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 7f,
 		
 		pushForceDamage: 25,
 		pushForceHit: 30,
