@@ -30,7 +30,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public abstract class Enemy extends AbstractCharacter implements Hittable {
+public class Enemy extends AbstractCharacter implements Hittable {
 	
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	

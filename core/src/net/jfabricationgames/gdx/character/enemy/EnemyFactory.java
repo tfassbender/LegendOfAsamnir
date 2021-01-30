@@ -5,15 +5,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
-import net.jfabricationgames.gdx.character.enemy.implementation.Cobra;
-import net.jfabricationgames.gdx.character.enemy.implementation.Elemental;
-import net.jfabricationgames.gdx.character.enemy.implementation.Gladiator;
-import net.jfabricationgames.gdx.character.enemy.implementation.Imp;
-import net.jfabricationgames.gdx.character.enemy.implementation.Mimic;
-import net.jfabricationgames.gdx.character.enemy.implementation.MiniGolem;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
-import net.jfabricationgames.gdx.character.enemy.implementation.Spider;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -71,33 +63,19 @@ public class EnemyFactory extends AbstractFactory {
 		Enemy enemy;
 		switch (type) {
 			case ENEMY_NAME_BAT:
-				enemy = new Bat(typeConfig, properties);
-				break;
 			case ENEMY_NAME_GLADIATOR:
-				enemy = new Gladiator(typeConfig, properties);
-				break;
 			case ENEMY_NAME_MINI_GOLEM:
-				enemy = new MiniGolem(typeConfig, properties);
+			case ENEMY_NAME_SPIDER:
+			case ENEMY_NAME_MIMIC_CHEST:
+			case ENEMY_NAME_MIMIC_BARREL:
+			case ENEMY_NAME_COBRA:
+			case ENEMY_NAME_FIRE_ELEMENTAL:
+			case ENEMY_NAME_ICE_ELEMENTAL:
+			case ENEMY_NAME_IMP:
+				enemy = new Enemy(typeConfig, properties);
 				break;
 			case ENEMY_NAME_MINOTAUR:
 				enemy = new Minotaur(typeConfig, properties);
-				break;
-			case ENEMY_NAME_SPIDER:
-				enemy = new Spider(typeConfig, properties);
-				break;
-			case ENEMY_NAME_MIMIC_CHEST:
-			case ENEMY_NAME_MIMIC_BARREL:
-				enemy = new Mimic(typeConfig, properties);
-				break;
-			case ENEMY_NAME_COBRA:
-				enemy = new Cobra(typeConfig, properties);
-				break;
-			case ENEMY_NAME_FIRE_ELEMENTAL:
-			case ENEMY_NAME_ICE_ELEMENTAL:
-				enemy = new Elemental(typeConfig, properties);
-				break;
-			case ENEMY_NAME_IMP:
-				enemy = new Imp(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);
