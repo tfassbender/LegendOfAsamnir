@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -28,7 +29,14 @@ public class GlobalEventListener implements EventListener {
 	@SuppressWarnings("unchecked")
 	private void loadGlobalEvents() {
 		Json json = new Json();
-		events = json.fromJson(HashMap.class, GlobalEventConfig.class, Gdx.files.internal(GLOBAL_EVENTS_CONFIG_FILE));
+		Array<String> configFiles = json.fromJson(Array.class, String.class, Gdx.files.internal(GLOBAL_EVENTS_CONFIG_FILE));
+		
+		events = new HashMap<String, GlobalEventConfig>();
+		for (String configFile : configFiles) {
+			Map<String, GlobalEventConfig> configuredEvents = json.fromJson(HashMap.class, GlobalEventConfig.class, Gdx.files.internal(configFile));
+			
+			events.putAll(configuredEvents);
+		}
 	}
 	
 	@Override

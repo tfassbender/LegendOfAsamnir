@@ -1,0 +1,105 @@
+{
+	demoLevelEndReached: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demoLevelEnded,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Demo end reached",
+			displayText: "You've killed the boss and reached the end of this demo level.",
+		}
+	},
+	demoLevelEndReached_pickedItem: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demoLevelEnded,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: demoLevel_endItem,
+		}
+	},
+	demoLevel_startCutscene: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demoLevel_startCutscene,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demoLevelCutscene,
+		}
+	},
+	demoLevel_showText: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demoLevel_showText,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "First Text",
+			displayText: "First Text, that is shown in this cutscene.",
+			colorHeader: #FF0000
+		}
+	},
+	demoLevel_cutsceneEnds: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demoLevel_cutsceneEnds,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Demo cutscene event",
+			displayText: "Event fired from demo cutscene.",
+			colorHeader: #ff00ff
+		}
+	},
+	demoLevelChangeToNextMap: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: go_to_map_4,
+		},
+		executionType: CONDITIONAL_EVENT,
+		condition: {
+			conditionId: demoLevel_endItemCollected,
+			thenCase: {
+				type: EVENT,
+				eventConfig: {
+					executionType: CHANGE_MAP,
+					executionParameters: {
+						map: test_map_4,
+					}
+				}
+			},
+			elseCase: {
+				type: NO_EXECUTION,
+			}
+		}
+		executionParameters: {
+			map: test_map_4,
+		}
+	},
+	demoLevel_interactWithAdventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: adventurer,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Adventurer",
+			displayText: "Don't disturb me! I need to run arround!",
+		}
+	},
+	demoLevel_interactWithFemaleAdventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: adventurer_female,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Female Adventurer",
+			displayText: "Hello There...",
+			colorHeader: #ff00ff
+		}
+	},
+}

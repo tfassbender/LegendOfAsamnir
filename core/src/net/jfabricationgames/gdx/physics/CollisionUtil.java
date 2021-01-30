@@ -20,7 +20,8 @@ public abstract class CollisionUtil {
 			Object sensorUserData = CollisionUtil.getCollisionTypeUserData(collisionType, fixtureA, fixtureB);
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(collisionType, fixtureA, fixtureB);
 			
-			if (sensorUserData == collidingObject && collidingType.isAssignableFrom(sensorCollidingUserData.getClass())) {
+			if (sensorUserData == collidingObject && collidingType != null && sensorCollidingUserData != null
+					&& collidingType.isAssignableFrom(sensorCollidingUserData.getClass())) {
 				return (T) sensorCollidingUserData;
 			}
 		}
