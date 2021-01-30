@@ -44,11 +44,11 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		ai.setCharacter(this);
 		initializeInteractionAnimation();
 		
-		setImageOffset(typeConfig.imageOffsetX, typeConfig.imageOffsetY);
+		setImageOffset(typeConfig.graphicsConfig.imageOffsetX, typeConfig.graphicsConfig.imageOffsetY);
 	}
 	
 	private void initializeStates() {
-		stateMachine = new CharacterStateMachine(typeConfig.stateConfig, typeConfig.initialState, null);
+		stateMachine = new CharacterStateMachine(typeConfig.graphicsConfig.stateConfig, typeConfig.graphicsConfig.initialState, null);
 	}
 	
 	private void createAI() {
@@ -68,9 +68,9 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		if (animation != null) {
 			AnimationSpriteConfig spriteConfig = animation.getSpriteConfigCopy();
 			spriteConfig.x += (animation.getKeyFrame().getRegionWidth() * GameScreen.WORLD_TO_SCREEN
-					* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X + typeConfig.interactionMarkerOffsetX);
+					* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X + typeConfig.graphicsConfig.interactionMarkerOffsetX);
 			spriteConfig.y += (animation.getKeyFrame().getRegionHeight() * GameScreen.WORLD_TO_SCREEN
-					* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.interactionMarkerOffsetY);
+					* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.graphicsConfig.interactionMarkerOffsetY);
 			
 			return spriteConfig;
 		}
@@ -85,16 +85,17 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		
 		interactionSpriteConfig.x = animationSpriteConfig.x
 				+ (animation.getKeyFrame().getRegionWidth() * GameScreen.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
-						+ typeConfig.interactionMarkerOffsetX);
+						+ typeConfig.graphicsConfig.interactionMarkerOffsetX);
 		interactionSpriteConfig.y = animationSpriteConfig.y + (animation.getKeyFrame().getRegionHeight() * GameScreen.WORLD_TO_SCREEN
-				* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.interactionMarkerOffsetY);
+				* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.graphicsConfig.interactionMarkerOffsetY);
 	}
 	
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
 		return new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false).setCollisionType(PhysicsCollisionType.OBSTACLE)
 				.setDensity(10_000f) // use a very high density, so the NPC can (almost) not be moved by the player or other forces
-				.setLinearDamping(10f).setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(typeConfig.bodyWidth).setHeight(typeConfig.bodyHeight);
+				.setLinearDamping(10f).setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(typeConfig.graphicsConfig.bodyWidth)
+				.setHeight(typeConfig.graphicsConfig.bodyHeight);
 	}
 	
 	@Override

@@ -1,13 +1,18 @@
 {
-	animationsConfig: config/animation/npc/adventurer_female.json,
-	stateConfig: config/npc/states/adventurer_female.json,
-	initialState: idle,
-	aiConfig: {
-		type: BASE_AI
-	}
+	graphicsConfigFile: config/npc/graphics/adventurer_female.json
 	
-	imageOffsetX: 0f,
-	imageOffsetY: 0.2f,
+	aiConfig: {
+		type: PRE_DEFINED_MOVEMENT_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: move,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
 	
 	movingSpeed: 1f,
 	

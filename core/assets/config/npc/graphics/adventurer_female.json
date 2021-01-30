@@ -1,0 +1,14 @@
+{
+	animationsConfig: config/animation/npc/adventurer_female.json,
+	stateConfig: config/npc/states/adventurer_female.json,
+	initialState: idle,
+	
+	bodyWidth: 0.7f,
+	bodyHeight: 0.8f,
+	
+	imageOffsetX: 0f,
+	imageOffsetY: 0.2f,
+	
+	interactionMarkerOffsetX: 0f,
+	interactionMarkerOffsetY: 0f,
+}

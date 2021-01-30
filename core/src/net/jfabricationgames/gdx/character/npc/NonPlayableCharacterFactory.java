@@ -38,6 +38,11 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 		
 		for (Entry<String, String> config : typeConfigFiles.entries()) {
 			NonPlayableCharacterTypeConfig typeConfig = json.fromJson(NonPlayableCharacterTypeConfig.class, Gdx.files.internal(config.value));
+			if (typeConfig.graphicsConfigFile != null) {
+				typeConfig.graphicsConfig = json.fromJson(NonPlayableCharacterGraphicsConfig.class,
+						Gdx.files.internal(typeConfig.graphicsConfigFile));
+			}
+			
 			typeConfigs.put(config.key, typeConfig);
 		}
 	}
@@ -45,7 +50,7 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 	private void loadAnimations() {
 		AnimationManager animationManager = AnimationManager.getInstance();
 		for (NonPlayableCharacterTypeConfig config : typeConfigs.values()) {
-			animationManager.loadAnimations(config.animationsConfig);
+			animationManager.loadAnimations(config.graphicsConfig.animationsConfig);
 		}
 	}
 	
