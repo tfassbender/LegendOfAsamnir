@@ -83,9 +83,12 @@ public abstract class Enemy extends AbstractCharacter implements Hittable {
 	}
 	
 	/**
-	 * Create the {@link ArtificialIntelligence} that controls this enemy.
+	 * Create the {@link ArtificialIntelligence} that controls this enemy. The default implementation creates an AI from the configuration file, that
+	 * is referenced in the field typeConfig.aiConfig.
 	 */
-	protected abstract void createAI();
+	protected void createAI() {
+		createAiFromConfiguration();
+	}
 	
 	protected void createAiFromConfiguration() {
 		ArtificialIntelligenceConfig aiConfig = loadAiConfig();

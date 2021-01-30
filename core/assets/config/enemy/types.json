@@ -4,6 +4,7 @@
 		stateConfig: config/enemy/states/bat.json,
 		initialState: move,
 		attackConfig: config/enemy/attack/bat.json,
+		aiConfig: config/enemy/ai/bat.json,
 		
 		health: 1,
 		movingSpeed: 3,
@@ -20,6 +21,7 @@
 		stateConfig: config/enemy/states/gladiator.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/gladiator.json,
+		aiConfig: config/enemy/ai/gladiator.json,
 		
 		health: 35,
 		movingSpeed: 1.5
@@ -71,6 +73,7 @@
 		stateConfig: config/enemy/states/spider.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/spider.json,
+		aiConfig: config/enemy/ai/spider.json,
 		
 		health: 20,
 		movingSpeed: 2.0,
@@ -88,6 +91,7 @@
 		stateConfig: config/enemy/states/mimic_chest.json,
 		initialState: waiting,
 		attackConfig: config/enemy/attack/mimic_chest.json,
+		aiConfig: config/enemy/ai/mimic.json,
 		
 		health: 20,
 		movingSpeed: 2.0,
@@ -106,6 +110,7 @@
 		stateConfig: config/enemy/states/mimic_barrel.json,
 		initialState: waiting,
 		attackConfig: config/enemy/attack/mimic_barrel.json,
+		aiConfig: config/enemy/ai/mimic.json,
 		
 		health: 30,
 		movingSpeed: 2.0,
@@ -124,6 +129,7 @@
 		stateConfig: config/enemy/states/cobra.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/cobra.json,
+		aiConfig: config/enemy/ai/cobra.json,
 		
 		health: 20,
 		movingSpeed: 1.0,
@@ -141,6 +147,7 @@
 		stateConfig: config/enemy/states/fire_elemental.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/fire_elemental.json,
+		aiConfig: config/enemy/ai/elemental.json,
 		
 		health: 15,
 		movingSpeed: 1.5
@@ -157,6 +164,7 @@
 		stateConfig: config/enemy/states/ice_elemental.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/ice_elemental.json,
+		aiConfig: config/enemy/ai/elemental.json,
 		
 		health: 15,
 		movingSpeed: 1.5
@@ -173,6 +181,7 @@
 		stateConfig: config/enemy/states/imp.json,
 		initialState: idle,
 		attackConfig: config/enemy/attack/imp.json,
+		aiConfig: config/enemy/ai/imp.json,
 		
 		health: 20,
 		movingSpeed: 2.5,

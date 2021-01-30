@@ -51,7 +51,7 @@ public class ActionAI extends AbstractArtificialIntelligence {
 			return false;
 		}
 		
-		float distanceToTargetingPlayer = targetingPlayer.getPosition().cpy().sub(enemy.getPosition()).len();
+		float distanceToTargetingPlayer = targetingPlayer.getPosition().sub(enemy.getPosition()).len();
 		return distanceToTargetingPlayer >= minDistToEnemy && distanceToTargetingPlayer <= maxDistToEnemy;
 	}
 	

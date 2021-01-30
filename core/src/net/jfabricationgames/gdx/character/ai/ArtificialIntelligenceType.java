@@ -57,7 +57,9 @@ public enum ArtificialIntelligenceType {
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			
-			return new FollowAI(subAI, movingState, idleState);
+			FollowAI ai = new FollowAI(subAI, movingState, idleState);
+			ai.setMinDistanceToPlayer(aiConfig.minDistanceToTargetPlayer);
+			return ai;
 		}
 	},
 	PRE_DEFINED_MOVEMENT_AI {
@@ -82,7 +84,10 @@ public enum ArtificialIntelligenceType {
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			
-			return new RunAwayAI(subAI, movingState, idleState);
+			RunAwayAI ai = new RunAwayAI(subAI, movingState, idleState);
+			ai.setDistanceToStopRunning(aiConfig.distanceToStopRunning);
+			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			return ai;
 		}
 	},
 	
@@ -112,7 +117,9 @@ public enum ArtificialIntelligenceType {
 			CharacterState attackState = stateMachine.getState(aiConfig.stateNameAttack);
 			AttackTimer attackTimer = createAttackTimer(aiConfig.attackTimerConfig);
 			
-			return new FightAI(subAI, attackState, attackTimer, aiConfig.attackDistance);
+			FightAI ai = new FightAI(subAI, attackState, attackTimer, aiConfig.attackDistance);
+			ai.setMinDistanceToTargetPlayer(aiConfig.minDistanceToTargetPlayer);
+			return ai;
 		}
 	},
 	MIMIC_SUPRISE_AI {

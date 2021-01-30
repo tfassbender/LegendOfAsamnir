@@ -1,0 +1,31 @@
+{
+	type: FIGHT_AI,
+	
+	stateNameAttack: attack,
+	
+	attackTimerConfig: {
+		type: FIXED,
+		fixedTime: 0.3f,
+	},
+	attackDistance: 2f,
+	
+	subAI: {
+		type: RUN_AWAY_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: move,
+		
+		subAI: {
+			type: PRE_DEFINED_MOVEMENT_AI,
+			
+			stateNameMove: move,
+			stateNameIdle: move,
+			
+			useRelativePositions: true,
+			
+			subAI: {
+				type: BASE_AI,
+			}
+		}
+	}
+}

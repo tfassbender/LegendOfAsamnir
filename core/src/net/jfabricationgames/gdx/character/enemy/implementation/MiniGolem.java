@@ -24,9 +24,4 @@ public class MiniGolem extends Enemy {
 	protected void addAdditionalPhysicsParts() {
 		CharacterPhysicsUtil.addEnemySensor(body, 3f);
 	}
-	
-	@Override
-	protected void createAI() {
-		createAiFromConfiguration();
-	}
 }
