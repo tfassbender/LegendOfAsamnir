@@ -17,5 +17,6 @@ public class NonPlayableCharacterTypeConfig {
 	public boolean addSensor = true;
 	public float sensorRadius = 1f;
 	
+	public boolean interactionPossible = true;
 	public float movingSpeed = 1f;
 }

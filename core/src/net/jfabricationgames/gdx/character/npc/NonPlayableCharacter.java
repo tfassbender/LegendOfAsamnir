@@ -126,8 +126,9 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	}
 	
 	private boolean showInteractionIcon() {
-		return !interactionAnimation.isAnimationFinished() // the animation (to appear or disappear) is still playing 
-				|| interactionAnimation.getAnimation().getPlayMode() == PlayMode.NORMAL;// the interaction icon appeared and is to be shown (animation finished)
+		return typeConfig.interactionPossible && // 
+				(!interactionAnimation.isAnimationFinished() // the animation (to appear or disappear) is still playing 
+						|| interactionAnimation.getAnimation().getPlayMode() == PlayMode.NORMAL);// the interaction icon appeared and is to be shown (animation finished)
 	}
 	
 	@Override
@@ -218,7 +219,10 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	@Override
 	public void move(Vector2 delta) {
 		super.move(delta);
-		updateInteractionAnimationSpriteConfig();
+		
+		if (typeConfig.interactionPossible) {
+			updateInteractionAnimationSpriteConfig();
+		}
 	}
 	
 	@Override

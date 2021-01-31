@@ -12,6 +12,7 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [Globally used classes](#globally-used-classes)
 - [Inputs](#inputs)
 - [Enemies](#enemies)
+- [NPCs](#npcs)
 - [Attacks](#attacks)
 - [Events](#events)
 - [Conditions](#conditions)
@@ -28,9 +29,9 @@ The structure of the libGDX project is documented by [libGDX](https://libgdx.bad
 
 The main class of the project is the class [DwarfScrollerGame](core/src/net/jfabricationgames/gdx/DwarfScrollerGame.java), which is instantiated by the desctop project (see libGDX documentation for details). This class contains some config paths, initializes [global classes](#globally-used-classes) and sets the screen, so the execution is directed to the active screen (the first one will be the main menu).
 
-The screens, that handle the whole game (when the screen is active), are placed in the `screens` package. Here the [GameScreen](core/src/net/jfabricationgames/gdx/screens/GameScreen.java) class is the central class, that is called from the libGDX engine, on every render step.
+The screens, that handle the whole game (when the screen is active), are placed in the `screens` package. Here the [GameScreen](core/src/net/jfabricationgames/gdx/screens/game/GameScreen.java) class is the central class, that is called from the libGDX engine, on every render step.
 
-The playable character and it's movement is to be found in the `character` package. The [Dwarf](core/src/net/jfabricationgames/gdx/character/Dwarf.java) is the character, that is controlled by the player. The inputs, the player maked are handled in the [CharacterInputMovementHandler](core/src/net/jfabricationgames/gdx/character/CharacterInputMovementHandler.java), which uses the configurable input (explained in the [inputs section](#inputs)).
+The playable character and it's movement is to be found in the `character` package. The [Dwarf](core/src/net/jfabricationgames/gdx/character/player/implementation/Dwarf.java) is the character, that is controlled by the player. The inputs, the player maked are handled in the [CharacterInputProcessor](core/src/net/jfabricationgames/gdx/character/player/implementation/CharacterInputProcessor.java), which uses the configurable input (explained in the [inputs section](#inputs)).
 
 **Note:** All configuration json files might contain incorrect json syntax, because libGDX allows changes to the usuall json syntax, like adding comments to the files (see the [libGDX wiki documentation](https://github.com/libgdx/libgdx/wiki/Reading-and-writing-JSON) for more information)
 
@@ -52,15 +53,13 @@ The class [FontManager](core/src/net/jfabricationgames/gdx/text/FontManager.java
 
 ## Inputs
 
-Input handling in libGDX (as described in the [libGDX wiki](https://github.com/libgdx/libgdx/wiki/Input-handling) can be used quite easy, but can not be configured as a data-driven approach. Therefore the [input package](core/src/net/jfabricationgames/gdx/input) has the possibilities to configure the inputs in an xml file, and to query the inputs by configured names. The input configuration, that is used in the game is to be found in the [profile.xml](core/assets/config/input/profile.xml) file. The use of the configuration in code can be found in the [CharacterInputMovementHandler](core/src/net/jfabricationgames/gdx/character/CharacterInputMovementHandler.java) class. Because not all possibilities of the input configuration are used in the game, there is a second configuration file, that includes a detailed documentation on the configuration possibilities: [demo_config.xml](core/assets/config/input/demo_profile.xml)
+Input handling in libGDX (as described in the [libGDX wiki](https://github.com/libgdx/libgdx/wiki/Input-handling) can be used quite easy, but can not be configured as a data-driven approach. Therefore the [input package](core/src/net/jfabricationgames/gdx/input) has the possibilities to configure the inputs in an xml file, and to query the inputs by configured names. The input configuration, that is used in the game is to be found in the [profile.xml](core/assets/config/input/profile.xml) file. The use of the configuration in code can be found in the [CharacterInputProcessor](core/src/net/jfabricationgames/gdx/character/player/implementation/CharacterInputProcessor.java) class. Because not all possibilities of the input configuration are used in the game, there is a second configuration file, that includes a detailed documentation on the configuration possibilities: [demo_config.xml](core/assets/config/input/demo_profile.xml)
 
 ## Enemies
 
-The code for the enemies is divided into several packages. The base class for every enemy in the game is the abstract class [Enemy](core/src/net/jfabricationgames/gdx/enemy/Enemy.java). This class keeps track of all information of the enemeis, like their AI, the states, physics bodies and configurations. An Enemy instance is added to the map by the [TiledMapLoader](core/src/net/jfabricationgames/gdx/map/TiledMapLoader.java), which is explained in the [Maps](#maps) section. This loader uses the [EnemyFactory](core/src/net/jfabricationgames/gdx/enemy/EnemyFactory.java) class to create all enemies. Therefore the enemies that are mentioned in the map properties have to be added in the EnemyFactory, for the enemies to be created.
+The code for the enemies is divided into several packages. The base class for every enemy in the game is the class [Enemy](core/src/net/jfabricationgames/gdx/character/enemy/Enemy.java). This class keeps track of all information of the enemeis, like their AI, the states, physics bodies and configurations. An Enemy instance is added to the map by the [TiledMapLoader](core/src/net/jfabricationgames/gdx/map/TiledMapLoader.java), which is explained in the [Maps](#maps) section. This loader uses the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) class to create all enemies. Therefore the enemies that are mentioned in the map properties have to be added in the EnemyFactory, for the enemies to be created.
 
 **Note:** The EnemyFactory class has to be expanded for every new enemy type that is created. The names used for the types of enemies have to be the same as referenced in the map properties.
-
-Because an enemy type is a difficult object, the Enemy class has some abstract methods, that have to be implemented in an enemy implementation. These methods are used to create the physics body of the enemy and create the AI. These parts have to be done in code. All other parts (like graphics, animations, sound) can be configured using json configuration files. Examples of enemy classes can be found in the [enemy/implementation](core/src/net/jfabricationgames/gdx/enemy/implementation) package
 
 Although parts of the enemy implementations must be designed inside the classes, some parts of the enemies are configured in a json configuration file. There is one file called [types.json](core/assets/config/enemy/types.json) for all enemy types, that keeps track of some configurations, and the configuration files, that are used to further configure the enemy's AI and states.
 
@@ -70,15 +69,56 @@ The animations that an enemy can show are configured in json configuration files
 
 ### AI
 
-Most enemies act slightly different, but have many things in common. But not all enemies will make use of all types of AIs. There might be AI's that follow the player, while others just stand still and throw things to the player. Therefore the AI of the enemies is designed, using a [decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) and a [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern).
+Most enemies act slightly different, but have many things in common. But not all enemies will make use of all types of AIs. There might be AI's that follow the player, while others just stand still and throw things at the player. Therefore the AI of the enemies is designed, using a [decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) and a [chain of responsibility pattern](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern).
 
-An example of this approach can be found in the [Gladiator](core/src/net/jfabricationgames/gdx/enemy/implementation/Gladiator.java) class, which is an implementation of an enemy. The AI is build of a [BaseAI](core/src/net/jfabricationgames/gdx/enemy/ai/BaseAI.java), that is surrounded by a [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/PreDefinedMovementAI.java), surrounded by a [FollowAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/FollowAI.java), surrounded by a [FightAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/FightAI.java). 
+#### Configuration
+
+Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
+
+Most enemy types can be configured in these files, because they use the common AI types. Some enemies are to specialized to be build by a configuration file. The AI of these enemies is created in the code. An example for a class that creates it's AI in the code is [Minotaur](core/src/net/jfabricationgames/gdx/character/enemy/implementation/Minotaur.java). **Note:** A subclass of Enemy, that defines it's AI in the class code needs to be added to the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) code, to load the correct class when instantiating the enemy.
+
+An example of an enemy type that is configured is the Gladiator, whichs AI configuration looks like this:
+
+```javascript
+{
+	type: FIGHT_AI,
+	
+	stateNameAttack: attack,
+	
+	attackTimerConfig: {
+		type: FIXED,
+		fixedTime: 1f,
+	},
+	attackDistance: 1.25f,
+	
+	subAI: {
+		type: FOLLOW_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: idle,
+		
+		subAI: {
+			type: PRE_DEFINED_MOVEMENT_AI,
+			
+			stateNameMove: move,
+			stateNameIdle: idle,
+			
+			useRelativePositions: true,
+			
+			subAI: {
+				type: BASE_AI,
+			}
+		}
+	}
+}
+```
+The AI is build of a [BaseAI](core/src/net/jfabricationgames/gdx/character/ai/BaseAI.java), that is surrounded by a [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/PreDefinedMovementAI.java), surrounded by a [FollowAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/FollowAI.java), surrounded by a [FightAI](core/src/net/jfabricationgames/gdx/character/enemy/ai/FightAI.java). 
 
 These AI's will cause the following behaviour for the Gladiator:
-- The [BaseAI](core/src/net/jfabricationgames/gdx/enemy/ai/BaseAI.java) is (obviously) the base for all AIs, because the chain has to end somewhere.
-- The [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/PreDefinedMovementAI.java) will make the gladiator move along a pre-defined way (defined in the map properties), as long as there is no higher AI, that says something else
-- The [FollowAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/FollowAI.java) will make the gladiator follow the player if he is in range (and detected by the enemies box2d sensor). This AI is positioned higher as the PreDefinedMovementAI in the chain of responsibility. Therefore the gladiator will priorize following the player higher than moving along his pre-defined way.
-- The [FightAI](core/src/net/jfabricationgames/gdx/enemy/ai/implementation/FightAI.java) will make the gladiator attack the player if he is near enough.
+- The [BaseAI](core/src/net/jfabricationgames/gdx/character/ai/BaseAI.java) is (obviously) the base for all AIs, because the chain has to end somewhere.
+- The [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/PreDefinedMovementAI.java) will make the gladiator move along a pre-defined way (defined in the map properties), as long as there is no higher AI, that says something else
+- The [FollowAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/FollowAI.java) will make the gladiator follow the player if he is in range (and detected by the enemies box2d sensor). This AI is positioned higher as the PreDefinedMovementAI in the chain of responsibility. Therefore the gladiator will priorize following the player higher than moving along his pre-defined way.
+- The [FightAI](core/src/net/jfabricationgames/gdx/character/enemy/ai/FightAI.java) will make the gladiator attack the player if he is near enough.
 
 The following image shows the call hierarchy of the AI classes:
 
@@ -96,6 +136,38 @@ An enemy can be in different states, which can be interrupted by other states, o
 - **interruptingStates:** A list of states, that can interrupt this state. If a state that is not defined in this list tries to interrupt this state, the state will not be changed. Examples for this list would be an `idle` state, which usually can be interrupted by every other state, or a `die` state, which probably can't be interrupted by any other state (see the [gladiator.json](core/assets/config/animation/enemy/gladiator.json) config file).
 - **flipAnimationToMovingDirection:** Indicates whether the animation images of this state should be flipped to follow the moving direction (e.g. for the `move` state, so the enemy will not run backwards). The default value of this property is `true`.
 - **flipAnimationOnEnteringOnly:** Indicates whether the animation should be flipped to the current direction, only once when entering the state. This can be usefull e.g. for the `die` state, because the direction of this animation usually doesn't change.
+
+## NPCs
+
+NPCs can be all types of characters. They are similar to [Enemies](#enemies), except that they are restricted and can not attack the player or other enemies. In addition to the other enemy functionalities, the player can interact with NPCs by moving close to them and clicking the interact button (just like he would interact with [Interactive Objects](#interactive-objects)).
+
+Since there can be many NPCs in a game, the configuration files [types.json](core/assets/config/npc/types.json) defines a map of all NPCs and their configuration file. An example of an NPC configuration file is [adventurer.json](core/assets/config/npc/adventurer.json):
+
+```javascript
+{
+	graphicsConfigFile: config/npc/graphics/adventurer.json
+	 
+	aiConfig: {
+		type: PRE_DEFINED_MOVEMENT_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: move,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
+	
+	interactionPossible: true,
+	movingSpeed: 1f,
+	
+	interactionEventId: adventurer,
+}
+```
+
+The NPC's main configuration file references a `graphicsConfigurationFile`, because many NPCs can use one graphics configuration, but define different behaviors. The NPCs behavior is defined in the `aiConfig` field, that defines the build up of an AI like explained in the [AI](#ai) section of the [Enemies](#enemies) description. The `interactionEventId` defines the event parameter, that is added to the [Event](#events), that is fired when the player interacts with the NPC. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the event is `NPC_INTERACTION`. These events can be consumed by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), if they are defined in a global event listener config file, that is referenced by the main global event config file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json).
 
 ## Attacks
 
@@ -144,7 +216,7 @@ Some events are configured in the configuration file [events.json](core/assets/c
 
 ### Global Events
 
-Events that are not created in code, but in configuration (e.g. when touching an event object on the map) can be handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java). This EventListener listens to all fired events and compares them to the event config of the events, that are configured in the JSON file [globalListenedEvents](core/assets/config/events/globalListenedEvents.json). If they match, the event is executed (e.g. to show a text on the screen when the player reaches a position or picks up a special item. See [Event Items](#event-items) and [Event Objects](#event-objects)). The *executionType*, that is configured in the global events is a value of the [GlobalEventExecutionType](core/src/net/jfabricationgames/gdx/event/global/GlobalEventExecutionType.java) enum, that defines how the event is to be executed.
+Events that are not created in code, but in configuration (e.g. when touching an event object on the map) can be handled by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java). This EventListener listens to all fired events and compares them to the event config of the events, that are configured in a global event configuration file, that is referenced from the JSON file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json). If they match, the event is executed (e.g. to show a text on the screen when the player reaches a position or picks up a special item. See [Event Items](#event-items) and [Event Objects](#event-objects)). The *executionType*, that is configured in the global events is a value of the [GlobalEventExecutionType](core/src/net/jfabricationgames/gdx/event/global/GlobalEventExecutionType.java) enum, that defines how the event is to be executed.
 
 ### Conditional Events
 
@@ -352,7 +424,7 @@ Interactive Objects are used to let the player interact with the map. They use a
 
 ### Locked Objects
 
-A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a `boolean` value. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/container/data/KeyItem.java) class.
+A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a `boolean` value. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/player/container/data/KeyItem.java) class.
 
 ### Spawn Points
 

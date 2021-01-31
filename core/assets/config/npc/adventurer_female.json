@@ -14,6 +14,7 @@
 		}
 	},
 	
+	interactionPossible: true,
 	movingSpeed: 1f,
 	
 	interactionEventId: adventurer_female,
