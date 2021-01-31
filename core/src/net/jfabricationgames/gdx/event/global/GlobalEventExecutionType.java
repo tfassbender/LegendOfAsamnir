@@ -15,16 +15,18 @@ public enum GlobalEventExecutionType {
 		private static final String MAP_KEY_DISPLAY_TEXT = "displayText";
 		private static final String MAP_KEY_DISPLAY_TEXT_HEADER = "displayTextHeader";
 		private static final String MAP_KEY_COLOR_HEADER = "colorHeader";
+		private static final String MAP_KEY_SHOW_NEXT_PAGE_ICON = "showNextPageIcon";
 		
 		@Override
 		public void execute(GlobalEventConfig eventConfig) {
 			String displayText = eventConfig.executionParameters.get(MAP_KEY_DISPLAY_TEXT);
 			String displayTextHeader = eventConfig.executionParameters.get(MAP_KEY_DISPLAY_TEXT_HEADER);
 			String colorHeader = eventConfig.executionParameters.get(MAP_KEY_COLOR_HEADER);
+			boolean showNextPageIcon = Boolean.parseBoolean(eventConfig.executionParameters.get(MAP_KEY_SHOW_NEXT_PAGE_ICON));
 			
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 			onScreenTextBox.setHeaderText(displayTextHeader, GameUtils.getColorFromRGB(colorHeader, Color.RED));
-			onScreenTextBox.setText(displayText);
+			onScreenTextBox.setText(displayText, showNextPageIcon);
 		}
 	},
 	START_CUTSCENE {

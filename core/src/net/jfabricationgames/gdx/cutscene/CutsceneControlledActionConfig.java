@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.cutscene;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
 public class CutsceneControlledActionConfig {
 	
@@ -13,6 +14,8 @@ public class CutsceneControlledActionConfig {
 	
 	public String globalEvent;
 	public boolean waitForEventToFinish; // only works for events that show an on-screen text; others will wait infinitely
+	
+	public ObjectMap<String, String> executionParameters;
 	
 	public String controlledUnitId;
 	public String controlledUnitState;

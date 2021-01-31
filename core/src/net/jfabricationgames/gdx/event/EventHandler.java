@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.event.global.GlobalEventConfig;
 import net.jfabricationgames.gdx.event.global.GlobalEventListener;
 
 public class EventHandler {
@@ -44,6 +45,10 @@ public class EventHandler {
 			EventListener listener = listeners.get(i);
 			listener.handleEvent(event);
 		}
+	}
+	
+	public void executeGeneratedEvent(GlobalEventConfig generatedEvent) {
+		generatedEvent.executionType.execute(generatedEvent);
 	}
 	
 	public void registerEventListener(EventListener listener) {

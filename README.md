@@ -151,7 +151,7 @@ Since there can be many NPCs in a game, the configuration files [types.json](cor
 		type: PRE_DEFINED_MOVEMENT_AI,
 		
 		stateNameMove: move,
-		stateNameIdle: move,
+		stateNameIdle: idle,
 		
 		useRelativePositions: true,
 		
@@ -294,6 +294,7 @@ A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/C
 - **executionDelayInSeconds:** Defines the time that is waited before starting the action. The default value is 0.
 - **globalEvent:** A String value that is added to an [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is fired, when this action is executed. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the EventConfig that is fired is `CUTSCENE_EVENT`. This event can be registered by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java) that handles the event (see [Global Events](#global-events) for more details on how global events work).
 - **waitForEventToFinish:** A boolean flag, that defines whether the execution of this action should wait for the fired event to be finished. This will only work for events that show text on the screen. The event (and this action) then end as soon as the text on the screen is confirmed by the user. For other events this will not work, but wait infinitely.
+- **executionParameters:** Parameters for the execution of generated global events (used to create `SHOW_ON_SCREEN_TEXT` events).
 - **controlledUnitId:** The id of a unit, that is controlled by this cutscene. This id needs to match a `unitId` of a unit in the current game map. The unit id is added to the map object with the parameter `unitId` in the map properties. The player character can always be reached by the unit id `PLAYER`.
 - **controlledUnitState:** The state to which a controlled enemy is changed. This parameter has to match a state that is defined in the enemy's config file (see [Enemy States](#states)).
 - **controlledUnitAttackTargetDirection:** A direction vector to which the attack of a unit is directed (if the state to which was changed is an attack state).

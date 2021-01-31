@@ -5,7 +5,7 @@
 		type: PRE_DEFINED_MOVEMENT_AI,
 		
 		stateNameMove: move,
-		stateNameIdle: move,
+		stateNameIdle: idle,
 		
 		useRelativePositions: true,
 		

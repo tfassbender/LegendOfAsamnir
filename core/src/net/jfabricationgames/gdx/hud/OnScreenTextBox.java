@@ -65,6 +65,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	private String text;
 	private String headerText;
 	private Color headerColor = Color.RED;
+	private boolean showNextPageIcon;
 	
 	private int firstDisplayedLine = 0;
 	private int[] displayedTextIndices;
@@ -146,7 +147,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		screenTextWriter.drawText(text, textBoxX + textOffsetX, textBoxY + textBoxHeight - textOffsetY, displayedTextIndices[0],
 				displayedTextIndices[0] + displayedCharacters, textWidth, Align.left, true);
 		
-		if (hasNextPage() && displayNextPageIndicator) {
+		if ((hasNextPage() || showNextPageIcon) && displayNextPageIndicator) {
 			drawNextPageIndicator();
 		}
 		
@@ -163,7 +164,12 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	public void setText(String text) {
+		setText(text, false);
+	}
+	
+	public void setText(String text, boolean showNextPageIcon) {
 		this.text = text;
+		this.showNextPageIcon = showNextPageIcon;
 		calculateTextLayout();
 		calculateDisplayedText();
 	}

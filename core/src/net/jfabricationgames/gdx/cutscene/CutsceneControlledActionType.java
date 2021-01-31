@@ -7,4 +7,5 @@ public enum CutsceneControlledActionType {
 	MOVE_CAMERA, //
 	EVENT, //
 	CHANGE_STATE, //
+	SHOW_ON_SCREEN_TEXT,
 }

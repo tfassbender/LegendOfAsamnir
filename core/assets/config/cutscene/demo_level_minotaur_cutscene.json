@@ -77,9 +77,15 @@
 			],
 		},
 		showText: {
-			type: EVENT,
+			type: SHOW_ON_SCREEN_TEXT,
 			
-			globalEvent: demoLevel_showText,
+			executionParameters: {
+				displayTextHeader: "First Text",
+				displayText: "First Text, that is shown in this cutscene.",
+				colorHeader: #FF0000,
+				showNextPageIcon: true,
+			}
+			
 			waitForEventToFinish: true,
 			
 			executionDelayInSeconds: 1f,
@@ -89,7 +95,13 @@
 			]
 		},
 		end: {
-			type: EVENT,
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Demo cutscene event",
+				displayText: "Event fired from demo cutscene.",
+				colorHeader: #ff00ff
+			}
 			
 			globalEvent: demoLevel_cutsceneEnds,
 			waitForEventToFinish: true,

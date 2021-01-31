@@ -17,6 +17,8 @@ public abstract class CutsceneActionFactory {
 				return new CutsceneMoveCameraAction(actionConfig, handler.createIsUnitMovingFunction());
 			case WAIT:
 				return new CutsceneWaitAction(actionConfig);
+			case SHOW_ON_SCREEN_TEXT:
+				return new CutsceneShowOnScreenTextAction(actionConfig);
 			default:
 				throw new IllegalStateException("Unexpected CutsceneControlledActionType in parameter actionConfig: " + actionConfig.type);
 		}
