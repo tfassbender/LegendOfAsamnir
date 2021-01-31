@@ -1,4 +1,5 @@
 [
 	"config/cutscene/demo_level_minotaur_cutscene.json",
+	"config/cutscene/demo_level_talk_to_female_adventurer.json",
 	"config/cutscene/tutorial_minotaur_cutscene.json",
 ]

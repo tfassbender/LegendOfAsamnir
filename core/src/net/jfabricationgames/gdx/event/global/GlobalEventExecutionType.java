@@ -1,7 +1,9 @@
 package net.jfabricationgames.gdx.event.global;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -27,6 +29,35 @@ public enum GlobalEventExecutionType {
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 			onScreenTextBox.setHeaderText(displayTextHeader, GameUtils.getColorFromRGB(colorHeader, Color.RED));
 			onScreenTextBox.setText(displayText, showNextPageIcon);
+		}
+	},
+	SHOW_PLAYER_CHOICE {
+		
+		private static final String MAP_KEY_CHOICE_ID = "choiceId";
+		private static final String MAP_KEY_HEADER = "header";
+		private static final String MAP_KEY_DESCRIPTION = "description";
+		private static final String MAP_KEY_PREFIX_OPTION = "option_";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			if (eventConfig.parameterObject != null && eventConfig.parameterObject instanceof PlayerChoice) {
+				OnScreenTextBox.getInstance().showPlayerChoice((PlayerChoice) eventConfig.parameterObject);
+			}
+			else {
+				PlayerChoice playerChoice = new PlayerChoice();
+				playerChoice.choiceId = eventConfig.executionParameters.get(MAP_KEY_CHOICE_ID);
+				playerChoice.header = eventConfig.executionParameters.get(MAP_KEY_HEADER);
+				playerChoice.description = eventConfig.executionParameters.get(MAP_KEY_DESCRIPTION);
+				playerChoice.options = new Array<>();
+				for (int i = 0; i < PlayerChoice.MAX_OPTIONS; i++) {
+					String option = eventConfig.executionParameters.get(MAP_KEY_PREFIX_OPTION + i);
+					if (option != null) {
+						playerChoice.options.add(option);
+					}
+				}
+				
+				OnScreenTextBox.getInstance().showPlayerChoice(playerChoice);
+			}
 		}
 	},
 	START_CUTSCENE {
@@ -57,7 +88,7 @@ public enum GlobalEventExecutionType {
 		}
 	},
 	SET_ITEM {
-
+		
 		private static final String MAP_KEY_ITEM_NAME = "item";
 		
 		@Override

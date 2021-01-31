@@ -71,12 +71,9 @@
 			eventType: NPC_INTERACTION,
 			stringValue: adventurer_female,
 		}
-		executionType: SHOW_ON_SCREEN_TEXT,
+		executionType: START_CUTSCENE,
 		executionParameters: {
-			displayTextHeader: "Female Adventurer",
-			displayText: "Hello There...",
-			colorHeader: #ff00ff,
-			showNextPageIcon: true,
+			cutsceneId: demoLevel_talkToFemaleAdventurer,
 		}
 	},
 }

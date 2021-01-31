@@ -1,0 +1,65 @@
+{
+	id: demoLevel_talkToFemaleAdventurer,
+	controlledActions: {
+		greeting: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "Hello There...",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				answer,
+			]
+		},
+		answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: demoLevel_talkToFemaleAdventurer_choice,
+				
+				header: "Dwarf",
+				description: "What do you want to answer?"
+				options: [
+					"Whasuuuuuuuup?",
+					"General Kenobi..."
+				],
+			},
+			choiceOptionExecutions: [
+				answer_wrong,
+				answer_right,
+			]
+		},
+		answer_wrong: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "Nothing mucht, you know ... just chilling ... killing ...",
+				colorHeader: #FF00FF,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		answer_right: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "Correct answer! You've won... absolutely nothing! Congratulations!",
+				colorHeader: #FF00FF,
+			}
+			
+			waitForEventToFinish: true,
+		}
+	}
+}

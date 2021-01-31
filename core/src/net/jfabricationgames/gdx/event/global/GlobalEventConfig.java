@@ -9,6 +9,8 @@ public class GlobalEventConfig {
 	
 	public EventConfig event;
 	public GlobalEventExecutionType executionType;
-	public ObjectMap<String, String> executionParameters;
 	public ConditionalExecution condition;
+	
+	public ObjectMap<String, String> executionParameters;
+	public Object parameterObject;
 }

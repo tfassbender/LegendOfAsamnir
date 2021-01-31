@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
+
 public class CutsceneControlledActionConfig {
 	
 	public CutsceneControlledActionType type;
@@ -14,6 +16,9 @@ public class CutsceneControlledActionConfig {
 	
 	public String globalEvent;
 	public boolean waitForEventToFinish; // only works for events that show an on-screen text; others will wait infinitely
+	
+	public PlayerChoice choice;
+	public Array<String> choiceOptionExecutions;
 	
 	public ObjectMap<String, String> executionParameters;
 	
