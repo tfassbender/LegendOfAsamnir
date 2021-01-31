@@ -255,7 +255,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		return false;
 	}
 	
-	private boolean showsText() {
+	public boolean showsText() {
 		return text != null;
 	}
 	

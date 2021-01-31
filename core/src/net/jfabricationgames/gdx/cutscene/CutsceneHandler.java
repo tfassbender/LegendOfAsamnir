@@ -16,6 +16,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.map.GameMap;
 
 public class CutsceneHandler implements EventListener {
@@ -56,7 +57,7 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	public boolean isCutsceneActive() {
-		return activeCutsceneId != null;
+		return activeCutsceneId != null || OnScreenTextBox.getInstance().showsText();
 	}
 	
 	public boolean isCameraControlledByCutscene() {
