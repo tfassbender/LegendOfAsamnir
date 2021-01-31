@@ -20,7 +20,7 @@
 			displayTextHeader: "Signboards",
 			displayText: "You can interact with signboards to read the text by moving close to them and pressing the E key or the controller button Y. Also press the E key or the controller button Y to close the message boxes or make the text appear faster.",
 		}
-	}
+	},
 	pickedUpAxe: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -31,7 +31,17 @@
 			displayTextHeader: "Mighty Battle Axe",
 			displayText: "It's dangerous to go alone! Take this.",
 		}
-	}
+	},
+	tutorialLevel_talkToFemaleAdventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: tutorial_level_adventurer_female,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: tutorialLevel_talkToFemaleAdventurer,
+		}
+	},
 	tutorialLevel_startMinotaurCutscene: {
 	    event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -41,5 +51,5 @@
 		executionParameters: {
 			cutsceneId: tutorialLevel_minotaurCutscene,
 		}
-	}
+	},
 }

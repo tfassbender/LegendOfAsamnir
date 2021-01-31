@@ -8,8 +8,8 @@ public class PlayerChoice {
 	
 	public String choiceId;
 	
-	public String header;
-	public String headerColor;
-	public String description;
+	public String header = "";
+	public String headerColor = "#FF0000";
+	public String description = "";
 	public Array<String> options;
 }

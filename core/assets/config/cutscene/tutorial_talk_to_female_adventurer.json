@@ -1,0 +1,152 @@
+{
+	id: tutorialLevel_talkToFemaleAdventurer,
+	controlledActions: {
+		greeting: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Greetings brave adventurer! I am an adventurer too, and searching for mighty enemies. There seem to be many monsters out in these lands, but I can't reach them, because the way seems to be blocked by some strange magical door. We need to find a key to unlock it, to get further.",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				question__greeting,
+			],
+		},
+		question__greeting: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: demoLevel_talkToFemaleAdventurer_choice,
+				
+				header: "Dwarf",
+				options: [
+					"I got an axe. That'll do.",
+					"I'll search for the key",
+					"Why don't you search for the key?"
+				],
+			},
+			choiceOptionExecutions: [
+				answer__destroy_door,
+				answer__i_will_search,
+				answer__do_it_yourself,
+			],
+		},
+		answer__destroy_door: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "I fear this door's magic is too strong. I already tried to destroy it, but I couldn't. Maybe you are strong enough... Go on and try.",
+				colorHeader: #FF00FF,
+			},
+			
+			waitForEventToFinish: true,
+		},
+		answer__i_will_search: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "Thank you, brave warrior. I'll wait for your victorious return.",
+				colorHeader: #FF00FF,
+			},
+			
+			waitForEventToFinish: true,
+		},
+		answer__do_it_yourself: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "You want to send out a lady on a dangerous quest, while waiting here?! I thought you would be a brave warrior on a mighty quest... but maybe I was wrong...",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				question__are_you_no_warrior,
+			],
+		},
+		question__are_you_no_warrior: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: demoLevel_talkToFemaleAdventurer_choice_2,
+				
+				header: "Dwarf",
+				options: [
+					"Fine. I'll search for the key",
+					"Aren't you an adventurer too?",
+				],
+			},
+			choiceOptionExecutions: [
+				answer__i_will_search,
+				answer__arent_you_an_adventurer_too,
+			],
+		},
+		answer__arent_you_an_adventurer_too: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "I am the breavest adventurer of my tribe!!! I fear nothing!!!",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				answer__arent_you_an_adventurer_too__continued,
+			],
+		},
+		answer__arent_you_an_adventurer_too__continued: {
+			 type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "... except ... these bats, that are guarding the key in the south. I just don't like bats. So would a mighty and brave warrior like you please help me to kill the bats and find the key, so we both can proceed our adventurs?",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				question__could_you_please,
+			],
+		},
+		question__could_you_please: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: demoLevel_talkToFemaleAdventurer_choice_3,
+				
+				header: "Dwarf",
+				options: [
+					"Fear not! I'll slay these dark creatures!",
+					"Fine. I'll do it",
+				],
+			},
+			choiceOptionExecutions: [
+				answer__i_will_search,
+				answer__i_will_search,
+			],
+		},
+	}
+}

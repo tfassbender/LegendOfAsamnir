@@ -1,0 +1,12 @@
+{
+	graphicsConfigFile: config/npc/graphics/adventurer_female.json
+	
+	aiConfig: {
+		type: BASE_AI,
+	},
+	
+	interactionPossible: true,
+	movingSpeed: 1f,
+	
+	interactionEventId: tutorial_level_adventurer_female,
+}

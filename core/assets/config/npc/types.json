@@ -1,4 +1,5 @@
 {
 	adventurer: config/npc/adventurer.json,
 	adventurer_female: config/npc/adventurer_female.json,
+	tutorial_level_adventurer_female: config/npc/tutorial_level_adventurer_female.json,
 }

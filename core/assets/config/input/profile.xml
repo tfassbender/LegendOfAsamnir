@@ -102,7 +102,7 @@
 				</controller>
 			</action>
 			
-			<action name="choice_up">
+			<action name="choice_down">
 				<key code="S" />
 				<controller player="1">
 					<pov directions="south southWest southEast" />

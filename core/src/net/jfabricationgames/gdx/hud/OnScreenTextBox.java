@@ -149,7 +149,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	public void showPlayerChoice(PlayerChoice playerChoice) {
-		Color headerColor = GameUtils.getColorFromRGB(playerChoice.headerColor);
+		Color headerColor = GameUtils.getColorFromRGB(playerChoice.headerColor, Color.RED);
 		setHeaderText(playerChoice.header, headerColor);
 		
 		playerChoiceRenderer.setPlayerChoice(playerChoice);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="885">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="886">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/tutorial.json"/>
@@ -1145,6 +1145,9 @@
     <property name="fastTravelPointId" value="tutorial_debug_1"/>
     <property name="fastTravelPointName" value="debug_1"/>
    </properties>
+   <point/>
+  </object>
+  <object id="885" name="npc.tutorial_level_adventurer_female" x="400" y="1046">
    <point/>
   </object>
  </objectgroup>
