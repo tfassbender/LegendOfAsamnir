@@ -57,7 +57,7 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	public boolean isCutsceneActive() {
-		return activeCutsceneId != null || OnScreenTextBox.getInstance().showsText();
+		return activeCutsceneId != null || OnScreenTextBox.getInstance().isDisplaying();
 	}
 	
 	public boolean isCameraControlledByCutscene() {

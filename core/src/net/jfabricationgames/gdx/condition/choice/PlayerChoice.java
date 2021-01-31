@@ -9,6 +9,7 @@ public class PlayerChoice {
 	public String choiceId;
 	
 	public String header;
+	public String headerColor;
 	public String description;
 	public Array<String> options;
 }

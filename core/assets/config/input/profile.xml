@@ -93,6 +93,22 @@
 					<button code="7" />
 				</controller>
 			</action>
+			
+			<action name="choice_up">
+				<key code="W" />
+				<controller player="1">
+					<pov directions="north northWest northEast" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</action>
+			
+			<action name="choice_up">
+				<key code="S" />
+				<controller player="1">
+					<pov directions="south southWest southEast" />
+					<axis code="0" threshold="0.5" />
+				</controller>
+			</action>
 		</actions>
 		
 		<controllerAxes>
