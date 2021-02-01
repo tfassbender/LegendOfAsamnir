@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
+import net.jfabricationgames.gdx.condition.execution.ConditionalExecution;
 
 public class CutsceneControlledActionConfig {
 	
@@ -19,6 +20,9 @@ public class CutsceneControlledActionConfig {
 	
 	public PlayerChoice choice;
 	public Array<String> choiceOptionExecutions;
+	
+	public ConditionalExecution condition;
+	public ObjectMap<String, String> conditionOptionExecutions;
 	
 	public ObjectMap<String, String> executionParameters;
 	

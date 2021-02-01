@@ -21,6 +21,8 @@ public abstract class CutsceneActionFactory {
 				return new CutsceneShowOnScreenTextAction(actionConfig);
 			case PLAYER_CHOICE:
 				return new CutscenePlayerChoiceAction(actionConfig);
+			case CONDITION:
+				return new CutsceneConditionAction(actionConfig);
 			default:
 				throw new IllegalStateException("Unexpected CutsceneControlledActionType in parameter actionConfig: " + actionConfig.type);
 		}

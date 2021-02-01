@@ -20,4 +20,5 @@ public enum EventType {
 	SET_ITEM, //
 	NPC_INTERACTION, //
 	PLAYER_CHOICE, //
+	CUTSCENE_CONDITION, //
 }

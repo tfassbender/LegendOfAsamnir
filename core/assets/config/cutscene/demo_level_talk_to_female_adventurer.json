@@ -52,15 +52,51 @@
 			waitForEventToFinish: true,
 		},
 		answer_right: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demoLevel_endItemCollected,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: answer_condition_met,
+				condition_not_met: answer_condition_not_met,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		answer_condition_met: {
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
 				displayTextHeader: "Female Adventurer",
-				displayText: "Correct answer! You've won... absolutely nothing! Congratulations!",
+				displayText: "You already killed the boss and picked up the demo end item.",
 				colorHeader: #FF00FF,
 			}
 			
 			waitForEventToFinish: true,
-		}
+		},
+		answer_condition_not_met: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Female Adventurer",
+				displayText: "You haven't met the boss yet?",
+				colorHeader: #FF00FF,
+			}
+			
+			waitForEventToFinish: true,
+		},
 	}
 }

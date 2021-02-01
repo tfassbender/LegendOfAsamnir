@@ -1,9 +1,17 @@
 package net.jfabricationgames.gdx.condition.execution;
 
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.global.GlobalEventConfig;
 
 public enum ConditionExecutableType {
 	
+	NO_EXECUTION {
+		
+		@Override
+		public void execute(ConditionExecutable conditionExecutable) {}
+	},
 	CONDITION {
 		
 		@Override
@@ -19,10 +27,15 @@ public enum ConditionExecutableType {
 			event.executionType.execute(event);
 		}
 	},
-	NO_EXECUTION {
+	CUTSCENE {
+		
+		private static final String MAP_KEY_CONDITION_CASE = "conditionCase";
 		
 		@Override
-		public void execute(ConditionExecutable conditionExecutable) {}
+		public void execute(ConditionExecutable conditionExecutable) {
+			String conditionCase = conditionExecutable.executionParameters.get(MAP_KEY_CONDITION_CASE);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CUTSCENE_CONDITION).setStringValue(conditionCase));
+		}
 	};
 	
 	public abstract void execute(ConditionExecutable conditionExecutable);

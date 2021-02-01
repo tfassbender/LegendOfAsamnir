@@ -9,4 +9,5 @@ public enum CutsceneControlledActionType {
 	CHANGE_STATE, //
 	SHOW_ON_SCREEN_TEXT, //
 	PLAYER_CHOICE, //
+	CONDITION, //
 }
