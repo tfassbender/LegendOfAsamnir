@@ -1,12 +1,4 @@
-{
-	// ********************************************************
-	// *** demo level
-	// ********************************************************
-	
-	demoLevel_endItemCollected: {
-		conditionType: HAS_ITEM,
-		parameters: {
-			itemId: demoLevel_endItem
-		}
-	}
-}
+[
+	config/condition/common.json,
+	config/condition/demo_level.json,
+]

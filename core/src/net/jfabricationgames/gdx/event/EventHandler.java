@@ -40,9 +40,10 @@ public class EventHandler {
 	}
 	
 	public void fireEvent(EventConfig event) {
-		//don't use a foreach loop here, because the iterator won't work nested
-		for (int i = 0; i < listeners.size; i++) {
-			EventListener listener = listeners.get(i);
+		// create a copy of the event listeners list, so it can be iterated (without problems because the iterator cannot be used nested) 
+		// and the items in the real list can be removed while processing the whole list
+		Array<EventListener> iterableListeners = new Array<>(listeners);
+		for (EventListener listener : iterableListeners) {
 			listener.handleEvent(event);
 		}
 	}

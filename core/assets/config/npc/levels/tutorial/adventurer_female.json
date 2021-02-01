@@ -6,7 +6,6 @@
 	},
 	
 	interactionPossible: true,
-	movingSpeed: 1f,
 	
 	interactionEventId: tutorial_level_adventurer_female,
 }

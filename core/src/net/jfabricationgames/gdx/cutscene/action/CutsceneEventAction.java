@@ -19,8 +19,13 @@ public class CutsceneEventAction extends AbstractCutsceneAction implements Event
 	@Override
 	public void execute(float delta) {
 		if (!eventFired) {
-			EventHandler.getInstance().fireEvent(
-					new EventConfig().setEventType(EventType.CUTSCENE_EVENT).setStringValue(actionConfig.globalEvent).setParameterObject(this));
+			if (actionConfig.event != null) {
+				EventHandler.getInstance().fireEvent(actionConfig.event);
+			}
+			if (actionConfig.globalEvent != null) {
+				EventHandler.getInstance().fireEvent(
+						new EventConfig().setEventType(EventType.CUTSCENE_EVENT).setStringValue(actionConfig.globalEvent).setParameterObject(this));
+			}
 			eventFired = true;
 		}
 	}

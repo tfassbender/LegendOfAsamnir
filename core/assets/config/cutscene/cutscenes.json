@@ -1,6 +1,16 @@
 [
-	"config/cutscene/demo_level_minotaur_cutscene.json",
-	"config/cutscene/demo_level_talk_to_female_adventurer.json",
-	"config/cutscene/tutorial_talk_to_female_adventurer.json",
-	"config/cutscene/tutorial_minotaur_cutscene.json",
+	//********************************************************
+	//*** Demo Level
+	//********************************************************
+	
+	"config/cutscene/demo/minotaur_cutscene.json",
+	"config/cutscene/demo/talk_to_female_adventurer.json",
+	
+	//********************************************************
+	//*** Tutorial Level
+	//********************************************************
+	
+	"config/cutscene/tutorial/talk_to_female_adventurer.json",
+	"config/cutscene/tutorial/minotaur_cutscene.json",
+	"config/cutscene/tutorial/adventurer_tells_a_tale.json",
 ]

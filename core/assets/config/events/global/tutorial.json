@@ -42,6 +42,16 @@
 			cutsceneId: tutorialLevel_talkToFemaleAdventurer,
 		}
 	},
+	tutorial_level_tale_teller: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: tutorial_level_tale_teller,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: tutorialLevel_adventurerTellsATale,
+		}
+	},
 	tutorialLevel_startMinotaurCutscene: {
 	    event: {
 			eventType: EVENT_OBJECT_TOUCHED,

@@ -283,7 +283,7 @@ All cutscenes, that are configured in the game, need to be configured in an own 
 
 ### Configuring Cutscenes
 
-An example of a cutscene configuration file is [demo_level_minotaur_cutscene.json](core/assets/config/cutscene/demo_level_minotaur_cutscene.json). It defines an `id`, which is the name that can be used to attain the cutscene, and a map named `controlledActions`, which defines the actions of the cutscene.  
+An example of a cutscene configuration file is [minotaur_cutscene.json](core/assets/config/cutscene/demo/minotaur_cutscene.json). It defines an `id`, which is the name that can be used to attain the cutscene, and a map named `controlledActions`, which defines the actions of the cutscene.  
 The actions, defined in the `controlledActions` map are a key value pairs, that map a name of the action to a [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) object, that defines how this action of the cutscene is to be interpreted and executed.
 
 A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) defines the following parameters:
@@ -306,7 +306,7 @@ A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/C
 
 ### Activating Cutscenes
 
-Cutscenes are usually started by a [Global Event](#global-events), that's type is set to `START_CUTSCENE`. The global event has to be configured to be activated when the cutscene is meant to be started. A cutscene that is configured to be started when the player touches an event object on the map is configured in the [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json) config file:
+Cutscenes are usually started by a [Global Event](#global-events), that's type is set to `START_CUTSCENE`. The global event has to be configured to be activated when the cutscene is meant to be started. A cutscene that is configured to be started when the player touches an event object on the map is configured in the [demo.json](core/assets/config/events/global/demo.json) config file (that is a config file for global listened events, which is referenced from the main config file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json)):
 
 ```javascript
 {

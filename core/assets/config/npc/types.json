@@ -1,5 +1,14 @@
 {
-	adventurer: config/npc/adventurer.json,
-	adventurer_female: config/npc/adventurer_female.json,
-	tutorial_level_adventurer_female: config/npc/tutorial_level_adventurer_female.json,
+	//************************************************
+	//*** Demo Level
+	//************************************************
+	adventurer: config/npc/levels/demo/adventurer.json,
+	adventurer_female: config/npc/levels/demo/adventurer_female.json,
+	
+	//************************************************
+	//*** Tutorial Level
+	//************************************************
+	
+	tutorial_level_adventurer_female: config/npc/levels/tutorial/adventurer_female.json,
+	tutorial_level_tale_teller: config/npc/levels/tutorial/tale_teller.json,
 }

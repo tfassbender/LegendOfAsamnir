@@ -1,0 +1,8 @@
+{
+	common__player_has_10_coins_or_more: {
+		conditionType: HAS_COINS,
+		parameters: {
+			atLeast: 10
+		}
+	}
+}

@@ -1,0 +1,8 @@
+{
+	demoLevel_endItemCollected: {
+		conditionType: HAS_ITEM,
+		parameters: {
+			itemId: demoLevel_endItem
+		}
+	}
+}

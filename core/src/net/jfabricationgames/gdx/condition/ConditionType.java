@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.condition;
 
 import net.jfabricationgames.gdx.character.player.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.character.player.container.CharacterPropertiesContainer;
 
 public enum ConditionType {
 	
@@ -38,6 +39,16 @@ public enum ConditionType {
 		public boolean check(Condition condition) {
 			String itemId = condition.parameters.get(PARAMETERS_KEY_ITEM_ID);
 			return CharacterItemContainer.getInstance().containsSpecialItem(itemId);
+		}
+	},
+	HAS_COINS {
+
+		private static final String PARAMETERS_KEY_COINS = "atLeast";
+		
+		@Override
+		public boolean check(Condition condition) {
+			int coinsNeeded = Integer.parseInt(condition.parameters.get(PARAMETERS_KEY_COINS));
+			return CharacterPropertiesContainer.getInstance().getCoins() >= coinsNeeded;
 		}
 	};
 	

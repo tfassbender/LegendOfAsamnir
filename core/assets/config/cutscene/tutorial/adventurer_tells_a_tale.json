@@ -1,0 +1,145 @@
+{
+	id: tutorialLevel_adventurerTellsATale,
+	controlledActions: {
+		npc__greeting: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Greetings adventurer! I have seen many things on my numerous quests for the glory of my tribe. Do you want to hear one of my stories? It'll cost just 10 coins.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				player__question__hear_the_story,
+			],
+		},
+		player__question__hear_the_story: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: tutorialLevel_hearTheTaleOfTheAdventurer_choice,
+				
+				header: "Dwarf",
+				description: "Pay 10 coins to hear the tale?"
+				options: [
+					"I wanna hear your tale.",
+					"No, thanks. I'll create my own tales.",
+				],
+			},
+			choiceOptionExecutions: [
+				npc__answer__hear_tale,
+				npc__answer__no_thanks,
+			],
+		},
+		npc__answer__hear_tale: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: common__player_has_10_coins_or_more,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: player_has_10_coins,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: player_has_not_enough_coins,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				player_has_10_coins: npc__answer__tell_tale,
+				player_has_not_enough_coins: npc__answer__not_enough_coins,
+			}
+		},
+		npc__answer__tell_tale: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Once when I was on a quest, I walked into a tavern. The bartender asked me: \"Why do you come into a tavern with full armor and weapons?\". \"Because of Mimics\", I said. The bartender laughed ... the whole tavern laughed ... the table laughed ... I killed the table ... It was a good time!",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				player__answer__strange_tale,
+			],
+		},
+		player__answer__strange_tale: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Dwarf",
+				displayText: "That's all? Not a very good tale for 10 coins...",
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__the_tale_will_be_usefull,
+			],
+		},
+		npc__answer__the_tale_will_be_usefull: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I think you will find this tale very usefull... sooner than you would believe... *strange, evil laughter*",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				take_coins,
+			]
+		},
+		take_coins: {
+			type: EVENT,
+			
+			event: {
+				eventType: TAKE_PLAYERS_COINS,
+				intValue: 10,
+			},
+		}
+		npc__answer__not_enough_coins: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "It seems you don't have 10 coins. Come back when you have collected enough coins.",
+				colorHeader: #0000FF,
+			},
+			
+			waitForEventToFinish: true,
+		},
+		npc__answer__no_thanks: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Come back here if you change your mind. It might be usefull on your quest... *silent laughter*",
+				colorHeader: #0000FF,
+			},
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

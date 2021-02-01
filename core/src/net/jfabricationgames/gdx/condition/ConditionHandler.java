@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.condition;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -26,7 +27,13 @@ public class ConditionHandler {
 	@SuppressWarnings("unchecked")
 	private void loadConditions() {
 		Json json = new Json();
-		conditions = json.fromJson(ObjectMap.class, Condition.class, Gdx.files.internal(CONDITIONS_CONFIG_FILE_PATH));
+		conditions = new ObjectMap<String, Condition>();
+		
+		Array<String> conditionFiles = json.fromJson(Array.class, String.class, Gdx.files.internal(CONDITIONS_CONFIG_FILE_PATH));
+		for (String conditionFile : conditionFiles) {
+			ObjectMap<String, Condition> conditionsPart = json.fromJson(ObjectMap.class, Condition.class, Gdx.files.internal(conditionFile));
+			conditions.putAll(conditionsPart);
+		}
 	}
 	
 	public boolean checkCondition(String conditionId) {

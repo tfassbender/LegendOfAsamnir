@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.condition.execution.ConditionalExecution;
+import net.jfabricationgames.gdx.event.EventConfig;
 
 public class CutsceneControlledActionConfig {
 	
@@ -15,6 +16,7 @@ public class CutsceneControlledActionConfig {
 	public boolean startsWithCutscene = false;
 	public float executionDelayInSeconds = 0f;
 	
+	public EventConfig event;
 	public String globalEvent;
 	public boolean waitForEventToFinish; // only works for events that show an on-screen text; others will wait infinitely
 	
