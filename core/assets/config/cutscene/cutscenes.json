@@ -13,4 +13,5 @@
 	"config/cutscene/tutorial/talk_to_female_adventurer.json",
 	"config/cutscene/tutorial/minotaur_cutscene.json",
 	"config/cutscene/tutorial/adventurer_tells_a_tale.json",
+	"config/cutscene/tutorial/adventurer_introduces_the_boss.json",
 ]

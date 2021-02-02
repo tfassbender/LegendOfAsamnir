@@ -1,0 +1,8 @@
+{
+	tutorialLevel_endItemCollected: {
+		conditionType: HAS_ITEM,
+		parameters: {
+			itemId: tutorialLevel_endItem
+		}
+	}
+}

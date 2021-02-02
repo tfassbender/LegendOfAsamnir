@@ -1,4 +1,5 @@
 [
 	config/condition/common.json,
-	config/condition/demo_level.json,
+	config/condition/levels/demo.json,
+	config/condition/levels/tutorial.json,
 ]

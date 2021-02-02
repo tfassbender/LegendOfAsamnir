@@ -44,7 +44,7 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Female Adventurer",
+				displayTextHeader: "Adventurer",
 				displayText: "I fear this door's magic is too strong. I already tried to destroy it, but I couldn't. Maybe you are strong enough... Go on and try.",
 				colorHeader: #FF00FF,
 			},
@@ -55,7 +55,7 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Female Adventurer",
+				displayTextHeader: "Adventurer",
 				displayText: "Thank you, brave warrior. I'll wait for your victorious return.",
 				colorHeader: #FF00FF,
 			},
@@ -66,7 +66,7 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Female Adventurer",
+				displayTextHeader: "Adventurer",
 				displayText: "You want to send out a lady on a dangerous quest, while waiting here?! I thought you would be a brave warrior on a mighty quest... but maybe I was wrong...",
 				colorHeader: #FF00FF,
 				showNextPageIcon: true,
@@ -101,7 +101,7 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Female Adventurer",
+				displayTextHeader: "Adventurer",
 				displayText: "I am the breavest adventurer of my tribe!!! I fear nothing!!!",
 				colorHeader: #FF00FF,
 				showNextPageIcon: true,
@@ -117,7 +117,7 @@
 			 type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Female Adventurer",
+				displayTextHeader: "Adventurer",
 				displayText: "... except ... these bats, that are guarding the key in the south. I just don't like bats. So would a mighty and brave warrior like you please help me to kill the bats and find the key, so we both can proceed our adventurs?",
 				colorHeader: #FF00FF,
 				showNextPageIcon: true,

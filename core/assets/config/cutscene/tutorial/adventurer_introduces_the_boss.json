@@ -1,0 +1,369 @@
+{
+	id: tutorialLevel_adventurerIntroducesTheBoss,
+	controlledActions: {
+		
+		//***********************************
+		//*** Greetings
+		//***********************************
+		
+		condition__boss_killed: {
+			startsWithCutscene: true,
+			
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: tutorialLevel_endItemCollected,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: player_has_killed_the_boss,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: player_has_not_killed_the_boss,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				player_has_killed_the_boss: npc__greeting_boss_killed,
+				player_has_not_killed_the_boss: npc__greeting_boss_not_killed_yet,
+			}
+		},
+		
+		npc__greeting_boss_killed: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "You killed the beast?! And survived?! ...",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__greeting_boss_killed_continued,
+			],
+		},
+		
+		npc__greeting_boss_killed_continued: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "You are for sure the greatest warrior I have ever seen. The tale of thy victory shall be told far and wide accross the land! I kneel to thee...",
+				colorHeader: #0000FF,
+			},
+			
+			waitForEventToFinish: true,
+		},
+		
+		npc__greeting_boss_not_killed_yet: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Greetings Adventurer! I came here to fight the mighty beast, that is locked here. Legends tell that it is a gigantic creature, that has killed every adventurer, brave enough to challenge it... But the way seems to be blocked by three magical doors. So I can't move on to slay the creature.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__greeting_boss_not_killed_yet_continued,
+			],
+		},
+		
+		npc__greeting_boss_not_killed_yet_continued: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I've heard many tales about this creature and the land it lives in, before I went here. Maybe I can help you, so can go on and try to kill the creature too. I would even grand you the first chance to beat it. So have you got any questions?",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				player__ask_questions,
+			],
+		},
+		
+		//***********************************
+		//*** Player asks questions
+		//***********************************
+		
+		player__ask_questions: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice,
+				
+				header: "Dwarf",
+				description: "What do you want to ask?"
+				options: [
+					"How can I open the doors?",
+					"What is behind the doors?",
+					"more options..."
+				],
+			},
+			choiceOptionExecutions: [
+				npc__answer__open_the_doors,
+				npc__answer__what_is_behind_the_doors,
+				player__ask_questions__more_options
+			],
+		},
+		
+		player__ask_questions__more_options: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice_2,
+				
+				header: "Dwarf",
+				description: "What do you want to ask?"
+				options: [
+					"Why would you help me?",
+					"I don't have any questions.",
+					"more options..."
+				],
+			},
+			choiceOptionExecutions: [
+				npc__answer__why_would_you_help_me,
+				npc__answer__no_more_questions,
+				player__ask_questions
+			],
+		},
+		
+		//***********************************
+		//*** NPC answers questions
+		//***********************************
+		
+		npc__answer__open_the_doors: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Legends say there are three magical keys that open the doors. Which key are you searching for?",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				player__ask_questions_which_key,
+			],
+		},
+		
+		npc__answer__what_is_behind_the_doors: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "The people of the lands near tell the story, that the magical doors were created by an mighty wizard, to lock away a creature, so dangerous, none has seen it and survived to tell it's tale. It is told that the creature's skin is so hard, that no arrow can hurt it. Only the mightiest swords can deal damage to this beast. But I think your axe could also be strong enouth.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__further_questions,
+			],
+		},
+		
+		npc__answer__further_questions: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Do you have any further questions?",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				player__ask_questions,
+			],
+		},
+		
+		npc__answer__no_more_questions: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I'll wait here. Come back if you have further questions.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+		},
+		
+		//***********************************
+		//*** Player asks questions - Keys
+		//***********************************
+		
+		player__ask_questions_which_key: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice,
+				
+				header: "Dwarf",
+				description: "Which key are you searching for?"
+				options: [
+					"The first one",
+					"The second one",
+					"The last one"
+				],
+			},
+			choiceOptionExecutions: [
+				npc__answer__first_key,
+				npc__answer__second_key,
+				npc__answer__last_key
+			],
+		},
+		
+		npc__answer__first_key: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "It is told that the first key is hidden, deep in a labyrinth in the north. The labyrinth is so difficult, that the person who build it never found the way out of it, and still lives in there...",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__further_questions,
+			],
+		},
+		npc__answer__second_key: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "An old man in a near village once told me, that he as seen the key for the second magical door in the west of this land. But he couldn't reach it, because there is another magical door that blocks the way. The key for this door has to be somewhere in the forrest, near the second key.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__further_questions,
+			],
+		},
+		npc__answer__last_key: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "It is commonly told, that the third and last key is placed in a dungeon in the east of the land. The entry to the dungeon is not hard to find, but there are many dangerous creatures in this dungeon, that make it hard to reach the key.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__further_questions,
+			],
+		},
+		
+		//**************************************
+		//*** Dialog - Why would you help me?
+		//**************************************
+		
+		npc__answer__why_would_you_help_me: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I am a mighty and hornorable adventurer! Is it so hard to believe, that I would help another adventurer?",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				player__answer__do_you_believe_him,
+			],
+		},
+		
+		player__answer__do_you_believe_him: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice,
+				
+				header: "Dwarf",
+				description: "Is it so hard to believe?"
+				options: [
+					"Well ... Yes ...",
+					"Ok, I believe you",
+				],
+			},
+			choiceOptionExecutions: [
+				npc__answer__honest_answer,
+				npc__answer__further_questions,
+			],
+		},
+		
+		npc__answer__honest_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Okay... I'm waiting here for adventurers to find the keys, because I couldn't find them alone. There are quite many monsters out here and it's easier to tell some tales and wait for adventurers like you to open the doors for me.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__honest_answer_continued,
+			],
+		},
+		npc__answer__honest_answer_continued: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "And after you have opened the doors and the creature has killed you it will probably be easier for me to slay it... You know... the business is hard these days...",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				npc__answer__further_questions,
+			],
+		},
+	}
+}

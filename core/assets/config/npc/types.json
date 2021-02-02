@@ -11,4 +11,5 @@
 	
 	tutorial_level_adventurer_female: config/npc/levels/tutorial/adventurer_female.json,
 	tutorial_level_tale_teller: config/npc/levels/tutorial/tale_teller.json,
+	tutorial_level_boss_introducer: config/npc/levels/tutorial/boss_introducer.json,
 }

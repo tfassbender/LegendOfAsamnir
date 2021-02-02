@@ -1,0 +1,11 @@
+{
+	graphicsConfigFile: config/npc/graphics/adventurer.json
+	
+	aiConfig: {
+		type: BASE_AI,
+	},
+	
+	interactionPossible: true,
+	
+	interactionEventId: tutorial_level_boss_introducer,
+}

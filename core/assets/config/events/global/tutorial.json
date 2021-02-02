@@ -1,15 +1,4 @@
 {
-	tutorialLevelEndReached: {
-		event: {
-			eventType: EVENT_ITEM_PICKED_UP,
-			stringValue: tutorialLevelEnded,
-		},
-		executionType: SHOW_ON_SCREEN_TEXT,
-		executionParameters: {
-			displayTextHeader: "The End ... so far ...",
-			displayText: "Wait, what?! You've killed the boss?! This must be a bug... Jokes asside, you've reached the end of this demo level. Congratulations! (More content comming soon)",
-		}
-	},
 	tutorialStartingPointReached: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -52,6 +41,16 @@
 			cutsceneId: tutorialLevel_adventurerTellsATale,
 		}
 	},
+	tutorial_level_boss_introducer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: tutorial_level_boss_introducer,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: tutorialLevel_adventurerIntroducesTheBoss,
+		}
+	},
 	tutorialLevel_startMinotaurCutscene: {
 	    event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -60,6 +59,27 @@
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: tutorialLevel_minotaurCutscene,
+		}
+	},
+	tutorialLevelEndReached: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: tutorialLevelEnded,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "The End ... so far ...",
+			displayText: "Wait, what?! You've killed the boss?! This must be a bug... Jokes asside, you've reached the end of this demo level. Congratulations! (More content comming soon)",
+		}
+	},
+	demoLevelEndReached_pickedItem: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: tutorialLevelEnded,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: tutorialLevel_endItem,
 		}
 	},
 }
