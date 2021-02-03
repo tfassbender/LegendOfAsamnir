@@ -15,8 +15,8 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [NPCs](#npcs)
 - [Attacks](#attacks)
 - [Events](#events)
-- [Conditions](#conditions)
 - [Cutscenes](#cutscenes)
+- [Conditions](#conditions)
 - [Items](#items)
 - [Game Objects](#game-objects)
 - [Maps](#maps)
@@ -222,6 +222,63 @@ Events that are not created in code, but in configuration (e.g. when touching an
 
 Global events can be executed only under given conditions. See [Conditions in Events](#conditions-in-events) for more details.
 
+## Cutscenes
+
+Cutscenes can be used for special, predefined scenes, in which neither the player nor other game objects (like enemies) have control over what is happening. The complete situation is only managed by the cutscene. This can be useful for interactions with NPCs, or to introduce a boss fight.
+
+All cutscenes, that are configured in the game, need to be configured in an own file (which is usually placed in the [config/cutscene](core/assets/config/cutscene) directory. The json config file [cutscenes.json](core/assets/config/cutscene/cutscenes.json) is a special file in this directory, that has to be placed there with exactly this name. It defines a list of all other cutscene configuration files as a json-array.
+
+### Configuring Cutscenes
+
+An example of a cutscene configuration file is [minotaur_cutscene.json](core/assets/config/cutscene/demo/minotaur_cutscene.json). It defines an `id`, which is the name that can be used to attain the cutscene, and a map named `controlledActions`, which defines the actions of the cutscene.  
+The actions, defined in the `controlledActions` map are a key value pairs, that map a name of the action to a [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) object, that defines how this action of the cutscene is to be interpreted and executed.
+
+Another example of a cutscene configuration file is [talk_to_female_adventurer.json](core/assets/config/cutscene/demo/talk_to_female_adventurer.json). This configuration does not include unit or camera movement, but conditions and player choices. See [Conditions in Cutscenes](#conditions-in-cutscenes) for more information.
+
+A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) defines the following parameters:
+
+- **type:** A [CutsceneControlledActionType](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionType.java) that defines how the action is executed.
+- **executes:** The actions that are executed after this action ends. The actions are referenced by their names.
+- **startsWithCutscene:** A boolean flag, that defines whether this action should be started immediately when the cutscene is started. Each cutscene has to define exactly one action, that starts with the cutscene. The default value of this property is false.
+- **executionDelayInSeconds:** Defines the time that is waited before starting the action. The default value is 0.
+- **event:** An [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is executed by the cutscene.
+- **globalEvent:** A String value that is added to an [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is fired, when this action is executed. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the EventConfig that is fired is `CUTSCENE_EVENT`. This event can be registered by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java) that handles the event (see [Global Events](#global-events) for more details on how global events work).
+- **waitForEventToFinish:** A boolean flag, that defines whether the execution of this action should wait for the fired event to be finished. This will only work for events that show text on the screen. The event (and this action) then end as soon as the text on the screen is confirmed by the user. For other events this will not work, but wait infinitely.
+- **choice:** A [PlayerChoice](core/src/net/jfabricationgames/gdx/condition/choice/PlayerChoice.java) that shows a textbox with different options from which the player can choose.
+- **choiceExecutionOptions:** A list of Strings that define which following `CutsceneControlledActionConfig` will be executed, depending on which option the player chooses. For `CutsceneControlledActionConfig`s that use the type `PLAYER_CHOICE`, this parameter replaces the **executes** parameter.
+- **condition:** A [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that defines which `CutsceneControlledActionConfig` will be executed next, depending on the result of the condition. See [Conditions in Cutscenes](#conditions-in-cutscenes) for more information.
+- **conditionOptionExecutions:** A map of strings, that map the configured condition result, to the name of the `CutsceneControlledActionConfig` that will be executed if the condition is met. See [Conditions in Cutscenes](#conditions-in-cutscenes) for more information.
+- **executionParameters:** Parameters for the execution of generated global events (used to create `SHOW_ON_SCREEN_TEXT` events).
+- **controlledUnitId:** The id of a unit, that is controlled by this cutscene. This id needs to match a `unitId` of a unit in the current game map. The unit id is added to the map object with the parameter `unitId` in the map properties. The player character can always be reached by the unit id `PLAYER`.
+- **controlledUnitState:** The state to which a controlled enemy is changed. This parameter has to match a state that is defined in the enemy's config file (see [Enemy States](#states)).
+- **controlledUnitAttackTargetDirection:** A direction vector to which the attack of a unit is directed (if the state to which was changed is an attack state).
+- **controlledUnitTarget:** The target to which the controlled unit is moved. The movement is always relative to the target unit (one of the next parameters).
+- **speedFactor:** The speed with witch the unit is moved (relative to the normal speed of this unit). The default is 1f, which means the unit moves as fast as usual.
+- **targetPositionRelativeToUnitId:** The id of a unit that is the relative target point for the controlledUnitTarget (one of the previous parameters).
+- **updatePositionRelativeToTarget:** A boolean flag, that defines whether target position of the controlled unit is to be updated, relative to the targetPositionRelativeToUnitId parameter. This can be useful if the relative target is also moving. The default is false.
+- **cameraFollowsTarget:** A boolean flag, that defines whether the camera has to follow the current controlled unit. If this parameter is set to false the camera will only move if it is moved by this cutscene. The default value is false.
+
+### Activating Cutscenes
+
+Cutscenes are usually started by a [Global Event](#global-events), that's type is set to `START_CUTSCENE`. The global event has to be configured to be activated when the cutscene is meant to be started. A cutscene that is configured to be started when the player touches an event object on the map is configured in the [demo.json](core/assets/config/events/global/demo.json) config file (that is a config file for global listened events, which is referenced from the main config file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json)):
+
+```javascript
+{
+  //...
+  demoLevel_startCutscene: {
+    event: {
+      eventType: EVENT_OBJECT_TOUCHED,
+      stringValue: demoLevel_startCutscene,
+    },
+    executionType: START_CUTSCENE,
+    executionParameters: {
+      cutsceneId: demoLevelCutscene,
+    }
+  },
+  //...
+}
+```
+
 ## Conditions
 
 Conditions can be used to add conditional executions to the game (e.g. the text of an interaction with an NPC, that changes if the player has completed a quest). The conditions can be configured in the configuration json file: [conditions.json](core/assets/config/condition/conditions.json).
@@ -270,60 +327,85 @@ To actually use the conditions that are defined in the [conditions.json](core/as
 ```
 
 In this conditional, global event the `event` parameter, defines what is needed to execute the event (see [Global Events](#global-events), that decides what will be executed, based on the condition. The `executionType` of the event has to be `CONDITIONAL_EVENT`, for the event to be executed as conditional event. The `condition` parameter defines a [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that contains a `conditionId` (which is a String parameter), a `thenCase` and an `elseCase` (which both are [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects).   
-The `conditionId` references the name of a condition, that was defined in the json configuration file [conditions.json](core/assets/config/condition/conditions.json). Whenever the event is executed, it checks the defined condition and then executes either the `thenCase` (if the condition is met) or the `elseCase` (if the condition is not met).  
+The `conditionId` references the name of a condition, that was defined in a configuration file, that is referenced by the main configuration file for conditions: [conditions.json](core/assets/config/condition/conditions.json). Whenever the event is executed, it checks the defined condition and then executes either the `thenCase` (if the condition is met) or the `elseCase` (if the condition is not met).  
 The `thenCase` and the `elseCase` are both [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects, that need to have a `type` parameter that references an enum constant of the [ConditionExecutableType](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutableType.java) enum.  
 The [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) type again defines parameters, that can be used to fire events, for cascading [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java)s or for other executions.  
 If a case must not be executed it can't be left out, but needs to be defined with a `NO_EXECUTION` type, like the `elseCase` in the example above.
 
-## Cutscenes
+### Conditions in Cutscenes
 
-Cutscenes can be used for special, predefined scenes, in which neither the player nor other game objects (like enemies) have control over what is happening. The complete situation is only managed by the cutscene. This can be useful for interactions with NPCs, or to introduce a boss fight.
-
-All cutscenes, that are configured in the game, need to be configured in an own file (which is usually placed in the [config/cutscene](core/assets/config/cutscene) directory. The json config file [cutscenes.json](core/assets/config/cutscene/cutscenes.json) is a special file in this directory, that has to be placed there with exactly this name. It defines a list of all other cutscene configuration files as a json-array.
-
-### Configuring Cutscenes
-
-An example of a cutscene configuration file is [minotaur_cutscene.json](core/assets/config/cutscene/demo/minotaur_cutscene.json). It defines an `id`, which is the name that can be used to attain the cutscene, and a map named `controlledActions`, which defines the actions of the cutscene.  
-The actions, defined in the `controlledActions` map are a key value pairs, that map a name of the action to a [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) object, that defines how this action of the cutscene is to be interpreted and executed.
-
-A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) defines the following parameters:
-
-- **type:** A [CutsceneControlledActionType](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionType.java) that defines how the action is executed.
-- **executes:** The actions that are executed after this action ends. The actions are referenced by their names.
-- **startsWithCutscene:** A boolean flag, that defines whether this action should be started immediately when the cutscene is started. Each cutscene has to define exactly one action, that starts with the cutscene. The default value of this property is false.
-- **executionDelayInSeconds:** Defines the time that is waited before starting the action. The default value is 0.
-- **globalEvent:** A String value that is added to an [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is fired, when this action is executed. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the EventConfig that is fired is `CUTSCENE_EVENT`. This event can be registered by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java) that handles the event (see [Global Events](#global-events) for more details on how global events work).
-- **waitForEventToFinish:** A boolean flag, that defines whether the execution of this action should wait for the fired event to be finished. This will only work for events that show text on the screen. The event (and this action) then end as soon as the text on the screen is confirmed by the user. For other events this will not work, but wait infinitely.
-- **executionParameters:** Parameters for the execution of generated global events (used to create `SHOW_ON_SCREEN_TEXT` events).
-- **controlledUnitId:** The id of a unit, that is controlled by this cutscene. This id needs to match a `unitId` of a unit in the current game map. The unit id is added to the map object with the parameter `unitId` in the map properties. The player character can always be reached by the unit id `PLAYER`.
-- **controlledUnitState:** The state to which a controlled enemy is changed. This parameter has to match a state that is defined in the enemy's config file (see [Enemy States](#states)).
-- **controlledUnitAttackTargetDirection:** A direction vector to which the attack of a unit is directed (if the state to which was changed is an attack state).
-- **controlledUnitTarget:** The target to which the controlled unit is moved. The movement is always relative to the target unit (one of the next parameters).
-- **speedFactor:** The speed with witch the unit is moved (relative to the normal speed of this unit). The default is 1f, which means the unit moves as fast as usual.
-- **targetPositionRelativeToUnitId:** The id of a unit that is the relative target point for the controlledUnitTarget (one of the previous parameters).
-- **updatePositionRelativeToTarget:** A boolean flag, that defines whether target position of the controlled unit is to be updated, relative to the targetPositionRelativeToUnitId parameter. This can be useful if the relative target is also moving. The default is false.
-- **cameraFollowsTarget:** A boolean flag, that defines whether the camera has to follow the current controlled unit. If this parameter is set to false the camera will only move if it is moved by this cutscene. The default value is false.
-
-### Activating Cutscenes
-
-Cutscenes are usually started by a [Global Event](#global-events), that's type is set to `START_CUTSCENE`. The global event has to be configured to be activated when the cutscene is meant to be started. A cutscene that is configured to be started when the player touches an event object on the map is configured in the [demo.json](core/assets/config/events/global/demo.json) config file (that is a config file for global listened events, which is referenced from the main config file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json)):
+In cutscenes there are two types of conditions, that can be configured. The first type is similar to the conditions that can be added to events. The following example shows a condition from the cutscene configuration file [talk_to_female_adventurer.json](core/assets/config/cutscene/demo/talk_to_female_adventurer.json):
 
 ```javascript
 {
   //...
-  demoLevel_startCutscene: {
-    event: {
-      eventType: EVENT_OBJECT_TOUCHED,
-      stringValue: demoLevel_startCutscene,
+  answer_right: {
+    type: CONDITION,
+    
+    condition: {
+      conditionId: demoLevel_endItemCollected,
+      thenCase: {
+        type: CUTSCENE,
+        executionParameters: {
+          conditionCase: condition_met,
+        }
+      },
+      elseCase: {
+        type: CUTSCENE,
+        executionParameters: {
+          conondition_not_met,
+        }
+      }
     },
-    executionType: START_CUTSCENE,
-    executionParameters: {
-      cutsceneId: demoLevelCutscene,
-    }
+    conditionOptionExecutions: {
+      condition_met: answer_condition_met,
+      condition_not_met: answer_condition_not_met,
+    },
+    
+    waitForEventToFinish: true,
   },
   //...
 }
 ```
+
+In this [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) the type `CONDITION` shows that this action config is to be executed as a [CutsceneConditionAction](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneConditionAction.java).   
+The `condition` parameter defines a [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that contains a `conditionId` (which is a String parameter), a `thenCase` and an `elseCase` (which both are [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects).   
+The `conditionId` references the name of a condition, that was defined in a configuration file, that is referenced by the main configuration file for conditions: [conditions.json](core/assets/config/condition/conditions.json).
+
+To be used in cutscenes, the type of the `thenCase` and `elseCase` need to be `CUTSCENE`, to notify the active cutscene about the result of the condition. It is also possible to configure the type `CONDITION` to define cascading conditions with more than two possible results. Here the final case still has to use the type `CUTSCENE`. The `executionParameters` define a map of strings. Here the key `conditionCase` has to be used and mapped to a unique string value. This string value is then used as key in the `conditionOptionExecutions` map, that maps it to the name of the next [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java), that is executed, depending on the result of the condition.
+
+In the example above this means, that if the condition with the conditionId **demoLevel_endItemCollected** is met (the condition is defined in a condition configuration file), the string **condition_met** will be sent to the cutscene, which causes the execution of the next cutscene action: **answer_condition_met**.
+
+The second type of condition, is a [PlayerChoice](core/src/net/jfabricationgames/gdx/condition/choice/PlayerChoice.java). This condition creates a textbox on the screen, that shows options from which the player can choose. An example of such a condition is the following (taken from the configuration file [talk_to_female_adventurer.json](core/assets/config/cutscene/demo/talk_to_female_adventurer.json).
+
+```javascript
+{
+  //...
+  answer: {
+    type: PLAYER_CHOICE,
+    
+    waitForEventToFinish: true,
+    
+    choice: {
+      header: "Dwarf",
+      headerColor: #0000FF
+      description: "What do you want to answer?"
+      options: [
+        "Whasuuuuuuuup?",
+        "General Kenobi..."
+      ],
+    },
+    choiceOptionExecutions: [
+      answer_wrong,
+      answer_right,
+    ]
+  },
+  //...
+}
+```
+
+In the example above the type `PLAYER_CHOICE` defines, that the [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) is to be executed as a [CutscenePlayerChoiceAction](core/src/net/jfabricationgames/gdx/cutscene/action/CutscenePlayerChoiceAction.java). The `choice` parameter is a [PlayerChoice](core/src/net/jfabricationgames/gdx/condition/choice/PlayerChoice.java), that is used to define the header, the header color, a description text and up to three options that the user can pick. These are shown in a textbox on the screen.  
+The list `choiceOptionExecutions` defines the list of possible next [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java)s that can be executed, based on the players choice. If the player chooses the first option, the first entry from the `choiceOptionExecutions` list will be chosen. If the player chooses the second option, the second entry from the list will be chosen...
 
 ## Items
 
