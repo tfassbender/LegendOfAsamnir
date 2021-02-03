@@ -107,8 +107,6 @@
 			waitForEventToFinish: true,
 			
 			choice: {
-				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice,
-				
 				header: "Dwarf",
 				description: "What do you want to ask?"
 				options: [
@@ -130,8 +128,6 @@
 			waitForEventToFinish: true,
 			
 			choice: {
-				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice_2,
-				
 				header: "Dwarf",
 				description: "What do you want to ask?"
 				options: [
@@ -225,8 +221,6 @@
 			waitForEventToFinish: true,
 			
 			choice: {
-				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice,
-				
 				header: "Dwarf",
 				description: "Which key are you searching for?"
 				options: [
@@ -318,8 +312,6 @@
 			waitForEventToFinish: true,
 			
 			choice: {
-				choiceId: tutorialLevel_ask_the_adventurer_a_question__choice,
-				
 				header: "Dwarf",
 				description: "Is it so hard to believe?"
 				options: [

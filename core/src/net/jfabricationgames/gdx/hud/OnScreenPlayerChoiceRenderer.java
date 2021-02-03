@@ -101,7 +101,7 @@ public class OnScreenPlayerChoiceRenderer {
 	}
 	
 	private void choseSelectedOption() {
-		EventConfig event = new EventConfig().setEventType(EventType.PLAYER_CHOICE).setStringValue(playerChoice.choiceId).setIntValue(selectedOption);
+		EventConfig event = new EventConfig().setEventType(EventType.CUTSCENE_PLAYER_CHOICE).setIntValue(selectedOption);
 		EventHandler.getInstance().fireEvent(event);
 		onScreenTextBox.close();
 	}

@@ -25,8 +25,6 @@
 			waitForEventToFinish: true,
 			
 			choice: {
-				choiceId: demoLevel_talkToFemaleAdventurer_choice,
-				
 				header: "Dwarf",
 				headerColor: #0000FF
 				description: "What do you want to answer?"

@@ -33,7 +33,6 @@ public enum GlobalEventExecutionType {
 	},
 	SHOW_PLAYER_CHOICE {
 		
-		private static final String MAP_KEY_CHOICE_ID = "choiceId";
 		private static final String MAP_KEY_HEADER = "header";
 		private static final String MAP_KEY_HEADER_COLOR = "headerColor";
 		private static final String MAP_KEY_DESCRIPTION = "description";
@@ -46,7 +45,6 @@ public enum GlobalEventExecutionType {
 			}
 			else {
 				PlayerChoice playerChoice = new PlayerChoice();
-				playerChoice.choiceId = eventConfig.executionParameters.get(MAP_KEY_CHOICE_ID);
 				playerChoice.header = eventConfig.executionParameters.get(MAP_KEY_HEADER);
 				playerChoice.headerColor = eventConfig.executionParameters.get(MAP_KEY_HEADER_COLOR);
 				playerChoice.description = eventConfig.executionParameters.get(MAP_KEY_DESCRIPTION);

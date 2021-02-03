@@ -48,7 +48,7 @@ public class CutscenePlayerChoiceAction extends AbstractCutsceneAction implement
 	
 	@Override
 	public void handleEvent(EventConfig event) {
-		if (event.eventType == EventType.PLAYER_CHOICE && actionConfig.choice.choiceId.equals(event.stringValue)) {
+		if (event.eventType == EventType.CUTSCENE_PLAYER_CHOICE) {
 			chosenOption = event.intValue;
 			eventHandlingFinished = true;
 			EventHandler.getInstance().removeEventListener(this);

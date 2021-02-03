@@ -19,6 +19,6 @@ public enum EventType {
 	CHANGE_MAP, // 
 	SET_ITEM, //
 	NPC_INTERACTION, //
-	PLAYER_CHOICE, //
+	CUTSCENE_PLAYER_CHOICE, //
 	CUTSCENE_CONDITION, //
 }
