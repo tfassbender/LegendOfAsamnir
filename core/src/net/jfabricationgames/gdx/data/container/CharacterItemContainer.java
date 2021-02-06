@@ -1,15 +1,19 @@
-package net.jfabricationgames.gdx.character.player.container.data;
+package net.jfabricationgames.gdx.data.container;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
-public class CharacterItemProperties {
+import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
+
+public class CharacterItemContainer {
 	
 	public int ammoArrow = 0;
 	public final int maxAmmoArrow = 30;
 	public int ammoBomb = 0;
 	public final int maxAmmoBomb = 15;
 	
-	public Array<KeyItem> keys = new Array<>();
+	public int numNormalKeys = 0;
+	
+	public Array<KeyItemProperties> keys = new Array<>();
 	public ObjectSet<String> specialItems = new ObjectSet<>();
 }

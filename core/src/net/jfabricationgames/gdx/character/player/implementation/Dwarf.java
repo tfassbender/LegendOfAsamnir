@@ -19,10 +19,10 @@ import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.character.player.container.CharacterFastTravelContainer;
-import net.jfabricationgames.gdx.character.player.container.CharacterItemContainer;
-import net.jfabricationgames.gdx.character.player.container.CharacterPropertiesContainer;
-import net.jfabricationgames.gdx.character.player.container.data.CharacterFastTravelProperties;
+import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
+import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
+import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
+import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -90,16 +90,16 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	private SoundSet soundSet;
 	
-	private CharacterPropertiesContainer properties;
-	private CharacterItemContainer itemContainer;
-	private CharacterFastTravelContainer fastTravelContainer;
+	private CharacterPropertiesDataHandler properties;
+	private CharacterItemDataHandler itemContainer;
+	private FastTravelDataHandler fastTravelContainer;
 	
 	private GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	
 	public Dwarf() {
-		properties = CharacterPropertiesContainer.getInstance();
-		itemContainer = CharacterItemContainer.getInstance();
-		fastTravelContainer = CharacterFastTravelContainer.getInstance();
+		properties = CharacterPropertiesDataHandler.getInstance();
+		itemContainer = CharacterItemDataHandler.getInstance();
+		fastTravelContainer = FastTravelDataHandler.getInstance();
 		
 		animationManager = AnimationManager.getInstance();
 		animationManager.loadAnimations(ASSET_CONFIG_FILE_NAME);
@@ -587,7 +587,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			itemContainer.collectItem((Item) event.parameterObject, this);
 		}
 		if (event.eventType == EventType.FAST_TRAVEL_TO_MAP_POSITION) {
-			CharacterFastTravelProperties fastTravelTargetPoint = fastTravelContainer.getFastTravelPropertiesById(event.stringValue);
+			FastTravelPointProperties fastTravelTargetPoint = fastTravelContainer.getFastTravelPropertiesById(event.stringValue);
 			if (fastTravelTargetPoint.enabled) {
 				setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
 			}

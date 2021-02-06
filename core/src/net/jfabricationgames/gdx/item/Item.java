@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.character.player.container.data.KeyItem;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
+import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -105,7 +105,7 @@ public class Item implements GameMapObject, CutsceneControlledUnit {
 	}
 	
 	public ObjectMap<String, String> getKeyProperties() {
-		return KeyItem.getKeyProperties(properties);
+		return KeyItemProperties.getKeyProperties(properties);
 	}
 	
 	public boolean containsProperty(String property) {

@@ -1,13 +1,13 @@
-package net.jfabricationgames.gdx.character.player.container.data;
+package net.jfabricationgames.gdx.data.properties;
 
 import com.badlogic.gdx.Gdx;
 
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 
-public class CharacterFastTravelProperties implements Cloneable {
+public class FastTravelPointProperties implements Cloneable {
 	
-	public static CharacterFastTravelProperties fromDto(FastTravelPointEventDto fastTravelDto) {
-		CharacterFastTravelProperties properties = new CharacterFastTravelProperties();
+	public static FastTravelPointProperties fromDto(FastTravelPointEventDto fastTravelDto) {
+		FastTravelPointProperties properties = new FastTravelPointProperties();
 		properties.fastTravelPointId = fastTravelDto.fastTravelPointId;
 		properties.fastTravelPointName = fastTravelDto.fastTravelPointName;
 		properties.enabled = fastTravelDto.enabled;
@@ -24,9 +24,9 @@ public class CharacterFastTravelProperties implements Cloneable {
 	public float positionOnMapY;
 	
 	@Override
-	public CharacterFastTravelProperties clone() {
+	public FastTravelPointProperties clone() {
 		try {
-			return (CharacterFastTravelProperties) super.clone();
+			return (FastTravelPointProperties) super.clone();
 		}
 		catch (CloneNotSupportedException e) {
 			Gdx.app.error(getClass().getSimpleName(), "CloneNotSupportedException in CharacterFastTravelProperties: ", e);

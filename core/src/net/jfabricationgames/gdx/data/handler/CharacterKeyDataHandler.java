@@ -1,28 +1,27 @@
-package net.jfabricationgames.gdx.character.player.container;
+package net.jfabricationgames.gdx.data.handler;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.character.player.container.data.CharacterItemProperties;
-import net.jfabricationgames.gdx.character.player.container.data.KeyItem;
+import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.item.Item;
 
-public class CharacterKeyContainer {
+public class CharacterKeyDataHandler {
 	
 	private static final String SPECIAL_KEY_MESSAGE_HEADER = "Special Key";
 	
-	private CharacterItemProperties properties;
-	private int numNormalKeys = 0;
+	private CharacterItemContainer properties;
 	
-	public CharacterKeyContainer(CharacterItemProperties properties) {
+	protected CharacterKeyDataHandler(CharacterItemContainer properties) {
 		this.properties = properties;
 	}
 	
 	public void addKey(Item item) {
-		KeyItem key = new KeyItem(item.getKeyProperties());
+		KeyItemProperties key = new KeyItemProperties(item.getKeyProperties());
 		properties.keys.add(key);
 		
-		if (KeyItem.isSpecialKey(key.mapProperties)) {
+		if (KeyItemProperties.isSpecialKey(key.mapProperties)) {
 			displaySpecialKeyProperties(key);
 		}
 		
@@ -30,22 +29,22 @@ public class CharacterKeyContainer {
 	}
 
 	private void countKeys() {
-		numNormalKeys = 0;
-		for (KeyItem key : properties.keys) {
+		properties.numNormalKeys = 0;
+		for (KeyItemProperties key : properties.keys) {
 			if (!key.isSpecialKey()) {
-				numNormalKeys++;
+				properties.numNormalKeys++;
 			}
 		}
 	}
 	
 	public int getNumNormalKeys() {
-		return numNormalKeys;
+		return properties.numNormalKeys;
 	}
 	
-	private void displaySpecialKeyProperties(KeyItem key) {
+	private void displaySpecialKeyProperties(KeyItemProperties key) {
 		OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 		onScreenTextBox.setHeaderText(SPECIAL_KEY_MESSAGE_HEADER);
-		onScreenTextBox.setText(KeyItem.getSpecialKeyPropertiesAsString(key.mapProperties));
+		onScreenTextBox.setText(KeyItemProperties.getSpecialKeyPropertiesAsString(key.mapProperties));
 	}
 	
 	public boolean containsKey(ObjectMap<String, String> keyProperties) {
@@ -53,7 +52,7 @@ public class CharacterKeyContainer {
 	}
 	
 	public void takeKey(ObjectMap<String, String> keyProperties) {
-		KeyItem keyItem = getKeyItem(keyProperties);
+		KeyItemProperties keyItem = getKeyItem(keyProperties);
 		if (keyItem == null) {
 			throw new IllegalStateException("The required key was not found. Required Properties: " + keyProperties);
 		}
@@ -63,8 +62,8 @@ public class CharacterKeyContainer {
 		countKeys();
 	}
 	
-	private KeyItem getKeyItem(ObjectMap<String, String> requiredProperties) {
-		for (KeyItem keyItem : properties.keys) {
+	private KeyItemProperties getKeyItem(ObjectMap<String, String> requiredProperties) {
+		for (KeyItemProperties keyItem : properties.keys) {
 			ObjectMap<String, String> keyProperties = keyItem.mapProperties;
 			if (keyProperties.size == requiredProperties.size) {
 				boolean propertiesMatch = true;

@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.character.player.container.CharacterItemContainer;
-import net.jfabricationgames.gdx.character.player.container.data.KeyItem;
+import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
+import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
@@ -22,7 +22,7 @@ public class LockedObject extends InteractiveObject {
 	public LockedObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
 		super(typeConfig, sprite, properties);
 		
-		keyProperties = KeyItem.getKeyProperties(properties);
+		keyProperties = KeyItemProperties.getKeyProperties(properties);
 	}
 	
 	@Override
@@ -48,7 +48,7 @@ public class LockedObject extends InteractiveObject {
 	}
 	
 	private boolean canBeUnlocked() {
-		CharacterItemContainer itemContainer = CharacterItemContainer.getInstance();
+		CharacterItemDataHandler itemContainer = CharacterItemDataHandler.getInstance();
 		if (itemContainer.containsKey(keyProperties)) {
 			itemContainer.takeKey(keyProperties);
 			return true;
@@ -61,8 +61,8 @@ public class LockedObject extends InteractiveObject {
 		OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 		String messageText;
 		
-		if (KeyItem.isSpecialKey(keyProperties)) {
-			messageText = LOCK_MESSAGE_TEXT_SPECIAL_KEY + '\n' + KeyItem.getSpecialKeyPropertiesAsString(keyProperties);
+		if (KeyItemProperties.isSpecialKey(keyProperties)) {
+			messageText = LOCK_MESSAGE_TEXT_SPECIAL_KEY + '\n' + KeyItemProperties.getSpecialKeyPropertiesAsString(keyProperties);
 		}
 		else {
 			messageText = LOCK_MESSAGE_TEXT_SIMPLE_KEY;

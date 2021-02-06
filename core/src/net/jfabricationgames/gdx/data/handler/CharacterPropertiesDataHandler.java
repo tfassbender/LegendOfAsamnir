@@ -1,25 +1,25 @@
-package net.jfabricationgames.gdx.character.player.container;
+package net.jfabricationgames.gdx.data.handler;
 
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.character.player.container.data.CharacterProperties;
 import net.jfabricationgames.gdx.character.player.implementation.CharacterAction;
+import net.jfabricationgames.gdx.data.container.CharacterDataContainer;
 
-public class CharacterPropertiesContainer {
+public class CharacterPropertiesDataHandler {
 	
-	private static CharacterPropertiesContainer instance;
+	private static CharacterPropertiesDataHandler instance;
 	
-	public static synchronized CharacterPropertiesContainer getInstance() {
+	public static synchronized CharacterPropertiesDataHandler getInstance() {
 		if (instance == null) {
-			instance = new CharacterPropertiesContainer();
+			instance = new CharacterPropertiesDataHandler();
 		}
 		return instance;
 	}
 	
-	private CharacterProperties properties;
+	private CharacterDataContainer properties;
 	
-	private CharacterPropertiesContainer() {
-		properties = new CharacterProperties();
+	private CharacterPropertiesDataHandler() {
+		properties = new CharacterDataContainer();
 	}
 	
 	public void updateStats(float delta, CharacterAction action) {

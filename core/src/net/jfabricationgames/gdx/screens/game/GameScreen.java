@@ -13,8 +13,8 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.character.player.container.CharacterFastTravelContainer;
-import net.jfabricationgames.gdx.character.player.container.data.CharacterFastTravelProperties;
+import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
+import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -235,8 +235,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		return playersRelativePosition;
 	}
 	
-	public Array<CharacterFastTravelProperties> getFastTravelPositions() {
-		return CharacterFastTravelContainer.getInstance().getFastTravelPositions();
+	public Array<FastTravelPointProperties> getFastTravelPositions() {
+		return FastTravelDataHandler.getInstance().getFastTravelPositions();
 	}
 	
 	public float getMapWidth() {

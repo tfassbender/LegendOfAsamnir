@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
-import net.jfabricationgames.gdx.character.player.container.data.CharacterFastTravelProperties;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -42,7 +42,7 @@ public class GameMapDialog extends InGameMenuDialog {
 	private MapConfig config;
 	private Vector2 playersRelativePositionOnMap;
 	
-	private Array<CharacterFastTravelProperties> fastTravelPoints;
+	private Array<FastTravelPointProperties> fastTravelPoints;
 	private String selectedFastTravelPointId;
 	
 	private float mapWidth;
@@ -159,7 +159,7 @@ public class GameMapDialog extends InGameMenuDialog {
 	}
 	
 	private void drawFastTravelPoints(float delta, float mapTextureX, float mapTextureY) {
-		for (CharacterFastTravelProperties fastTravelPoint : fastTravelPoints) {
+		for (FastTravelPointProperties fastTravelPoint : fastTravelPoints) {
 			float relativePositionX = fastTravelPoint.positionOnMapX * GameScreen.SCREEN_TO_WORLD / mapWidth;
 			float relativePositionY = fastTravelPoint.positionOnMapY * GameScreen.SCREEN_TO_WORLD / mapHeight;
 			
@@ -206,15 +206,15 @@ public class GameMapDialog extends InGameMenuDialog {
 	}
 	
 	public void setFocusTo(String stateName) {
-		CharacterFastTravelProperties fastTravelProperties = getFastTravelPropertiesById(stateName);
+		FastTravelPointProperties fastTravelProperties = getFastTravelPropertiesById(stateName);
 		if (fastTravelProperties != null) {
 			selectedFastTravelPointId = fastTravelProperties.fastTravelPointId;
 			buttonBackToMenu.setFocused(false);
 		}
 	}
 	
-	private CharacterFastTravelProperties getFastTravelPropertiesById(String stateName) {
-		for (CharacterFastTravelProperties fastTravelProperty : fastTravelPoints) {
+	private FastTravelPointProperties getFastTravelPropertiesById(String stateName) {
+		for (FastTravelPointProperties fastTravelProperty : fastTravelPoints) {
 			if (stateName.equals(fastTravelProperty.fastTravelPointId)) {
 				return fastTravelProperty;
 			}
@@ -241,7 +241,7 @@ public class GameMapDialog extends InGameMenuDialog {
 		}
 		
 		if (selectedFastTravelPointId != null) {
-			CharacterFastTravelProperties fastTravelTargetProperties = getFastTravelPropertiesById(selectedFastTravelPointId);
+			FastTravelPointProperties fastTravelTargetProperties = getFastTravelPropertiesById(selectedFastTravelPointId);
 			if (fastTravelTargetProperties.enabled) {
 				EventHandler.getInstance()
 						.fireEvent(new EventConfig().setEventType(EventType.FAST_TRAVEL_TO_MAP_POSITION).setStringValue(selectedFastTravelPointId));

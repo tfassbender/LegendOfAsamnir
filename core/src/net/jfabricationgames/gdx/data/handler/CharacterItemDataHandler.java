@@ -1,35 +1,35 @@
-package net.jfabricationgames.gdx.character.player.container;
+package net.jfabricationgames.gdx.data.handler;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.character.player.container.data.CharacterItemProperties;
+import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 
-public class CharacterItemContainer {
+public class CharacterItemDataHandler {
 	
 	private static final String ITEM_NAME_KEY = "key";
 	
-	private static CharacterItemContainer instance;
+	private static CharacterItemDataHandler instance;
 	
-	public static synchronized CharacterItemContainer getInstance() {
+	public static synchronized CharacterItemDataHandler getInstance() {
 		if (instance == null) {
-			instance = new CharacterItemContainer();
+			instance = new CharacterItemDataHandler();
 		}
 		return instance;
 	}
 	
-	private CharacterPropertiesContainer characterProperties;
-	private CharacterKeyContainer characterKeyContainer;
-	private CharacterItemProperties properties;
+	private CharacterPropertiesDataHandler characterProperties;
+	private CharacterKeyDataHandler characterKeyContainer;
+	private CharacterItemContainer properties;
 	
-	private CharacterItemContainer() {
-		characterProperties = CharacterPropertiesContainer.getInstance();
-		properties = new CharacterItemProperties();
-		characterKeyContainer = new CharacterKeyContainer(properties);
+	private CharacterItemDataHandler() {
+		characterProperties = CharacterPropertiesDataHandler.getInstance();
+		properties = new CharacterItemContainer();
+		characterKeyContainer = new CharacterKeyDataHandler(properties);
 	}
 	
 	public <T extends PlayableCharacter & StatsCharacter> void collectItem(Item item, T player) {

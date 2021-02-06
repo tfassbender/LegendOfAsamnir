@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.player.container.data;
+package net.jfabricationgames.gdx.data.properties;
 
 import java.util.Iterator;
 
@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-public class KeyItem {
+public class KeyItemProperties {
 	
 	public static final String KEY_PROPERTY_PREFIX = "key_";
 	public static final String COMMON_REQUIRED_PROPERTY = KEY_PROPERTY_PREFIX + "level_";
@@ -24,7 +24,7 @@ public class KeyItem {
 					keyProperties.put(propertyKey, (String) propertyValue);
 				}
 				else {
-					Gdx.app.error(KeyItem.class.getSimpleName(), "The map properties contain a property that has a key property prefix (\""
+					Gdx.app.error(KeyItemProperties.class.getSimpleName(), "The map properties contain a property that has a key property prefix (\""
 							+ KEY_PROPERTY_PREFIX + "\"), but is no String. MapProperties: " + properties);
 				}
 			}
@@ -33,8 +33,8 @@ public class KeyItem {
 		return keyProperties;
 	}
 	
-	public static KeyItem fromMapProperties(MapProperties properties) {
-		KeyItem key = new KeyItem();
+	public static KeyItemProperties fromMapProperties(MapProperties properties) {
+		KeyItemProperties key = new KeyItemProperties();
 		
 		Iterator<String> mapPropertyKeysIterator = properties.getKeys();
 		while (mapPropertyKeysIterator.hasNext()) {
@@ -44,7 +44,7 @@ public class KeyItem {
 				key.mapProperties.put(mapPropertyKey, (String) mapPropertyValue);
 			}
 			else {
-				Gdx.app.error(KeyItem.class.getSimpleName(),
+				Gdx.app.error(KeyItemProperties.class.getSimpleName(),
 						"The MapProperties contains values that are no Strings. Only String values are alowed for keys.");
 			}
 		}
@@ -63,17 +63,17 @@ public class KeyItem {
 	public static String getSpecialKeyPropertiesAsString(ObjectMap<String, String> properties) {
 		StringBuilder sb = new StringBuilder();
 		for (Entry<String, String> entry : properties.entries()) {
-			String propertyKey = entry.key.substring(KeyItem.KEY_PROPERTY_PREFIX.length());
+			String propertyKey = entry.key.substring(KeyItemProperties.KEY_PROPERTY_PREFIX.length());
 			String propertyValue = entry.value;
 			sb.append(propertyKey).append(':').append(' ').append(propertyValue).append('\n');
 		}
 		return sb.substring(0, sb.length() - 1);
 	}
 	
-	public KeyItem() {
+	public KeyItemProperties() {
 		this(new ObjectMap<>());
 	}
-	public KeyItem(ObjectMap<String, String> mapProperties) {
+	public KeyItemProperties(ObjectMap<String, String> mapProperties) {
 		this.mapProperties = mapProperties;
 	}
 	

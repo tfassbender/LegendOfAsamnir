@@ -1,7 +1,7 @@
 package net.jfabricationgames.gdx.condition;
 
-import net.jfabricationgames.gdx.character.player.container.CharacterItemContainer;
-import net.jfabricationgames.gdx.character.player.container.CharacterPropertiesContainer;
+import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
+import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 
 public enum ConditionType {
 	
@@ -38,7 +38,7 @@ public enum ConditionType {
 		@Override
 		public boolean check(Condition condition) {
 			String itemId = condition.parameters.get(PARAMETERS_KEY_ITEM_ID);
-			return CharacterItemContainer.getInstance().containsSpecialItem(itemId);
+			return CharacterItemDataHandler.getInstance().containsSpecialItem(itemId);
 		}
 	},
 	HAS_COINS {
@@ -48,7 +48,7 @@ public enum ConditionType {
 		@Override
 		public boolean check(Condition condition) {
 			int coinsNeeded = Integer.parseInt(condition.parameters.get(PARAMETERS_KEY_COINS));
-			return CharacterPropertiesContainer.getInstance().getCoins() >= coinsNeeded;
+			return CharacterPropertiesDataHandler.getInstance().getCoins() >= coinsNeeded;
 		}
 	};
 	
