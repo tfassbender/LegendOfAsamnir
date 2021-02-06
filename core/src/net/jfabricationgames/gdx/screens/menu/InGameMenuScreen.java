@@ -14,7 +14,6 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.debug.DebugGridRenderer;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -39,7 +38,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	protected Viewport viewport;
 	protected SpriteBatch batch;
 	protected PlayableCharacter player;
-	protected DebugGridRenderer debugGridRenderer;
 	
 	public InGameMenuScreen(GameScreen gameScreen, PlayableCharacter player, String... stateConfigFiles) {
 		super(stateConfigFiles);
@@ -58,10 +56,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 		assetManager = AssetGroupManager.getInstance();
 		assetManager.loadGroup(ASSET_GROUP_NAME);
 		assetManager.finishLoading();
-		
-		debugGridRenderer = new DebugGridRenderer();
-		debugGridRenderer.setLineOffsets(50f, 50f);
-		debugGridRenderer.stopDebug();
 	}
 	
 	@Override

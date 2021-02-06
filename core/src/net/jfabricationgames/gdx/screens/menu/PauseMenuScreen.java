@@ -187,8 +187,6 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		drawControlsDialog();
 		drawMapDialog(delta);
-		
-		debugGridRenderer.render(delta);
 	}
 	
 	private void drawBackground() {

@@ -149,8 +149,6 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		batch.end();
 		
 		drawTexts();
-		
-		debugGridRenderer.render(delta);
 	}
 	
 	private void drawBackground() {
