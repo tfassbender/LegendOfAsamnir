@@ -144,8 +144,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private void createDialogs() {
 		controlsDialog = new GameControlsDialog();
 		mapDialog = new GameMapDialog(gameScreen, this::backToGame, this::playMenuSound);
-		saveGameDialog = new SaveGameDialog();
-		loadGameDialog = new LoadGameDialog();
+		saveGameDialog = new SaveGameDialog(this::backToGame, this::playMenuSound);
+		loadGameDialog = new LoadGameDialog(this::backToGame, this::playMenuSound);
 	}
 	
 	private void initializeStateMachine() {
@@ -173,6 +173,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		closeControlsDialog();
 		closeMapDialog();
+		closeSaveGameDialog();
+		closeLoadGameDialog();
 		mapDialog.updateMapConfig(gameScreen);
 		
 		takeGameSnapshot();
@@ -313,9 +315,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 			saveGameDialog.setFocusTo(stateName);
 		}
 		else if (stateName.startsWith(STATE_PREFIX_LOAD_DIALOG)) {
-			if (stateName.equals(STATE_PREFIX_MAP_DIALOG + "button_loadGameDialogBack")) {
-				loadGameDialog.setFocusToBackButton();
-			}
+			loadGameDialog.setFocusTo(stateName);
 		}
 		else if (stateName.startsWith(STATE_PREFIX_BUTTON)) {
 			String buttonId = stateName.substring(STATE_PREFIX_BUTTON.length());
@@ -459,5 +459,33 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	public void saveToSlot5() {
 		saveGameDialog.saveToSlot(5);
+	}
+	
+	//*********************************************************************
+	//*** State machine methods for load dialog (called via reflection)
+	//*********************************************************************
+	
+	public void loadFromQuickSaveSlot() {
+		loadGameDialog.loadFromQuickSaveSlot();
+	}
+	
+	public void loadFromSlot1() {
+		loadGameDialog.loadFromSlot(1);
+	}
+	
+	public void loadFromSlot2() {
+		loadGameDialog.loadFromSlot(2);
+	}
+	
+	public void loadFromSlot3() {
+		loadGameDialog.loadFromSlot(3);
+	}
+	
+	public void loadFromSlot4() {
+		loadGameDialog.loadFromSlot(4);
+	}
+	
+	public void loadFromSlot5() {
+		loadGameDialog.loadFromSlot(5);
 	}
 }

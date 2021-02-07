@@ -1,51 +1,83 @@
 package net.jfabricationgames.gdx.screens.menu.dialog;
 
-import com.badlogic.gdx.graphics.Color;
+import java.util.function.Consumer;
 
-import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
+import com.badlogic.gdx.Gdx;
+
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
-import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
-import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 
-public class LoadGameDialog extends InGameMenuDialog {
+public class LoadGameDialog extends GameDataServiceDialog {
 	
-	public LoadGameDialog() {
-		createControls();
+	public LoadGameDialog(Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
+		super(backToGame, playMenuSoundConsumer);
+	}
+
+	@Override
+	protected String getMenuTitle() {
+		return "Load Game";
 	}
 	
-	private void createControls() {
-		background = new MenuBox(12, 8, MenuBox.TextureType.YELLOW_PAPER);
-		banner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
-		buttonBackToMenu = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(935, 550).setSize(110, 40).build();
-		buttonBackToMenu.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
-		buttonBackToMenu.setFocused(true);
+	@Override
+	protected String getButtonText() {
+		return "Load";
 	}
 	
-	public void draw() {
-		if (visible) {
-			batch.begin();
-			
-			background.draw(batch, 40, 50, 1130, 570);
-			banner.draw(batch, 80, 480, 460, 200);
-			buttonBackToMenu.draw(batch);
-			
-			drawText();
-			
-			batch.end();
+	@Override
+	public void setFocusTo(String stateName) {
+		unfocusAll();
+		
+		FocusButton button = null;
+		switch (stateName) {
+			case "loadDialog_button_loadGameDialogBack":
+				button = buttonBackToMenu;
+				break;
+			case "loadDialog_button_quickSaveSlot":
+				button = buttonQuickSlot;
+				break;
+			case "loadDialog_button_saveSlot1":
+				button = buttonsSlot[0];
+				break;
+			case "loadDialog_button_saveSlot2":
+				button = buttonsSlot[1];
+				break;
+			case "loadDialog_button_saveSlot3":
+				button = buttonsSlot[2];
+				break;
+			case "loadDialog_button_saveSlot4":
+				button = buttonsSlot[3];
+				break;
+			case "loadDialog_button_saveSlot5":
+				button = buttonsSlot[4];
+				break;
+			default:
+				throw new IllegalStateException("Unexpected state identifier: " + stateName);
+		}
+		
+		if (button != null) {
+			button.setFocused(true);
 		}
 	}
 	
-	private void drawText() {
-		screenTextWriter.setColor(Color.BLACK);
-		screenTextWriter.setScale(1.2f);
-		screenTextWriter.drawText("Load Game", 155, 594);
-		
-		screenTextWriter.setScale(0.8f);
-		screenTextWriter.drawText(InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS + "Back", 970, 593);
+	public void loadFromQuickSaveSlot() {
+		Gdx.app.log(getClass().getSimpleName(), "'loadFromQuickSaveSlot' selected");
+		if (gameDataService.isQuickSaveGameDataSlotExisting()) {
+			gameDataService.loadGameDataFromQuicksaveSlot();
+			backToGame();
+		}
+		else {
+			playMenuSound(ControlledMenu.SOUND_ERROR);
+		}
 	}
 	
-	public void setFocusToBackButton() {
-		buttonBackToMenu.setFocused(true);
+	public void loadFromSlot(int slot) {
+		Gdx.app.log(getClass().getSimpleName(), "'loadFromSlot' " + slot + " selected");
+		if (gameDataService.isGameDataSlotExisting(slot)) {
+			gameDataService.loadGameDataFromSaveSlot(slot);
+			backToGame();
+		}
+		else {
+			playMenuSound(ControlledMenu.SOUND_ERROR);
+		}
 	}
 }
