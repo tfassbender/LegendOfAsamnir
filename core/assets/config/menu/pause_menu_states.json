@@ -7,30 +7,36 @@
 	},
 	button_controls: {
 		up: button_backToGame,
-		down: button_restartGame,
+		down: button_saveGame,
 		right: button_showMap,
 		select: showControls, 
 	},
-	button_restartGame: {
+	button_saveGame: {
 		up: button_controls,
+		down: button_loadGame,
+		right: button_showMap,
+		select: saveGame,
+	},
+	button_loadGame: {
+		up: button_saveGame,
 		down: button_quit,
 		right: item_1,
-		select: restartGame,
+		select: loadGame,
 	},
 	button_quit: {
-		up: button_restartGame,
+		up: button_loadGame,
 		right: item_5,
 		select: quitGame,
 	},
 	button_showMap: {
-		left: button_controls,
+		left: button_saveGame,
 		down: item_1,
 		select: showMap,
 	},
 	item_1: {
 		up: button_showMap,
 		down: item_5,
-		left: button_restartGame,
+		left: button_loadGame,
 		right: item_2,
 		select: selectCurrentItem,
 	},
@@ -77,10 +83,67 @@
 		left: item_7,
 		select: selectCurrentItem, 
 	},
+	
+	//*********************************************
+	//*** Controlls Dialog
+	//*********************************************
+	
 	button_controlsDialogBack: {
 		select: closeControlsDialog,
-	}
-	button_mapDialogBack: {
+	},
+	
+	//*********************************************
+	//*** Map Dialog
+	//*********************************************
+	
+	mapDialog_button_mapDialogBack: {
 		select: closeMapDialog,
-	}
+	},
+	
+	//*********************************************
+	//*** Save Game Dialog
+	//*********************************************
+	
+	saveDialog_button_saveGameDialogBack: {
+		down: saveDialog_button_quickSave,
+		select: closeSaveGameDialog,
+	},
+	
+	saveDialog_button_quickSave: {
+		up: saveDialog_button_saveGameDialogBack,
+		down: saveDialog_button_saveSlot1,
+		select: quickSave,
+	},
+	saveDialog_button_saveSlot1: {
+		up: saveDialog_button_quickSave,
+		down: saveDialog_button_saveSlot2,
+		select: saveToSlot1,
+	},
+	saveDialog_button_saveSlot2: {
+		up: saveDialog_button_saveSlot1,
+		down: saveDialog_button_saveSlot3,
+		select: saveToSlot2,
+	},
+	saveDialog_button_saveSlot3: {
+		up: saveDialog_button_saveSlot2,
+		down: saveDialog_button_saveSlot4,
+		select: saveToSlot3,
+	},
+	saveDialog_button_saveSlot4: {
+		up: saveDialog_button_saveSlot3,
+		down: saveDialog_button_saveSlot5,
+		select: saveToSlot4,
+	},
+	saveDialog_button_saveSlot5: {
+		up: saveDialog_button_saveSlot4,
+		select: saveToSlot5,
+	},
+	
+	//*********************************************
+	//*** Load Game Dialog
+	//*********************************************
+	
+	button_loadGameDialogBack: {
+		select: closeLoadGameDialog,
+	},
 }

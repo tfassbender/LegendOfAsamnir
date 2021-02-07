@@ -4,8 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.character.player.implementation.CharacterAction;
 import net.jfabricationgames.gdx.data.container.CharacterDataContainer;
+import net.jfabricationgames.gdx.data.container.GameDataContainer;
 
-public class CharacterPropertiesDataHandler {
+public class CharacterPropertiesDataHandler implements DataHandler {
 	
 	private static CharacterPropertiesDataHandler instance;
 	
@@ -18,8 +19,11 @@ public class CharacterPropertiesDataHandler {
 	
 	private CharacterDataContainer properties;
 	
-	private CharacterPropertiesDataHandler() {
-		properties = new CharacterDataContainer();
+	private CharacterPropertiesDataHandler() {}
+	
+	@Override
+	public void updateData(GameDataContainer dataContainer) {
+		properties = dataContainer.characterDataContainer;
 	}
 	
 	public void updateStats(float delta, CharacterAction action) {

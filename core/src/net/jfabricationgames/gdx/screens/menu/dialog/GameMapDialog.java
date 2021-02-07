@@ -18,7 +18,6 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
-import net.jfabricationgames.gdx.screens.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
@@ -194,10 +193,6 @@ public class GameMapDialog extends InGameMenuDialog {
 			screenTextWriter.setScale(1.5f);
 			screenTextWriter.drawText("No Map Available for this level", 200, 350, 790, Align.center, true);
 		}
-	}
-	
-	private String getButtonTextColorEncoding(FocusButton button) {
-		return button.hasFocus() ? InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS : InGameMenuScreen.TEXT_COLOR_ENCODING_NORMAL;
 	}
 	
 	public void setFocusToBackButton() {

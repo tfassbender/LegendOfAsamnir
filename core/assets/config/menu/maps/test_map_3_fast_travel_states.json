@@ -1,12 +1,12 @@
 {
 	test_map_point_1: {
-		up: button_mapDialogBack,
+		up: mapDialog_button_mapDialogBack,
 		down: test_map_point_2,
 		right: test_map_point_3,
 		select: selectFastTravelPoint,
 		
 		reachableFrom: [{
-				fromState: button_mapDialogBack,
+				fromState: mapDialog_button_mapDialogBack,
 				direction: LEFT,
 			}],
 	},
@@ -16,13 +16,13 @@
 		select: selectFastTravelPoint,
 	},
 	test_map_point_3: {
-		up: button_mapDialogBack,
+		up: mapDialog_button_mapDialogBack,
 		down: test_map_point_4,
 		left: test_map_point_1,
 		select: selectFastTravelPoint,
 		
 		reachableFrom: [{
-				fromState: button_mapDialogBack,
+				fromState: mapDialog_button_mapDialogBack,
 				direction: DOWN,
 			}],
 	},

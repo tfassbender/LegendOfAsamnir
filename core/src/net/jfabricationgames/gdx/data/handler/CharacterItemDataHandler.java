@@ -4,12 +4,13 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.item.ItemPropertyKeys;
 
-public class CharacterItemDataHandler {
+public class CharacterItemDataHandler implements DataHandler {
 	
 	private static final String ITEM_NAME_KEY = "key";
 	
@@ -28,8 +29,12 @@ public class CharacterItemDataHandler {
 	
 	private CharacterItemDataHandler() {
 		characterProperties = CharacterPropertiesDataHandler.getInstance();
-		properties = new CharacterItemContainer();
-		characterKeyContainer = new CharacterKeyDataHandler(properties);
+		characterKeyContainer = CharacterKeyDataHandler.getInstance();
+	}
+	
+	@Override
+	public void updateData(GameDataContainer dataContainer) {
+		properties = dataContainer.itemDataContainer;
 	}
 	
 	public <T extends PlayableCharacter & StatsCharacter> void collectItem(Item item, T player) {

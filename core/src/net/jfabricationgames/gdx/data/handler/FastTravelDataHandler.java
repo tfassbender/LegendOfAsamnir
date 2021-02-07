@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.data.container.FastTravelContainer;
+import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -11,7 +12,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 
-public class FastTravelDataHandler implements EventListener {
+public class FastTravelDataHandler implements DataHandler, EventListener {
 	
 	private static FastTravelDataHandler instance;
 	
@@ -25,9 +26,12 @@ public class FastTravelDataHandler implements EventListener {
 	private FastTravelContainer properties;
 	
 	private FastTravelDataHandler() {
-		properties = new FastTravelContainer();
-		
 		EventHandler.getInstance().registerEventListener(this);
+	}
+
+	@Override
+	public void updateData(GameDataContainer dataContainer) {
+		properties = dataContainer.fastTravelDataContainer;
 	}
 	
 	public Array<FastTravelPointProperties> getFastTravelPositions() {

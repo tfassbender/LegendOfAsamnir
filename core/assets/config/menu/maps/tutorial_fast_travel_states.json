@@ -1,32 +1,32 @@
 {
 	tutorial_beginning: {
-		up: button_mapDialogBack,
+		up: mapDialog_button_mapDialogBack,
 		down: tutorial_hidden_key_area,
 		right: tutorial_big_map_entrance,
 		select: selectFastTravelPoint,
 	},
 	tutorial_big_map_entrance: {
-		up: button_mapDialogBack,
+		up: mapDialog_button_mapDialogBack,
 		down: tutorial_dungeon_entrance,
 		left: tutorial_beginning,
 		right: tutorial_shop,
 		select: selectFastTravelPoint,
 	},
 	tutorial_shop: {
-		up: button_mapDialogBack,
+		up: mapDialog_button_mapDialogBack,
 		down: tutorial_dungeon_entrance,
 		left: tutorial_big_map_entrance,
 		right: tutorial_labyrinth,
 		select: selectFastTravelPoint,
 	},
 	tutorial_labyrinth: {
-		up: button_mapDialogBack,
+		up: mapDialog_button_mapDialogBack,
 		down: tutorial_dungeon,
 		left: tutorial_shop,
 		select: selectFastTravelPoint,
 		
 		reachableFrom: [{
-				fromState: button_mapDialogBack,
+				fromState: mapDialog_button_mapDialogBack,
 				direction: DOWN,
 			}],
 	},
@@ -61,11 +61,11 @@
 	tutorial_debug_1: {
 		debug: true,
 		
-		down: button_mapDialogBack,
+		down: mapDialog_button_mapDialogBack,
 		select: selectFastTravelPoint,
 		
 		reachableFrom: [{
-				fromState: button_mapDialogBack,
+				fromState: mapDialog_button_mapDialogBack,
 				direction: UP,
 			}],
 	}

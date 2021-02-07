@@ -8,7 +8,7 @@ import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
-public abstract  class InGameMenuDialog implements Disposable {
+public abstract class InGameMenuDialog implements Disposable {
 	
 	protected MenuBox background;
 	protected MenuBox banner;
@@ -30,6 +30,10 @@ public abstract  class InGameMenuDialog implements Disposable {
 	
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	
+	protected String getButtonTextColorEncoding(FocusButton button) {
+		return button.hasFocus() ? InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS : InGameMenuScreen.TEXT_COLOR_ENCODING_NORMAL;
 	}
 	
 	@Override

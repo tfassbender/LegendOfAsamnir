@@ -22,6 +22,8 @@ import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screens.menu.control.MenuStateMachine;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
+import net.jfabricationgames.gdx.screens.menu.dialog.LoadGameDialog;
+import net.jfabricationgames.gdx.screens.menu.dialog.SaveGameDialog;
 
 public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
@@ -42,8 +44,14 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final Array<String> ITEMS = new Array<>(new String[] {"jump", "bow", "bomb"});
 	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
+	private static final String STATE_PREFIX_MAP_DIALOG = "mapDialog_";
+	private static final String STATE_PREFIX_SAVE_DIALOG = "saveDialog_";
+	private static final String STATE_PREFIX_LOAD_DIALOG = "loadDialog_";
+	
 	private GameControlsDialog controlsDialog;
 	private GameMapDialog mapDialog;
+	private SaveGameDialog saveGameDialog;
+	private LoadGameDialog loadGameDialog;
 	
 	private MenuBox background;
 	private MenuBox headerBanner;
@@ -55,7 +63,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private AnimationDirector<TextureRegion> mapAnimation;
 	private FocusButton buttonBackToGame;
 	private FocusButton buttonControls;
-	private FocusButton buttonRestart;
+	private FocusButton buttonSave;
+	private FocusButton buttonLoad;
 	private FocusButton buttonQuit;
 	private FocusButton buttonShowMap;
 	
@@ -90,15 +99,20 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonBackToGame = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
 				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
 				.setSize(buttonWidth, buttonHeight) //
-				.setPosition(buttonPosX, lowestButtonY + 3f * (buttonHeight + buttonGapY)) //
+				.setPosition(buttonPosX, lowestButtonY + 4f * (buttonHeight + buttonGapY)) //
 				.build();
 		buttonControls = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
 				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
 				.setSize(buttonWidth, buttonHeight) //
+				.setPosition(buttonPosX, lowestButtonY + 3f * (buttonHeight + buttonGapY)) //
+				.build();
+		buttonSave = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(buttonWidth, buttonHeight) //
 				.setPosition(buttonPosX, lowestButtonY + 2f * (buttonHeight + buttonGapY)) //
 				.build();
-		buttonRestart = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
-				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+		buttonLoad = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED)//
 				.setSize(buttonWidth, buttonHeight) //
 				.setPosition(buttonPosX, lowestButtonY + 1f * (buttonHeight + buttonGapY)) //
 				.build();
@@ -110,7 +124,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		buttonBackToGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonControls.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
-		buttonRestart.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonSave.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonLoad.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		
 		ammoMenu = new AmmoSubMenu(AMMO_ITEMS, player);
@@ -129,6 +144,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private void createDialogs() {
 		controlsDialog = new GameControlsDialog();
 		mapDialog = new GameMapDialog(gameScreen, this::backToGame, this::playMenuSound);
+		saveGameDialog = new SaveGameDialog();
+		loadGameDialog = new LoadGameDialog();
 	}
 	
 	private void initializeStateMachine() {
@@ -187,6 +204,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		
 		drawControlsDialog();
 		drawMapDialog(delta);
+		drawSaveGameDialog();
+		drawLoadGameDialog();
 	}
 	
 	private void drawBackground() {
@@ -216,7 +235,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private void drawButtons() {
 		buttonBackToGame.draw(batch);
 		buttonControls.draw(batch);
-		buttonRestart.draw(batch);
+		buttonSave.draw(batch);
+		buttonLoad.draw(batch);
 		buttonQuit.draw(batch);
 		buttonShowMap.draw(batch);
 	}
@@ -234,6 +254,14 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	private void drawMapDialog(float delta) {
 		mapDialog.draw(delta);
+	}
+	
+	private void drawSaveGameDialog() {
+		saveGameDialog.draw();
+	}
+	
+	private void drawLoadGameDialog() {
+		loadGameDialog.draw();
 	}
 	
 	private void drawTexts() {
@@ -257,10 +285,11 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		screenTextWriter.setScale(1.15f);
 		int buttonTextX = 160;
 		int buttonTextWidth = 430;
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToGame) + "Back to Game", buttonTextX, 494, buttonTextWidth, Align.center,
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToGame) + "Back to Game", buttonTextX, 591, buttonTextWidth, Align.center,
 				false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonControls) + "Controlls", buttonTextX, 397, buttonTextWidth, Align.center, false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonRestart) + "Restart Game", buttonTextX, 302, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonControls) + "Controlls", buttonTextX, 494, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonSave) + "Save Game", buttonTextX, 397, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoad) + "Load Game", buttonTextX, 302, buttonTextWidth, Align.center, false);
 		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 206, buttonTextWidth, Align.center, false);
 	}
 	
@@ -275,6 +304,19 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 			int itemIndex = Integer.parseInt(stateName.substring(STATE_PREFIX_ITEM.length())) - 1;
 			itemMenu.setHoveredIndex(itemIndex);
 		}
+		else if (stateName.startsWith(STATE_PREFIX_MAP_DIALOG)) {
+			if (stateName.equals(STATE_PREFIX_MAP_DIALOG + "button_mapDialogBack")) {
+				mapDialog.setFocusToBackButton();
+			}
+		}
+		else if (stateName.startsWith(STATE_PREFIX_SAVE_DIALOG)) {
+			saveGameDialog.setFocusTo(stateName);
+		}
+		else if (stateName.startsWith(STATE_PREFIX_LOAD_DIALOG)) {
+			if (stateName.equals(STATE_PREFIX_MAP_DIALOG + "button_loadGameDialogBack")) {
+				loadGameDialog.setFocusToBackButton();
+			}
+		}
 		else if (stateName.startsWith(STATE_PREFIX_BUTTON)) {
 			String buttonId = stateName.substring(STATE_PREFIX_BUTTON.length());
 			FocusButton button = null;
@@ -285,17 +327,17 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				case "controls":
 					button = buttonControls;
 					break;
-				case "restartGame":
-					button = buttonRestart;
+				case "saveGame":
+					button = buttonSave;
+					break;
+				case "loadGame":
+					button = buttonLoad;
 					break;
 				case "quit":
 					button = buttonQuit;
 					break;
 				case "showMap":
 					button = buttonShowMap;
-					break;
-				case "mapDialogBack":
-					mapDialog.setFocusToBackButton();
 					break;
 				case "controlsDialogBack":
 					//dialog button; not handled here
@@ -308,6 +350,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 			}
 		}
 		
+		//no prefix is used for fast travel points
 		//will be ignored if the state is not known in the map dialog
 		mapDialog.setFocusTo(stateName);
 	}
@@ -315,7 +358,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private void unfocusAll() {
 		buttonBackToGame.setFocused(false);
 		buttonControls.setFocused(false);
-		buttonRestart.setFocused(false);
+		buttonSave.setFocused(false);
+		buttonLoad.setFocused(false);
 		buttonQuit.setFocused(false);
 		buttonShowMap.setFocused(false);
 		itemMenu.setHoveredIndex(-1);
@@ -326,6 +370,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		super.dispose();
 		controlsDialog.dispose();
 		mapDialog.dispose();
+		saveGameDialog.dispose();
+		loadGameDialog.dispose();
 	}
 	
 	//****************************************************************
@@ -338,11 +384,23 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		stateMachine.changeState("button_controlsDialogBack");
 	}
 	
+	public void saveGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Save Game' selected");
+		saveGameDialog.setVisible(true);
+		stateMachine.changeState("saveDialog_button_saveGameDialogBack");
+	}
+	
+	public void loadGame() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Load Game' selected");
+		loadGameDialog.setVisible(true);
+		stateMachine.changeState("loadDialog_button_loadGameDialogBack");
+	}
+	
 	public void showMap() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Show Map' selected");
 		mapDialog.setVisible(true);
 		mapDialog.setFocusToBackButton();
-		stateMachine.changeState("button_mapDialogBack");
+		stateMachine.changeState("mapDialog_button_mapDialogBack");
 	}
 	
 	public void selectCurrentItem() {
@@ -361,7 +419,45 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		stateMachine.changeState("button_showMap");
 	}
 	
+	public void closeSaveGameDialog() {
+		saveGameDialog.setVisible(false);
+		stateMachine.changeState("button_saveGame");
+	}
+	
+	public void closeLoadGameDialog() {
+		loadGameDialog.setVisible(false);
+		stateMachine.changeState("button_loadGame");
+	}
+	
 	public void selectFastTravelPoint() {
 		mapDialog.selectFastTravelPoint();
+	}
+	
+	//*********************************************************************
+	//*** State machine methods for save dialog (called via reflection)
+	//*********************************************************************
+	
+	public void quickSave() {
+		saveGameDialog.quickSave();
+	}
+	
+	public void saveToSlot1() {
+		saveGameDialog.saveToSlot(1);
+	}
+	
+	public void saveToSlot2() {
+		saveGameDialog.saveToSlot(2);
+	}
+	
+	public void saveToSlot3() {
+		saveGameDialog.saveToSlot(3);
+	}
+	
+	public void saveToSlot4() {
+		saveGameDialog.saveToSlot(4);
+	}
+	
+	public void saveToSlot5() {
+		saveGameDialog.saveToSlot(5);
 	}
 }

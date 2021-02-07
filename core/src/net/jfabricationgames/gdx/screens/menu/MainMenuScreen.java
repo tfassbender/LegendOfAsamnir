@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -110,6 +111,7 @@ public class MainMenuScreen extends ScreenAdapter implements InputActionListener
 	}
 	
 	private void startGame() {
+		GameDataHandler.getInstance().createNewGameData();
 		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
 		dispose();
 	}

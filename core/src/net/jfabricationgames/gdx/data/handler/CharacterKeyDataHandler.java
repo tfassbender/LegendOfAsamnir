@@ -3,18 +3,31 @@ package net.jfabricationgames.gdx.data.handler;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
+import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.item.Item;
 
-public class CharacterKeyDataHandler {
+public class CharacterKeyDataHandler implements DataHandler {
 	
 	private static final String SPECIAL_KEY_MESSAGE_HEADER = "Special Key";
 	
+	private static CharacterKeyDataHandler instance;
+	
+	public static synchronized CharacterKeyDataHandler getInstance() {
+		if (instance == null) {
+			instance = new CharacterKeyDataHandler();
+		}
+		return instance;
+	}
+	
 	private CharacterItemContainer properties;
 	
-	protected CharacterKeyDataHandler(CharacterItemContainer properties) {
-		this.properties = properties;
+	private CharacterKeyDataHandler() {}
+	
+	@Override
+	public void updateData(GameDataContainer dataContainer) {
+		properties = dataContainer.itemDataContainer;
 	}
 	
 	public void addKey(Item item) {
@@ -27,7 +40,7 @@ public class CharacterKeyDataHandler {
 		
 		countKeys();
 	}
-
+	
 	private void countKeys() {
 		properties.numNormalKeys = 0;
 		for (KeyItemProperties key : properties.keys) {
