@@ -8,11 +8,14 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -24,6 +27,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
 	
+	@MapObjectState
 	private boolean actionExecuted = false;
 	private boolean changedBodyToSensor = false;
 	private AnimationDirector<TextureRegion> interactionAnimation;
@@ -54,6 +58,24 @@ public class InteractiveObject extends GameObject implements Interactive {
 		
 		if (isActivateOnStartup()) {
 			executeInteraction();
+		}
+	}
+	
+	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		super.applyState(state);
+		
+		if (Boolean.parseBoolean(state.get("actionExecuted"))) {
+			actionExecuted = true;
+			
+			if (typeConfig.changeBodyToSensorAfterAction) {
+				changedBodyToSensor = true;
+				changeBodyToSensor();
+			}
+			
+			if (typeConfig.textureAfterAction != null) {
+				sprite = createSprite(typeConfig.textureAfterAction);
+			}
 		}
 	}
 	
@@ -129,6 +151,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 		if (typeConfig.textureAfterAction != null) {
 			sprite = createSprite(typeConfig.textureAfterAction);
 		}
+		
+		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
 	@Override

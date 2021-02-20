@@ -20,6 +20,7 @@ import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutscenePositioningUnit;
+import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapObject;
@@ -33,7 +34,7 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class GameObject implements Hittable, GameMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
+public class GameObject implements Hittable, GameMapObject, StatefulMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
 	
 	public static final String MAP_PROPERTY_KEY_DEBUG_OBJECT = "debugObject";
 	
@@ -91,6 +92,14 @@ public class GameObject implements Hittable, GameMapObject, CutsceneControlledUn
 			typeConfig.initAction.execute(this);
 		}
 	}
+	
+	@Override
+	public String getMapObjectId() {
+		return StatefulMapObject.getMapObjectId(mapProperties);
+	}
+
+	@Override
+	public void applyState(ObjectMap<String, String> state) {}
 	
 	protected void createPhysicsBody(float x, float y) {
 		float width = sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.x;

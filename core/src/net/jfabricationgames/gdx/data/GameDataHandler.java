@@ -6,11 +6,13 @@ import net.jfabricationgames.gdx.data.container.CharacterDataContainer;
 import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.data.container.FastTravelContainer;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
+import net.jfabricationgames.gdx.data.container.MapObjectDataContainer;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterKeyDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.DataHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 
 public class GameDataHandler implements DataHandler {
 	
@@ -34,6 +36,7 @@ public class GameDataHandler implements DataHandler {
 		CharacterKeyDataHandler.getInstance().updateData(gameDataContainer);
 		CharacterPropertiesDataHandler.getInstance().updateData(gameDataContainer);
 		FastTravelDataHandler.getInstance().updateData(gameDataContainer);
+		MapObjectDataHandler.getInstance().updateData(gameDataContainer);
 	}
 	
 	public void createNewGameData() {
@@ -42,6 +45,7 @@ public class GameDataHandler implements DataHandler {
 		gameDataContainer.characterDataContainer = new CharacterDataContainer();
 		gameDataContainer.itemDataContainer = new CharacterItemContainer();
 		gameDataContainer.fastTravelDataContainer = new FastTravelContainer();
+		gameDataContainer.mapObjectDataContainer = new MapObjectDataContainer();
 		updateData(gameDataContainer);
 	}
 	

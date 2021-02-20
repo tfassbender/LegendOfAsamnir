@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
@@ -25,6 +26,11 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -37,7 +43,7 @@ import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
-public class GameMap implements Disposable {
+public class GameMap implements EventListener, Disposable {
 	
 	public enum GlobalMapPropertyKeys {
 		
@@ -118,6 +124,8 @@ public class GameMap implements Disposable {
 		
 		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
 		player = PlayerFactory.createPlayer();
+		
+		EventHandler.getInstance().registerEventListener(this);
 	}
 	
 	public void showMap(String mapAsset) {
@@ -206,7 +214,8 @@ public class GameMap implements Disposable {
 	}
 	
 	private boolean isMapInitialized() {
-		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null && projectiles != null;
+		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null
+				&& projectiles != null;
 	}
 	
 	public void beforeWorldStep() {
@@ -307,7 +316,7 @@ public class GameMap implements Disposable {
 			enemy.draw(delta, batch);
 		}
 	}
-
+	
 	private void processNpcs(float delta) {
 		for (NonPlayableCharacter npc : nonPlayableCharacters) {
 			npc.act(delta);
@@ -385,7 +394,7 @@ public class GameMap implements Disposable {
 		enemies.removeValue(enemy, false);
 		removePhysicsBody(body);
 	}
-
+	
 	public void addNpc(NonPlayableCharacter npc) {
 		nonPlayableCharacters.add(npc);
 	}
@@ -463,6 +472,22 @@ public class GameMap implements Disposable {
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public void handleEvent(EventConfig event) {
+		if (event.eventType == EventType.UPDATE_MAP_OBJECT_STATES) {
+			updateMapObjectStates((MapObjectDataHandler) event.parameterObject);
+		}
+	}
+	
+	private void updateMapObjectStates(MapObjectDataHandler dataHandler) {
+		for (GameObject object : objects) {
+			ObjectMap<String, String> state = dataHandler.getStateById(object.getMapObjectId());
+			if (state != null) {
+				object.applyState(state);
+			}
+		}
 	}
 	
 	@Override
