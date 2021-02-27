@@ -1,8 +1,6 @@
 package net.jfabricationgames.gdx.map;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -228,7 +226,8 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private void executeAnnotatedMethodsOnAllObjects(Class<? extends Annotation> annotation) {
-		executeAnnotatedMethods(annotation, player);
+		AnnotationUtil.executeAnnotatedMethods(annotation, player);
+		
 		executeAnnotatedMethods(annotation, items);
 		executeAnnotatedMethods(annotation, itemsAboveGameObjects);
 		executeAnnotatedMethods(annotation, objects);
@@ -239,21 +238,7 @@ public class GameMap implements EventListener, Disposable {
 	
 	private void executeAnnotatedMethods(Class<? extends Annotation> annotation, Array<?> mapObjects) {
 		for (Object mapObject : mapObjects) {
-			executeAnnotatedMethods(annotation, mapObject);
-		}
-	}
-	
-	private void executeAnnotatedMethods(Class<? extends Annotation> annotation, Object mapObject) {
-		Class<?> mapObjectType = mapObject.getClass();
-		Array<Method> annotatedMethods = AnnotationUtil.getMethodsAnnotatedWith(mapObjectType, annotation);
-		for (Method method : annotatedMethods) {
-			try {
-				method.invoke(mapObject, new Object[0]);
-			}
-			catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				Gdx.app.error(getClass().getSimpleName(), "could not invoke method '" + method.getName() + "' annotated '"
-						+ annotation.getSimpleName() + "' on object of type '" + mapObjectType.getSimpleName() + "'");
-			}
+			AnnotationUtil.executeAnnotatedMethods(annotation, mapObject);
 		}
 	}
 	

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -42,6 +43,8 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	
 	@MapObjectState
 	protected boolean picked;
+	@MapObjectState
+	private Vector2 position;
 	
 	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties,
 			GameMap gameMap) {
@@ -73,9 +76,37 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		body.setUserData(this);
 	}
 	
+	public void setPosition(Vector2 position) {
+		this.position = position;
+	}
+	
 	@Override
 	public String getMapObjectId() {
+		if (!isConfiguredMapObject()) {
+			if (isSpecialItem()) {
+				return getSpecialItemValue();
+			}
+		}
+		
 		return StatefulMapObject.getMapObjectId(properties);
+	}
+	
+	private boolean isSpecialItem() {
+		return KeyItemProperties.isSpecialKey(getKeyProperties());
+	}
+	
+	private String getSpecialItemValue() {
+		if (!isSpecialItem()) {
+			return null;
+		}
+		
+		String specialKeyProperties = KeyItemProperties.getSpecialKeyPropertiesAsString(getKeyProperties());
+		return specialKeyProperties.replace("\\n", "__").replace(" ", "_").replace(":", "_");
+	}
+	
+	@Override
+	public boolean isConfiguredMapObject() {
+		return StatefulMapObject.getMapObjectId(properties) != null;
 	}
 	
 	@Override

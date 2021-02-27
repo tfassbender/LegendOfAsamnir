@@ -10,11 +10,13 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.container.MapObjectDataContainer;
 import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
+import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class MapObjectDataHandler {
 	
@@ -55,6 +57,7 @@ public class MapObjectDataHandler {
 		String mapObjectId = mapObject.getMapObjectId();
 		if (mapObjectId != null) {
 			try {
+				callBeforePersistStateMethods(mapObject);
 				MapObjectStateProperties serializedState = serializeMapObjectState(mapObject);
 				if (!serializedState.state.isEmpty()) {
 					addObjectTypeDescription(mapObject, serializedState);
@@ -65,6 +68,10 @@ public class MapObjectDataHandler {
 				Gdx.app.error(getClass().getSimpleName(), "Exception during serialization of StatefulMapObject", e);
 			}
 		}
+	}
+
+	private void callBeforePersistStateMethods(StatefulMapObject mapObject) {
+		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, mapObject);
 	}
 
 	private MapObjectStateProperties serializeMapObjectState(StatefulMapObject mapObject) throws IllegalArgumentException, IllegalAccessException {

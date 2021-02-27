@@ -18,6 +18,9 @@ public interface StatefulMapObject {
 	
 	public String getMapObjectId();
 	
-	public void applyState(ObjectMap<String, String> state);
+	public default boolean isConfiguredMapObject() {
+		return true;
+	}
 	
+	public void applyState(ObjectMap<String, String> state);
 }
