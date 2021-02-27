@@ -483,14 +483,19 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private void updateMapObjectStates(MapObjectDataHandler dataHandler) {
-		for (GameObject object : objects) {
+		applyStatesToMapObjects(dataHandler, objects);
+		applyStatesToMapObjects(dataHandler, items);
+		applyStatesToMapObjects(dataHandler, enemies);
+	}
+	
+	private void applyStatesToMapObjects(MapObjectDataHandler dataHandler, Array<? extends StatefulMapObject> mapObjects) {
+		//create a copy of the list before executing to avoid a concurrent modification (which would not throw an exception)
+		Array<StatefulMapObject> immutableObjectList = new Array<>(mapObjects);
+		for (StatefulMapObject object : immutableObjectList) {
 			applyStateIfPresent(dataHandler, object);
 		}
-		for (Item item : items) {
-			applyStateIfPresent(dataHandler, item);
-		}
 	}
-
+	
 	private void applyStateIfPresent(MapObjectDataHandler dataHandler, StatefulMapObject object) {
 		ObjectMap<String, String> state = dataHandler.getStateById(object.getMapObjectId());
 		if (state != null) {

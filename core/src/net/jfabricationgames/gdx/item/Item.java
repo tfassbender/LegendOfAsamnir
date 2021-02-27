@@ -73,6 +73,19 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		body.setUserData(this);
 	}
 	
+	@Override
+	public String getMapObjectId() {
+		return StatefulMapObject.getMapObjectId(properties);
+	}
+	
+	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		if (Boolean.parseBoolean(state.get("picked"))) {
+			picked = true;
+			remove();
+		}
+	}
+	
 	public void draw(float delta, SpriteBatch batch) {
 		if (animation != null) {
 			animation.increaseStateTime(delta);
@@ -137,18 +150,5 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	@Override
 	public String toString() {
 		return "Item [name=" + itemName + "; properties=" + properties + "]";
-	}
-	
-	@Override
-	public String getMapObjectId() {
-		return StatefulMapObject.getMapObjectId(properties);
-	}
-	
-	@Override
-	public void applyState(ObjectMap<String, String> state) {
-		if (Boolean.parseBoolean(state.get("picked"))) {
-			picked = true;
-			remove();
-		}
 	}
 }

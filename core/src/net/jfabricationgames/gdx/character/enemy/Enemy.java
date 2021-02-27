@@ -20,6 +20,9 @@ import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.state.MapObjectState;
+import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -27,7 +30,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
-public class Enemy extends AbstractCharacter implements Hittable {
+public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObject {
 	
 	private static final String STATE_NAME_MOVE = "move";
 	
@@ -39,7 +42,10 @@ public class Enemy extends AbstractCharacter implements Hittable {
 	protected float health;
 	
 	protected ObjectMap<String, Float> dropTypes;
+	@MapObjectState
 	protected boolean droppedItems;
+	@MapObjectState
+	protected boolean defeated;
 	
 	private PhysicsBodyProperties physicsBodyProperties;
 	
@@ -128,6 +134,23 @@ public class Enemy extends AbstractCharacter implements Hittable {
 	protected void addAdditionalPhysicsParts() {
 		if (typeConfig.addSensor) {
 			CharacterPhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
+		}
+	}
+	
+	@Override
+	public String getMapObjectId() {
+		return StatefulMapObject.getMapObjectId(properties);
+	}
+	
+	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		if (Boolean.parseBoolean(state.get("droppedItems")) && dropsSpecialItems()) {
+			//don't drop special items twice, because special items will be saved and re-added to the map if they are not picked up
+			droppedItems = true;
+		}
+		if (Boolean.parseBoolean(state.get("defeated"))) {
+			defeated = true;
+			removeFromMap();
 		}
 	}
 	
@@ -225,6 +248,9 @@ public class Enemy extends AbstractCharacter implements Hittable {
 	
 	protected void die() {
 		stateMachine.setState(getDieStateName());
+		
+		defeated = true;
+		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
 	/**
@@ -238,7 +264,7 @@ public class Enemy extends AbstractCharacter implements Hittable {
 		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
 		
-		if (properties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
+		if (dropsSpecialItems()) {
 			String specialDropType = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
 			String specialDropMapProperties = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
 			MapProperties mapProperties = TiledMapLoader.createMapPropertiesFromString(specialDropMapProperties);
@@ -247,7 +273,13 @@ public class Enemy extends AbstractCharacter implements Hittable {
 		else {
 			ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
 		}
+		
 		droppedItems = true;
+		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
+	}
+	
+	private boolean dropsSpecialItems() {
+		return properties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE);
 	}
 	
 	@Override
