@@ -27,6 +27,7 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -483,10 +484,17 @@ public class GameMap implements EventListener, Disposable {
 	
 	private void updateMapObjectStates(MapObjectDataHandler dataHandler) {
 		for (GameObject object : objects) {
-			ObjectMap<String, String> state = dataHandler.getStateById(object.getMapObjectId());
-			if (state != null) {
-				object.applyState(state);
-			}
+			applyStateIfPresent(dataHandler, object);
+		}
+		for (Item item : items) {
+			applyStateIfPresent(dataHandler, item);
+		}
+	}
+
+	private void applyStateIfPresent(MapObjectDataHandler dataHandler, StatefulMapObject object) {
+		ObjectMap<String, String> state = dataHandler.getStateById(object.getMapObjectId());
+		if (state != null) {
+			object.applyState(state);
 		}
 	}
 	

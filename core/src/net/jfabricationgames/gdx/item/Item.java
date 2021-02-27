@@ -12,7 +12,10 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
+import net.jfabricationgames.gdx.data.state.MapObjectState;
+import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -21,7 +24,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class Item implements GameMapObject, CutsceneControlledUnit {
+public class Item implements GameMapObject, StatefulMapObject, CutsceneControlledUnit {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
@@ -36,6 +39,9 @@ public class Item implements GameMapObject, CutsceneControlledUnit {
 	protected final String itemName;
 	protected ItemTypeConfig typeConfig;
 	protected String pickUpSoundName;
+	
+	@MapObjectState
+	protected boolean picked;
 	
 	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties,
 			GameMap gameMap) {
@@ -82,8 +88,11 @@ public class Item implements GameMapObject, CutsceneControlledUnit {
 	}
 	
 	public void pickUp() {
+		picked = true;
 		playPickUpSound();
 		remove();
+		
+		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
 	@Override
@@ -128,5 +137,18 @@ public class Item implements GameMapObject, CutsceneControlledUnit {
 	@Override
 	public String toString() {
 		return "Item [name=" + itemName + "; properties=" + properties + "]";
+	}
+	
+	@Override
+	public String getMapObjectId() {
+		return StatefulMapObject.getMapObjectId(properties);
+	}
+	
+	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		if (Boolean.parseBoolean(state.get("picked"))) {
+			picked = true;
+			remove();
+		}
 	}
 }

@@ -18,6 +18,8 @@ import net.jfabricationgames.gdx.event.EventType;
 
 public class MapObjectDataHandler {
 	
+	public static final String TYPE_DESCRIPTION_MAP_KEY = "__mapObjectType";
+	
 	private static MapObjectDataHandler instance;
 	
 	public static synchronized MapObjectDataHandler getInstance() {
@@ -36,18 +38,35 @@ public class MapObjectDataHandler {
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_OBJECT_STATES).setParameterObject(this));
 	}
 	
-	public void addStatefulMapObject(StatefulMapObject mapObject) {
-		try {
-			MapObjectStateProperties serializedState = serializeMapObjectState(mapObject);
-			if (!serializedState.state.isEmpty()) {
-				properties.mapObjectStates.put(mapObject.getMapObjectId(), serializedState);
-			}
+	public ObjectMap<String, String> getStateById(String mapObjectId) {
+		if (mapObjectId == null) {
+			return null;
 		}
-		catch (IllegalArgumentException | IllegalAccessException e) {
-			Gdx.app.error(getClass().getSimpleName(), "Exception during serialization of StatefulMapObject", e);
+		
+		MapObjectStateProperties mapObjectStateProperties = properties.mapObjectStates.get(mapObjectId);
+		if (mapObjectStateProperties == null) {
+			return null;
 		}
+		
+		return mapObjectStateProperties.state;
 	}
 	
+	public void addStatefulMapObject(StatefulMapObject mapObject) {
+		String mapObjectId = mapObject.getMapObjectId();
+		if (mapObjectId != null) {
+			try {
+				MapObjectStateProperties serializedState = serializeMapObjectState(mapObject);
+				if (!serializedState.state.isEmpty()) {
+					addObjectTypeDescription(mapObject, serializedState);
+					properties.mapObjectStates.put(mapObjectId, serializedState);
+				}
+			}
+			catch (IllegalArgumentException | IllegalAccessException e) {
+				Gdx.app.error(getClass().getSimpleName(), "Exception during serialization of StatefulMapObject", e);
+			}
+		}
+	}
+
 	private MapObjectStateProperties serializeMapObjectState(StatefulMapObject mapObject) throws IllegalArgumentException, IllegalAccessException {
 		ObjectMap<String, String> state = new ObjectMap<>();
 		Array<Field> stateFields = getStateFields(mapObject);
@@ -83,16 +102,7 @@ public class MapObjectDataHandler {
 		return stateFields;
 	}
 	
-	public ObjectMap<String, String> getStateById(String mapObjectId) {
-		if (mapObjectId == null) {
-			return null;
-		}
-		
-		MapObjectStateProperties mapObjectStateProperties = properties.mapObjectStates.get(mapObjectId);
-		if (mapObjectStateProperties == null) {
-			return null;
-		}
-		
-		return mapObjectStateProperties.state;
+	private void addObjectTypeDescription(StatefulMapObject mapObject, MapObjectStateProperties serializedState) {
+		serializedState.state.put(TYPE_DESCRIPTION_MAP_KEY, mapObject.getClass().getSimpleName());
 	}
 }
