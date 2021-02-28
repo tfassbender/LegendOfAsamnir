@@ -170,6 +170,8 @@ public class GameMap implements EventListener, Disposable {
 		mapPhysicsLoader.createPhysics(map);
 		
 		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
+		
+		updateMapObjectStates();
 	}
 	
 	private void removeCurrentMapIfPresent() {
@@ -489,11 +491,12 @@ public class GameMap implements EventListener, Disposable {
 	@Override
 	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.UPDATE_MAP_OBJECT_STATES) {
-			updateMapObjectStates((MapObjectDataHandler) event.parameterObject);
+			updateMapObjectStates();
 		}
 	}
 	
-	private void updateMapObjectStates(MapObjectDataHandler dataHandler) {
+	private void updateMapObjectStates() {
+		MapObjectDataHandler dataHandler = MapObjectDataHandler.getInstance();
 		applyStatesToMapObjects(dataHandler, objects);
 		applyStatesToMapObjects(dataHandler, items);
 		applyStatesToMapObjects(dataHandler, enemies);

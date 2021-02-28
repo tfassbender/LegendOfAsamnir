@@ -41,7 +41,7 @@ public class MapObjectDataHandler {
 	
 	public void updateData(GameDataContainer gameDataContainer) {
 		properties = gameDataContainer.mapObjectDataContainer;
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_OBJECT_STATES).setParameterObject(this));
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_OBJECT_STATES));
 	}
 	
 	public ObjectMap<String, String> getStateById(String mapObjectId) {

@@ -72,7 +72,7 @@
 			displayText: "Wait, what?! You've killed the boss?! This must be a bug... Jokes asside, you've reached the end of this demo level. Congratulations! (More content comming soon)",
 		}
 	},
-	demoLevelEndReached_pickedItem: {
+	tutorialLevelEndReached_pickedItem: {
 		event: {
 			eventType: EVENT_ITEM_PICKED_UP,
 			stringValue: tutorialLevelEnded,
