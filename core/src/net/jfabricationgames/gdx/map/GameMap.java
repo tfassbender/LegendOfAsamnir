@@ -25,6 +25,7 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -497,9 +498,12 @@ public class GameMap implements EventListener, Disposable {
 	
 	private void updateMapObjectStates() {
 		MapObjectDataHandler dataHandler = MapObjectDataHandler.getInstance();
+		
 		applyStatesToMapObjects(dataHandler, objects);
 		applyStatesToMapObjects(dataHandler, items);
 		applyStatesToMapObjects(dataHandler, enemies);
+		
+		addNotConfiguredObjects(dataHandler);
 	}
 	
 	private void applyStatesToMapObjects(MapObjectDataHandler dataHandler, Array<? extends StatefulMapObject> mapObjects) {
@@ -514,6 +518,33 @@ public class GameMap implements EventListener, Disposable {
 		ObjectMap<String, String> state = dataHandler.getStateById(object.getMapObjectId());
 		if (state != null) {
 			object.applyState(state);
+		}
+	}
+	
+	private void addNotConfiguredObjects(MapObjectDataHandler dataHandler) {
+		ObjectMap<String, MapObjectStateProperties> currentMapStates = dataHandler.getCurrentMapStates();
+		
+		if (currentMapStates != null) {
+			for (String mapStateKey : currentMapStates.keys()) {
+				if (isUnconfiguredObjectKey(mapStateKey)) {
+					addUnconfiguredObjectToMap(currentMapStates.get(mapStateKey));
+				}
+			}
+		}
+	}
+	
+	private boolean isUnconfiguredObjectKey(String mapStateKey) {
+		return mapStateKey.startsWith(MapObjectDataHandler.OBJECT_NOT_CONFIGURED_IN_MAP_PREFIX);
+	}
+	
+	private void addUnconfiguredObjectToMap(MapObjectStateProperties mapObjectStateProperties) {
+		String objectType = mapObjectStateProperties.state.get(MapObjectDataHandler.TYPE_DESCRIPTION_MAP_KEY);
+		switch (objectType) {
+			case "Item":
+				itemFactory.addItemFromSavedState(mapObjectStateProperties.state);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected type: " + objectType);
 		}
 	}
 	

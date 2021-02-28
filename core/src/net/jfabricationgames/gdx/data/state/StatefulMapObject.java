@@ -18,7 +18,7 @@ public interface StatefulMapObject {
 	
 	public String getMapObjectId();
 	
-	public default boolean isConfiguredMapObject() {
+	public default boolean isConfiguredInMap() {
 		return true;
 	}
 	

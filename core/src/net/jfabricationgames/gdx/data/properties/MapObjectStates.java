@@ -4,5 +4,5 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class MapObjectStates {
 	
-	public ObjectMap<String, MapObjectStateProperties> mapObjectStates;
+	public ObjectMap<String, MapObjectStateProperties> states;
 }

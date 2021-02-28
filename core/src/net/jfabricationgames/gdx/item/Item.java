@@ -15,6 +15,7 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
+import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -24,6 +25,7 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyPropertie
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
+import net.jfabricationgames.gdx.util.SerializationUtil;
 
 public class Item implements GameMapObject, StatefulMapObject, CutsceneControlledUnit {
 	
@@ -36,6 +38,7 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	protected MapProperties properties;
 	protected Body body;
 	
+	@MapObjectState
 	protected final String itemName;
 	protected ItemTypeConfig typeConfig;
 	protected String pickUpSoundName;
@@ -44,6 +47,8 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	protected boolean picked;
 	@MapObjectState
 	private Vector2 position;
+	@MapObjectState
+	private String mapProperties;
 	
 	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		this.itemName = itemName;
@@ -77,9 +82,16 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		this.position = position;
 	}
 	
+	@BeforePersistState
+	public void updateMapProperties() {
+		if (!isConfiguredInMap()) {
+			mapProperties = SerializationUtil.serializeMapProperties(properties, false);
+		}
+	}
+	
 	@Override
 	public String getMapObjectId() {
-		if (!isConfiguredMapObject()) {
+		if (!isConfiguredInMap()) {
 			if (isSpecialItem()) {
 				return getSpecialItemValue();
 			}
@@ -98,11 +110,11 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		}
 		
 		String specialKeyProperties = KeyItemProperties.getSpecialKeyPropertiesAsString(getKeyProperties());
-		return specialKeyProperties.replace("\\n", "__").replace(" ", "_").replace(":", "_");
+		return specialKeyProperties.replace("\\n", "_").replace(" ", "_").replace(":", "_");
 	}
 	
 	@Override
-	public boolean isConfiguredMapObject() {
+	public boolean isConfiguredInMap() {
 		return StatefulMapObject.getMapObjectId(properties) != null;
 	}
 	

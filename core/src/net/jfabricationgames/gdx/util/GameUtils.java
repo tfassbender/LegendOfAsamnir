@@ -3,7 +3,9 @@ package net.jfabricationgames.gdx.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
-public abstract class GameUtils {
+public class GameUtils {
+	
+	private GameUtils() {}
 	
 	public static void runDelayed(Runnable runnable, float delayTime) {
 		Thread delayThread = new Thread(() -> {

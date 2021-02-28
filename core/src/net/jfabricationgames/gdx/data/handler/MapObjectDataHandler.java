@@ -23,6 +23,7 @@ import net.jfabricationgames.gdx.util.AnnotationUtil;
 public class MapObjectDataHandler {
 	
 	public static final String TYPE_DESCRIPTION_MAP_KEY = "__mapObjectType";
+	public static final String OBJECT_NOT_CONFIGURED_IN_MAP_PREFIX = "__not_configured_in_map__";
 	
 	private static MapObjectDataHandler instance;
 	
@@ -44,6 +45,15 @@ public class MapObjectDataHandler {
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_OBJECT_STATES));
 	}
 	
+	public ObjectMap<String, MapObjectStateProperties> getCurrentMapStates() {
+		MapObjectStates mapObjectStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
+		if (mapObjectStates == null) {
+			return null;
+		}
+		
+		return mapObjectStates.states;
+	}
+	
 	public ObjectMap<String, String> getStateById(String mapObjectId) {
 		if (mapObjectId == null) {
 			return null;
@@ -63,7 +73,7 @@ public class MapObjectDataHandler {
 			return null;
 		}
 		
-		return currentMapStates.mapObjectStates.get(mapObjectId);
+		return currentMapStates.states.get(mapObjectId);
 	}
 	
 	private String getCurrentMapIdentifier() {
@@ -73,6 +83,9 @@ public class MapObjectDataHandler {
 	public void addStatefulMapObject(StatefulMapObject mapObject) {
 		String mapObjectId = mapObject.getMapObjectId();
 		if (mapObjectId != null) {
+			if (!mapObject.isConfiguredInMap()) {
+				mapObjectId = OBJECT_NOT_CONFIGURED_IN_MAP_PREFIX + mapObjectId;
+			}
 			try {
 				callBeforePersistStateMethods(mapObject);
 				MapObjectStateProperties serializedState = serializeMapObjectState(mapObject);
@@ -134,10 +147,10 @@ public class MapObjectDataHandler {
 		MapObjectStates currentMapStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
 		if (currentMapStates == null) {
 			currentMapStates = new MapObjectStates();
-			currentMapStates.mapObjectStates = new ObjectMap<>();
+			currentMapStates.states = new ObjectMap<>();
 			properties.mapObjectStates.put(getCurrentMapIdentifier(), currentMapStates);
 		}
 		
-		currentMapStates.mapObjectStates.put(mapObjectId, serializedState);
+		currentMapStates.states.put(mapObjectId, serializedState);
 	}
 }

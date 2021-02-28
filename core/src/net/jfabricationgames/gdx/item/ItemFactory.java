@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
@@ -16,6 +17,7 @@ import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.SerializationUtil;
 
 public class ItemFactory extends AbstractFactory {
 	
@@ -81,6 +83,19 @@ public class ItemFactory extends AbstractFactory {
 				GameMap.getInstance().addItem(item);
 			}
 		});
+	}
+	
+	public void addItemFromSavedState(ObjectMap<String, String> state) {
+		boolean pickedUp = Boolean.parseBoolean(state.get("picked"));
+		
+		if (!pickedUp) {
+			Json json = new Json();
+			String type = state.get("itemName");
+			Vector2 position = json.fromJson(Vector2.class, state.get("position"));
+			MapProperties mapProperties = SerializationUtil.deserializeMapProperties(state.get("mapProperties"));
+			
+			createAndDropItem(type, mapProperties, position.x, position.y, true, ItemDropUtil.ITEM_DROP_PICKUP_DELAY);
+		}
 	}
 	
 	public Item createItem(String name, float x, float y, MapProperties properties) {

@@ -1,7 +1,5 @@
 package net.jfabricationgames.gdx.map;
 
-import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -23,6 +21,7 @@ import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.SerializationUtil;
 
 public class TiledMapLoader {
 	
@@ -33,26 +32,7 @@ public class TiledMapLoader {
 	public static final String OBJECT_NAME_NPC = "npc";
 	
 	public static String mapPropertiesToString(MapProperties properties, boolean includePosition) {
-		StringBuilder sb = new StringBuilder();
-		
-		Array<String> excludedKeys = new Array<>();
-		if (!includePosition) {
-			excludedKeys.addAll("x", "y", "width", "height");
-		}
-		
-		sb.append('{');
-		Iterator<String> keys = properties.getKeys();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			String value = properties.get(key).toString();
-			if (!excludedKeys.contains(key, false)) {
-				sb.append('\"').append(key).append('\"').append(": ").append('\"').append(value).append("\", ");
-			}
-		}
-		sb.setLength(sb.length() - 2);
-		sb.append('}');
-		
-		return sb.toString();
+		return SerializationUtil.serializeMapProperties(properties, includePosition);
 	}
 	
 	public static MapProperties createMapPropertiesFromString(String jsonConfig) {

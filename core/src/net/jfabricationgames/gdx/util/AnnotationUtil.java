@@ -7,7 +7,9 @@ import java.lang.reflect.Method;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
-public abstract class AnnotationUtil {
+public class AnnotationUtil {
+	
+	private AnnotationUtil() {}
 	
 	public static Array<Method> getMethodsAnnotatedWith(Class<?> type, Class<? extends Annotation> annotation) {
 		Array<Method> methods = new Array<Method>();
