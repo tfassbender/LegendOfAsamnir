@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.data.handler;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -26,6 +27,8 @@ public class MapObjectDataHandler {
 	public static final String OBJECT_NOT_CONFIGURED_IN_MAP_PREFIX = "__not_configured_in_map__";
 	
 	private static MapObjectDataHandler instance;
+	
+	private AtomicInteger objectCounter = new AtomicInteger();
 	
 	public static synchronized MapObjectDataHandler getInstance() {
 		if (instance == null) {
@@ -152,5 +155,9 @@ public class MapObjectDataHandler {
 		}
 		
 		currentMapStates.states.put(mapObjectId, serializedState);
+	}
+	
+	public synchronized int getUniqueObjectCount() {
+		return objectCounter.addAndGet(1);
 	}
 }

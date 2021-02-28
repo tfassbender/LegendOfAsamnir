@@ -95,6 +95,9 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 			if (isSpecialItem()) {
 				return getSpecialItemValue();
 			}
+			else if (itemName.equals("key")) {
+				return "key_" + MapObjectDataHandler.getInstance().getUniqueObjectCount();
+			}
 		}
 		
 		return StatefulMapObject.getMapObjectId(properties);

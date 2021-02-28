@@ -44,6 +44,10 @@ public class SerializationUtil {
 		@SuppressWarnings("unchecked")
 		ObjectMap<String, String> properties = json.fromJson(ObjectMap.class, String.class, serialized);
 		
+		if (properties == null) {
+			return new MapProperties();
+		}
+		
 		MapProperties mapProperties = new MapProperties();
 		for (ObjectMap.Entry<String, String> property : properties.entries()) {
 			mapProperties.put(property.key, property.value);
