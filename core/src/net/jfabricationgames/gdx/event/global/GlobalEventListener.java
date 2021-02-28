@@ -35,7 +35,19 @@ public class GlobalEventListener implements EventListener {
 		for (String configFile : configFiles) {
 			Map<String, GlobalEventConfig> configuredEvents = json.fromJson(HashMap.class, GlobalEventConfig.class, Gdx.files.internal(configFile));
 			
+			checkDuplicateKeys(configuredEvents);
 			events.putAll(configuredEvents);
+		}
+	}
+	
+	private void checkDuplicateKeys(Map<String, GlobalEventConfig> configuredEvents) {
+		for (String eventKey : events.keySet()) {
+			for (String configuredEventKey : configuredEvents.keySet()) {
+				if (eventKey.equals(configuredEventKey)) {
+					throw new IllegalStateException(
+							"The event key '" + configuredEventKey + "' would overwrite an already known event key. The keys have to be unique");
+				}
+			}
 		}
 	}
 	
