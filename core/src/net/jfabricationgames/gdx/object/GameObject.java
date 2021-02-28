@@ -44,7 +44,6 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	protected Sprite sprite;
 	protected MapProperties mapProperties;
 	protected Body body;
-	protected GameMap gameMap;
 	protected TextureAtlas textureAtlas;
 	protected GameObjectTypeConfig typeConfig;
 	protected ObjectMap<String, Float> dropTypes;
@@ -186,10 +185,10 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 			String specialDropType = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
 			String specialDropMapProperties = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
 			MapProperties mapProperties = TiledMapLoader.createMapPropertiesFromString(specialDropMapProperties);
-			ItemDropUtil.dropItem(specialDropType, mapProperties, gameMap, x, y, typeConfig.renderDropsAboveObject);
+			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
 		}
 		else {
-			ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
+			ItemDropUtil.dropItems(dropTypes, x, y, typeConfig.renderDropsAboveObject);
 		}
 	}
 	
@@ -199,7 +198,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	}
 	
 	public void remove() {
-		gameMap.removeObject(this, body);
+		GameMap.getInstance().removeObject(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
@@ -225,10 +224,6 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	@Override
 	public String toString() {
 		return "MapObject [type=" + typeConfig + ", properties=" + TiledMapLoader.mapPropertiesToString(mapProperties, true) + "]";
-	}
-	
-	protected void setGameMap(GameMap gameMap) {
-		this.gameMap = gameMap;
 	}
 	
 	protected void setTextureAtlas(TextureAtlas textureAtlas) {

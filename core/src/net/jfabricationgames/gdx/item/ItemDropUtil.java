@@ -29,7 +29,7 @@ public class ItemDropUtil {
 		return json.fromJson(ObjectMap.class, Float.class, droppedItemConfig);
 	}
 	
-	public static void dropItems(ObjectMap<String, Float> dropTypes, GameMap gameMap, float x, float y, boolean renderDropsAboveObject) {
+	public static void dropItems(ObjectMap<String, Float> dropTypes, float x, float y, boolean renderDropsAboveObject) {
 		if (doesDropItems(dropTypes)) {
 			double random = Math.random();
 			float summedProbability = 0f;
@@ -37,7 +37,7 @@ public class ItemDropUtil {
 				String dropType = entry.key;
 				float dropProbability = entry.value;
 				if (random <= summedProbability + dropProbability) {
-					dropItem(dropType, gameMap, x, y, renderDropsAboveObject);
+					dropItem(dropType, x, y, renderDropsAboveObject);
 					return;
 				}
 				summedProbability += dropProbability;
@@ -49,11 +49,11 @@ public class ItemDropUtil {
 		return dropTypes != null && !dropTypes.isEmpty();
 	}
 	
-	private static void dropItem(String type, GameMap gameMap, float x, float y, boolean renderDropsAboveObject) {
-		gameMap.getItemFactory().createAndDropItem(type, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+	private static void dropItem(String type, float x, float y, boolean renderDropsAboveObject) {
+		GameMap.getInstance().getItemFactory().createAndDropItem(type, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}
 	
-	public static void dropItem(String type, MapProperties mapProperties, GameMap gameMap, float x, float y, boolean renderDropsAboveObject) {
-		gameMap.getItemFactory().createAndDropItem(type, mapProperties, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+	public static void dropItem(String type, MapProperties mapProperties, float x, float y, boolean renderDropsAboveObject) {
+		GameMap.getInstance().getItemFactory().createAndDropItem(type, mapProperties, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}
 }

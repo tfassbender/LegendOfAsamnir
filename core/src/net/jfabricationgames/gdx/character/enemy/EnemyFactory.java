@@ -30,9 +30,7 @@ public class EnemyFactory extends AbstractFactory {
 	
 	private ObjectMap<String, EnemyTypeConfig> typeConfigs;
 	
-	public EnemyFactory(GameMap gameMap) {
-		this.gameMap = gameMap;
-		
+	public EnemyFactory() {
 		if (config == null) {
 			config = loadConfig(Config.class, CONFIG_FILE);
 		}
@@ -80,7 +78,6 @@ public class EnemyFactory extends AbstractFactory {
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);
 		}
-		enemy.setGameMap(gameMap);
 		enemy.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return enemy;
@@ -89,7 +86,7 @@ public class EnemyFactory extends AbstractFactory {
 	public void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Enemy gameObject = createEnemy(type, x, y, mapProperties);
-			gameMap.addEnemy(gameObject);
+			GameMap.getInstance().addEnemy(gameObject);
 		});
 	}
 	

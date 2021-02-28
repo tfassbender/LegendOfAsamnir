@@ -35,7 +35,6 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	protected Sprite sprite;
 	protected MapProperties properties;
 	protected Body body;
-	protected GameMap gameMap;
 	
 	protected final String itemName;
 	protected ItemTypeConfig typeConfig;
@@ -46,14 +45,12 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	@MapObjectState
 	private Vector2 position;
 	
-	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties,
-			GameMap gameMap) {
+	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		this.itemName = itemName;
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
 		this.animation = animation;
 		this.properties = properties;
-		this.gameMap = gameMap;
 		
 		if (animation == null && sprite == null) {
 			Gdx.app.error(getClass().getSimpleName(), "Neither an animation nor a sprite was set for this item.");
@@ -145,10 +142,8 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	}
 	
 	public void remove() {
-		if (gameMap != null) {
-			gameMap.removeItem(this, body);
-			body = null;// set the body to null to avoid strange errors in native Box2D methods
-		}
+		GameMap.getInstance().removeItem(this, body);
+		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
 	private void playPickUpSound() {

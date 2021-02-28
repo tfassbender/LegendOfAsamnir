@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -268,10 +269,10 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 			String specialDropType = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
 			String specialDropMapProperties = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
 			MapProperties mapProperties = TiledMapLoader.createMapPropertiesFromString(specialDropMapProperties);
-			ItemDropUtil.dropItem(specialDropType, mapProperties, gameMap, x, y, typeConfig.renderDropsAboveObject);
+			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
 		}
 		else {
-			ItemDropUtil.dropItems(dropTypes, gameMap, x, y, typeConfig.renderDropsAboveObject);
+			ItemDropUtil.dropItems(dropTypes, x, y, typeConfig.renderDropsAboveObject);
 		}
 		
 		droppedItems = true;
@@ -284,7 +285,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	
 	@Override
 	public void removeFromMap() {
-		gameMap.removeEnemy(this, body);
+		GameMap.getInstance().removeEnemy(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

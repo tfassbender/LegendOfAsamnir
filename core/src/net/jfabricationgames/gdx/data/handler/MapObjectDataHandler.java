@@ -10,12 +10,14 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.container.MapObjectDataContainer;
 import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
+import net.jfabricationgames.gdx.data.properties.MapObjectStates;
 import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class MapObjectDataHandler {
@@ -35,6 +37,8 @@ public class MapObjectDataHandler {
 	
 	private Json json = new Json();
 	
+	private MapObjectDataHandler() {}
+	
 	public void updateData(GameDataContainer gameDataContainer) {
 		properties = gameDataContainer.mapObjectDataContainer;
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_OBJECT_STATES).setParameterObject(this));
@@ -45,12 +49,25 @@ public class MapObjectDataHandler {
 			return null;
 		}
 		
-		MapObjectStateProperties mapObjectStateProperties = properties.mapObjectStates.get(mapObjectId);
+		MapObjectStateProperties mapObjectStateProperties = getMapObjectProperties(mapObjectId);
 		if (mapObjectStateProperties == null) {
 			return null;
 		}
 		
 		return mapObjectStateProperties.state;
+	}
+	
+	private MapObjectStateProperties getMapObjectProperties(String mapObjectId) {
+		MapObjectStates currentMapStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
+		if (currentMapStates == null) {
+			return null;
+		}
+		
+		return currentMapStates.mapObjectStates.get(mapObjectId);
+	}
+	
+	private String getCurrentMapIdentifier() {
+		return GameMap.getInstance().getCurrentMapIdentifier();
 	}
 	
 	public void addStatefulMapObject(StatefulMapObject mapObject) {
@@ -61,7 +78,7 @@ public class MapObjectDataHandler {
 				MapObjectStateProperties serializedState = serializeMapObjectState(mapObject);
 				if (!serializedState.state.isEmpty()) {
 					addObjectTypeDescription(mapObject, serializedState);
-					properties.mapObjectStates.put(mapObjectId, serializedState);
+					setMapObjectProperties(mapObjectId, serializedState);
 				}
 			}
 			catch (IllegalArgumentException | IllegalAccessException e) {
@@ -69,11 +86,11 @@ public class MapObjectDataHandler {
 			}
 		}
 	}
-
+	
 	private void callBeforePersistStateMethods(StatefulMapObject mapObject) {
 		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, mapObject);
 	}
-
+	
 	private MapObjectStateProperties serializeMapObjectState(StatefulMapObject mapObject) throws IllegalArgumentException, IllegalAccessException {
 		ObjectMap<String, String> state = new ObjectMap<>();
 		Array<Field> stateFields = getStateFields(mapObject);
@@ -111,5 +128,16 @@ public class MapObjectDataHandler {
 	
 	private void addObjectTypeDescription(StatefulMapObject mapObject, MapObjectStateProperties serializedState) {
 		serializedState.state.put(TYPE_DESCRIPTION_MAP_KEY, mapObject.getClass().getSimpleName());
+	}
+	
+	private void setMapObjectProperties(String mapObjectId, MapObjectStateProperties serializedState) {
+		MapObjectStates currentMapStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
+		if (currentMapStates == null) {
+			currentMapStates = new MapObjectStates();
+			currentMapStates.mapObjectStates = new ObjectMap<>();
+			properties.mapObjectStates.put(getCurrentMapIdentifier(), currentMapStates);
+		}
+		
+		currentMapStates.mapObjectStates.put(mapObjectId, serializedState);
 	}
 }

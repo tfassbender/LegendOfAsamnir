@@ -9,13 +9,12 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.map.GameMap;
 
 public class BuyableItem extends Item {
 	
 	public BuyableItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation,
-			MapProperties properties, GameMap gameMap) {
-		super(itemName, typeConfig, sprite, animation, properties, gameMap);
+			MapProperties properties) {
+		super(itemName, typeConfig, sprite, animation, properties);
 	}
 	
 	@Override

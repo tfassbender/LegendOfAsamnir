@@ -9,12 +9,6 @@ public abstract class AbstractCutsceneAction {
 	
 	public static final String CONTROLLED_UNIT_ID_PLAYER = "PLAYER";
 	
-	protected static GameMap gameMap;
-	
-	public static void setGameMap(GameMap map) {
-		gameMap = map;
-	}
-	
 	protected CutsceneControlledActionConfig actionConfig;
 	protected float executionTimeInSeconds = 0f;
 	
@@ -44,10 +38,10 @@ public abstract class AbstractCutsceneAction {
 	protected <T> T getUnitAs(String unitId, Class<T> clazz) {
 		Object controlledUnit = null;
 		if (unitId.equals(CONTROLLED_UNIT_ID_PLAYER)) {
-			controlledUnit = gameMap.getPlayer();
+			controlledUnit = GameMap.getInstance().getPlayer();
 		}
 		else {
-			controlledUnit = gameMap.getUnitById(unitId);
+			controlledUnit = GameMap.getInstance().getUnitById(unitId);
 		}
 		
 		if (controlledUnit == null) {
@@ -59,7 +53,7 @@ public abstract class AbstractCutsceneAction {
 		}
 		return clazz.cast(controlledUnit);
 	}
-
+	
 	public CutsceneControlledActionConfig getActionConfig() {
 		return actionConfig;
 	}

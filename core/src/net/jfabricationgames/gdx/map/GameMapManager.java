@@ -38,7 +38,7 @@ public class GameMapManager {
 		throw new IllegalStateException("A map with the name '" + mapName + "' is not found in the config file.");
 	}
 	
-	public String getInitialMapName() {
+	public String getInitialMapIdentifier() {
 		for (GameMapConfig config : mapFiles) {
 			if (config.initial) {
 				return config.name;

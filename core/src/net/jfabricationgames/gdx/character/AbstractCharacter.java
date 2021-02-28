@@ -39,7 +39,6 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	protected CutsceneHandler cutsceneHandler;
 	
 	protected MapProperties properties;
-	protected GameMap gameMap;
 	protected Body body;
 	
 	protected Vector2 intendedMovement;
@@ -54,10 +53,6 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		
 		PhysicsWorld.getInstance().registerContactListener(this);
 		cutsceneHandler = CutsceneHandler.getInstance();
-	}
-	
-	public void setGameMap(GameMap gameMap) {
-		this.gameMap = gameMap;
 	}
 	
 	protected void setImageOffset(float x, float y) {

@@ -25,9 +25,7 @@ public class ItemFactory extends AbstractFactory {
 	private ObjectMap<String, ItemTypeConfig> typeConfigs;
 	private ObjectMap<String, ObjectMap<String, Object>> defaultValues;
 	
-	public ItemFactory(GameMap gameMap) {
-		this.gameMap = gameMap;
-		
+	public ItemFactory() {
 		if (config == null) {
 			config = loadConfig(Config.class, configFile);
 		}
@@ -60,10 +58,10 @@ public class ItemFactory extends AbstractFactory {
 	public void createAndDropItem(String type, MapProperties mapProperties, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
 		Item item = createItem(type, x, y, mapProperties, addBodyDelay);
 		if (renderAboveGameObjects) {
-			gameMap.addItemAboveGameObjects(item);
+			GameMap.getInstance().addItemAboveGameObjects(item);
 		}
 		else {
-			gameMap.addItem(item);
+			GameMap.getInstance().addItem(item);
 		}
 		
 		item.setPosition(new Vector2(x, y));
@@ -77,10 +75,10 @@ public class ItemFactory extends AbstractFactory {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Item item = createItem(type, x, y, mapProperties);
 			if (renderAboveGameObjects) {
-				gameMap.addItemAboveGameObjects(item);
+				GameMap.getInstance().addItemAboveGameObjects(item);
 			}
 			else {
-				gameMap.addItem(item);
+				GameMap.getInstance().addItem(item);
 			}
 		});
 	}
@@ -104,13 +102,13 @@ public class ItemFactory extends AbstractFactory {
 		
 		switch (typeConfig.type) {
 			case ITEM:
-				item = new Item(name, typeConfig, sprite, animation, properties, gameMap);
+				item = new Item(name, typeConfig, sprite, animation, properties);
 				break;
 			case EVENT_ITEM:
-				item = new EventItem(name, typeConfig, sprite, animation, properties, gameMap);
+				item = new EventItem(name, typeConfig, sprite, animation, properties);
 				break;
 			case BUYABLE_ITEM:
-				item = new BuyableItem(name, typeConfig, sprite, animation, properties, gameMap);
+				item = new BuyableItem(name, typeConfig, sprite, animation, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown ItemType \"" + typeConfig.type + "\" of object type \"" + name + "\"");

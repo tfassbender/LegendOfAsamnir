@@ -19,9 +19,7 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 	
 	private ObjectMap<String, NonPlayableCharacterTypeConfig> typeConfigs;
 	
-	public NonPlayableCharacterFactory(GameMap gameMap) {
-		this.gameMap = gameMap;
-		
+	public NonPlayableCharacterFactory() {
 		if (config == null) {
 			config = loadConfig(Config.class, CONFIG_FILE);
 		}
@@ -62,7 +60,6 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 		}
 		
 		NonPlayableCharacter npc = new NonPlayableCharacter(typeConfig, properties);
-		npc.setGameMap(gameMap);
 		npc.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return npc;
@@ -71,7 +68,7 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 	public void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			NonPlayableCharacter gameObject = createNpc(type, x, y, mapProperties);
-			gameMap.addNpc(gameObject);
+			GameMap.getInstance().addNpc(gameObject);
 		});
 	}
 	

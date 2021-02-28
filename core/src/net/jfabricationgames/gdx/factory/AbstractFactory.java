@@ -11,7 +11,6 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public abstract class AbstractFactory {
@@ -19,7 +18,6 @@ public abstract class AbstractFactory {
 	protected Json json;
 	protected TextureAtlas atlas;
 	protected World world;
-	protected GameMap gameMap;
 	
 	public AbstractFactory() {
 		json = new Json();

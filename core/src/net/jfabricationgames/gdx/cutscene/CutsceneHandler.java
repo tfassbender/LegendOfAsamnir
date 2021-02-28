@@ -17,7 +17,6 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.map.GameMap;
 
 public class CutsceneHandler implements EventListener {
 	
@@ -161,9 +160,5 @@ public class CutsceneHandler implements EventListener {
 	
 	private CutsceneConfig getActiveCutsceneConfig() {
 		return cutscenes.get(activeCutsceneId);
-	}
-	
-	public void setGameMap(GameMap gameMap) {
-		AbstractCutsceneAction.setGameMap(gameMap);
 	}
 }

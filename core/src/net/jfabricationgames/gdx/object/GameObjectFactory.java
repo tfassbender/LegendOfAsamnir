@@ -26,9 +26,7 @@ public class GameObjectFactory extends AbstractFactory {
 	
 	private Map<String, GameObjectTypeConfig> typeConfigs;
 	
-	public GameObjectFactory(GameMap gameMap) {
-		this.gameMap = gameMap;
-		
+	public GameObjectFactory() {
 		if (config == null) {
 			config = loadConfig(Config.class, configFile);
 		}
@@ -75,7 +73,6 @@ public class GameObjectFactory extends AbstractFactory {
 			default:
 				throw new IllegalStateException("Unknown GameObjectType \"" + typeConfig.type + "\" of object type \"" + type + "\"");
 		}
-		object.setGameMap(gameMap);
 		object.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		object.setTextureAtlas(atlas);
 		
@@ -85,7 +82,7 @@ public class GameObjectFactory extends AbstractFactory {
 	public void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			GameObject gameObject = createObject(type, x, y, mapProperties);
-			gameMap.addObject(gameObject);
+			GameMap.getInstance().addObject(gameObject);
 		});
 	}
 	

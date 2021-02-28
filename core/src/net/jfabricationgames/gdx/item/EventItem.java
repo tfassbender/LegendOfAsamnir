@@ -8,7 +8,6 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.map.GameMap;
 
 public class EventItem extends Item {
 	
@@ -16,9 +15,9 @@ public class EventItem extends Item {
 	
 	private String eventParameter;
 	
-	public EventItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties,
-			GameMap gameMap) {
-		super(itemName, typeConfig, sprite, animation, properties, gameMap);
+	public EventItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation,
+			MapProperties properties) {
+		super(itemName, typeConfig, sprite, animation, properties);
 		readEventParameters();
 	}
 	

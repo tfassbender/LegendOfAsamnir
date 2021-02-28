@@ -80,9 +80,9 @@ public class TiledMapLoader {
 	private EnemyFactory enemyFactory;
 	private NonPlayableCharacterFactory npcFactory;
 	
-	public TiledMapLoader(String mapAsset, GameMap gameMap) {
+	public TiledMapLoader(String mapAsset) {
 		this.mapAsset = mapAsset;
-		this.gameMap = gameMap;
+		this.gameMap = GameMap.getInstance();
 		
 		this.itemFactory = gameMap.itemFactory;
 		this.objectFactory = gameMap.objectFactory;

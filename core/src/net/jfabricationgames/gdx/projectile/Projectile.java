@@ -30,7 +30,6 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	private static final String SOUND_SET_PROJECTILE = "projectile";
 	private static final String EXPLOSION_PROJECTILE_TYPE = "explosion";
 	
-	protected GameMap gameMap;
 	protected Body body;
 	protected ProjectileTypeConfig typeConfig;
 	protected PhysicsCollisionType collisionType;
@@ -125,10 +124,6 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	protected float getSpriteVectorAngleOffset() {
 		return 0;
-	}
-	
-	protected void setGameMap(GameMap gameMap) {
-		this.gameMap = gameMap;
 	}
 	
 	public void setDamage(float damage) {
@@ -280,7 +275,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	public void remove() {
 		attackPerformed = true;
-		gameMap.removeProjectile(this, body);
+		GameMap.getInstance().removeProjectile(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

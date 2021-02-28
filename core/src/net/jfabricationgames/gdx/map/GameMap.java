@@ -70,8 +70,26 @@ public class GameMap implements EventListener, Disposable {
 	
 	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = new GameMapGroundType();
 	
+	private static GameMap instance;
+	
 	public static GameMapGroundType getGroundTypeByName(String name) {
 		return TiledMapPhysicsLoader.groundTypes.get(name);
+	}
+	
+	public static synchronized GameMap getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("The GameMap was not yet created. Use the method createGameMap(OrthographicCamera) to create it.");
+		}
+		
+		return instance;
+	}
+	
+	public static synchronized void createGameMap(OrthographicCamera camera) {
+		if (instance != null) {
+			throw new IllegalStateException("The GameMap has already been created. Use the method getInstance() to get a reference to it.");
+		}
+		
+		instance = new GameMap(camera);
 	}
 	
 	protected TiledMap map;
@@ -79,6 +97,8 @@ public class GameMap implements EventListener, Disposable {
 	
 	private int[] backgroundLayers;
 	private int[] terrainLayers;
+	
+	private String currentMapIdentifier;
 	
 	//the lists are initialized in the factories
 	protected Array<Item> items;
@@ -103,7 +123,7 @@ public class GameMap implements EventListener, Disposable {
 	
 	private CutsceneHandler cutsceneHandler;
 	
-	public GameMap(OrthographicCamera camera) {
+	private GameMap(OrthographicCamera camera) {
 		this.camera = camera;
 		
 		batch = new SpriteBatch();
@@ -111,15 +131,14 @@ public class GameMap implements EventListener, Disposable {
 		
 		itemsAboveGameObjects = new Array<>();
 		projectiles = new Array<>();
-		ProjectileFactory.createInstance(this);
+		ProjectileFactory.createInstance();
 		
-		itemFactory = new ItemFactory(this);
-		objectFactory = new GameObjectFactory(this);
-		enemyFactory = new EnemyFactory(this);
-		npcFactory = new NonPlayableCharacterFactory(this);
+		itemFactory = new ItemFactory();
+		objectFactory = new GameObjectFactory();
+		enemyFactory = new EnemyFactory();
+		npcFactory = new NonPlayableCharacterFactory();
 		
 		cutsceneHandler = CutsceneHandler.getInstance();
-		cutsceneHandler.setGameMap(this);
 		
 		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
 		player = PlayerFactory.createPlayer();
@@ -127,12 +146,19 @@ public class GameMap implements EventListener, Disposable {
 		EventHandler.getInstance().registerEventListener(this);
 	}
 	
-	public void showMap(String mapAsset) {
+	public String getCurrentMapIdentifier() {
+		return currentMapIdentifier;
+	}
+	
+	public void showMap(String mapIdentifier) {
+		currentMapIdentifier = mapIdentifier;
+		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
+		
 		removeCurrentMapIfPresent();
 		
 		player.reAddToWorld();
 		
-		TiledMapLoader loader = new TiledMapLoader(mapAsset, this);
+		TiledMapLoader loader = new TiledMapLoader(mapAsset);
 		loader.loadMap();
 		
 		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN, batch);

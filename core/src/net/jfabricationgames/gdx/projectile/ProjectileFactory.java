@@ -34,21 +34,19 @@ public class ProjectileFactory extends AbstractFactory {
 		return instance;
 	}
 	
-	public static synchronized ProjectileFactory createInstance(GameMap gameMap) {
-		if (instance != null && instance.gameMap.equals(gameMap)) {
+	public static synchronized ProjectileFactory createInstance() {
+		if (instance != null) {
 			Gdx.app.error(ProjectileFactory.class.getSimpleName(), "A ProjectileFactory for this game map has already been created.");
 		}
 		
 		AnimationManager.getInstance().loadAnimations(animationConfigFile);
-		instance = new ProjectileFactory(gameMap);
+		instance = new ProjectileFactory();
 		return instance;
 	}
 	
 	private ObjectMap<String, ProjectileTypeConfig> typeConfigs;
 	
-	private ProjectileFactory(GameMap gameMap) {
-		this.gameMap = gameMap;
-		
+	private ProjectileFactory() {
 		if (config == null) {
 			config = loadConfig(Config.class, configFile);
 		}
@@ -101,11 +99,10 @@ public class ProjectileFactory extends AbstractFactory {
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);
 		}
-		projectile.setGameMap(gameMap);
 		projectile.createPhysicsBody(position, collisionType);
 		projectile.startProjectile(direction);
 		
-		gameMap.addProjectile(projectile);
+		GameMap.getInstance().addProjectile(projectile);
 		
 		return projectile;
 	}
