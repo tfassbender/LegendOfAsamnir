@@ -237,6 +237,11 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	}
 	
 	@Override
+	public boolean interactionCanBeExecuted() {
+		return true;
+	}
+	
+	@Override
 	public float getDistanceToPlayer(PlayableCharacter character) {
 		return getPosition().sub(character.getPosition()).len();
 	}

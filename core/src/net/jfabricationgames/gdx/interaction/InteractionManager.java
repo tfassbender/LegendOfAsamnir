@@ -18,8 +18,19 @@ public class InteractionManager {
 	public static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y = 0.3f;
 	
 	private static PlayableCharacter character;
-	private static final Comparator<Interactive> distanceComparator = (i1, i2) -> Float.compare(i1.getDistanceToPlayer(character),
-			i2.getDistanceToPlayer(character));
+	private static final Comparator<Interactive> distanceComparator = (i1, i2) -> {
+		boolean i1Executable = i1.interactionCanBeExecuted();
+		boolean i2Executable = i2.interactionCanBeExecuted();
+		if (i1Executable && !i2Executable) {
+			return -1;
+		}
+		else if (!i1Executable && i2Executable) {
+			return 1;
+		}
+		else {
+			return Float.compare(i1.getDistanceToPlayer(character), i2.getDistanceToPlayer(character));
+		}
+	};
 	
 	private static InteractionManager instance;
 	

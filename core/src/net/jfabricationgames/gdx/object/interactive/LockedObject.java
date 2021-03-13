@@ -26,10 +26,11 @@ public class LockedObject extends InteractiveObject {
 	}
 	
 	@Override
-	protected boolean canBeExecuted() {
-		if (!super.canBeExecuted()) {
+	public boolean interactionCanBeExecuted() {
+		if (!super.interactionCanBeExecuted()) {
 			return false;
 		}
+		
 		if (!typeConfig.defaultLocked && !lockedByMapProperty()) {
 			return true;
 		}

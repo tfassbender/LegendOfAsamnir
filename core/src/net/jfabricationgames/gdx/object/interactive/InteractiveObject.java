@@ -129,7 +129,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	@Override
 	public void interact() {
-		if (canBeExecuted()) {
+		if (interactionCanBeExecuted()) {
 			if (typeConfig.animationAction != null) {
 				animation = getActionAnimation();
 			}
@@ -137,7 +137,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	protected boolean canBeExecuted() {
+	@Override
+	public boolean interactionCanBeExecuted() {
 		return canBeExecutedByConfig();
 	}
 	private boolean canBeExecutedByConfig() {

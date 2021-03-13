@@ -8,5 +8,7 @@ public interface Interactive extends ContactListener {
 	
 	public void interact();
 	
+	public boolean interactionCanBeExecuted();
+	
 	public float getDistanceToPlayer(PlayableCharacter character);
 }
