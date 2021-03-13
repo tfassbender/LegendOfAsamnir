@@ -115,7 +115,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	@Override
 	public void takeDamage(float damage, AttackType attackType) {
-		if (animation == null) {
+		if (animation == null || animation.isAnimationFinished()) {
 			animation = getHitAnimation();
 		}
 		playHitSound();
