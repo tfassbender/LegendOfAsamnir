@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectSet;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
@@ -151,13 +152,13 @@ public class CharacterStateMachine {
 		return currentState.config.endsWithAnimation && currentState.animation.isAnimationFinished() && currentState.followingState == state;
 	}
 	
-	public void flipTextureToMovementDirection(TextureRegion region, Vector2 movingDirection) {
-		if (isFlipTextureToMovingDirection() && movingDirection.len2() > 1e-3) {
+	public void flipAnimationTexturesToMovementDirection(AnimationDirector<TextureRegion> animation, Vector2 movingDirection) {
+		if (isFlipTextureToMovingDirection() && movingDirection.len2() > 0.1f) {
 			float angleDegrees = movingDirection.angle();
 			boolean flipToLeft = angleDegrees > 90 + ANGLE_FLIP_THRESHOLD_DEGREES && angleDegrees < 270 - ANGLE_FLIP_THRESHOLD_DEGREES;
 			boolean flipToRight = angleDegrees < 90 - ANGLE_FLIP_THRESHOLD_DEGREES || angleDegrees > 270 + ANGLE_FLIP_THRESHOLD_DEGREES;
-			if ((flipToLeft && isTextureRight(region)) || (flipToRight && isTextureLeft(region))) {
-				region.flip(true, false);
+			if ((flipToLeft && isTextureRight(animation)) || (flipToRight && isTextureLeft(animation))) {
+				animation.flip(true, false);
 			}
 		}
 	}
@@ -166,12 +167,12 @@ public class CharacterStateMachine {
 		return currentState.config.flipAnimationToMovingDirection;
 	}
 	
-	private boolean isTextureRight(TextureRegion texture) {
-		return currentState.config.initialAnimationDirectionRight != texture.isFlipX();
+	private boolean isTextureRight(AnimationDirector<TextureRegion> animation) {
+		return currentState.config.initialAnimationDirectionRight != animation.getKeyFrame().isFlipX();
 	}
 	
-	private boolean isTextureLeft(TextureRegion texture) {
-		return currentState.config.initialAnimationDirectionRight == texture.isFlipX();
+	private boolean isTextureLeft(AnimationDirector<TextureRegion> animation) {
+		return currentState.config.initialAnimationDirectionRight == animation.getKeyFrame().isFlipX();
 	}
 	
 	public CharacterState getState(String id) {

@@ -136,13 +136,13 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	}
 	
 	@Override
-	protected void updateTextureDirection(TextureRegion region) {
+	protected void updateTextureDirection(AnimationDirector<TextureRegion> animation) {
 		if (intendedMovement != null && intendedMovement.len2() > 0.1f) {
-			stateMachine.flipTextureToMovementDirection(region, intendedMovement);
+			stateMachine.flipAnimationTexturesToMovementDirection(animation, intendedMovement);
 		}
 		else if (player != null) {
 			Vector2 directionToPlayer = player.getPosition().sub(getPosition());
-			stateMachine.flipTextureToMovementDirection(region, directionToPlayer);
+			stateMachine.flipAnimationTexturesToMovementDirection(animation, directionToPlayer);
 		}
 	}
 	

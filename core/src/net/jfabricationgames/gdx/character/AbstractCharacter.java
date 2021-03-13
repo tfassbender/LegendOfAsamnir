@@ -87,12 +87,12 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 			TextureRegion region = animation.getKeyFrame();
 			animation.getSpriteConfig().setX((body.getPosition().x - region.getRegionWidth() * 0.5f + imageOffsetX))
 					.setY((body.getPosition().y - region.getRegionHeight() * 0.5f + imageOffsetY));
-			updateTextureDirection(region);
+			updateTextureDirection(animation);
 			animation.draw(batch);
 		}
 	}
 	
-	protected abstract void updateTextureDirection(TextureRegion region);
+	protected abstract void updateTextureDirection(AnimationDirector<TextureRegion> animation);
 	
 	protected AnimationDirector<TextureRegion> getAnimation() {
 		return stateMachine.getCurrentState().getAnimation();

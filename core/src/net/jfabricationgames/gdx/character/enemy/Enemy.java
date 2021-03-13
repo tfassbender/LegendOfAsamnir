@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
@@ -172,8 +173,8 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	}
 	
 	@Override
-	protected void updateTextureDirection(TextureRegion region) {
-		stateMachine.flipTextureToMovementDirection(region, intendedMovement);
+	protected void updateTextureDirection(AnimationDirector<TextureRegion> animation) {
+		stateMachine.flipAnimationTexturesToMovementDirection(animation, intendedMovement);
 	}
 	
 	public void drawHealthBar(ShapeRenderer shapeRenderer) {
