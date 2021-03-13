@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -60,7 +61,6 @@ public class EnemyFactory extends AbstractFactory {
 		
 		Enemy enemy;
 		switch (type) {
-			case ENEMY_NAME_BAT:
 			case ENEMY_NAME_GLADIATOR:
 			case ENEMY_NAME_MINI_GOLEM:
 			case ENEMY_NAME_SPIDER:
@@ -71,6 +71,9 @@ public class EnemyFactory extends AbstractFactory {
 			case ENEMY_NAME_ICE_ELEMENTAL:
 			case ENEMY_NAME_IMP:
 				enemy = new Enemy(typeConfig, properties);
+				break;
+			case ENEMY_NAME_BAT:
+				enemy = new Bat(typeConfig, properties);
 				break;
 			case ENEMY_NAME_MINOTAUR:
 				enemy = new Minotaur(typeConfig, properties);

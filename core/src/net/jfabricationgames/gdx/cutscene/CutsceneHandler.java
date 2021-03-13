@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
+import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveCameraAction;
@@ -17,6 +18,7 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.map.GameMap;
 
 public class CutsceneHandler implements EventListener {
 	
@@ -93,6 +95,8 @@ public class CutsceneHandler implements EventListener {
 		}
 		
 		activeCutsceneId = cutscene.id;
+		stopPlayerAction();
+		stopCutsceneActorsActions(cutscene);
 		
 		Entry<String, CutsceneControlledActionConfig> initialAction = null;
 		for (Entry<String, CutsceneControlledActionConfig> actionConfig : cutscene.controlledActions.entries()) {
@@ -111,6 +115,22 @@ public class CutsceneHandler implements EventListener {
 		}
 		
 		addExecutedAction(initialAction.value, initialAction.key);
+	}
+	
+	private void stopPlayerAction() {
+		GameMap.getInstance().getPlayer().changeToIdleState();
+	}
+	
+	private void stopCutsceneActorsActions(CutsceneConfig cutscene) {
+		GameMap gameMap = GameMap.getInstance();
+		for (CutsceneControlledActionConfig actionConfig : cutscene.controlledActions.values()) {
+			if (actionConfig.controlledUnitId != null) {
+				Object controlledUnit = gameMap.getUnitById(actionConfig.controlledUnitId);
+				if (controlledUnit instanceof AbstractCharacter) {
+					((AbstractCharacter) controlledUnit).changeToIdleState();
+				}
+			}
+		}
 	}
 	
 	private void addExecutedAction(CutsceneControlledActionConfig actionConfig, String actionId) {

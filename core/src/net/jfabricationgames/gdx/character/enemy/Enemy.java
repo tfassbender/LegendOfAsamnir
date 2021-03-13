@@ -33,8 +33,6 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObject {
 	
-	private static final String STATE_NAME_MOVE = "move";
-	
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	
 	protected EnemyTypeConfig typeConfig;
@@ -63,8 +61,10 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		readMapProperties(properties);
 		initializeAttackCreator();
 		initializeStates();
+		initializeMovingState();
+		initializeIdleState();
+		
 		createAI();
-		setMovingState();
 		ai.setCharacter(this);
 		
 		setImageOffset(typeConfig.imageOffsetX, typeConfig.imageOffsetY);
@@ -104,13 +104,6 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	private ArtificialIntelligenceConfig loadAiConfig() {
 		Json json = new Json();
 		return json.fromJson(ArtificialIntelligenceConfig.class, Gdx.files.internal(typeConfig.aiConfig));
-	}
-	
-	private void setMovingState() {
-		movingState = stateMachine.getState(STATE_NAME_MOVE);
-		if (movingState == null) {
-			throw new IllegalStateException("Moving state not found. Maybe the 'getMovingStateName()' method needs to be overwritten?");
-		}
 	}
 	
 	@Override

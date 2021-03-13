@@ -6,4 +6,5 @@ public interface CutsceneMoveableUnit extends CutscenePositioningUnit {
 	
 	public void moveTo(Vector2 position, float speedFactor);
 	public void changeToMovingState();
+	public void changeToIdleState();
 }

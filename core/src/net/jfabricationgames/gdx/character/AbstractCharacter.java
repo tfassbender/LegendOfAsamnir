@@ -32,9 +32,12 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
+	protected static final String STATE_NAME_MOVE = "move";
+	protected static final String STATE_NAME_IDLE = "idle";
 	
 	protected CharacterStateMachine stateMachine;
 	protected CharacterState movingState;
+	protected CharacterState idleState;
 	protected ArtificialIntelligence ai;
 	protected CutsceneHandler cutsceneHandler;
 	
@@ -109,6 +112,37 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		if (!stateMachine.getCurrentState().equals(movingState)) {
 			stateMachine.setState(movingState);
 		}
+	}
+	
+	protected void initializeMovingState() {
+		movingState = stateMachine.getState(getMovingStateName());
+		if (movingState == null) {
+			throw new IllegalStateException("Moving state not found. If the moving state's name is not the convention name '" + STATE_NAME_MOVE
+					+ "' the getMovingStateName() method has to be overwritten.");
+		}
+	}
+	
+	protected String getMovingStateName() {
+		return STATE_NAME_MOVE;
+	}
+
+	@Override
+	public void changeToIdleState() {
+		if (!stateMachine.getCurrentState().equals(idleState)) {
+			stateMachine.setState(idleState);
+		}
+	}
+	
+	protected void initializeIdleState() {
+		idleState = stateMachine.getState(getIdleStateName());
+		if (idleState == null) {
+			throw new IllegalStateException("Idle state not found. If the moving state's name is not the convention name '" + STATE_NAME_IDLE
+					+ "' the getIdleStateName() method has to be overwritten.");
+		}
+	}
+	
+	protected String getIdleStateName() {
+		return STATE_NAME_IDLE;
 	}
 	
 	@Override

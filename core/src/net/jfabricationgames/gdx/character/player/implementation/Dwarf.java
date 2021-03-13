@@ -391,6 +391,13 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			changeAction(CharacterAction.RUN);
 		}
 	}
+
+	@Override
+	public void changeToIdleState() {
+		if (action != CharacterAction.IDLE) {
+			changeAction(CharacterAction.IDLE);
+		}
+	}
 	
 	@Override
 	public Vector2 getPosition() {

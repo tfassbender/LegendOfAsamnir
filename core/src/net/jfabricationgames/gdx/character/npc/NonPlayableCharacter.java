@@ -41,6 +41,9 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		movingSpeed = typeConfig.movingSpeed;
 		
 		initializeStates();
+		initializeMovingState();
+		initializeIdleState();
+		
 		createAI();
 		ai.setCharacter(this);
 		initializeInteractionAnimation();
