@@ -13,6 +13,7 @@ import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.character.enemy.ai.MinotaurAttackAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
+import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -99,6 +100,12 @@ public class Minotaur extends Enemy implements EventListener {
 		}
 	}
 	
+	@Override
+	protected void die() {
+		super.die();
+		GameDataService.fireQuickSaveEvent();
+	}
+
 	@Override
 	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.PLAYER_RESPAWNED) {

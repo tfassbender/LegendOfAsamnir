@@ -86,7 +86,7 @@ public class EventObject extends GameObject implements ContactListener {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	
 	public Vector2 getEventObjectCenterPosition() {
-		return eventObjectCenter;
+		return eventObjectCenter.cpy();
 	}
 	
 	@Override

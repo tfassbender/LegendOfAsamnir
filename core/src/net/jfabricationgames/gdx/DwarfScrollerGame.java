@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputProfile;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -27,7 +28,7 @@ public class DwarfScrollerGame extends Game {
 	
 	private InputMultiplexer multiplexer;
 	private InputProfile gameInputProfile;
-
+	
 	public static synchronized DwarfScrollerGame createInstance(Runnable preGameConfigurator) {
 		if (instance == null) {
 			instance = new DwarfScrollerGame(preGameConfigurator);
@@ -49,7 +50,8 @@ public class DwarfScrollerGame extends Game {
 		
 		AssetGroupManager.initialize(ASSET_GROUP_MANAGER_CONFIG_PATH);
 		SoundManager.getInstance().loadConfig(SOUND_CONFIG_PATH);
-		FontManager.getInstance().load(FONT_CONFIG_PATH);
+		FontManager.getInstance().loadConfig(FONT_CONFIG_PATH);
+		GameDataService.initializeEventListener();
 		
 		multiplexer = new InputMultiplexer();
 		Gdx.input.setInputProcessor(multiplexer);

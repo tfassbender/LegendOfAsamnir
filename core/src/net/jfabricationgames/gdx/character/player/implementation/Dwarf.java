@@ -20,6 +20,7 @@ import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
+import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
@@ -391,7 +392,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			changeAction(CharacterAction.RUN);
 		}
 	}
-
+	
 	@Override
 	public void changeToIdleState() {
 		if (action != CharacterAction.IDLE) {
@@ -584,8 +585,9 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EventObject.EVENT_KEY_RESPAWN_CHECKPOINT)) {
 			if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
 				EventObject respawnObject = (EventObject) event.parameterObject;
-				properties.setRespawnPoint(respawnObject.getEventObjectCenterPosition().cpy());
+				properties.setRespawnPoint(respawnObject.getEventObjectCenterPosition());
 			}
+			GameDataService.fireQuickSaveEvent();
 		}
 		if (event.eventType == EventType.TAKE_PLAYERS_COINS) {
 			properties.reduceCoins(event.intValue);

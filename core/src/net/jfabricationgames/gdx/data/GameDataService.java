@@ -10,13 +10,33 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.event.EventType;
 
-public class GameDataService {
+public class GameDataService implements EventListener {
 	
 	public static final String GAME_DATA_SAVE_DIRECTORY = ".DwarfScrollerGDX/saves/";
 	public static final String GAME_DATA_SAVE_FILENAME_QUICKSAVE = "quicksave.json";
 	public static final String GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER = "<index>";
 	public static final String GAME_DATA_SAVE_FILENAME = "save_" + GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER + ".json";
+	
+	public static void fireQuickSaveEvent() {
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.QUICKSAVE));
+	}
+	
+	public static void initializeEventListener() {
+		GameDataService service = new GameDataService();
+		EventHandler.getInstance().registerEventListener(service);
+	}
+	
+	@Override
+	public void handleEvent(EventConfig event) {
+		if (event.eventType == EventType.QUICKSAVE) {
+			storeGameDataToQuickSaveSlot();
+		}
+	}
 	
 	public void storeGameDataToQuickSaveSlot() {
 		store(GAME_DATA_SAVE_FILENAME_QUICKSAVE);

@@ -28,7 +28,7 @@ public class FontManager implements Disposable {
 		fonts = new ArrayMap<String, BitmapFont>();
 	}
 	
-	public void load(String configPath) {
+	public void loadConfig(String configPath) {
 		Json json = new Json();
 		fontConfig = json.fromJson(FontConfig.class, Gdx.files.internal(configPath));
 		createFontShader();
