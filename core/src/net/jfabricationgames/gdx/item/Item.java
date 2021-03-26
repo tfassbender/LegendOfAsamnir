@@ -15,7 +15,7 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
-import net.jfabricationgames.gdx.data.state.BeforePersistState;
+import net.jfabricationgames.gdx.data.state.BeforeAddStatefulObject;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -82,7 +82,7 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		this.position = position;
 	}
 	
-	@BeforePersistState
+	@BeforeAddStatefulObject
 	public void updateMapProperties() {
 		if (!isConfiguredInMap()) {
 			mapProperties = SerializationUtil.serializeMapProperties(properties, false);

@@ -10,10 +10,13 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
+import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameDataService implements EventListener {
 	
@@ -50,11 +53,18 @@ public class GameDataService implements EventListener {
 		Gdx.app.log(getClass().getSimpleName(), "saving game to file: " + fileName);
 		FileHandle fileHandle = Gdx.files.external(GAME_DATA_SAVE_DIRECTORY + fileName);
 		
+		executeAnnotatedMethodsBeforePersisting();
 		GameDataContainer gameData = GameDataHandler.getInstance().getGameData();
 		Json json = new Json();
+		json.setUsePrototypes(false);
 		String serializedGameData = json.prettyPrint(gameData);
 		
 		fileHandle.writeString(serializedGameData, false);
+	}
+	
+	private void executeAnnotatedMethodsBeforePersisting() {
+		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMap.getInstance());
+		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMap.getInstance().getPlayer());
 	}
 	
 	public void loadGameDataFromQuicksaveSlot() {

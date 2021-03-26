@@ -174,4 +174,8 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 	public void setRespawnPoint(Vector2 respawnPoint) {
 		properties.respawnPoint = respawnPoint;
 	}
+	
+	public void setPlayerPosition(Vector2 position) {
+		properties.position = position;
+	}
 }

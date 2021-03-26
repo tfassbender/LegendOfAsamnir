@@ -19,11 +19,12 @@ import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
+import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
+import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -91,16 +92,16 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	private SoundSet soundSet;
 	
-	private CharacterPropertiesDataHandler properties;
-	private CharacterItemDataHandler itemContainer;
-	private FastTravelDataHandler fastTravelContainer;
+	private CharacterPropertiesDataHandler propertiesDataHandler;
+	private CharacterItemDataHandler itemDataHandler;
+	private FastTravelDataHandler fastTravelDataHandler;
 	
 	private GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	
 	public Dwarf() {
-		properties = CharacterPropertiesDataHandler.getInstance();
-		itemContainer = CharacterItemDataHandler.getInstance();
-		fastTravelContainer = FastTravelDataHandler.getInstance();
+		propertiesDataHandler = CharacterPropertiesDataHandler.getInstance();
+		itemDataHandler = CharacterItemDataHandler.getInstance();
+		fastTravelDataHandler = FastTravelDataHandler.getInstance();
 		
 		animationManager = AnimationManager.getInstance();
 		animationManager.loadAnimations(ASSET_CONFIG_FILE_NAME);
@@ -178,17 +179,17 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	@Override
 	public boolean changeAction(CharacterAction action) {
 		if (isAlive() || action == CharacterAction.DIE) {
-			if (!properties.hasEnoughEndurance(action)) {
+			if (!propertiesDataHandler.hasEnoughEndurance(action)) {
 				return false;
 			}
-			if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && !properties.hasBlock()) {
+			if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && !propertiesDataHandler.hasBlock()) {
 				return false;
 			}
 			this.action = action;
 			this.animation = getAnimation();
 			this.animation.resetStateTime();
 			
-			properties.reduceEnduranceForAction(action);
+			propertiesDataHandler.reduceEnduranceForAction(action);
 			
 			playSound(action);
 			
@@ -218,12 +219,12 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				case BOMB:
 					ItemAmmoType ammoType = ItemAmmoType.fromSpecialAction(activeSpecialAction);
 					if (attackCreator.allAttacksExecuted()) {
-						if (itemContainer.hasAmmo(ammoType)) {
-							itemContainer.decreaseAmmo(ammoType);
+						if (itemDataHandler.hasAmmo(ammoType)) {
+							itemDataHandler.decreaseAmmo(ammoType);
 							attackCreator.startAttack(ammoType.name().toLowerCase(),
 									movementHandler.getMovingDirection().getNormalizedDirectionVector());
 							
-							if (!itemContainer.hasAmmo(ammoType)) {
+							if (!itemDataHandler.hasAmmo(ammoType)) {
 								fireOutOfAmmoEvent(ammoType);
 							}
 						}
@@ -253,13 +254,13 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public int getAmmo(ItemAmmoType ammoType) {
-		return itemContainer.getAmmo(ammoType);
+		return itemDataHandler.getAmmo(ammoType);
 	}
 	
 	@Override
 	public void render(float delta, SpriteBatch batch) {
 		updateAction(delta);
-		properties.updateStats(delta, action);
+		propertiesDataHandler.updateStats(delta, action);
 		attackCreator.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
@@ -365,11 +366,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public void reduceEnduranceForSprinting(float delta) {
-		properties.reduceEnduranceForSprinting(delta);
+		propertiesDataHandler.reduceEnduranceForSprinting(delta);
 	}
 	@Override
 	public boolean isExhausted() {
-		return properties.isExhausted();
+		return propertiesDataHandler.isExhausted();
 	}
 	
 	@Override
@@ -405,9 +406,15 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		return body.getPosition().cpy();
 	}
 	
+	@BeforePersistState
+	public void updatePositionToDataContainer() {
+		propertiesDataHandler.setPlayerPosition(getPosition());
+	}
+	
+	@Override
 	public void setPosition(float x, float y) {
 		body.setTransform(x, y, 0);
-		properties.setRespawnPoint(new Vector2(x, y));
+		propertiesDataHandler.setRespawnPoint(new Vector2(x, y));
 	}
 	
 	@Override
@@ -432,42 +439,42 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public float getHealth() {
-		return properties.getHealthPercentual();
+		return propertiesDataHandler.getHealthPercentual();
 	}
 	
 	@Override
 	public boolean isAlive() {
-		return properties.isAlive();
+		return propertiesDataHandler.isAlive();
 	}
 	
 	@Override
 	public float getMana() {
-		return properties.getManaPercentual();
+		return propertiesDataHandler.getManaPercentual();
 	}
 	
 	@Override
 	public float getEndurance() {
-		return properties.getEndurancePercentual();
+		return propertiesDataHandler.getEndurancePercentual();
 	}
 	
 	@Override
 	public float getArmor() {
-		return properties.getArmorPercentual();
+		return propertiesDataHandler.getArmorPercentual();
 	}
 	
 	@Override
 	public int getCoins() {
-		return properties.getCoins();
+		return propertiesDataHandler.getCoins();
 	}
 	
 	@Override
 	public int getCoinsForHud() {
-		return properties.getCoinsForHud();
+		return propertiesDataHandler.getCoinsForHud();
 	}
 	
 	@Override
 	public int getNormalKeys() {
-		return itemContainer.getNumNormalKeys();
+		return itemDataHandler.getNumNormalKeys();
 	}
 	
 	@Override
@@ -490,7 +497,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_SENSOR, fixtureA, fixtureB);
 			
 			if (sensorCollidingUserData instanceof Item) {
-				itemContainer.collectItem((Item) sensorCollidingUserData, this);
+				itemDataHandler.collectItem((Item) sensorCollidingUserData, this);
 			}
 		}
 		
@@ -524,8 +531,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				takeArmorDamage(damage * 0.33f);
 				damage *= 0.1f;
 			}
-			properties.takeDamage(damage);
-			if (!properties.isAlive()) {
+			propertiesDataHandler.takeDamage(damage);
+			if (!propertiesDataHandler.isAlive()) {
 				die();
 			}
 			else {
@@ -540,7 +547,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	private void takeArmorDamage(float damage) {
-		properties.takeArmorDamage(damage);
+		propertiesDataHandler.takeArmorDamage(damage);
 	}
 	
 	private void die() {
@@ -585,33 +592,33 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EventObject.EVENT_KEY_RESPAWN_CHECKPOINT)) {
 			if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
 				EventObject respawnObject = (EventObject) event.parameterObject;
-				properties.setRespawnPoint(respawnObject.getEventObjectCenterPosition());
+				propertiesDataHandler.setRespawnPoint(respawnObject.getEventObjectCenterPosition());
 			}
 			GameDataService.fireQuickSaveEvent();
 		}
 		if (event.eventType == EventType.TAKE_PLAYERS_COINS) {
-			properties.reduceCoins(event.intValue);
+			propertiesDataHandler.reduceCoins(event.intValue);
 		}
 		if (event.eventType == EventType.PLAYER_BUY_ITEM) {
-			itemContainer.collectItem((Item) event.parameterObject, this);
+			itemDataHandler.collectItem((Item) event.parameterObject, this);
 		}
 		if (event.eventType == EventType.FAST_TRAVEL_TO_MAP_POSITION) {
-			FastTravelPointProperties fastTravelTargetPoint = fastTravelContainer.getFastTravelPropertiesById(event.stringValue);
+			FastTravelPointProperties fastTravelTargetPoint = fastTravelDataHandler.getFastTravelPropertiesById(event.stringValue);
 			if (fastTravelTargetPoint.enabled) {
 				setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
 			}
 		}
 		if (event.eventType == EventType.SET_ITEM) {
 			String itemId = event.stringValue;
-			itemContainer.addSpecialItem(itemId);
+			itemDataHandler.addSpecialItem(itemId);
 		}
 	}
 	
 	@Override
 	public void respawn() {
-		Vector2 respawnPoint = properties.getRespawnPoint();
+		Vector2 respawnPoint = propertiesDataHandler.getRespawnPoint();
 		setPosition(respawnPoint.x, respawnPoint.y);
-		properties.changeStatsAfterRespawn();
+		propertiesDataHandler.changeStatsAfterRespawn();
 		gameOver = false;
 		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.PLAYER_RESPAWNED));

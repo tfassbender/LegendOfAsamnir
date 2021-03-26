@@ -36,4 +36,5 @@ public class CharacterDataContainer {
 	public final float coinsDecreasePerSecond = 20f;
 	
 	public Vector2 respawnPoint;
+	public Vector2 position;
 }

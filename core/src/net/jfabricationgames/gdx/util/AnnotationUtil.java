@@ -21,16 +21,16 @@ public class AnnotationUtil {
 		return methods;
 	}
 	
-	public static void executeAnnotatedMethods(Class<? extends Annotation> annotation, Object mapObject) {
-		Class<?> mapObjectType = mapObject.getClass();
-		Array<Method> annotatedMethods = AnnotationUtil.getMethodsAnnotatedWith(mapObjectType, annotation);
+	public static void executeAnnotatedMethods(Class<? extends Annotation> annotation, Object object) {
+		Class<?> objectType = object.getClass();
+		Array<Method> annotatedMethods = AnnotationUtil.getMethodsAnnotatedWith(objectType, annotation);
 		for (Method method : annotatedMethods) {
 			try {
-				method.invoke(mapObject, new Object[0]);
+				method.invoke(object, new Object[0]);
 			}
 			catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				Gdx.app.error(AnnotationUtil.class.getSimpleName(), "could not invoke method '" + method.getName() + "' annotated '"
-						+ annotation.getSimpleName() + "' on object of type '" + mapObjectType.getSimpleName() + "'", e);
+						+ annotation.getSimpleName() + "' on object of type '" + objectType.getSimpleName() + "'", e);
 			}
 		}
 	}

@@ -24,8 +24,10 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.data.handler.MapDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
+import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -145,6 +147,11 @@ public class GameMap implements EventListener, Disposable {
 		player = PlayerFactory.createPlayer();
 		
 		EventHandler.getInstance().registerEventListener(this);
+	}
+	
+	@BeforePersistState
+	public void updateMapData() {
+		MapDataHandler.getInstance().setMapIdentifier(currentMapIdentifier);
 	}
 	
 	public String getCurrentMapIdentifier() {

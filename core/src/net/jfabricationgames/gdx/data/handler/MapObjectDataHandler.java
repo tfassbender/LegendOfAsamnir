@@ -12,7 +12,7 @@ import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.container.MapObjectDataContainer;
 import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
 import net.jfabricationgames.gdx.data.properties.MapObjectStates;
-import net.jfabricationgames.gdx.data.state.BeforePersistState;
+import net.jfabricationgames.gdx.data.state.BeforeAddStatefulObject;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -104,7 +104,7 @@ public class MapObjectDataHandler {
 	}
 	
 	private void callBeforePersistStateMethods(StatefulMapObject mapObject) {
-		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, mapObject);
+		AnnotationUtil.executeAnnotatedMethods(BeforeAddStatefulObject.class, mapObject);
 	}
 	
 	private MapObjectStateProperties serializeMapObjectState(StatefulMapObject mapObject) throws IllegalArgumentException, IllegalAccessException {
