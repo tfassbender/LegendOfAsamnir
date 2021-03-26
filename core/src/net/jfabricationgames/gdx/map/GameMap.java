@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
@@ -24,6 +25,7 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
@@ -152,6 +154,29 @@ public class GameMap implements EventListener, Disposable {
 	@BeforePersistState
 	public void updateMapData() {
 		MapDataHandler.getInstance().setMapIdentifier(currentMapIdentifier);
+	}
+	
+	public void updateAfterLoadingGameState() {
+		updateMap();
+		updatePlayerPosition();
+		updateCameraPosition();
+	}
+	
+	private void updateMap() {
+		String mapIdentifier = MapDataHandler.getInstance().getMapIdentifier();
+		if (currentMapIdentifier == null || !currentMapIdentifier.equals(mapIdentifier)) {
+			showMap(mapIdentifier);
+		}
+	}
+	
+	private void updatePlayerPosition() {
+		CharacterPropertiesDataHandler characterDataHandler = CharacterPropertiesDataHandler.getInstance();
+		Vector2 playerPosition = characterDataHandler.getPlayerPosition();
+		player.setPosition(playerPosition.x, playerPosition.y);
+	}
+	
+	private void updateCameraPosition() {
+		CameraMovementHandler.getInstance().centerCameraOnPlayer();
 	}
 	
 	public String getCurrentMapIdentifier() {

@@ -59,7 +59,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private InputContext inputContext;
 	private HeadsUpDisplay hud;
 	private GameMap map;
-	private PlayableCharacter player;
 	
 	private PauseMenuScreen pauseMenu;
 	private ShopMenuScreen shopMenu;
@@ -118,23 +117,21 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
 		map.showMap(initialMapIdentifier);
-		player = map.getPlayer();
 	}
 	
 	private void changeMap(String mapIdentifier) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			map.showMap(mapIdentifier);
-			player = map.getPlayer();
 			InteractionManager.getInstance().resetInteractions();
 		});
 	}
 	
 	private void createHud() {
-		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud, player);
+		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud);
 	}
 	
 	private void createCameraMovementHandler() {
-		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera, player);
+		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera);
 	}
 	
 	private void initializeEventHandling() {
@@ -167,6 +164,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void checkGameOver() {
+		PlayableCharacter player = GameMap.getInstance().getPlayer();
 		if (!gameOver && player.isGameOver()) {
 			gameOver = true;
 			showGameOverMenuScreen();
@@ -174,7 +172,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void showGameOverMenuScreen() {
-		new GameOverMenuScreen(this, player).showMenu();
+		new GameOverMenuScreen(this).showMenu();
 	}
 	
 	@Override
@@ -188,7 +186,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void showPauseMenu() {
 		if (pauseMenu == null) {
-			pauseMenu = new PauseMenuScreen(this, player);
+			pauseMenu = new PauseMenuScreen(this);
 		}
 		pauseMenu.showMenu();
 	}
@@ -208,7 +206,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void showShopMenu() {
 		if (shopMenu == null) {
-			shopMenu = new ShopMenuScreen(this, player);
+			shopMenu = new ShopMenuScreen(this);
 		}
 		shopMenu.showMenu();
 	}
@@ -229,7 +227,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right)
 	 */
 	public Vector2 getPlayersPositionOnMap() {
-		Vector2 playersRelativePosition = player.getPosition().cpy().scl(SCREEN_TO_WORLD);
+		PlayableCharacter player = GameMap.getInstance().getPlayer();
+		Vector2 playersRelativePosition = player.getPosition().scl(SCREEN_TO_WORLD);
 		playersRelativePosition.x /= map.getMapWidth();
 		playersRelativePosition.y /= map.getMapHeight();
 		return playersRelativePosition;

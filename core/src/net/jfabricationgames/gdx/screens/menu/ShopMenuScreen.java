@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -50,8 +49,8 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private MenuBox ammoMenuBanner;
 	private FocusButton buttonBackToGame;
 	
-	public ShopMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
-		super(gameScreen, player, SHOP_MENU_STATES_CONFIG);
+	public ShopMenuScreen(GameScreen gameScreen) {
+		super(gameScreen, SHOP_MENU_STATES_CONFIG);
 		
 		initialize();
 	}

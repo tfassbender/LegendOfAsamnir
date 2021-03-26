@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -39,10 +40,11 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Cont
 	protected SpriteBatch batch;
 	protected PlayableCharacter player;
 	
-	public InGameMenuScreen(GameScreen gameScreen, PlayableCharacter player, String... stateConfigFiles) {
+	public InGameMenuScreen(GameScreen gameScreen, String... stateConfigFiles) {
 		super(stateConfigFiles);
 		this.gameScreen = gameScreen;
-		this.player = player;
+
+		player = GameMap.getInstance().getPlayer();
 		
 		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 		

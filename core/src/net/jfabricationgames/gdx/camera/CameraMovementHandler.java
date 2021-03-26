@@ -10,6 +10,7 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class CameraMovementHandler {
@@ -34,21 +35,22 @@ public class CameraMovementHandler {
 		return instance != null;
 	}
 	
-	public static synchronized CameraMovementHandler createInstance(OrthographicCamera camera, PlayableCharacter player) {
+	public static synchronized CameraMovementHandler createInstance(OrthographicCamera camera) {
 		if (instance != null) {
 			throw new IllegalStateException("The instance of CameraMovementHandler has already been created. "
 					+ "Use the getInstance() method to get the instance instead of creating one.");
 		}
+		PlayableCharacter player = GameMap.getInstance().getPlayer();
 		instance = new CameraMovementHandler(camera, player);
 		return instance;
 	}
 	
-	public static synchronized CameraMovementHandler createInstanceIfAbsent(OrthographicCamera camera, PlayableCharacter player) {
+	public static synchronized CameraMovementHandler createInstanceIfAbsent(OrthographicCamera camera) {
 		if (isInstanceCreated()) {
 			return getInstance();
 		}
 		else {
-			return createInstance(camera, player);
+			return createInstance(camera);
 		}
 	}
 	
@@ -88,6 +90,12 @@ public class CameraMovementHandler {
 	public void moveCamera(float deltaX, float deltaY) {
 		camera.position.x += deltaX;
 		camera.position.y += deltaY;
+	}
+	
+	public void centerCameraOnPlayer() {
+		Vector2 playerPosition = player.getPosition();
+		camera.position.x = playerPosition.x;
+		camera.position.y = playerPosition.y;
 	}
 	
 	public Vector2 getCameraPosition() {

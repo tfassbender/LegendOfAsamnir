@@ -83,6 +83,7 @@ public class GameDataService implements EventListener {
 		GameDataContainer gameData = json.fromJson(GameDataContainer.class, fileHandle);
 		
 		GameDataHandler.getInstance().updateData(gameData);
+		GameMap.getInstance().updateAfterLoadingGameState();
 	}
 	
 	public boolean isGameDataSlotExisting(int slot) {

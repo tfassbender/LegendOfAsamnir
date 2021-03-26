@@ -3,6 +3,8 @@ package net.jfabricationgames.gdx.hud;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.map.GameMap;
+
 public class HeadsUpDisplay implements Disposable {
 	
 	public static final String DEFAULT_FONT_NAME = "vikingMedium";
@@ -17,11 +19,12 @@ public class HeadsUpDisplay implements Disposable {
 	private OnScreenTextBox onScreenText;
 	private WorldEdge worldEdge;
 	
-	public HeadsUpDisplay(float hudSceneWidht, float hudSceneHeight, OrthographicCamera camera, StatsCharacter character) {
+	public HeadsUpDisplay(float hudSceneWidht, float hudSceneHeight, OrthographicCamera camera) {
 		this.hudSceneWidth = hudSceneWidht;
 		this.hudSceneHeight = hudSceneHeight;
 		this.camera = camera;
-		this.character = character;
+		
+		character = GameMap.getInstance().getPlayer();
 		
 		statusBar = new StatusBar(this);
 		onScreenItemRenderer = new OnScreenItemRenderer(this);

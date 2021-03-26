@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -68,8 +67,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private FocusButton buttonQuit;
 	private FocusButton buttonShowMap;
 	
-	public PauseMenuScreen(GameScreen gameScreen, PlayableCharacter player) {
-		super(gameScreen, player, (String[]) null);
+	public PauseMenuScreen(GameScreen gameScreen) {
+		super(gameScreen, (String[]) null);
 		
 		initialize();
 	}
