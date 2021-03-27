@@ -46,7 +46,7 @@
 		textureScale: 0.12,
 		
 		range: 30,
-		removeIfRangeExceeded: false,
+		removeAfterRangeExceeded: false,
 		speed: 60,
 		dampingAfterObjectHit: 15,
 		
@@ -61,7 +61,7 @@
 		rotateTextureToMovementDirection: true,
 		
 		range: 30,
-		removeIfRangeExceeded: false,
+		removeAfterRangeExceeded: false,
 		speed: 75,
 		dampingAfterObjectHit: 15,
 	},
@@ -71,8 +71,13 @@
 		texture: projectile_rock,
 		textureScale: 1
 		
-		range: 75,
-		speed: 40,
-		dampingAfterObjectHit: 15,
+		speed: 100,
+		damping: 1,
+		range: 100,
+		removeAfterRangeExceeded: false,
+		dampingAfterRangeExceeded: 10,
+		dampingAfterObjectHit: 10,
+		
+		timeActive: 10,
 	}
 }

@@ -13,6 +13,6 @@ public class Rock extends Projectile {
 	
 	@Override
 	protected PhysicsBodyProperties createShapePhysicsBodyProperties() {
-		return new PhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(0.75f);
+		return new PhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(0.25f).setDensity(15f);
 	}
 }

@@ -19,8 +19,8 @@ public class ImpFireball extends Projectile {
 	}
 	
 	@Override
-	protected void stopProjectile() {
-		super.stopProjectile();
+	protected void stopProjectileAfterObjectHit() {
+		super.stopProjectileAfterObjectHit();
 		changeBodyToSensor();
 	}
 }

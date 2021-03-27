@@ -16,10 +16,11 @@ public class ProjectileTypeConfig {
 	public String sound;
 	
 	public float range = 0f;
-	public boolean removeIfRangeExceeded = true;
+	public boolean removeAfterRangeExceeded = true;
 	public float speed = 30f;
 	public float damping = 0f;
 	public float dampingAfterObjectHit = 5f;
+	public float dampingAfterRangeExceeded = 0f;
 	
 	public float timeTillExplosion = -1f;
 	public boolean multipleHitsPossible = false;

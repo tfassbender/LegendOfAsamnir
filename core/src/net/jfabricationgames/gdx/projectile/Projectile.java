@@ -73,7 +73,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	private void initialize() {
 		distanceTraveled = 0;
 		if (typeConfig.damping > 0 && isRangeRestricted()) {
-			throw new IllegalStateException("A Projectile can not be range restricted AND use linear damping");
+			throw new IllegalStateException("A Projectile can not be restricted to be removed after a given range AND use linear damping");
 		}
 		attackPerformed = false;
 		
@@ -156,8 +156,8 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 			if (isRangeRestricted()) {
 				remove();
 			}
-			else {
-				stopProjectile();
+			else if (isDampedAfterRangeExceeds()) {
+				stopProjectileAfterRangeExceeds();
 			}
 		}
 		if (activeTimeOver()) {
@@ -173,7 +173,11 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	}
 	
 	private boolean isRangeRestricted() {
-		return typeConfig.range > 0 && typeConfig.removeIfRangeExceeded;
+		return typeConfig.range > 0 && typeConfig.removeAfterRangeExceeded;
+	}
+
+	private boolean isDampedAfterRangeExceeds() {
+		return typeConfig.range > 0 && typeConfig.dampingAfterRangeExceeded > 0;
 	}
 	
 	private boolean activeTimeOver() {
@@ -192,9 +196,16 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		return typeConfig.timeTillExplosion > 0;
 	}
 	
-	protected void stopProjectile() {
+	protected void stopProjectileAfterObjectHit() {
 		if (hasBody()) {
 			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+			attackPerformed = true;
+		}
+	}
+
+	private void stopProjectileAfterRangeExceeds() {
+		if (hasBody()) {
+			body.setLinearDamping(typeConfig.dampingAfterRangeExceeded);
 			attackPerformed = true;
 		}
 	}

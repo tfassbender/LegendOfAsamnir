@@ -14,7 +14,7 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class ProjectileFactory extends AbstractFactory {
-
+	
 	private static final String PROJECTILE_TYPE_ARROW = "arrow";
 	private static final String PROJECTILE_TYPE_BOMB = "bomb";
 	private static final String PROJECTILE_TYPE_EXPLOSION = "explosion";
@@ -64,6 +64,10 @@ public class ProjectileFactory extends AbstractFactory {
 	}
 	
 	public Projectile createProjectileAndAddToMap(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType) {
+		if (type == null) {
+			throw new IllegalStateException(
+					"The 'type' parameter mussn't be null. Maybe the projectileType was not configured in the attack config file?");
+		}
 		ProjectileTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: " + type

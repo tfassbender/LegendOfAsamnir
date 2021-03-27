@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="3">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="5">
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -24,6 +24,12 @@
    <properties>
     <property name="unitId" value="cyclops"/>
    </properties>
+   <point/>
+  </object>
+  <object id="3" name="item.arrow" x="352" y="192">
+   <point/>
+  </object>
+  <object id="4" name="item.bomb" x="416" y="192">
    <point/>
   </object>
  </objectgroup>

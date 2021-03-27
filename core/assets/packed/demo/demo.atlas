@@ -1985,13 +1985,6 @@ cyclops_move
   orig: 64, 64
   offset: 0, 0
   index: 10
-cyclops_stone
-  rotate: false
-  xy: 2036, 1013
-  size: 11, 11
-  orig: 11, 11
-  offset: 0, 0
-  index: -1
 destroyable_wall
   rotate: false
   xy: 1126, 730
@@ -2768,14 +2761,14 @@ elemental_ice_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 6
 elemental_ice_idle
   rotate: false
   xy: 862, 362
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
+  index: 1
 elemental_ice_move
   rotate: false
   xy: 862, 362
@@ -4925,6 +4918,13 @@ pot_hit
   orig: 32, 32
   offset: 0, 0
   index: 3
+projectile_rock
+  rotate: false
+  xy: 2036, 1013
+  size: 11, 11
+  orig: 11, 11
+  offset: 0, 0
+  index: -1
 rainbow_bridge_disabled
   rotate: false
   xy: 900, 0

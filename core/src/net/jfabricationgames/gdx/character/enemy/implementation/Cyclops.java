@@ -4,8 +4,10 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.ai.BaseAI;
+import net.jfabricationgames.gdx.character.ai.util.timer.FixedAttackTimer;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
+import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -29,7 +31,7 @@ public class Cyclops extends Enemy implements EventListener {
 	@Override
 	protected void createAI() {
 		ai = new BaseAI();
-		//TODO create an AI
+		ai = new FightAI(ai, stateMachine.getState("attack_throw"), new FixedAttackTimer(5f), 5f);
 	}
 	
 

@@ -34,8 +34,8 @@ public class Web extends Projectile implements GameMapGroundTypeContainer {
 	}
 	
 	@Override
-	protected void stopProjectile() {
-		super.stopProjectile();
+	protected void stopProjectileAfterObjectHit() {
+		super.stopProjectileAfterObjectHit();
 		changeBodyToSensor();
 	}
 	
