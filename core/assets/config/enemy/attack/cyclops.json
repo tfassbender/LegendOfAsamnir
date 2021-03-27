@@ -1,0 +1,30 @@
+[
+	{
+		id: attack_beam,
+		type: BEAM,
+		delay: 0.6,
+		duration: 2,
+		damage: 10,
+		distFromCenter: 0.2,
+		pushForce: 50
+	},
+	{
+		id: attack_stomp,
+		type: NOVA,
+		delay: 0.5,
+		duration: 0,
+		damage: 3,
+		distFromCenter: 0,
+		hitFixtureRadius: 5,
+		pushForce: 200
+		pushForceAffectedByBlock: false,
+	},
+	{
+		id: attack_throw,
+		type: ROCK,
+		delay: 1.2,
+		duration: 0,
+		damage: 20,
+		pushForce: 150,
+	}
+]

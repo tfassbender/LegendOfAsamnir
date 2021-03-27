@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
+import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -17,7 +18,6 @@ public class EnemyFactory extends AbstractFactory {
 	private static final String ENEMY_NAME_BAT = "bat";
 	private static final String ENEMY_NAME_GLADIATOR = "gladiator";
 	private static final String ENEMY_NAME_MINI_GOLEM = "mini_golem";
-	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
 	private static final String ENEMY_NAME_SPIDER = "spider";
 	private static final String ENEMY_NAME_MIMIC_CHEST = "mimic_chest";
 	private static final String ENEMY_NAME_MIMIC_BARREL = "mimic_barrel";
@@ -25,6 +25,9 @@ public class EnemyFactory extends AbstractFactory {
 	private static final String ENEMY_NAME_FIRE_ELEMENTAL = "fire_elemental";
 	private static final String ENEMY_NAME_ICE_ELEMENTAL = "ice_elemental";
 	private static final String ENEMY_NAME_IMP = "imp";
+	
+	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
+	private static final String ENEMY_NAME_CYCLOPS = "cyclops";
 	
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	private static Config config;
@@ -77,6 +80,9 @@ public class EnemyFactory extends AbstractFactory {
 				break;
 			case ENEMY_NAME_MINOTAUR:
 				enemy = new Minotaur(typeConfig, properties);
+				break;
+			case ENEMY_NAME_CYCLOPS:
+				enemy = new Cyclops(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);

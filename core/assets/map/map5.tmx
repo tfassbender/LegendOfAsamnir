@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="3">
+ <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
+ <layer id="1" name="background" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt1c0NAiEQBWBoQq1ErWT1qtTg3nVr0HrFKIkhC7jMDD/mHb6LCTiPh6iVUhq6ctb5WpndWDeCk2Du2Dp/9ol4pldC7tj8sRlN4POSvnPPdZma0VSe/9cuQzO6jK1lWKr2PappZa09G8LanH04bK2dZ09Ym7MPx/k/Zr7/njjn2NrQPtzdpM5QCnc3JXNcrMPHseMckr8P5Ggrx6De93UskOP1Xkn/h5TqRbKTf8rh7peP6765N5f7vS3dk3QPuT0tVasHAAAAAAAAAAAAgB49ASWphAo=
+  </data>
+ </layer>
+ <layer id="2" name="backgroun_ 2" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztltENgjAQhsGHrqFG5lATnUOcxBdYwwf0QddwFDexDW3SXI7SlmJbcl9yuYRCuC9/0RYFQRBTeJT+FRs1x3PiLN2M3qbnQsw+hc7CSZ/xxesN1mPOj4Flic340a6l5uDCN9A3EBvhsWZ9bVjsafwRHgfW15E8okMeabEUj3K1DI/tQjy6zPfVjlcle64eYvaWVyO78rhn9J8OHUSv+ey3jFwwh1au7VkeuQw5NHL9omWSqovJodXuw1xSOQePOTTgfuiSgo+NQ4s8J1zqAZ8YLqdi3AHmoYP5qGz+mY9vHhBTPnP72DqY8oCM7Tf9jFD92cEmDxsfcaaB+3iKi6uDSx4Q5SPqyvB36/m4dFcHnzwwfN8dsofA9rdxzh4CyiOtPJTLOWInCIIgCIIgCIwfpF/Wcw==
+  </data>
+ </layer>
+ <layer id="3" name="terrain" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
+  </data>
+ </layer>
+ <objectgroup id="4" name="objects">
+  <object id="1" name="player.startingPosition" x="160" y="320">
+   <point/>
+  </object>
+  <object id="2" name="enemy.cyclops" x="800" y="512">
+   <properties>
+    <property name="unitId" value="cyclops"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="physics" locked="1"/>
+</map>

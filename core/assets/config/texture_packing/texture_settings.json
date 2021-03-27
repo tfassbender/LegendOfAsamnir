@@ -148,6 +148,18 @@
 				enemy/imp/imp_idle,
 				enemy/imp/imp_move,
 				
+				// cyclops
+				enemy/cyclops/cyclops_attack_beam,
+				enemy/cyclops/cyclops_beam,
+				enemy/cyclops/cyclops_attack_stomp,
+				enemy/cyclops/cyclops_attack_throw,
+				enemy/cyclops/cyclops_damage_high,
+				enemy/cyclops/cyclops_damage_low,
+				enemy/cyclops/cyclops_defense,
+				enemy/cyclops/cyclops_die,
+				enemy/cyclops/cyclops_idle,
+				enemy/cyclops/cyclops_move,
+				
 				//##############################################################
 				//### NPCs
 				//##############################################################

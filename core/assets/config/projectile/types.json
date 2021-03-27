@@ -65,4 +65,14 @@
 		speed: 75,
 		dampingAfterObjectHit: 15,
 	},
+	rock: {
+		attackType: ROCK,
+		
+		texture: projectile_rock,
+		textureScale: 1
+		
+		range: 75,
+		speed: 40,
+		dampingAfterObjectHit: 15,
+	}
 }

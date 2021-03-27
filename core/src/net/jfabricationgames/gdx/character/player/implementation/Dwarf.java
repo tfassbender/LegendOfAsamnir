@@ -527,7 +527,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	@Override
 	public void takeDamage(float damage, AttackType attackType) {
 		if (isAlive()) {
-			if (isBlocking()) {
+			if (isBlocking() && attackType.canBeBlocked()) {
 				takeArmorDamage(damage * 0.33f);
 				damage *= 0.1f;
 			}

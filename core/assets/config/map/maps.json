@@ -20,6 +20,11 @@
 		map: "map/map4.tmx",
 		//initial: true
 	}
+	{
+		name: test_map_5,
+		map: "map/map5.tmx",
+		initial: true
+	}
 	
 	// demo / tutorial
 	{

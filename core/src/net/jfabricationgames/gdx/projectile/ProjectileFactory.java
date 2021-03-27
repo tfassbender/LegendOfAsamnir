@@ -14,12 +14,13 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class ProjectileFactory extends AbstractFactory {
-	
-	private static final String PROJECTILE_TYPE_IMP_FIRE = "imp_fire";
-	private static final String PROJECTILE_TYPE_WEB = "web";
+
+	private static final String PROJECTILE_TYPE_ARROW = "arrow";
+	private static final String PROJECTILE_TYPE_BOMB = "bomb";
 	private static final String PROJECTILE_TYPE_EXPLOSION = "explosion";
-	private static final String PROJECTILE_NAME_BOMB = "bomb";
-	private static final String PROJECTILE_NAME_ARROW = "arrow";
+	private static final String PROJECTILE_TYPE_WEB = "web";
+	private static final String PROJECTILE_TYPE_IMP_FIRE = "imp_fire";
+	private static final String PROJECTILE_TYPE_ROCK = "rock";
 	private static final String configFile = "config/factory/projectile_factory.json";
 	private static final String animationConfigFile = "config/animation/projectiles.json";
 	private static Config config;
@@ -80,10 +81,10 @@ public class ProjectileFactory extends AbstractFactory {
 		
 		Projectile projectile;
 		switch (type) {
-			case PROJECTILE_NAME_ARROW:
+			case PROJECTILE_TYPE_ARROW:
 				projectile = new Arrow(typeConfig, sprite);
 				break;
-			case PROJECTILE_NAME_BOMB:
+			case PROJECTILE_TYPE_BOMB:
 				projectile = new Bomb(typeConfig, sprite);
 				break;
 			case PROJECTILE_TYPE_EXPLOSION:
@@ -95,6 +96,9 @@ public class ProjectileFactory extends AbstractFactory {
 				break;
 			case PROJECTILE_TYPE_IMP_FIRE:
 				projectile = new ImpFireball(typeConfig, animation);
+				break;
+			case PROJECTILE_TYPE_ROCK:
+				projectile = new Rock(typeConfig, sprite);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);

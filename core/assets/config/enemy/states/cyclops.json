@@ -1,0 +1,89 @@
+[
+	{
+		id: idle,
+		animation: cyclops_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, attack_beam, attack_stomp, attack_throw, defense, die
+		]
+	},
+	{
+		id: move,
+		animation: cyclops_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, attack_beam, attack_stomp, attack_throw, defense, die
+		]
+	},
+	{
+		id: attack_beam,
+		animation: cyclops_attack_beam,
+		attack: attack_beam
+		endsWithAnimation: false,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: attack_stomp,
+		animation: cyclops_attack_stomp,
+		stateEnteringSound: cyclops_attack_stomp,
+		attack: attack_stomp
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: attack_throw,
+		animation: cyclops_attack_throw,
+		attack: attack_throw
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: defense,
+		animation: cyclops_defense,
+		endsWithAnimation: false,
+		followingState: idle,
+		interruptingStates: [
+			damage_high, die
+		]
+	},
+	{
+		id: damage_low,
+		animation: cyclops_damage_low,
+		endsWithAnimation: true,
+		stateEnteringSound: flesh_hit_1,
+		followingState: idle,
+		interruptingStates: [
+			attack_beam, attack_stomp, attack_throw, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: damage_high,
+		animation: cyclops_damage_high,
+		endsWithAnimation: true,
+		stateEnteringSound: flesh_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			attack_beam, attack_stomp, attack_throw, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: cyclops_die,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 3f,
+		followingState: END,
+		//stateEnteringSound: cyclops_die,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]

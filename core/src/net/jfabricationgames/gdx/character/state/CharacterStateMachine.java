@@ -88,10 +88,10 @@ public class CharacterStateMachine {
 			}
 			
 			state.interruptingStates = new ObjectSet<>();
-			for (String interruptingStates : config.interruptingStates) {
-				CharacterState interruptingState = states.get(interruptingStates);
+			for (String interruptingStateName : config.interruptingStates) {
+				CharacterState interruptingState = states.get(interruptingStateName);
 				if (interruptingState == null) {
-					throw new IllegalStateException("The interruptingState '" + interruptingState + "' of the state '" + config.id + "' is unknown.");
+					throw new IllegalStateException("The interruptingState '" + interruptingStateName + "' of the state '" + config.id + "' is unknown.");
 				}
 				state.interruptingStates.add(interruptingState);
 			}

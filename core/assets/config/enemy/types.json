@@ -297,4 +297,31 @@
 			arrow: 0.2,
 		}
 	},
+	cyclops: {
+		animationsConfig: config/animation/enemy/cyclops.json,
+		stateConfig: config/enemy/states/cyclops.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/cyclops.json
+		
+		health: 150,
+		movingSpeed: 2.0,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0.4f,
+		
+		bodyShape: OCTAGON,
+		bodyWidth: 1.0f,
+		bodyHeight: 1.4f,
+		
+		addSensor: true,
+		sensorRadius: 8f,
+		
+		pushForceDamage: 0,
+		pushForceHit: 40,
+		
+		usesHealthBar: true,
+		healthBarOffsetX: 0.6,
+		healthBarOffsetY: -0.4,
+		healthBarWidthFactor: 0.5,
+	}
 }
