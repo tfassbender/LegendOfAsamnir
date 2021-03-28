@@ -24,8 +24,8 @@ public class MinotaurAttackAI extends AbstractMultiAttackAI {
 	
 	private Random random;
 	
-	public MinotaurAttackAI(ArtificialIntelligence subAI, ArrayMap<String, CharacterState> attackStates, ArrayMap<CharacterState, Float> attackDistances,
-			AttackTimer attackTimer) {
+	public MinotaurAttackAI(ArtificialIntelligence subAI, ArrayMap<String, CharacterState> attackStates,
+			ArrayMap<CharacterState, Float> attackDistances, AttackTimer attackTimer) {
 		super(subAI, attackStates, attackDistances, attackTimer);
 		
 		attackHit = attackStates.get("attack_hit");

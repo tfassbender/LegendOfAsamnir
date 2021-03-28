@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="5">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="9">
+ <properties>
+  <property name="mini_map_config_path" value="config/menu/maps/test_map_5.json"/>
+ </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
@@ -30,6 +33,30 @@
    <point/>
   </object>
   <object id="4" name="item.bomb" x="416" y="192">
+   <point/>
+  </object>
+  <object id="5" name="object.spawnPoint" x="640" y="320">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_arrows"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="6" name="object.spawnPoint" x="864" y="320">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_arrows"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="7" name="object.spawnPoint" x="512" y="704">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_arrows"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8" name="object.spawnPoint" x="1184" y="704">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_arrows"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

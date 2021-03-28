@@ -314,7 +314,7 @@
 		bodyHeight: 1.4f,
 		
 		addSensor: true,
-		sensorRadius: 8f,
+		sensorRadius: 12f,
 		
 		pushForceDamage: 0,
 		pushForceHit: 40,

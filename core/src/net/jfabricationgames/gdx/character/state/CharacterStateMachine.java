@@ -103,13 +103,20 @@ public class CharacterStateMachine {
 	 * Change states that end on the animations end (if the animation has ended).
 	 */
 	public void updateState(float delta) {
-		if (isChangeStateAfterAnimation(delta) || isChangeStateAfterAttackFinishes(delta)) {
+		if (isStateEnded(delta)) {
+			if (currentState.followingState.config.attack != null) {
+				currentState.followingState.setAttackDirection(new Vector2(0, 0));
+			}
 			setState(currentState.followingState);
 		}
 	}
+
+	private boolean isStateEnded(float delta) {
+		return isChangeStateAfterAnimation(delta) || isChangeStateAfterAttackFinishes(delta);
+	}
 	
 	private boolean isChangeStateAfterAnimation(float delta) {
-		return currentState.getAnimation().isAnimationFinished() && currentState.config.endsWithAnimation && afterAnimationDelayEnded(delta);
+		return currentState.config.endsWithAnimation && currentState.getAnimation().isAnimationFinished() && afterAnimationDelayEnded(delta);
 	}
 	
 	private boolean isChangeStateAfterAttackFinishes(float delta) {
@@ -119,6 +126,10 @@ public class CharacterStateMachine {
 	private boolean afterAnimationDelayEnded(float delta) {
 		timeSinceAnimationEnded += delta;
 		return timeSinceAnimationEnded > currentState.config.changeStateAfterAnimationDelay;
+	}
+	
+	public boolean isInState(String stateId) {
+		return currentState == getState(stateId);
 	}
 	
 	public boolean isInEndState() {
@@ -145,7 +156,7 @@ public class CharacterStateMachine {
 	}
 	
 	private boolean isStateChangeAllowed(CharacterState state) {
-		return currentState.interruptingStates.contains(state) || followsOnCurrentState(state);
+		return currentState.interruptingStates.contains(state) || isStateEnded(0f) && followsOnCurrentState(state);
 	}
 	
 	private void changeState(CharacterState state) {

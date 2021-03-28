@@ -23,9 +23,10 @@
 		attack: attack_beam
 		endsWithAnimation: false,
 		endsAfterAttackFinishes: true,
+		flipAnimationOnEnteringOnly: true,
 		followingState: idle,
 		interruptingStates: [
-			die
+			damage_low, die
 		]
 	},
 	{
@@ -52,7 +53,8 @@
 	{
 		id: defense,
 		animation: cyclops_defense,
-		endsWithAnimation: false,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 2,
 		followingState: idle,
 		interruptingStates: [
 			damage_high, die
@@ -63,9 +65,9 @@
 		animation: cyclops_damage_low,
 		endsWithAnimation: true,
 		stateEnteringSound: flesh_hit_1,
-		followingState: idle,
+		followingState: defense,
 		interruptingStates: [
-			attack_beam, attack_stomp, attack_throw, die
+			die
 		],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true
@@ -75,9 +77,9 @@
 		animation: cyclops_damage_high,
 		endsWithAnimation: true,
 		stateEnteringSound: flesh_hit_2,
-		followingState: idle,
+		followingState: attack_stomp,
 		interruptingStates: [
-			attack_beam, attack_stomp, attack_throw, die
+			die
 		],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true
