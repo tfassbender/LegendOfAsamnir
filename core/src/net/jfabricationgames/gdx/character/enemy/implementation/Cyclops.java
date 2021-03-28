@@ -31,7 +31,7 @@ public class Cyclops extends Enemy implements EventListener {
 	@Override
 	protected void createAI() {
 		ai = new BaseAI();
-		ai = new FightAI(ai, stateMachine.getState("attack_throw"), new FixedAttackTimer(5f), 5f);
+		ai = new FightAI(ai, stateMachine.getState("attack_beam"), new FixedAttackTimer(5f), 5f);
 	}
 	
 

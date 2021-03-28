@@ -1,10 +1,14 @@
-package net.jfabricationgames.gdx.attack;
+package net.jfabricationgames.gdx.attack.implementation;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
+import net.jfabricationgames.gdx.attack.Attack;
+import net.jfabricationgames.gdx.attack.AttackConfig;
+import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;

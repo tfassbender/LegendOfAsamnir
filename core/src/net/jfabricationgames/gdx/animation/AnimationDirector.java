@@ -10,6 +10,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AnimationDirector<T extends TextureRegion> {
 	
+	public static boolean isTextureRight(boolean initialAnimationDirectionIsRight, AnimationDirector<TextureRegion> animation) {
+		return initialAnimationDirectionIsRight != animation.getKeyFrame().isFlipX();
+	}
+	
+	public static boolean isTextureLeft(boolean initialAnimationDirectionIsRight, AnimationDirector<TextureRegion> animation) {
+		return initialAnimationDirectionIsRight == animation.getKeyFrame().isFlipX();
+	}
+	
 	private float stateTime;
 	private Animation<T> animation;
 	
@@ -20,12 +28,9 @@ public class AnimationDirector<T extends TextureRegion> {
 		initializeSpriteConfigWithoutPosition();
 	}
 	
-	private void initializeSpriteConfigWithoutPosition() {
-		// null-check is needed because of the DummyAnimationDirector
-		if (animation != null) {
-			T keyFrame = animation.getKeyFrame(0);
-			spriteConfig = new AnimationSpriteConfig().setWidth(keyFrame.getRegionWidth()).setHeight(keyFrame.getRegionHeight());
-		}
+	protected void initializeSpriteConfigWithoutPosition() {
+		T keyFrame = animation.getKeyFrame(0);
+		spriteConfig = new AnimationSpriteConfig().setWidth(keyFrame.getRegionWidth()).setHeight(keyFrame.getRegionHeight());
 	}
 	
 	/**
@@ -56,28 +61,19 @@ public class AnimationDirector<T extends TextureRegion> {
 	 * Get the frame at the current time.
 	 */
 	public T getKeyFrame() {
-		return getKeyFrame(0);
-	}
-	
-	/**
-	 * Increase the state time and get the frame at the increased state time.
-	 * 
-	 * @param delta
-	 *        The time delta from the render method.
-	 */
-	public T getKeyFrame(float delta) {
-		increaseStateTime(delta);
 		return animation.getKeyFrame(stateTime);
 	}
 	
-	/**
-	 * Increase the state time by a given delta time.
-	 * 
-	 * @param delta
-	 *        The time delta from the render method.
-	 */
+	public float getStateTime() {
+		return stateTime;
+	}
+	
 	public void increaseStateTime(float delta) {
 		stateTime += delta;
+	}
+	
+	public void setStateTime(float stateTime) {
+		this.stateTime = stateTime;
 	}
 	
 	/**
@@ -109,6 +105,10 @@ public class AnimationDirector<T extends TextureRegion> {
 		return animation.isAnimationFinished(stateTime);
 	}
 	
+	public float getAnimationDuration() {
+		return animation.getAnimationDuration();
+	}
+	
 	/**
 	 * Flip all key frames of the animation.
 	 */
@@ -125,7 +125,7 @@ public class AnimationDirector<T extends TextureRegion> {
 	public void setSpriteConfig(AnimationSpriteConfig spriteConfig) {
 		this.spriteConfig = spriteConfig;
 	}
-
+	
 	public AnimationSpriteConfig getSpriteConfigCopy() {
 		return new AnimationSpriteConfig(spriteConfig);
 	}

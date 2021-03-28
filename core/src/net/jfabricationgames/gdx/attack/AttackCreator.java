@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -57,6 +58,12 @@ public class AttackCreator {
 			if (attack.isToStart()) {
 				attack.start();
 			}
+		}
+	}
+	
+	public void renderAttacks(float delta, SpriteBatch batch) {
+		for (Attack attack : attacks) {
+			attack.render(delta, batch);
 		}
 	}
 	

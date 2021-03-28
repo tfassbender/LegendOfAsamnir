@@ -23,7 +23,9 @@
 		attack: attack_beam
 		endsWithAnimation: false,
 		followingState: idle,
-		interruptingStates: []
+		interruptingStates: [
+			die
+		]
 	},
 	{
 		id: attack_stomp,
@@ -32,7 +34,9 @@
 		attack: attack_stomp
 		endsWithAnimation: true,
 		followingState: idle,
-		interruptingStates: []
+		interruptingStates: [
+			die
+		]
 	},
 	{
 		id: attack_throw,
@@ -40,7 +44,9 @@
 		attack: attack_throw
 		endsWithAnimation: true,
 		followingState: idle,
-		interruptingStates: []
+		interruptingStates: [
+			die
+		]
 	},
 	{
 		id: defense,

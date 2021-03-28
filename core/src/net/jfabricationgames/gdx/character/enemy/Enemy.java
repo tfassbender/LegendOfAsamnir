@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.character.enemy;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
@@ -166,6 +167,13 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 			ai.calculateMove(delta);
 			ai.executeMove();
 		}
+	}
+	
+	@Override
+	public void draw(float delta, SpriteBatch batch) {
+		super.draw(delta, batch);
+		
+		attackCreator.renderAttacks(delta, batch);
 	}
 	
 	private boolean isAlive() {

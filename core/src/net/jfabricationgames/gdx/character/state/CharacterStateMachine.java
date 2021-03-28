@@ -168,11 +168,11 @@ public class CharacterStateMachine {
 	}
 	
 	private boolean isTextureRight(AnimationDirector<TextureRegion> animation) {
-		return currentState.config.initialAnimationDirectionRight != animation.getKeyFrame().isFlipX();
+		return AnimationDirector.isTextureRight(currentState.config.initialAnimationDirectionRight, animation);
 	}
 	
 	private boolean isTextureLeft(AnimationDirector<TextureRegion> animation) {
-		return currentState.config.initialAnimationDirectionRight == animation.getKeyFrame().isFlipX();
+		return AnimationDirector.isTextureLeft(currentState.config.initialAnimationDirectionRight, animation);
 	}
 	
 	public CharacterState getState(String id) {

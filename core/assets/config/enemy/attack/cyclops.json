@@ -6,17 +6,17 @@
 		duration: 2,
 		damage: 10,
 		distFromCenter: 0.2,
-		pushForce: 50
+		pushForce: 100
 	},
 	{
 		id: attack_stomp,
 		type: NOVA,
 		delay: 0.5,
 		duration: 0,
-		damage: 3,
+		damage: 2.5,
 		distFromCenter: 0,
 		hitFixtureRadius: 5,
-		pushForce: 200
+		pushForce: 300
 		pushForceAffectedByBlock: false,
 	},
 	{

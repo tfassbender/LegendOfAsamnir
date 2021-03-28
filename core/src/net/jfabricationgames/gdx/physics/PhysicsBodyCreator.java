@@ -96,7 +96,12 @@ public abstract class PhysicsBodyCreator {
 	}
 	public static Fixture addRectangularFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(properties.width * 0.5f, properties.height * 0.5f);
+		if (properties.fixturePosition != null) {
+			shape.setAsBox(properties.width * 0.5f, properties.height * 0.5f, properties.fixturePosition, 0f);
+		}
+		else {
+			shape.setAsBox(properties.width * 0.5f, properties.height * 0.5f);
+		}
 		
 		FixtureDef fixtureDef = createFixtureDef(shape, properties);
 		Fixture fixture = properties.body.createFixture(fixtureDef);

@@ -268,6 +268,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		
 		drawDwarf(batch);
 		drawAimMarker(batch);
+		attackCreator.renderAttacks(delta, batch);
 	}
 	
 	private void updateAction(float delta) {
@@ -536,7 +537,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				die();
 			}
 			else {
-				if (isBlocking()) {
+				if (isBlocking() && attackType.canBeBlocked()) {
 					changeAction(CharacterAction.SHIELD_HIT);
 				}
 				else {

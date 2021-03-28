@@ -8,15 +8,15 @@ public class DummyAnimationDirector<T extends TextureRegion> extends AnimationDi
 		super(null);
 	}
 	
+	@Override
+	protected void initializeSpriteConfigWithoutPosition() {}
+	
+	@Override
 	public T getKeyFrame() {
 		return null;
 	}
 	
-	public T getKeyFrame(float delta) {
-		increaseStateTime(delta);
-		return null;
-	}
-	
+	@Override
 	public boolean isAnimationFinished() {
 		return true;
 	}
