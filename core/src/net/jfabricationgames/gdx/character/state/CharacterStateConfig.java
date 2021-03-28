@@ -10,6 +10,7 @@ public class CharacterStateConfig {
 	public String stateEnteringSound;
 	
 	public boolean endsWithAnimation = true;
+	public boolean endsAfterAttackFinishes = false;
 	public float changeStateAfterAnimationDelay = 0f;
 	public String followingState;
 	

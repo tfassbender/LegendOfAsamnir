@@ -91,7 +91,8 @@ public class CharacterStateMachine {
 			for (String interruptingStateName : config.interruptingStates) {
 				CharacterState interruptingState = states.get(interruptingStateName);
 				if (interruptingState == null) {
-					throw new IllegalStateException("The interruptingState '" + interruptingStateName + "' of the state '" + config.id + "' is unknown.");
+					throw new IllegalStateException(
+							"The interruptingState '" + interruptingStateName + "' of the state '" + config.id + "' is unknown.");
 				}
 				state.interruptingStates.add(interruptingState);
 			}
@@ -102,9 +103,17 @@ public class CharacterStateMachine {
 	 * Change states that end on the animations end (if the animation has ended).
 	 */
 	public void updateState(float delta) {
-		if (currentState.getAnimation().isAnimationFinished() && currentState.config.endsWithAnimation && afterAnimationDelayEnded(delta)) {
+		if (isChangeStateAfterAnimation(delta) || isChangeStateAfterAttackFinishes(delta)) {
 			setState(currentState.followingState);
 		}
+	}
+	
+	private boolean isChangeStateAfterAnimation(float delta) {
+		return currentState.getAnimation().isAnimationFinished() && currentState.config.endsWithAnimation && afterAnimationDelayEnded(delta);
+	}
+	
+	private boolean isChangeStateAfterAttackFinishes(float delta) {
+		return currentState.config.endsAfterAttackFinishes && currentState.allAttacksFinished();
 	}
 	
 	private boolean afterAnimationDelayEnded(float delta) {
@@ -149,7 +158,8 @@ public class CharacterStateMachine {
 	}
 	
 	private boolean followsOnCurrentState(CharacterState state) {
-		return currentState.config.endsWithAnimation && currentState.animation.isAnimationFinished() && currentState.followingState == state;
+		return (currentState.config.endsWithAnimation || currentState.config.endsAfterAttackFinishes) && currentState.animation.isAnimationFinished()
+				&& currentState.followingState == state;
 	}
 	
 	public void flipAnimationTexturesToMovementDirection(AnimationDirector<TextureRegion> animation, Vector2 movingDirection) {

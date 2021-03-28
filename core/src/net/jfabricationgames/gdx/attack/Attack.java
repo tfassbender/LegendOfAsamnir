@@ -40,7 +40,7 @@ public abstract class Attack {
 		aborted = true;
 	}
 	
-	protected boolean isExecuted() {
+	public boolean isExecuted() {
 		return aborted || (started && timer >= config.delay + config.duration);
 	}
 	

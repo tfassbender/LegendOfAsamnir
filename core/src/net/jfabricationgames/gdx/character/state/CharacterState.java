@@ -88,6 +88,14 @@ public class CharacterState {
 		attacks.add(attack);
 	}
 	
+	public boolean allAttacksFinished() {
+		boolean allAttacksFinished = !attacks.isEmpty();
+		for (Attack attack : attacks) {
+			allAttacksFinished &= attack.isExecuted();
+		}
+		return allAttacksFinished;
+	}
+	
 	/**
 	 * Flip the whole animation into the right direction, according to the last image, that was drawn of the previous state.
 	 */
