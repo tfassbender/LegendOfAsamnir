@@ -8,6 +8,7 @@ import java.util.TimeZone;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.state.BeforePersistState;
@@ -55,7 +56,7 @@ public class GameDataService implements EventListener {
 		
 		executeAnnotatedMethodsBeforePersisting();
 		GameDataContainer gameData = GameDataHandler.getInstance().getGameData();
-		Json json = new Json();
+		Json json = new Json(OutputType.json);
 		json.setUsePrototypes(false);
 		String serializedGameData = json.prettyPrint(gameData);
 		
