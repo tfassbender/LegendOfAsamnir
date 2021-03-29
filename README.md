@@ -20,6 +20,7 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [Items](#items)
 - [Game Objects](#game-objects)
 - [Maps](#maps)
+- [Saving and Loading Game States](#saving-and-loading-game-states)
 - [Menus](#menus)
 - [Others](#others)
 
@@ -574,9 +575,368 @@ The second part of configuration is done in a separate config file, that defines
 
 Ground physics are objects, that can be added to the ground layer of a map. These objects interact with the player, with enemies or other game objects and can be used to change the behavior of them, while touching the ground objects (e.g. the player is slowed down when he climbs up a wall or stairs). The types of ground physics have to be configured in the json configuration file [ground_types.json](core/assets/config/map/ground_types.json). The type of ground, that is applied for a map object in the ground layer is to be defined in the map properties of this map object, with the property key **ground** and a value that matches one of the configured names in the [ground_types.json](core/assets/config/map/ground_types.json) config file. 
 
+## Saving and Loading Game States
+
+To be able to continue the game after closing it, the game state of the game can be saved to files. Therefore all the information needed to re-create the current state of the game is serialized into a JSON file, that is stored in the file system. Therefore the class [GameDataService](core/src/net/jfabricationgames/gdx/data/GameDataService.java) can be used to to read or write game states from or to files. These files are saved in the user's home directory in the subdirectory '.DwarfScrollerGdx'.  
+All data that is stored to the game save file is kept in the [GameDataHandler](core/src/net/jfabricationgames/gdx/data/GameDataHandler.java), which is a singleton object, that contains a [GameDataContainer](core/src/net/jfabricationgames/gdx/data/container/GameDataContainer.java) for the current game state. This GameDataContainer contains multiple other containers from the [container package](core/src/net/jfabricationgames/gdx/data/container) that store parts of the game state.
+
+A serialized game state could look like the following example:
+
+```javascript
+{
+"characterDataContainer": {
+	"slowedDown": false,
+	"health": 100,
+	"maxHealth": 100,
+	"increaseHealth": 0,
+	"healthIncreasePerSecond": 25,
+	"mana": 100,
+	"maxMana": 100,
+	"increaseMana": 0,
+	"manaIncreasePerSecond": 25,
+	"endurance": 100,
+	"maxEndurance": 100,
+	"increaseEndurance": 0,
+	"enduranceIncreasePerSecond": 25,
+	"enduranceChargeMoving": 7.5,
+	"enduranceChargeIdle": 15,
+	"enduranceCostsSprint": 15,
+	"armor": 64.99999,
+	"maxArmor": 100,
+	"increaseArmor": 0,
+	"armorIncreasePerSecond": 25,
+	"coins": 5,
+	"maxCoins": 999,
+	"decreaseCoins": 0,
+	"coinsDecreasePerSecond": 20,
+	"respawnPoint": {
+		"x": 36.45332,
+		"y": 37.73332
+	},
+	"position": {
+		"x": 40.943,
+		"y": 28.140167
+	}
+},
+"itemDataContainer": {
+	"ammoArrow": 20,
+	"maxAmmoArrow": 30,
+	"ammoBomb": 0,
+	"maxAmmoBomb": 15,
+	"numNormalKeys": 1,
+	"keys": [
+		{
+			"mapProperties": {}
+		}
+	],
+	"specialItems": {
+		"values": []
+	}
+},
+"fastTravelDataContainer": {
+	"fastTravelProperties": {
+		"test_map_point_1": {
+			"fastTravelPointId": "test_map_point_1",
+			"fastTravelPointName": "Left",
+			"enabled": false,
+			"positionOnMapX": 5.72,
+			"positionOnMapY": 48
+		},
+		"test_map_point_2": {
+			"fastTravelPointId": "test_map_point_2",
+			"fastTravelPointName": "Down Left",
+			"enabled": true,
+			"positionOnMapX": 6.3999996,
+			"positionOnMapY": 6.3999996
+		},
+		"test_map_point_3": {
+			"fastTravelPointId": "test_map_point_3",
+			"fastTravelPointName": "Right",
+			"enabled": false,
+			"positionOnMapX": 42.239998,
+			"positionOnMapY": 44.84
+		},
+		"test_map_point_4": {
+			"fastTravelPointId": "test_map_point_4",
+			"fastTravelPointName": "Down Right",
+			"enabled": true,
+			"positionOnMapX": 48,
+			"positionOnMapY": 23.72
+		}
+	}
+},
+"mapDataContainer": {
+	"mapIdentifier": "test_map_3"
+},
+"mapObjectDataContainer": {
+	"mapObjectStates": {
+		"test_map_3": {
+			"states": {
+				"88": {
+					"state": {
+						"defeated": "true",
+						"droppedItems": "true",
+						"__mapObjectType": "Enemy"
+					}
+				},
+				"__not_configured_in_map__key__enemy_dropped_key": {
+					"state": {
+						"picked": "true",
+						"position": "{\nx: 947.7061\ny: 746.1159\n}",
+						"mapProperties": "\"{key_key: enemy dropped key}\"",
+						"__mapObjectType": "Item",
+						"itemName": "key"
+					}
+				},
+				"__not_configured_in_map__key__special_key": {
+					"state": {
+						"picked": "false",
+						"position": "{\nx: 960.3199\ny: 792.95\n}",
+						"mapProperties": "\"{key_key: special key}\"",
+						"__mapObjectType": "Item",
+						"itemName": "key"
+					}
+				},
+				"158": {
+					"state": {
+						"actionExecuted": "true",
+						"__mapObjectType": "InteractiveObject"
+					}
+				},
+				"115": {
+					"state": {
+						"actionExecuted": "true",
+						"__mapObjectType": "LockedObject"
+					}
+				},
+				"94": {
+					"state": {
+						"picked": "true",
+						"position": "null",
+						"mapProperties": "null",
+						"__mapObjectType": "Item",
+						"itemName": "shield"
+					}
+				},
+				"160": {
+					"state": {
+						"actionExecuted": "true",
+						"__mapObjectType": "InteractiveObject"
+					}
+				},
+				"100": {
+					"state": {
+						"picked": "true",
+						"position": "null",
+						"mapProperties": "null",
+						"__mapObjectType": "Item",
+						"itemName": "arrow"
+					}
+				},
+				"128": {
+					"state": {
+						"actionExecuted": "true",
+						"__mapObjectType": "LockedObject"
+					}
+				},
+				"129": {
+					"state": {
+						"defeated": "true",
+						"droppedItems": "true",
+						"__mapObjectType": "Enemy"
+					}
+				},
+				"109": {
+					"state": {
+						"picked": "true",
+						"position": "null",
+						"mapProperties": "null",
+						"__mapObjectType": "Item",
+						"itemName": "key"
+					}
+				}
+			}
+		}
+	}
+}
+}
+```
+
+The save state contains simple numerical or boolean data like in the `characterDataContainer`, but also complex data from map objects like in the `mapObjectDataContainer`. The complex parts are explained in detail in the next sections.
+
+### Map Objects
+
+Objects that are configured in the map and have changed their state since they were added (because items were picked up, enemies were defeated, ...) are stored in the `mapObjectDataContainer`. Every map configures their own stateful objects here. Which part of the object is to be persisted can be declared in the class of the object, that is stored. The map objects that shall be stored in the game state file need to implement the interface [StatefulMapObject](core/src/net/jfabricationgames/gdx/data/state/StatefulMapObject.java). When implementing this interface the classes need to be able to tell an ID of the object that is saved (which is usually just the id, that was configured in the map) and to apply the state that was stored in the game state. An example of the implementation of this can be found in the [Enemy](core/src/net/jfabricationgames/gdx/character/enemy/Enemy.java) class:
+
+```java
+@Override
+public String getMapObjectId() {
+	return StatefulMapObject.getMapObjectId(properties);
+}
+
+@Override
+public void applyState(ObjectMap<String, String> state) {
+	if (Boolean.parseBoolean(state.get("droppedItems")) && dropsSpecialItems()) {
+		//don't drop special items twice, because special items will be saved and re-added to the map if they are not picked up
+		droppedItems = true;
+	}
+	if (Boolean.parseBoolean(state.get("defeated"))) {
+		defeated = true;
+		removeFromMap();
+	}
+}
+```
+
+The map objects can choose, whether or not their state needs to be persisted. Therefore they need to call the method `MapObjectDataHandler.addStatefulMapObject(StatefulMapObject)` to persist their state in the MapObjectDataHandler. An example of the implementation of this can be found in the [Enemy](core/src/net/jfabricationgames/gdx/character/enemy/Enemy.java) class:
+
+```java
+protected void die() {
+	stateMachine.setState(getDieStateName());
+	
+	defeated = true;
+	MapObjectDataHandler.getInstance().addStatefulMapObject(this);
+}
+```
+
+The map objects also choose the parts of them, that are persisted. Therefore, fields that need to be persisted are annotated with the [MapObjectState](core/src/net/jfabricationgames/gdx/data/state/MapObjectState.java) annotation. An example of the implementation of this can be found in the [Enemy](core/src/net/jfabricationgames/gdx/character/enemy/Enemy.java) class:
+
+```java
+protected float health;
+
+protected ObjectMap<String, Float> dropTypes;
+@MapObjectState
+protected boolean droppedItems;
+@MapObjectState
+protected boolean defeated;
+```
+
+Here only the fields that are annotated with `@MapObjectState` will be persisted into the [MapObjectDataContainer](core/src/net/jfabricationgames/gdx/data/container/MapObjectDataContainer.java) and lead to a serialized state like this:
+
+```javascript
+//...
+"mapObjectDataContainer": {
+	"mapObjectStates": {
+		"test_map_3": {
+			"states": {
+				"88": {
+					"state": {
+						"defeated": "true",
+						"droppedItems": "true",
+						"__mapObjectType": "Enemy"
+					}
+				},
+				//...
+```
+
+### Not Map Objects
+
+Not only the objects, that are configured in the map, but also objects, that are added to the map later (e.g. by enemies dropping items) sometimes need to be persisted. For example this could be the case for a key, that is dropped and not picked up before saving the game state. Without this key the game might be impossible to continue, so it's state needs to be stored.
+
+These objects were not configured in the map, so they don't have and ID that was given in the map properties. Therefore they need to define a unique ID to identify them in the map. When this ID can be created they can be persisted just like every other map object. An example of an implementation that uses this is the class [Item](core/src/net/jfabricationgames/gdx/item/Item.java):
+
+```java
+@Override
+public String getMapObjectId() {
+	if (!isConfiguredInMap()) {
+		if (isSpecialItem()) {
+			return getSpecialItemValue();
+		}
+		else if (itemName.equals("key")) {
+			return "key_" + MapObjectDataHandler.getInstance().getUniqueObjectCount();
+		}
+	}
+	
+	return StatefulMapObject.getMapObjectId(properties);
+}
+
+private boolean isSpecialItem() {
+	return KeyItemProperties.isSpecialKey(getKeyProperties());
+}
+
+private String getSpecialItemValue() {
+	if (!isSpecialItem()) {
+		return null;
+	}
+	
+	String specialKeyProperties = KeyItemProperties.getSpecialKeyPropertiesAsString(getKeyProperties());
+	return specialKeyProperties.replace("\\n", "_").replace(" ", "_").replace(":", "_");
+}
+
+@Override
+public boolean isConfiguredInMap() {
+	return StatefulMapObject.getMapObjectId(properties) != null;
+}
+
+@Override
+public void applyState(ObjectMap<String, String> state) {
+	if (Boolean.parseBoolean(state.get("picked"))) {
+		picked = true;
+		remove();
+	}
+}
+```
+
+This will cause a persisted object state like the following to be added to the game save file:
+
+```javascript
+//...
+"mapObjectDataContainer": {
+	"mapObjectStates": {
+		"test_map_3": {
+			"states": {
+				//...
+				"__not_configured_in_map__key__special_key": {
+					"state": {
+						"picked": "false",
+						"position": "{\nx: 960.3199\ny: 792.95\n}",
+						"mapProperties": "\"{key_key: special key}\"",
+						"__mapObjectType": "Item",
+						"itemName": "key"
+					}
+				},
+				//...
+```
+
+### Updating States Before Persisting
+
+Before persisting the state of an object there might be some updates needed. To do this, the annotations [BeforeAddStatefulObject](core/src/net/jfabricationgames/gdx/data/state/BeforeAddStatefulObject.java) and [BeforePersistState](core/src/net/jfabricationgames/gdx/data/state/BeforePersistState.java) can be used. 
+
+The [BeforeAddStatefulObject](core/src/net/jfabricationgames/gdx/data/state/BeforeAddStatefulObject.java) annotation can be used on a method, that is executed on a [StatefulMapObject](core/src/net/jfabricationgames/gdx/data/state/StatefulMapObject.java) just before the state of this object is persisted. An example of such a method can be found in the class [Item](core/src/net/jfabricationgames/gdx/item/Item.java):
+
+```java
+@BeforeAddStatefulObject
+public void updateMapProperties() {
+	if (!isConfiguredInMap()) {
+		mapProperties = SerializationUtil.serializeMapProperties(properties, false);
+	}
+}
+```
+
+Here the map properties of items that were not configured in the map are updated, so they are persisted too.
+
+The [BeforePersistState](core/src/net/jfabricationgames/gdx/data/state/BeforePersistState.java) annotation can be used to annotate a method in any class, that needs to update some data, just before it is persisted. An example of this can be found in the class [Dwarf](core/src/net/jfabricationgames/gdx/character/player/implementation/Dwarf.java), that updates the players current position, since this variable is not always updated when the dwarf moves:
+
+```java
+@BeforePersistState
+public void updatePositionToDataContainer() {
+	propertiesDataHandler.setPlayerPosition(getPosition());
+}
+```
+
+For the methods to be executed the objects that contain this methods still need to be added to the `executeAnnotatedMethodsBeforePersisting` method of the [GameDataService](core/src/net/jfabricationgames/gdx/data/GameDataService.java):
+
+```java
+private void executeAnnotatedMethodsBeforePersisting() {
+	AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMap.getInstance());
+	AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMap.getInstance().getPlayer());
+}
+```
+
 ## Menus
 
 In game menus are libGDX screens, that can be shown to stop the games execution. Thex usually extend the abstract class [InGameMenuScreen](core/src/net/jfabricationgames/gdx/screens/menu/InGameMenuScreen.java). Since InGameMenuScreen extends the abstract class [ControlledMenu](core/src/net/jfabricationgames/gdx/screens/menu/control/ControlledMenu.java) all in game menus are by default controlled menus, which can be controlled using the keyboard or controller.
+
+The Pause Menu for each map needs to be configured to use the correct mini map and fast travel points (see [Global Map Properties](#global-map-properties) for details).
 
 ### Menu State Machine
 
