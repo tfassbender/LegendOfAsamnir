@@ -175,12 +175,6 @@
 					<button code="0" />
 				</controller>
 			</action>
-			
-			<action name="start_game">
-				<controller>
-					<button code="3" />
-				</controller>
-			</action>
 		</actions>
 	</context>
 	

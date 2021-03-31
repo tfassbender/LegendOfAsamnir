@@ -1,0 +1,60 @@
+{
+	button_continue: {
+		down: button_load,
+		select: continueGame,
+		initial: true
+	},
+	button_load: {
+		up: button_continue,
+		down: button_startGame,
+		select: showLoadGameMenu,
+	}
+	button_startGame: {
+		up: button_load,
+		down: button_quit,
+		select: startGame,
+	},
+	button_quit: {
+		up: button_startGame,
+		select: quitGame,
+	}
+	
+	//*********************************************
+	//*** Load Game Dialog
+	//*********************************************
+	
+	loadDialog_button_loadGameDialogBack: {
+		down: loadDialog_button_quickSaveSlot,
+		select: closeLoadGameDialog,
+	},
+	
+	loadDialog_button_quickSaveSlot: {
+		up: loadDialog_button_loadGameDialogBack,
+		down: loadDialog_button_saveSlot1,
+		select: loadFromQuickSaveSlot,
+	},
+	loadDialog_button_saveSlot1: {
+		up: loadDialog_button_quickSaveSlot,
+		down: loadDialog_button_saveSlot2,
+		select: loadFromSlot1,
+	},
+	loadDialog_button_saveSlot2: {
+		up: loadDialog_button_saveSlot1,
+		down: loadDialog_button_saveSlot3,
+		select: loadFromSlot2,
+	},
+	loadDialog_button_saveSlot3: {
+		up: loadDialog_button_saveSlot2,
+		down: loadDialog_button_saveSlot4,
+		select: loadFromSlot3,
+	},
+	loadDialog_button_saveSlot4: {
+		up: loadDialog_button_saveSlot3,
+		down: loadDialog_button_saveSlot5,
+		select: loadFromSlot4,
+	},
+	loadDialog_button_saveSlot5: {
+		up: loadDialog_button_saveSlot4,
+		select: loadFromSlot5,
+	},
+}

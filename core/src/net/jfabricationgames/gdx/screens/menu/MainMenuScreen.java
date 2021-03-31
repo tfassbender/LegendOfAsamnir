@@ -1,124 +1,78 @@
 package net.jfabricationgames.gdx.screens.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
-import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.data.GameDataHandler;
-import net.jfabricationgames.gdx.input.InputActionListener;
-import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
+import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screens.menu.dialog.LoadGameDialog;
 
-public class MainMenuScreen extends ScreenAdapter implements InputActionListener {
+public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	
-	public static final String ASSET_GROUP_NAME = "main_menu";
-	public static final int VIRTUAL_WIDTH = 1280;
-	public static final int VIRTUAL_HEIGHT = 720;
-	
-	private static final String CONTROLLER_ACTION_START_GAME = "start_game";
 	private static final String INPUT_CONTEXT_NAME = "mainMenu";
+	private static final String MAIN_MENU_STATE_CONFIG = "config/menu/main_menu_states.json";
+	private static final String STATE_PREFIX_LOAD_DIALOG = "loadDialog_";
 	
-	private AssetGroupManager assetManager;
-	private InputContext inputContext;
+	private MenuBox background;
+	private MenuBox bannerMainMenu;
+	private MenuBox banner;
+	private FocusButton buttonContinueGame;
+	private FocusButton buttonLoadGame;
+	private FocusButton buttonStartNewGame;
+	private FocusButton buttonQuit;
 	
-	private Viewport viewport;
-	
-	private Table table;
-	private Stage stage;
+	private LoadGameDialog loadGameDialog;
 	
 	public MainMenuScreen() {
-		assetManager = AssetGroupManager.getInstance();
-		assetManager.loadGroup(ASSET_GROUP_NAME);
-		assetManager.finishLoading();
+		super(MAIN_MENU_STATE_CONFIG);
 		
-		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
-		inputContext = DwarfScrollerGame.getInstance().getInputContext();
-		inputContext.addListener(this);
+		createComponents();
+		createDialogs();
+		stateMachine.changeToInitialState();
 		
-		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
-		stage = new Stage(viewport);
-		DwarfScrollerGame.getInstance().addInputProcessor(stage);
-		
-		buildStage();
+		showMenu();
 	}
 	
-	private void buildStage() {
-		TextureAtlas menu = assetManager.get("packed/menu/menu.atlas");
-		TextureRegion headlineTexture = menu.findRegion("dwarf_scroller_headline");
-		TextureRegion playButtonTexture = menu.findRegion("play_button_text");
-		TextureRegion exitButtonTexture = menu.findRegion("exit_button_text");
+	private void createComponents() {
+		background = new MenuBox(12, 15, MenuBox.TextureType.GREEN_BOARD);
+		banner = new MenuBox(10, 2, MenuBox.TextureType.BIG_BANNER);
+		bannerMainMenu = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
-		Image headline = new Image(headlineTexture);
+		buttonContinueGame = createButton(3);
+		buttonLoadGame = createButton(2);
+		buttonStartNewGame = createButton(1);
+		buttonQuit = createButton(0);
 		
-		ImageButtonStyle playButtonStyle = new ImageButtonStyle();
-		playButtonStyle.up = new TextureRegionDrawable(menu.findRegion("button_wide_round_edges"));
-		playButtonStyle.imageUp = new TextureRegionDrawable(playButtonTexture);
-		ImageButton buttonPlay = new ImageButton(playButtonStyle);
-		
-		ImageButtonStyle exitButtonStyle = new ImageButtonStyle();
-		exitButtonStyle.up = new TextureRegionDrawable(menu.findRegion("button_wide_round_edges"));
-		exitButtonStyle.imageUp = new TextureRegionDrawable(exitButtonTexture);
-		ImageButton buttonExit = new ImageButton(exitButtonStyle);
-		
-		// build the table
-		table = new Table();
-		
-		table.row();
-		table.add(headline).align(Align.center).padBottom(50f).expand();
-		table.row();
-		table.add(buttonPlay).padBottom(20).uniform();
-		table.row();
-		table.add(buttonExit).padBottom(20).uniform();
-		
-		table.setFillParent(true);
-		table.pack();
-		
-		table.setPosition(0, VIRTUAL_HEIGHT);
-		table.addAction(Actions.sequence(Actions.moveTo(0, -VIRTUAL_HEIGHT * 0.05f, 0.5f), Actions.moveTo(0, 0, 0.2f)));
-		
-		buttonPlay.addListener(new ClickListener() {
-			
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				startGame();
-			};
-		});
-		buttonExit.addListener(new ClickListener() {
-			
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				Gdx.app.exit();
-			};
-		});
-		
-		stage.addActor(table);
+		buttonContinueGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonLoadGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonStartNewGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 	}
 	
-	private void startGame() {
-		GameDataHandler.getInstance().createNewGameData();
-		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
-		dispose();
+	private void createDialogs() {
+		loadGameDialog = new LoadGameDialog(() -> {}, this::playMenuSound);
 	}
 	
-	@Override
-	public void resize(int width, int height) {
-		viewport.update(width, height);
+	private FocusButton createButton(int button) {
+		int buttonWidth = 290;
+		int buttonHeight = 55;
+		int buttonPosX = 370;
+		int lowestButtonY = 90;
+		int buttonGapY = 50;
+		
+		return new FocusButtonBuilder() //
+				.setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
+				.setSize(buttonWidth, buttonHeight) //
+				.setPosition(buttonPosX, lowestButtonY + button * (buttonHeight + buttonGapY)) //
+				.build();
 	}
 	
 	@Override
@@ -126,24 +80,166 @@ public class MainMenuScreen extends ScreenAdapter implements InputActionListener
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		stage.act(Math.min(delta, 1f / 60f));
-		stage.draw();
+		batch.begin();
+		drawBackground();
+		drawButtons();
+		drawBanners();
+		batch.end();
+		
+		drawTexts();
+
+		drawLoadGameDialog();
+	}
+	
+	@Override
+	protected String getInputContextName() {
+		return INPUT_CONTEXT_NAME;
+	}
+	
+	private void drawBackground() {
+		background.draw(batch, 300, 30, 580, 600);
+	}
+	
+	private void drawButtons() {
+		buttonContinueGame.draw(batch);
+		buttonLoadGame.draw(batch);
+		buttonStartNewGame.draw(batch);
+		buttonQuit.draw(batch);
+	}
+	
+	private void drawBanners() {
+		banner.draw(batch, 0, 520, 1200, 350);
+		bannerMainMenu.draw(batch, 315, 430, 550, 250);
+	}
+	
+	private void drawTexts() {
+		screenTextWriter.setColor(Color.BLACK);
+		screenTextWriter.setScale(2f);
+		screenTextWriter.drawText("Dwarf Scroller GDX", 110, 720);
+		
+		int buttonTextX = 370;
+		int buttonTextWidth = 430;
+		screenTextWriter.setColor(Color.BLACK);
+		screenTextWriter.setScale(1.5f);
+		screenTextWriter.drawText("Main Menu", buttonTextX + 5, 573, buttonTextWidth, Align.center, false);
+		
+		screenTextWriter.setScale(1.15f);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonContinueGame) + "Continue", buttonTextX, 462, buttonTextWidth, Align.center,
+				false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoadGame) + "Load Game", buttonTextX, 356, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonStartNewGame) + "New Game", buttonTextX, 252, buttonTextWidth, Align.center,
+				false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 148, buttonTextWidth, Align.center, false);
+	}
+	
+	private String getButtonTextColorEncoding(FocusButton button) {
+		return button.hasFocus() ? TEXT_COLOR_ENCODING_FOCUS : TEXT_COLOR_ENCODING_NORMAL;
+	}
+	
+	private void drawLoadGameDialog() {
+		loadGameDialog.draw();
+	}
+	
+	@Override
+	protected void setFocusTo(String stateName, String leavingState) {
+		unfocusAll();
+
+		if (stateName.startsWith(STATE_PREFIX_LOAD_DIALOG)) {
+			loadGameDialog.setFocusTo(stateName);
+		}
+		else {
+			switch (stateName) {
+				case "button_continue":
+					buttonContinueGame.setFocused(true);
+					break;
+				case "button_load":
+					buttonLoadGame.setFocused(true);
+					break;
+				case "button_startGame":
+					buttonStartNewGame.setFocused(true);
+					break;
+				case "button_quit":
+					buttonQuit.setFocused(true);
+					break;
+			}
+		}
+	}
+	
+	private void unfocusAll() {
+		buttonContinueGame.setFocused(false);
+		buttonLoadGame.setFocused(false);
+		buttonStartNewGame.setFocused(false);
+		buttonQuit.setFocused(false);
 	}
 	
 	@Override
 	public void dispose() {
-		DwarfScrollerGame.getInstance().removeInputProcessor(stage);
-		assetManager.unloadGroup(ASSET_GROUP_NAME);
-		inputContext.removeListener(this);
-		
-		stage.dispose();
+		super.dispose();
+		loadGameDialog.dispose();
+	}
+
+	private void createGameScreen() {
+		GameDataHandler.getInstance().createNewGameData();
+		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
 	}
 	
-	@Override
-	public boolean onAction(String action, Type type, Parameters parameters) {
-		if (action.equals(CONTROLLER_ACTION_START_GAME)) {
-			startGame();
-		}
-		return false;
+	//****************************************************************
+	//*** State machine methods (called via reflection)
+	//****************************************************************
+	
+	public void continueGame() {
+		createGameScreen();
+		new GameDataService().loadGameDataFromQuicksaveSlot();
+		dispose();
+	}
+	
+	public void showLoadGameMenu() {
+		loadGameDialog.setVisible(true);
+		stateMachine.changeState("loadDialog_button_loadGameDialogBack");
+	}
+	
+	public void startGame() {
+		GameDataHandler.getInstance().createNewGameData();
+		createGameScreen();
+		dispose();
+	}
+	
+	//*********************************************************************
+	//*** State machine methods for load dialog (called via reflection)
+	//*********************************************************************
+
+	public void closeLoadGameDialog() {
+		loadGameDialog.setVisible(false);
+		stateMachine.changeState("button_load");
+	}
+	
+	public void loadFromQuickSaveSlot() {
+		createGameScreen();
+		loadGameDialog.loadFromQuickSaveSlot();
+	}
+	
+	public void loadFromSlot1() {
+		createGameScreen();
+		loadGameDialog.loadFromSlot(1);
+	}
+	
+	public void loadFromSlot2() {
+		createGameScreen();
+		loadGameDialog.loadFromSlot(2);
+	}
+	
+	public void loadFromSlot3() {
+		createGameScreen();
+		loadGameDialog.loadFromSlot(3);
+	}
+	
+	public void loadFromSlot4() {
+		createGameScreen();
+		loadGameDialog.loadFromSlot(4);
+	}
+	
+	public void loadFromSlot5() {
+		createGameScreen();
+		loadGameDialog.loadFromSlot(5);
 	}
 }

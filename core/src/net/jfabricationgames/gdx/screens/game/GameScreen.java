@@ -68,6 +68,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private boolean gameOver = false;
 	
 	public GameScreen() {
+		initializeGame();
+	}
+	
+	private void initializeGame() {
 		createAssetManager();
 		initializeCamerasAndViewports();
 		initializeInputContext();

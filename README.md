@@ -934,7 +934,7 @@ private void executeAnnotatedMethodsBeforePersisting() {
 
 ## Menus
 
-In game menus are libGDX screens, that can be shown to stop the games execution. Thex usually extend the abstract class [InGameMenuScreen](core/src/net/jfabricationgames/gdx/screens/menu/InGameMenuScreen.java). Since InGameMenuScreen extends the abstract class [ControlledMenu](core/src/net/jfabricationgames/gdx/screens/menu/control/ControlledMenu.java) all in game menus are by default controlled menus, which can be controlled using the keyboard or controller.
+In game menus are libGDX screens, that can be shown to stop the games execution. They usually extend the abstract class [InGameMenuScreen](core/src/net/jfabricationgames/gdx/screens/menu/InGameMenuScreen.java). Since InGameMenuScreen extends the abstract class [ControlledMenu](core/src/net/jfabricationgames/gdx/screens/menu/control/ControlledMenu.java) all in game menus are by default controlled menus, which can be controlled using the keyboard or controller.
 
 The Pause Menu for each map needs to be configured to use the correct mini map and fast travel points (see [Global Map Properties](#global-map-properties) for details).
 
