@@ -1,0 +1,6 @@
+{
+	chest: {
+		atlas: packed/loading_screen/loading_screen.atlas,
+		texture: chest
+	},
+}

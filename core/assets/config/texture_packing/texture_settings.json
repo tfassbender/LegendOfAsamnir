@@ -211,5 +211,17 @@
 				objects/animated/map/unfold,
 			]
 		},
+		loading_screen: {
+			outputDir: packed/loading_screen,
+			atlasName: loading_screen
+			textureDirs: [
+				menu/loading_screen,
+				
+				menu/background/big_banner,
+				menu/background/yellow_board,
+				
+				dwarf/dwarf_run_right,
+			]
+		}
 	}
 }

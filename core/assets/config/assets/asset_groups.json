@@ -5,6 +5,12 @@
 			"path": "packed/menu/menu.atlas"
 		}
 	],
+	"loading_screen": [
+		{
+			"type": "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+			"path": "packed/loading_screen/loading_screen.atlas" 
+		}
+	],
 	"game" : [
 		// texture atlas (includes dwarf, item, objects, ...)
 		{	

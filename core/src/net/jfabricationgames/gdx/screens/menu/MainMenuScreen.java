@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Align;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -62,7 +61,8 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	private void createDialogs() {
-		loadGameDialog = new LoadGameDialog(() -> {}, this::playMenuSound);
+		loadGameDialog = new LoadGameDialog(() -> {
+		}, this::playMenuSound);
 	}
 	
 	private FocusButton createButton(int button) {
@@ -184,9 +184,9 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		loadGameDialog.dispose();
 	}
 	
-	private void createGameScreen() {
+	private void createGameScreen(Runnable afterCreatingGameScreen) {
 		GameDataHandler.getInstance().createNewGameData();
-		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+		GameScreen.loadAndShowGameScreen(afterCreatingGameScreen);
 	}
 	
 	//****************************************************************
@@ -194,9 +194,11 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	//****************************************************************
 	
 	public void continueGame() {
-		createGameScreen();
-		new GameDataService().loadGameDataFromQuicksaveSlot();
-		dispose();
+		createGameScreen(() -> {
+			new GameDataService().loadGameDataFromQuicksaveSlot();
+			dispose();
+		});
+		
 	}
 	
 	public void showLoadGameMenu() {
@@ -206,8 +208,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	
 	public void startGame() {
 		GameDataHandler.getInstance().createNewGameData();
-		createGameScreen();
-		dispose();
+		createGameScreen(this::dispose);
 	}
 	
 	//*********************************************************************
@@ -220,32 +221,38 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	public void loadFromQuickSaveSlot() {
-		createGameScreen();
-		loadGameDialog.loadFromQuickSaveSlot();
+		createGameScreen(() -> {
+			loadGameDialog.loadFromQuickSaveSlot();
+		});
 	}
 	
 	public void loadFromSlot1() {
-		createGameScreen();
-		loadGameDialog.loadFromSlot(1);
+		createGameScreen(() -> {
+			loadGameDialog.loadFromSlot(1);
+		});
 	}
 	
 	public void loadFromSlot2() {
-		createGameScreen();
-		loadGameDialog.loadFromSlot(2);
+		createGameScreen(() -> {
+			loadGameDialog.loadFromSlot(2);
+		});
 	}
 	
 	public void loadFromSlot3() {
-		createGameScreen();
-		loadGameDialog.loadFromSlot(3);
+		createGameScreen(() -> {
+			loadGameDialog.loadFromSlot(3);
+		});
 	}
 	
 	public void loadFromSlot4() {
-		createGameScreen();
-		loadGameDialog.loadFromSlot(4);
+		createGameScreen(() -> {
+			loadGameDialog.loadFromSlot(4);
+		});
 	}
 	
 	public void loadFromSlot5() {
-		createGameScreen();
-		loadGameDialog.loadFromSlot(5);
+		createGameScreen(() -> {
+			loadGameDialog.loadFromSlot(5);
+		});
 	}
 }

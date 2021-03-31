@@ -37,8 +37,12 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 		batch = new SpriteBatch();
 		
 		assetManager = AssetGroupManager.getInstance();
-		assetManager.loadGroup(ASSET_GROUP_NAME);
+		assetManager.loadGroup(getAssetGroupName());
 		assetManager.finishLoading();
+	}
+
+	protected String getAssetGroupName() {
+		return ASSET_GROUP_NAME;
 	}
 	
 	@Override
@@ -62,7 +66,7 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	
 	@Override
 	public void dispose() {
-		assetManager.unloadGroup(ASSET_GROUP_NAME);
+		assetManager.unloadGroup(getAssetGroupName());
 		removeInputListener();
 	}
 	

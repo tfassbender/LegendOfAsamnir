@@ -27,6 +27,7 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.menu.GameOverMenuScreen;
+import net.jfabricationgames.gdx.screens.menu.LoadingScreen;
 import net.jfabricationgames.gdx.screens.menu.PauseMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.ShopMenuScreen;
 
@@ -49,6 +50,19 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private static final String ACTION_SHOW_MENU = "menu";
 	
+	public static void loadAndShowGameScreen(Runnable afterCreatingGameScreen) {
+		AssetGroupManager assetManager = AssetGroupManager.getInstance();
+		showLoadingScreen(afterCreatingGameScreen);
+		assetManager.loadGroup(ASSET_GROUP_NAME);
+	}
+	
+	private static void showLoadingScreen(Runnable afterCreatingGameScreen) {
+		new LoadingScreen(() -> {
+			DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+			afterCreatingGameScreen.run();
+		}).showMenu();
+	}
+	
 	private OrthographicCamera camera;
 	private OrthographicCamera cameraHud;
 	private Viewport viewport;
@@ -67,12 +81,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private boolean gameOver = false;
 	
-	public GameScreen() {
+	private GameScreen() {
 		initializeGame();
 	}
 	
 	private void initializeGame() {
-		createAssetManager();
 		initializeCamerasAndViewports();
 		initializeInputContext();
 		createBox2DWorld();
@@ -96,12 +109,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		camera.zoom = 1.5f;
 		
 		cameraHud.update();
-	}
-	
-	private void createAssetManager() {
-		assetManager = AssetGroupManager.getInstance();
-		assetManager.loadGroup(ASSET_GROUP_NAME);
-		assetManager.finishLoading();
 	}
 	
 	private void initializeInputContext() {

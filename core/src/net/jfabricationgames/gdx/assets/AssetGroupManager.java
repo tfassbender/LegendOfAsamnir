@@ -101,7 +101,7 @@ public class AssetGroupManager implements Disposable, AssetErrorListener {
 		return manager.isLoaded(fileName, type);
 	}
 	
-	public boolean update() {
+	public boolean finishedLoading() {
 		return manager.update();
 	}
 	
