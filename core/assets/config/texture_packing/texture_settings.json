@@ -197,6 +197,12 @@
 				menu/background/yellow_board,
 				menu/background/yellow_paper,
 				
+				dwarf/dwarf_run_right,
+				dwarf/dwarf_idle_right,
+				dwarf/dwarf_attack_jump_right,
+				enemy/minotaur/minotaur_move,
+				enemy/minotaur/minotaur_die,
+				
 				//mini maps
 				map/mini_maps,
 				

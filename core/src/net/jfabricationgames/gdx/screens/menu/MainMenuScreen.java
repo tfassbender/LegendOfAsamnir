@@ -11,6 +11,7 @@ import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screens.menu.components.MainMenuAnimation;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screens.menu.dialog.LoadGameDialog;
 
@@ -30,12 +31,16 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	
 	private LoadGameDialog loadGameDialog;
 	
+	private MainMenuAnimation mainMenuAnimation;
+	
 	public MainMenuScreen() {
 		super(MAIN_MENU_STATE_CONFIG);
 		
 		createComponents();
 		createDialogs();
 		stateMachine.changeToInitialState();
+		
+		mainMenuAnimation = new MainMenuAnimation();
 		
 		showMenu();
 	}
@@ -76,24 +81,25 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	@Override
+	protected String getInputContextName() {
+		return INPUT_CONTEXT_NAME;
+	}
+	
+	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
+		mainMenuAnimation.drawAnimation(batch, delta);
 		drawBackground();
 		drawButtons();
 		drawBanners();
 		batch.end();
 		
 		drawTexts();
-
+		
 		drawLoadGameDialog();
-	}
-	
-	@Override
-	protected String getInputContextName() {
-		return INPUT_CONTEXT_NAME;
 	}
 	
 	private void drawBackground() {
@@ -143,7 +149,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	@Override
 	protected void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
-
+		
 		if (stateName.startsWith(STATE_PREFIX_LOAD_DIALOG)) {
 			loadGameDialog.setFocusTo(stateName);
 		}
@@ -177,7 +183,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		super.dispose();
 		loadGameDialog.dispose();
 	}
-
+	
 	private void createGameScreen() {
 		GameDataHandler.getInstance().createNewGameData();
 		DwarfScrollerGame.getInstance().setScreen(new GameScreen());
@@ -207,7 +213,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	//*********************************************************************
 	//*** State machine methods for load dialog (called via reflection)
 	//*********************************************************************
-
+	
 	public void closeLoadGameDialog() {
 		loadGameDialog.setVisible(false);
 		stateMachine.changeState("button_load");

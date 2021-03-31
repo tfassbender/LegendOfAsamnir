@@ -13,5 +13,35 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			name: dwarf_run_right,
+			atlas: packed/menu/menu.atlas,
+			frameDuration: 0.1,
+			playMode: LOOP
+		},
+		{
+			name: dwarf_attack_jump_right,
+			atlas: packed/menu/menu.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
+		{
+			name: dwarf_idle_right,
+			atlas: packed/menu/menu.atlas,
+			frameDuration: 0.1,
+			playMode: LOOP
+		},
+		{
+			name: minotaur_move,
+			atlas: packed/menu/menu.atlas,
+			frameDuration: 0.1,
+			playMode: LOOP
+		},
+		{
+			name: minotaur_die,
+			atlas: packed/menu/menu.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
 	]
 }
