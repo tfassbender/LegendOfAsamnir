@@ -12,6 +12,8 @@ import net.jfabricationgames.gdx.map.GameMapObject;
 
 public interface PlayableCharacter extends StatsCharacter, GameMapObject, CutsceneMoveableUnit {
 	
+	public void process(float delta);
+	
 	public void render(float delta, SpriteBatch batch);
 	
 	public void move(float x, float y);

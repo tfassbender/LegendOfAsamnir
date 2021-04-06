@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="890">
  <properties>
+  <property name="above_player_layers" value="[2]"/>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/tutorial.json"/>
-  <property name="terrain_layers" value="[2]"/>
  </properties>
  <tileset firstgid="1" source="tileset/rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="100" height="100" locked="1">

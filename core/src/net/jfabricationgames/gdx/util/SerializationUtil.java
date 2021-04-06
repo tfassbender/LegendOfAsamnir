@@ -30,7 +30,9 @@ public class SerializationUtil {
 				sb.append(key).append(": ").append(value).append(", ");
 			}
 		}
-		sb.setLength(sb.length() - 2);
+		if (sb.length() > 1) {
+			sb.setLength(sb.length() - 2);
+		}
 		sb.append('}');
 		
 		return sb.toString();

@@ -69,9 +69,11 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	public static final String MAP_KEY_BACKGROUND_LAYERS = "background_layers";
-	public static final String MAP_KEY_TERRAIN_LAYERS = "terrain_layers";
+	public static final String MAP_KEY_ABOVE_PLAYER_LAYERS = "above_player_layers";
+	public static final String MAP_KEY_SHADOW_LAYERS = "shadow_layers";
 	public static final int[] BACKGROUND_LAYERS_DEFAULT = new int[] {0, 1};
-	public static final int[] TERRAIN_LAYERS_DEFAULT = new int[] {2};
+	public static final int[] ABOVE_PLAYER_LAYERS_DEFAULT = new int[] {2};
+	public static final int[] SHADOW_LAYERS_DEFAULT = new int[] {};
 	
 	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = new GameMapGroundType();
 	
@@ -101,7 +103,8 @@ public class GameMap implements EventListener, Disposable {
 	protected Vector2 playerStartingPosition;
 	
 	private int[] backgroundLayers;
-	private int[] terrainLayers;
+	private int[] abovePlayerLayers;
+	private int[] shadowLayers;
 	
 	private String currentMapIdentifier;
 	
@@ -256,7 +259,8 @@ public class GameMap implements EventListener, Disposable {
 	
 	private void loadLayersFromMapProperties() {
 		String backgroundLayersJson = map.getProperties().get(MAP_KEY_BACKGROUND_LAYERS, String.class);
-		String terrainLayersJson = map.getProperties().get(MAP_KEY_TERRAIN_LAYERS, String.class);
+		String abovePlayerLayersJson = map.getProperties().get(MAP_KEY_ABOVE_PLAYER_LAYERS, String.class);
+		String shadowLayersJson = map.getProperties().get(MAP_KEY_SHADOW_LAYERS, String.class);
 		
 		Json json = new Json();
 		if (backgroundLayersJson != null) {
@@ -265,11 +269,17 @@ public class GameMap implements EventListener, Disposable {
 		else {
 			backgroundLayers = BACKGROUND_LAYERS_DEFAULT;
 		}
-		if (terrainLayersJson != null) {
-			terrainLayers = json.fromJson(int[].class, terrainLayersJson);
+		if (abovePlayerLayersJson != null) {
+			abovePlayerLayers = json.fromJson(int[].class, abovePlayerLayersJson);
 		}
 		else {
-			terrainLayers = TERRAIN_LAYERS_DEFAULT;
+			abovePlayerLayers = ABOVE_PLAYER_LAYERS_DEFAULT;
+		}
+		if (shadowLayersJson != null) {
+			shadowLayers = json.fromJson(int[].class, shadowLayersJson);
+		}
+		else {
+			shadowLayers = SHADOW_LAYERS_DEFAULT;
 		}
 	}
 	
@@ -305,6 +315,10 @@ public class GameMap implements EventListener, Disposable {
 	
 	public void renderBackground() {
 		renderer.render(backgroundLayers);
+	}
+	
+	public void processPlayer(float delta) {
+		player.process(delta);
 	}
 	
 	public void processAndRenderGameObject(float delta) {
@@ -396,9 +410,16 @@ public class GameMap implements EventListener, Disposable {
 		}
 	}
 	
-	public void renderTerrain() {
+	public void renderAbovePlayer() {
 		renderer.setView(camera);
-		renderer.render(terrainLayers);
+		renderer.render(abovePlayerLayers);
+	}
+	
+	public void renderShalows() {
+		if (shadowLayers.length > 0) {
+			renderer.setView(camera);
+			renderer.render(shadowLayers);
+		}
 	}
 	
 	public Vector2 getPlayerStartingPosition() {

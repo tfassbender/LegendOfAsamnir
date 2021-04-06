@@ -160,12 +160,14 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		physicsWorld.step(1f / 60f);
 		map.afterWorldStep();
 		
+		map.processPlayer(delta);
+		cameraMovementHandler.moveCamera(delta);
+		
 		map.renderBackground();
 		map.processAndRenderGameObject(delta);
-		map.renderTerrain();
+		map.renderAbovePlayer();
+		map.renderShalows();
 		hud.render(delta);
-		
-		cameraMovementHandler.moveCamera(delta);
 		
 		checkGameOver();
 		

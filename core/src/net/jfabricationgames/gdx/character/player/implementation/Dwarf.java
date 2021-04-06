@@ -258,14 +258,17 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	@Override
-	public void render(float delta, SpriteBatch batch) {
+	public void process(float delta) {
 		updateAction(delta);
 		propertiesDataHandler.updateStats(delta, action);
 		attackCreator.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
-		
+	}
+	
+	@Override
+	public void render(float delta, SpriteBatch batch) {
 		drawDwarf(batch);
 		drawAimMarker(batch);
 		attackCreator.renderAttacks(delta, batch);
