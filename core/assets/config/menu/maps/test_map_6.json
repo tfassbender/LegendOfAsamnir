@@ -1,0 +1,11 @@
+{
+	name: Test Map 6,
+	texture: {
+		atlas: packed/menu/menu.atlas,
+		texture: mini_map_test_map_6
+	},
+	textureWidth: 500,
+	textureHeight: 250,
+	
+	mapStateConfigFile: config/menu/maps/test_map_6_fast_travel_states.json,
+}
