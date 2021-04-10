@@ -1,0 +1,27 @@
+[
+	//******************
+	//*** maps
+	//******************
+	config/spawn/maps/demo.json,
+	config/spawn/maps/map6.json
+	
+	//******************
+	//*** enemies
+	//******************
+	config/spawn/enemies/bat.json,
+	config/spawn/enemies/cobra.json,
+	config/spawn/enemies/fire_elemental.json,
+	config/spawn/enemies/gladiator.json,
+	config/spawn/enemies/ice_elemental.json,
+	config/spawn/enemies/imp.json,
+	config/spawn/enemies/mimic_barrel.json,
+	config/spawn/enemies/mimic_chest.json,
+	config/spawn/enemies/mini_golem.json,
+	config/spawn/enemies/spider.json,
+	
+	//******************
+	//*** common
+	//******************
+	config/spawn/common/objects.json,
+	config/spawn/common/ammo.json,
+]

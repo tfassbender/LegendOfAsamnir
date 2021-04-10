@@ -1,0 +1,10 @@
+{
+	map6__chestDroppingHealthItem: {
+		spawnType: object.chest,
+		spawnTypeMapProperties: "{drop: \"{health: 1}\"}",
+	},
+	map6__chestDroppingShieldItem: {
+		spawnType: object.chest,
+		spawnTypeMapProperties: "{drop: \"{shield: 1}\"}",
+	}
+}

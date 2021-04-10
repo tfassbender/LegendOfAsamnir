@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="141" height="74" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="617">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="141" height="74" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="820">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -87,13 +87,13 @@
    </properties>
    <point/>
   </object>
-  <object id="604" name="item.key" x="2976" y="800">
+  <object id="604" name="item.key" x="2975.75" y="785.5">
    <point/>
   </object>
   <object id="605" name="item.key" x="4399.5" y="176.5">
    <point/>
   </object>
-  <object id="606" name="item.key" x="3968" y="876.5">
+  <object id="606" name="item.key" x="3952" y="876">
    <properties>
     <property name="key_key" value="Master Key 2"/>
    </properties>
@@ -125,6 +125,1098 @@
    <properties>
     <property name="spawn" value="playerOutOfAmmo_arrows"/>
    </properties>
+   <point/>
+  </object>
+  <object id="619" name="object.spawnPoint.mini_golem" x="1248.25" y="379.25">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_right_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="620" name="object.spawnPoint.mini_golem" x="1598.5" y="530">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_up_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="621" name="object.spawnPoint.mini_golem" x="544" y="448">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="622" name="object.spawnPoint.mini_golem" x="640" y="448">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="623" name="object.spawnPoint.mini_golem" x="128" y="896">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="624" name="object.spawnPoint.mini_golem" x="128" y="928">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="625" name="object.spawnPoint.mini_golem" x="448" y="1408">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="626" name="object.spawnPoint.mini_golem" x="352" y="1280">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_left_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="627" name="object.spawnPoint.mini_golem" x="192" y="1312">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_right_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="628" name="object.spawnPoint.mini_golem" x="1056" y="1056">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="629" name="object.spawnPoint.mini_golem" x="1120" y="1088">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="630" name="object.spawnPoint.mini_golem" x="2144" y="1056">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="631" name="object.spawnPoint.mini_golem" x="2176" y="1056">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="632" name="object.spawnPoint" x="3136.33" y="335.5">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_down_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="633" name="object.spawnPoint.mini_golem" x="2528" y="320">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_right_7"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="634" name="object.spawnPoint.mini_golem" x="4354.67" y="192.333">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="635" name="object.spawnPoint.mini_golem" x="4397" y="234.333">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="636" name="object.spawnPoint.mini_golem" x="4337.67" y="233.667">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="637" name="object.spawnPoint.mini_golem" x="4192" y="224">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="638" name="object.spawnPoint.mini_golem" x="4223.67" y="216.667">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="639" name="object.spawnPoint.mini_golem" x="4175" y="576">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_right_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="640" name="object.spawnPoint.mini_golem" x="4432" y="576">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_left_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="641" name="object.spawnPoint.mini_golem" x="3808" y="2176">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="642" name="object.spawnPoint.mini_golem" x="3776.67" y="2186.67">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="643" name="object.spawnPoint.mini_golem" x="2816" y="1888">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="644" name="object.spawnPoint.mini_golem" x="2784" y="1856">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="645" name="object.spawnPoint.mini_golem" x="2752" y="1824">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="646" name="object.spawnPoint.mini_golem" x="2496" y="1792">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_left_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="647" name="object.spawnPoint.mini_golem" x="2400" y="1664">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_right_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="648" name="object.spawnPoint.mini_golem" x="2400" y="1760">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_right_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="649" name="object.spawnPoint.mini_golem" x="2496" y="1696">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_left_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="650" name="object.spawnPoint.bat" x="1919.33" y="535.333">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="651" name="object.spawnPoint.bat" x="1984" y="536">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="652" name="object.spawnPoint.bat" x="2028" y="518">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="653" name="object.spawnPoint.bat" x="1056" y="555">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_right_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="654" name="object.spawnPoint.bat" x="320" y="448">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="655" name="object.spawnPoint.bat" x="128" y="640">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="656" name="object.spawnPoint.bat" x="544" y="800">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="657" name="object.spawnPoint.bat" x="288" y="640">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_down_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="658" name="object.spawnPoint.bat" x="384" y="608">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_left_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="659" name="object.spawnPoint.bat" x="152" y="1637">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_right_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="660" name="object.spawnPoint.bat" x="193" y="1626">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_up_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="661" name="object.spawnPoint.bat" x="177" y="1590">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_up_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="662" name="object.spawnPoint.bat" x="213" y="1573">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_down_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="663" name="object.spawnPoint.bat" x="267.333" y="1546.33">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_left_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="664" name="object.spawnPoint.bat" x="191" y="1518">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_right_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="665" name="object.spawnPoint.bat" x="1694.67" y="1102">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_right_10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="666" name="object.spawnPoint.bat" x="2686.67" y="1160">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="667" name="object.spawnPoint.bat" x="2548" y="1146.67">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_up_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="668" name="object.spawnPoint.bat" x="1726.67" y="894.667">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="669" name="object.spawnPoint.bat" x="2133.33" y="904">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="670" name="object.spawnPoint.bat" x="2016" y="966.667">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_down_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="671" name="object.spawnPoint.bat" x="2076" y="1196">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_left_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="672" name="object.spawnPoint.bat" x="3433" y="799.5">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="673" name="object.spawnPoint.bat" x="3445" y="730">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="674" name="object.spawnPoint.bat" x="3531.5" y="758.5">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="675" name="object.spawnPoint.bat" x="3571.5" y="717.5">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="676" name="object.spawnPoint.bat" x="3459" y="870.5">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="677" name="object.spawnPoint.bat" x="3799" y="422">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="678" name="object.spawnPoint.bat" x="3837" y="440">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="679" name="object.spawnPoint.bat" x="3788" y="470">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="680" name="object.spawnPoint.bat" x="3890" y="1478">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_up_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="681" name="object.spawnPoint.bat" x="3955" y="1488">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_right_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="682" name="object.spawnPoint.bat" x="3921" y="1425">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_down_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="683" name="object.spawnPoint.bat" x="3995" y="2256">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="684" name="object.spawnPoint.bat" x="4048" y="2229">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="685" name="object.spawnPoint.bat" x="3409" y="2286">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="686" name="object.spawnPoint.bat" x="3262" y="2248">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="687" name="object.spawnPoint.bat" x="2505" y="2192">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="688" name="object.spawnPoint.bat" x="2648" y="2124">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="689" name="object.spawnPoint.bat" x="2811" y="2025">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="691" name="object.spawnPoint.spider" x="4334.5" y="1875.5">
+   <properties>
+    <property name="spawn" value="enemy__spider"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="692" name="object.spawnPoint.spider" x="3087" y="2226">
+   <properties>
+    <property name="spawn" value="enemy__spider"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="693" name="object.spawnPoint.spider" x="2721" y="2080">
+   <properties>
+    <property name="spawn" value="enemy__spider"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="695" name="object.spawnPoint.mimic_barrel" x="96" y="544">
+   <properties>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="696" name="object.spawnPoint.mimic_barrel" x="4016" y="1627">
+   <properties>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="698" name="object.spawnPoint.barrel" x="96" y="512">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="699" name="object.spawnPoint.barrel" x="96" y="576">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="700" name="object.spawnPoint.barrel" x="1237" y="884.583">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="701" name="object.spawnPoint.barrel" x="1236.83" y="854.917">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="702" name="object.spawnPoint.barrel" x="2197" y="234">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="703" name="object.spawnPoint.barrel" x="2091" y="234">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="704" name="object.spawnPoint.barrel" x="2197" y="266">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="705" name="object.spawnPoint.barrel" x="4044" y="1627">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="706" name="object.spawnPoint.barrel" x="4072" y="1627">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="707" name="object.spawnPoint.barrel" x="3900.25" y="2061.75">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="708" name="object.spawnPoint.barrel" x="3892.75" y="2109.58">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="709" name="object.spawnPoint.barrel" x="3925.5" y="2096">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="710" name="object.spawnPoint.barrel" x="2848" y="1728">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="711" name="object.spawnPoint.barrel" x="2912" y="1792">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="712" name="object.spawnPoint.barrel" x="2879.33" y="1056.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="713" name="object.spawnPoint.barrel" x="2844.67" y="1110.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="714" name="object.spawnPoint.barrel" x="2290.67" y="1188.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="715" name="object.spawnPoint.pot" x="2112" y="234">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="716" name="object.spawnPoint.pot" x="2144" y="266">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="717" name="object.spawnPoint.pot" x="2112" y="266">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="718" name="object.spawnPoint.pot" x="2176" y="266">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="719" name="object.spawnPoint.pot" x="2144" y="234">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="720" name="object.spawnPoint.pot" x="2352" y="394">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="721" name="object.spawnPoint.pot" x="2385" y="394">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="722" name="object.spawnPoint.pot" x="2416" y="394">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="723" name="object.spawnPoint.pot" x="2352" y="426">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="724" name="object.spawnPoint.pot" x="1899" y="1023">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="725" name="object.spawnPoint.pot" x="1922" y="1053">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="726" name="object.spawnPoint.pot" x="4432" y="416">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="727" name="object.spawnPoint.pot" x="4400" y="384">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="728" name="object.spawnPoint.pot" x="4400" y="352">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="729" name="object.spawnPoint.pot" x="724" y="266">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="730" name="object.spawnPoint.pot" x="788" y="266">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="731" name="object.spawnPoint.pot" x="756" y="266">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="732" name="object.spawnPoint.pot" x="976" y="301">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="733" name="object.spawnPoint.pot" x="976" y="269">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="734" name="object.spawnPoint.pot" x="944" y="269">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="735" name="object.spawnPoint.pot" x="256" y="950">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="736" name="object.spawnPoint.pot" x="288" y="950">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="737" name="object.spawnPoint.pot" x="320" y="950">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="738" name="object.spawnPoint.pot" x="2176" y="234">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="739" name="object.spawnPoint.pot" x="2336" y="1275">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="740" name="object.spawnPoint.pot" x="2368" y="1275">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="741" name="object.spawnPoint.pot" x="2400" y="1275">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="742" name="object.spawnPoint.pot" x="2432" y="1275">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="743" name="object.spawnPoint.pot" x="2464" y="1275">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="744" name="object.spawnPoint.pot" x="397" y="2067">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="745" name="object.spawnPoint.pot" x="397" y="2131">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="746" name="object.spawnPoint.pot" x="397" y="2163">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="747" name="object.spawnPoint.pot" x="397" y="2099">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="748" name="object.spawnPoint.pot" x="397" y="2195">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="749" name="object.spawnPoint.pot" x="239" y="1194">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="750" name="object.spawnPoint.pot" x="271" y="1194">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="751" name="object.spawnPoint.pot" x="303" y="1194">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="752" name="object.spawnPoint.pot" x="2809" y="1163">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="753" name="object.spawnPoint.pot" x="2841" y="1163">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="754" name="object.spawnPoint.pot" x="2777" y="1163">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="755" name="object.spawnPoint.pot" x="2777" y="1195">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="756" name="object.spawnPoint.pot" x="2809" y="1195">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="757" name="object.spawnPoint.pot" x="2713" y="1227">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="758" name="object.spawnPoint.pot" x="2745" y="1227">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="759" name="object.spawnPoint.pot" x="2777" y="1227">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="760" name="object.spawnPoint.pot" x="2745" y="1195">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="761" name="object.spawnPoint.pot" x="3424" y="1056">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="762" name="object.spawnPoint.pot" x="3456" y="1056">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="763" name="object.spawnPoint.pot" x="3424" y="1088">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="764" name="object.spawnPoint.pot" x="3456" y="1088">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="765" name="object.spawnPoint.pot" x="4023" y="728">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="766" name="object.spawnPoint.pot" x="4055" y="728">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="767" name="object.spawnPoint.pot" x="4142" y="1912.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="768" name="object.spawnPoint.pot" x="4174" y="1912.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="769" name="object.spawnPoint.pot" x="3555" y="2298">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="770" name="object.spawnPoint.pot" x="3587" y="2298">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="771" name="object.spawnPoint.pot" x="3188.67" y="1866.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="772" name="object.spawnPoint.pot" x="3220.67" y="1866.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="773" name="object.spawnPoint.pot" x="2349" y="1870.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="775" name="object.spawnPoint.pot" x="2349" y="1838.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="776" name="object.spawnPoint.pot" x="2349" y="1902.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="777" name="object.spawnPoint.pot" x="4338" y="1342">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="778" name="object.spawnPoint.pot" x="4338" y="1310">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="779" name="object.spawnPoint.pot" x="4338" y="1374">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="780" name="object.spawnPoint.pot" x="2828" y="2102.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="781" name="object.spawnPoint.pot" x="2828" y="2070.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="782" name="object.spawnPoint.pot" x="2828" y="2134.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="783" name="object.spawnPoint.pot" x="3619" y="2298">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="784" name="object.spawnPoint.pot" x="494.667" y="1386">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="785" name="object.spawnPoint.pot" x="526.667" y="1386">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="786" name="object.spawnPoint.pot" x="558.667" y="1386">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="787" name="object.spawnPoint.mimic_chest" x="128" y="1423">
+   <properties>
+    <property name="spawn" value="enemy__mimic_chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="788" name="object.spawnPoint.mimic_chest" x="3984" y="876">
+   <properties>
+    <property name="spawn" value="enemy__mimic_chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="790" name="object.spawnPoint.chest" x="3470" y="824.333">
+   <properties>
+    <property name="spawn" value="object__chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="791" name="object.spawnPoint.chest" x="2879.75" y="785">
+   <properties>
+    <property name="spawn" value="object__chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="793" name="object.spawnPoint.chest" x="616.75" y="881.75">
+   <properties>
+    <property name="spawn" value="object__chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="794" name="object.spawnPoint.chest" x="2880" y="1760">
+   <properties>
+    <property name="spawn" value="object__chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="795" name="object.spawnPoint.chest" x="2400" y="1568">
+   <properties>
+    <property name="spawn" value="map6__chestDroppingHealthItem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="796" name="object.spawnPoint.chest" x="2432" y="1568">
+   <properties>
+    <property name="spawn" value="map6__chestDroppingHealthItem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="797" name="object.spawnPoint.chest" x="2464" y="1568">
+   <properties>
+    <property name="spawn" value="map6__chestDroppingShieldItem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="798" name="object.spawnPoint.chest" x="2496" y="1568">
+   <properties>
+    <property name="spawn" value="map6__chestDroppingShieldItem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="799" name="object.spawnPoint.chest" x="575.75" y="2024.5">
+   <properties>
+    <property name="spawn" value="map6__chestDroppingHealthItem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="800" name="object.spawnPoint.chest" x="607.75" y="2024.5">
+   <properties>
+    <property name="spawn" value="map6__chestDroppingShieldItem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="807" name="item.health" x="176" y="1656">
+   <point/>
+  </object>
+  <object id="808" name="item.health" x="1600" y="1184">
+   <point/>
+  </object>
+  <object id="809" name="item.health" x="1871" y="1969.75">
+   <point/>
+  </object>
+  <object id="810" name="item.health" x="575.667" y="2197.33">
+   <point/>
+  </object>
+  <object id="811" name="item.health" x="3796" y="1550">
+   <point/>
+  </object>
+  <object id="812" name="item.health" x="4175.25" y="175.5">
+   <point/>
+  </object>
+  <object id="814" name="item.shield" x="4207.75" y="175.75">
+   <point/>
+  </object>
+  <object id="815" name="item.shield" x="4336.67" y="1658">
+   <point/>
+  </object>
+  <object id="816" name="item.shield" x="1839.67" y="1935.67">
+   <point/>
+  </object>
+  <object id="817" name="item.shield" x="614.25" y="2197">
+   <point/>
+  </object>
+  <object id="818" name="item.shield" x="657" y="1259.67">
+   <point/>
+  </object>
+  <object id="819" name="item.shield" x="2112" y="1269.67">
    <point/>
   </object>
  </objectgroup>

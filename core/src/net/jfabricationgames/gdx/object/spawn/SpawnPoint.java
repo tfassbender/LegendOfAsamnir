@@ -21,7 +21,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	
 	private static final String MAP_PROPERTY_KEY_SPAWN_CONFIG = "spawn";
 	
-	private static final String SPAWN_CONFIG_FILE = "config/spawn/spawns.json";
+	private static final String SPAWN_CONFIG_FILE = "config/spawn/spawnConfigs.json";
 	
 	private static ObjectMap<String, SpawnConfig> spawnConfigs = loadSpawnConfigs();
 	
@@ -29,7 +29,20 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	private static ObjectMap<String, SpawnConfig> loadSpawnConfigs() {
 		Json json = new Json();
 		
-		ObjectMap<String, SpawnConfig> spawnConfigs = json.fromJson(ObjectMap.class, SpawnConfig.class, Gdx.files.internal(SPAWN_CONFIG_FILE));
+		Array<String> spawnConfigFiles = json.fromJson(Array.class, String.class, Gdx.files.internal(SPAWN_CONFIG_FILE));
+		
+		ObjectMap<String, SpawnConfig> spawnConfigs = new ObjectMap<String, SpawnConfig>();
+		for (String configFile : spawnConfigFiles) {
+			ObjectMap<String, SpawnConfig> configs = json.fromJson(ObjectMap.class, SpawnConfig.class, Gdx.files.internal(configFile));
+			for (String key : configs.keys()) {
+				if (spawnConfigs.containsKey(key)) {
+					throw new IllegalStateException("The key '" + key + "' from the spawn config file '" + configFile
+							+ "' was already added by another spawn config file. Duplicate keys are not allowed.");
+				}
+			}
+			spawnConfigs.putAll(configs);
+		}
+		
 		addGameStartEvents(spawnConfigs);
 		
 		return spawnConfigs;
@@ -141,7 +154,17 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	@Override
-	public void dispose() {
+	public void remove() {
+		super.remove();
+		removeEventListener();
+	}
+	
+	private void removeEventListener() {
 		EventHandler.getInstance().removeEventListener(this);
+	}
+	
+	@Override
+	public void dispose() {
+		removeEventListener();
 	}
 }

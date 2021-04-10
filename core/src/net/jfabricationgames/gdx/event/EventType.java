@@ -3,7 +3,9 @@ package net.jfabricationgames.gdx.event;
 public enum EventType {
 	
 	GAME_START, //
+	GAME_LOADED, //
 	PLAYER_RESPAWNED, //
+	MAP_ENTERED, //
 	OUT_OF_AMMO, //
 	EVENT_OBJECT_TOUCHED, //
 	EVENT_ITEM_PICKED_UP, //

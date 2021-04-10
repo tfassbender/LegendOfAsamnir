@@ -10,7 +10,7 @@ import net.jfabricationgames.gdx.event.global.GlobalEventListener;
 
 public class EventHandler {
 	
-	public static final String EVENT_GAME_STARTED = "gameStarted";
+	public static final String EVENT_GAME_STARTED = "GAME_STARTED";
 	
 	private static final String EVENT_CONFIG_FILE = "config/events/events.json";
 	

@@ -1,14 +1,4 @@
 {
-	playerOutOfAmmo_arrows: {
-		spawnType: item.arrow,
-		events: [playerOutOfAmmo_arrows]
-		spawnOnGameStart: true,
-	},
-	playerOutOfAmmo_bombs: {
-		spawnType: item.bomb,
-		events: [playerOutOfAmmo_bombs]
-		spawnOnGameStart: true,
-	},
 	gameStart_potDroppingBigCoin: {
 		spawnType: object.pot,
 		spawnTypeMapProperties: "{drop: \"{big_coin: 1}\"}",

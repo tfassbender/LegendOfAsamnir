@@ -1,0 +1,146 @@
+{
+	//*********************************
+	//*** no movement
+	//*********************************
+	enemy__imp: {
+		spawnType: enemy.imp,
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
+	//*********************************
+	//*** movement up
+	//*********************************
+	enemy__imp__movement_up_1: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:1}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_up_3: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:3}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_up_5: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:5}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_up_7: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:7}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_up_10: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
+	//*********************************
+	//*** movement down
+	//*********************************
+	enemy__imp__movement_down_1: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-1}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_down_3: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-3}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_down_5: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-5}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_down_7: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-7}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_down_10: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-10}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
+	//*********************************
+	//*** movement left
+	//*********************************
+	enemy__imp__movement_left_1: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-1, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_left_3: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-3, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_left_5: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-5, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_left_7: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-7, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_left_10: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-10, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
+	//*********************************
+	//*** movement right
+	//*********************************
+	enemy__imp__movement_right_1: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:1, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_right_3: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:3, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_right_5: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:5, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_right_7: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:7, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__imp__movement_right_10: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:10, y:0}, {x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+}

@@ -167,9 +167,7 @@ public class GameMap implements EventListener, Disposable {
 	
 	private void updateMap() {
 		String mapIdentifier = MapDataHandler.getInstance().getMapIdentifier();
-		if (currentMapIdentifier == null || !currentMapIdentifier.equals(mapIdentifier)) {
-			showMap(mapIdentifier);
-		}
+		showMap(mapIdentifier);
 	}
 	
 	private void updatePlayerPosition() {
@@ -208,6 +206,8 @@ public class GameMap implements EventListener, Disposable {
 		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
 		updateMapObjectStates();
+		
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
 	}
 	
 	private void removeCurrentMapIfPresent() {

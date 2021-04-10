@@ -1,7 +1,20 @@
 {
-	gameStarted: {
+	GAME_STARTED: {
 		eventType: GAME_START,
 	},
+	GAME_LOADED: {
+		eventType: GAME_LOADED,
+	},
+	PLAYER_RESPAWNED: {
+		eventType: PLAYER_RESPAWNED,
+	},
+	MAP_ENTERED: {
+		eventType: MAP_ENTERED,
+	},
+	QUICKSAVE: {
+		eventType: QUICKSAVE,
+	}
+	
 	playerOutOfAmmo_arrows: {
 		eventType: OUT_OF_AMMO,
 		stringValue: ARROW,
