@@ -156,13 +156,14 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		map.beforeWorldStep();
+		map.executeBeforeWorldStep();
 		physicsWorld.step(1f / 60f);
-		map.afterWorldStep();
+		map.executeAfterWorldStep();
 		
 		map.processPlayer(delta);
 		cameraMovementHandler.moveCamera(delta);
 		
+		map.updateCameraToRenderer();
 		map.renderBackground();
 		map.processAndRenderGameObject(delta);
 		map.renderAbovePlayer();

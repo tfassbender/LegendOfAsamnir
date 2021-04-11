@@ -19,7 +19,7 @@
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAADg3wAnEAAB
   </data>
  </layer>
- <objectgroup id="4" name="objects">
+ <objectgroup id="4" name="objects" locked="1">
   <object id="1" name="player.startingPosition" x="160" y="320">
    <point/>
   </object>

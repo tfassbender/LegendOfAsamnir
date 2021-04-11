@@ -7,7 +7,10 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -28,12 +31,21 @@ public class EventObject extends GameObject implements ContactListener {
 	
 	private String eventParameter;
 	private boolean singleExecution;
+	@MapObjectState
 	private boolean executed = false;
 	private Vector2 eventObjectCenter;
 	
 	public EventObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
 		super(typeConfig, sprite, mapProperties);
 		PhysicsWorld.getInstance().registerContactListener(this);
+	}
+	
+	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		super.applyState(state);
+		if (state.containsKey("executed")) {
+			this.executed = Boolean.parseBoolean(state.get("executed"));
+		}
 	}
 	
 	@Override
@@ -69,6 +81,7 @@ public class EventObject extends GameObject implements ContactListener {
 					.setParameterObject(this);
 			EventHandler.getInstance().fireEvent(event);
 			executed = true;
+			MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 		}
 	}
 	

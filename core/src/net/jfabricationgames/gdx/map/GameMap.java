@@ -288,11 +288,11 @@ public class GameMap implements EventListener, Disposable {
 				&& projectiles != null;
 	}
 	
-	public void beforeWorldStep() {
+	public void executeBeforeWorldStep() {
 		executeAnnotatedMethodsOnAllObjects(BeforeWorldStep.class);
 	}
 	
-	public void afterWorldStep() {
+	public void executeAfterWorldStep() {
 		executeAnnotatedMethodsOnAllObjects(AfterWorldStep.class);
 	}
 	
@@ -311,6 +311,10 @@ public class GameMap implements EventListener, Disposable {
 		for (Object mapObject : mapObjects) {
 			AnnotationUtil.executeAnnotatedMethods(annotation, mapObject);
 		}
+	}
+	
+	public void updateCameraToRenderer() {
+		renderer.setView(camera);
 	}
 	
 	public void renderBackground() {
@@ -411,13 +415,11 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	public void renderAbovePlayer() {
-		renderer.setView(camera);
 		renderer.render(abovePlayerLayers);
 	}
 	
 	public void renderShalows() {
 		if (shadowLayers.length > 0) {
-			renderer.setView(camera);
 			renderer.render(shadowLayers);
 		}
 	}

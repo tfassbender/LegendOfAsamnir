@@ -16,7 +16,7 @@
    eJztmQ0OgyAMhfFnV5juwruOO+I0kYQ11ZYCa936JcTENBsPyqNgCI7jlDBpd+CP8bE/plvbsrYhebfs769Evz9n8OyR2DNmOqQptXS0ZgznY3UVHSmYT1jTIfWyGjpq+uiYEZvmWamOKdTfDyS/J9WRM26QR2Z8x2jW1gfGndk2rOoY6JAPSnS03gOf+39wW9onK/MhxXW04xXy8irNL0s6OL5L+bEFuL575sdX4caMg94Ka4ecWoKK1TrD1a6vsFyQ1EFxPLhz1ZqjfZaaN+7a0D7DY/2U5EZtL9C+D9K8Y8ByAq6HdF/8JnBesD7EM0zMCegD2jlPwc09ac5b108B59c6uecyx9Fi81NJvmrvl7XAdMR3VD25+ar2twGIpD/QV39lbh0+8a6Ag1YtyCHeE2BaSvJaa01wah7OfPiadpx2vAFKqw6l
   </data>
  </layer>
- <objectgroup id="3" name="objects">
+ <objectgroup id="3" name="objects" locked="1">
   <object id="1" name="item.axe" x="480" y="639">
    <point/>
   </object>
