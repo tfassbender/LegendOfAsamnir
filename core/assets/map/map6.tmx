@@ -247,15 +247,15 @@
    </properties>
    <point/>
   </object>
-  <object id="639" name="object.spawnPoint.mini_golem" x="4175" y="576">
+  <object id="639" name="object.spawnPoint.mini_golem" x="4208" y="576">
    <properties>
-    <property name="spawn" value="enemy__mini_golem__movement_right_5"/>
+    <property name="spawn" value="enemy__mini_golem__movement_right_3"/>
    </properties>
    <point/>
   </object>
-  <object id="640" name="object.spawnPoint.mini_golem" x="4432" y="576">
+  <object id="640" name="object.spawnPoint.mini_golem" x="4400" y="576">
    <properties>
-    <property name="spawn" value="enemy__mini_golem__movement_left_5"/>
+    <property name="spawn" value="enemy__mini_golem__movement_left_3"/>
    </properties>
    <point/>
   </object>
