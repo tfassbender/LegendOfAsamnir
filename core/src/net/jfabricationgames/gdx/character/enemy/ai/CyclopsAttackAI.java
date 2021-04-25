@@ -77,7 +77,7 @@ public class CyclopsAttackAI extends AbstractMultiAttackAI {
 			return -1;
 		}
 		
-		return targetingPlayer.getPosition().sub(character.getPosition()).angle();
+		return targetingPlayer.getPosition().sub(character.getPosition()).angleDeg();
 	}
 	
 	private boolean isInBeamTargetAngle(float angle) {

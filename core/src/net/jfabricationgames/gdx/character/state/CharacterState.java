@@ -108,7 +108,7 @@ public class CharacterState {
 	}
 	
 	public void flipAnimationToDirection(Vector2 direction) {
-		float directionAngle = direction.angle();
+		float directionAngle = direction.angleDeg();
 		boolean directionRight = directionAngle < 90 || directionAngle > 270;
 		boolean animationRight = config.initialAnimationDirectionRight != animation.getKeyFrame().isFlipX();
 		if (directionRight != animationRight) {

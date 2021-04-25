@@ -110,7 +110,7 @@ public class CharacterStateMachine {
 			setState(currentState.followingState);
 		}
 	}
-
+	
 	private boolean isStateEnded(float delta) {
 		return isChangeStateAfterAnimation(delta) || isChangeStateAfterAttackFinishes(delta);
 	}
@@ -175,7 +175,7 @@ public class CharacterStateMachine {
 	
 	public void flipAnimationTexturesToMovementDirection(AnimationDirector<TextureRegion> animation, Vector2 movingDirection) {
 		if (isFlipTextureToMovingDirection() && movingDirection.len2() > 0.1f) {
-			float angleDegrees = movingDirection.angle();
+			float angleDegrees = movingDirection.angleDeg();
 			boolean flipToLeft = angleDegrees > 90 + ANGLE_FLIP_THRESHOLD_DEGREES && angleDegrees < 270 - ANGLE_FLIP_THRESHOLD_DEGREES;
 			boolean flipToRight = angleDegrees < 90 - ANGLE_FLIP_THRESHOLD_DEGREES || angleDegrees > 270 + ANGLE_FLIP_THRESHOLD_DEGREES;
 			if ((flipToLeft && isTextureRight(animation)) || (flipToRight && isTextureLeft(animation))) {

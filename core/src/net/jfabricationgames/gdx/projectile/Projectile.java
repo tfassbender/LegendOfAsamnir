@@ -115,7 +115,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	}
 	
 	protected void rotateProjectile(Vector2 direction) {
-		float angle = direction.angle();
+		float angle = direction.angleDeg();
 		float rotation = angle - typeConfig.textureInitialRotation + getSpriteVectorAngleOffset();
 		body.setTransform(body.getPosition().x, body.getPosition().y, MathUtils.degreesToRadians * angle);
 		sprite.setRotation(rotation);
@@ -175,7 +175,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	private boolean isRangeRestricted() {
 		return typeConfig.range > 0 && typeConfig.removeAfterRangeExceeded;
 	}
-
+	
 	private boolean isDampedAfterRangeExceeds() {
 		return typeConfig.range > 0 && typeConfig.dampingAfterRangeExceeded > 0;
 	}
@@ -202,7 +202,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 			attackPerformed = true;
 		}
 	}
-
+	
 	private void stopProjectileAfterRangeExceeds() {
 		if (hasBody()) {
 			body.setLinearDamping(typeConfig.dampingAfterRangeExceeded);
