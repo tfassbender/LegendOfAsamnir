@@ -3,7 +3,6 @@ package net.jfabricationgames.gdx.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -167,7 +166,7 @@ public class InputContextLoader {
 			}
 		}
 	}
-
+	
 	private <T> void checkDuplicateKey(ArrayMap<T, ?> map, T key, Element keyElement, Object newValue) {
 		if (map.containsKey(key) && map.get(key) != newValue) {
 			logDuplicateErrorMessage(key, map.get(key), newValue, keyElement);
@@ -218,11 +217,9 @@ public class InputContextLoader {
 			}
 			
 			Element buttonElement = controllerElement.getChildByName("button");
-			Element povElement = controllerElement.getChildByName("pov");
 			Element axisElement = controllerElement.getChildByName("axis");
 			
 			loadControllerButton(elementName, player, buttonElement);
-			loadControllerPov(elementName, player, povElement);
 			loadControllerAxisElement(elementName, player, axisElement);
 		}
 	}
@@ -243,40 +240,6 @@ public class InputContextLoader {
 			else if (readingContextType == ContextType.ACTIONS) {
 				checkDuplicateKey(context.controllerButtonActions, key, controllerButtonElement, elementName);
 				context.controllerButtonActions.put(key, elementName);
-			}
-			else {
-				throw new IllegalStateException("unexpected ContextType: " + readingContextType);
-			}
-		}
-	}
-	
-	/**
-	 * Loads: <context><states><state name="..."><controller player="..."><pov directions="..." /></controller></state></states><context>
-	 */
-	private void loadControllerPov(String elementName, int player, Element controllerPovElement) {
-		if (controllerPovElement != null) {
-			String[] directions = controllerPovElement.getAttribute("directions").split(" ");
-			
-			//convert direction strings to PlayerValue objects (containing the direction and the 'player' field, which identifies the controller)
-			PlayerValue[] playerDirections = new PlayerValue[directions.length];
-			for (int i = 0; i < directions.length; i++) {
-				playerDirections[i] = new PlayerValue(player, directions[i]);
-			}
-			
-			if (readingContextType == ContextType.STATES) {
-				context.controllerPovStates.put(elementName, new Array<PlayerValue>(playerDirections));
-			}
-			else if (readingContextType == ContextType.ACTIONS) {
-				//add the pov direction to all actions (because an action can be triggered by multiple pov directions; usually like: north, northEast and northWest)
-				for (PlayerValue playerDirection : playerDirections) {
-					Array<String> actions = context.controllerPovActions.get(playerDirection);
-					if (actions == null) {
-						actions = new Array<String>();
-						checkDuplicateKey(context.controllerPovActions, playerDirection, controllerPovElement, actions);
-						context.controllerPovActions.put(playerDirection, actions);
-					}
-					actions.add(elementName);
-				}
 			}
 			else {
 				throw new IllegalStateException("unexpected ContextType: " + readingContextType);

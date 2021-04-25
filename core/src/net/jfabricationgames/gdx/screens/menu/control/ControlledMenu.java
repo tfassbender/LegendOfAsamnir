@@ -51,8 +51,7 @@ public abstract class ControlledMenu<T extends ControlledMenu<T>> extends Screen
 	}
 	
 	protected boolean isEventTypeHandled(Type type) {
-		return type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.CONTROLLER_AXIS_THRESHOLD_PASSED
-				|| type == Type.CONTROLLER_POV_CHANGED;
+		return type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.CONTROLLER_AXIS_THRESHOLD_PASSED;
 	}
 	
 	@Override

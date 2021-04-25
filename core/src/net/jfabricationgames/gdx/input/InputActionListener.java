@@ -1,7 +1,5 @@
 package net.jfabricationgames.gdx.input;
 
-import com.badlogic.gdx.controllers.PovDirection;
-
 public interface InputActionListener {
 	
 	public enum Type {
@@ -15,7 +13,6 @@ public interface InputActionListener {
 		SCROLLED, //
 		CONTROLLER_BUTTON_PRESSED, //
 		CONTROLLER_BUTTON_RELEASED, //
-		CONTROLLER_POV_CHANGED, //
 		CONTROLLER_AXIS_THRESHOLD_PASSED; //
 	}
 	
@@ -48,7 +45,6 @@ public interface InputActionListener {
 		public int player;//the player that holds a controller
 		public float axisValue;
 		public float axisThreshold;
-		public PovDirection povDirection;
 		
 		public Parameters setKeycode(int keycode) {
 			this.keycode = keycode;
@@ -100,16 +96,11 @@ public interface InputActionListener {
 			return this;
 		}
 		
-		public Parameters setPovDirection(PovDirection povDirection) {
-			this.povDirection = povDirection;
-			return this;
-		}
-		
 		@Override
 		public String toString() {
 			return "Parameters [keycode=" + keycode + ", button=" + button + ", screenX=" + screenX + ", screenY=" + screenY + ", pointer=" + pointer
 					+ ", scrollAmount=" + scrollAmount + ", character=" + character + ", player=" + player + ", axisValue=" + axisValue
-					+ ", axisThreshold=" + axisThreshold + ", povDirection=" + povDirection + "]";
+					+ ", axisThreshold=" + axisThreshold + "]";
 		}
 	}
 	

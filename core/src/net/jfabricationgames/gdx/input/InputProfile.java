@@ -10,9 +10,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
@@ -122,9 +120,9 @@ public class InputProfile implements InputProcessor, ControllerListener {
 	}
 	
 	@Override
-	public boolean scrolled(int amount) {
+	public boolean scrolled(float amountX, float amountY) {
 		if (context != null) {
-			return context.scrolled(amount);
+			return context.scrolled(amountX, amountY);
 		}
 		return false;
 	}
@@ -150,32 +148,6 @@ public class InputProfile implements InputProcessor, ControllerListener {
 		if (context != null && Math.abs(value) > CONTROLLER_AXIS_DEAD_ZONE) {
 			return context.controllerAxisMoved(controller, axisCode, value);
 		}
-		return false;
-	}
-	
-	@Override
-	public boolean povMoved(Controller controller, int povCode, PovDirection value) {
-		if (context != null) {
-			return context.controllerPovMoved(controller, povCode, value);
-		}
-		return false;
-	}
-	
-	@Override
-	public boolean xSliderMoved(Controller controller, int sliderCode, boolean value) {
-		//not supported here
-		return false;
-	}
-	
-	@Override
-	public boolean ySliderMoved(Controller controller, int sliderCode, boolean value) {
-		//not supported here
-		return false;
-	}
-	
-	@Override
-	public boolean accelerometerMoved(Controller controller, int accelerometerCode, Vector3 value) {
-		//not supported here
 		return false;
 	}
 	

@@ -21,8 +21,11 @@
 			<!-- For controller inputs there are input events too -->
 			<CONTROLLER_BUTTON_DOWN />
 			<CONTROLLER_BUTTON_UP />
-			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
+			
+			<!-- Controller Pov is not supported since libGdx version 1.10.0 -->
+			<!-- The controller Pov-Directions were replaced by buttons -->
+			<!-- <CONTROLLER_POV_CHANGED /> -->
 		</events>
 		
 		<!-- The context may contain a list of states, of which the state can be requested (by polling). -->
@@ -106,6 +109,9 @@
 					<!-- In this case we define, that the button "0" (which is usually the 'A' button) is for moving up (which is not that common, 
 						but shows how to do it in this example) -->
 					<button code="0" />
+					
+					
+					<!-- WARNING Controller Pov-Directions are no longer supported since libGdx version 1.10.0 and are replaced by buttons -->
 					<!-- Also the directions-cross (called 'pov' here) can be used to move the character -->
 					<!-- The pov tag has no 'code' attribute (because I have never seen a controller with more than one direction crosses). But it has a 
 						'directions' tag, that includes a list of directions that should lead to moving up. These directions are named after cardinal directions
@@ -113,7 +119,9 @@
 						So the character will move 'up' not only if up is pressed, but also if up and left is pressed at the same time. The same can be 
 						done for left, so the character moves up and left when both keys are pressed -->
 					<!-- NOTE: the pov also has a direction 'center', which means no direction key is pressed -->
-					<pov directions="north northWest northEast" />
+					<!-- <pov directions="north northWest northEast" /> -->
+					
+					
 					<!-- At last we define an axis to make the character move -->
 					<!-- The axis tag has a 'code' attribute, which defines the axis that is used (0 is the left analog stick in vertical direction on my controller).
 						The axis tag also has a threshold value, that indicates when the analog axis is moved enough to activate the state. A value of -0.5 means
@@ -131,21 +139,24 @@
 			<state name="down">
 				<key code="S" />
 				<controller player="1">
-					<pov directions="south southWest southEast" />
+				    <!-- Controller Pov-Directions are no longer supported since libGdx version 1.10.0 and are replaced by buttons -->
+					<!-- <pov directions="south southWest southEast" /> -->
 					<axis code="0" threshold="0.5" />
 				</controller>
 			</state>
 			<state name="left">
 				<key code="A" />
 				<controller player="1">
-					<pov directions="west southWest northWest" />
+				    <!-- Controller Pov-Directions are no longer supported since libGdx version 1.10.0 and are replaced by buttons -->
+					<!-- <pov directions="west southWest northWest" /> -->
 					<axis code="1" threshold="-0.5" />
 				</controller>
 			</state>
 			<state name="right">
 				<key code="D" />
 				<controller player="1">
-					<pov directions="east southEast northEast" />
+				    <!-- Controller Pov-Directions are no longer supported since libGdx version 1.10.0 and are replaced by buttons -->
+					<!-- <pov directions="east southEast northEast" /> -->
 					<axis code="1" threshold="0.5" />
 				</controller>
 			</state>

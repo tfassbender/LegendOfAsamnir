@@ -1,11 +1,10 @@
 <InputProfile>
-	<!-- The game context contains player movement (using WASD, controller pov and controller analog stick), -->
+	<!-- The game context contains player movement (using WASD, controller pov (as buttons since libGdx version 1.10.0) and controller analog stick) -->
 	<context name="game">
 		<events>
 			<KEY_DOWN />
 			<TOUCH_DOWN />
 			<CONTROLLER_BUTTON_DOWN />
-			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
 		
@@ -14,36 +13,36 @@
 			<state name="up">
 				<key code="W" />
 				<controller player="1">
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
 				</controller>
 			</state>
 			<state name="down">
 				<key code="S" />
 				<controller player="1">
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
 				</controller>
 			</state>
 			<state name="left">
 				<key code="A" />
 				<controller player="1">
-					<pov directions="west southWest northWest" />
-					<axis code="1" threshold="-0.5" />
+					<button code="13" />
+					<axis code="0" threshold="-0.5" />
 				</controller>
 			</state>
 			<state name="right">
 				<key code="D" />
 				<controller player="1">
-					<pov directions="east southEast northEast" />
-					<axis code="1" threshold="0.5" />
+					<button code="14" />
+					<axis code="0" threshold="0.5" />
 				</controller>
 			</state>
 			
 			<state name="sprint">
 				<key code="L-Shift" />
 				<controller player="1">
-					<button code="8" />
+					<button code="7" />
 				</controller>
 			</state>
 			
@@ -58,15 +57,15 @@
 			<state name="attack">
 				<button code="Left" /><!-- left mouse button -->
 				<controller player="1">
-					<button code="1" />
-					<axis code="4" threshold="-0.7" /><!-- right shoulder axis -->
+					<button code="0" />
+					<axis code="5" threshold="0.7" /><!-- right shoulder axis -->
 				</controller>
 			</state>
 			
 			<state name="block">
 				<button code="Right" /><!-- right mouse button to block -->
 				<controller>
-					<button code="0" />
+					<button code="1" />
 					<axis code="4" threshold="0.7" /><!-- left shoulder axis -->
 				</controller>
 			</state>
@@ -90,33 +89,33 @@
 			<action name="menu">
 				<key code="Escape" />
 				<controller>
-					<button code="7" />
+					<button code="6" />
 				</controller>
 			</action>
 			
 			<action name="choice_up">
 				<key code="W" />
 				<controller player="1">
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
 				</controller>
 			</action>
 			
 			<action name="choice_down">
 				<key code="S" />
 				<controller player="1">
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
 				</controller>
 			</action>
 		</actions>
 		
 		<controllerAxes>
 			<controllerAxis name="camera_vertical_move_axis">
-				<axis player="1" code="2" />
+				<axis player="1" code="3" />
 			</controllerAxis>
 			<controllerAxis name="camera_horizontal_move_axis">
-				<axis player="1" code="3" />
+				<axis player="1" code="2" />
 			</controllerAxis>
 		</controllerAxes>
 	</context>
@@ -127,38 +126,37 @@
 			<KEY_DOWN />
 			<TOUCH_DOWN />
 			<CONTROLLER_BUTTON_DOWN />
-			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
 		<actions>
-			<!-- input movement using WASD, controller pov or controller analog stick (should usually be the left analog stick). 
-				Works on all attached controllers -->
+			<!-- input movement using WASD, controller pov (as buttons since libGdx version 1.10.0) or controller analog stick 
+			    (should usually be the left analog stick). Works on all attached controllers -->
 			<action name="up">
 				<key code="W" />
 				<controller>
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="down">
 				<key code="S" />
 				<controller>
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
 				</controller>
 			</action>
 			<action name="left">
 				<key code="A" />
 				<controller>
-					<pov directions="west southWest northWest" />
-					<axis code="1" threshold="-0.5" />
+					<button code="13" />
+					<axis code="0" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="right">
 				<key code="D" />
 				<controller>
-					<pov directions="east southEast northEast" />
-					<axis code="1" threshold="0.5" />
+					<button code="14" />
+					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
 
@@ -184,43 +182,42 @@
 			<KEY_DOWN />
 			<TOUCH_DOWN />
 			<CONTROLLER_BUTTON_DOWN />
-			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
 		<actions>
 			<action name="up">
 				<key code="Up" />
 				<controller>
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="down">
 				<key code="Down" />
 				<controller>
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
 				</controller>
 			</action>
 			<action name="left">
 				<key code="Left" />
 				<controller>
-					<pov directions="west southWest northWest" />
-					<axis code="1" threshold="-0.5" />
+					<button code="13" />
+					<axis code="0" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="right">
 				<key code="Right" />
 				<controller>
-					<pov directions="east southEast northEast" />
-					<axis code="1" threshold="0.5" />
+					<button code="14" />
+					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
 
 			<action name="backToGame">
 				<key code="Escape" />
 				<controller>
-					<button code="7" />
+					<button code="6" />
 				</controller>
 			</action>
 
@@ -238,43 +235,42 @@
 			<KEY_DOWN />
 			<TOUCH_DOWN />
 			<CONTROLLER_BUTTON_DOWN />
-			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
 		<actions>
 			<action name="up">
 				<key code="Up" />
 				<controller>
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="down">
 				<key code="Down" />
 				<controller>
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
 				</controller>
 			</action>
 			<action name="left">
 				<key code="Left" />
 				<controller>
-					<pov directions="west southWest northWest" />
-					<axis code="1" threshold="-0.5" />
+					<button code="13" />
+					<axis code="0" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="right">
 				<key code="Right" />
 				<controller>
-					<pov directions="east southEast northEast" />
-					<axis code="1" threshold="0.5" />
+					<button code="14" />
+					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
 
 			<action name="backToGame">
 				<key code="Escape" />
 				<controller>
-					<button code="7" />
+					<button code="6" />
 				</controller>
 			</action>
 			
@@ -300,36 +296,35 @@
 			<KEY_DOWN />
 			<TOUCH_DOWN />
 			<CONTROLLER_BUTTON_DOWN />
-			<CONTROLLER_POV_CHANGED />
 			<CONTROLLER_AXIS_THRESHOLD_PASSED />
 		</events>
 		<actions>
 			<action name="up">
 				<key code="Up" />
 				<controller>
-					<pov directions="north northWest northEast" />
-					<axis code="0" threshold="-0.5" />
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="down">
 				<key code="Down" />
 				<controller>
-					<pov directions="south southWest southEast" />
-					<axis code="0" threshold="0.5" />
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
 				</controller>
 			</action>
 			<action name="left">
 				<key code="Left" />
 				<controller>
-					<pov directions="west southWest northWest" />
-					<axis code="1" threshold="-0.5" />
+					<button code="13" />
+					<axis code="0" threshold="-0.5" />
 				</controller>
 			</action>
 			<action name="right">
 				<key code="Right" />
 				<controller>
-					<pov directions="east southEast northEast" />
-					<axis code="1" threshold="0.5" />
+					<button code="14" />
+					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
 

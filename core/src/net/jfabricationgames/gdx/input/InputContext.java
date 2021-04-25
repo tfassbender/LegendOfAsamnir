@@ -5,8 +5,6 @@ import java.util.PriorityQueue;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.controllers.PovDirection;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -30,8 +28,6 @@ public class InputContext {
 	protected ArrayMap<Integer, String> buttonActions;
 	protected ArrayMap<String, PlayerValue> controllerButtonStates;
 	protected ArrayMap<PlayerValue, String> controllerButtonActions;
-	protected ArrayMap<String, Array<PlayerValue>> controllerPovStates;
-	protected ArrayMap<PlayerValue, Array<String>> controllerPovActions;
 	protected ArrayMap<String, AxisThreshold> controllerAxisStates;
 	protected ArrayMap<PlayerValue, AxisThresholdPair> controllerAxisActions;
 	protected ArrayMap<String, PlayerAxis> namedAxes;
@@ -60,8 +56,6 @@ public class InputContext {
 		handledEvents = new ArrayMap<>();
 		controllerButtonStates = new ArrayMap<>();
 		controllerButtonActions = new ArrayMap<>();
-		controllerPovStates = new ArrayMap<>();
-		controllerPovActions = new ArrayMap<>();
 		controllerAxisStates = new ArrayMap<>();
 		controllerAxisActions = new ArrayMap<>();
 		namedAxes = new ArrayMap<>();
@@ -80,8 +74,6 @@ public class InputContext {
 		handledEvents.clear();
 		controllerButtonStates.clear();
 		controllerButtonActions.clear();
-		controllerPovStates.clear();
-		controllerPovActions.clear();
 		controllerAxisStates.clear();
 		controllerAxisActions.clear();
 		namedAxes.clear();
@@ -156,17 +148,11 @@ public class InputContext {
 	 */
 	public boolean isControllerStateActive(String state) {
 		PlayerValue playerButton = controllerButtonStates.get(state);
-		Array<PlayerValue> playerPovs = controllerPovStates.get(state);
 		AxisThreshold playerAxis = controllerAxisStates.get(state);
 		
 		boolean stateActive = false;
 		if (playerButton != null) {
 			stateActive |= isControllerButtonPressed(playerButton);
-		}
-		if (playerPovs != null && !playerPovs.isEmpty()) {
-			for (PlayerValue pov : playerPovs) {
-				stateActive |= isControllerPovPressed(pov);
-			}
 		}
 		if (playerAxis != null) {
 			stateActive |= isControllerAxisStateActive(playerAxis);
@@ -189,26 +175,6 @@ public class InputContext {
 		else {
 			if (Controllers.getControllers().size >= player) {
 				return Controllers.getControllers().get(player - 1).getButton(button);
-			}
-		}
-		
-		return false;
-	}
-	
-	private boolean isControllerPovPressed(PlayerValue playerPov) {
-		int player = playerPov.player;
-		String pov = playerPov.value;
-		
-		if (player == CONTROLLER_ANY_PLAYER) {
-			boolean povPressed = false;
-			for (Controller controller : Controllers.getControllers()) {
-				povPressed |= controller.getPov(0) == PovDirection.valueOf(pov);
-			}
-			return povPressed;
-		}
-		else {
-			if (Controllers.getControllers().size >= player) {
-				return Controllers.getControllers().get(player - 1).getPov(0) == PovDirection.valueOf(pov);
 			}
 		}
 		
@@ -313,9 +279,10 @@ public class InputContext {
 		return false;
 	}
 	
-	protected boolean scrolled(int amount) {
+	protected boolean scrolled(float amountX, float amountY) {
 		if (isEventHandled(InputEvent.SCROLLED)) {
-			return invokeListeners(Type.SCROLLED, new Parameters().setScrollAmount(amount));
+			//use amountY here according to the migration guide: https://libgdx.com/news/2021/04/the-ultimate-migration-guide#input
+			return invokeListeners(Type.SCROLLED, new Parameters().setScrollAmount((int) amountY));
 		}
 		return false;
 	}
@@ -358,7 +325,7 @@ public class InputContext {
 				invokeListeners(axisThreshold.stateName, Type.CONTROLLER_AXIS_THRESHOLD_PASSED,
 						new Parameters().setPlayer(player).setAxisValue(axisValue).setAxisThreshold(axisThreshold.threshold));
 			}
-			axisThreshold.thresholdPassed = thresholdPassed;			
+			axisThreshold.thresholdPassed = thresholdPassed;
 		}
 	}
 	
@@ -367,19 +334,6 @@ public class InputContext {
 			return Controllers.getControllers().get(player - 1).getAxis(axisCode);
 		}
 		return 0;
-	}
-	
-	protected boolean controllerPovMoved(Controller controller, int povCode, PovDirection value) {
-		if (isEventHandled(InputEvent.CONTROLLER_POV_CHANGED)) {
-			int player = getPlayerOfController(controller);
-			Array<String> actions = controllerPovActions.get(new PlayerValue(player, value.name()));
-			if (actions != null) {
-				for (String action : actions) {
-					invokeListeners(action, Type.CONTROLLER_POV_CHANGED, new Parameters().setPlayer(player).setPovDirection(value));
-				}
-			}
-		}
-		return false;
 	}
 	
 	private boolean isEventHandled(InputEvent inputEvent) {
