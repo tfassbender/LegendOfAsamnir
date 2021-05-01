@@ -30,6 +30,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 public abstract class AbstractCharacter implements GameMapObject, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
+	public static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";
 	
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	protected static final String STATE_NAME_MOVE = "move";
@@ -125,7 +126,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	protected String getMovingStateName() {
 		return STATE_NAME_MOVE;
 	}
-
+	
 	@Override
 	public void changeToIdleState() {
 		if (!stateMachine.getCurrentState().equals(idleState)) {

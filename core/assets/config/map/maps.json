@@ -13,7 +13,7 @@
 	{
 		name: test_map_3,
 		map: "map/map3.tmx",
-		//initial: true
+		initial: true
 	},
 	{
 		name: test_map_4,
@@ -28,7 +28,7 @@
 	{
 		name: test_map_6,
 		map: "map/map6.tmx",
-		initial: true
+		//initial: true
 	},
 	
 	// demo / tutorial

@@ -10,6 +10,7 @@ import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.implementation.ActionAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
+import net.jfabricationgames.gdx.character.ai.implementation.RandomMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.RunAwayAI;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
@@ -71,6 +72,23 @@ public enum ArtificialIntelligenceType {
 			Array<Vector2> positions = loadPositionsFromMapProperties(mapProperties);
 			
 			return new PreDefinedMovementAI(subAI, movingState, idleState, aiConfig.useRelativePositions, positions);
+		}
+	},
+	RANDOM_MOVEMENT_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
+			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			String maxDistanceString = mapProperties.get(AbstractCharacter.MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
+			float maxDistance = 0f;
+			if (maxDistanceString != null && !maxDistanceString.isEmpty()) {
+				maxDistance = Float.parseFloat(maxDistanceString);
+			}
+			
+			return new RandomMovementAI(subAI, movingState, idleState, maxDistance);
 		}
 	},
 	RUN_AWAY_AI {
@@ -142,7 +160,7 @@ public enum ArtificialIntelligenceType {
 		if (predefinedMovingPositions != null) {
 			try {
 				Json json = new Json();
-				return (Array<Vector2>) json.fromJson(Array.class, Vector2.class, predefinedMovingPositions);
+				return json.fromJson(Array.class, Vector2.class, predefinedMovingPositions);
 			}
 			catch (SerializationException e) {
 				throw new IllegalStateException("A predefined movement string could not be parsed: \"" + predefinedMovingPositions
