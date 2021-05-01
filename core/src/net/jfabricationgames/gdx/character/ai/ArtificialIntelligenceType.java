@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.implementation.ActionAI;
+import net.jfabricationgames.gdx.character.ai.implementation.BackToStartingPointMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.RandomMovementAI;
@@ -89,6 +90,18 @@ public enum ArtificialIntelligenceType {
 			}
 			
 			return new RandomMovementAI(subAI, movingState, idleState, maxDistance);
+		}
+	},
+	BACK_TO_STARTING_POSITION_MOVEMENT_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
+			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			
+			return new BackToStartingPointMovementAI(subAI, movingState, idleState);
 		}
 	},
 	RUN_AWAY_AI {
