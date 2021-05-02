@@ -74,52 +74,58 @@ Most enemies act slightly different, but have many things in common. But not all
 
 #### Configuration
 
-Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
+Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/enemy/ai/config/EnemyAiConfig.java), that includes a map of named AI types. Which of the AI types is chosen for an instance can be configured in the map properties of the enemy. If nothing is configured in the map properties, the default value, that is configured in the [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/enemy/ai/config/EnemyAiConfig.java) object is used. The type configurations can be parsed to an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
 
-Most enemy types can be configured in these files, because they use the common AI types. Some enemies are to specialized to be build by a configuration file. The AI of these enemies is created in the code. An example for a class that creates it's AI in the code is [Minotaur](core/src/net/jfabricationgames/gdx/character/enemy/implementation/Minotaur.java). **Note:** A subclass of Enemy, that defines it's AI in the class code needs to be added to the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) code, to load the correct class when instantiating the enemy.
+Most enemy types can be configured in these files, because they use the common AI types. Some enemies are to specialized to be build by a configuration file. The AI of these enemies is created in the code. An example for a class that creates it's AI in the code is [Minotaur](core/src/net/jfabricationgames/gdx/character/enemy/implementation/Minotaur.java).  
+**Note:** A subclass of Enemy, that defines it's AI in the class code needs to be added to the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) code, to load the correct class when instantiating the enemy.
 
 An example of an enemy type that is configured is the Gladiator, whichs AI configuration looks like this:
 
 ```javascript
 {
-	type: FIGHT_AI,
-	
-	stateNameAttack: attack,
-	
-	attackTimerConfig: {
-		type: FIXED,
-		fixedTime: 1f,
-	},
-	attackDistance: 1.25f,
-	
-	subAI: {
-		type: FOLLOW_AI,
-		
-		stateNameMove: move,
-		stateNameIdle: idle,
-		
-		subAI: {
-			type: PRE_DEFINED_MOVEMENT_AI,
+	defaultAI: gladiator,
+	aiConfigurations: {
+		gladiator: {
+			type: FIGHT_AI,
 			
-			stateNameMove: move,
-			stateNameIdle: idle,
+			stateNameAttack: attack,
 			
-			useRelativePositions: true,
+			attackTimerConfig: {
+				type: FIXED,
+				fixedTime: 1f,
+			},
+			attackDistance: 1.25f,
 			
 			subAI: {
-				type: BASE_AI,
+				type: FOLLOW_AI,
+				
+				stateNameMove: move,
+				stateNameIdle: idle,
+				
+				subAI: {
+					type: PRE_DEFINED_MOVEMENT_AI,
+					
+					stateNameMove: move,
+					stateNameIdle: idle,
+					
+					useRelativePositions: true,
+					
+					subAI: {
+						type: BASE_AI,
+					}
+				}
 			}
 		}
 	}
 }
 ```
-The AI is build of a [BaseAI](core/src/net/jfabricationgames/gdx/character/ai/BaseAI.java), that is surrounded by a [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/PreDefinedMovementAI.java), surrounded by a [FollowAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/FollowAI.java), surrounded by a [FightAI](core/src/net/jfabricationgames/gdx/character/enemy/ai/FightAI.java). 
+The enemy AI configuration contains only one AI, that is build of a [BaseAI](core/src/net/jfabricationgames/gdx/character/ai/BaseAI.java), that is surrounded by a [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/PreDefinedMovementAI.java), surrounded by a [FollowAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/FollowAI.java), surrounded by a [FightAI](core/src/net/jfabricationgames/gdx/character/enemy/ai/FightAI.java). 
 
 These AI's will cause the following behaviour for the Gladiator:
 - The [BaseAI](core/src/net/jfabricationgames/gdx/character/ai/BaseAI.java) is (obviously) the base for all AIs, because the chain has to end somewhere.
 - The [PreDefinedMovementAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/PreDefinedMovementAI.java) will make the gladiator move along a pre-defined way (defined in the map properties), as long as there is no higher AI, that says something else
 - The [FollowAI](core/src/net/jfabricationgames/gdx/character/ai/implementation/FollowAI.java) will make the gladiator follow the player if he is in range (and detected by the enemies box2d sensor). This AI is positioned higher as the PreDefinedMovementAI in the chain of responsibility. Therefore the gladiator will priorize following the player higher than moving along his pre-defined way.
-- The [FightAI](core/src/net/jfabricationgames/gdx/character/enemy/ai/FightAI.java) will make the gladiator attack the player if he is near enough.
+- The [FightAI](core/src/net/jfabricationgames/gdx/character/enemy/ai/FightAI.java) will make the gladiator attack the player if he is near.
 
 The following image shows the call hierarchy of the AI classes:
 
