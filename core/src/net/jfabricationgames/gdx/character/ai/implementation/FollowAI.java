@@ -13,10 +13,10 @@ import net.jfabricationgames.gdx.character.state.CharacterState;
  */
 public class FollowAI extends AbstractMovementAI {
 	
-	private PlayableCharacter playerToFollow;
+	protected PlayableCharacter targetToFollow;
 	
-	/** The distance till which the enemy follows the player (to not push him if to near) */
-	private float minDistanceToPlayer = 1f;
+	/** The distance till which the controlled actor follows the target (to not push him if to near) */
+	protected float minDistanceToTarget = 1f;
 	
 	public FollowAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState) {
 		super(subAI, movingState, idleState);
@@ -26,17 +26,17 @@ public class FollowAI extends AbstractMovementAI {
 	public void calculateMove(float delta) {
 		subAI.calculateMove(delta);
 		
-		if (playerToFollow != null) {
+		if (targetToFollow != null) {
 			AIPositionChangingMove move = new AIPositionChangingMove(this);
-			if (distanceToPlayer() > minDistanceToPlayer) {
-				move.movementTarget = playerToFollow.getPosition();
+			if (distanceToTarget() > minDistanceToTarget) {
+				move.movementTarget = targetToFollow.getPosition();
 			}
 			setMove(MoveType.MOVE, move);
 		}
 	}
 	
-	private float distanceToPlayer() {
-		return character.getPosition().sub(playerToFollow.getPosition()).len();
+	private float distanceToTarget() {
+		return character.getPosition().sub(targetToFollow.getPosition()).len();
 	}
 	
 	@Override
@@ -61,10 +61,10 @@ public class FollowAI extends AbstractMovementAI {
 	
 	@Override
 	public void beginContact(Contact contact) {
-		PlayableCharacter collidingPlayer = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
+		PlayableCharacter collidingCharacter = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
 		// if the sensor touches a PlayableCharacter -> start following him
-		if (collidingPlayer != null) {
-			followPlayer(collidingPlayer);
+		if (collidingCharacter != null) {
+			followTarget(collidingCharacter);
 		}
 		
 		subAI.beginContact(contact);
@@ -72,23 +72,22 @@ public class FollowAI extends AbstractMovementAI {
 	
 	@Override
 	public void endContact(Contact contact) {
-		PlayableCharacter collidingPlayer = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
-		if (collidingPlayer != null) {
+		PlayableCharacter collidingCharacter = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
+		if (collidingCharacter != null) {
 			stopFollowingPlayer();
 		}
 		
 		subAI.endContact(contact);
 	}
 	
-	private void followPlayer(PlayableCharacter player) {
-		playerToFollow = player;
+	protected void followTarget(PlayableCharacter player) {
+		targetToFollow = player;
 	}
-	private void stopFollowingPlayer() {
-		playerToFollow = null;
+	protected void stopFollowingPlayer() {
+		targetToFollow = null;
 	}
 	
-	public FollowAI setMinDistanceToPlayer(float distance) {
-		this.minDistanceToPlayer = distance;
-		return this;
+	public void setMinDistanceToTarget(float distance) {
+		this.minDistanceToTarget = distance;
 	}
 }

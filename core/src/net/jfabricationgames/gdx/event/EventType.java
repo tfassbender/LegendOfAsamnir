@@ -25,4 +25,5 @@ public enum EventType {
 	CUTSCENE_CONDITION, //
 	UPDATE_MAP_OBJECT_STATES, //
 	QUICKSAVE, //
+	AI_TEAM_CALL, //
 }

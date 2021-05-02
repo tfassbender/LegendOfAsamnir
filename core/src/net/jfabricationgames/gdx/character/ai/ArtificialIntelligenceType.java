@@ -19,6 +19,7 @@ import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerFactory;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
+import net.jfabricationgames.gdx.character.enemy.ai.TeamMovementAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.map.TiledMapLoader;
@@ -58,7 +59,7 @@ public enum ArtificialIntelligenceType {
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			
 			FollowAI ai = new FollowAI(subAI, movingState, idleState);
-			ai.setMinDistanceToPlayer(aiConfig.minDistanceToTargetPlayer);
+			ai.setMinDistanceToTarget(aiConfig.minDistanceToTargetPlayer);
 			return ai;
 		}
 	},
@@ -161,6 +162,19 @@ public enum ArtificialIntelligenceType {
 			CharacterState surpriseState = stateMachine.getState(aiConfig.stateNameSurprise);
 			
 			return new MimicSurpriseAI(subAI, waitingState, surpriseState, aiConfig.attackDistance);
+		}
+	},
+	TEAM_MOVEMENT_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
+			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			String teamId = mapProperties.get("teamId", String.class);
+			
+			return new TeamMovementAI(subAI, movingState, idleState, aiConfig.distanceToInformTeamMates, teamId);
 		}
 	};
 	

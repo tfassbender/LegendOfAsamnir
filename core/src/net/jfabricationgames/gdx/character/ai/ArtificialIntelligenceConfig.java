@@ -29,6 +29,7 @@ public class ArtificialIntelligenceConfig {
 	public float minDistanceToTargetPlayer = 1f;
 	public float distanceToKeepFromPlayer = 5f;
 	public float distanceToStopRunning = 2f;
+	public float distanceToInformTeamMates = 7f;
 	public AttackTimerConfig attackTimerConfig;
 	
 	public ArtificialIntelligence buildAI(CharacterStateMachine stateMachine, MapProperties mapProperties) {

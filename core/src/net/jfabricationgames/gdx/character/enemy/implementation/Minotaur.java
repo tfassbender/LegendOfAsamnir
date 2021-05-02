@@ -47,7 +47,7 @@ public class Minotaur extends Enemy implements EventListener {
 		CharacterState idleState = stateMachine.getState("idle");
 		
 		FollowAI followAI = new FollowAI(ai, movingState, idleState);
-		followAI.setMinDistanceToPlayer(1.7f);
+		followAI.setMinDistanceToTarget(1.7f);
 		
 		return followAI;
 	}

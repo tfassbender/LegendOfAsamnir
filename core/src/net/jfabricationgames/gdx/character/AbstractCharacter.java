@@ -205,4 +205,9 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	public void resetGroundProperties() {
 		groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
 	}
+	
+	@Override
+	public void removeFromMap() {
+		ai.characterRemovedFromMap();
+	}
 }

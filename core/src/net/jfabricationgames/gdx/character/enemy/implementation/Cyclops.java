@@ -64,7 +64,7 @@ public class Cyclops extends Enemy implements EventListener {
 		CharacterState idleState = stateMachine.getState(STATE_NAME_IDLE);
 		
 		FollowAI followAI = new FollowAI(ai, movingState, idleState);
-		followAI.setMinDistanceToPlayer(FOLLOW_AI_MIN_DISTANCE_TO_PLAYER);
+		followAI.setMinDistanceToTarget(FOLLOW_AI_MIN_DISTANCE_TO_PLAYER);
 		
 		return followAI;
 	}

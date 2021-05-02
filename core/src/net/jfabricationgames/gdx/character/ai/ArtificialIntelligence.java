@@ -28,4 +28,6 @@ public interface ArtificialIntelligence extends ContactListener {
 	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz);
 	
 	public void setCharacter(AbstractCharacter character);
+	
+	public default void characterRemovedFromMap() {};
 }
