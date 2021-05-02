@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
+import net.jfabricationgames.gdx.character.enemy.ai.config.EnemyAiConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
@@ -99,13 +100,21 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	}
 	
 	private void createAiFromConfiguration() {
-		ArtificialIntelligenceConfig aiConfig = loadAiConfig();
+		EnemyAiConfig enemyAiConfig = loadAiConfig();
+		String configuredAiName = properties.get(MAP_PROPERTIES_KEY_AI_TYPE, enemyAiConfig.defaultAI, String.class);
+		ArtificialIntelligenceConfig aiConfig = enemyAiConfig.aiConfigurations.get(configuredAiName);
+		
+		if (aiConfig == null) {
+			throw new IllegalStateException(
+					"The configured AI type '" + configuredAiName + "' is not available in the config file '" + typeConfig.aiConfig + "'.");
+		}
+		
 		ai = aiConfig.type.buildAI(aiConfig, stateMachine, properties);
 	}
 	
-	private ArtificialIntelligenceConfig loadAiConfig() {
+	private EnemyAiConfig loadAiConfig() {
 		Json json = new Json();
-		return json.fromJson(ArtificialIntelligenceConfig.class, Gdx.files.internal(typeConfig.aiConfig));
+		return json.fromJson(EnemyAiConfig.class, Gdx.files.internal(typeConfig.aiConfig));
 	}
 	
 	@Override

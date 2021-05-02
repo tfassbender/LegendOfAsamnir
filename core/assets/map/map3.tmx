@@ -142,12 +142,14 @@
   </object>
   <object id="90" name="enemy.mini_golem" x="512" y="352">
    <properties>
+    <property name="aiType" value="mini_golem_team"/>
     <property name="teamId" value="mini_golems_upper_map_part"/>
    </properties>
    <point/>
   </object>
   <object id="91" name="enemy.mini_golem" x="448" y="320">
    <properties>
+    <property name="aiType" value="mini_golem_team"/>
     <property name="teamId" value="mini_golems_upper_map_part"/>
    </properties>
    <point/>

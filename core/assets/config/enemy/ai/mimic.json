@@ -1,30 +1,35 @@
 {
-	type: MIMIC_SUPRISE_AI,
-	
-	stateNameWait: waiting,
-	stateNameSurprise: surprise,
-	
-	attackDistance: 1f,
-	
-	subAI: {
-		type: FIGHT_AI,
-		
-		stateNameAttack: attack,
-		
-		attackTimerConfig: {
-			type: FIXED,
-			fixedTime: 0.5f,
-		},
-		attackDistance: 1.25f,
-		
-		subAI: {
-			type: FOLLOW_AI,
+	defaultAI: mimic,
+	aiConfigurations: {
+		mimic: {
+			type: MIMIC_SUPRISE_AI,
 			
-			stateNameMove: move,
-			stateNameIdle: idle,
+			stateNameWait: waiting,
+			stateNameSurprise: surprise,
+			
+			attackDistance: 1f,
 			
 			subAI: {
-				type: BASE_AI,
+				type: FIGHT_AI,
+				
+				stateNameAttack: attack,
+				
+				attackTimerConfig: {
+					type: FIXED,
+					fixedTime: 0.5f,
+				},
+				attackDistance: 1.25f,
+				
+				subAI: {
+					type: FOLLOW_AI,
+					
+					stateNameMove: move,
+					stateNameIdle: idle,
+					
+					subAI: {
+						type: BASE_AI,
+					}
+				}
 			}
 		}
 	}

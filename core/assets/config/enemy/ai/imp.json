@@ -1,42 +1,47 @@
 {
-	type: FIGHT_AI,
-	
-	stateNameAttack: attack,
-	
-	attackTimerConfig: {
-		type: FIXED,
-		fixedTime: 1.5f,
-	},
-	attackDistance: 5f,
-	minDistanceToTargetPlayer: 5f,
-	
-	subAI: {
-		type: RUN_AWAY_AI,
-		
-		stateNameMove: move,
-		stateNameIdle: idle,
-		
-		distanceToKeepFromPlayer: 4.5f,
-		distanceToStopRunning: 0f,
-		
-		subAI: {
-			type: FOLLOW_AI,
+	defaultAI: imp,
+	aiConfigurations: {
+		imp: {
+			type: FIGHT_AI,
 			
-			stateNameMove: move,
-			stateNameIdle: idle,
+			stateNameAttack: attack,
 			
+			attackTimerConfig: {
+				type: FIXED,
+				fixedTime: 1.5f,
+			},
+			attackDistance: 5f,
 			minDistanceToTargetPlayer: 5f,
 			
 			subAI: {
-				type: PRE_DEFINED_MOVEMENT_AI,
+				type: RUN_AWAY_AI,
 				
 				stateNameMove: move,
 				stateNameIdle: idle,
 				
-				useRelativePositions: true,
+				distanceToKeepFromPlayer: 4.5f,
+				distanceToStopRunning: 0f,
 				
 				subAI: {
-					type: BASE_AI,
+					type: FOLLOW_AI,
+					
+					stateNameMove: move,
+					stateNameIdle: idle,
+					
+					minDistanceToTargetPlayer: 5f,
+					
+					subAI: {
+						type: PRE_DEFINED_MOVEMENT_AI,
+						
+						stateNameMove: move,
+						stateNameIdle: idle,
+						
+						useRelativePositions: true,
+						
+						subAI: {
+							type: BASE_AI,
+						}
+					}
 				}
 			}
 		}

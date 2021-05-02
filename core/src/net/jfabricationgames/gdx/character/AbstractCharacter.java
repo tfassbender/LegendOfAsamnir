@@ -31,6 +31,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	public static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";
+	public static final String MAP_PROPERTIES_KEY_AI_TYPE = "aiType";
 	
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
 	protected static final String STATE_NAME_MOVE = "move";

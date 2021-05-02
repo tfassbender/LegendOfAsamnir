@@ -1,32 +1,37 @@
 {
-	type: FAST_ATTACK_FIGHT_AI,
-	
-	stateNameAttack: attack,
-	
-	attackTimerConfig: {
-		type: FIXED,
-		fixedTime: 1f,
-	},
-	attackDistance: 2.5f,
-	attackSpeedFactor: 5f,
-	attackSpeedDelay: 0.1f,
-	
-	subAI: {
-		type: FOLLOW_AI,
-		
-		stateNameMove: move,
-		stateNameIdle: idle,
-		
-		subAI: {
-			type: PRE_DEFINED_MOVEMENT_AI,
+	defaultAI: cobra,
+	aiConfigurations: {
+		cobra: {
+			type: FAST_ATTACK_FIGHT_AI,
 			
-			stateNameMove: move,
-			stateNameIdle: idle,
+			stateNameAttack: attack,
 			
-			useRelativePositions: true,
+			attackTimerConfig: {
+				type: FIXED,
+				fixedTime: 1f,
+			},
+			attackDistance: 2.5f,
+			attackSpeedFactor: 5f,
+			attackSpeedDelay: 0.1f,
 			
 			subAI: {
-				type: BASE_AI,
+				type: FOLLOW_AI,
+				
+				stateNameMove: move,
+				stateNameIdle: idle,
+				
+				subAI: {
+					type: PRE_DEFINED_MOVEMENT_AI,
+					
+					stateNameMove: move,
+					stateNameIdle: idle,
+					
+					useRelativePositions: true,
+					
+					subAI: {
+						type: BASE_AI,
+					}
+				}
 			}
 		}
 	}
