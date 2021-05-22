@@ -64,5 +64,37 @@
 				}
 			}
 		}
+		
+		mini_golem_ray_cast: {
+			type: FIGHT_AI,
+			
+			stateNameAttack: attack,
+			
+			attackTimerConfig: {
+				type: FIXED,
+				fixedTime: 1f,
+			},
+			attackDistance: 1.25f,
+			
+			subAI: {
+				type: RAY_CAST_FOLLOW_AI,
+				
+				stateNameMove: move,
+				stateNameIdle: idle,
+				
+				subAI: {
+					type: PRE_DEFINED_MOVEMENT_AI,
+					
+					stateNameMove: move,
+					stateNameIdle: idle,
+					
+					useRelativePositions: true,
+					
+					subAI: {
+						type: BASE_AI,
+					}
+				}
+			}
+		},
 	}
 }

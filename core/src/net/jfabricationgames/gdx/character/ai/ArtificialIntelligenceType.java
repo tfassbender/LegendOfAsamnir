@@ -12,6 +12,7 @@ import net.jfabricationgames.gdx.character.ai.implementation.BackToStartingPoint
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.RandomMovementAI;
+import net.jfabricationgames.gdx.character.ai.implementation.RayCastFollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.RunAwayAI;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
@@ -59,6 +60,20 @@ public enum ArtificialIntelligenceType {
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			
 			FollowAI ai = new FollowAI(subAI, movingState, idleState);
+			ai.setMinDistanceToTarget(aiConfig.minDistanceToTargetPlayer);
+			return ai;
+		}
+	},
+	RAY_CAST_FOLLOW_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
+			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			
+			RayCastFollowAI ai = new RayCastFollowAI(subAI, movingState, idleState);
 			ai.setMinDistanceToTarget(aiConfig.minDistanceToTargetPlayer);
 			return ai;
 		}

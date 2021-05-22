@@ -35,7 +35,7 @@ public class FollowAI extends AbstractMovementAI {
 		}
 	}
 	
-	private float distanceToTarget() {
+	protected float distanceToTarget() {
 		return character.getPosition().sub(targetToFollow.getPosition()).len();
 	}
 	

@@ -1,6 +1,6 @@
 package net.jfabricationgames.gdx.physics;
 
-public abstract class PhysicsBodyCategories {
+public class PhysicsBodyCategories {
 	
 	// **********************************************************************
 	// *** categories
@@ -38,4 +38,6 @@ public abstract class PhysicsBodyCategories {
 	public static final short MASK_MAP_GROUND = CATEGORY_PLAYER | CATEGORY_ENEMY;
 	public static final short MASK_EXPLOSION = CATEGORY_PLAYER | CATEGORY_ENEMY | CATEGORY_OBSTACLE;
 	public static final short MASK_CONFIG_OBJECT = MASK_NONE;
+	
+	private PhysicsBodyCategories() {}
 }

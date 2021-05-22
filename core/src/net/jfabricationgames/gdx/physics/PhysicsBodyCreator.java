@@ -11,7 +11,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 
-public abstract class PhysicsBodyCreator {
+public class PhysicsBodyCreator {
+	
+	private PhysicsBodyCreator() {}
 	
 	public static Body createBody(BodyDef bodyDef) {
 		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
@@ -158,6 +160,7 @@ public abstract class PhysicsBodyCreator {
 		
 		public PhysicsCollisionType collisionType;
 		
+		@Override
 		public PhysicsBodyProperties clone() {
 			try {
 				return (PhysicsBodyProperties) super.clone();

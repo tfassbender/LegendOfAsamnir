@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -153,6 +154,10 @@ public class PhysicsWorld implements ContactListener {
 			runnable.run();
 		}
 		runAfterWorldStep.clear();
+	}
+	
+	public void rayCast(RayCastCallback rayCastCallback, Vector2 startPoint, Vector2 endPoint) {
+		world.rayCast(rayCastCallback, startPoint, endPoint);
 	}
 	
 	@Override

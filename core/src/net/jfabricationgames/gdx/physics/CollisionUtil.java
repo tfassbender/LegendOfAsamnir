@@ -5,7 +5,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 
-public abstract class CollisionUtil {
+public class CollisionUtil {
+	
+	private CollisionUtil() {}
 	
 	public static boolean isPlayableCharacterContact(Object collidingObject, PhysicsCollisionType collisionType, Contact contact) {
 		return CollisionUtil.getObjectCollidingWith(collidingObject, collisionType, contact, PlayableCharacter.class) != null;
