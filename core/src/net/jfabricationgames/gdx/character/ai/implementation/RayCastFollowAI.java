@@ -8,6 +8,7 @@ import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.move.AIPositionChangingMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
 import net.jfabricationgames.gdx.character.state.CharacterState;
+import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class RayCastFollowAI extends FollowAI {
@@ -36,6 +37,7 @@ public class RayCastFollowAI extends FollowAI {
 	}
 	
 	private boolean canSeeTarget() {
+		canSeeTarget = true;
 		PhysicsWorld.getInstance().rayCast(rayCastCallback, character.getPosition(), targetToFollow.getPosition());
 		
 		//the canSeeTarget field will be set in the reportRayFixture method of the rayCastCallback
@@ -44,13 +46,21 @@ public class RayCastFollowAI extends FollowAI {
 	
 	private class RayCastFollowAiCallback implements RayCastCallback {
 		
-		private static final float RAYCAST_STOP_QUERYING = 0;
+		private static final float RAYCAST_CONTINUE_QUERYING = -1;
 		
 		@Override
 		public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-			canSeeTarget = fixture.getBody().getUserData() == targetToFollow;
+			canSeeTarget &= fixture.isSensor() || isTargetFraction(fixture) || isItemFixture(fixture);
 			
-			return RAYCAST_STOP_QUERYING;
+			return RAYCAST_CONTINUE_QUERYING;
+		}
+		
+		private boolean isTargetFraction(Fixture fixture) {
+			return fixture.getBody().getUserData() == targetToFollow;
+		}
+		
+		private boolean isItemFixture(Fixture fixture) {
+			return fixture.getBody().getUserData() instanceof Item;
 		}
 	}
 }
