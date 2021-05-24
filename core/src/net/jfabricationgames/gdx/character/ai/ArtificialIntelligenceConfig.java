@@ -19,6 +19,7 @@ public class ArtificialIntelligenceConfig {
 	
 	public float minDistToEnemy;
 	public float maxDistToEnemy;
+	public float maxMoveDistance;
 	public float timeBetweenActions;
 	
 	public boolean useRelativePositions = true;

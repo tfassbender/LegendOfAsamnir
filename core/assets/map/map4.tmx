@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="125" height="132" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="125" height="132" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="147">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_4.json"/>
@@ -26,6 +26,33 @@
    <point/>
   </object>
   <object id="137" name="enemy.mini_golem" x="256" y="464">
+   <point/>
+  </object>
+  <object id="138" name="animal.squirrel" x="567.667" y="857">
+   <point/>
+  </object>
+  <object id="139" name="animal.armadillo" x="568" y="745.333">
+   <point/>
+  </object>
+  <object id="140" name="animal.dragonfly" x="503.667" y="440.667">
+   <point/>
+  </object>
+  <object id="141" name="animal.crab" x="784" y="447">
+   <point/>
+  </object>
+  <object id="142" name="animal.hedgehog" x="770.333" y="797.667">
+   <point/>
+  </object>
+  <object id="143" name="animal.cat" x="312" y="809.333">
+   <point/>
+  </object>
+  <object id="144" name="animal.fox" x="168" y="451.333">
+   <point/>
+  </object>
+  <object id="145" name="animal.pig" x="429.333" y="469.333">
+   <point/>
+  </object>
+  <object id="146" name="animal.twig_blight" x="344.667" y="258">
    <point/>
   </object>
  </objectgroup>

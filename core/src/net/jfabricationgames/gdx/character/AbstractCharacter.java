@@ -62,6 +62,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		
 		PhysicsWorld.getInstance().registerContactListener(this);
 		cutsceneHandler = CutsceneHandler.getInstance();
+		intendedMovement = new Vector2();
 	}
 	
 	protected void setImageOffset(float x, float y) {

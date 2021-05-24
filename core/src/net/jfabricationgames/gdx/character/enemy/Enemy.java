@@ -54,7 +54,6 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		super(properties);
 		this.typeConfig = typeConfig;
 		
-		intendedMovement = new Vector2();
 		healthBarRenderer = new EnemyHealthBarRenderer();
 		
 		readTypeConfig();

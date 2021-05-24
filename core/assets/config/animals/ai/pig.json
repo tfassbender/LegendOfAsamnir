@@ -4,6 +4,8 @@
 		pig: {
 			type: RUN_AWAY_AI,
 			
+			distanceToStopRunning: 0f,
+			
 			stateNameMove: move,
 			stateNameIdle: idle,
 			
@@ -13,7 +15,7 @@
 				stateNameMove: move,
 				stateNameIdle: move,
 				
-				maxMoveDistance: 5f,
+				maxMoveDistance: 3f,
 				
 				useRelativePositions: true,
 				

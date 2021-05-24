@@ -99,8 +99,9 @@ public enum ArtificialIntelligenceType {
 			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			float maxDistance = aiConfig.maxMoveDistance;
+			
 			String maxDistanceString = mapProperties.get(AbstractCharacter.MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
-			float maxDistance = 0f;
 			if (maxDistanceString != null && !maxDistanceString.isEmpty()) {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
