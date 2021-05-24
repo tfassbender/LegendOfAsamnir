@@ -7,7 +7,7 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 public class EnemyTypeConfig {
 	
 	public String animationsConfig;//the animation config file that is to be loaded (by the factory)
-	public String stateConfig;//the state config file that is to be loaded (by the EnemyStateMachine)
+	public String stateConfig;//the state config file that is to be loaded (by the StateMachine)
 	public String initialState;
 	public String attackConfig;
 	public String aiConfig;

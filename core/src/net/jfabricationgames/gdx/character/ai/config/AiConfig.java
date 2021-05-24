@@ -1,10 +1,10 @@
-package net.jfabricationgames.gdx.character.enemy.ai.config;
+package net.jfabricationgames.gdx.character.ai.config;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
 
-public class EnemyAiConfig {
+public class AiConfig {
 	
 	public ObjectMap<String, ArtificialIntelligenceConfig> aiConfigurations;
 	public String defaultAI;

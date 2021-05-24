@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.character;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
@@ -9,10 +10,13 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
+import net.jfabricationgames.gdx.character.ai.config.AiConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
@@ -80,6 +84,24 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	protected abstract void addAdditionalPhysicsParts();
 	
+	protected void createAiFromConfiguration(String aiConfigFile) {
+		AiConfig aiConfig = loadAiConfig(aiConfigFile);
+		String configuredAiName = properties.get(MAP_PROPERTIES_KEY_AI_TYPE, aiConfig.defaultAI, String.class);
+		ArtificialIntelligenceConfig chosenAiConfig = aiConfig.aiConfigurations.get(configuredAiName);
+		
+		if (chosenAiConfig == null) {
+			throw new IllegalStateException(
+					"The configured AI type '" + configuredAiName + "' is not available in the config file '" + aiConfigFile + "'.");
+		}
+		
+		ai = chosenAiConfig.type.buildAI(chosenAiConfig, stateMachine, properties);
+	}
+	
+	private AiConfig loadAiConfig(String aiConfigFile) {
+		Json json = new Json();
+		return json.fromJson(AiConfig.class, Gdx.files.internal(aiConfigFile));
+	}
+	
 	public abstract void act(float delta);
 	
 	public void draw(float delta, SpriteBatch batch) {
@@ -94,7 +116,9 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		}
 	}
 	
-	protected abstract void updateTextureDirection(AnimationDirector<TextureRegion> animation);
+	protected void updateTextureDirection(AnimationDirector<TextureRegion> animation) {
+		stateMachine.flipAnimationTexturesToMovementDirection(animation, intendedMovement);
+	}
 	
 	protected AnimationDirector<TextureRegion> getAnimation() {
 		return stateMachine.getCurrentState().getAnimation();
@@ -208,7 +232,5 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	}
 	
 	@Override
-	public void removeFromMap() {
-		ai.characterRemovedFromMap();
-	}
+	public abstract void removeFromMap();
 }

@@ -1,0 +1,47 @@
+[
+	{
+		id: idle,
+		animation: squirrel_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle_2, move, dig, eat
+		]
+	},
+	{
+		id: idle_2,
+		animation: squirrel_idle_2,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, dig, eat
+		]
+	},
+	{
+		id: dig,
+		animation: squirrel_dig,
+		endsWithAnimation: true,
+		followingState: dig,
+		interruptingStates: [
+			move, eat 
+		]
+	},
+	{
+		id: eat,
+		animation: squirrel_eat,
+		endsWithAnimation: true,
+		followingState: eat,
+		interruptingStates: [
+			move, dig
+		]
+	},
+	{
+		id: move,
+		animation: squirrel_move,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: [
+			dig, eat
+		]
+	},
+]

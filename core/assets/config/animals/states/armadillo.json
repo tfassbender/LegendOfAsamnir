@@ -1,0 +1,28 @@
+[
+	{
+		id: curl,
+		animation: armadillo_curl,
+		endsWithAnimation: true,
+		flipAnimationOnEnteringOnly: true,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: idle,
+		animation: armadillo_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move
+		]
+	},
+	{
+		id: move,
+		animation: armadillo_move,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: [
+			curl
+		]
+	},
+]

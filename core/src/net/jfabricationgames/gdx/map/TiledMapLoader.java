@@ -12,6 +12,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.character.animal.Animal;
+import net.jfabricationgames.gdx.character.animal.AnimalFactory;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
@@ -30,6 +32,7 @@ public class TiledMapLoader {
 	public static final String OBJECT_NAME_OBJECT = "object";
 	public static final String OBJECT_NAME_ENEMY = "enemy";
 	public static final String OBJECT_NAME_NPC = "npc";
+	public static final String OBJECT_NAME_ANIMAL = "animal";
 	
 	public static String mapPropertiesToString(MapProperties properties, boolean includePosition) {
 		return SerializationUtil.serializeMapProperties(properties, includePosition);
@@ -59,6 +62,7 @@ public class TiledMapLoader {
 	private GameObjectFactory objectFactory;
 	private EnemyFactory enemyFactory;
 	private NonPlayableCharacterFactory npcFactory;
+	private AnimalFactory animalFactory;
 	
 	public TiledMapLoader(String mapAsset) {
 		this.mapAsset = mapAsset;
@@ -68,6 +72,7 @@ public class TiledMapLoader {
 		this.objectFactory = gameMap.objectFactory;
 		this.enemyFactory = gameMap.enemyFactory;
 		this.npcFactory = gameMap.npcFactory;
+		this.animalFactory = gameMap.animalFactory;
 	}
 	
 	public void loadMap() {
@@ -81,6 +86,7 @@ public class TiledMapLoader {
 		Array<GameObject> objects = new Array<>();
 		Array<Enemy> enemies = new Array<>();
 		Array<NonPlayableCharacter> npcs = new Array<>();
+		Array<Animal> animals = new Array<>();
 		
 		MapObjects mapObjects = gameMap.map.getLayers().get("objects").getObjects();
 		
@@ -130,6 +136,9 @@ public class TiledMapLoader {
 				case OBJECT_NAME_NPC:
 					npcs.add(npcFactory.createNpc(parts[1], rectangle.x, rectangle.y, properties));
 					break;
+				case OBJECT_NAME_ANIMAL:
+					animals.add(animalFactory.createAnimal(parts[1], rectangle.x, rectangle.y, properties));
+					break;
 				default:
 					throw new IllegalStateException("Unknown map object found: " + name + ". Properties: " + mapPropertiesToString(properties, true));
 			}
@@ -139,6 +148,7 @@ public class TiledMapLoader {
 		gameMap.objects = objects;
 		gameMap.enemies = enemies;
 		gameMap.nonPlayableCharacters = npcs;
+		gameMap.animals = animals;
 	}
 	
 	private boolean isDebugObject(MapProperties properties) {

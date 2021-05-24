@@ -1,0 +1,155 @@
+{
+	armadillo: {
+		animationsConfig: config/animation/animal/armadillo.json,
+		stateConfig: config/animal/states/armadillo.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/armadillo.json,
+		
+		movingSpeed: 0.5f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 2f,
+	},
+	cat: {
+		animationsConfig: config/animation/animal/cat.json,
+		stateConfig: config/animal/states/cat.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/cat.json,
+		
+		movingSpeed: 4f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 5f,
+	},
+	crab: {
+		animationsConfig: config/animation/animal/crab.json,
+		stateConfig: config/animal/states/crab.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/crab.json,
+		
+		movingSpeed: 1f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 3f,
+	},
+	dragonfly: {
+		animationsConfig: config/animation/animal/dragonfly.json,
+		stateConfig: config/animal/states/dragonfly.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/dragonfly.json,
+		
+		movingSpeed: 2f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 5f,
+	},
+	fox: {
+		animationsConfig: config/animation/animal/fox.json,
+		stateConfig: config/animal/states/fox.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/fox.json,
+		
+		movingSpeed: 4f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 5f,
+	},
+	hedgehog: {
+		animationsConfig: config/animation/animal/hedgehog.json,
+		stateConfig: config/animal/states/hedgehog.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/hedgehog.json,
+		
+		movingSpeed: 0.5f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 3f,
+	},
+	pig: {
+		animationsConfig: config/animation/animal/pig.json,
+		stateConfig: config/animal/states/pig.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/pig.json,
+		
+		movingSpeed: 2f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 5f,
+	},
+	squirrel: {
+		animationsConfig: config/animation/animal/squirrel.json,
+		stateConfig: config/animal/states/squirrel.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/squirrel.json,
+		
+		movingSpeed: 4f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 5f,
+	},
+	twig_blight: {
+		animationsConfig: config/animation/animal/twig_blight.json,
+		stateConfig: config/animal/states/twig_blight.json,
+		initialState: idle,
+		aiConfig: config/animal/ai/twig_blight.json,
+		
+		movingSpeed: 3f,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.4f,
+		
+		addSensor: true,
+		sensorRadius: 4f,
+	},
+}

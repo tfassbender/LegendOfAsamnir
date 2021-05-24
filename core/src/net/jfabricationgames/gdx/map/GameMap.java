@@ -18,6 +18,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
+import net.jfabricationgames.gdx.character.animal.Animal;
+import net.jfabricationgames.gdx.character.animal.AnimalFactory;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
@@ -114,12 +116,14 @@ public class GameMap implements EventListener, Disposable {
 	protected Array<GameObject> objects;
 	protected Array<Enemy> enemies;
 	protected Array<NonPlayableCharacter> nonPlayableCharacters;
+	protected Array<Animal> animals;
 	protected Array<Projectile> projectiles;
 	
 	protected ItemFactory itemFactory;
 	protected GameObjectFactory objectFactory;
 	protected EnemyFactory enemyFactory;
 	protected NonPlayableCharacterFactory npcFactory;
+	protected AnimalFactory animalFactory;
 	
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer renderer;
@@ -145,6 +149,7 @@ public class GameMap implements EventListener, Disposable {
 		objectFactory = new GameObjectFactory();
 		enemyFactory = new EnemyFactory();
 		npcFactory = new NonPlayableCharacterFactory();
+		animalFactory = new AnimalFactory();
 		
 		cutsceneHandler = CutsceneHandler.getInstance();
 		
@@ -237,6 +242,9 @@ public class GameMap implements EventListener, Disposable {
 		for (NonPlayableCharacter npc : nonPlayableCharacters) {
 			npc.removeFromMap();
 		}
+		for (Animal animal : animals) {
+			animal.removeFromMap();
+		}
 		for (Projectile projectile : projectiles) {
 			projectile.removeFromMap();
 		}
@@ -254,6 +262,7 @@ public class GameMap implements EventListener, Disposable {
 		objects.clear();
 		enemies.clear();
 		nonPlayableCharacters.clear();
+		animals.clear();
 		projectiles.clear();
 	}
 	
@@ -285,7 +294,7 @@ public class GameMap implements EventListener, Disposable {
 	
 	private boolean isMapInitialized() {
 		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null
-				&& projectiles != null;
+				&& animals != null && projectiles != null;
 	}
 	
 	public void executeBeforeWorldStep() {
@@ -304,6 +313,7 @@ public class GameMap implements EventListener, Disposable {
 		executeAnnotatedMethods(annotation, objects);
 		executeAnnotatedMethods(annotation, enemies);
 		executeAnnotatedMethods(annotation, nonPlayableCharacters);
+		executeAnnotatedMethods(annotation, animals);
 		executeAnnotatedMethods(annotation, projectiles);
 	}
 	
@@ -337,6 +347,8 @@ public class GameMap implements EventListener, Disposable {
 		renderEnemies(delta);
 		processNpcs(delta);
 		renderNpcs(delta);
+		processAnimals(delta);
+		renderAnimals(delta);
 		processProjectiles(delta);
 		renderProjectiles();
 		
@@ -390,6 +402,17 @@ public class GameMap implements EventListener, Disposable {
 	private void renderNpcs(float delta) {
 		for (NonPlayableCharacter npc : nonPlayableCharacters) {
 			npc.draw(delta, batch);
+		}
+	}
+	
+	private void processAnimals(float delta) {
+		for (Animal animal : animals) {
+			animal.act(delta);
+		}
+	}
+	private void renderAnimals(float delta) {
+		for (Animal animal : animals) {
+			animal.draw(delta, batch);
 		}
 	}
 	
@@ -474,6 +497,15 @@ public class GameMap implements EventListener, Disposable {
 		removePhysicsBody(body);
 	}
 	
+	public void addAnimal(Animal animal) {
+		animals.add(animal);
+	}
+	
+	public void removeAnimal(Animal animal, Body body) {
+		animals.removeValue(animal, false);
+		removePhysicsBody(body);
+	}
+	
 	public void addProjectile(Projectile projectile) {
 		projectiles.add(projectile);
 	}
@@ -526,6 +558,12 @@ public class GameMap implements EventListener, Disposable {
 		for (NonPlayableCharacter npc : nonPlayableCharacters) {
 			if (unitId.equals(npc.getUnitId())) {
 				return npc;
+			}
+		}
+		
+		for (Animal animal : animals) {
+			if (unitId.equals(animal.getUnitId())) {
+				return animal;
 			}
 		}
 		

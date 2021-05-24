@@ -1,0 +1,18 @@
+[
+	{
+		id: idle,
+		animation: pig_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move
+		]
+	},
+	{
+		id: move,
+		animation: pig_move,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: []
+	},
+]

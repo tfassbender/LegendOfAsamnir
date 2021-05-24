@@ -148,7 +148,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	
 	@Override
 	public void removeFromMap() {
-		super.removeFromMap();
+		ai.characterRemovedFromMap();
 		GameMap.getInstance().removeNpc(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods

@@ -1,0 +1,18 @@
+[
+	{
+		id: idle,
+		animation: hedgehog_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move
+		]
+	},
+	{
+		id: move,
+		animation: hedgehog_move,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: []
+	},
+]

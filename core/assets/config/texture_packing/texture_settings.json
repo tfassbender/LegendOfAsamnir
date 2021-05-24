@@ -181,6 +181,61 @@
 				npc/adventurer_female/adventurer_female_die,
 				npc/adventurer_female/adventurer_female_idle,
 				npc/adventurer_female/adventurer_female_move,
+				
+				//##############################################################
+				//### Animals
+				//##############################################################
+				
+				//armadillo
+				animals/armadillo/armadillo_curl,
+				animals/armadillo/armadillo_idle,
+				animals/armadillo/armadillo_move,
+				
+				//cat
+				animals/cat/cat_hiss,
+				animals/cat/cat_idle,
+				animals/cat/cat_idle_2,
+				animals/cat/cat_lick,
+				animals/cat/cat_paw,
+				animals/cat/cat_paw_2,
+				animals/cat/cat_run,
+				animals/cat/cat_sleep,
+				animals/cat/cat_walk,
+				
+				//crab
+				animals/crab/crab_idle,
+				animals/crab/crab_move,
+				
+				//dragonfly
+				animals/dragonfly/dragonfly_idle,
+				animals/dragonfly/dragonfly_move,
+				
+				//fox
+				animals/fox/fox_idle,
+				animals/fox/fox_idle_2,
+				animals/fox/fox_leap,
+				animals/fox/fox_move,
+				animals/fox/fox_sleep,
+				
+				//hedgehog
+				animals/hedgehog/hedgehog_idle,
+				animals/hedgehog/hedgehog_move,
+				
+				//pig
+				animals/pig/pig_idle,
+				animals/pig/pig_move,
+				animals/pig/pig_sleep,
+				
+				//squirrel
+				animals/squirrel/squirrel_dig,
+				animals/squirrel/squirrel_eat,
+				animals/squirrel/squirrel_idle,
+				animals/squirrel/squirrel_idle_2,
+				animals/squirrel/squirrel_move,
+				
+				//twig blight
+				animals/twig_blight/twig_blight_idle,
+				animals/twig_blight/twig_blight_move,
 			]
 		},
 		menu: {

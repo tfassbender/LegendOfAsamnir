@@ -1,0 +1,26 @@
+{
+	defaultAI: twig_blight,
+	aiConfigurations: {
+		twig_blight: {
+			type: RUN_AWAY_AI,
+			
+			stateNameMove: move,
+			stateNameIdle: idle,
+			
+			subAI: {
+				type: RANDOM_MOVEMENT_AI,
+				
+				stateNameMove: move,
+				stateNameIdle: move,
+				
+				maxMoveDistance: 5f,
+				
+				useRelativePositions: true,
+				
+				subAI: {
+					type: BASE_AI,
+				}
+			}
+		}
+	}
+}

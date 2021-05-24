@@ -1,8 +1,8 @@
 
 menu.png
-size: 4096,1024
+size: 4096, 1024
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 arrow
   rotate: false

@@ -1,0 +1,88 @@
+[
+	{
+		id: hiss,
+		animation: cat_hiss,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: idle,
+		animation: cat_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, run, hiss, jump, lick, paw, paw_2, sleep
+		]
+	},
+	{
+		id: idle_2,
+		animation: cat_idle_2,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, run, hiss, jump, lick, paw, paw_2, sleep
+		]
+	},
+	{
+		id: jump,
+		animation: cat_jump,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: lick,
+		animation: cat_lick,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, run, hiss, jump
+		]
+	},
+	{
+		id: paw,
+		animation: cat_paw,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, run, hiss, jump
+		]
+	},
+	{
+		id: paw_2,
+		animation: cat_paw_2,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, run, hiss, jump
+		]
+	},
+	{
+		id: run,
+		animation: cat_run,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			hiss, jump
+		]
+	},
+	{
+		id: sleep,
+		animation: cat_sleep,
+		endsWithAnimation: true,
+		followingState: sleep,
+		interruptingStates: [
+			move, run, hiss, jump, lick, paw, paw_2
+		]
+	},
+	{
+		id: move,
+		animation: cat_walk,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: [
+			run, hiss, jump, lick, paw, paw_2
+		]
+	},
+]

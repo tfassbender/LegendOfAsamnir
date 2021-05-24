@@ -1,0 +1,47 @@
+[
+	{
+		id: idle,
+		animation: fox_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle_2, move, leap, sleep
+		]
+	},
+	{
+		id: idle_2,
+		animation: fox_idle_2,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, leap, sleep
+		]
+	},
+	{
+		id: leap,
+		animation: fox_leap,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move
+		]
+	},
+	{
+		id: move,
+		animation: fox_move,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: [
+			leap
+		]
+	},
+	{
+		id: sleep,
+		animation: fox_sleep,
+		endsWithAnimation: true,
+		followingState: sleep,
+		interruptingStates: [
+			move, leap
+		]
+	},
+]

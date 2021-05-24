@@ -1,18 +1,14 @@
 package net.jfabricationgames.gdx.character.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
@@ -20,8 +16,6 @@ import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
-import net.jfabricationgames.gdx.character.enemy.ai.config.EnemyAiConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
@@ -36,6 +30,13 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObject {
 	
+	private static PhysicsBodyProperties physicsBodyProperties = createDefaultPhysicsBodyProperties();
+	
+	private static PhysicsBodyProperties createDefaultPhysicsBodyProperties() {
+		return new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false).setCollisionType(PhysicsCollisionType.ENEMY).setDensity(10f)
+				.setLinearDamping(10f);
+	}
+	
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	
 	protected EnemyTypeConfig typeConfig;
@@ -49,13 +50,9 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	@MapObjectState
 	protected boolean defeated;
 	
-	private PhysicsBodyProperties physicsBodyProperties;
-	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(properties);
 		this.typeConfig = typeConfig;
-		physicsBodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false)
-				.setCollisionType(PhysicsCollisionType.ENEMY).setDensity(10f).setLinearDamping(10f);
 		
 		intendedMovement = new Vector2();
 		healthBarRenderer = new EnemyHealthBarRenderer();
@@ -96,25 +93,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	 * is referenced in the field typeConfig.aiConfig.
 	 */
 	protected void createAI() {
-		createAiFromConfiguration();
-	}
-	
-	private void createAiFromConfiguration() {
-		EnemyAiConfig enemyAiConfig = loadAiConfig();
-		String configuredAiName = properties.get(MAP_PROPERTIES_KEY_AI_TYPE, enemyAiConfig.defaultAI, String.class);
-		ArtificialIntelligenceConfig aiConfig = enemyAiConfig.aiConfigurations.get(configuredAiName);
-		
-		if (aiConfig == null) {
-			throw new IllegalStateException(
-					"The configured AI type '" + configuredAiName + "' is not available in the config file '" + typeConfig.aiConfig + "'.");
-		}
-		
-		ai = aiConfig.type.buildAI(aiConfig, stateMachine, properties);
-	}
-	
-	private EnemyAiConfig loadAiConfig() {
-		Json json = new Json();
-		return json.fromJson(EnemyAiConfig.class, Gdx.files.internal(typeConfig.aiConfig));
+		createAiFromConfiguration(typeConfig.aiConfig);
 	}
 	
 	@Override
@@ -125,13 +104,9 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		attackCreator.setBody(body);
 	}
 	
-	protected PhysicsBodyProperties getDefaultPhysicsBodyProperties() {
-		return physicsBodyProperties.clone();
-	}
-	
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
-		return getDefaultPhysicsBodyProperties().setRadius(typeConfig.bodyRadius).setWidth(typeConfig.bodyWidth).setHeight(typeConfig.bodyHeight)
+		return physicsBodyProperties.setRadius(typeConfig.bodyRadius).setWidth(typeConfig.bodyWidth).setHeight(typeConfig.bodyHeight)
 				.setPhysicsBodyShape(typeConfig.bodyShape);
 	}
 	
@@ -187,11 +162,6 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	
 	private boolean isAlive() {
 		return health > 0;
-	}
-	
-	@Override
-	protected void updateTextureDirection(AnimationDirector<TextureRegion> animation) {
-		stateMachine.flipAnimationTexturesToMovementDirection(animation, intendedMovement);
 	}
 	
 	public void drawHealthBar(ShapeRenderer shapeRenderer) {
@@ -296,7 +266,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	
 	@Override
 	public void removeFromMap() {
-		super.removeFromMap();
+		ai.characterRemovedFromMap();
 		GameMap.getInstance().removeEnemy(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods

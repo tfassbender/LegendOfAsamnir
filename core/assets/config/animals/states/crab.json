@@ -1,0 +1,18 @@
+[
+	{
+		id: idle,
+		animation: crab_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move
+		]
+	},
+	{
+		id: move,
+		animation: crab_move,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: []
+	},
+]
