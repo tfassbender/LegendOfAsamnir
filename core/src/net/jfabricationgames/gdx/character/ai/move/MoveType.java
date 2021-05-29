@@ -4,5 +4,4 @@ public enum MoveType {
 	
 	MOVE, //
 	ATTACK, //
-	DEFEND, //
 }

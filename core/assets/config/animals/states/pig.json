@@ -15,4 +15,11 @@
 		followingState: move,
 		interruptingStates: []
 	},
+	{
+		id: sleep,
+		animation: pig_sleep,
+		endsWithAnimation: true,
+		followingState: move,
+		interruptingStates: []
+	},
 ]

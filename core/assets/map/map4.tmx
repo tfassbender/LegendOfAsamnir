@@ -44,6 +44,9 @@
    <point/>
   </object>
   <object id="143" name="animal.cat" x="312" y="809.333">
+   <properties>
+    <property name="aiType" value="random_idle_states_cat"/>
+   </properties>
    <point/>
   </object>
   <object id="144" name="animal.fox" x="168" y="451.333">

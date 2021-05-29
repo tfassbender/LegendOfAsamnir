@@ -4,9 +4,11 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig.StateConfig;
 import net.jfabricationgames.gdx.character.ai.implementation.ActionAI;
 import net.jfabricationgames.gdx.character.ai.implementation.BackToStartingPointMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
@@ -17,6 +19,7 @@ import net.jfabricationgames.gdx.character.ai.implementation.RunAwayAI;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerFactory;
+import net.jfabricationgames.gdx.character.animal.ai.RandomIdleStatesAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
@@ -192,6 +195,26 @@ public enum ArtificialIntelligenceType {
 			
 			return new TeamMovementAI(subAI, movingState, idleState, aiConfig.distanceToInformTeamMates, teamId);
 		}
+	},
+	
+	//*****************************************************
+	//*** Animal AIs
+	//*****************************************************
+	
+	RANDOM_IDLE_STATES_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			ObjectMap<CharacterState, StateConfig> idleStates = new ObjectMap<>();
+			for (String stateName : aiConfig.idleStates.keys()) {
+				idleStates.put(stateMachine.getState(stateName), aiConfig.idleStates.get(stateName));
+			}
+			
+			return new RandomIdleStatesAI(subAI, idleStates);
+		}
+		
 	};
 	
 	public abstract ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,

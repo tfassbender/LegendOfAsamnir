@@ -23,6 +23,48 @@
 					type: BASE_AI,
 				}
 			}
+		},
+		
+		random_idle_states_cat: {
+			type: RUN_AWAY_AI,
+			
+			distanceToStopRunning: 0f,
+			
+			stateNameMove: move,
+			stateNameIdle: idle,
+			
+			subAI: {
+				type: RANDOM_IDLE_STATES_AI,
+				
+				idleStates: {
+					idle: {
+						probability: 0.6,
+					},
+					idle_2: {
+						probability: 0.15,
+					},
+					lick: {
+						probability: 0.05,
+						minRepetitions: 1,
+						maxRepetitions: 5,
+					},
+					paw: {
+						probability: 0.05,
+					},
+					paw_2: {
+						probability: 0.05,
+					},
+					sleep: {
+						probability: 0.1,
+						minRepetitions: 15,
+						maxRepetitions: 25,
+					}
+				}
+				
+				subAI: {
+					type: BASE_AI,
+				}
+			}
 		}
 	}
 }

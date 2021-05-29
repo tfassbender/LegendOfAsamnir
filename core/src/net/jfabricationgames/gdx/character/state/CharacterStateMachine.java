@@ -25,6 +25,11 @@ public class CharacterStateMachine {
 	private AnimationManager animationManager;
 	
 	private CharacterState currentState;
+	/** The state that is set if the current state ends (repeated - see overridingStateRepetition; overrides the configured following state) */
+	private CharacterState overridingFollowingState;
+	/** The number of repetitions of the overriding state */
+	private int overridingStateRepetitions;
+	
 	private ArrayMap<String, CharacterState> states;
 	
 	private AttackCreator attackCreator;
@@ -104,11 +109,24 @@ public class CharacterStateMachine {
 	 */
 	public void updateState(float delta) {
 		if (isStateEnded(delta)) {
-			if (currentState.followingState.config.attack != null) {
-				currentState.followingState.setAttackDirection(new Vector2(0, 0));
-			}
-			setState(currentState.followingState);
+			changeToNextState();
 		}
+	}
+	
+	private void changeToNextState() {
+		CharacterState nextState = currentState.followingState;
+		if (overridingFollowingState != null) {
+			nextState = overridingFollowingState;
+			overridingStateRepetitions--;
+			if (overridingStateRepetitions < 0) {
+				overridingFollowingState = null;
+			}
+		}
+		
+		if (nextState.config.attack != null) {
+			nextState.setAttackDirection(new Vector2(0, 0));
+		}
+		setState(nextState);
 	}
 	
 	private boolean isStateEnded(float delta) {
@@ -153,6 +171,14 @@ public class CharacterStateMachine {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isOverridingFollowingStateSet() {
+		return overridingFollowingState != null;
+	}
+	public void setOverridingFollowingState(CharacterState state, int repetitions) {
+		this.overridingFollowingState = state;
+		this.overridingStateRepetitions = repetitions;
 	}
 	
 	private boolean isStateChangeAllowed(CharacterState state) {

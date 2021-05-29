@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.character.ai;
 
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
@@ -33,7 +34,16 @@ public class ArtificialIntelligenceConfig {
 	public float distanceToInformTeamMates = 7f;
 	public AttackTimerConfig attackTimerConfig;
 	
+	public ObjectMap<String, StateConfig> idleStates;
+	
 	public ArtificialIntelligence buildAI(CharacterStateMachine stateMachine, MapProperties mapProperties) {
 		return type.buildAI(this, stateMachine, mapProperties);
+	}
+	
+	public static class StateConfig {
+		
+		public float probability;
+		public int minRepetitions = 1;
+		public int maxRepetitions = 1;
 	}
 }
