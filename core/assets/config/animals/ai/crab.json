@@ -4,6 +4,7 @@
 		crab: {
 			type: RUN_AWAY_AI,
 			
+			distanceToKeepFromPlayer: 3f,
 			distanceToStopRunning: 0f,
 			
 			stateNameMove: move,
@@ -16,6 +17,8 @@
 				stateNameIdle: move,
 				
 				maxMoveDistance: 3f,
+				
+				distanceToKeepFromPlayer: 3f,
 				
 				useRelativePositions: true,
 				

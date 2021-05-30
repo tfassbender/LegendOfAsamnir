@@ -91,7 +91,9 @@ public enum ArtificialIntelligenceType {
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			Array<Vector2> positions = loadPositionsFromMapProperties(mapProperties);
 			
-			return new PreDefinedMovementAI(subAI, movingState, idleState, aiConfig.useRelativePositions, positions);
+			PreDefinedMovementAI ai = new PreDefinedMovementAI(subAI, movingState, idleState, aiConfig.useRelativePositions, positions);
+			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			return ai;
 		}
 	},
 	RANDOM_MOVEMENT_AI {
@@ -109,7 +111,9 @@ public enum ArtificialIntelligenceType {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
 			
-			return new RandomMovementAI(subAI, movingState, idleState, maxDistance);
+			RandomMovementAI ai = new RandomMovementAI(subAI, movingState, idleState, maxDistance);
+			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			return ai;
 		}
 	},
 	BACK_TO_STARTING_POSITION_MOVEMENT_AI {

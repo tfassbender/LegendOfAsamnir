@@ -14,7 +14,7 @@
 		bodyRadius: 0.4f,
 		
 		addSensor: true,
-		sensorRadius: 2f,
+		sensorRadius: 4f,
 	},
 	cat: {
 		animationsConfig: config/animation/animals/cat.json,

@@ -68,7 +68,7 @@ public class Animal extends AbstractCharacter {
 		
 		if (!cutsceneHandler.isCutsceneActive()) {
 			ai.calculateMove(delta);
-			ai.executeMove();
+			ai.executeMove(delta);
 		}
 	}
 	

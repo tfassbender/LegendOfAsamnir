@@ -148,7 +148,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		}
 		else if (!cutsceneHandler.isCutsceneActive()) {
 			ai.calculateMove(delta);
-			ai.executeMove();
+			ai.executeMove(delta);
 		}
 	}
 	

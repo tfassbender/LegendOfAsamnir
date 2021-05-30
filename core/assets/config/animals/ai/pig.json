@@ -5,6 +5,7 @@
 			type: RUN_AWAY_AI,
 			
 			distanceToStopRunning: 0f,
+			distanceToKeepFromPlayer: 2f,
 			
 			stateNameMove: move,
 			stateNameIdle: idle,
@@ -16,6 +17,7 @@
 				stateNameIdle: move,
 				
 				maxMoveDistance: 3f,
+				distanceToKeepFromPlayer: 2f,
 				
 				useRelativePositions: true,
 				

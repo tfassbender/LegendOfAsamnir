@@ -31,7 +31,7 @@ public class FightAI extends AbstractAttackAI {
 	}
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		AIAttackingMove move = getMove(MoveType.ATTACK, AIAttackingMove.class);
 		if (isExecutedByMe(move)) {
 			if (changeToAttackState()) {
@@ -45,7 +45,7 @@ public class FightAI extends AbstractAttackAI {
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 	
 	protected void attackMoveTo(Vector2 targetPosition) {

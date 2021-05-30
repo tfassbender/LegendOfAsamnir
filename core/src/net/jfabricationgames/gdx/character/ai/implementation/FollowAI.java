@@ -40,7 +40,7 @@ public class FollowAI extends AbstractMovementAI {
 	}
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			if (move.movementTarget != null) {
@@ -56,7 +56,7 @@ public class FollowAI extends AbstractMovementAI {
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 	
 	@Override

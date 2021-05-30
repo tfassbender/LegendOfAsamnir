@@ -56,7 +56,7 @@ public class ActionAI extends AbstractArtificialIntelligence {
 	}
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		AIActionMove move = getMove(MoveType.ATTACK, AIActionMove.class);
 		if (isExecutedByMe(move)) {
 			if (changeToActionState()) {
@@ -64,7 +64,7 @@ public class ActionAI extends AbstractArtificialIntelligence {
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 	
 	protected boolean changeToActionState() {

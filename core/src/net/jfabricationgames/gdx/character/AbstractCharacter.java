@@ -177,6 +177,10 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		return new Vector2(body.getPosition());
 	}
 	
+	public float getMovingSpeed() {
+		return movingSpeed;
+	}
+	
 	public void moveTo(Vector2 pos) {
 		moveTo(pos, 1f);
 	}

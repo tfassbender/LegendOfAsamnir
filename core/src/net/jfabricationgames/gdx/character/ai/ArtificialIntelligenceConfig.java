@@ -29,7 +29,7 @@ public class ArtificialIntelligenceConfig {
 	public float attackSpeedFactor;
 	public float attackSpeedDelay;
 	public float minDistanceToTargetPlayer = 1f;
-	public float distanceToKeepFromPlayer = 5f;
+	public float distanceToKeepFromPlayer = 0f;
 	public float distanceToStopRunning = 2f;
 	public float distanceToInformTeamMates = 7f;
 	public AttackTimerConfig attackTimerConfig;

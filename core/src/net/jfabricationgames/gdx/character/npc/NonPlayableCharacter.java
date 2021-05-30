@@ -115,7 +115,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		
 		if (!cutsceneHandler.isCutsceneActive()) {
 			ai.calculateMove(delta);
-			ai.executeMove();
+			ai.executeMove(delta);
 		}
 	}
 	

@@ -50,7 +50,7 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 	}
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		if (positionsDefined) {
 			AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 			if (isExecutedByMe(move)) {
@@ -61,13 +61,15 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 						targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
 					}
 					else {
-						character.moveTo(targetPoint);
+						if (!isMovementWouldLeadToNearToPlayer(targetPoint, delta)) {
+							character.moveTo(targetPoint);
+						}
 					}
 					move.executed();
 				}
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 }

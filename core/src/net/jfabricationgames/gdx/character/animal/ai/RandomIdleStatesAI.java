@@ -46,7 +46,7 @@ public class RandomIdleStatesAI extends AbstractArtificialIntelligence {
 	}
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		AIActionMove aiMove = getMove(MoveType.MOVE, AIActionMove.class);
 		if (isExecutedByMe(aiMove)) {
 			if (inIdleState()) {
@@ -59,7 +59,7 @@ public class RandomIdleStatesAI extends AbstractArtificialIntelligence {
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 	
 	private void setOverridingFollowingState() {

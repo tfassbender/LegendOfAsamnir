@@ -18,11 +18,15 @@
 				stateNameMove: move,
 				stateNameIdle: move,
 				
+				distanceToKeepFromPlayer: 5f,
+				
 				subAI: {
 					type: PRE_DEFINED_MOVEMENT_AI,
 					
 					stateNameMove: move,
 					stateNameIdle: move,
+				
+					distanceToKeepFromPlayer: 5f,
 					
 					useRelativePositions: true,
 					

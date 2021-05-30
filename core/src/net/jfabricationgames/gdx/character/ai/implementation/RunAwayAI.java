@@ -34,7 +34,7 @@ public class RunAwayAI extends AbstractMovementAI {
 	}
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			if (inMovingState() || changeToMovingState()) {
@@ -43,7 +43,7 @@ public class RunAwayAI extends AbstractMovementAI {
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 	
 	@Override

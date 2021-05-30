@@ -48,6 +48,8 @@
 							stateNameMove: move,
 							stateNameIdle: idle,
 							
+							distanceToKeepFromPlayer: 3.5f,
+							
 							useRelativePositions: true,
 							
 							subAI: {

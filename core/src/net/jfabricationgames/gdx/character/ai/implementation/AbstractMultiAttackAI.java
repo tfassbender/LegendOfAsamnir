@@ -14,8 +14,8 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 	protected ArrayMap<String, CharacterState> attackStates;
 	protected ArrayMap<CharacterState, Float> attackDistances;
 	
-	public AbstractMultiAttackAI(ArtificialIntelligence subAI, ArrayMap<String, CharacterState> attackStates, ArrayMap<CharacterState, Float> attackDistances,
-			AttackTimer attackTimer) {
+	public AbstractMultiAttackAI(ArtificialIntelligence subAI, ArrayMap<String, CharacterState> attackStates,
+			ArrayMap<CharacterState, Float> attackDistances, AttackTimer attackTimer) {
 		super(subAI, null, attackTimer);
 		this.attackStates = attackStates;
 		this.attackDistances = attackDistances;
@@ -60,7 +60,7 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 	protected abstract CharacterState chooseAttack();
 	
 	@Override
-	public void executeMove() {
+	public void executeMove(float delta) {
 		AIAttackingMove move = getMove(MoveType.ATTACK, AIAttackingMove.class);
 		if (isExecutedByMe(move)) {
 			if (changeToAttackState(move.attack)) {
@@ -74,7 +74,7 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 			}
 		}
 		
-		subAI.executeMove();
+		subAI.executeMove(delta);
 	}
 	
 	protected boolean isInRangeForAttack(CharacterState attack, float distanceToTarget) {

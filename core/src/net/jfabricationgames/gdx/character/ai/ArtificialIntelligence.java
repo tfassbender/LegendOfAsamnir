@@ -22,7 +22,7 @@ public interface ArtificialIntelligence extends ContactListener {
 	/**
 	 * Request a Move using the getMove(MoveType) method and execute it (if it has not yet been executed).
 	 */
-	public void executeMove();
+	public void executeMove(float delta);
 	
 	public void setMove(MoveType moveType, AIMove aiMove);
 	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz);

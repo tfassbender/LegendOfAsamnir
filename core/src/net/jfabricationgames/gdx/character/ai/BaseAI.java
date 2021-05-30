@@ -41,7 +41,7 @@ public class BaseAI extends AbstractArtificialIntelligence implements Artificial
 	public void calculateMove(float delta) {}
 	
 	@Override
-	public void executeMove() {}
+	public void executeMove(float delta) {}
 	
 	@Override
 	public void setCharacter(AbstractCharacter character) {}
