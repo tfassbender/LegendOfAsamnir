@@ -2,13 +2,13 @@
 	defaultAI: pig,
 	aiConfigurations: {
 		pig: {
-			type: RUN_AWAY_AI,
-			
-			distanceToStopRunning: 0f,
-			distanceToKeepFromPlayer: 2f,
+			type: FOLLOW_AI,
 			
 			stateNameMove: move,
 			stateNameIdle: idle,
+			
+			minDistanceToTargetPlayer: 2f,
+			maxMoveDistance: 10f,
 			
 			subAI: {
 				type: RANDOM_MOVEMENT_AI,

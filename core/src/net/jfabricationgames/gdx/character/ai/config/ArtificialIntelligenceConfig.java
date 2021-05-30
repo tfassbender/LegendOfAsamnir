@@ -1,8 +1,10 @@
-package net.jfabricationgames.gdx.character.ai;
+package net.jfabricationgames.gdx.character.ai.config;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceType;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 

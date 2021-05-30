@@ -1,6 +1,6 @@
 package net.jfabricationgames.gdx.character.npc;
 
-import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
 
 public class NonPlayableCharacterTypeConfig {
 	

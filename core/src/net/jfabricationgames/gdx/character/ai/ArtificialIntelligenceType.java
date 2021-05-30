@@ -8,7 +8,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
-import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig.StateConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig.StateConfig;
 import net.jfabricationgames.gdx.character.ai.implementation.BackToStartingPointMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
@@ -65,6 +66,7 @@ public enum ArtificialIntelligenceType {
 			
 			FollowAI ai = new FollowAI(subAI, movingState, idleState);
 			ai.setMinDistanceToTarget(aiConfig.minDistanceToTargetPlayer);
+			ai.setMaxDistanceFromStart(aiConfig.maxMoveDistance);
 			return ai;
 		}
 	},

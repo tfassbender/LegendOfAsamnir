@@ -15,8 +15,8 @@ import com.badlogic.gdx.utils.Json;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
-import net.jfabricationgames.gdx.character.ai.config.AiConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceTypesConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
@@ -86,7 +86,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	protected abstract void addAdditionalPhysicsParts();
 	
 	protected void createAiFromConfiguration(String aiConfigFile) {
-		AiConfig aiConfig = loadAiConfig(aiConfigFile);
+		ArtificialIntelligenceTypesConfig aiConfig = loadAiConfig(aiConfigFile);
 		String configuredAiName = properties.get(MAP_PROPERTIES_KEY_AI_TYPE, aiConfig.defaultAI, String.class);
 		ArtificialIntelligenceConfig chosenAiConfig = aiConfig.aiConfigurations.get(configuredAiName);
 		
@@ -98,9 +98,9 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		ai = chosenAiConfig.type.buildAI(chosenAiConfig, stateMachine, properties);
 	}
 	
-	private AiConfig loadAiConfig(String aiConfigFile) {
+	private ArtificialIntelligenceTypesConfig loadAiConfig(String aiConfigFile) {
 		Json json = new Json();
-		return json.fromJson(AiConfig.class, Gdx.files.internal(aiConfigFile));
+		return json.fromJson(ArtificialIntelligenceTypesConfig.class, Gdx.files.internal(aiConfigFile));
 	}
 	
 	public abstract void act(float delta);
