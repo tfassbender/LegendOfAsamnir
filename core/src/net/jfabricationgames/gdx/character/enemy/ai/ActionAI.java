@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.character.ai.implementation;
+package net.jfabricationgames.gdx.character.enemy.ai;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 

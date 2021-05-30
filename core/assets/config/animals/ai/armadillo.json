@@ -26,6 +26,40 @@
 					type: BASE_AI,
 				}
 			}
+		},
+		armadillo_curl: {
+			type: CHANGE_STATE_WHEN_PLAYER_NEAR_AI,
+			
+			stateNameAction: curl,
+			stateNameAction2: curl_reversed,
+			minDistanceToTargetPlayer: 2f,
+			
+			subAI: {
+				type: RUN_AWAY_AI,
+				
+				distanceToKeepFromPlayer: 3f,
+				distanceToStopRunning: 0f,
+				
+				stateNameMove: move,
+				stateNameIdle: idle,
+				
+				subAI: {
+					type: RANDOM_MOVEMENT_AI,
+					
+					stateNameMove: move,
+					stateNameIdle: move,
+					
+					maxMoveDistance: 3f,
+					
+					distanceToKeepFromPlayer: 3f,
+					
+					useRelativePositions: true,
+					
+					subAI: {
+						type: BASE_AI,
+					}
+				}
+			}
 		}
 	}
 }

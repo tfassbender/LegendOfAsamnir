@@ -32,6 +32,9 @@
    <point/>
   </object>
   <object id="139" name="animal.armadillo" x="568" y="745.333">
+   <properties>
+    <property name="aiType" value="armadillo_curl"/>
+   </properties>
    <point/>
   </object>
   <object id="140" name="animal.dragonfly" x="503.667" y="440.667">

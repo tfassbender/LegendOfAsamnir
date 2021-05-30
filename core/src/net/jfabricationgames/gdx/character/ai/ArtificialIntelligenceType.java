@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.SerializationException;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig.StateConfig;
-import net.jfabricationgames.gdx.character.ai.implementation.ActionAI;
 import net.jfabricationgames.gdx.character.ai.implementation.BackToStartingPointMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
@@ -19,7 +18,9 @@ import net.jfabricationgames.gdx.character.ai.implementation.RunAwayAI;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerFactory;
+import net.jfabricationgames.gdx.character.animal.ai.ChangeStateWhenPlayerNearAI;
 import net.jfabricationgames.gdx.character.animal.ai.RandomIdleStatesAI;
+import net.jfabricationgames.gdx.character.enemy.ai.ActionAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
@@ -219,6 +220,22 @@ public enum ArtificialIntelligenceType {
 			return new RandomIdleStatesAI(subAI, idleStates);
 		}
 		
+	},
+	CHANGE_STATE_WHEN_PLAYER_NEAR_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			CharacterState playerNearState = stateMachine.getState(aiConfig.stateNameAction);
+			CharacterState playerLeavingState = null;
+			if (aiConfig.stateNameAction2 != null) {
+				playerLeavingState = stateMachine.getState(aiConfig.stateNameAction2);
+			}
+			float distanceToChangeState = aiConfig.minDistanceToTargetPlayer;
+			
+			return new ChangeStateWhenPlayerNearAI(subAI, playerNearState, playerLeavingState, distanceToChangeState);
+		}
 	};
 	
 	public abstract ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,

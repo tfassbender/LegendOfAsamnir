@@ -1,19 +1,11 @@
 [
 	{
-		id: curl,
-		animation: armadillo_curl,
-		endsWithAnimation: true,
-		flipAnimationOnEnteringOnly: true,
-		followingState: idle,
-		interruptingStates: []
-	},
-	{
 		id: idle,
 		animation: armadillo_idle,
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			move
+			move, curl
 		]
 	},
 	{
@@ -24,5 +16,23 @@
 		interruptingStates: [
 			curl
 		]
+	},
+	{
+		id: curl,
+		animation: armadillo_curl,
+		endsWithAnimation: false,
+		flipAnimationOnEnteringOnly: true,
+		followingState: curl_reversed,
+		interruptingStates: [
+			curl_reversed,
+		]
+	},
+	{
+		id: curl_reversed,
+		animation: armadillo_curl_reversed,
+		endsWithAnimation: true,
+		flipAnimationOnEnteringOnly: true,
+		followingState: idle,
+		interruptingStates: [],
 	},
 ]

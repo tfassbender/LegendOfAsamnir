@@ -12,6 +12,7 @@ public class ArtificialIntelligenceConfig {
 	public ArtificialIntelligenceConfig subAI;
 	
 	public String stateNameAction = "action";
+	public String stateNameAction2;
 	public String stateNameMove = "move";
 	public String stateNameIdle = "idle";
 	public String stateNameAttack = "attack";
