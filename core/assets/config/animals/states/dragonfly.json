@@ -12,7 +12,7 @@
 		id: move,
 		animation: dragonfly_move,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: []
 	},
 ]

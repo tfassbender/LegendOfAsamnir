@@ -54,18 +54,18 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 		if (positionsDefined) {
 			AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 			if (isExecutedByMe(move)) {
-				if (inMovingState() || changeToMovingState()) {
-					Vector2 targetPoint = move.movementTarget;
-					if (reachedTargetPoint(targetPoint)) {
-						// next target point
-						targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
-					}
-					else {
-						if (!isMovementWouldLeadToNearToPlayer(targetPoint, delta)) {
+				Vector2 targetPoint = move.movementTarget;
+				if (!isMovementWouldLeadToNearToPlayer(targetPoint, delta)) {
+					if (inMovingState() || changeToMovingState()) {
+						if (reachedTargetPoint(targetPoint)) {
+							// next target point
+							targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
+						}
+						else {
 							character.moveTo(targetPoint);
 						}
+						move.executed();
 					}
-					move.executed();
 				}
 			}
 		}

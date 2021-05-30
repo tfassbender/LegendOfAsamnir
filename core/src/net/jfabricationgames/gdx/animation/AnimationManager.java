@@ -57,7 +57,7 @@ public class AnimationManager {
 			AnimationConfigList animationConfig = loadAnimationConfig(config);
 			
 			animationConfigurations
-					.putAll(animationConfig.getConfigList().stream().collect(Collectors.toMap(AnimationConfig::getName, Function.identity())));
+					.putAll(animationConfig.getConfigList().stream().collect(Collectors.toMap(AnimationConfig::getAlias, Function.identity())));
 			
 			animationConfig.getConfigList().forEach(this::createAnimation);
 		}
@@ -70,14 +70,13 @@ public class AnimationManager {
 	}
 	
 	private void createAnimation(AnimationConfig config) {
-		TextureAtlas textureAtlas = assetManager.get(config.getAtlas(), TextureAtlas.class);
-		Animation<TextureRegion> animation = new Animation<>(config.getFrameDuration(), textureAtlas.findRegions(config.getName()),
-				config.getPlayMode());
+		TextureAtlas textureAtlas = assetManager.get(config.atlas, TextureAtlas.class);
+		Animation<TextureRegion> animation = new Animation<>(config.frameDuration, textureAtlas.findRegions(config.name), config.playMode);
 		if (animation.getKeyFrames().length == 0) {
-			Gdx.app.error(getClass().getSimpleName(), "Animation loaded, but with 0 key frames. Animation was '" + config.getName()
+			Gdx.app.error(getClass().getSimpleName(), "Animation loaded, but with 0 key frames. Animation was '" + config.name
 					+ "'. Maybe the animation was configured, but the images were not packed into the atlas?");
 		}
-		animations.put(config.getName(), animation);
+		animations.put(config.getAlias(), animation);
 	}
 	
 	/**

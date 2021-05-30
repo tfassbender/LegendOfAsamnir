@@ -20,7 +20,7 @@
 		id: move,
 		animation: armadillo_move,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: [
 			curl
 		]

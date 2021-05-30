@@ -12,7 +12,7 @@
 		id: move,
 		animation: hedgehog_move,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: []
 	},
 ]

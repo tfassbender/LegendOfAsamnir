@@ -12,14 +12,14 @@
 		id: move,
 		animation: pig_move,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: []
 	},
 	{
 		id: sleep,
 		animation: pig_sleep,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: []
 	},
 ]

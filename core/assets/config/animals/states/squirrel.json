@@ -21,7 +21,7 @@
 		id: dig,
 		animation: squirrel_dig,
 		endsWithAnimation: true,
-		followingState: dig,
+		followingState: idle,
 		interruptingStates: [
 			move, eat 
 		]
@@ -30,7 +30,7 @@
 		id: eat,
 		animation: squirrel_eat,
 		endsWithAnimation: true,
-		followingState: eat,
+		followingState: idle,
 		interruptingStates: [
 			move, dig
 		]
@@ -39,7 +39,7 @@
 		id: move,
 		animation: squirrel_move,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: [
 			dig, eat
 		]

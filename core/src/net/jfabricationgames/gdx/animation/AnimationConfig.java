@@ -4,45 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class AnimationConfig {
 	
-	private String name;
-	private String atlas;
-	private float frameDuration = 0.1f;
-	private PlayMode playMode = PlayMode.NORMAL;
+	public String name;
+	public String alias;
+	public String atlas;
+	public float frameDuration = 0.1f;
+	public PlayMode playMode = PlayMode.NORMAL;
 	
-	public AnimationConfig() {
-		
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getAtlas() {
-		return atlas;
-	}
-	public void setAtlas(String atlas) {
-		this.atlas = atlas;
-	}
-	
-	public float getFrameDuration() {
-		return frameDuration;
-	}
-	public void setFrameDuration(float frameDuration) {
-		this.frameDuration = frameDuration;
-	}
-	
-	public PlayMode getPlayMode() {
-		return playMode;
-	}
-	public void setPlayMode(PlayMode playMode) {
-		this.playMode = playMode;
-	}
-	
-	@Override
-	public String toString() {
-		return "AnimationConfig [name=" + name + ", atlas=" + atlas + ", frameDuration=" + frameDuration + ", playMode=" + playMode + "]";
+	public String getAlias() {
+		return alias != null ? alias : name;
 	}
 }

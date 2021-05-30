@@ -30,7 +30,7 @@
 		id: move,
 		animation: fox_move,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: [
 			leap
 		]
@@ -39,7 +39,7 @@
 		id: sleep,
 		animation: fox_sleep,
 		endsWithAnimation: true,
-		followingState: sleep,
+		followingState: idle,
 		interruptingStates: [
 			move, leap
 		]

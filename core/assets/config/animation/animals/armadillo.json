@@ -19,5 +19,12 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			alias: armadillo_curl_reversed,
+			name: armadillo_curl,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: REVERSED
+		},
 	]
 }

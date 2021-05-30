@@ -71,7 +71,7 @@
 		id: sleep,
 		animation: cat_sleep,
 		endsWithAnimation: true,
-		followingState: sleep,
+		followingState: idle,
 		interruptingStates: [
 			move, run, hiss, jump, lick, paw, paw_2
 		]
@@ -80,7 +80,7 @@
 		id: move,
 		animation: cat_walk,
 		endsWithAnimation: true,
-		followingState: move,
+		followingState: idle,
 		interruptingStates: [
 			run, hiss, jump, lick, paw, paw_2
 		]
