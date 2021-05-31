@@ -19,6 +19,8 @@
 				maxMoveDistance: 3f,
 				distanceToKeepFromPlayer: 2f,
 				
+				movementSpeedFactor: 0.5f,
+				
 				useRelativePositions: true,
 				
 				subAI: {

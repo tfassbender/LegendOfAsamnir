@@ -35,6 +35,8 @@ public class ArtificialIntelligenceConfig {
 	public float distanceToKeepFromPlayer = 0f;
 	public float distanceToStopRunning = 2f;
 	public float distanceToInformTeamMates = 7f;
+	public float movementSpeedFactor = 1f;
+	
 	public AttackTimerConfig attackTimerConfig;
 	
 	public ObjectMap<String, StateConfig> idleStates;

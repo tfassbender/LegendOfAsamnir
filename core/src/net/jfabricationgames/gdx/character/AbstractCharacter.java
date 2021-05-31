@@ -15,8 +15,8 @@ import com.badlogic.gdx.utils.Json;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceTypesConfig;
 import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceTypesConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
@@ -200,7 +200,10 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	}
 	
 	public void moveToDirection(Vector2 pos) {
-		Vector2 direction = pos.cpy().nor().scl(movingSpeed);
+		moveToDirection(pos, 1f);
+	}
+	public void moveToDirection(Vector2 pos, float speedFactor) {
+		Vector2 direction = pos.cpy().nor().scl(movingSpeed * speedFactor);
 		move(direction);
 	}
 	

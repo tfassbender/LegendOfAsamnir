@@ -54,7 +54,7 @@ public class FollowAI extends AbstractRelativeMovementAI {
 		if (isExecutedByMe(move)) {
 			if (move.movementTarget != null) {
 				if (inMovingState() || changeToMovingState()) {
-					character.moveTo(move.movementTarget);
+					character.moveTo(move.movementTarget, movementSpeedFactor);
 					move.executed();
 				}
 			}

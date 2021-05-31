@@ -38,7 +38,7 @@ public class RunAwayAI extends AbstractMovementAI {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			if (inMovingState() || changeToMovingState()) {
-				character.moveToDirection(move.movementDirection);
+				character.moveToDirection(move.movementDirection, movementSpeedFactor);
 				move.executed();
 			}
 		}

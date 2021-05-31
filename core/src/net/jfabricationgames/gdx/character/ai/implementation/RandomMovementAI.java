@@ -44,7 +44,7 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 						calculateNextTargetPoint();
 					}
 					else {
-						character.moveTo(targetPoint);
+						character.moveTo(targetPoint, movementSpeedFactor);
 					}
 					move.executed();
 				}

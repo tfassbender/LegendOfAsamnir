@@ -9,6 +9,8 @@ public abstract class AbstractMovementAI extends AbstractArtificialIntelligence 
 	protected CharacterState movingState;
 	protected CharacterState idleState;
 	
+	protected float movementSpeedFactor = 1f;
+	
 	public AbstractMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState) {
 		super(subAI);
 		this.movingState = movingState;
@@ -27,5 +29,9 @@ public abstract class AbstractMovementAI extends AbstractArtificialIntelligence 
 	}
 	protected boolean changeToIdleState() {
 		return stateMachine.setState(idleState);
+	}
+	
+	public void setMovementSpeedFactor(float movementSpeedFactor) {
+		this.movementSpeedFactor = movementSpeedFactor;
 	}
 }

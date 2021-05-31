@@ -62,7 +62,7 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 							targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
 						}
 						else {
-							character.moveTo(targetPoint);
+							character.moveTo(targetPoint, movementSpeedFactor);
 						}
 						move.executed();
 					}

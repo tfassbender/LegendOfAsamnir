@@ -67,6 +67,7 @@ public enum ArtificialIntelligenceType {
 			FollowAI ai = new FollowAI(subAI, movingState, idleState);
 			ai.setMinDistanceToTarget(aiConfig.minDistanceToTargetPlayer);
 			ai.setMaxDistanceFromStart(aiConfig.maxMoveDistance);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
 		}
 	},
@@ -81,6 +82,7 @@ public enum ArtificialIntelligenceType {
 			
 			RayCastFollowAI ai = new RayCastFollowAI(subAI, movingState, idleState);
 			ai.setMinDistanceToTarget(aiConfig.minDistanceToTargetPlayer);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
 		}
 	},
@@ -96,6 +98,7 @@ public enum ArtificialIntelligenceType {
 			
 			PreDefinedMovementAI ai = new PreDefinedMovementAI(subAI, movingState, idleState, aiConfig.useRelativePositions, positions);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
 		}
 	},
@@ -116,6 +119,7 @@ public enum ArtificialIntelligenceType {
 			
 			RandomMovementAI ai = new RandomMovementAI(subAI, movingState, idleState, maxDistance);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
 		}
 	},
@@ -128,7 +132,9 @@ public enum ArtificialIntelligenceType {
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			
-			return new BackToStartingPointMovementAI(subAI, movingState, idleState);
+			BackToStartingPointMovementAI ai = new BackToStartingPointMovementAI(subAI, movingState, idleState);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
+			return ai;
 		}
 	},
 	RUN_AWAY_AI {
@@ -143,6 +149,7 @@ public enum ArtificialIntelligenceType {
 			RunAwayAI ai = new RunAwayAI(subAI, movingState, idleState);
 			ai.setDistanceToStopRunning(aiConfig.distanceToStopRunning);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
 		}
 	},
@@ -200,7 +207,9 @@ public enum ArtificialIntelligenceType {
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			String teamId = mapProperties.get("teamId", String.class);
 			
-			return new TeamMovementAI(subAI, movingState, idleState, aiConfig.distanceToInformTeamMates, teamId);
+			TeamMovementAI ai = new TeamMovementAI(subAI, movingState, idleState, aiConfig.distanceToInformTeamMates, teamId);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
+			return ai;
 		}
 	},
 	

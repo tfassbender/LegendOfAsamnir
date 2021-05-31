@@ -17,6 +17,7 @@
 				stateNameIdle: move,
 				
 				maxMoveDistance: 3f,
+				movementSpeedFactor: 0.5f,
 				
 				distanceToKeepFromPlayer: 3f,
 				
