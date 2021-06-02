@@ -27,10 +27,15 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 		}
 		
 		if (maxDistance > 0) {
-			AIPositionChangingMove move = new AIPositionChangingMove(this);
-			move.movementTarget = targetPosition;
+			AIPositionChangingMove move = createPositionChangeMove();
 			setMove(MoveType.MOVE, move);
 		}
+	}
+	
+	protected AIPositionChangingMove createPositionChangeMove() {
+		AIPositionChangingMove move = new AIPositionChangingMove(this);
+		move.movementTarget = targetPosition;
+		return move;
 	}
 	
 	@Override
@@ -58,10 +63,18 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 		subAI.executeMove(delta);
 	}
 	
-	private void calculateNextTargetPoint() {
+	protected void calculateNextTargetPoint() {
 		targetPosition = new Vector2(1, 1);//don't use a null-vector; otherwise setLength will not work
 		targetPosition.setLength((float) (Math.random() * maxDistance));
 		targetPosition.setAngleDeg((float) (Math.random() * 360f));
 		targetPosition.add(relativeZero);
+	}
+	
+	protected boolean isTargetPositionSet() {
+		return targetPosition != null;
+	}
+	
+	protected void resetTargetPosition() {
+		targetPosition = null;
 	}
 }

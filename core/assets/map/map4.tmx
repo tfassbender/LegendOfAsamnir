@@ -46,7 +46,7 @@
   <object id="142" name="animal.hedgehog" x="770.333" y="797.667">
    <point/>
   </object>
-  <object id="143" name="animal.cat" x="312" y="809.333">
+  <object id="143" name="animal.cat" x="356" y="786.666">
    <properties>
     <property name="aiType" value="random_idle_states_cat"/>
    </properties>

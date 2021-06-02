@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerConfig;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimerFactory;
 import net.jfabricationgames.gdx.character.animal.ai.ChangeStateWhenPlayerNearAI;
 import net.jfabricationgames.gdx.character.animal.ai.RandomIdleStatesAI;
+import net.jfabricationgames.gdx.character.animal.ai.RandomIdleStatesMovementAI;
 import net.jfabricationgames.gdx.character.enemy.ai.ActionAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
@@ -231,6 +232,33 @@ public enum ArtificialIntelligenceType {
 			return new RandomIdleStatesAI(subAI, idleStates);
 		}
 		
+	},
+	RANDOM_IDLE_STATES_MOVEMENT_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			ObjectMap<CharacterState, StateConfig> idleStates = new ObjectMap<>();
+			for (String stateName : aiConfig.idleStates.keys()) {
+				idleStates.put(stateMachine.getState(stateName), aiConfig.idleStates.get(stateName));
+			}
+			
+			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
+			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			float maxDistance = aiConfig.maxMoveDistance;
+			float movementProbability = aiConfig.movementProbability;
+			
+			String maxDistanceString = mapProperties.get(AbstractCharacter.MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
+			if (maxDistanceString != null && !maxDistanceString.isEmpty()) {
+				maxDistance = Float.parseFloat(maxDistanceString);
+			}
+			
+			RandomMovementAI ai = new RandomIdleStatesMovementAI(subAI, idleStates, movementProbability, movingState, idleState, maxDistance);
+			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
+			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
+			return ai;
+		}
 	},
 	CHANGE_STATE_WHEN_PLAYER_NEAR_AI {
 		

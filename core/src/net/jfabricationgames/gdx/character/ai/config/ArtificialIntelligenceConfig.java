@@ -36,6 +36,7 @@ public class ArtificialIntelligenceConfig {
 	public float distanceToStopRunning = 2f;
 	public float distanceToInformTeamMates = 7f;
 	public float movementSpeedFactor = 1f;
+	public float movementProbability;
 	
 	public AttackTimerConfig attackTimerConfig;
 	
