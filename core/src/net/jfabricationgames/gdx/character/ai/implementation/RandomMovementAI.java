@@ -38,9 +38,13 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			Vector2 targetPoint = move.movementTarget;
-			if (!isMovementWouldLeadToNearToPlayer(targetPoint, delta)) {
+			
+			if (targetPoint == null) {
+				calculateNextTargetPoint();
+			}
+			else if (!isMovementWouldLeadToNearToPlayer(targetPoint, delta)) {
 				if (inMovingState() || changeToMovingState()) {
-					if (targetPoint == null || reachedTargetPoint(targetPoint)) {
+					if (reachedTargetPoint(targetPoint)) {
 						calculateNextTargetPoint();
 					}
 					else {

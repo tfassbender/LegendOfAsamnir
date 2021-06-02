@@ -182,7 +182,8 @@ public class CharacterStateMachine {
 	}
 	
 	private boolean isStateChangeAllowed(CharacterState state) {
-		return currentState.interruptingStates.contains(state) || isStateEnded(0f) && followsOnCurrentState(state);
+		return currentState.interruptingStates.contains(state)
+				|| isStateEnded(0f) && (followsOnCurrentState(state) || state == overridingFollowingState);
 	}
 	
 	private void changeState(CharacterState state) {

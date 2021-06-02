@@ -64,7 +64,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			hiss, jump
+			jump
 		]
 	},
 	{
@@ -82,7 +82,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			run, hiss, jump, lick, paw, paw_2
+			run, jump
 		]
 	},
 ]

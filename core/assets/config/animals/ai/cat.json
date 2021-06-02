@@ -32,8 +32,9 @@
 			type: RUN_AWAY_AI,
 			
 			distanceToStopRunning: 0f,
+			distanceToKeepFromPlayer: 1.5f,
 			
-			stateNameMove: move,
+			stateNameMove: run,
 			stateNameIdle: idle,
 			
 			subAI: {
