@@ -28,13 +28,10 @@
   <object id="137" name="enemy.mini_golem" x="256" y="464">
    <point/>
   </object>
-  <object id="138" name="animal.squirrel" x="567.667" y="857">
+  <object id="138" name="animal.squirrel" x="568.334" y="785">
    <point/>
   </object>
-  <object id="139" name="animal.armadillo" x="568" y="745.333">
-   <properties>
-    <property name="aiType" value="armadillo_curl"/>
-   </properties>
+  <object id="139" name="animal.armadillo" x="591.333" y="468.666">
    <point/>
   </object>
   <object id="140" name="animal.dragonfly" x="503.667" y="440.667">
@@ -46,13 +43,10 @@
   <object id="142" name="animal.hedgehog" x="770.333" y="797.667">
    <point/>
   </object>
-  <object id="143" name="animal.cat" x="356" y="786.666">
-   <properties>
-    <property name="aiType" value="random_idle_states_cat"/>
-   </properties>
+  <object id="143" name="animal.cat" x="334.667" y="791.999">
    <point/>
   </object>
-  <object id="144" name="animal.fox" x="168" y="451.333">
+  <object id="144" name="animal.fox" x="544" y="624">
    <point/>
   </object>
   <object id="145" name="animal.pig" x="429.333" y="469.333">

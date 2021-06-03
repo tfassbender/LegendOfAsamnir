@@ -23,7 +23,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			move, eat 
+			move
 		]
 	},
 	{
@@ -32,7 +32,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			move, dig
+			move
 		]
 	},
 	{

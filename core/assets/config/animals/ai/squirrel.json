@@ -11,17 +11,35 @@
 			stateNameIdle: idle,
 			
 			subAI: {
-				type: RANDOM_MOVEMENT_AI,
-				
-				stateNameMove: move,
-				stateNameIdle: move,
-				
-				maxMoveDistance: 3f,
-				movementSpeedFactor: 0.5f,
-				
-				distanceToKeepFromPlayer: 3f,
+				type: RANDOM_IDLE_STATES_MOVEMENT_AI,
 				
 				useRelativePositions: true,
+			
+				stateNameMove: move,
+				stateNameIdle: idle,
+			
+				movementProbability: 0.15f,
+			    maxMoveDistance: 4f,
+				distanceToKeepFromPlayer: 3f,
+				
+				idleStates: {
+					idle: {
+						probability: 0.6,
+					},
+					idle_2: {
+						probability: 0.2,
+					},
+					dig: {
+						probability: 0.1,
+						minRepetitions: 5,
+						maxRepetitions: 10,
+					},
+					eat: {
+						probability: 0.1,
+						minRepetitions: 10,
+						maxRepetitions: 15
+					}
+				}
 				
 				subAI: {
 					type: BASE_AI,

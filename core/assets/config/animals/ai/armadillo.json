@@ -2,32 +2,6 @@
 	defaultAI: armadillo,
 	aiConfigurations: {
 		armadillo: {
-			type: RUN_AWAY_AI,
-			
-			distanceToKeepFromPlayer: 3f,
-			distanceToStopRunning: 0f,
-			
-			stateNameMove: move,
-			stateNameIdle: idle,
-			
-			subAI: {
-				type: RANDOM_MOVEMENT_AI,
-				
-				stateNameMove: move,
-				stateNameIdle: move,
-				
-				maxMoveDistance: 3f,
-				
-				distanceToKeepFromPlayer: 3f,
-				
-				useRelativePositions: true,
-				
-				subAI: {
-					type: BASE_AI,
-				}
-			}
-		},
-		armadillo_curl: {
 			type: CHANGE_STATE_WHEN_PLAYER_NEAR_AI,
 			
 			stateNameAction: curl,
@@ -44,16 +18,22 @@
 				stateNameIdle: idle,
 				
 				subAI: {
-					type: RANDOM_MOVEMENT_AI,
-					
-					stateNameMove: move,
-					stateNameIdle: move,
-					
-					maxMoveDistance: 3f,
-					
-					distanceToKeepFromPlayer: 3f,
+					type: RANDOM_IDLE_STATES_MOVEMENT_AI,
 					
 					useRelativePositions: true,
+				
+					stateNameMove: move,
+					stateNameIdle: idle,
+				
+					movementProbability: 0.05f,
+				    maxMoveDistance: 4f,
+					distanceToKeepFromPlayer: 3f,
+					
+					idleStates: {
+						idle: {
+							probability: 1,
+						},
+					}
 					
 					subAI: {
 						type: BASE_AI,
