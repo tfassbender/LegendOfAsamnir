@@ -130,6 +130,17 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	}
 	
 	@Override
+	public String toString() {
+		return getTypeAndPositionAsString();
+	}
+	
+	public String getTypeAndPositionAsString() {
+		return "[Type: " + getTypeConfig().typeName + " ; Position: " + properties.get("x") + ", " + properties.get("y") + "]";
+	}
+	
+	protected abstract CharacterTypeConfig getTypeConfig();
+	
+	@Override
 	public String getUnitId() {
 		return properties.get(CutsceneControlledUnit.MAP_PROPERTIES_KEY_UNIT_ID, String.class);
 	}

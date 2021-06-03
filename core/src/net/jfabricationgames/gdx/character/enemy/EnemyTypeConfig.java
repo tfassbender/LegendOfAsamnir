@@ -2,9 +2,10 @@ package net.jfabricationgames.gdx.character.enemy;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
-public class EnemyTypeConfig {
+public class EnemyTypeConfig extends CharacterTypeConfig {
 	
 	public String animationsConfig;//the animation config file that is to be loaded (by the factory)
 	public String stateConfig;//the state config file that is to be loaded (by the StateMachine)

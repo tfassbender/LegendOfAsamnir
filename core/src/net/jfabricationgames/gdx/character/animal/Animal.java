@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
+import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -70,6 +71,11 @@ public class Animal extends AbstractCharacter {
 			ai.calculateMove(delta);
 			ai.executeMove(delta);
 		}
+	}
+	
+	@Override
+	protected CharacterTypeConfig getTypeConfig() {
+		return typeConfig;
 	}
 	
 	@Override

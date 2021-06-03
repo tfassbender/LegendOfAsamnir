@@ -24,7 +24,7 @@ public class RandomIdleStatesAI extends AbstractArtificialIntelligence {
 	@Override
 	public void setCharacter(AbstractCharacter character) {
 		super.setCharacter(character);
-		handler = new RandomIdleStatesHandler(stateMachine, idleStateProbabilities);
+		handler = new RandomIdleStatesHandler(character, stateMachine, idleStateProbabilities);
 	}
 	
 	@Override

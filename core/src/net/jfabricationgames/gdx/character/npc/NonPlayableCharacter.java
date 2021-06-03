@@ -12,6 +12,7 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
+import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -133,6 +134,11 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		return typeConfig.interactionPossible && // 
 				(!interactionAnimation.isAnimationFinished() // the animation (to appear or disappear) is still playing 
 						|| interactionAnimation.getAnimation().getPlayMode() == PlayMode.NORMAL);// the interaction icon appeared and is to be shown (animation finished)
+	}
+	
+	@Override
+	protected CharacterTypeConfig getTypeConfig() {
+		return typeConfig;
 	}
 	
 	@Override

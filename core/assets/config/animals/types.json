@@ -1,5 +1,7 @@
 {
 	armadillo: {
+		typeName: armadillo,
+		
 		animationsConfig: config/animation/animals/armadillo.json,
 		stateConfig: config/animals/states/armadillo.json,
 		initialState: idle,
@@ -17,6 +19,8 @@
 		sensorRadius: 4f,
 	},
 	cat: {
+		typeName: cat,
+		
 		animationsConfig: config/animation/animals/cat.json,
 		stateConfig: config/animals/states/cat.json,
 		initialState: idle,
@@ -34,6 +38,8 @@
 		sensorRadius: 5f,
 	},
 	crab: {
+		typeName: crab,
+		
 		animationsConfig: config/animation/animals/crab.json,
 		stateConfig: config/animals/states/crab.json,
 		initialState: idle,
@@ -51,6 +57,8 @@
 		sensorRadius: 3f,
 	},
 	dragonfly: {
+		typeName: dragonfly,
+		
 		animationsConfig: config/animation/animals/dragonfly.json,
 		stateConfig: config/animals/states/dragonfly.json,
 		initialState: idle,
@@ -68,6 +76,8 @@
 		sensorRadius: 5f,
 	},
 	fox: {
+		typeName: fox,
+		
 		animationsConfig: config/animation/animals/fox.json,
 		stateConfig: config/animals/states/fox.json,
 		initialState: idle,
@@ -85,6 +95,8 @@
 		sensorRadius: 5f,
 	},
 	hedgehog: {
+		typeName: hedgehog,
+		
 		animationsConfig: config/animation/animals/hedgehog.json,
 		stateConfig: config/animals/states/hedgehog.json,
 		initialState: idle,
@@ -102,6 +114,8 @@
 		sensorRadius: 3f,
 	},
 	pig: {
+		typeName: pig,
+		
 		animationsConfig: config/animation/animals/pig.json,
 		stateConfig: config/animals/states/pig.json,
 		initialState: idle,
@@ -119,6 +133,8 @@
 		sensorRadius: 5f,
 	},
 	squirrel: {
+		typeName: squirrel,
+		
 		animationsConfig: config/animation/animals/squirrel.json,
 		stateConfig: config/animals/states/squirrel.json,
 		initialState: idle,
@@ -136,6 +152,8 @@
 		sensorRadius: 5f,
 	},
 	twig_blight: {
+		typeName: twig_blight,
+		
 		animationsConfig: config/animation/animals/twig_blight.json,
 		stateConfig: config/animals/states/twig_blight.json,
 		initialState: idle,

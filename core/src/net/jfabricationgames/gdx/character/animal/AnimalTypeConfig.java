@@ -1,8 +1,9 @@
 package net.jfabricationgames.gdx.character.animal;
 
+import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
-public class AnimalTypeConfig {
+public class AnimalTypeConfig extends CharacterTypeConfig {
 	
 	public String animationsConfig;//the animation config file that is to be loaded (by the factory)
 	public String stateConfig;//the state config file that is to be loaded (by the StateMachine)

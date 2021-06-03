@@ -1,5 +1,7 @@
 {
 	bat: {
+		typeName: bat,
+		
 		animationsConfig: config/animation/enemy/bat.json,
 		stateConfig: config/enemy/states/bat.json,
 		initialState: move,
@@ -26,6 +28,8 @@
 		}
 	},
 	gladiator: {
+		typeName: gladiator,
+		
 		animationsConfig: config/animation/enemy/gladiator.json,
 		stateConfig: config/enemy/states/gladiator.json,
 		initialState: idle,
@@ -53,6 +57,8 @@
 		}
 	},
 	mini_golem: {
+		typeName: mini_golem,
+		
 		animationsConfig: config/animation/enemy/mini_golem.json,
 		stateConfig: config/enemy/states/mini_golem.json,
 		initialState: idle,
@@ -79,6 +85,8 @@
 		}
 	},
 	minotaur: {
+		typeName: minotaur,
+		
 		animationsConfig: config/animation/enemy/minotaur.json,
 		stateConfig: config/enemy/states/minotaur.json,
 		initialState: idle,
@@ -106,6 +114,8 @@
 		healthBarWidthFactor: 0.5,
 	},
 	spider: {
+		typeName: spider,
+		
 		animationsConfig: config/animation/enemy/spider.json,
 		stateConfig: config/enemy/states/spider.json,
 		initialState: idle,
@@ -133,6 +143,8 @@
 		}
 	},
 	mimic_chest: {
+		typeName: mimic_chest,
+		
 		animationsConfig: config/animation/enemy/mimic_chest.json,
 		stateConfig: config/enemy/states/mimic_chest.json,
 		initialState: waiting,
@@ -162,6 +174,8 @@
 		}
 	},
 	mimic_barrel: {
+		typeName: mimic_barrel,
+		
 		animationsConfig: config/animation/enemy/mimic_barrel.json,
 		stateConfig: config/enemy/states/mimic_barrel.json,
 		initialState: waiting,
@@ -191,6 +205,8 @@
 		}
 	},
 	cobra: {
+		typeName: cobra,
+		
 		animationsConfig: config/animation/enemy/cobra.json,
 		stateConfig: config/enemy/states/cobra.json,
 		initialState: idle,
@@ -218,6 +234,8 @@
 		}
 	},
 	fire_elemental: {
+		typeName: fire_elemental,
+		
 		animationsConfig: config/animation/enemy/fire_elemental.json,
 		stateConfig: config/enemy/states/fire_elemental.json,
 		initialState: idle,
@@ -244,6 +262,8 @@
 		}
 	},
 	ice_elemental: {
+		typeName: ice_elemental,
+		
 		animationsConfig: config/animation/enemy/ice_elemental.json,
 		stateConfig: config/enemy/states/ice_elemental.json,
 		initialState: idle,
@@ -270,6 +290,8 @@
 		}
 	},
 	imp: {
+		typeName: imp,
+		
 		animationsConfig: config/animation/enemy/imp.json,
 		stateConfig: config/enemy/states/imp.json,
 		initialState: idle,
@@ -298,6 +320,8 @@
 		}
 	},
 	cyclops: {
+		typeName: cyclops,
+		
 		animationsConfig: config/animation/enemy/cyclops.json,
 		stateConfig: config/enemy/states/cyclops.json,
 		initialState: idle,

@@ -15,6 +15,7 @@ import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
+import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
@@ -114,6 +115,11 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		if (typeConfig.addSensor) {
 			CharacterPhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
 		}
+	}
+	
+	@Override
+	protected CharacterTypeConfig getTypeConfig() {
+		return typeConfig;
 	}
 	
 	@Override
