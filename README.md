@@ -13,6 +13,7 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 - [Inputs](#inputs)
 - [Enemies](#enemies)
 - [NPCs](#npcs)
+- [Animals](#animals)
 - [Attacks](#attacks)
 - [Events](#events)
 - [Cutscenes](#cutscenes)
@@ -74,7 +75,7 @@ Most enemies act slightly different, but have many things in common. But not all
 
 #### Configuration
 
-Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/enemy/ai/config/EnemyAiConfig.java), that includes a map of named AI types. Which of the AI types is chosen for an instance can be configured in the map properties of the enemy. If nothing is configured in the map properties, the default value, that is configured in the [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/enemy/ai/config/EnemyAiConfig.java) object is used. The type configurations can be parsed to an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
+Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/ai/config/AiConfig.java), that includes a map of named AI types. Which of the AI types is chosen for an instance can be configured in the map properties of the enemy. If nothing is configured in the map properties, the default value, that is configured in the [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/enemy/ai/config/EnemyAiConfig.java) object is used. The type configurations can be parsed to an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
 
 Most enemy types can be configured in these files, because they use the common AI types. Some enemies are to specialized to be build by a configuration file. The AI of these enemies is created in the code. An example for a class that creates it's AI in the code is [Minotaur](core/src/net/jfabricationgames/gdx/character/enemy/implementation/Minotaur.java).  
 **Note:** A subclass of Enemy, that defines it's AI in the class code needs to be added to the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) code, to load the correct class when instantiating the enemy.
@@ -175,6 +176,67 @@ Since there can be many NPCs in a game, the configuration files [types.json](cor
 ```
 
 The NPC's main configuration file references a `graphicsConfigurationFile`, because many NPCs can use one graphics configuration, but define different behaviors. The NPCs behavior is defined in the `aiConfig` field, that defines the build up of an AI like explained in the [AI](#ai) section of the [Enemies](#enemies) description. The `interactionEventId` defines the event parameter, that is added to the [Event](#events), that is fired when the player interacts with the NPC. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the event is `NPC_INTERACTION`. These events can be consumed by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java), if they are defined in a global event listener config file, that is referenced by the main global event config file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json).
+
+## Animals
+
+Animals are similar to [Enemies](#enemies) or [NPCs](#npcs). They are restricted to not attack nor interact with the player. The animal types are defined in the json config file [types.json](core/assets/config/animals/types.json). This configuration file defines a map of configurations of the type [AnimalTypeConfig](core/src/net/jfabricationgames/gdx/character/animal/AnimalTypeConfig.java).
+
+The animals can be configured to use [states](#states) and an [AI](#ai) like [Enemies](#enemies) and [NPCs](#npcs). The AIs can be configured to make the animals move around, switch to multiple idle states or change to specified states when the player gets near. An example for an animal's AI configuration can be found in the configuration file [squirrel.json](core/assets/config/animals/ai/squirrel.json).
+
+```javascript
+{
+	defaultAI: squirrel,
+	aiConfigurations: {
+		squirrel: {
+			type: RUN_AWAY_AI,
+			
+			distanceToKeepFromPlayer: 3f,
+			distanceToStopRunning: 0f,
+			
+			stateNameMove: move,
+			stateNameIdle: idle,
+			
+			subAI: {
+				type: RANDOM_IDLE_STATES_MOVEMENT_AI,
+				
+				useRelativePositions: true,
+			
+				stateNameMove: move,
+				stateNameIdle: idle,
+			
+				movementProbability: 0.15f,
+			    maxMoveDistance: 4f,
+				distanceToKeepFromPlayer: 3f,
+				
+				idleStates: {
+					idle: {
+						probability: 0.6,
+					},
+					idle_2: {
+						probability: 0.2,
+					},
+					dig: {
+						probability: 0.1,
+						minRepetitions: 5,
+						maxRepetitions: 10,
+					},
+					eat: {
+						probability: 0.1,
+						minRepetitions: 10,
+						maxRepetitions: 15
+					}
+				}
+				
+				subAI: {
+					type: BASE_AI,
+				}
+			}
+		}
+	}
+}
+```
+
+This configuration file defines the AI of the squirrel, that moves around, or changes to multiple idle states randomly and runs away if the player gets to close to it.
 
 ## Attacks
 
