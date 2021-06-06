@@ -53,8 +53,8 @@
 				</controller>
 			</state>
 			
-			<!-- attacking dwarf -->
 			<state name="attack">
+				<key code="R-Ctrl" />
 				<button code="Left" /><!-- left mouse button -->
 				<controller player="1">
 					<button code="0" />
@@ -63,6 +63,7 @@
 			</state>
 			
 			<state name="block">
+				<key code="R-Shift" />
 				<button code="Right" /><!-- right mouse button to block -->
 				<controller>
 					<button code="1" />
@@ -133,6 +134,7 @@
 			    (should usually be the left analog stick). Works on all attached controllers -->
 			<action name="up">
 				<key code="W" />
+				<key code="Up" />
 				<controller>
 					<button code="11" />
 					<axis code="1" threshold="-0.5" />
@@ -140,6 +142,7 @@
 			</action>
 			<action name="down">
 				<key code="S" />
+				<key code="Down" />
 				<controller>
 					<button code="12" />
 					<axis code="1" threshold="0.5" />
@@ -147,6 +150,7 @@
 			</action>
 			<action name="left">
 				<key code="A" />
+				<key code="Left" />
 				<controller>
 					<button code="13" />
 					<axis code="0" threshold="-0.5" />
@@ -154,6 +158,7 @@
 			</action>
 			<action name="right">
 				<key code="D" />
+				<key code="Right" />
 				<controller>
 					<button code="14" />
 					<axis code="0" threshold="0.5" />
@@ -187,6 +192,7 @@
 		<actions>
 			<action name="up">
 				<key code="Up" />
+				<key code="W" />
 				<controller>
 					<button code="11" />
 					<axis code="1" threshold="-0.5" />
@@ -194,6 +200,7 @@
 			</action>
 			<action name="down">
 				<key code="Down" />
+				<key code="S" />
 				<controller>
 					<button code="12" />
 					<axis code="1" threshold="0.5" />
@@ -201,6 +208,7 @@
 			</action>
 			<action name="left">
 				<key code="Left" />
+				<key code="A" />
 				<controller>
 					<button code="13" />
 					<axis code="0" threshold="-0.5" />
@@ -208,6 +216,7 @@
 			</action>
 			<action name="right">
 				<key code="Right" />
+				<key code="D" />
 				<controller>
 					<button code="14" />
 					<axis code="0" threshold="0.5" />
@@ -240,6 +249,7 @@
 		<actions>
 			<action name="up">
 				<key code="Up" />
+				<key code="W" />
 				<controller>
 					<button code="11" />
 					<axis code="1" threshold="-0.5" />
@@ -247,6 +257,7 @@
 			</action>
 			<action name="down">
 				<key code="Down" />
+				<key code="S" />
 				<controller>
 					<button code="12" />
 					<axis code="1" threshold="0.5" />
@@ -254,6 +265,7 @@
 			</action>
 			<action name="left">
 				<key code="Left" />
+				<key code="A" />
 				<controller>
 					<button code="13" />
 					<axis code="0" threshold="-0.5" />
@@ -261,6 +273,7 @@
 			</action>
 			<action name="right">
 				<key code="Right" />
+				<key code="D" />
 				<controller>
 					<button code="14" />
 					<axis code="0" threshold="0.5" />
@@ -301,6 +314,7 @@
 		<actions>
 			<action name="up">
 				<key code="Up" />
+				<key code="W" />
 				<controller>
 					<button code="11" />
 					<axis code="1" threshold="-0.5" />
@@ -308,6 +322,7 @@
 			</action>
 			<action name="down">
 				<key code="Down" />
+				<key code="S" />
 				<controller>
 					<button code="12" />
 					<axis code="1" threshold="0.5" />
@@ -315,6 +330,7 @@
 			</action>
 			<action name="left">
 				<key code="Left" />
+				<key code="A" />
 				<controller>
 					<button code="13" />
 					<axis code="0" threshold="-0.5" />
@@ -322,6 +338,7 @@
 			</action>
 			<action name="right">
 				<key code="Right" />
+				<key code="D" />
 				<controller>
 					<button code="14" />
 					<axis code="0" threshold="0.5" />

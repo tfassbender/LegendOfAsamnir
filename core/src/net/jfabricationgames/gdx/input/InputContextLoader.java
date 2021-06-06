@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -129,12 +130,16 @@ public class InputContextLoader {
 			Element element = contextElement.getChild(i);
 			String elementName = element.getAttribute("name");
 			
-			Element keyElement = element.getChildByName("key");
-			Element buttonElement = element.getChildByName("button");
+			Array<Element> keyElements = element.getChildrenByName("key");
+			Array<Element> buttonElements = element.getChildrenByName("button");
 			Element controllerElement = element.getChildByName("controller");
 			
-			loadKeyElement(elementName, keyElement);
-			loadButtonElement(elementName, buttonElement);
+			for (Element keyElement : keyElements) {
+				loadKeyElement(elementName, keyElement);
+			}
+			for (Element buttonElement : buttonElements) {
+				loadButtonElement(elementName, buttonElement);
+			}
 			loadControllerElement(elementName, controllerElement);
 		}
 	}
