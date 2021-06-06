@@ -28,8 +28,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
 	
 	@MapObjectState
-	private boolean actionExecuted = false;
-	private boolean changedBodyToSensor = false;
+	protected boolean actionExecuted = false;
+	protected boolean changedBodyToSensor = false;
 	private AnimationDirector<TextureRegion> interactionAnimation;
 	
 	public InteractiveObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
@@ -96,7 +96,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 			interactionAnimation.draw(batch);
 		}
 		
-		if (changeBodyToSensorAfterAction()) {
+		if (isChangeBodyToSensorAfterAction()) {
 			changedBodyToSensor = true;
 			changeBodyToSensor();
 		}
@@ -108,7 +108,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 						|| interactionAnimation.getAnimation().getPlayMode() == PlayMode.NORMAL); // the interaction icon appeared and is to be shown (animation finished)
 	}
 	
-	private boolean changeBodyToSensorAfterAction() {
+	private boolean isChangeBodyToSensorAfterAction() {
 		return actionExecuted && animation != null && animation.isAnimationFinished() && typeConfig.changeBodyToSensorAfterAction
 				&& !changedBodyToSensor;
 	}
@@ -130,9 +130,6 @@ public class InteractiveObject extends GameObject implements Interactive {
 	@Override
 	public void interact() {
 		if (interactionCanBeExecuted()) {
-			if (typeConfig.animationAction != null) {
-				animation = getActionAnimation();
-			}
 			executeInteraction();
 		}
 	}
@@ -141,12 +138,17 @@ public class InteractiveObject extends GameObject implements Interactive {
 	public boolean interactionCanBeExecuted() {
 		return canBeExecutedByConfig();
 	}
+	
 	private boolean canBeExecutedByConfig() {
 		return typeConfig.multipleActionExecutionsPossible || !actionExecuted;
 	}
 	
-	private void executeInteraction() {
+	protected void executeInteraction() {
 		actionExecuted = true;
+		if (typeConfig.animationAction != null) {
+			animation = getActionAnimation();
+		}
+		
 		performAction();
 		dropItems();
 		if (typeConfig.textureAfterAction != null) {
@@ -161,7 +163,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 		return character.getPosition().sub(body.getPosition()).len();
 	}
 	
-	private void performAction() {
+	protected void performAction() {
 		if (typeConfig.interactiveAction != null) {
 			typeConfig.interactiveAction.execute(this);
 		}

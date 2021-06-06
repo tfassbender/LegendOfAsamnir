@@ -76,4 +76,32 @@
 			cutsceneId: demoLevel_talkToFemaleAdventurer,
 		}
 	},
+	demoLevel_stateSwitchesActivated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demoLevel_switch_group_1,
+		}
+		executionType: CONDITIONAL_EVENT,
+		condition: {
+			conditionId: demoLevel_bothSwitchesActivated,
+			thenCase: {
+				type: EVENT,
+				eventConfig: {
+					executionType: OPEN_LOCK,
+					executionParameters: {
+						lockId: demoLevel_lock_switch_group_1
+					}
+				}
+			}
+			elseCase: {
+				type: EVENT,
+				eventConfig: {
+					executionType: CLOSE_LOCK,
+					executionParameters: {
+						lockId: demoLevel_lock_switch_group_1
+					}
+				}
+			}
+		}
+	}
 }

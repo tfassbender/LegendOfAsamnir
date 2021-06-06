@@ -96,6 +96,26 @@ public enum GlobalEventExecutionType {
 			String item = eventConfig.executionParameters.get(MAP_KEY_ITEM_NAME);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SET_ITEM).setStringValue(item));
 		}
+	},
+	OPEN_LOCK {
+		
+		private static final String MAP_KEY_LOCK_ID = "lockId";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String lockId = eventConfig.executionParameters.get(MAP_KEY_LOCK_ID);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.OPEN_LOCK).setStringValue(lockId));
+		}
+	},
+	CLOSE_LOCK {
+		
+		private static final String MAP_KEY_LOCK_ID = "lockId";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String lockId = eventConfig.executionParameters.get(MAP_KEY_LOCK_ID);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CLOSE_LOCK).setStringValue(lockId));
+		}
 	};
 	
 	public abstract void execute(GlobalEventConfig eventConfig);

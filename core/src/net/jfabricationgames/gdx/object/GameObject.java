@@ -96,7 +96,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	public String getMapObjectId() {
 		return StatefulMapObject.getMapObjectId(mapProperties);
 	}
-
+	
 	@Override
 	public void applyState(ObjectMap<String, String> state) {}
 	
@@ -169,8 +169,12 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	}
 	
 	protected AnimationDirector<TextureRegion> getActionAnimation() {
-		if (typeConfig.animationAction != null) {
-			AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationAction);
+		return getAnimation(typeConfig.animationAction);
+	}
+	
+	protected AnimationDirector<TextureRegion> getAnimation(String animationName) {
+		if (animationName != null) {
+			AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(animationName);
 			animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
 			return animation;
 		}
@@ -205,6 +209,12 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	protected void changeBodyToSensor() {
 		for (Fixture fixture : body.getFixtureList()) {
 			fixture.setSensor(true);
+		}
+	}
+	
+	public void changeBodyToNonSensor() {
+		for (Fixture fixture : body.getFixtureList()) {
+			fixture.setSensor(false);
 		}
 	}
 	

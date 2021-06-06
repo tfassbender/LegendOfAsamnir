@@ -80,6 +80,13 @@
 			playMode: NORMAL
 		},
 		{
+			alias: key_wall_close,
+			name: key_wall_open,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: REVERSED
+		},
+		{
 			name: door_open,
 			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,

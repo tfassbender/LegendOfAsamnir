@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.condition;
 
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
+import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 
 public enum ConditionType {
 	
@@ -42,13 +43,23 @@ public enum ConditionType {
 		}
 	},
 	HAS_COINS {
-
+		
 		private static final String PARAMETERS_KEY_COINS = "atLeast";
 		
 		@Override
 		public boolean check(Condition condition) {
 			int coinsNeeded = Integer.parseInt(condition.parameters.get(PARAMETERS_KEY_COINS));
 			return CharacterPropertiesDataHandler.getInstance().getCoins() >= coinsNeeded;
+		}
+	},
+	STATE_SWITCH_ACTIVE {
+		
+		private static final String STATE_SWITCH_ID = "stateSwitchId";
+		
+		@Override
+		public boolean check(Condition condition) {
+			String stateSwitchId = condition.parameters.get(STATE_SWITCH_ID);
+			return StateSwitchObject.isStateSwitchActive(stateSwitchId);
 		}
 	};
 	

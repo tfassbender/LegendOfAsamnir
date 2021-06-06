@@ -15,6 +15,7 @@ import net.jfabricationgames.gdx.object.destroyable.DestroyableObject;
 import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
 import net.jfabricationgames.gdx.object.interactive.LockedObject;
+import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -63,6 +64,9 @@ public class GameObjectFactory extends AbstractFactory {
 				break;
 			case LOCKED:
 				object = new LockedObject(typeConfig, sprite, properties);
+				break;
+			case STATE_SWITCH:
+				object = new StateSwitchObject(typeConfig, sprite, properties);
 				break;
 			case SPAWN_POINT:
 				object = new SpawnPoint(typeConfig, sprite, properties);

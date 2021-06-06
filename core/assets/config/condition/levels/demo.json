@@ -4,5 +4,22 @@
 		parameters: {
 			itemId: demoLevel_endItem
 		}
+	},
+	demoLevel_bothSwitchesActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demoLevel_switch_1,
+				}
+			},
+			condition2: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demoLevel_switch_2,
+				}
+			}
+		}
 	}
 }

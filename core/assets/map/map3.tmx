@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="172">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="175">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
@@ -438,6 +438,27 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
   <object id="171" name="object.key_wall" x="960" y="160">
+   <point/>
+  </object>
+  <object id="172" name="object.button" x="495.333" y="1265.33">
+   <properties>
+    <property name="eventParameter" value="demoLevel_switch_group_1"/>
+    <property name="stateSwitchId" value="demoLevel_switch_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="173" name="object.switch" x="528.667" y="1265.33">
+   <properties>
+    <property name="eventParameter" value="demoLevel_switch_group_1"/>
+    <property name="stateSwitchId" value="demoLevel_switch_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="174" name="object.key_wall" x="608.333" y="1264.67">
+   <properties>
+    <property name="lockId" value="demoLevel_lock_switch_group_1"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

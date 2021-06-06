@@ -127,6 +127,7 @@
 		textureAfterAction: key_wall_open_33,
 		changeBodyToSensorAfterAction: true,
 		animationAction: key_wall_open,
+		animationActionReversed: key_wall_close,
 		
 		interactionMarkerOffsetX: 0.15f,
 		interactionMarkerOffsetY: 0.15f,
@@ -216,4 +217,72 @@
 		
 		defaultLocked: true,
 	},
+	button: {
+		type: STATE_SWITCH,
+		
+		texture: button_wall_up,
+		textureAfterAction: button_wall_down,
+		
+		physicsBodySizeFactorX: 0.6f,
+		physicsBodySizeFactorY: 0.6f,
+		physicsBodyOffsetFactorX: 0f,
+		physicsBodyOffsetFactorY: 0f,
+		
+		interactionMarkerOffsetX: 0.15f,
+		interactionMarkerOffsetY: 0.1f,
+		
+		addSensor: true,
+		sensorRadius: 0.4f,
+	},
+	switch: {
+		type: STATE_SWITCH,
+		
+		texture: switch_wall_up,
+		textureAfterAction: switch_wall_down,
+		
+		physicsBodySizeFactorX: 0.6f,
+		physicsBodySizeFactorY: 0.6f,
+		physicsBodyOffsetFactorX: 0f,
+		physicsBodyOffsetFactorY: 0f,
+		
+		interactionMarkerOffsetX: 0.15f,
+		interactionMarkerOffsetY: 0.1f,
+		
+		addSensor: true,
+		sensorRadius: 0.4f,
+	},
+	pressure_button: {
+		type: STATE_SWITCH,
+		
+		texture: button_floor_up,
+		textureAfterAction: button_wall_down,
+		
+		physicsBodySizeFactorX: 0.6f,
+		physicsBodySizeFactorY: 0.6f,
+		physicsBodyOffsetFactorX: 0f,
+		physicsBodyOffsetFactorY: 0f,
+		
+		interactionMarkerOffsetX: 0.15f,
+		interactionMarkerOffsetY: 0.1f,
+		
+		addSensor: true,
+		sensorRadius: 0.4f,
+	},
+	bottom_switch: {
+		type: STATE_SWITCH,
+		
+		texture: switch_floor_up,
+		textureAfterAction: switch_floor_down,
+		
+		physicsBodySizeFactorX: 0.6f,
+		physicsBodySizeFactorY: 0.6f,
+		physicsBodyOffsetFactorX: 0f,
+		physicsBodyOffsetFactorY: 0f,
+		
+		interactionMarkerOffsetX: 0.15f,
+		interactionMarkerOffsetY: 0.1f,
+		
+		addSensor: true,
+		sensorRadius: 0.4f,
+	}
 }
