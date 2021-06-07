@@ -251,22 +251,20 @@
 		addSensor: true,
 		sensorRadius: 0.4f,
 	},
-	pressure_button: {
+	pressure_switch: {
 		type: STATE_SWITCH,
 		
 		texture: button_floor_up,
-		textureAfterAction: button_wall_down,
+		textureAfterAction: button_floor_down,
 		
-		physicsBodySizeFactorX: 0.6f,
-		physicsBodySizeFactorY: 0.6f,
+		physicsBodySizeFactorX: 0.2f,
+		physicsBodySizeFactorY: 0.2f,
 		physicsBodyOffsetFactorX: 0f,
 		physicsBodyOffsetFactorY: 0f,
 		
-		interactionMarkerOffsetX: 0.15f,
-		interactionMarkerOffsetY: 0.1f,
-		
 		addSensor: false,
 		isSensor: true,
+		pressureActivated: true,
 	},
 	bottom_switch: {
 		type: STATE_SWITCH,

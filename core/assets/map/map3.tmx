@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="176">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="177">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
@@ -462,6 +462,13 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
   <object id="175" name="object.movable_rock" x="687.333" y="1264.33">
+   <point/>
+  </object>
+  <object id="176" name="object.pressure_switch" x="720" y="1264.33">
+   <properties>
+    <property name="eventParameter" value="demoLevel_switch_group_1"/>
+    <property name="stateSwitchId" value="demoLevel_pressure_switch"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

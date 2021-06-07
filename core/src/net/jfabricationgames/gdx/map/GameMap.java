@@ -41,6 +41,7 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectFactory;
+import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.physics.AfterWorldStep;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -472,6 +473,24 @@ public class GameMap implements EventListener, Disposable {
 	public void addObject(GameObject object) {
 		objects.add(object);
 		object.postAddToGameMap();
+		
+		sortMovableGameObjectsLast();
+	}
+	
+	/**
+	 * Sort movable game objects to the end of the list, to make them drawn on top of other objects.
+	 */
+	private void sortMovableGameObjectsLast() {
+		int listSize = objects.size;
+		for (int i = 0; i < listSize; i++) {
+			GameObject object = objects.get(i);
+			if (object instanceof MovableObject) {
+				objects.removeIndex(i);
+				listSize--;
+				i--;
+				objects.add(object);
+			}
+		}
 	}
 	
 	public void removeObject(GameObject gameObject, Body body) {

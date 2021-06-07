@@ -15,9 +15,20 @@
 				}
 			},
 			condition2: {
-				conditionType: STATE_SWITCH_ACTIVE,
-				parameters: {
-					stateSwitchId: demoLevel_switch_2,
+				conditionType: AND,
+				conditionalParameters: {
+					condition: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demoLevel_switch_2,
+						}
+					},
+					condition2: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demoLevel_pressure_switch,
+						}
+					}
 				}
 			}
 		}

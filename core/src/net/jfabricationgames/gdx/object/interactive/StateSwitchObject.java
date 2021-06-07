@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.object.interactive;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
@@ -11,6 +12,8 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
+import net.jfabricationgames.gdx.physics.CollisionUtil;
+import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class StateSwitchObject extends InteractiveObject {
 	
@@ -79,6 +82,34 @@ public class StateSwitchObject extends InteractiveObject {
 		if (mapProperties.containsKey(MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER)) {
 			String eventParameter = mapProperties.get(MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER, String.class);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.STATE_SWITCH_ACTION).setStringValue(eventParameter));
+		}
+	}
+	
+	@Override
+	public void beginContact(Contact contact) {
+		if (isPressureActivated()) {
+			if (CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, Object.class) != null) {
+				executeInteraction();
+			}
+		}
+		else {
+			super.beginContact(contact);
+		}
+	}
+	
+	private boolean isPressureActivated() {
+		return typeConfig.pressureActivated;
+	}
+	
+	@Override
+	public void endContact(Contact contact) {
+		if (isPressureActivated()) {
+			if (CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, Object.class) != null) {
+				executeInteraction();
+			}
+		}
+		else {
+			super.endContact(contact);
 		}
 	}
 }

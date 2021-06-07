@@ -70,4 +70,10 @@ public class GameObjectTypeConfig {
 	
 	public boolean defaultLocked = true;
 	public String animationActionReversed;
+	
+	//****************************************
+	//*** State Switch Objects
+	//****************************************
+	
+	public boolean pressureActivated = false;
 }
