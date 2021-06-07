@@ -116,11 +116,34 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		}
 	}
 	
+	@Override
+	protected void executeInteraction() {
+		float animationTime = 0;
+		boolean setAnimationTime = false;
+		if (animation != null) {
+			setAnimationTime = true;
+			animationTime = animation.getStateTime();
+		}
+		
+		super.executeInteraction();
+		
+		if (setAnimationTime) {
+			animation.setStateTime(animation.getAnimationDuration() - animationTime);
+		}
+	}
+	
 	private void reverseInteraction() {
 		actionExecuted = false;
+		
+		float animationTime = animation.getStateTime();
+		if (animation != null) {
+			animationTime = animation.getStateTime();
+		}
+		
 		if (typeConfig.animationActionReversed != null) {
 			animation = getReversedActionAnimation();
 		}
+		animation.setStateTime(animation.getAnimationDuration() - animationTime);
 		
 		if (typeConfig.textureAfterAction != null) {
 			sprite = createSprite(typeConfig.texture);
