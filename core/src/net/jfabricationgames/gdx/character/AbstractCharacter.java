@@ -252,4 +252,8 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	@Override
 	public abstract void removeFromMap();
+	
+	public boolean isRemovedFromMap() {
+		return body == null;
+	}
 }

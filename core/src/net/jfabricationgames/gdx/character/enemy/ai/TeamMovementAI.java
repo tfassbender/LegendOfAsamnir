@@ -70,7 +70,7 @@ public class TeamMovementAI extends FollowAI implements EventListener {
 	}
 	
 	private void informTeamMatesAboutNewTarget(PlayableCharacter collidingCharacter) {
-		if (teamId != null && !teamId.isEmpty()) {
+		if (teamId != null && !teamId.isEmpty() && !character.isRemovedFromMap()) {
 			TeamCallEventDto eventDto = new TeamCallEventDto() //
 					.setTeamId(teamId) //
 					.setTarget(collidingCharacter) //

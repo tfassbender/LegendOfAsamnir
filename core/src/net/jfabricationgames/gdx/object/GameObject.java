@@ -72,7 +72,8 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	
 	protected void readTypeConfig() {
 		physicsBodyProperties = new PhysicsBodyProperties().setType(typeConfig.bodyType).setSensor(typeConfig.isSensor).setDensity(typeConfig.density)
-				.setFriction(typeConfig.friction).setRestitution(typeConfig.restitution).setCollisionType(typeConfig.collisionType);
+				.setFriction(typeConfig.friction).setRestitution(typeConfig.restitution).setLinearDamping(typeConfig.linearDamping)
+				.setCollisionType(typeConfig.collisionType);
 		physicsBodySizeFactor = new Vector2(typeConfig.physicsBodySizeFactorX, typeConfig.physicsBodySizeFactorY);
 		physicsBodyOffsetFactor = new Vector2(typeConfig.physicsBodyOffsetFactorX, typeConfig.physicsBodyOffsetFactorY);
 		

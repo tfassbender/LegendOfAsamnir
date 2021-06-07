@@ -16,6 +16,7 @@ import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
 import net.jfabricationgames.gdx.object.interactive.LockedObject;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
+import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -73,6 +74,9 @@ public class GameObjectFactory extends AbstractFactory {
 				break;
 			case EVENT_OBJECT:
 				object = new EventObject(typeConfig, sprite, properties);
+				break;
+			case MOVABLE:
+				object = new MovableObject(typeConfig, sprite, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown GameObjectType \"" + typeConfig.type + "\" of object type \"" + type + "\"");

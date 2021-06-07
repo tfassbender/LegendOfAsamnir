@@ -24,9 +24,10 @@ public class GameObjectTypeConfig {
 	public float physicsBodyOffsetFactorY = 0f;
 	
 	public BodyType bodyType = BodyType.StaticBody;
-	public float density = 0f;
+	public float density = 10f;
 	public float friction = 0f;
 	public float restitution = 0f;
+	public float linearDamping = 10f;
 	public PhysicsCollisionType collisionType = PhysicsCollisionType.OBSTACLE;
 	public boolean isSensor = false;
 	public boolean addSensor = false;

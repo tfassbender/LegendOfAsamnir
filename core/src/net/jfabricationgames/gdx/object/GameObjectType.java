@@ -7,4 +7,5 @@ public enum GameObjectType {
 	STATE_SWITCH, //
 	SPAWN_POINT, //
 	EVENT_OBJECT, //
+	MOVABLE, //
 }

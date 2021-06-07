@@ -265,8 +265,8 @@
 		interactionMarkerOffsetX: 0.15f,
 		interactionMarkerOffsetY: 0.1f,
 		
-		addSensor: true,
-		sensorRadius: 0.4f,
+		addSensor: false,
+		isSensor: true,
 	},
 	bottom_switch: {
 		type: STATE_SWITCH,
@@ -284,5 +284,16 @@
 		
 		addSensor: true,
 		sensorRadius: 0.4f,
+	},
+	movable_rock: {
+		type: MOVABLE,
+		
+		bodyType: DynamicBody,
+		linearDamping: 5f,
+		collisionType: MAP_OBJECT,
+		
+		texture: stone,
+		
+		density: 5f,
 	}
 }

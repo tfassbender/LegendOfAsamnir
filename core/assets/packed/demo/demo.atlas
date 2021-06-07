@@ -122,13 +122,6 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
-adventurer_idle
-  rotate: false
-  xy: 986, 664
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
   index: 13
 adventurer_idle
   rotate: false
@@ -137,6 +130,13 @@ adventurer_idle
   orig: 32, 32
   offset: 0, 0
   index: 12
+adventurer_idle
+  rotate: false
+  xy: 986, 664
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
 adventurer_jump
   rotate: false
   xy: 986, 664
@@ -762,14 +762,14 @@ adventurer_move
   index: 6
 aim_marker_gray
   rotate: false
-  xy: 1088, 691
+  xy: 630, 0
   size: 5, 5
   orig: 5, 5
   offset: 0, 0
   index: -1
 aim_marker_red
   rotate: false
-  xy: 1640, 837
+  xy: 637, 0
   size: 5, 5
   orig: 5, 5
   offset: 0, 0
@@ -801,14 +801,14 @@ armadillo_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 armadillo_move
   rotate: false
   xy: 462, 8
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 armadillo_curl
   rotate: false
   xy: 496, 8
@@ -930,7 +930,7 @@ projectile_arrow
   index: -1
 axe
   rotate: false
-  xy: 756, 0
+  xy: 68, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1028,133 +1028,133 @@ barrel_hit
   index: 3
 bat_attack
   rotate: false
-  xy: 630, 6
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 1
-bat_attack
-  rotate: false
-  xy: 648, 0
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 2
-bat_attack
-  rotate: false
-  xy: 666, 0
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 3
-bat_attack
-  rotate: false
-  xy: 684, 0
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 4
-bat_attack
-  rotate: false
-  xy: 702, 0
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 5
-bat_die
-  rotate: false
-  xy: 720, 0
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 1
-bat_die
-  rotate: false
-  xy: 738, 0
-  size: 16, 24
-  orig: 16, 24
-  offset: 0, 0
-  index: 2
-bat_die
-  rotate: false
   xy: 1090, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
-  index: 3
-bat_die
+  index: 1
+bat_attack
   rotate: false
   xy: 1438, 400
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
+  index: 2
+bat_attack
+  rotate: false
+  xy: 1108, 596
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 3
+bat_attack
+  rotate: false
+  xy: 1438, 374
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 4
+bat_attack
+  rotate: false
+  xy: 1126, 596
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 5
+bat_die
+  rotate: false
+  xy: 1144, 596
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 1
+bat_die
+  rotate: false
+  xy: 1162, 596
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 2
+bat_die
+  rotate: false
+  xy: 1180, 596
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 3
+bat_die
+  rotate: false
+  xy: 1198, 596
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
   index: 4
 bat_die
   rotate: false
-  xy: 1108, 596
+  xy: 1216, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 5
 bat_fly
   rotate: false
-  xy: 1438, 374
+  xy: 1234, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 1
 bat_fly
   rotate: false
-  xy: 1126, 596
+  xy: 1252, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 2
 bat_fly
   rotate: false
-  xy: 1144, 596
+  xy: 1270, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 3
 bat_fly
   rotate: false
-  xy: 1162, 596
+  xy: 1288, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 4
 bat_fly
   rotate: false
-  xy: 1180, 596
+  xy: 1306, 596
   size: 16, 24
   orig: 16, 24
   offset: 0, 0
   index: 5
 big_coin
   rotate: false
-  xy: 774, 0
+  xy: 656, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 bomb
   rotate: false
-  xy: 792, 0
+  xy: 674, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 projectile_bomb
   rotate: false
-  xy: 792, 0
+  xy: 674, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 bow
   rotate: false
-  xy: 810, 0
+  xy: 692, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1245,28 +1245,28 @@ box_hit
   index: 3
 button_floor_down
   rotate: false
-  xy: 828, 0
+  xy: 710, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 button_floor_up
   rotate: false
-  xy: 846, 0
+  xy: 728, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 button_wall_down
   rotate: false
-  xy: 864, 0
+  xy: 746, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 button_wall_up
   rotate: false
-  xy: 882, 0
+  xy: 764, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1774,14 +1774,14 @@ cobra_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 5
 cobra_move
   rotate: false
   xy: 630, 100
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 1
 cobra_attack
   rotate: false
   xy: 630, 66
@@ -1966,7 +1966,7 @@ cobra_move
   index: 7
 coin
   rotate: false
-  xy: 900, 0
+  xy: 782, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -2453,14 +2453,14 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 4
+  index: 14
 cyclops_idle
   rotate: false
   xy: 1940, 894
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 14
+  index: 4
 cyclops_idle
   rotate: false
   xy: 1940, 894
@@ -2610,21 +2610,21 @@ destroyable_wall
   index: -1
 dialog_skull
   rotate: false
-  xy: 68, 6
+  xy: 1438, 360
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 dialog_skull
   rotate: false
-  xy: 1438, 360
+  xy: 1034, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 2
 dialog_skull
   rotate: false
-  xy: 1152, 4
+  xy: 1050, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -3433,14 +3433,14 @@ elemental_ice_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 6
 elemental_ice_idle
   rotate: false
   xy: 960, 222
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
+  index: 1
 elemental_ice_move
   rotate: false
   xy: 960, 222
@@ -3590,28 +3590,28 @@ elemental_ice_move
   index: 4
 empty
   rotate: false
-  xy: 1248, 829
+  xy: 1088, 695
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 exclamation
   rotate: false
-  xy: 1168, 4
+  xy: 1066, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 interrogation
   rotate: false
-  xy: 1168, 4
+  xy: 1066, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 1
 exclamation
   rotate: false
-  xy: 1184, 4
+  xy: 1082, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
@@ -4185,14 +4185,14 @@ gladiator_move
   index: 8
 hammer
   rotate: false
-  xy: 918, 0
+  xy: 800, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 health
   rotate: false
-  xy: 936, 0
+  xy: 818, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -4210,14 +4210,14 @@ hedgehog_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 hedgehog_move
   rotate: false
   xy: 1176, 188
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 hedgehog_idle
   rotate: false
   xy: 1176, 154
@@ -4521,21 +4521,21 @@ imp_move
   index: 7
 interrogation
   rotate: false
-  xy: 1200, 4
+  xy: 1098, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 2
 interrogation
   rotate: false
-  xy: 1216, 4
+  xy: 1114, 4
   size: 14, 12
   orig: 14, 12
   offset: 0, 0
   index: 3
 jump
   rotate: false
-  xy: 954, 0
+  xy: 836, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -4829,7 +4829,7 @@ key_wall_open
   index: 33
 mana
   rotate: false
-  xy: 972, 0
+  xy: 854, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -6096,28 +6096,28 @@ projectile_rock
   index: -1
 rainbow_bridge_disabled
   rotate: false
-  xy: 990, 0
+  xy: 872, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 rainbow_bridge_enabled
   rotate: false
-  xy: 1008, 0
+  xy: 890, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scroll
   rotate: false
-  xy: 1026, 0
+  xy: 908, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 shield
   rotate: false
-  xy: 1044, 0
+  xy: 926, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -6226,14 +6226,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_idle
   rotate: false
   xy: 1328, 324
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_jump
   rotate: false
   xy: 1328, 324
@@ -6689,37 +6689,44 @@ squirrel_move
   orig: 32, 32
   offset: 0, 0
   index: 8
+stone
+  rotate: false
+  xy: 630, 7
+  size: 24, 23
+  orig: 24, 23
+  offset: 0, 0
+  index: -1
 switch_floor_down
   rotate: false
-  xy: 1062, 0
+  xy: 944, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 switch_floor_up
   rotate: false
-  xy: 1080, 0
+  xy: 962, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 switch_wall_down
   rotate: false
-  xy: 1098, 0
+  xy: 980, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 switch_wall_up
   rotate: false
-  xy: 1116, 0
+  xy: 998, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 sword
   rotate: false
-  xy: 1134, 0
+  xy: 1016, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
