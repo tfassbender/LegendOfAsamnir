@@ -41,6 +41,10 @@ public abstract class Attack {
 	}
 	
 	public boolean isExecuted() {
+		if (config.type == AttackType.BOOMERANG && !isRemoved()) {
+			//there must be only one boomerang at a time
+			return false;
+		}
 		return aborted || (started && timer >= config.delay + config.duration);
 	}
 	
@@ -57,6 +61,10 @@ public abstract class Attack {
 	protected abstract void start();
 	
 	protected abstract void remove();
+	
+	protected boolean isRemoved() {
+		return body == null;
+	}
 	
 	protected abstract void dealAttackDamage(Contact contact);
 }

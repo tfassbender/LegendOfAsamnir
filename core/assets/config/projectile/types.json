@@ -79,5 +79,20 @@
 		dampingAfterObjectHit: 10,
 		
 		timeActive: 10,
+	},
+	boomerang: {
+		attackType: BOOMERANG,
+		
+		texture: boomerang
+		textureScale: 1.5,
+		
+		speed: 100,
+		damping: 0.25,
+		range: 50,
+		removeAfterRangeExceeded: false,
+		dampingAfterRangeExceeded: 2,
+		dampingAfterObjectHit: 10,
+		
+		timeActive: 1f,
 	}
 }

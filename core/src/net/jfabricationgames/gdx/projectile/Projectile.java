@@ -34,6 +34,8 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	protected ProjectileTypeConfig typeConfig;
 	protected PhysicsCollisionType collisionType;
 	
+	protected Body playerBody;
+	
 	protected float distanceTraveled;
 	protected float timeActive;
 	protected boolean attackPerformed;
@@ -46,10 +48,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	protected float explosionPushForce;
 	protected boolean explosionPushForceAffectedByBlock;
 	
-	private float imageOffsetX;
-	private float imageOffsetY;
+	protected float imageOffsetX;
+	protected float imageOffsetY;
 	
-	private float animationRotation;
+	protected float animationRotation;
 	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
@@ -57,6 +59,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	public Projectile(ProjectileTypeConfig typeConfig, Sprite sprite) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
+		scaleSprite();
 		
 		initialize();
 	}
@@ -66,8 +69,13 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		this.animation = animation;
 		
 		sprite = new Sprite(animation.getKeyFrame());
+		scaleSprite();
 		
 		initialize();
+	}
+	
+	private void scaleSprite() {
+		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale, sprite.getScaleY() * typeConfig.textureScale);
 	}
 	
 	private void initialize() {
@@ -231,8 +239,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		remove();
 	}
 	
-	public void draw(SpriteBatch batch) {
-		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale, sprite.getScaleY() * typeConfig.textureScale);
+	public void draw(float delta, SpriteBatch batch) {
 		sprite.setPosition(body.getPosition().x - sprite.getOriginX() + imageOffsetX, body.getPosition().y - sprite.getOriginY() + imageOffsetY);
 		sprite.draw(batch);
 	}
@@ -266,7 +273,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		}
 	}
 	
-	private boolean isAttackOver() {
+	protected boolean isAttackOver() {
 		return attackPerformed && !typeConfig.multipleHitsPossible;
 	}
 	
@@ -291,6 +298,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
+	public boolean isRemoved() {
+		return body == null;
+	}
+	
 	public void setExplosionDamage(float explosionDamage) {
 		this.explosionDamage = explosionDamage;
 	}
@@ -301,5 +312,9 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	public void setExplosionPushForceAffectedByBlock(boolean explosionPushForceAffectedByBlock) {
 		this.explosionPushForceAffectedByBlock = explosionPushForceAffectedByBlock;
+	}
+	
+	public void setPlayerBody(Body body) {
+		this.playerBody = body;
 	}
 }

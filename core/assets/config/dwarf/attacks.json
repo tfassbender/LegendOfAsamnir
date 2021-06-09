@@ -27,7 +27,7 @@
 		damage: 5,
 		distFromCenter: 0,
 		hitFixtureRadius: 1.5,
-		pushForce: 3d
+		pushForce: 3,
 		pushForceAffectedByBlock: false,
 	},
 	{
@@ -50,5 +50,14 @@
 		explosionDamage: 20,
 		explosionPushForce: 3,
 		explosionPushForceAffectedByBlock: false,
+	},
+	{
+		id: boomerang,
+		type: BOOMERANG,
+		projectileType: boomerang,
+		delay: 0,
+		duration: 2,
+		damage: 5,
+		pushForce: 5,
 	}
 ]

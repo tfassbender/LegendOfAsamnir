@@ -109,6 +109,13 @@ bomb
   orig: 16, 16
   offset: 0, 0
   index: -1
+boomerang
+  rotate: false
+  xy: 270, 93
+  size: 14, 11
+  orig: 14, 11
+  offset: 0, 0
+  index: -1
 bow
   rotate: false
   xy: 2558, 711

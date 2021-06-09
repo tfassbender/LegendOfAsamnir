@@ -126,6 +126,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		EventHandler.getInstance().registerEventListener(this);
 	}
 	
+	@Override
 	public void reAddToWorld() {
 		body = createPhysicsBody();
 		attackCreator = new AttackCreator(ATTACK_CONFIG_FILE_NAME, body, PhysicsCollisionType.PLAYER_ATTACK);
@@ -235,6 +236,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 						}
 						
 						return true;
+					}
+					break;
+				case BOOMERANG:
+					if (attackCreator.allAttacksExecuted()) {
+						attackCreator.startAttack("boomerang", movementHandler.getMovingDirection().getNormalizedDirectionVector());
 					}
 					break;
 				case JUMP:

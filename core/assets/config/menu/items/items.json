@@ -15,6 +15,10 @@
 		atlas: packed/menu/menu.atlas,
 		texture: bomb,
 	},
+	boomerang: {
+		atlas: packed/menu/menu.atlas,
+		texture: boomerang,
+	}
 	health: {
 		atlas: packed/menu/menu.atlas,
 		texture: health,

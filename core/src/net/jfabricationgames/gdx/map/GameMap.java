@@ -351,7 +351,7 @@ public class GameMap implements EventListener, Disposable {
 		processAnimals(delta);
 		renderAnimals(delta);
 		processProjectiles(delta);
-		renderProjectiles();
+		renderProjectiles(delta);
 		
 		renderPlayer(delta);
 		batch.end();
@@ -422,9 +422,9 @@ public class GameMap implements EventListener, Disposable {
 			projectile.update(delta);
 		}
 	}
-	private void renderProjectiles() {
+	private void renderProjectiles(float delta) {
 		for (Projectile projectile : projectiles) {
-			projectile.draw(batch);
+			projectile.draw(delta, batch);
 		}
 	}
 	

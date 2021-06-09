@@ -12,19 +12,22 @@ import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 
 public class ProjectileAttack extends Attack {
 	
+	private Projectile projectile;
+	
 	public ProjectileAttack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
 		super(config, direction, body, collisionType);
 	}
 	
 	@Override
 	protected void start() {
-		Projectile projectile = ProjectileFactory.getInstance().createProjectileAndAddToMap(config.projectileType, body.getPosition(), direction, collisionType);
+		projectile = ProjectileFactory.getInstance().createProjectileAndAddToMap(config.projectileType, body.getPosition(), direction, collisionType);
 		projectile.setDamage(config.damage);
 		projectile.setPushForce(config.pushForce);
 		projectile.setPushForceAffectedByBlock(config.pushForceAffectedByBlock);
 		projectile.setExplosionDamage(config.explosionDamage);
 		projectile.setExplosionPushForce(config.explosionPushForce);
 		projectile.setExplosionPushForceAffectedByBlock(config.explosionPushForceAffectedByBlock);
+		projectile.setPlayerBody(body);
 		
 		started = true;
 	}
@@ -37,5 +40,10 @@ public class ProjectileAttack extends Attack {
 	@Override
 	protected void dealAttackDamage(Contact contact) {
 		// damage is calculated in the projectile
+	}
+	
+	@Override
+	protected boolean isRemoved() {
+		return projectile == null || projectile.isRemoved();
 	}
 }

@@ -19,9 +19,9 @@ public class Bomb extends Projectile {
 	}
 	
 	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(float delta, SpriteBatch batch) {
 		turnBombColorRed();
-		super.draw(batch);
+		super.draw(delta, batch);
 	}
 	
 	private void turnBombColorRed() {

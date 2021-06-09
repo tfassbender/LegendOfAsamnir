@@ -4,7 +4,8 @@ public enum SpecialAction {
 	
 	JUMP(0), //
 	BOW(1), //
-	BOMB(2); //
+	BOMB(2), //
+	BOOMERANG(3); //
 	
 	public static SpecialAction findByNameIgnoringCase(String specialAction) {
 		for (SpecialAction action : values()) {
