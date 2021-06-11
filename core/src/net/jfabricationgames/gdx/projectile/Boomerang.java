@@ -9,6 +9,8 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class Boomerang extends Projectile {
 	
+	public static final float MANA_COST = 5f;
+	
 	private static final float ROTATION_PER_SECOND = 540f;
 	private static final float RETURN_SPEED = 3f;
 	
@@ -64,7 +66,16 @@ public class Boomerang extends Projectile {
 	}
 	
 	@Override
-	protected boolean isAttackOver() {
-		return moveBackToPlayer;
+	protected void stopProjectileAfterObjectHit() {
+		if (hasBody() && !moveBackToPlayer) {
+			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+		}
+	}
+	
+	@Override
+	protected void stopProjectileAfterRangeExceeds() {
+		if (hasBody() && !moveBackToPlayer) {
+			body.setLinearDamping(typeConfig.dampingAfterRangeExceeded);
+		}
 	}
 }

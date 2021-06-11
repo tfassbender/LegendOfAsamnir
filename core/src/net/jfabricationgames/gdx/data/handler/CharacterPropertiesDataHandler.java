@@ -121,8 +121,16 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 		return properties.mana / properties.maxMana;
 	}
 	
+	public boolean hasEnoughMana(float manaCost) {
+		return properties.mana >= manaCost;
+	}
+	
 	public void increaseMana(float amount) {
 		properties.increaseMana += amount;
+	}
+	
+	public void reduceMana(float amount) {
+		properties.mana -= amount;
 	}
 	
 	public float getEndurancePercentual() {
@@ -151,10 +159,10 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 	 * Shows the decrease of coins if properties.decreaseCoins is greater than 0.
 	 */
 	public int getCoinsForHud() {
-		return (int) Math.round(properties.coins);
+		return Math.round(properties.coins);
 	}
 	public int getCoins() {
-		return (int) Math.round(properties.coins - properties.decreaseCoins);
+		return Math.round(properties.coins - properties.decreaseCoins);
 	}
 	
 	public void changeStatsAfterRespawn() {

@@ -101,7 +101,7 @@ public class TeamMovementAI extends FollowAI implements EventListener {
 			TeamCallEventDto dto = (TeamCallEventDto) event.parameterObject;
 			if (isMyTeam(dto)) {
 				if (isTargetFound(dto)) {
-					if (isMateInRange(dto)) {
+					if (!character.isRemovedFromMap() && isMateInRange(dto)) {
 						teamTargetToFollow = dto.target;
 					}
 				}

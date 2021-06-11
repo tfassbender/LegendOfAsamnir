@@ -211,7 +211,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		}
 	}
 	
-	private void stopProjectileAfterRangeExceeds() {
+	protected void stopProjectileAfterRangeExceeds() {
 		if (hasBody()) {
 			body.setLinearDamping(typeConfig.dampingAfterRangeExceeded);
 			attackPerformed = true;

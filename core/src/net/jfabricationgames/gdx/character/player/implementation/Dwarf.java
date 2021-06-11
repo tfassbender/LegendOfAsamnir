@@ -40,6 +40,7 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.projectile.Boomerang;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
@@ -239,7 +240,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 					}
 					break;
 				case BOOMERANG:
-					if (attackCreator.allAttacksExecuted()) {
+					if (propertiesDataHandler.hasEnoughMana(Boomerang.MANA_COST) && attackCreator.allAttacksExecuted()) {
+						propertiesDataHandler.reduceMana(Boomerang.MANA_COST);
 						attackCreator.startAttack("boomerang", movementHandler.getMovingDirection().getNormalizedDirectionVector());
 					}
 					break;
@@ -314,6 +316,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		//use null as offset parameter to not create a new empty vector every time
 		draw(batch, frame, null, frame.getRegionWidth(), frame.getRegionHeight());
 	}
+	
 	private void draw(SpriteBatch batch, TextureRegion frame, Vector2 offset, float width, float height) {
 		float originX = 0.5f * width + PHYSICS_BODY_POSITION_OFFSET.x * width;
 		float originY = 0.5f * height + PHYSICS_BODY_POSITION_OFFSET.y * height;
@@ -378,6 +381,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	public void reduceEnduranceForSprinting(float delta) {
 		propertiesDataHandler.reduceEnduranceForSprinting(delta);
 	}
+	
 	@Override
 	public boolean isExhausted() {
 		return propertiesDataHandler.isExhausted();

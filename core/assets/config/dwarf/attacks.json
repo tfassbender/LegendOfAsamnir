@@ -58,6 +58,6 @@
 		delay: 0,
 		duration: 2,
 		damage: 5,
-		pushForce: 5,
+		pushForce: 2,
 	}
 ]
