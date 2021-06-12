@@ -21,6 +21,8 @@ public class CharacterInputProcessor implements InputActionListener {
 	private static final String INPUT_BLOCK = "block";
 	
 	private static final String ACTION_INTERACT = "interact";
+	private static final String ACTION_PREVIOUS_SPECIAL_ACTION = "previousSpecialAction";
+	private static final String ACTION_NEXT_SPECIAL_ACTION = "nextSpecialAction";
 	
 	private PlayableCharacter inputCharacter;
 	
@@ -321,9 +323,22 @@ public class CharacterInputProcessor implements InputActionListener {
 	
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
-		if (action.equals(ACTION_INTERACT) && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
-			InteractionManager.getInstance().interact(inputCharacter);
+		if (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED) {
+			if (action.equals(ACTION_INTERACT)) {
+				InteractionManager.getInstance().interact(inputCharacter);
+			}
+			else if (action.equals(ACTION_PREVIOUS_SPECIAL_ACTION)) {
+				selectNextSpecialAction(-1);
+			}
+			else if (action.equals(ACTION_NEXT_SPECIAL_ACTION)) {
+				selectNextSpecialAction(1);
+			}
 		}
 		return false;
+	}
+	
+	private void selectNextSpecialAction(int delta) {
+		SpecialAction specialAction = SpecialAction.getSpecialAction(inputCharacter.getActiveSpecialAction(), delta);
+		inputCharacter.setActiveSpecialAction(specialAction);
 	}
 }

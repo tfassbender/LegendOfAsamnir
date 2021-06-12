@@ -109,6 +109,20 @@
 					<axis code="1" threshold="0.5" />
 				</controller>
 			</action>
+			
+			<action name="previousSpecialAction">
+				<key code="R" />
+				<controller player="1">
+					<button code="9" />
+				</controller>
+			</action>
+			
+			<action name="nextSpecialAction">
+				<key code="T" />
+				<controller player="1">
+					<button code="10" />
+				</controller>
+			</action>
 		</actions>
 		
 		<controllerAxes>

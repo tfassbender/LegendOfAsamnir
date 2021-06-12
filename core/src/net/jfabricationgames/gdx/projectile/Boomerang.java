@@ -76,4 +76,13 @@ public class Boomerang extends Projectile {
 			body.setLinearDamping(typeConfig.dampingAfterRangeExceeded);
 		}
 	}
+	
+	@Override
+	protected void setBodyLinearDamping() {
+		if (moveBackToPlayer) {
+			return;
+		}
+		
+		super.setBodyLinearDamping();
+	}
 }

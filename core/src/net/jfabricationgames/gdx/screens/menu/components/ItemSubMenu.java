@@ -104,6 +104,9 @@ public class ItemSubMenu extends MenuBox {
 		}
 		return null;
 	}
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
+	}
 	
 	public int getHoveredIndex() {
 		return hoveredIndex;

@@ -180,6 +180,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		playMenuSound(SOUND_ENTER_PAUSE_MENU);
 		
 		stateMachine.changeToInitialState();
+		
+		itemMenu.setSelectedIndex(player.getActiveSpecialAction().indexInMenu);
 	}
 	
 	@Override

@@ -7,4 +7,24 @@
 		atlas: packed/demo/demo.atlas,
 		texture: key_1
 	},
+	jump: {
+		atlas: packed/demo/demo.atlas,
+		texture: jump,
+	},
+	bow: {
+		atlas: packed/demo/demo.atlas,
+		texture: bow,
+	},
+	bomb: {
+		atlas: packed/demo/demo.atlas,
+		texture: bomb,
+	},
+	boomerang: {
+		atlas: packed/demo/demo.atlas,
+		texture: boomerang,
+	},
+	wand: {
+		atlas: packed/demo/demo.atlas,
+		texture: wand,
+	},
 }

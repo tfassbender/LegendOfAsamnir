@@ -210,7 +210,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	protected void stopProjectileAfterObjectHit() {
 		if (hasBody()) {
-			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+			setBodyLinearDamping();
 			attackPerformed = true;
 		}
 	}
@@ -275,7 +275,8 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 				hittable.pushByHit(body.getPosition().cpy(), pushForce, pushForceAffectedByBlock);
 				hittable.takeDamage(damage, typeConfig.attackType);
 			}
-			body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+			
+			setBodyLinearDamping();
 			attackPerformed = true;
 		}
 	}
@@ -286,6 +287,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	protected boolean hasDamage() {
 		return damage > 0;
+	}
+	
+	protected void setBodyLinearDamping() {
+		body.setLinearDamping(typeConfig.dampingAfterObjectHit);
 	}
 	
 	@Override

@@ -29,6 +29,16 @@ public enum SpecialAction {
 		return names;
 	}
 	
+	public static SpecialAction getSpecialAction(SpecialAction activeSpecialAction, int delta) {
+		int searchedIndex = (activeSpecialAction.indexInMenu + delta + values().length) % values().length;
+		for (SpecialAction action : values()) {
+			if (action.indexInMenu == searchedIndex) {
+				return action;
+			}
+		}
+		throw new IllegalStateException("No special action found.");
+	}
+	
 	public final int indexInMenu;
 	public final float manaCost;
 	
