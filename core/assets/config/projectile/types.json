@@ -96,6 +96,8 @@
 		removeAfterRangeExceeded: false,
 		dampingAfterRangeExceeded: 2,
 		dampingAfterObjectHit: 10,
+		
+		timeActive: 1f,
 	},
 	wand: {
 		attackType: WAND,
