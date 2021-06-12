@@ -18,7 +18,11 @@
 	boomerang: {
 		atlas: packed/menu/menu.atlas,
 		texture: boomerang,
-	}
+	},
+	wand: {
+		atlas: packed/menu/menu.atlas,
+		texture: wand,
+	},
 	health: {
 		atlas: packed/menu/menu.atlas,
 		texture: health,

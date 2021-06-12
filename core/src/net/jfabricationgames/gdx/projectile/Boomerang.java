@@ -9,8 +9,6 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class Boomerang extends Projectile {
 	
-	public static final float MANA_COST = 5f;
-	
 	private static final float ROTATION_PER_SECOND = 540f;
 	private static final float RETURN_SPEED = 3f;
 	

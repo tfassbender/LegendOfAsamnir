@@ -57,7 +57,8 @@
 		
 		animation: imp_fire,
 		removeAfterAnimationFinished: true,
-		textureScale: 0.05,
+		textureScale: 3,
+		textureScaleGrowing: true,
 		rotateTextureToMovementDirection: true,
 		
 		range: 30,
@@ -92,7 +93,23 @@
 		removeAfterRangeExceeded: false,
 		dampingAfterRangeExceeded: 2,
 		dampingAfterObjectHit: 10,
+	},
+	wand: {
+		attackType: WAND,
 		
-		timeActive: 1f,
+		texture: force_field,
+		textureScale: 2f,
+		
+		textureInitialRotation: 180,
+		rotateTextureToMovementDirection: true,
+		
+		speed: 50,
+		damping: 0,
+		range: 100,
+		removeAfterRangeExceeded: true,
+		dampingAfterRangeExceeded: 0,
+		dampingAfterObjectHit: 0,
+		
+		multipleHitsPossible: true,
 	}
 }

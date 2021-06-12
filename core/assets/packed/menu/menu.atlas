@@ -111,7 +111,7 @@ bomb
   index: -1
 boomerang
   rotate: false
-  xy: 270, 93
+  xy: 320, 157
   size: 14, 11
   orig: 14, 11
   offset: 0, 0
@@ -125,7 +125,7 @@ bow
   index: -1
 button_green
   rotate: false
-  xy: 1512, 263
+  xy: 2153, 436
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -139,7 +139,7 @@ button_green_focus
   index: -1
 button_yellow
   rotate: false
-  xy: 2153, 436
+  xy: 270, 90
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -412,14 +412,14 @@ inventory_down
   index: -1
 inventory_down_left
   rotate: false
-  xy: 2038, 328
+  xy: 3518, 1006
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_down_right
   rotate: false
-  xy: 3518, 1006
+  xy: 26, 9
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
@@ -510,14 +510,14 @@ inventory_up
   index: -1
 inventory_up_left
   rotate: false
-  xy: 26, 9
+  xy: 294, 135
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
   index: -1
 inventory_up_right
   rotate: false
-  xy: 294, 135
+  xy: 1512, 262
   size: 15, 15
   orig: 15, 15
   offset: 0, 0
@@ -807,6 +807,13 @@ small_banner_right
   xy: 2524, 525
   size: 32, 32
   orig: 32, 32
+  offset: 0, 0
+  index: -1
+wand
+  rotate: false
+  xy: 2038, 327
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 yellow_board_down

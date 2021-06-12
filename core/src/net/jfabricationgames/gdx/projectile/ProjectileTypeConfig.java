@@ -3,13 +3,14 @@ package net.jfabricationgames.gdx.projectile;
 import net.jfabricationgames.gdx.attack.AttackType;
 
 public class ProjectileTypeConfig {
-
+	
 	public AttackType attackType;
 	
 	public String texture;
 	public String animation;
 	public boolean removeAfterAnimationFinished = true;
 	public float textureScale = 1f;
+	public boolean textureScaleGrowing;
 	public float textureInitialRotation;
 	public boolean rotateTextureToMovementDirection = false;
 	

@@ -40,7 +40,6 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.projectile.Boomerang;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
@@ -240,9 +239,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 					}
 					break;
 				case BOOMERANG:
-					if (propertiesDataHandler.hasEnoughMana(Boomerang.MANA_COST) && attackCreator.allAttacksExecuted()) {
-						propertiesDataHandler.reduceMana(Boomerang.MANA_COST);
-						attackCreator.startAttack("boomerang", movementHandler.getMovingDirection().getNormalizedDirectionVector());
+				case WAND:
+					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
+						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						attackCreator.startAttack(activeSpecialAction.name().toLowerCase(),
+								movementHandler.getMovingDirection().getNormalizedDirectionVector());
 					}
 					break;
 				case JUMP:

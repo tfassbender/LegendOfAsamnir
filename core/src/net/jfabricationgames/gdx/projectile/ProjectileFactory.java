@@ -22,6 +22,8 @@ public class ProjectileFactory extends AbstractFactory {
 	private static final String PROJECTILE_TYPE_IMP_FIRE = "imp_fire";
 	private static final String PROJECTILE_TYPE_ROCK = "rock";
 	private static final String PROJECTILE_TYPE_BOOMERANG = "boomerang";
+	private static final String PROJECTILT_TYPE_WAND = "wand";
+	
 	private static final String configFile = "config/factory/projectile_factory.json";
 	private static final String animationConfigFile = "config/animation/projectiles.json";
 	private static Config config;
@@ -107,6 +109,9 @@ public class ProjectileFactory extends AbstractFactory {
 				break;
 			case PROJECTILE_TYPE_BOOMERANG:
 				projectile = new Boomerang(typeConfig, sprite);
+				break;
+			case PROJECTILT_TYPE_WAND:
+				projectile = new Wand(typeConfig, sprite);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);

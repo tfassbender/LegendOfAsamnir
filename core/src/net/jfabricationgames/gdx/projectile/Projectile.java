@@ -59,7 +59,9 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	public Projectile(ProjectileTypeConfig typeConfig, Sprite sprite) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
-		scaleSprite();
+		if (!typeConfig.textureScaleGrowing) {
+			scaleSprite();
+		}
 		
 		initialize();
 	}
@@ -69,13 +71,18 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		this.animation = animation;
 		
 		sprite = new Sprite(animation.getKeyFrame());
-		scaleSprite();
+		if (!typeConfig.textureScaleGrowing) {
+			scaleSprite();
+		}
 		
 		initialize();
 	}
 	
 	private void scaleSprite() {
-		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale, sprite.getScaleY() * typeConfig.textureScale);
+		scaleSprite(1);
+	}
+	private void scaleSprite(float delta) {
+		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale * delta, sprite.getScaleY() * typeConfig.textureScale * delta);
 	}
 	
 	private void initialize() {
@@ -240,6 +247,9 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
+		if (typeConfig.textureScaleGrowing) {
+			scaleSprite(delta);
+		}
 		sprite.setPosition(body.getPosition().x - sprite.getOriginX() + imageOffsetX, body.getPosition().y - sprite.getOriginY() + imageOffsetY);
 		sprite.draw(batch);
 	}
@@ -251,7 +261,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	@Override
 	public void beginContact(Contact contact) {
-		if (isAttackOver() || damage == 0) {
+		if (isAttackOver() || !hasDamage()) {
 			return;
 		}
 		
@@ -275,6 +285,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	protected boolean isAttackOver() {
 		return attackPerformed && !typeConfig.multipleHitsPossible;
+	}
+	
+	protected boolean hasDamage() {
+		return damage > 0;
 	}
 	
 	@Override
