@@ -40,7 +40,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final String MAP_ANIMATION_IDLE = "map_idle";
 	private static final String PAUSE_MENU_STATES_CONFIG = "config/menu/pause_menu_states.json";
 	
-	private static final Array<String> ITEMS = new Array<>(new String[] {"jump", "bow", "bomb", "boomerang", "wand"});
+	private static final Array<String> ITEMS = SpecialAction.getNamesAsList();
 	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
 	private static final String STATE_PREFIX_MAP_DIALOG = "mapDialog_";

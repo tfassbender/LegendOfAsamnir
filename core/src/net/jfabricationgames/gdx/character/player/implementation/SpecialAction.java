@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.character.player.implementation;
 
+import com.badlogic.gdx.utils.Array;
+
 public enum SpecialAction {
 	
 	JUMP(0, 0f), //
@@ -15,6 +17,16 @@ public enum SpecialAction {
 			}
 		}
 		return null;
+	}
+	
+	public static Array<String> getNamesAsList() {
+		Array<String> names = new Array<>(values().length);
+		
+		for (SpecialAction action : values()) {
+			names.add(action.name().toLowerCase());
+		}
+		
+		return names;
 	}
 	
 	public final int indexInMenu;

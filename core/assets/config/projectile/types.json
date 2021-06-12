@@ -30,6 +30,7 @@
 		
 		animation: explosion,
 		textureScale: 0.05,
+		textureScaleGrowing: true,
 		
 		sound: explosion,
 		
@@ -44,11 +45,13 @@
 		animation: spider_web,
 		removeAfterAnimationFinished: false,
 		textureScale: 0.12,
+		textureScaleGrowing: true,
 		
 		range: 30,
 		removeAfterRangeExceeded: false,
 		speed: 60,
 		dampingAfterObjectHit: 15,
+		dampingAfterRangeExceeded: 15,
 		
 		timeActive: 5,
 	},
@@ -57,7 +60,7 @@
 		
 		animation: imp_fire,
 		removeAfterAnimationFinished: true,
-		textureScale: 3,
+		textureScale: 0.05,
 		textureScaleGrowing: true,
 		rotateTextureToMovementDirection: true,
 		

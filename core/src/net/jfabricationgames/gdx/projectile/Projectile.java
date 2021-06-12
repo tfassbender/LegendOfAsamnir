@@ -79,10 +79,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	}
 	
 	private void scaleSprite() {
-		scaleSprite(1);
-	}
-	private void scaleSprite(float delta) {
-		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale * delta, sprite.getScaleY() * typeConfig.textureScale * delta);
+		sprite.setScale(sprite.getScaleX() * typeConfig.textureScale, sprite.getScaleY() * typeConfig.textureScale);
 	}
 	
 	private void initialize() {
@@ -248,7 +245,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	public void draw(float delta, SpriteBatch batch) {
 		if (typeConfig.textureScaleGrowing) {
-			scaleSprite(delta);
+			scaleSprite();
 		}
 		sprite.setPosition(body.getPosition().x - sprite.getOriginX() + imageOffsetX, body.getPosition().y - sprite.getOriginY() + imageOffsetY);
 		sprite.draw(batch);
