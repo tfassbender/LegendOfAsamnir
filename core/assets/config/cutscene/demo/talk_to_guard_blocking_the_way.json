@@ -1,0 +1,165 @@
+{
+	id: demoLevel_talkToGuardBlockingTheWay,
+	controlledActions: {
+		initial: {
+			startsWithCutscene: true,
+			
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demoLevel_heightRestrictionWayCleared,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: greeting_already_moved,
+				condition_not_met: greeting,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		greeting_already_moved: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "What do you want? I already let you pass.",
+				colorHeader: #FF00FF,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "You shall not pass!!! Unless you are taller than 1.5 meters, like it's written on the board.",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				answer,
+			]
+		},
+		answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Dwarf",
+				headerColor: #0000FF
+				description: "What do you want to answer?"
+				options: [
+					"Ok, I'll leave.",
+					"The board says 1.0 meters!",
+				],
+			},
+			choiceOptionExecutions: [
+				answer_leave,
+				answer_check_board,
+			]
+		},
+		answer_leave: {
+			type: WAIT,
+		},
+		answer_check_board: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "What?! Are you sure? Wait, I'll have a look.",
+				colorHeader: #FF00FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				checked_board,
+			]
+		},
+		checked_board: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demoLevel_heightRestrictionBoardTextChanged,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: answer_height_changed,
+				condition_not_met: answer_height_not_changed,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		answer_height_not_changed: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "No! It says 1.5 meters! So you are not allowed to pass, because you're too small.",
+				colorHeader: #FF00FF,
+			},
+			
+			waitForEventToFinish: true,
+		},
+		answer_height_changed: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Oh, you are right ... I was sure that it said 1.5 meters, but ... Ok, I think you are more than 1 meter tall, so you can pass.",
+				colorHeader: #FF00FF,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				move_away,
+			]
+		},
+		move_away: {
+			type: MOVE,
+			controlledUnitId: demoLevel_guard_blocking_the_way,
+			controlledUnitTarget: {x: 0, y: 1.2},
+			
+			executes: [
+				set_moved_away,
+			]
+		},
+		set_moved_away: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demoLevel_heightRestrictionWayCleared, value: true}",
+			},
+		}
+	}
+}

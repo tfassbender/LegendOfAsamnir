@@ -122,6 +122,13 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
+  index: 13
+adventurer_idle
+  rotate: false
+  xy: 986, 664
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
   index: 12
 adventurer_idle
   rotate: false
@@ -130,13 +137,6 @@ adventurer_idle
   orig: 32, 32
   offset: 0, 0
   index: 1
-adventurer_idle
-  rotate: false
-  xy: 986, 664
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 13
 adventurer_jump
   rotate: false
   xy: 986, 664
@@ -633,14 +633,14 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 9
 adventurer_idle
   rotate: false
   xy: 1464, 764
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 9
+  index: 8
 adventurer_idle
   rotate: false
   xy: 1464, 730
@@ -787,15 +787,8 @@ armadillo_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
-armadillo_idle
-  rotate: false
-  xy: 460, 8
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
   index: 8
-armadillo_move
+armadillo_idle
   rotate: false
   xy: 460, 8
   size: 32, 32
@@ -809,6 +802,13 @@ armadillo_move
   orig: 32, 32
   offset: 0, 0
   index: 3
+armadillo_move
+  rotate: false
+  xy: 460, 8
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
 armadillo_curl
   rotate: false
   xy: 494, 8
@@ -2089,14 +2089,14 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 1
+  index: 11
 cyclops_idle
   rotate: false
   xy: 1310, 960
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 11
+  index: 1
 cyclops_attack_beam
   rotate: false
   xy: 1376, 960
@@ -2460,6 +2460,13 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
+  index: 13
+cyclops_idle
+  rotate: false
+  xy: 1940, 894
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
   index: 4
 cyclops_idle
   rotate: false
@@ -2468,13 +2475,6 @@ cyclops_idle
   orig: 64, 64
   offset: 0, 0
   index: 14
-cyclops_idle
-  rotate: false
-  xy: 1940, 894
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: 13
 cyclops_idle
   rotate: false
   xy: 298, 110
@@ -3440,14 +3440,14 @@ elemental_ice_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 6
 elemental_ice_idle
   rotate: false
   xy: 926, 222
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
+  index: 1
 elemental_ice_move
   rotate: false
   xy: 926, 222

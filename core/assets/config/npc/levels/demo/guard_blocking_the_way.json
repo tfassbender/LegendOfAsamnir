@@ -1,0 +1,12 @@
+{
+	graphicsConfigFile: config/npc/graphics/adventurer.json
+	 
+	aiConfig: {
+		type: BASE_AI,
+	},
+	
+	interactionPossible: true,
+	movingSpeed: 0.5f,
+	
+	interactionEventId: guard_blocking_the_way,
+}

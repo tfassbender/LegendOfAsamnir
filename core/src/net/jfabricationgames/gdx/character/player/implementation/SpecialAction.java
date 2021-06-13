@@ -8,7 +8,9 @@ public enum SpecialAction {
 	BOW(1, 0f), //
 	BOMB(2, 0f), //
 	BOOMERANG(3, 5f), //
-	WAND(4, 10f); //
+	WAND(4, 10f), // 
+	FEATHER(5, 0f), //
+	LANTERN(6, 10f); //
 	
 	public static SpecialAction findByNameIgnoringCase(String specialAction) {
 		for (SpecialAction action : values()) {

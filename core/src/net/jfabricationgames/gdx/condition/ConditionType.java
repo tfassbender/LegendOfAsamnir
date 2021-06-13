@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.condition;
 
+import net.jfabricationgames.gdx.condition.values.GlobalConditionValues;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
@@ -54,12 +55,25 @@ public enum ConditionType {
 	},
 	STATE_SWITCH_ACTIVE {
 		
-		private static final String STATE_SWITCH_ID = "stateSwitchId";
+		private static final String PARAMETER_STATE_SWITCH_ID = "stateSwitchId";
 		
 		@Override
 		public boolean check(Condition condition) {
-			String stateSwitchId = condition.parameters.get(STATE_SWITCH_ID);
+			String stateSwitchId = condition.parameters.get(PARAMETER_STATE_SWITCH_ID);
 			return StateSwitchObject.isStateSwitchActive(stateSwitchId);
+		}
+	},
+	GLOBAL_VALUE_SET {
+		
+		private static final String PARAMETER_VALUE_KEY = "key";
+		private static final String PARAMETER_EXPECTED_VALUE = "expectedValue";
+		
+		@Override
+		public boolean check(Condition condition) {
+			String key = condition.parameters.get(PARAMETER_VALUE_KEY);
+			String expectedValue = condition.parameters.get(PARAMETER_EXPECTED_VALUE);
+			
+			return GlobalConditionValues.getInstance().isValueEqual(key, expectedValue);
 		}
 	};
 	

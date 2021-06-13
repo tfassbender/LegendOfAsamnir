@@ -5,6 +5,7 @@
 	
 	"config/cutscene/demo/minotaur_cutscene.json",
 	"config/cutscene/demo/talk_to_female_adventurer.json",
+	"config/cutscene/demo/talk_to_guard_blocking_the_way.json",
 	
 	//********************************************************
 	//*** Tutorial Level

@@ -27,4 +27,12 @@
 		atlas: packed/demo/demo.atlas,
 		texture: wand,
 	},
+	feather: {
+		atlas: packed/demo/demo.atlas,
+		texture: feather,
+	},
+	lantern: {
+		atlas: packed/demo/demo.atlas,
+		texture: lantern,
+	},
 }

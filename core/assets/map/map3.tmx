@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="177">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="179">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
@@ -468,6 +468,23 @@ Arrows: 25 Coins..</property>
    <properties>
     <property name="eventParameter" value="demoLevel_switch_group_1"/>
     <property name="stateSwitchId" value="demoLevel_pressure_switch"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="177" name="npc.guard_blocking_the_way" x="313" y="1469.67">
+   <properties>
+    <property name="unitId" value="demoLevel_guard_blocking_the_way"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="178" name="object.changeable_signboard" x="288" y="1451.67">
+   <properties>
+    <property name="colorHeader" value="#ff0000"/>
+    <property name="displayText" value="You must be at least 1.5 meters tall to enter."/>
+    <property name="displayTextChanged" value="You must be at least 1.0 meters tall to enter."/>
+    <property name="displayTextHeader" value="Access Restriction"/>
+    <property name="globalConditionKey" value="demoLevel_heightRestrictionChanged"/>
+    <property name="globalConditionValue" value="true"/>
    </properties>
    <point/>
   </object>

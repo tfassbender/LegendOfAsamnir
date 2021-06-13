@@ -32,5 +32,19 @@
 				}
 			}
 		}
+	},
+	demoLevel_heightRestrictionBoardTextChanged: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demoLevel_heightRestrictionChanged,
+			expectedValue: true,
+		}
+	},
+	demoLevel_heightRestrictionWayCleared: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demoLevel_heightRestrictionWayCleared,
+			expectedValue: true,
+		}
 	}
 }

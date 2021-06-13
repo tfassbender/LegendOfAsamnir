@@ -103,5 +103,15 @@
 				}
 			}
 		}
-	}
+	},
+	demoLevel_interactWithGuardBlockingTheWay: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: guard_blocking_the_way,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demoLevel_talkToGuardBlockingTheWay,
+		}
+	},
 }

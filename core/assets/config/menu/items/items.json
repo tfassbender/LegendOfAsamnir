@@ -23,6 +23,14 @@
 		atlas: packed/menu/menu.atlas,
 		texture: wand,
 	},
+	feather: {
+		atlas: packed/menu/menu.atlas,
+		texture: feather,
+	},
+	lantern: {
+		atlas: packed/menu/menu.atlas,
+		texture: lantern,
+	},
 	health: {
 		atlas: packed/menu/menu.atlas,
 		texture: health,

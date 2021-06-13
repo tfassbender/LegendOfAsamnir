@@ -80,6 +80,23 @@
 		multipleActionExecutionsPossible: true,
 		interactiveAction: SHOW_ON_SCREEN_TEXT,
 	},
+	changeable_signboard: {
+		type: INTERACTIVE,
+		
+		texture: signboard,
+		animationHit: signboard_hit,
+		hitSound: wood_hit_1,
+		
+		physicsBodySizeFactorX: 0.3,
+		physicsBodySizeFactorY: 0.3,
+		physicsBodyOffsetFactorX: 0.05,
+		physicsBodyOffsetFactorY: -0.075,
+		
+		addSensor: true,
+		
+		multipleActionExecutionsPossible: true,
+		interactiveAction: SHOW_OR_CHANGE_TEXT,
+	}
 	chest: {
 		type: LOCKED,
 		

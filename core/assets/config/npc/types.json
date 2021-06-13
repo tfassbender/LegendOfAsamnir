@@ -4,6 +4,7 @@
 	//************************************************
 	adventurer: config/npc/levels/demo/adventurer.json,
 	adventurer_female: config/npc/levels/demo/adventurer_female.json,
+	guard_blocking_the_way: config/npc/levels/demo/guard_blocking_the_way.json
 	
 	//************************************************
 	//*** Tutorial Level

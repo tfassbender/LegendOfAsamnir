@@ -50,4 +50,8 @@ public enum EventType {
 	//*******************************
 	NPC_INTERACTION, //
 	AI_TEAM_CALL, //
+	//*******************************
+	//*** Conditions
+	//*******************************
+	SET_GLOBAL_CONDITION_VALUE,
 }
