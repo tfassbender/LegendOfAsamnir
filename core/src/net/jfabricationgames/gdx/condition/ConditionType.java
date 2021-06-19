@@ -1,8 +1,8 @@
 package net.jfabricationgames.gdx.condition;
 
-import net.jfabricationgames.gdx.condition.values.GlobalConditionValues;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 
 public enum ConditionType {
@@ -73,7 +73,7 @@ public enum ConditionType {
 			String key = condition.parameters.get(PARAMETER_VALUE_KEY);
 			String expectedValue = condition.parameters.get(PARAMETER_EXPECTED_VALUE);
 			
-			return GlobalConditionValues.getInstance().isValueEqual(key, expectedValue);
+			return GlobalValuesDataHandler.getInstance().isValueEqual(key, expectedValue);
 		}
 	};
 	

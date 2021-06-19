@@ -481,7 +481,7 @@ Arrows: 25 Coins..</property>
    <properties>
     <property name="colorHeader" value="#ff0000"/>
     <property name="displayText" value="You must be at least 1.5 meters tall to enter."/>
-    <property name="displayTextChanged" value="You must be at least 1.0 meters tall to enter."/>
+    <property name="displayTextChanged" value="You must be at least 1.0 meter tall to enter."/>
     <property name="displayTextHeader" value="Access Restriction"/>
     <property name="globalConditionKey" value="demoLevel_heightRestrictionChanged"/>
     <property name="globalConditionValue" value="true"/>

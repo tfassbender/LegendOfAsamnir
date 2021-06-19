@@ -5,7 +5,7 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
-import net.jfabricationgames.gdx.condition.values.GlobalConditionValues;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -44,7 +44,7 @@ public enum InteractiveAction {
 			PlayableCharacter player = GameMap.getInstance().getPlayer();
 			
 			if (player.getActiveSpecialAction() == SpecialAction.FEATHER && !isValueChanged(globalConditionKey, globalConditionValue)) {
-				GlobalConditionValues.getInstance().put(globalConditionKey, globalConditionValue);
+				GlobalValuesDataHandler.getInstance().put(globalConditionKey, globalConditionValue);
 				
 				showOnScreenText("The text was changed.", "Text changed", headerColor);
 			}
@@ -65,7 +65,7 @@ public enum InteractiveAction {
 		}
 		
 		private boolean isValueChanged(String globalConditionKey, String globalConditionValue) {
-			return GlobalConditionValues.getInstance().isValueEqual(globalConditionKey, globalConditionValue);
+			return GlobalValuesDataHandler.getInstance().isValueEqual(globalConditionKey, globalConditionValue);
 		}
 	},
 	OPEN_SHOP_MENU {
