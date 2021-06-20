@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 
 public class InteractionManager {
 	
@@ -50,7 +51,7 @@ public class InteractionManager {
 	}
 	
 	public void interact(PlayableCharacter character) {
-		if (!interactivesInRange.isEmpty()) {
+		if (!CutsceneHandler.getInstance().isCutsceneActive() && !interactivesInRange.isEmpty()) {
 			InteractionManager.character = character;
 			interactivesInRange.sort(distanceComparator);
 			
