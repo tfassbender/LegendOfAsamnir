@@ -51,8 +51,15 @@
 				type: NO_EXECUTION,
 			}
 		}
+	},
+	demoLevelChangeToDungeonMap: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: go_to_map_6,
+		},
+		executionType: CHANGE_MAP,
 		executionParameters: {
-			map: test_map_4,
+			map: test_map_6,
 		}
 	},
 	demoLevel_interactWithAdventurer: {
