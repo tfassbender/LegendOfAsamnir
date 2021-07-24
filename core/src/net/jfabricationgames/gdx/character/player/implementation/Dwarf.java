@@ -76,7 +76,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private static final String TEXTURE_CONFIG_FILE_NAME = "config/dwarf/textures.json";
 	
 	private static final String SOUND_SET_KEY = "dwarf";
-	private static final String SPIN_ATTACK_CHARGED_SOUND = "spin_attack_charged";
+	private static final String SOUND_SPIN_ATTACK_CHARGED = "spin_attack_charged";
+	private static final String SOUND_AMMO_EMPTY = "ammo_empty";
+	
+	private static final String ATTACK_NAME_WAIT = "wait";
 	
 	private boolean gameOver;
 	
@@ -228,8 +231,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 							}
 						}
 						else {
-							//TODO delay between sounds
-							//soundSet.playSound(SOUND_AMMO_EMPTY);
+							delayAttacks();
+							soundSet.playSound(SOUND_AMMO_EMPTY);
 							return false;
 						}
 						
@@ -250,18 +253,24 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 						GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, "true");
 						
 						//handle the lantern as attack to have a duration (so it's not executed in every game step)
-						attackCreator.startAttack(activeSpecialAction.name().toLowerCase(),
-								movementHandler.getMovingDirection().getNormalizedDirectionVector());
+						delayAttacks();
 					}
 					break;
 				case JUMP:
 					return changeAction(CharacterAction.JUMP);
+				case FEATHER:
+					//do nothing here - the action will be executed in InteractiveAction.SHOW_OR_CHANGE_TEXT
+					break;
 				default:
 					throw new IllegalStateException("Unexpected SpecialAction: " + activeSpecialAction);
 			}
 		}
 		
 		return false;
+	}
+	
+	private void delayAttacks() {
+		attackCreator.startAttack(ATTACK_NAME_WAIT, movementHandler.getMovingDirection().getNormalizedDirectionVector());
 	}
 	
 	private void fireOutOfAmmoEvent(ItemAmmoType ammoType) {
@@ -494,7 +503,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	@Override
 	public void playSpinAttackChargedSound() {
-		playSound(SPIN_ATTACK_CHARGED_SOUND);
+		playSound(SOUND_SPIN_ATTACK_CHARGED);
 	}
 	
 	@Override

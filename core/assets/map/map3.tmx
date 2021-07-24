@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="181">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="191">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
@@ -495,6 +495,33 @@ Arrows: 25 Coins..</property>
    <properties>
     <property name="eventParameter" value="go_to_map_6"/>
    </properties>
+  </object>
+  <object id="181" name="item.rune_algiz" x="1455.33" y="138.667">
+   <point/>
+  </object>
+  <object id="182" name="item.rune_ansuz" x="1455.33" y="172">
+   <point/>
+  </object>
+  <object id="184" name="item.rune_hagalaz" x="1455.21" y="238.792">
+   <point/>
+  </object>
+  <object id="185" name="item.rune_gebo" x="1455.33" y="205.542">
+   <point/>
+  </object>
+  <object id="186" name="item.rune_kenaz" x="1455" y="272.292">
+   <point/>
+  </object>
+  <object id="187" name="item.rune_laguz" x="1454.92" y="306.083">
+   <point/>
+  </object>
+  <object id="188" name="item.rune_raidho" x="1454.75" y="406.833">
+   <point/>
+  </object>
+  <object id="189" name="item.rune_othala" x="1454.83" y="373.208">
+   <point/>
+  </object>
+  <object id="190" name="item.rune_mannaz" x="1454.88" y="339.625">
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="4" name="physics" locked="1">

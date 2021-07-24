@@ -65,11 +65,61 @@
 		pickUpSound: pickup_ammo
 		costs: 25,
 	},
-	//menu items
+	//**********************************
+	//*** menu items
+	//**********************************
 	bow: {
 		texture: bow
 	},
 	jump: {
 		texture: jump
+	},
+	//**********************************
+	//*** runes
+	//**********************************
+	rune_algiz: {
+		type: RUNE,
+		texture: rune_algiz,
+		pickUpSound: levelEnd
+	},
+	rune_ansuz: {
+		type: RUNE,
+		texture: rune_ansuz,
+		pickUpSound: levelEnd
+	},
+	rune_gebo: {
+		type: RUNE,
+		texture: rune_gebo,
+		pickUpSound: levelEnd
+	},
+	rune_hagalaz: {
+		type: RUNE,
+		texture: rune_hagalaz,
+		pickUpSound: levelEnd
+	},
+	rune_kenaz: {
+		type: RUNE,
+		texture: rune_kenaz,
+		pickUpSound: levelEnd
+	},
+	rune_laguz: {
+		type: RUNE,
+		texture: rune_laguz,
+		pickUpSound: levelEnd
+	},
+	rune_mannaz: {
+		type: RUNE,
+		texture: rune_mannaz,
+		pickUpSound: levelEnd
+	},
+	rune_othala: {
+		type: RUNE,
+		texture: rune_othala,
+		pickUpSound: levelEnd
+	},
+	rune_raidho: {
+		type: RUNE,
+		texture: rune_raidho,
+		pickUpSound: levelEnd
 	},
 }
