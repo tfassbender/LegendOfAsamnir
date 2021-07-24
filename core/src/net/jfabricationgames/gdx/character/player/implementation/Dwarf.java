@@ -1,7 +1,10 @@
 package net.jfabricationgames.gdx.character.player.implementation;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -23,6 +26,7 @@ import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -64,6 +68,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private static final Vector2 PHYSICS_BODY_POSITION_OFFSET = new Vector2(0f, -0.15f);
 	
 	private static final float DRAWING_DIRECTION_OFFSET = 0.1f;
+	private static final Vector2 DARKNESS_GRADIENT_POSITION_OFFSET = new Vector2(0f, -0.6f);
+	private static final Vector2 DARKNESS_GRADIENT_SIZE = new Vector2(100f, 100f);
 	
 	private static final String ASSET_CONFIG_FILE_NAME = "config/animation/dwarf.json";
 	private static final String ATTACK_CONFIG_FILE_NAME = "config/dwarf/attacks.json";
@@ -89,6 +95,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private TextureRegion idleDwarfSprite;
 	private TextureRegion blockSprite;
 	private TextureRegion aimMarkerSprite;
+	private TextureRegion darknessSprite;
 	
 	private SoundSet soundSet;
 	
@@ -108,9 +115,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		soundSet = SoundManager.getInstance().loadSoundSet(SOUND_SET_KEY);
 		
 		textureLoader = new TextureLoader(TEXTURE_CONFIG_FILE_NAME);
-		idleDwarfSprite = getIdleSprite();
-		blockSprite = getShieldSprite();
-		aimMarkerSprite = getAimMarkerSprite();
+		idleDwarfSprite = textureLoader.loadTexture("idle");
+		blockSprite = textureLoader.loadTexture("block");
+		aimMarkerSprite = textureLoader.loadTexture("aim_marker");
+		darknessSprite = textureLoader.loadTexture("darkness");
 		
 		action = CharacterAction.NONE;
 		body = createPhysicsBody();
@@ -145,16 +153,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		body.setUserData(this);
 		
 		return body;
-	}
-	
-	private TextureRegion getIdleSprite() {
-		return textureLoader.loadTexture("idle");
-	}
-	private TextureRegion getShieldSprite() {
-		return textureLoader.loadTexture("block");
-	}
-	private TextureRegion getAimMarkerSprite() {
-		return textureLoader.loadTexture("aim_marker");
 	}
 	
 	private void registerAsContactListener() {
@@ -242,6 +240,16 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				case WAND:
 					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						attackCreator.startAttack(activeSpecialAction.name().toLowerCase(),
+								movementHandler.getMovingDirection().getNormalizedDirectionVector());
+					}
+					break;
+				case LANTERN:
+					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
+						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, "true");
+						
+						//handle the lantern as attack to have a duration (so it's not executed in every game step)
 						attackCreator.startAttack(activeSpecialAction.name().toLowerCase(),
 								movementHandler.getMovingDirection().getNormalizedDirectionVector());
 					}
@@ -354,6 +362,48 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				aimMarkerOffsetY);
 		float aimMarkerSize = 5f;
 		draw(batch, aimMarkerSprite, aimMarkerOffset, aimMarkerSize, aimMarkerSize);
+	}
+	
+	@Override
+	public void renderDarkness(SpriteBatch batch, ShapeRenderer shapeRenderer) {
+		batch.begin();
+		draw(batch, darknessSprite, DARKNESS_GRADIENT_POSITION_OFFSET, DARKNESS_GRADIENT_SIZE.x, DARKNESS_GRADIENT_SIZE.y);
+		batch.end();
+		
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(Color.BLACK);
+		
+		float x = body.getPosition().x;
+		float y = body.getPosition().y;
+		
+		final float UP_DOWN_OFFSET_X = -1f;
+		final float LEF_RIGHT_OFFSET_X = 0.1f;
+		
+		//left
+		shapeRenderer.rect(x - DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f + LEF_RIGHT_OFFSET_X, //
+				y + GameScreen.SCENE_HEIGHT, //
+				-GameScreen.SCENE_WIDTH, //
+				-GameScreen.SCENE_HEIGHT * 2f);
+		
+		//right
+		shapeRenderer.rect(x + DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f - LEF_RIGHT_OFFSET_X, //
+				y + GameScreen.SCENE_HEIGHT, //
+				GameScreen.SCENE_WIDTH, //
+				-GameScreen.SCENE_HEIGHT * 2f);
+		
+		//up
+		shapeRenderer.rect(x - DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f + UP_DOWN_OFFSET_X, //
+				y + DARKNESS_GRADIENT_SIZE.y * GameScreen.WORLD_TO_SCREEN * 0.5f, //
+				GameScreen.SCENE_WIDTH * 0.5f, //
+				GameScreen.SCENE_HEIGHT);
+		
+		//down
+		shapeRenderer.rect(x - DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f + UP_DOWN_OFFSET_X, //
+				y - DARKNESS_GRADIENT_SIZE.y * GameScreen.WORLD_TO_SCREEN * 0.5f, //
+				GameScreen.SCENE_WIDTH * 0.5f, //
+				-GameScreen.SCENE_HEIGHT);
+		
+		shapeRenderer.end();
 	}
 	
 	@Override

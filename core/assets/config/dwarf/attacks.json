@@ -68,5 +68,13 @@
 		duration: 2,
 		damage: 0,
 		pushForce: 5,
+	},
+	{
+		id: lantern,
+		type: NOVA,
+		delay: 0,
+		duration: 1,
+		damage: 0,
+		pushForce: 0,
 	}
 ]

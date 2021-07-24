@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.character.player;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.character.player.implementation.CharacterAction;
@@ -55,16 +56,19 @@ public interface PlayableCharacter extends StatsCharacter, GameMapObject, Cutsce
 	
 	public boolean isAlive();
 	
+	@Override
 	public Vector2 getPosition();
 	
 	public void setPosition(float x, float y);
 	
+	@Override
 	public SpecialAction getActiveSpecialAction();
 	
 	public void setActiveSpecialAction(SpecialAction specialAction);
 	
 	public boolean isGameOver();
 	
+	@Override
 	public int getAmmo(ItemAmmoType ammoType);
 	
 	public void respawn();
@@ -72,4 +76,6 @@ public interface PlayableCharacter extends StatsCharacter, GameMapObject, Cutsce
 	public int getCoins();
 	
 	public void reAddToWorld();
+	
+	public void renderDarkness(SpriteBatch batch, ShapeRenderer shapeRenderer);
 }

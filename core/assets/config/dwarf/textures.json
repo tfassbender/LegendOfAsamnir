@@ -13,5 +13,10 @@
 		atlas: packed/demo/demo.atlas,
 		texture: aim_marker_red,
 		type: TEXTURE_REGION
+	},
+	darkness: {
+		atlas: packed/demo/demo.atlas,
+		texture: darkness_gradient,
+		type: TEXTURE_REGION
 	}
 }

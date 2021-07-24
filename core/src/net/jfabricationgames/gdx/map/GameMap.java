@@ -28,6 +28,7 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.MapObjectStateProperties;
@@ -71,14 +72,17 @@ public class GameMap implements EventListener, Disposable {
 		}
 	}
 	
-	public static final String MAP_KEY_BACKGROUND_LAYERS = "background_layers";
-	public static final String MAP_KEY_ABOVE_PLAYER_LAYERS = "above_player_layers";
-	public static final String MAP_KEY_SHADOW_LAYERS = "shadow_layers";
+	public static final String MAP_PROPERTY_KEY_BACKGROUND_LAYERS = "background_layers";
+	public static final String MAP_PROPERTY_KEY_ABOVE_PLAYER_LAYERS = "above_player_layers";
+	public static final String MAP_PROPERTY_KEY_SHADOW_LAYERS = "shadow_layers";
+	public static final String MAP_PROPERTY_KEY_DUNGEON_LEVEL = "dungeon_level";
 	public static final int[] BACKGROUND_LAYERS_DEFAULT = new int[] {0, 1};
 	public static final int[] ABOVE_PLAYER_LAYERS_DEFAULT = new int[] {2};
 	public static final int[] SHADOW_LAYERS_DEFAULT = new int[] {};
 	
 	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = new GameMapGroundType();
+	
+	public static final String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
 	
 	private static GameMap instance;
 	
@@ -214,6 +218,8 @@ public class GameMap implements EventListener, Disposable {
 		updateMapObjectStates();
 		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
+		
+		resetLanternUsed();
 	}
 	
 	private void removeCurrentMapIfPresent() {
@@ -222,6 +228,11 @@ public class GameMap implements EventListener, Disposable {
 			removeBodiesFromWorld();
 			clearObjectLists();
 		}
+	}
+	
+	private boolean isMapInitialized() {
+		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null
+				&& animals != null && projectiles != null;
 	}
 	
 	/**
@@ -268,9 +279,9 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private void loadLayersFromMapProperties() {
-		String backgroundLayersJson = map.getProperties().get(MAP_KEY_BACKGROUND_LAYERS, String.class);
-		String abovePlayerLayersJson = map.getProperties().get(MAP_KEY_ABOVE_PLAYER_LAYERS, String.class);
-		String shadowLayersJson = map.getProperties().get(MAP_KEY_SHADOW_LAYERS, String.class);
+		String backgroundLayersJson = map.getProperties().get(MAP_PROPERTY_KEY_BACKGROUND_LAYERS, String.class);
+		String abovePlayerLayersJson = map.getProperties().get(MAP_PROPERTY_KEY_ABOVE_PLAYER_LAYERS, String.class);
+		String shadowLayersJson = map.getProperties().get(MAP_PROPERTY_KEY_SHADOW_LAYERS, String.class);
 		
 		Json json = new Json();
 		if (backgroundLayersJson != null) {
@@ -293,9 +304,8 @@ public class GameMap implements EventListener, Disposable {
 		}
 	}
 	
-	private boolean isMapInitialized() {
-		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null
-				&& animals != null && projectiles != null;
+	private void resetLanternUsed() {
+		GlobalValuesDataHandler.getInstance().put(GLOBAL_VALUE_KEY_LANTERN_USED, "false");
 	}
 	
 	public void executeBeforeWorldStep() {
@@ -442,10 +452,25 @@ public class GameMap implements EventListener, Disposable {
 		renderer.render(abovePlayerLayers);
 	}
 	
-	public void renderShalows() {
+	public void renderShadows() {
 		if (shadowLayers.length > 0) {
 			renderer.render(shadowLayers);
 		}
+	}
+	
+	public void renderDarknessArroundPlayer() {
+		if (isDungeonMap() && !lanternUsed()) {
+			shapeRenderer.setProjectionMatrix(camera.combined);
+			player.renderDarkness(batch, shapeRenderer);
+		}
+	}
+	
+	private boolean isDungeonMap() {
+		return Boolean.parseBoolean(map.getProperties().get(MAP_PROPERTY_KEY_DUNGEON_LEVEL, "false", String.class));
+	}
+	
+	private boolean lanternUsed() {
+		return GlobalValuesDataHandler.getInstance().isValueEqual(GLOBAL_VALUE_KEY_LANTERN_USED, "true");
 	}
 	
 	public Vector2 getPlayerStartingPosition() {
