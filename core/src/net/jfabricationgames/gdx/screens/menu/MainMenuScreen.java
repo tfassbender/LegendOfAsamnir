@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 
 import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.data.GameDataService;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
@@ -207,8 +208,10 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	public void startGame() {
-		GameDataHandler.getInstance().createNewGameData();
-		createGameScreen(this::dispose);
+		createGameScreen(() -> {
+			GlobalValuesDataHandler.getInstance().initializeGameStartValues();
+			dispose();
+		});
 	}
 	
 	//*********************************************************************

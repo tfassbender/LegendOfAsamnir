@@ -305,7 +305,7 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private void resetLanternUsed() {
-		GlobalValuesDataHandler.getInstance().put(GLOBAL_VALUE_KEY_LANTERN_USED, "false");
+		GlobalValuesDataHandler.getInstance().put(GLOBAL_VALUE_KEY_LANTERN_USED, false);
 	}
 	
 	public void executeBeforeWorldStep() {
@@ -470,7 +470,7 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private boolean lanternUsed() {
-		return GlobalValuesDataHandler.getInstance().isValueEqual(GLOBAL_VALUE_KEY_LANTERN_USED, "true");
+		return GlobalValuesDataHandler.getInstance().getAsBoolean(GLOBAL_VALUE_KEY_LANTERN_USED);
 	}
 	
 	public Vector2 getPlayerStartingPosition() {

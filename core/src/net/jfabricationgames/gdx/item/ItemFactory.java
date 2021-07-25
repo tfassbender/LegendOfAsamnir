@@ -128,6 +128,9 @@ public class ItemFactory extends AbstractFactory {
 			case RUNE:
 				item = new RuneItem(name, typeConfig, sprite, animation, properties);
 				break;
+			case SPECIAL_ACTION:
+				item = new SpecialActionItem(name, typeConfig, sprite, animation, properties);
+				break;
 			default:
 				throw new IllegalStateException("Unknown ItemType \"" + typeConfig.type + "\" of object type \"" + name + "\"");
 		}

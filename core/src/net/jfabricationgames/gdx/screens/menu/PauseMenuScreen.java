@@ -5,14 +5,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
-import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.item.RuneItem;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
@@ -20,6 +17,7 @@ import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButton
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screens.menu.components.RuneSubMenu;
+import net.jfabricationgames.gdx.screens.menu.components.SpecialActionItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.control.MenuStateMachine;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
@@ -33,22 +31,12 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final String SOUND_ENTER_PAUSE_MENU = "enter_pause_menu";
 	private static final String ACTION_BACK_TO_GAME = "backToGame";
 	
-	private static final int ITEM_MENU_ITEMS_PER_LINE = 4;
-	private static final int ITEM_MENU_LINES = 2;
-	
-	private static final int RUNE_MENU_ITEMS_PER_LINE = 9;
-	private static final int RUNE_MENU_LINES = 1;
-	
 	private static final String STATE_PREFIX_ITEM = "item_";
 	private static final String STATE_PREFIX_BUTTON = "button_";
 	private static final String STATE_PREFIX_RUNE = "rune_";
 	
 	private static final String MAP_ANIMATION_IDLE = "map_idle";
 	private static final String PAUSE_MENU_STATES_CONFIG = "config/menu/pause_menu_states.json";
-	
-	private static final Array<String> ITEMS = SpecialAction.getNamesAsList();
-	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
-	private static final Array<String> RUNES = RuneItem.RuneType.getNamesAsList();
 	
 	private static final String STATE_PREFIX_MAP_DIALOG = "mapDialog_";
 	private static final String STATE_PREFIX_SAVE_DIALOG = "saveDialog_";
@@ -103,10 +91,10 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		background = new MenuBox(12, 10, MenuBox.TextureType.GREEN_BOARD);
 		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		
-		itemMenu = new ItemSubMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, ITEMS);
+		itemMenu = new SpecialActionItemSubMenu();
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
-		runeMenu = new RuneSubMenu(RUNE_MENU_ITEMS_PER_LINE, RUNE_MENU_LINES, RUNES);
+		runeMenu = new RuneSubMenu();
 		runeMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		runeDescriptionBanner = new MenuBox(5, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
@@ -147,7 +135,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonLoad.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		
-		ammoMenu = new AmmoSubMenu(AMMO_ITEMS, player);
+		ammoMenu = new AmmoSubMenu(player);
 		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
 		mapBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
@@ -202,7 +190,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		stateMachine.changeToInitialState();
 		
 		itemMenu.setSelectedIndex(player.getActiveSpecialAction().indexInMenu);
-		runeMenu.updateRuneStates();
+		itemMenu.updateStateAfterMenuShown();
+		runeMenu.updateStateAfterMenuShown();
 	}
 	
 	@Override

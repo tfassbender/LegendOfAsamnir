@@ -65,18 +65,48 @@
 		pickUpSound: pickup_ammo
 		costs: 25,
 	},
+	
 	//**********************************
 	//*** menu items
 	//**********************************
-	bow: {
-		texture: bow
-	},
+	
 	jump: {
 		texture: jump
 	},
+	
+	//**********************************
+	//*** special actions
+	//**********************************
+	
+	bow: {
+		type: SPECIAL_ACTION,
+		texture: bow,
+	},
+	special_action_bomb: {
+		type: SPECIAL_ACTION,
+		texture: bomb,
+	},
+	boomerang: {
+		type: SPECIAL_ACTION,
+		texture: boomerang,
+	},
+	wand: {
+		type: SPECIAL_ACTION,
+		texture: wand,
+	},
+	feather: {
+		type: SPECIAL_ACTION,
+		texture: feather,
+	},
+	lantern: {
+		type: SPECIAL_ACTION,
+		texture: lantern,
+	}
+	
 	//**********************************
 	//*** runes
 	//**********************************
+	
 	rune_algiz: {
 		type: RUNE,
 		texture: rune_algiz,

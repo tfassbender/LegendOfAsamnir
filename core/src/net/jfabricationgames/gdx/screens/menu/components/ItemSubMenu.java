@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
-public class ItemSubMenu extends MenuBox {
+public abstract class ItemSubMenu extends MenuBox {
 	
 	private static final String selectionTextureConfigName = "selected";
 	private static final String hoverTextureConfigName = "hover";
@@ -39,7 +39,10 @@ public class ItemSubMenu extends MenuBox {
 		
 		itemTextureLoader = new TextureLoader(itemTextureConfigFile);
 		loadItemTextures();
+		updateStateAfterMenuShown();
 	}
+	
+	public abstract void updateStateAfterMenuShown();
 	
 	private void loadItemTextures() {
 		itemTextures = new Array<>(items.size);
@@ -75,11 +78,13 @@ public class ItemSubMenu extends MenuBox {
 		
 		if (index >= 0 && items.size > index) {
 			TextureRegion itemTexture = itemTextures.get(index);
-			if (itemTexture != null) {
+			if (itemTexture != null && isItemKnown(index)) {
 				drawItem(batch, posX, posY, scaledWidth, scaledHeight, borderFactor, sizeFactor, itemTexture, index);
 			}
 		}
 	}
+	
+	protected abstract boolean isItemKnown(int index);
 	
 	protected void drawItem(SpriteBatch batch, float posX, float posY, float scaledWidth, float scaledHeight, float borderFactor, float sizeFactor,
 			TextureRegion itemTexture, int index) {

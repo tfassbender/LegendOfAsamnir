@@ -5,5 +5,6 @@ public enum ItemType {
 	ITEM, //
 	EVENT_ITEM, //
 	BUYABLE_ITEM, //
-	RUNE,
+	RUNE, //
+	SPECIAL_ACTION,
 }

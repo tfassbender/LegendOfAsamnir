@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="191">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="198">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
@@ -514,13 +514,31 @@ Arrows: 25 Coins..</property>
   <object id="187" name="item.rune_laguz" x="1454.92" y="306.083">
    <point/>
   </object>
-  <object id="188" name="item.rune_raidho" x="1454.75" y="406.833">
-   <point/>
-  </object>
-  <object id="189" name="item.rune_othala" x="1454.83" y="373.208">
+  <object id="188" name="item.rune_raidho" x="1454.08" y="377.5">
    <point/>
   </object>
   <object id="190" name="item.rune_mannaz" x="1454.88" y="339.625">
+   <point/>
+  </object>
+  <object id="191" name="item.rune_othala" x="833" y="662">
+   <point/>
+  </object>
+  <object id="192" name="item.bow" x="800" y="662.333">
+   <point/>
+  </object>
+  <object id="193" name="item.special_action_bomb" x="671.667" y="661.667">
+   <point/>
+  </object>
+  <object id="194" name="item.boomerang" x="544" y="464">
+   <point/>
+  </object>
+  <object id="195" name="item.wand" x="576" y="464">
+   <point/>
+  </object>
+  <object id="196" name="item.feather" x="608.333" y="464">
+   <point/>
+  </object>
+  <object id="197" name="item.lantern" x="640.333" y="463.667">
    <point/>
   </object>
  </objectgroup>

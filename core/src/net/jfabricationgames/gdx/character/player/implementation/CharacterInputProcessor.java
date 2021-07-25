@@ -338,7 +338,16 @@ public class CharacterInputProcessor implements InputActionListener {
 	}
 	
 	private void selectNextSpecialAction(int delta) {
-		SpecialAction specialAction = SpecialAction.getSpecialAction(inputCharacter.getActiveSpecialAction(), delta);
+		if (delta != 1 && delta != -1) {
+			throw new IllegalArgumentException("delta must be 1 or -1");
+		}
+		
+		SpecialAction specialAction = SpecialAction.getNextSpecialAction(inputCharacter.getActiveSpecialAction(), delta);
+		while (!specialAction.canBeUsed()) {
+			//search on till a special action can be used (should not be an infinite loop, since the jump action can always be used)
+			specialAction = SpecialAction.getNextSpecialAction(specialAction, delta);
+		}
+		
 		inputCharacter.setActiveSpecialAction(specialAction);
 	}
 }

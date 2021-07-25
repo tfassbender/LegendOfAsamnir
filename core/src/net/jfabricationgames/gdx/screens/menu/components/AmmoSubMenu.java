@@ -17,6 +17,8 @@ public class AmmoSubMenu extends SingleLineMenuBox {
 	
 	private static final String itemTextureConfigFile = "config/menu/items/items.json";
 	
+	private static final int NUM_ITEMS = 2;
+	
 	private class AmmoText {
 		
 		public String text;
@@ -40,11 +42,11 @@ public class AmmoSubMenu extends SingleLineMenuBox {
 	private TextureLoader itemTextureLoader;
 	private ScreenTextWriter screenTextWriter;
 	
-	public AmmoSubMenu(Array<ItemAmmoType> items, PlayableCharacter character) {
-		super(items.size, SingleLineTextureType.INVENTORY);
-		this.items = items;
+	public AmmoSubMenu(PlayableCharacter character) {
+		super(NUM_ITEMS, SingleLineTextureType.INVENTORY);
 		this.character = character;
 		
+		items = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 		ammoTextPositions = new ArrayMap<>();
 		
 		initializeScreenTextWriter();

@@ -250,7 +250,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				case LANTERN:
 					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
-						GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, "true");
+						GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, true);
 						
 						//handle the lantern as attack to have a duration (so it's not executed in every game step)
 						delayAttacks();

@@ -11,7 +11,6 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
@@ -19,6 +18,7 @@ import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screens.menu.components.SpecialActionItemSubMenu;
 
 public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	
@@ -31,12 +31,8 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private static final String STATE_PREFIX_ITEM = "item_";
 	private static final String STATE_PREFIX_BUTTON = "button_";
 	
-	private static final int ITEM_MENU_ITEMS_PER_LINE = 4;
-	private static final int ITEM_MENU_LINES = 2;
-	
 	private static final Array<String> ITEMS = new Array<>(new String[] {"health", "shield", "mana", null, "arrow", "bomb"});
 	private static final Array<Integer> ITEM_COSTS = new Array<>(new Integer[] {30, 20, 15, 0, 25, 25});
-	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
 	
 	private static final ItemFactory ITEM_FACTORY = new ItemFactory();
 	
@@ -66,7 +62,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		descriptionBox = new MenuBox(5, 4, MenuBox.TextureType.YELLOW_PAPER);
 		
-		itemMenu = new ItemSubMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, ITEMS);
+		itemMenu = new SpecialActionItemSubMenu();
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
@@ -79,7 +75,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		
 		buttonBackToGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		
-		ammoMenu = new AmmoSubMenu(AMMO_ITEMS, player);
+		ammoMenu = new AmmoSubMenu(player);
 		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 	}
 	

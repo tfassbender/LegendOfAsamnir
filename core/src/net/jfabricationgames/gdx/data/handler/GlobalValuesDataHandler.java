@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
 import net.jfabricationgames.gdx.data.container.GlobalValuesContainer;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -53,6 +54,10 @@ public class GlobalValuesDataHandler implements DataHandler, EventListener {
 		globalValuesContainer.globalValues.put(key, value);
 	}
 	
+	public void put(String key, boolean value) {
+		put(key, Boolean.toString(value));
+	}
+	
 	public boolean isValueEqual(String key, String value) {
 		if (value == null) {
 			return !globalValuesContainer.globalValues.containsKey(key);
@@ -62,6 +67,10 @@ public class GlobalValuesDataHandler implements DataHandler, EventListener {
 		}
 	}
 	
+	public boolean getAsBoolean(String key) {
+		return isValueEqual(key, "true");
+	}
+	
 	@Override
 	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.SET_GLOBAL_CONDITION_VALUE) {
@@ -69,5 +78,9 @@ public class GlobalValuesDataHandler implements DataHandler, EventListener {
 			ObjectMap<String, String> keyAndValue = json.fromJson(ObjectMap.class, String.class, event.stringValue);
 			put(keyAndValue.get("key"), keyAndValue.get("value"));
 		}
+	}
+	
+	public void initializeGameStartValues() {
+		put(SpecialAction.JUMP.actionEnabledGlobalValueKey, true);
 	}
 }
