@@ -76,10 +76,15 @@ public class ItemSubMenu extends MenuBox {
 		if (index >= 0 && items.size > index) {
 			TextureRegion itemTexture = itemTextures.get(index);
 			if (itemTexture != null) {
-				batch.draw(itemTexture, posX + scaledWidth * borderFactor, posY + scaledHeight * borderFactor, scaledWidth * sizeFactor,
-						scaledHeight * sizeFactor);
+				drawItem(batch, posX, posY, scaledWidth, scaledHeight, borderFactor, sizeFactor, itemTexture, index);
 			}
 		}
+	}
+	
+	protected void drawItem(SpriteBatch batch, float posX, float posY, float scaledWidth, float scaledHeight, float borderFactor, float sizeFactor,
+			TextureRegion itemTexture, int index) {
+		batch.draw(itemTexture, posX + scaledWidth * borderFactor, posY + scaledHeight * borderFactor, scaledWidth * sizeFactor,
+				scaledHeight * sizeFactor);
 	}
 	
 	private int calculateItemIndex(int x, int y) {

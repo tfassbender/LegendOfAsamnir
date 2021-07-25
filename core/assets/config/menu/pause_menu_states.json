@@ -1,4 +1,8 @@
 {
+	//*********************************************
+	//*** Buttons
+	//*********************************************
+	
 	button_backToGame: {
 		down: button_controls,
 		right: button_showMap,
@@ -25,6 +29,7 @@
 	},
 	button_quit: {
 		up: button_loadGame,
+		down: rune_1,
 		right: item_5,
 		select: quitGame,
 	},
@@ -33,6 +38,11 @@
 		down: item_1,
 		select: showMap,
 	},
+	
+	//*********************************************
+	//*** Items
+	//*********************************************
+	
 	item_1: {
 		up: button_showMap,
 		down: item_5,
@@ -62,26 +72,87 @@
 	},
 	item_5: {
 		up: item_1,
+		down: rune_6,
 		left: button_quit,
 		right: item_6,
 		select: selectCurrentItem, 
 	},
 	item_6: {
 		up: item_2,
+		down: rune_7,
 		left: item_5,
 		right: item_7,
 		select: selectCurrentItem, 
 	},
 	item_7: {
 		up: item_3,
+		down: rune_8,
 		left: item_6,
 		right: item_8,
 		select: selectCurrentItem, 
 	},
 	item_8: {
 		up: item_4,
+		down: rune_9,
 		left: item_7,
 		select: selectCurrentItem, 
+	},
+	
+	//*********************************************
+	//*** Runes
+	//*********************************************
+	
+	rune_1: {
+		up: button_quit,
+		right: rune_2,
+		select: noAction,
+	},
+	rune_2: {
+		up: button_quit,
+		left: rune_1,
+		right: rune_3,
+		select: noAction,
+	},
+	rune_3: {
+		up: button_quit,
+		left: rune_2,
+		right: rune_4,
+		select: noAction,
+	},
+	rune_4: {
+		up: button_quit,
+		left: rune_3,
+		right: rune_5,
+		select: noAction,
+	},
+	rune_5: {
+		up: button_quit,
+		left: rune_4,
+		right: rune_6,
+		select: noAction,
+	},
+	rune_6: {
+		up: item_5,
+		left: rune_5,
+		right: rune_7,
+		select: noAction,
+	},
+	rune_7: {
+		up: item_6,
+		left: rune_6,
+		right: rune_8,
+		select: noAction,
+	},
+	rune_8: {
+		up: item_7,
+		left: rune_7,
+		right: rune_9,
+		select: noAction,
+	},
+	rune_9: {
+		up: item_8,
+		left: rune_8,
+		select: noAction,
 	},
 	
 	//*********************************************

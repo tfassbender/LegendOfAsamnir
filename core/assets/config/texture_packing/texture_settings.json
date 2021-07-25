@@ -260,6 +260,9 @@
 				enemy/minotaur/minotaur_move,
 				enemy/minotaur/minotaur_die,
 				
+				//runes
+				items/runes,
+				
 				//mini maps
 				map/mini_maps,
 				

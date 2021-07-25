@@ -12,12 +12,14 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
+import net.jfabricationgames.gdx.item.RuneItem;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screens.menu.components.RuneSubMenu;
 import net.jfabricationgames.gdx.screens.menu.control.MenuStateMachine;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameControlsDialog;
 import net.jfabricationgames.gdx.screens.menu.dialog.GameMapDialog;
@@ -34,14 +36,19 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private static final int ITEM_MENU_ITEMS_PER_LINE = 4;
 	private static final int ITEM_MENU_LINES = 2;
 	
+	private static final int RUNE_MENU_ITEMS_PER_LINE = 9;
+	private static final int RUNE_MENU_LINES = 1;
+	
 	private static final String STATE_PREFIX_ITEM = "item_";
 	private static final String STATE_PREFIX_BUTTON = "button_";
+	private static final String STATE_PREFIX_RUNE = "rune_";
 	
 	private static final String MAP_ANIMATION_IDLE = "map_idle";
 	private static final String PAUSE_MENU_STATES_CONFIG = "config/menu/pause_menu_states.json";
 	
 	private static final Array<String> ITEMS = SpecialAction.getNamesAsList();
 	private static final Array<ItemAmmoType> AMMO_ITEMS = new Array<>(new ItemAmmoType[] {ItemAmmoType.ARROW, ItemAmmoType.BOMB});
+	private static final Array<String> RUNES = RuneItem.RuneType.getNamesAsList();
 	
 	private static final String STATE_PREFIX_MAP_DIALOG = "mapDialog_";
 	private static final String STATE_PREFIX_SAVE_DIALOG = "saveDialog_";
@@ -53,13 +60,22 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private LoadGameDialog loadGameDialog;
 	
 	private MenuBox background;
+	
 	private MenuBox headerBanner;
+	
 	private ItemSubMenu itemMenu;
 	private MenuBox itemMenuBanner;
+	
+	private RuneSubMenu runeMenu;
+	private MenuBox runeMenuBanner;
+	private MenuBox runeDescriptionBanner;
+	
 	private AmmoSubMenu ammoMenu;
 	private MenuBox ammoMenuBanner;
+	
 	private MenuBox mapBanner;
 	private AnimationDirector<TextureRegion> mapAnimation;
+	
 	private FocusButton buttonBackToGame;
 	private FocusButton buttonControls;
 	private FocusButton buttonSave;
@@ -84,16 +100,20 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void createComponents() {
-		background = new MenuBox(12, 8, MenuBox.TextureType.GREEN_BOARD);
+		background = new MenuBox(12, 10, MenuBox.TextureType.GREEN_BOARD);
 		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		itemMenu = new ItemSubMenu(ITEM_MENU_ITEMS_PER_LINE, ITEM_MENU_LINES, ITEMS);
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
+		runeMenu = new RuneSubMenu(RUNE_MENU_ITEMS_PER_LINE, RUNE_MENU_LINES, RUNES);
+		runeMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
+		runeDescriptionBanner = new MenuBox(5, 2, MenuBox.TextureType.BIG_BANNER_LOW);
+		
 		int buttonWidth = 290;
 		int buttonHeight = 55;
 		int buttonPosX = 160;
-		int lowestButtonY = 150;
+		int lowestButtonY = 220;
 		int buttonGapY = 40;
 		buttonBackToGame = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
 				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
@@ -134,7 +154,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonShowMap = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
 				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
 				.setSize(120, 35) //
-				.setPosition(625, 373) //
+				.setPosition(625, 443) //
 				.build();
 		buttonShowMap.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		mapAnimation = AnimationManager.getInstance().getAnimationDirector(MAP_ANIMATION_IDLE);
@@ -182,6 +202,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		stateMachine.changeToInitialState();
 		
 		itemMenu.setSelectedIndex(player.getActiveSpecialAction().indexInMenu);
+		runeMenu.updateRuneStates();
 	}
 	
 	@Override
@@ -197,6 +218,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		batch.begin();
 		drawBackground();
 		drawItemMenu();
+		drawRuneMenu();
 		drawMap(delta);
 		drawAmmoMenu();
 		drawButtons();
@@ -213,15 +235,19 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	private void drawBackground() {
 		gameSnapshotSprite.draw(batch);
-		background.draw(batch, 100, 100, 980, 600);
+		background.draw(batch, 100, 0, 980, 770);
 	}
 	
 	private void drawItemMenu() {
-		itemMenu.draw(batch, 625, 150, 400, 200);
+		itemMenu.draw(batch, 625, 220, 400, 200);
+	}
+	
+	private void drawRuneMenu() {
+		runeMenu.draw(batch, 160, 55, 865, 140);
 	}
 	
 	private void drawMap(float delta) {
-		mapAnimation.setSpriteConfig(new AnimationSpriteConfig().setX(670).setY(430).setWidth(80).setHeight(80));
+		mapAnimation.setSpriteConfig(new AnimationSpriteConfig().setX(670).setY(500).setWidth(80).setHeight(80));
 		if (buttonShowMap.hasFocus()) {
 			mapAnimation.increaseStateTime(delta);
 		}
@@ -232,7 +258,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void drawAmmoMenu() {
-		ammoMenu.draw(batch, 825, 380, 200, 110);
+		ammoMenu.draw(batch, 825, 450, 200, 110);
 	}
 	
 	private void drawButtons() {
@@ -245,10 +271,12 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void drawBanners() {
-		headerBanner.draw(batch, 125, 540, 650, 250);
-		itemMenuBanner.draw(batch, 640, 260, 200, 150);
-		ammoMenuBanner.draw(batch, 800, 465, 250, 150);
-		mapBanner.draw(batch, 610, 465, 200, 150);
+		headerBanner.draw(batch, 125, 610, 650, 250);
+		itemMenuBanner.draw(batch, 640, 330, 200, 150);
+		runeMenuBanner.draw(batch, 180, 105, 200, 150);
+		runeDescriptionBanner.draw(batch, 210, -5, 890, 150);
+		ammoMenuBanner.draw(batch, 800, 535, 250, 150);
+		mapBanner.draw(batch, 610, 535, 200, 150);
 	}
 	
 	private void drawControlsDialog() {
@@ -273,27 +301,31 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		screenTextWriter.setColor(Color.BLACK);
 		
 		screenTextWriter.setScale(1.5f);
-		screenTextWriter.drawText("Pause Menu", 230, 683);
+		screenTextWriter.drawText("Pause Menu", 230, 753);
 		
 		screenTextWriter.setScale(0.8f);
-		screenTextWriter.drawText("Items", 690, 345);
+		screenTextWriter.drawText("Items", 690, 415);
 		
-		screenTextWriter.drawText("Ammo", 860, 550);
+		screenTextWriter.drawText("Ammo", 860, 620);
 		
-		screenTextWriter.drawText("Map", 670, 550);
+		screenTextWriter.drawText("Map", 670, 620);
+		
+		screenTextWriter.drawText("Runes", 223, 190);
 		
 		screenTextWriter.setScale(0.55f);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonShowMap) + "Show Map", 675, 408, 80, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonShowMap) + "Show Map", 675, 478, 80, Align.center, false);
+		
+		screenTextWriter.drawText(runeMenu.getHoveredRuneDescription(), 330, 75);
 		
 		screenTextWriter.setScale(1.15f);
 		int buttonTextX = 160;
 		int buttonTextWidth = 430;
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToGame) + "Back to Game", buttonTextX, 591, buttonTextWidth, Align.center,
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToGame) + "Back to Game", buttonTextX, 661, buttonTextWidth, Align.center,
 				false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonControls) + "Controlls", buttonTextX, 494, buttonTextWidth, Align.center, false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonSave) + "Save Game", buttonTextX, 397, buttonTextWidth, Align.center, false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoad) + "Load Game", buttonTextX, 302, buttonTextWidth, Align.center, false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 206, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonControls) + "Controlls", buttonTextX, 564, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonSave) + "Save Game", buttonTextX, 467, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoad) + "Load Game", buttonTextX, 372, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 276, buttonTextWidth, Align.center, false);
 	}
 	
 	private String getButtonTextColorEncoding(FocusButton button) {
@@ -306,6 +338,10 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		if (stateName.startsWith(STATE_PREFIX_ITEM)) {
 			int itemIndex = Integer.parseInt(stateName.substring(STATE_PREFIX_ITEM.length())) - 1;
 			itemMenu.setHoveredIndex(itemIndex);
+		}
+		else if (stateName.startsWith(STATE_PREFIX_RUNE)) {
+			int runeIndex = Integer.parseInt(stateName.substring(STATE_PREFIX_RUNE.length())) - 1;
+			runeMenu.setHoveredIndex(runeIndex);
 		}
 		else if (stateName.startsWith(STATE_PREFIX_MAP_DIALOG)) {
 			if (stateName.equals(STATE_PREFIX_MAP_DIALOG + "button_mapDialogBack")) {
@@ -364,6 +400,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonQuit.setFocused(false);
 		buttonShowMap.setFocused(false);
 		itemMenu.setHoveredIndex(-1);
+		runeMenu.setHoveredIndex(-1);
 	}
 	
 	@Override
@@ -433,6 +470,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	public void selectFastTravelPoint() {
 		mapDialog.selectFastTravelPoint();
 	}
+	
+	public void noAction() {}
 	
 	//*********************************************************************
 	//*** State machine methods for save dialog (called via reflection)

@@ -1,11 +1,26 @@
 {
-	bow: {
+	health: {
 		atlas: packed/menu/menu.atlas,
-		texture: bow,
+		texture: health,
 	},
+	shield: {
+		atlas: packed/menu/menu.atlas,
+		texture: shield,
+	},
+	mana: {
+		atlas: packed/menu/menu.atlas,
+		texture: mana,
+	},
+	//********************
+	//*** items
+	//********************
 	jump: {
 		atlas: packed/menu/menu.atlas,
 		texture: jump,
+	},
+	bow: {
+		atlas: packed/menu/menu.atlas,
+		texture: bow,
 	},
 	arrow: {
 		atlas: packed/menu/menu.atlas,
@@ -31,16 +46,43 @@
 		atlas: packed/menu/menu.atlas,
 		texture: lantern,
 	},
-	health: {
+	//********************
+	//*** runes
+	//********************
+	othala: {
 		atlas: packed/menu/menu.atlas,
-		texture: health,
+		texture: rune_othala,
 	},
-	shield: {
+	ansuz: {
 		atlas: packed/menu/menu.atlas,
-		texture: shield,
+		texture: rune_ansuz,
 	},
-	mana: {
+	raidho: {
 		atlas: packed/menu/menu.atlas,
-		texture: mana,
-	}
+		texture: rune_raidho,
+	},
+	gebo: {
+		atlas: packed/menu/menu.atlas,
+		texture: rune_gebo,
+	},
+	algiz: {
+		atlas: packed/menu/menu.atlas,
+		texture: rune_algiz,
+	},
+	mannaz: {
+		atlas: packed/menu/menu.atlas,
+		texture: rune_mannaz,
+	},
+	hagalaz: {
+		atlas: packed/menu/menu.atlas,
+		texture: rune_hagalaz,
+	},
+	kenaz: {
+		atlas: packed/menu/menu.atlas,
+		texture: rune_kenaz,
+	},
+	laguz: {
+		atlas: packed/menu/menu.atlas,
+		texture: rune_laguz,
+	},
 }
