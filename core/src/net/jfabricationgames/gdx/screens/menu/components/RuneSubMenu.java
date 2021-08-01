@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
-import net.jfabricationgames.gdx.item.RuneType;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 
 public class RuneSubMenu extends ItemSubMenu {
 	
@@ -27,7 +27,7 @@ public class RuneSubMenu extends ItemSubMenu {
 		runeFound = new boolean[RuneType.values().length];
 		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
 		for (RuneType rune : RuneType.values()) {
-			runeFound[rune.order] = globalValues.getAsBoolean(rune.globalValueKey);
+			runeFound[rune.order] = globalValues.getAsBoolean(rune.globalValueKeyCollected);
 		}
 		
 		runeHagalazForged = GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED);

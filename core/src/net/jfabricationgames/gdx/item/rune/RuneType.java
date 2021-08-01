@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.item;
+package net.jfabricationgames.gdx.item.rune;
 
 import com.badlogic.gdx.utils.Array;
 
@@ -49,16 +49,16 @@ public enum RuneType {
 	}
 	
 	public final int order;
-	public final String globalValueKey;
+	public final String globalValueKeyCollected;
 	public final String description;
 	
 	private RuneType(int order, String globalValueKey, String description) {
 		this.order = order;
-		this.globalValueKey = globalValueKey;
+		this.globalValueKeyCollected = globalValueKey;
 		this.description = description;
 	}
 	
 	public boolean isCollected() {
-		return GlobalValuesDataHandler.getInstance().getAsBoolean(globalValueKey);
+		return GlobalValuesDataHandler.getInstance().getAsBoolean(globalValueKeyCollected);
 	}
 }

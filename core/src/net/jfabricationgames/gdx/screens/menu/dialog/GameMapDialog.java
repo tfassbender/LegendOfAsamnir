@@ -13,10 +13,12 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
@@ -31,6 +33,8 @@ public class GameMapDialog extends InGameMenuDialog {
 	private static final Color COLOR_FAST_TRAVEL_POINT_DISABLED = Color.DARK_GRAY;
 	private static final Color COLOR_FAST_TRAVEL_POINT_ENABLED = new Color(0.93f, 0.48f, 0f, 1f);
 	private static final Color COLOR_FAST_TRAVEL_POINT_SELECTED = new Color(0.78f, 0.27f, 0.11f, 1f);
+	
+	private static final String RUNE_NEEDED_EVENT_KEY = "rune_needed__raidho";
 	
 	private float playerPositionPointerBlinkTimer = 0;
 	private boolean playerPositionPointerBlinkOn = true;
@@ -223,6 +227,10 @@ public class GameMapDialog extends InGameMenuDialog {
 		shapeRenderer.dispose();
 	}
 	
+	private boolean runeCollected() {
+		return GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.RAIDHO.globalValueKeyCollected);
+	}
+	
 	//****************************************************************
 	//*** State machine methods (called via reflection)
 	//****************************************************************
@@ -230,21 +238,27 @@ public class GameMapDialog extends InGameMenuDialog {
 	public void selectFastTravelPoint() {
 		Gdx.app.debug(getClass().getSimpleName(), "selectFastTravelPoint was invoked.");
 		
-		if (CutsceneHandler.getInstance().isCutsceneActive()) {
-			playMenuSoundConsumer.accept(ControlledMenu.SOUND_ERROR);
-			return;
-		}
-		
-		if (selectedFastTravelPointId != null) {
-			FastTravelPointProperties fastTravelTargetProperties = getFastTravelPropertiesById(selectedFastTravelPointId);
-			if (fastTravelTargetProperties.enabled) {
-				EventHandler.getInstance()
-						.fireEvent(new EventConfig().setEventType(EventType.FAST_TRAVEL_TO_MAP_POSITION).setStringValue(selectedFastTravelPointId));
-				backToGameCallback.run();
-			}
-			else {
+		if (runeCollected()) {
+			if (CutsceneHandler.getInstance().isCutsceneActive()) {
 				playMenuSoundConsumer.accept(ControlledMenu.SOUND_ERROR);
+				return;
 			}
+			
+			if (selectedFastTravelPointId != null) {
+				FastTravelPointProperties fastTravelTargetProperties = getFastTravelPropertiesById(selectedFastTravelPointId);
+				if (fastTravelTargetProperties.enabled) {
+					EventHandler.getInstance().fireEvent(
+							new EventConfig().setEventType(EventType.FAST_TRAVEL_TO_MAP_POSITION).setStringValue(selectedFastTravelPointId));
+					backToGameCallback.run();
+				}
+				else {
+					playMenuSoundConsumer.accept(ControlledMenu.SOUND_ERROR);
+				}
+			}
+		}
+		else {
+			backToGameCallback.run();
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_NEEDED).setStringValue(RUNE_NEEDED_EVENT_KEY));
 		}
 	}
 }

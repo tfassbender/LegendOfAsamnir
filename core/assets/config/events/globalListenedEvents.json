@@ -1,4 +1,5 @@
 [
+	config/events/global/game.json,
 	config/events/global/demo.json,
 	config/events/global/tutorial.json,
 ]

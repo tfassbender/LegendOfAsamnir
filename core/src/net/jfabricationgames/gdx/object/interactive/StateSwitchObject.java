@@ -6,11 +6,13 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -19,6 +21,7 @@ public class StateSwitchObject extends InteractiveObject {
 	
 	private static final String MAP_PROPERTIES_KEY_STATE_SWITCH_ID = "stateSwitchId";
 	private static final String MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER = "eventParameter";
+	private static final String RUNE_NEEDED_EVENT_KEY = "rune_needed__ansuz";
 	
 	private static ObjectMap<String, Boolean> switchObjectStates = new ObjectMap<>();
 	
@@ -57,6 +60,27 @@ public class StateSwitchObject extends InteractiveObject {
 		}
 	}
 	
+	@Override
+	protected void executeInteraction() {
+		if (runeCollected()) {
+			performAction();
+			active = !active;
+			
+			changeSwitchObjectState(stateSwitchId, active);
+			updateSprite();
+			executeEvent();
+			
+			MapObjectDataHandler.getInstance().addStatefulMapObject(this);
+		}
+		else {
+			showRuneNeededText();
+		}
+	}
+	
+	private boolean runeCollected() {
+		return GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.ANSUZ.globalValueKeyCollected);
+	}
+	
 	private void updateSprite() {
 		if (active) {
 			sprite = createSprite(typeConfig.textureAfterAction);
@@ -66,23 +90,15 @@ public class StateSwitchObject extends InteractiveObject {
 		}
 	}
 	
-	@Override
-	protected void executeInteraction() {
-		performAction();
-		active = !active;
-		
-		changeSwitchObjectState(stateSwitchId, active);
-		updateSprite();
-		executeEvent();
-		
-		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
-	}
-	
 	private void executeEvent() {
 		if (mapProperties.containsKey(MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER)) {
 			String eventParameter = mapProperties.get(MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER, String.class);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.STATE_SWITCH_ACTION).setStringValue(eventParameter));
 		}
+	}
+	
+	private void showRuneNeededText() {
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_NEEDED).setStringValue(RUNE_NEEDED_EVENT_KEY));
 	}
 	
 	@Override

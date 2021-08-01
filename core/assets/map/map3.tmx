@@ -499,7 +499,7 @@ Arrows: 25 Coins..</property>
   <object id="181" name="item.rune_algiz" x="1455.33" y="138.667">
    <point/>
   </object>
-  <object id="182" name="item.rune_ansuz" x="1455.33" y="172">
+  <object id="182" name="item.rune_ansuz" x="657.33" y="1209">
    <point/>
   </object>
   <object id="184" name="item.rune_hagalaz" x="1455.21" y="238.792">
@@ -514,7 +514,7 @@ Arrows: 25 Coins..</property>
   <object id="187" name="item.rune_laguz" x="1454.92" y="306.083">
    <point/>
   </object>
-  <object id="188" name="item.rune_raidho" x="1454.08" y="377.5">
+  <object id="188" name="item.rune_raidho" x="142.08" y="343.5">
    <point/>
   </object>
   <object id="190" name="item.rune_mannaz" x="1454.88" y="339.625">

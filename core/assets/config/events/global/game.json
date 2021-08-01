@@ -1,0 +1,24 @@
+{
+	rune_needed__ansuz: {
+		event: {
+			eventType: RUNE_NEEDED,
+			stringValue: rune_needed__ansuz,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "???",
+			displayText: "I have no idea what this is. Maybe I should hit it with my axe... That solves all problems.",
+		}
+	},
+	rune_needed__raidho: {
+		event: {
+			eventType: RUNE_NEEDED,
+			stringValue: rune_needed__raidho,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "???",
+			displayText: "I don't realy know how to use this...",
+		}
+	}
+}
