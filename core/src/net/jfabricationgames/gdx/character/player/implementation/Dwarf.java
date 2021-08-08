@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
+import net.jfabricationgames.gdx.animation.GrowingAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
@@ -70,7 +71,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	private static final float DRAWING_DIRECTION_OFFSET = 0.1f;
 	private static final Vector2 DARKNESS_GRADIENT_POSITION_OFFSET = new Vector2(0f, -0.6f);
-	private static final Vector2 DARKNESS_GRADIENT_SIZE = new Vector2(100f, 100f);
 	
 	private static final String ANIMATION_DWARF_CONFIG_FILE = "config/animation/dwarf.json";
 	private static final String ATTACK_CONFIG_FILE_NAME = "config/dwarf/attacks.json";
@@ -96,12 +96,13 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private CharacterInputProcessor movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
-	private AnimationDirector<TextureRegion> runeAnimation;
 	private TextureLoader textureLoader;
 	private TextureRegion idleDwarfSprite;
 	private TextureRegion blockSprite;
 	private TextureRegion aimMarkerSprite;
-	private TextureRegion darknessSprite;
+	
+	private GrowingAnimationDirector<TextureRegion> darknessAnimation;
+	private boolean darknessFading;
 	
 	private SoundSet soundSet;
 	
@@ -124,7 +125,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		idleDwarfSprite = textureLoader.loadTexture("idle");
 		blockSprite = textureLoader.loadTexture("block");
 		aimMarkerSprite = textureLoader.loadTexture("aim_marker");
-		darknessSprite = textureLoader.loadTexture("darkness");
+		darknessAnimation = animationManager.getGrowingAnimationDirector("darkness_fade");
 		
 		action = CharacterAction.NONE;
 		body = createPhysicsBody();
@@ -253,7 +254,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 				case LANTERN:
 					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
-						GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, true);
+						startDarknessFade();
 						
 						//handle the lantern as attack to have a duration (so it's not executed in every game step)
 						delayAttacks();
@@ -272,13 +273,17 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		return false;
 	}
 	
+	private void fireOutOfAmmoEvent(ItemAmmoType ammoType) {
+		EventConfig eventConfig = new EventConfig().setEventType(EventType.OUT_OF_AMMO).setStringValue(ammoType.name());
+		EventHandler.getInstance().fireEvent(eventConfig);
+	}
+	
 	private void delayAttacks() {
 		attackCreator.startAttack(ATTACK_NAME_WAIT, movementHandler.getMovingDirection().getNormalizedDirectionVector());
 	}
 	
-	private void fireOutOfAmmoEvent(ItemAmmoType ammoType) {
-		EventConfig eventConfig = new EventConfig().setEventType(EventType.OUT_OF_AMMO).setStringValue(ammoType.name());
-		EventHandler.getInstance().fireEvent(eventConfig);
+	private void startDarknessFade() {
+		darknessFading = true;
 	}
 	
 	@Override
@@ -294,6 +299,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
+		
+		if (darknessFading) {
+			darknessAnimation.increaseStateTime(delta);
+		}
 	}
 	
 	@Override
@@ -307,13 +316,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		animation.increaseStateTime(delta);
 		if (animation.isAnimationFinished()) {
 			changeAction(CharacterAction.NONE);
-		}
-		
-		if (runeAnimation != null) {
-			runeAnimation.increaseStateTime(delta);
-			if (runeAnimation.isAnimationFinished()) {
-				runeAnimation = null;
-			}
 		}
 	}
 	
@@ -342,18 +344,25 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	
 	private void draw(SpriteBatch batch, TextureRegion frame) {
 		//use null as offset parameter to not create a new empty vector every time
-		draw(batch, frame, null, frame.getRegionWidth(), frame.getRegionHeight());
+		draw(batch, frame, 0, 0, frame.getRegionWidth(), frame.getRegionHeight());
 	}
 	
 	private void draw(SpriteBatch batch, TextureRegion frame, Vector2 offset, float width, float height) {
+		if (offset != null) {
+			draw(batch, frame, offset.x, offset.y, width, height);
+		}
+		else {
+			draw(batch, frame, 0, 0, width, height);
+		}
+	}
+	
+	private void draw(SpriteBatch batch, TextureRegion frame, float offsetX, float offsetY, float width, float height) {
 		float originX = 0.5f * width + PHYSICS_BODY_POSITION_OFFSET.x * width;
 		float originY = 0.5f * height + PHYSICS_BODY_POSITION_OFFSET.y * height;
 		float x = body.getPosition().x - originX;
 		float y = body.getPosition().y - originY;
-		if (offset != null) {
-			x += offset.x;
-			y += offset.y;
-		}
+		x += offsetX;
+		y += offsetY;
 		x += getDrawingDirectionOffset();
 		
 		batch.draw(frame, // textureRegion
@@ -386,7 +395,12 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	@Override
 	public void renderDarkness(SpriteBatch batch, ShapeRenderer shapeRenderer) {
 		batch.begin();
-		draw(batch, darknessSprite, DARKNESS_GRADIENT_POSITION_OFFSET, DARKNESS_GRADIENT_SIZE.x, DARKNESS_GRADIENT_SIZE.y);
+		draw(batch, darknessAnimation.getKeyFrame(), //
+				DARKNESS_GRADIENT_POSITION_OFFSET.x, //
+				// the texture seems to move while the animation is playing, which causes a gap between the texture and the black overlay underneath
+				// the state time with a factor of -2f is used as a workarround against this
+				DARKNESS_GRADIENT_POSITION_OFFSET.y - darknessAnimation.getStateTime() * 2f, // 
+				darknessAnimation.getWidth(), darknessAnimation.getHeight());
 		batch.end();
 		
 		shapeRenderer.begin(ShapeType.Filled);
@@ -395,34 +409,43 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		float x = body.getPosition().x;
 		float y = body.getPosition().y;
 		
-		final float UP_DOWN_OFFSET_X = -1f;
-		final float LEF_RIGHT_OFFSET_X = 0.1f;
+		final float LEF_RIGHT_OFFSET_X = 0.2f;
+		final float UP_OFFSET_Y = 0.25f;
+		final float DOWN_OFFSET_Y = 0.5f;
 		
 		//left
-		shapeRenderer.rect(x - DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f + LEF_RIGHT_OFFSET_X, //
+		shapeRenderer.rect(x - darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f + LEF_RIGHT_OFFSET_X, //
 				y + GameScreen.SCENE_HEIGHT, //
 				-GameScreen.SCENE_WIDTH, //
 				-GameScreen.SCENE_HEIGHT * 2f);
 		
 		//right
-		shapeRenderer.rect(x + DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f - LEF_RIGHT_OFFSET_X, //
+		shapeRenderer.rect(x + darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f - LEF_RIGHT_OFFSET_X, //
 				y + GameScreen.SCENE_HEIGHT, //
 				GameScreen.SCENE_WIDTH, //
 				-GameScreen.SCENE_HEIGHT * 2f);
 		
 		//up
-		shapeRenderer.rect(x - DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f + UP_DOWN_OFFSET_X, //
-				y + DARKNESS_GRADIENT_SIZE.y * GameScreen.WORLD_TO_SCREEN * 0.5f, //
-				GameScreen.SCENE_WIDTH * 0.5f, //
+		shapeRenderer.rect(x - darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f, //
+				y + darknessAnimation.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.5f + UP_OFFSET_Y, //
+				GameScreen.SCENE_WIDTH * 2f, //
 				GameScreen.SCENE_HEIGHT);
 		
 		//down
-		shapeRenderer.rect(x - DARKNESS_GRADIENT_SIZE.x * GameScreen.WORLD_TO_SCREEN * 0.5f + UP_DOWN_OFFSET_X, //
-				y - DARKNESS_GRADIENT_SIZE.y * GameScreen.WORLD_TO_SCREEN * 0.5f, //
-				GameScreen.SCENE_WIDTH * 0.5f, //
+		shapeRenderer.rect(x - darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f, //
+				y - darknessAnimation.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.5f + DOWN_OFFSET_Y, //
+				GameScreen.SCENE_WIDTH * 2f, //
 				-GameScreen.SCENE_HEIGHT);
 		
 		shapeRenderer.end();
+		
+		if (darknessAnimation.isAnimationFinished()) {
+			darknessAnimation.resetStateTime();
+			darknessFading = false;
+			
+			//set the global value for lantern used, to not render the darkness anymore
+			GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, true);
+		}
 	}
 	
 	@Override

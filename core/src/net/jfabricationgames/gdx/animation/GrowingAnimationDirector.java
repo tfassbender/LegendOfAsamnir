@@ -18,6 +18,7 @@ public class GrowingAnimationDirector<T extends TextureRegion> extends Animation
 		
 		initializeSpriteConfigWithoutPosition();
 		initialSpriteSize = getSpriteConfigCopy();
+		updateTextureScale();
 	}
 	
 	@Override
@@ -67,6 +68,14 @@ public class GrowingAnimationDirector<T extends TextureRegion> extends Animation
 	public void resetStateTime() {
 		super.resetStateTime();
 		updateTextureScale();
+	}
+	
+	public float getWidth() {
+		return spriteConfig.width;
+	}
+	
+	public float getHeight() {
+		return spriteConfig.height;
 	}
 	
 	private void updateTextureScale() {

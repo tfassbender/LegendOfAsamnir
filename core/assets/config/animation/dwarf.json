@@ -55,5 +55,16 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		}
+		
+		{
+			name: darkness_gradient,
+			alias: darkness_fade,
+			type: GROWING,
+			atlas: packed/demo/demo.atlas,
+			
+			startScale: 4,
+			maxScale: 20,
+			duration: 2,
+		}
 	]
 }

@@ -53,10 +53,10 @@ public class OnScreenRuneRenderer implements Disposable, EventListener {
 	private void drawRunes() {
 		batch.begin();
 		batch.draw(runeAnimation.getKeyFrame(), //
-				screenCenter.x - runeAnimation.getSpriteConfig().width * 0.5f, //
-				screenCenter.y - runeAnimation.getSpriteConfig().height * 0.5f, //
-				runeAnimation.getSpriteConfig().width, //
-				runeAnimation.getSpriteConfig().height);
+				screenCenter.x - runeAnimation.getWidth() * 0.5f, //
+				screenCenter.y - runeAnimation.getHeight() * 0.5f, //
+				runeAnimation.getWidth(), //
+				runeAnimation.getHeight());
 		batch.end();
 	}
 	
