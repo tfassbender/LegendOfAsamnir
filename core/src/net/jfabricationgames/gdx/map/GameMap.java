@@ -465,7 +465,7 @@ public class GameMap implements EventListener, Disposable {
 		}
 	}
 	
-	private boolean isDungeonMap() {
+	public boolean isDungeonMap() {
 		return Boolean.parseBoolean(map.getProperties().get(MAP_PROPERTY_KEY_DUNGEON_LEVEL, "false", String.class));
 	}
 	
