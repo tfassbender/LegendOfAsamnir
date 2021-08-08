@@ -11,10 +11,10 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
@@ -158,7 +158,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	
 	protected AnimationDirector<TextureRegion> getHitAnimation() {
 		if (showHitAnimation()) {
-			AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationHit);
+			AnimationDirector<TextureRegion> animation = animationManager.getTextureAnimationDirector(typeConfig.animationHit);
 			animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
 			return animation;
 		}
@@ -175,7 +175,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	
 	protected AnimationDirector<TextureRegion> getAnimation(String animationName) {
 		if (animationName != null) {
-			AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(animationName);
+			AnimationDirector<TextureRegion> animation = animationManager.getTextureAnimationDirector(animationName);
 			animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
 			return animation;
 		}

@@ -502,10 +502,10 @@ Arrows: 25 Coins..</property>
   <object id="182" name="item.rune_ansuz" x="657.33" y="1209">
    <point/>
   </object>
-  <object id="184" name="item.rune_hagalaz" x="1455.21" y="238.792">
+  <object id="184" name="item.rune_hagalaz" x="497.21" y="690.792">
    <point/>
   </object>
-  <object id="185" name="item.rune_gebo" x="1455.33" y="205.542">
+  <object id="185" name="item.rune_gebo" x="288.33" y="144.542">
    <point/>
   </object>
   <object id="186" name="item.rune_kenaz" x="1455" y="272.292">

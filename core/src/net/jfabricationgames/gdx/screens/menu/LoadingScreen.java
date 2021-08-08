@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox.TextureType;
@@ -30,9 +30,8 @@ public class LoadingScreen extends MenuScreen<LoadingScreen> {
 	public LoadingScreen(Runnable afterFinishedLoading) {
 		this.afterFinishedLoading = afterFinishedLoading;
 		assetManager = AssetGroupManager.getInstance();
-		dwarfAnimation = AnimationManager.getInstance().getAnimationDirector("dwarf_run_right");
+		dwarfAnimation = AnimationManager.getInstance().getTextureAnimationDirector("dwarf_run_right");
 		
-
 		TextureLoader textureLoader = new TextureLoader(TEXTURE_CONFIG);
 		chestTexture = textureLoader.loadTexture("chest");
 		
@@ -93,7 +92,7 @@ public class LoadingScreen extends MenuScreen<LoadingScreen> {
 	
 	private void drawLoadingBar() {
 		float progress = assetManager.getProgress();
-		float positionX = 315f +  420f * progress;
+		float positionX = 315f + 420f * progress;
 		float positionY = 220f;
 		
 		batch.draw(chestTexture, 790, 210, 80, 80);

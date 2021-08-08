@@ -34,6 +34,7 @@ public enum EventType {
 	EVENT_ITEM_PICKED_UP, //
 	SET_ITEM, //
 	RUNE_NEEDED, //
+	RUNE_USED, //
 	//*******************************
 	//*** Cutscenes
 	//*******************************

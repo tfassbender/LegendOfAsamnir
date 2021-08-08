@@ -35,6 +35,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.object.event.EventObject;
@@ -71,7 +72,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private static final Vector2 DARKNESS_GRADIENT_POSITION_OFFSET = new Vector2(0f, -0.6f);
 	private static final Vector2 DARKNESS_GRADIENT_SIZE = new Vector2(100f, 100f);
 	
-	private static final String ASSET_CONFIG_FILE_NAME = "config/animation/dwarf.json";
+	private static final String ANIMATION_DWARF_CONFIG_FILE = "config/animation/dwarf.json";
 	private static final String ATTACK_CONFIG_FILE_NAME = "config/dwarf/attacks.json";
 	private static final String TEXTURE_CONFIG_FILE_NAME = "config/dwarf/textures.json";
 	
@@ -80,6 +81,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private static final String SOUND_AMMO_EMPTY = "ammo_empty";
 	
 	private static final String ATTACK_NAME_WAIT = "wait";
+	private static final String RUNE_HAGALAZ_ANIMATION_NAME = "rune_hagalaz";
 	
 	private boolean gameOver;
 	
@@ -94,6 +96,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private CharacterInputProcessor movementHandler;
 	
 	private AnimationDirector<TextureRegion> animation;
+	private AnimationDirector<TextureRegion> runeAnimation;
 	private TextureLoader textureLoader;
 	private TextureRegion idleDwarfSprite;
 	private TextureRegion blockSprite;
@@ -114,7 +117,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		fastTravelDataHandler = FastTravelDataHandler.getInstance();
 		
 		animationManager = AnimationManager.getInstance();
-		animationManager.loadAnimations(ASSET_CONFIG_FILE_NAME);
+		animationManager.loadAnimations(ANIMATION_DWARF_CONFIG_FILE);
 		soundSet = SoundManager.getInstance().loadSoundSet(SOUND_SET_KEY);
 		
 		textureLoader = new TextureLoader(TEXTURE_CONFIG_FILE_NAME);
@@ -172,7 +175,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		}
 	}
 	private AnimationDirector<TextureRegion> getAnimation(CharacterAction action) {
-		return animationManager.getAnimationDirector(getAnimationName(action));
+		return animationManager.getTextureAnimationDirector(getAnimationName(action));
 	}
 	private String getAnimationName(CharacterAction action) {
 		return action.getAnimationName();
@@ -304,6 +307,13 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		animation.increaseStateTime(delta);
 		if (animation.isAnimationFinished()) {
 			changeAction(CharacterAction.NONE);
+		}
+		
+		if (runeAnimation != null) {
+			runeAnimation.increaseStateTime(delta);
+			if (runeAnimation.isAnimationFinished()) {
+				runeAnimation = null;
+			}
 		}
 	}
 	
@@ -625,9 +635,22 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	private void die() {
-		playSound(CharacterAction.HIT);
-		changeAction(CharacterAction.DIE);
-		GameUtils.runDelayed(() -> gameOver(), TIME_TILL_GAME_OVER_MENU);
+		if (runeCollectedAndForged()) {
+			propertiesDataHandler.increaseHealthByHalf();
+			GlobalValuesDataHandler.getInstance().put(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED, false);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_USED).setStringValue(RUNE_HAGALAZ_ANIMATION_NAME));
+		}
+		else {
+			playSound(CharacterAction.HIT);
+			changeAction(CharacterAction.DIE);
+			GameUtils.runDelayed(() -> gameOver(), TIME_TILL_GAME_OVER_MENU);
+		}
+	}
+	
+	private boolean runeCollectedAndForged() {
+		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
+		return globalValues.getAsBoolean(RuneType.HAGALAZ.globalValueKeyCollected) //
+				&& globalValues.getAsBoolean(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED);
 	}
 	
 	private void gameOver() {

@@ -12,8 +12,7 @@ import net.jfabricationgames.gdx.event.EventType;
 
 public class BuyableItem extends Item {
 	
-	public BuyableItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation,
-			MapProperties properties) {
+	public BuyableItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		super(itemName, typeConfig, sprite, animation, properties);
 	}
 	

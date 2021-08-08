@@ -51,7 +51,7 @@ public class BeamAttack extends Attack {
 		hitFixtureProperties = new PhysicsBodyProperties().setBody(body).setCollisionType(collisionType).setSensor(true)
 				.setPhysicsBodyShape(PhysicsBodyShape.RECTANGLE).setWidth(CYCLOPS_BEAM_WIDTH).setHeight(CYCLOPS_BEAM_HEIGHT)
 				.setFixturePosition(getFixturePosition(direction));
-		beamAnimation = AnimationManager.getInstance().getAnimationDirectorCopy(CYCLOPS_BEAM_ANIMATION_NAME);
+		beamAnimation = AnimationManager.getInstance().getTextureAnimationDirectorCopy(CYCLOPS_BEAM_ANIMATION_NAME);
 		updateTextureDirection(beamAnimation);
 	}
 	
@@ -84,7 +84,7 @@ public class BeamAttack extends Attack {
 			
 			if (!beamAnimation.isAnimationFinished()) {
 				if (isLongBeamAnimationKeyFrame()) {
-					for (int i = CYCLOPS_LONG_BEAM_SPRITE_REPETITIONS-1; i >= 0; i--) {
+					for (int i = CYCLOPS_LONG_BEAM_SPRITE_REPETITIONS - 1; i >= 0; i--) {
 						drawBeam(batch, region, CYCLOPS_LONG_BEAM_SPRITE_OFFSET * (i + 1));
 					}
 				}

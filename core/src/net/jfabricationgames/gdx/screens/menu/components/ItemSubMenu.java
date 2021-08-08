@@ -42,7 +42,7 @@ public abstract class ItemSubMenu extends MenuBox {
 		updateStateAfterMenuShown();
 	}
 	
-	public abstract void updateStateAfterMenuShown();
+	public void updateStateAfterMenuShown() {}
 	
 	private void loadItemTextures() {
 		itemTextures = new Array<>(items.size);
@@ -84,7 +84,9 @@ public abstract class ItemSubMenu extends MenuBox {
 		}
 	}
 	
-	protected abstract boolean isItemKnown(int index);
+	protected boolean isItemKnown(int index) {
+		return true;
+	}
 	
 	protected void drawItem(SpriteBatch batch, float posX, float posY, float scaledWidth, float scaledHeight, float borderFactor, float sizeFactor,
 			TextureRegion itemTexture, int index) {

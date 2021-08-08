@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Json;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public abstract class AbstractFactory {
@@ -47,7 +47,7 @@ public abstract class AbstractFactory {
 			return null;
 		}
 		
-		AnimationDirector<TextureRegion> animation = AnimationManager.getInstance().getAnimationDirectorCopy(animationName);
+		AnimationDirector<TextureRegion> animation = AnimationManager.getInstance().getTextureAnimationDirectorCopy(animationName);
 		AnimationSpriteConfig spriteConfig = createSpriteConfig(animation.getKeyFrame(), x, y);
 		animation.setSpriteConfig(spriteConfig);
 		return animation;

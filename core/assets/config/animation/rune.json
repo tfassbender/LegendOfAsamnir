@@ -1,0 +1,14 @@
+{
+	configList: 
+	[
+		{
+			name: rune_hagalaz,
+			type: GROWING,
+			atlas: packed/demo/demo.atlas,
+			
+			startScale: 0.1,
+			maxScale: 3,
+			duration: 2,
+		},
+	]
+}

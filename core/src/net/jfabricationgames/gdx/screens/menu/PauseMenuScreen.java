@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
@@ -62,7 +62,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private MenuBox ammoMenuBanner;
 	
 	private MenuBox mapBanner;
-	private AnimationDirector<TextureRegion> mapAnimation;
+	private TextureAnimationDirector<TextureRegion> mapAnimation;
 	
 	private FocusButton buttonBackToGame;
 	private FocusButton buttonControls;
@@ -145,7 +145,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				.setPosition(625, 443) //
 				.build();
 		buttonShowMap.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
-		mapAnimation = AnimationManager.getInstance().getAnimationDirector(MAP_ANIMATION_IDLE);
+		mapAnimation = AnimationManager.getInstance().getTextureAnimationDirector(MAP_ANIMATION_IDLE);
 	}
 	
 	private void createDialogs() {

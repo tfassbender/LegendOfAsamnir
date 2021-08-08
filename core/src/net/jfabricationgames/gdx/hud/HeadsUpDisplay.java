@@ -16,6 +16,7 @@ public class HeadsUpDisplay implements Disposable {
 	
 	private StatusBar statusBar;
 	private OnScreenItemRenderer onScreenItemRenderer;
+	private OnScreenRuneRenderer onScreenRuneRenderer;
 	private OnScreenTextBox onScreenText;
 	private WorldEdge worldEdge;
 	
@@ -28,6 +29,7 @@ public class HeadsUpDisplay implements Disposable {
 		
 		statusBar = new StatusBar(this);
 		onScreenItemRenderer = new OnScreenItemRenderer(this);
+		onScreenRuneRenderer = new OnScreenRuneRenderer(this);
 		onScreenText = OnScreenTextBox.createInstance(this);
 		worldEdge = new WorldEdge(this);
 	}
@@ -35,6 +37,7 @@ public class HeadsUpDisplay implements Disposable {
 	public void render(float delta) {
 		statusBar.render(delta);
 		onScreenItemRenderer.render(delta);
+		onScreenRuneRenderer.render(delta);
 		onScreenText.render(delta);
 		worldEdge.render(delta);
 	}

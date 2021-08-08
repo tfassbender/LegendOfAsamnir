@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
@@ -33,7 +34,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	private NonPlayableCharacterTypeConfig typeConfig;
 	
 	private PlayableCharacter player;
-	private AnimationDirector<TextureRegion> interactionAnimation;
+	private TextureAnimationDirector<TextureRegion> interactionAnimation;
 	
 	public NonPlayableCharacter(NonPlayableCharacterTypeConfig typeConfig, MapProperties properties) {
 		super(properties);

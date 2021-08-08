@@ -1,14 +1,11 @@
 package net.jfabricationgames.gdx.animation;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
-
-import net.jfabricationgames.gdx.screens.game.GameScreen;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class AnimationDirector<T extends TextureRegion> {
+import net.jfabricationgames.gdx.screens.game.GameScreen;
+
+public abstract class AnimationDirector<T extends TextureRegion> {
 	
 	public static boolean isTextureRight(boolean initialAnimationDirectionIsRight, AnimationDirector<TextureRegion> animation) {
 		return initialAnimationDirectionIsRight != animation.getKeyFrame().isFlipX();
@@ -18,20 +15,10 @@ public class AnimationDirector<T extends TextureRegion> {
 		return initialAnimationDirectionIsRight == animation.getKeyFrame().isFlipX();
 	}
 	
-	private float stateTime;
-	private Animation<T> animation;
+	protected float stateTime;
+	protected AnimationSpriteConfig spriteConfig;
 	
-	private AnimationSpriteConfig spriteConfig;
-	
-	public AnimationDirector(Animation<T> animation) {
-		this.animation = animation;
-		initializeSpriteConfigWithoutPosition();
-	}
-	
-	protected void initializeSpriteConfigWithoutPosition() {
-		T keyFrame = animation.getKeyFrame(0);
-		spriteConfig = new AnimationSpriteConfig().setWidth(keyFrame.getRegionWidth()).setHeight(keyFrame.getRegionHeight());
-	}
+	protected abstract void initializeSpriteConfigWithoutPosition();
 	
 	/**
 	 * Draw the current key frame of this animation onto the {@link SpriteBatch}.<br>
@@ -48,21 +35,21 @@ public class AnimationDirector<T extends TextureRegion> {
 				GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
 	}
 	
-	public void drawInMenu(SpriteBatch batch) {
-		if (spriteConfig == null) {
-			throw new IllegalStateException("No AnimationSpriteConfig. Please add an AnimationSpriteConfig in order to use the draw method");
-		}
-		
-		T keyFrame = getKeyFrame();
-		batch.draw(keyFrame, spriteConfig.x, spriteConfig.y, spriteConfig.width, spriteConfig.height);
-	}
-	
 	/**
 	 * Get the frame at the current time.
 	 */
-	public T getKeyFrame() {
-		return animation.getKeyFrame(stateTime);
-	}
+	public abstract T getKeyFrame();
+	
+	/**
+	 * Set the animation state time to the end of the animation.
+	 */
+	public abstract void endAnimation();
+	
+	public abstract boolean isAnimationFinished();
+	
+	public abstract float getAnimationDuration();
+	
+	public abstract void flip(boolean x, boolean y);
 	
 	public float getStateTime() {
 		return stateTime;
@@ -81,41 +68,6 @@ public class AnimationDirector<T extends TextureRegion> {
 	 */
 	public void resetStateTime() {
 		stateTime = 0;
-	}
-	
-	/**
-	 * Set the animation state time to the end of the animation.
-	 */
-	public void endAnimation() {
-		stateTime = animation.getAnimationDuration();
-	}
-	
-	public void setPlayMode(PlayMode playMode) {
-		animation.setPlayMode(playMode);
-	}
-	
-	/**
-	 * Get the {@link Animation} that this object holds.
-	 */
-	public Animation<T> getAnimation() {
-		return animation;
-	}
-	
-	public boolean isAnimationFinished() {
-		return animation.isAnimationFinished(stateTime);
-	}
-	
-	public float getAnimationDuration() {
-		return animation.getAnimationDuration();
-	}
-	
-	/**
-	 * Flip all key frames of the animation.
-	 */
-	public void flip(boolean x, boolean y) {
-		for (TextureRegion region : animation.getKeyFrames()) {
-			region.flip(x, y);
-		}
 	}
 	
 	public AnimationSpriteConfig getSpriteConfig() {

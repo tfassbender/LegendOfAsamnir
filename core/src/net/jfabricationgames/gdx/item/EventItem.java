@@ -15,8 +15,7 @@ public class EventItem extends Item {
 	
 	private String eventParameter;
 	
-	public EventItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation,
-			MapProperties properties) {
+	public EventItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		super(itemName, typeConfig, sprite, animation, properties);
 		readEventParameters();
 	}

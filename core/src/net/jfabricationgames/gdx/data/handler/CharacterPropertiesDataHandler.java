@@ -117,6 +117,10 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 		properties.increaseHealth += amount;
 	}
 	
+	public void increaseHealthByHalf() {
+		properties.increaseHealth += properties.maxHealth * 0.5f;
+	}
+	
 	public float getManaPercentual() {
 		return properties.mana / properties.maxMana;
 	}

@@ -3,8 +3,8 @@ package net.jfabricationgames.gdx.screens.menu.components;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 
 public class MainMenuAnimation {
 	
@@ -24,8 +24,8 @@ public class MainMenuAnimation {
 	
 	public MainMenuAnimation() {
 		AnimationManager.getInstance().loadAnimations("config/animation/menu.json");
-		dwarfAnimation = AnimationManager.getInstance().getAnimationDirector("dwarf_run_right");
-		minotaurAnimation = AnimationManager.getInstance().getAnimationDirector("minotaur_move");
+		dwarfAnimation = AnimationManager.getInstance().getTextureAnimationDirector("dwarf_run_right");
+		minotaurAnimation = AnimationManager.getInstance().getTextureAnimationDirector("minotaur_move");
 	}
 	
 	public void drawAnimation(SpriteBatch batch, float delta) {
@@ -35,13 +35,13 @@ public class MainMenuAnimation {
 		}
 		
 		if (dwarfPosition > dwarfPositionChangeToAttackAnimation && !changedToAttackAnimation) {
-			dwarfAnimation = AnimationManager.getInstance().getAnimationDirector("dwarf_attack_jump_right");
+			dwarfAnimation = AnimationManager.getInstance().getTextureAnimationDirector("dwarf_attack_jump_right");
 			changedToAttackAnimation = true;
 		}
 		
 		if (changedToAttackAnimation && !changedToIdleAnimation && dwarfAnimation.isAnimationFinished()) {
-			dwarfAnimation = AnimationManager.getInstance().getAnimationDirector("dwarf_idle_right");
-			minotaurAnimation = AnimationManager.getInstance().getAnimationDirector("minotaur_die");
+			dwarfAnimation = AnimationManager.getInstance().getTextureAnimationDirector("dwarf_idle_right");
+			minotaurAnimation = AnimationManager.getInstance().getTextureAnimationDirector("minotaur_die");
 			changedToIdleAnimation = true;
 		}
 		

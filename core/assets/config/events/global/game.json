@@ -20,5 +20,16 @@
 			displayTextHeader: "???",
 			displayText: "I don't realy know how to use this...",
 		}
+	},
+	rune_needed__gebo: {
+		event: {
+			eventType: RUNE_NEEDED,
+			stringValue: rune_needed__gebo,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Thorin",
+			displayText: "I won't give away any of my gold.",
+		}
 	}
 }

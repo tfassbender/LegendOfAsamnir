@@ -32,6 +32,7 @@ public class AnimationManager {
 	
 	private AssetGroupManager assetManager;
 	private Map<String, Animation<TextureRegion>> animations;
+	private Map<String, TextureRegion> growingAnimationTextures;
 	private Map<String, AnimationConfig> animationConfigurations;
 	
 	private Array<String> configFiles;
@@ -39,6 +40,7 @@ public class AnimationManager {
 	private AnimationManager() {
 		assetManager = AssetGroupManager.getInstance();
 		animations = new HashMap<>();
+		growingAnimationTextures = new HashMap<>();
 		animationConfigurations = new HashMap<>();
 		
 		configFiles = new Array<>();
@@ -48,7 +50,7 @@ public class AnimationManager {
 	 * Load the animations, defined in the configuration file.
 	 * 
 	 * @param config
-	 *        The configuration file, that's animations are to be loaded
+	 *        The configuration files, that's animations are to be loaded
 	 */
 	public void loadAnimations(String... configurations) {
 		Gdx.app.log(getClass().getSimpleName(), "Loading animations from config: " + Arrays.toString(configurations));
@@ -59,7 +61,8 @@ public class AnimationManager {
 			animationConfigurations
 					.putAll(animationConfig.getConfigList().stream().collect(Collectors.toMap(AnimationConfig::getAlias, Function.identity())));
 			
-			animationConfig.getConfigList().forEach(this::createAnimation);
+			animationConfig.getConfigList().stream().filter(c -> c.type == AnimationType.MULTIPLE_TEXTURES).forEach(this::createAnimation);
+			animationConfig.getConfigList().stream().filter(c -> c.type == AnimationType.GROWING).forEach(this::createTextures);
 		}
 	}
 	
@@ -79,14 +82,18 @@ public class AnimationManager {
 		animations.put(config.getAlias(), animation);
 	}
 	
+	private void createTextures(AnimationConfig config) {
+		TextureAtlas textureAtlas = assetManager.get(config.atlas, TextureAtlas.class);
+		TextureRegion texture = textureAtlas.findRegion(config.name);
+		growingAnimationTextures.put(config.getAlias(), texture);
+	}
+	
 	/**
 	 * Get an {@link Animation} from the loaded animations.<br>
 	 * <b>WARNING:</b> This {@link Animation} will always be the same instance. Use getAnimationCopy(String) for a unique animation instance.
 	 * 
 	 * @param name
 	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
-	 * 		
-	 * @return The {@link Animation}.
 	 */
 	public Animation<TextureRegion> getAnimation(String name) {
 		if (!animations.containsKey(name)) {
@@ -95,13 +102,12 @@ public class AnimationManager {
 		}
 		return animations.get(name);
 	}
+	
 	/**
 	 * Get a copy of an {@link Animation} from the loaded animations. The copy is a new, independent instance of the animation.<br>
 	 * 
 	 * @param name
 	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
-	 * 		
-	 * @return The {@link Animation}.
 	 */
 	public Animation<TextureRegion> getAnimationCopy(String name) {
 		Animation<TextureRegion> animation = getAnimation(name);
@@ -109,29 +115,36 @@ public class AnimationManager {
 	}
 	
 	/**
-	 * Get an {@link AnimationDirector} from the loaded animations.<br>
+	 * Get a {@link TextureAnimationDirector} from the loaded animations.<br>
 	 * <b>WARNING:</b> The underlying {@link Animation} will always be the same instance. Use getAnimationDirectorCopy(String) for a unique animation
 	 * instance.
 	 * 
 	 * @param name
 	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
-	 * 		
-	 * @return The {@link AnimationDirector}.
 	 */
-	public AnimationDirector<TextureRegion> getAnimationDirector(String name) {
-		return new AnimationDirector<TextureRegion>(getAnimation(name));
+	public TextureAnimationDirector<TextureRegion> getTextureAnimationDirector(String name) {
+		return new TextureAnimationDirector<TextureRegion>(getAnimation(name));
 	}
+	
 	/**
-	 * Get an {@link AnimationDirector} from the loaded animations. The underlying {@link Animation} is a new independent instance of a loaded
+	 * Get a {@link TextureAnimationDirector} from the loaded animations. The underlying {@link Animation} is a new independent instance of a loaded
 	 * {@link Animation}.
 	 * 
 	 * @param name
 	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
-	 * 		
-	 * @return The {@link AnimationDirector}.
 	 */
-	public AnimationDirector<TextureRegion> getAnimationDirectorCopy(String name) {
-		return new AnimationDirector<TextureRegion>(getAnimationCopy(name));
+	public TextureAnimationDirector<TextureRegion> getTextureAnimationDirectorCopy(String name) {
+		return new TextureAnimationDirector<TextureRegion>(getAnimationCopy(name));
+	}
+	
+	/**
+	 * Get a {@link GrowingAnimationDirector} from the loaded animations.<br>
+	 * 
+	 * @param name
+	 *        The name of the animation that was defined in the JSON configuration file from which the animations were loaded.
+	 */
+	public GrowingAnimationDirector<TextureRegion> getGrowingAnimationDirector(String name) {
+		return new GrowingAnimationDirector<TextureRegion>(growingAnimationTextures.get(name), animationConfigurations.get(name).clone());
 	}
 	
 	/**
@@ -149,8 +162,6 @@ public class AnimationManager {
 	 * 
 	 * @param name
 	 *        The atlas' name
-	 * 		
-	 * @return The {@link TextureAtlas}
 	 */
 	public TextureAtlas getAtlas(String name) {
 		return assetManager.get(name, TextureAtlas.class);
@@ -176,8 +187,6 @@ public class AnimationManager {
 	 * 
 	 * @param configName
 	 *        The name of the configuration that is defined in the configuration's JSON file.
-	 * 		
-	 * @return The {@link AnimationConfig}
 	 */
 	public AnimationConfig getAnimationConfig(String configName) {
 		return animationConfigurations.get(configName);

@@ -10,8 +10,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
@@ -30,7 +30,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 	@MapObjectState
 	protected boolean actionExecuted = false;
 	protected boolean changedBodyToSensor = false;
-	private AnimationDirector<TextureRegion> interactionAnimation;
+	private TextureAnimationDirector<TextureRegion> interactionAnimation;
 	
 	public InteractiveObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
 		super(typeConfig, sprite, properties);

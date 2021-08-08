@@ -7,18 +7,20 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screens.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
-import net.jfabricationgames.gdx.screens.menu.components.SpecialActionItemSubMenu;
+import net.jfabricationgames.gdx.screens.menu.components.ShopItemSubMenu;
 
 public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	
@@ -31,7 +33,9 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private static final String STATE_PREFIX_ITEM = "item_";
 	private static final String STATE_PREFIX_BUTTON = "button_";
 	
-	private static final Array<String> ITEMS = new Array<>(new String[] {"health", "shield", "mana", null, "arrow", "bomb"});
+	private static final String RUNE_NEEDED_EVENT_KEY = "rune_needed__gebo";
+	
+	private static final Array<String> ITEM_NAMES = new Array<>(new String[] {"health", "shield", "mead", null, "arrow", "bomb"});
 	private static final Array<Integer> ITEM_COSTS = new Array<>(new Integer[] {30, 20, 15, 0, 25, 25});
 	
 	private static final ItemFactory ITEM_FACTORY = new ItemFactory();
@@ -62,7 +66,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		descriptionBox = new MenuBox(5, 4, MenuBox.TextureType.YELLOW_PAPER);
 		
-		itemMenu = new SpecialActionItemSubMenu();
+		itemMenu = new ShopItemSubMenu();
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
@@ -94,20 +98,30 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	 */
 	public void selectCurrentItem() {
 		int selectedItemIndex = itemMenu.getHoveredIndex();
-		if (ITEMS.size > selectedItemIndex) {
-			String itemName = ITEMS.get(selectedItemIndex);
+		if (ITEM_NAMES.size > selectedItemIndex) {
+			String itemName = ITEM_NAMES.get(selectedItemIndex);
 			int itemCosts = ITEM_COSTS.get(selectedItemIndex);
 			
 			if (itemName != null && itemCosts > 0) {
-				if (player.getCoins() >= itemCosts) {
-					playMenuSound(SOUND_BUY_ITEM);
-					fireBuyItemEvent(itemName, itemCosts);
+				if (runeCollected()) {
+					if (player.getCoins() >= itemCosts) {
+						playMenuSound(SOUND_BUY_ITEM);
+						fireBuyItemEvent(itemName, itemCosts);
+					}
+					else {
+						playMenuSound(InGameMenuScreen.SOUND_ERROR);
+					}
 				}
 				else {
-					playMenuSound(InGameMenuScreen.SOUND_ERROR);
+					backToGame();
+					EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_NEEDED).setStringValue(RUNE_NEEDED_EVENT_KEY));
 				}
 			}
 		}
+	}
+	
+	private boolean runeCollected() {
+		return GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.GEBO.globalValueKeyCollected);
 	}
 	
 	private void fireBuyItemEvent(String itemName, int itemCosts) {
@@ -198,8 +212,8 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		int playersCoins = player.getCoins();
 		
 		int selectedItemIndex = itemMenu.getHoveredIndex();
-		if (selectedItemIndex >= 0 && ITEMS.size > selectedItemIndex) {
-			itemName = ITEMS.get(selectedItemIndex);
+		if (selectedItemIndex >= 0 && ITEM_NAMES.size > selectedItemIndex) {
+			itemName = ITEM_NAMES.get(selectedItemIndex);
 			itemCosts = ITEM_COSTS.get(selectedItemIndex);
 		}
 		if (itemName == null || itemName.isEmpty()) {

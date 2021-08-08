@@ -23,7 +23,7 @@ public class Explosion extends Projectile {
 		super.update(delta);
 		removeExplosionSensor();
 	}
-
+	
 	private void removeExplosionSensor() {
 		if (hasBody()) {
 			for (Fixture fixture : body.getFixtureList()) {

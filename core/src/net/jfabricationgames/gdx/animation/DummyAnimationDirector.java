@@ -2,7 +2,7 @@ package net.jfabricationgames.gdx.animation;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class DummyAnimationDirector<T extends TextureRegion> extends AnimationDirector<T> {
+public class DummyAnimationDirector<T extends TextureRegion> extends TextureAnimationDirector<T> {
 	
 	public DummyAnimationDirector() {
 		super(null);

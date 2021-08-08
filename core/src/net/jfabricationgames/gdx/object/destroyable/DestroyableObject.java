@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
@@ -46,6 +46,7 @@ public class DestroyableObject extends GameObject {
 		playHitSound();
 	}
 	
+	@Override
 	public void draw(float delta, SpriteBatch batch) {
 		super.draw(delta, batch);
 		
@@ -68,7 +69,7 @@ public class DestroyableObject extends GameObject {
 			return null;
 		}
 		
-		AnimationDirector<TextureRegion> animation = animationManager.getAnimationDirector(typeConfig.animationBreak);
+		AnimationDirector<TextureRegion> animation = animationManager.getTextureAnimationDirector(typeConfig.animationBreak);
 		animation.setSpriteConfig(AnimationSpriteConfig.fromSprite(sprite));
 		return animation;
 	}

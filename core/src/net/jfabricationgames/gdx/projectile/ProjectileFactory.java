@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
@@ -83,7 +83,7 @@ public class ProjectileFactory extends AbstractFactory {
 		}
 		AnimationDirector<TextureRegion> animation = null;
 		if (typeConfig.animation != null) {
-			animation = AnimationManager.getInstance().getAnimationDirectorCopy(typeConfig.animation);
+			animation = AnimationManager.getInstance().getTextureAnimationDirectorCopy(typeConfig.animation);
 		}
 		
 		Projectile projectile;

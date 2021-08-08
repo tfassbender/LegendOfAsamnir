@@ -5,8 +5,8 @@ import java.util.Comparator;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 
@@ -69,8 +69,8 @@ public class InteractionManager {
 	}
 	
 	//do not declare static, because otherwise the animation will not be loaded before it's attempted to be used
-	public AnimationDirector<TextureRegion> getInteractionAnimationCopy() {
-		return AnimationManager.getInstance().getAnimationDirectorCopy(INTERACTION_ANIMATION);
+	public TextureAnimationDirector<TextureRegion> getInteractionAnimationCopy() {
+		return AnimationManager.getInstance().getTextureAnimationDirectorCopy(INTERACTION_ANIMATION);
 	}
 	
 	public void resetInteractions() {

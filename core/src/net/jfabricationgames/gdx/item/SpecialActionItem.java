@@ -14,8 +14,7 @@ public class SpecialActionItem extends Item {
 	
 	private SpecialAction action;
 	
-	public SpecialActionItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation,
-			MapProperties properties) {
+	public SpecialActionItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		super(itemName, typeConfig, sprite, animation, properties);
 		this.action = SpecialAction.getByContainingName(itemName);
 		

@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectSet;
 
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 
@@ -63,7 +63,7 @@ public class CharacterStateMachine {
 	
 	private void initializeStates(Array<CharacterStateConfig> stateConfig) {
 		for (CharacterStateConfig config : stateConfig) {
-			CharacterState state = new CharacterState(animationManager.getAnimationDirector(config.animation), config, attackCreator);
+			CharacterState state = new CharacterState(animationManager.getTextureAnimationDirector(config.animation), config, attackCreator);
 			states.put(config.id, state);
 		}
 		
