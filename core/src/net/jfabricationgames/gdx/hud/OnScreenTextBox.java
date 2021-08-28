@@ -15,7 +15,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
-import net.jfabricationgames.gdx.util.GameUtils;
+import net.jfabricationgames.gdx.util.GameUtil;
 
 public class OnScreenTextBox implements Disposable, InputActionListener {
 	
@@ -149,7 +149,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 	}
 	
 	public void showPlayerChoice(PlayerChoice playerChoice) {
-		Color headerColor = GameUtils.getColorFromRGB(playerChoice.headerColor, Color.RED);
+		Color headerColor = GameUtil.getColorFromRGB(playerChoice.headerColor, Color.RED);
 		setHeaderText(playerChoice.header, headerColor);
 		
 		playerChoiceRenderer.setPlayerChoice(playerChoice);

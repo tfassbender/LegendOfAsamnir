@@ -23,11 +23,11 @@ import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.MapUtil;
 
 public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObject {
 	
@@ -254,7 +254,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		if (dropsSpecialItems()) {
 			String specialDropType = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
 			String specialDropMapProperties = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
-			MapProperties mapProperties = TiledMapLoader.createMapPropertiesFromString(specialDropMapProperties);
+			MapProperties mapProperties = MapUtil.createMapPropertiesFromString(specialDropMapProperties);
 			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
 		}
 		else {

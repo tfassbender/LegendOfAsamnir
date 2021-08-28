@@ -8,7 +8,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.util.GameUtils;
+import net.jfabricationgames.gdx.util.GameUtil;
 
 public enum GlobalEventExecutionType {
 	
@@ -27,7 +27,7 @@ public enum GlobalEventExecutionType {
 			boolean showNextPageIcon = Boolean.parseBoolean(eventConfig.executionParameters.get(MAP_KEY_SHOW_NEXT_PAGE_ICON));
 			
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(displayTextHeader, GameUtils.getColorFromRGB(colorHeader, Color.RED));
+			onScreenTextBox.setHeaderText(displayTextHeader, GameUtil.getColorFromRGB(colorHeader, Color.RED));
 			onScreenTextBox.setText(displayText, showNextPageIcon);
 		}
 	},

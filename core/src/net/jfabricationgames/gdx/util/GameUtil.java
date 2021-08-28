@@ -3,9 +3,9 @@ package net.jfabricationgames.gdx.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
-public class GameUtils {
+public class GameUtil {
 	
-	private GameUtils() {}
+	private GameUtil() {}
 	
 	public static void runDelayed(Runnable runnable, float delayTime) {
 		Thread delayThread = new Thread(() -> {
@@ -14,7 +14,7 @@ public class GameUtils {
 				runnable.run();
 			}
 			catch (InterruptedException e) {
-				Gdx.app.error(GameUtils.class.getSimpleName(), "Delay thread - sleep interrupted");
+				Gdx.app.error(GameUtil.class.getSimpleName(), "Delay thread - sleep interrupted");
 			}
 		});
 		delayThread.setDaemon(true);

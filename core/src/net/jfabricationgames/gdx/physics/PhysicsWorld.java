@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import net.jfabricationgames.gdx.util.GameUtils;
+import net.jfabricationgames.gdx.util.GameUtil;
 
 /**
  * A singleton that keeps track of the current world instance.
@@ -146,7 +146,7 @@ public class PhysicsWorld implements ContactListener {
 	}
 	
 	public void runDelayedAfterWorldStep(Runnable runnable, float delayTime) {
-		GameUtils.runDelayed(() -> runAfterWorldStep(runnable), delayTime);
+		GameUtil.runDelayed(() -> runAfterWorldStep(runnable), delayTime);
 	}
 	
 	private void executeRunnables() {

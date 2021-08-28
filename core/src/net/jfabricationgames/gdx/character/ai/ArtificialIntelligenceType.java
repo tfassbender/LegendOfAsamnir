@@ -29,7 +29,7 @@ import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
 import net.jfabricationgames.gdx.character.enemy.ai.TeamMovementAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
-import net.jfabricationgames.gdx.map.TiledMapLoader;
+import net.jfabricationgames.gdx.util.MapUtil;
 
 public enum ArtificialIntelligenceType {
 	
@@ -290,7 +290,7 @@ public enum ArtificialIntelligenceType {
 			}
 			catch (SerializationException e) {
 				throw new IllegalStateException("A predefined movement string could not be parsed: \"" + predefinedMovingPositions
-						+ "\". Complete map properties: " + TiledMapLoader.mapPropertiesToString(mapProperties, true), e);
+						+ "\". Complete map properties: " + MapUtil.mapPropertiesToString(mapProperties, true), e);
 			}
 		}
 		return null;

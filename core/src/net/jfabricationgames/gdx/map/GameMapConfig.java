@@ -1,6 +1,6 @@
 package net.jfabricationgames.gdx.map;
 
-public class GameMapConfig {
+class GameMapConfig {
 	
 	public String name;
 	public String map;

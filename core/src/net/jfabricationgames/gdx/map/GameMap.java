@@ -4,17 +4,12 @@ import java.lang.annotation.Annotation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
@@ -26,7 +21,6 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayerFactory;
-import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapDataHandler;
@@ -48,7 +42,6 @@ import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameMap implements EventListener, Disposable {
@@ -72,17 +65,18 @@ public class GameMap implements EventListener, Disposable {
 		}
 	}
 	
-	public static final String MAP_PROPERTY_KEY_BACKGROUND_LAYERS = "background_layers";
-	public static final String MAP_PROPERTY_KEY_ABOVE_PLAYER_LAYERS = "above_player_layers";
-	public static final String MAP_PROPERTY_KEY_SHADOW_LAYERS = "shadow_layers";
+	public static final String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
+	
 	public static final String MAP_PROPERTY_KEY_DUNGEON_LEVEL = "dungeon_level";
-	public static final int[] BACKGROUND_LAYERS_DEFAULT = new int[] {0, 1};
-	public static final int[] ABOVE_PLAYER_LAYERS_DEFAULT = new int[] {2};
-	public static final int[] SHADOW_LAYERS_DEFAULT = new int[] {};
+	
+	public static final String OBJECT_NAME_ANIMAL = "animal";
+	public static final String OBJECT_NAME_NPC = "npc";
+	public static final String OBJECT_NAME_ENEMY = "enemy";
+	public static final String OBJECT_NAME_OBJECT = "object";
+	public static final String OBJECT_NAME_ITEM = "item";
+	public static final String OBJECT_NAME_PLAYER = "player";
 	
 	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = new GameMapGroundType();
-	
-	public static final String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
 	
 	private static GameMap instance;
 	
@@ -106,14 +100,13 @@ public class GameMap implements EventListener, Disposable {
 		instance = new GameMap(camera);
 	}
 	
-	protected TiledMap map;
-	protected Vector2 playerStartingPosition;
-	
-	private int[] backgroundLayers;
-	private int[] abovePlayerLayers;
-	private int[] shadowLayers;
+	private GameMapRenderer renderer;
+	private GameMapProcessor processor;
 	
 	private String currentMapIdentifier;
+	
+	protected TiledMap map;
+	protected Vector2 playerStartingPosition;
 	
 	//the lists are initialized in the factories
 	protected Array<Item> items;
@@ -130,21 +123,11 @@ public class GameMap implements EventListener, Disposable {
 	protected NonPlayableCharacterFactory npcFactory;
 	protected AnimalFactory animalFactory;
 	
-	private OrthographicCamera camera;
-	private OrthogonalTiledMapRenderer renderer;
-	
-	private SpriteBatch batch;
-	private ShapeRenderer shapeRenderer;
-	
-	private PlayableCharacter player;
-	
-	private CutsceneHandler cutsceneHandler;
+	protected PlayableCharacter player;
 	
 	private GameMap(OrthographicCamera camera) {
-		this.camera = camera;
-		
-		batch = new SpriteBatch();
-		shapeRenderer = new ShapeRenderer();
+		renderer = new GameMapRenderer(this, camera);
+		processor = new GameMapProcessor(this);
 		
 		itemsAboveGameObjects = new Array<>();
 		projectiles = new Array<>();
@@ -155,8 +138,6 @@ public class GameMap implements EventListener, Disposable {
 		enemyFactory = new EnemyFactory();
 		npcFactory = new NonPlayableCharacterFactory();
 		animalFactory = new AnimalFactory();
-		
-		cutsceneHandler = CutsceneHandler.getInstance();
 		
 		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
 		player = PlayerFactory.createPlayer();
@@ -196,22 +177,16 @@ public class GameMap implements EventListener, Disposable {
 	
 	public void showMap(String mapIdentifier) {
 		currentMapIdentifier = mapIdentifier;
-		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
 		
 		removeCurrentMapIfPresent();
-		
 		player.reAddToWorld();
 		
-		TiledMapLoader loader = new TiledMapLoader(mapAsset);
-		loader.loadMap();
+		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
+		TiledMapLoader.loadMap(mapAsset);
 		
-		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN, batch);
-		renderer.setView(camera);
+		renderer.changeMap(map);
 		
-		loadLayersFromMapProperties();
-		
-		TiledMapPhysicsLoader mapPhysicsLoader = new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD);
-		mapPhysicsLoader.createPhysics(map);
+		TiledMapPhysicsLoader.createPhysics(map);
 		
 		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
@@ -278,32 +253,6 @@ public class GameMap implements EventListener, Disposable {
 		projectiles.clear();
 	}
 	
-	private void loadLayersFromMapProperties() {
-		String backgroundLayersJson = map.getProperties().get(MAP_PROPERTY_KEY_BACKGROUND_LAYERS, String.class);
-		String abovePlayerLayersJson = map.getProperties().get(MAP_PROPERTY_KEY_ABOVE_PLAYER_LAYERS, String.class);
-		String shadowLayersJson = map.getProperties().get(MAP_PROPERTY_KEY_SHADOW_LAYERS, String.class);
-		
-		Json json = new Json();
-		if (backgroundLayersJson != null) {
-			backgroundLayers = json.fromJson(int[].class, backgroundLayersJson);
-		}
-		else {
-			backgroundLayers = BACKGROUND_LAYERS_DEFAULT;
-		}
-		if (abovePlayerLayersJson != null) {
-			abovePlayerLayers = json.fromJson(int[].class, abovePlayerLayersJson);
-		}
-		else {
-			abovePlayerLayers = ABOVE_PLAYER_LAYERS_DEFAULT;
-		}
-		if (shadowLayersJson != null) {
-			shadowLayers = json.fromJson(int[].class, shadowLayersJson);
-		}
-		else {
-			shadowLayers = SHADOW_LAYERS_DEFAULT;
-		}
-	}
-	
 	private void resetLanternUsed() {
 		GlobalValuesDataHandler.getInstance().put(GLOBAL_VALUE_KEY_LANTERN_USED, false);
 	}
@@ -334,143 +283,45 @@ public class GameMap implements EventListener, Disposable {
 		}
 	}
 	
-	public void updateCameraToRenderer() {
-		renderer.setView(camera);
-	}
-	
-	public void renderBackground() {
-		renderer.render(backgroundLayers);
-	}
-	
 	public void processPlayer(float delta) {
 		player.process(delta);
 	}
 	
-	public void processAndRenderGameObject(float delta) {
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		renderItems(delta);
-		renderObjects(delta);
-		renderItemsAboveGameObjects(delta);
+	public void processAndRender(float delta) {
+		renderer.updateCamera();
+		renderer.renderBackground();
+		processAndRenderGameObject(delta);
+		renderer.renderAbovePlayer();
+		renderer.renderShadows();
+		renderer.renderDarknessArroundPlayer();
+	}
+	
+	private void processAndRenderGameObject(float delta) {
+		renderer.beginBatch();
+		renderer.renderItems(delta);
+		renderer.renderObjects(delta);
+		renderer.renderItemsAboveGameObjects(delta);
 		
-		processCutscene(delta);
-		processEnemies(delta);
-		renderEnemies(delta);
-		processNpcs(delta);
-		renderNpcs(delta);
-		processAnimals(delta);
-		renderAnimals(delta);
-		processProjectiles(delta);
-		renderProjectiles(delta);
+		processor.processCutscene(delta);
+		processor.processEnemies(delta);
+		renderer.renderEnemies(delta);
+		processor.processNpcs(delta);
+		renderer.renderNpcs(delta);
+		processor.processAnimals(delta);
+		renderer.renderAnimals(delta);
+		processor.processProjectiles(delta);
+		renderer.renderProjectiles(delta);
 		
-		renderPlayer(delta);
-		batch.end();
+		renderer.renderPlayer(delta);
+		renderer.endBatch();
 		
-		shapeRenderer.setProjectionMatrix(camera.combined);
-		shapeRenderer.begin(ShapeType.Filled);
-		renderEnemyHealthBars();
-		shapeRenderer.end();
-	}
-	
-	private void renderItems(float delta) {
-		for (Item item : items) {
-			item.draw(delta, batch);
-		}
-	}
-	
-	private void renderObjects(float delta) {
-		for (GameObject object : objects) {
-			object.draw(delta, batch);
-		}
-	}
-	
-	private void renderItemsAboveGameObjects(float delta) {
-		for (Item item : itemsAboveGameObjects) {
-			item.draw(delta, batch);
-		}
-	}
-	
-	private void processCutscene(float delta) {
-		cutsceneHandler.act(delta);
-	}
-	
-	private void processEnemies(float delta) {
-		for (Enemy enemy : enemies) {
-			enemy.act(delta);
-		}
-	}
-	private void renderEnemies(float delta) {
-		for (Enemy enemy : enemies) {
-			enemy.draw(delta, batch);
-		}
-	}
-	
-	private void processNpcs(float delta) {
-		for (NonPlayableCharacter npc : nonPlayableCharacters) {
-			npc.act(delta);
-		}
-	}
-	private void renderNpcs(float delta) {
-		for (NonPlayableCharacter npc : nonPlayableCharacters) {
-			npc.draw(delta, batch);
-		}
-	}
-	
-	private void processAnimals(float delta) {
-		for (Animal animal : animals) {
-			animal.act(delta);
-		}
-	}
-	private void renderAnimals(float delta) {
-		for (Animal animal : animals) {
-			animal.draw(delta, batch);
-		}
-	}
-	
-	private void processProjectiles(float delta) {
-		for (Projectile projectile : projectiles) {
-			projectile.update(delta);
-		}
-	}
-	private void renderProjectiles(float delta) {
-		for (Projectile projectile : projectiles) {
-			projectile.draw(delta, batch);
-		}
-	}
-	
-	private void renderPlayer(float delta) {
-		player.render(delta, batch);
-	}
-	
-	private void renderEnemyHealthBars() {
-		for (Enemy enemy : enemies) {
-			enemy.drawHealthBar(shapeRenderer);
-		}
-	}
-	
-	public void renderAbovePlayer() {
-		renderer.render(abovePlayerLayers);
-	}
-	
-	public void renderShadows() {
-		if (shadowLayers.length > 0) {
-			renderer.render(shadowLayers);
-		}
-	}
-	
-	public void renderDarknessArroundPlayer() {
-		if (isDungeonMap() && !lanternUsed()) {
-			shapeRenderer.setProjectionMatrix(camera.combined);
-			player.renderDarkness(batch, shapeRenderer);
-		}
+		renderer.beginShapeRenderer();
+		renderer.renderEnemyHealthBars();
+		renderer.endShapeRenderer();
 	}
 	
 	public boolean isDungeonMap() {
 		return Boolean.parseBoolean(map.getProperties().get(MAP_PROPERTY_KEY_DUNGEON_LEVEL, "false", String.class));
-	}
-	
-	private boolean lanternUsed() {
-		return GlobalValuesDataHandler.getInstance().getAsBoolean(GLOBAL_VALUE_KEY_LANTERN_USED);
 	}
 	
 	public Vector2 getPlayerStartingPosition() {
@@ -689,6 +540,5 @@ public class GameMap implements EventListener, Disposable {
 	public void dispose() {
 		renderer.dispose();
 		map.dispose();
-		batch.dispose();
 	}
 }

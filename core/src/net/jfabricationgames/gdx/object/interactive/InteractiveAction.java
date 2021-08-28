@@ -12,7 +12,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.util.GameUtils;
+import net.jfabricationgames.gdx.util.GameUtil;
 
 public enum InteractiveAction {
 	
@@ -26,7 +26,7 @@ public enum InteractiveAction {
 			String headerColor = mapProperties.get(MAP_PROPERTY_KEY_COLOR_HEADER, String.class);
 			
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(headerText, GameUtils.getColorFromRGB(headerColor, Color.RED));
+			onScreenTextBox.setHeaderText(headerText, GameUtil.getColorFromRGB(headerColor, Color.RED));
 			onScreenTextBox.setText(text);
 		}
 	},
@@ -60,7 +60,7 @@ public enum InteractiveAction {
 		
 		private void showOnScreenText(String text, String header, String headerColor) {
 			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(header, GameUtils.getColorFromRGB(headerColor, Color.RED));
+			onScreenTextBox.setHeaderText(header, GameUtil.getColorFromRGB(headerColor, Color.RED));
 			onScreenTextBox.setText(text);
 		}
 		

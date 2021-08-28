@@ -12,10 +12,10 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.MapUtil;
 
 public class SpawnPoint extends GameObject implements EventListener, Disposable {
 	
@@ -94,7 +94,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	private String mapPropertiesToString() {
-		return TiledMapLoader.mapPropertiesToString(mapProperties, true);
+		return MapUtil.mapPropertiesToString(mapProperties, true);
 	}
 	
 	@Override
@@ -132,19 +132,19 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 		
 		MapProperties mapProperties = new MapProperties();
 		if (spawnConfig.spawnTypeMapProperties != null) {
-			mapProperties = TiledMapLoader.createMapPropertiesFromString(spawnConfig.spawnTypeMapProperties);
+			mapProperties = MapUtil.createMapPropertiesFromString(spawnConfig.spawnTypeMapProperties);
 		}
 		
 		switch (parts[0]) {
-			case TiledMapLoader.OBJECT_NAME_ITEM:
+			case GameMap.OBJECT_NAME_ITEM:
 				GameMap.getInstance().getItemFactory().createAndAddItemAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
 						body.getPosition().y * GameScreen.SCREEN_TO_WORLD, mapProperties, true);
 				break;
-			case TiledMapLoader.OBJECT_NAME_OBJECT:
+			case GameMap.OBJECT_NAME_OBJECT:
 				GameMap.getInstance().getObjectFactory().createAndAddObjectAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
 						body.getPosition().y * GameScreen.SCREEN_TO_WORLD, mapProperties);
 				break;
-			case TiledMapLoader.OBJECT_NAME_ENEMY:
+			case GameMap.OBJECT_NAME_ENEMY:
 				GameMap.getInstance().getEnemyFactory().createAndAddEnemyAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
 						body.getPosition().y * GameScreen.SCREEN_TO_WORLD, mapProperties);
 				break;

@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 /**
  * Populates the Box2D world with static bodies using data from a map object.
@@ -35,7 +36,7 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
  * It uses a JSON formatted materials file to assign properties to the static bodies it creates. In case no material property is found, it'll use a
  * default one.
  */
-public class TiledMapPhysicsLoader {
+class TiledMapPhysicsLoader {
 	
 	public static final String MAP_MATERIALS_CONFIG_FILE = "config/map/materials.json";
 	public static final String MAP_GROUND_TYPES_CONFIG_FILE = "config/map/ground_types.json";
@@ -50,6 +51,10 @@ public class TiledMapPhysicsLoader {
 	
 	protected static ObjectMap<String, FixtureDef> materials;
 	protected static ObjectMap<String, GameMapGroundType> groundTypes;
+	
+	protected static final void createPhysics(Map map) {
+		new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD).createPhysicsFromMap(map);
+	}
 	
 	private static FixtureDef createGroundFixtureDef() {
 		FixtureDef groundFixtureDef = new FixtureDef();
@@ -70,7 +75,7 @@ public class TiledMapPhysicsLoader {
 	 * @param unitsPerPixel
 	 *        conversion ratio from pixel units to box2D metres.
 	 */
-	public TiledMapPhysicsLoader(float unitsPerPixel) {
+	private TiledMapPhysicsLoader(float unitsPerPixel) {
 		this.worldUnitsPerPixel = unitsPerPixel;
 		
 		Gdx.app.debug(getClass().getSimpleName(), "--- Loading map physics objects ---------------------------------------------------");
@@ -79,7 +84,7 @@ public class TiledMapPhysicsLoader {
 		loadGroundTypes();
 	}
 	
-	public void createPhysics(Map map) {
+	private void createPhysicsFromMap(Map map) {
 		createPhysics(map, LAYER_NAME_SOLID_OBJECT_PHYSICS, this::createSolidObjectPhysics);
 		createPhysics(map, LAYER_NAME_GROUND_PHYSICS, this::createGroundPhysics);
 	}

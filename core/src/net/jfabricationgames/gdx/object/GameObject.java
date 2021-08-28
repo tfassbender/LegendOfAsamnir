@@ -24,7 +24,6 @@ import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapObject;
-import net.jfabricationgames.gdx.map.TiledMapLoader;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -33,6 +32,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
+import net.jfabricationgames.gdx.util.MapUtil;
 
 public class GameObject implements Hittable, GameMapObject, StatefulMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
 	
@@ -189,7 +189,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 		if (mapProperties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
 			String specialDropType = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
 			String specialDropMapProperties = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
-			MapProperties mapProperties = TiledMapLoader.createMapPropertiesFromString(specialDropMapProperties);
+			MapProperties mapProperties = MapUtil.createMapPropertiesFromString(specialDropMapProperties);
 			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
 		}
 		else {
@@ -234,7 +234,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	
 	@Override
 	public String toString() {
-		return "MapObject [type=" + typeConfig + ", properties=" + TiledMapLoader.mapPropertiesToString(mapProperties, true) + "]";
+		return "MapObject [type=" + typeConfig + ", properties=" + MapUtil.mapPropertiesToString(mapProperties, true) + "]";
 	}
 	
 	protected void setTextureAtlas(TextureAtlas textureAtlas) {

@@ -50,7 +50,7 @@ import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.texture.TextureLoader;
-import net.jfabricationgames.gdx.util.GameUtils;
+import net.jfabricationgames.gdx.util.GameUtil;
 
 public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hittable, EventListener {
 	
@@ -666,7 +666,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		else {
 			playSound(CharacterAction.HIT);
 			changeAction(CharacterAction.DIE);
-			GameUtils.runDelayed(() -> gameOver(), TIME_TILL_GAME_OVER_MENU);
+			GameUtil.runDelayed(() -> gameOver(), TIME_TILL_GAME_OVER_MENU);
 		}
 	}
 	
