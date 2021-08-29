@@ -129,7 +129,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		
 		action = CharacterAction.NONE;
 		body = createPhysicsBody();
-		registerAsContactListener();
+		PhysicsWorld.getInstance().registerContactListener(this);
 		
 		activeSpecialAction = SpecialAction.JUMP;
 		
@@ -160,11 +160,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		body.setUserData(this);
 		
 		return body;
-	}
-	
-	private void registerAsContactListener() {
-		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
-		physicsWorld.registerContactListener(this);
 	}
 	
 	private AnimationDirector<TextureRegion> getAnimation() {

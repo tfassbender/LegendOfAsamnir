@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.cutscene.action;
 
 import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.map.GameMap;
 
@@ -38,7 +39,7 @@ public abstract class AbstractCutsceneAction {
 	protected <T> T getUnitAs(String unitId, Class<T> clazz) {
 		Object controlledUnit = null;
 		if (unitId.equals(CONTROLLED_UNIT_ID_PLAYER)) {
-			controlledUnit = GameMap.getInstance().getPlayer();
+			controlledUnit = Player.getInstance();
 		}
 		else {
 			controlledUnit = GameMap.getInstance().getUnitById(unitId);

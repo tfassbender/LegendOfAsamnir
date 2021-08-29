@@ -20,7 +20,7 @@ import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.character.player.PlayerFactory;
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapDataHandler;
@@ -140,7 +140,7 @@ public class GameMap implements EventListener, Disposable {
 		animalFactory = new AnimalFactory();
 		
 		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
-		player = PlayerFactory.createPlayer();
+		player = Player.getInstance();
 		
 		EventHandler.getInstance().registerEventListener(this);
 	}
@@ -326,10 +326,6 @@ public class GameMap implements EventListener, Disposable {
 	
 	public Vector2 getPlayerStartingPosition() {
 		return playerStartingPosition;
-	}
-	
-	public PlayableCharacter getPlayer() {
-		return player;
 	}
 	
 	public void addItem(Item item) {

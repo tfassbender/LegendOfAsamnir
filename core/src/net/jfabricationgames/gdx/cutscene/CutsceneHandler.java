@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveCameraAction;
@@ -118,7 +119,7 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	private void stopPlayerAction() {
-		GameMap.getInstance().getPlayer().changeToIdleState();
+		Player.getInstance().changeToIdleState();
 	}
 	
 	private void stopCutsceneActorsActions(CutsceneConfig cutscene) {

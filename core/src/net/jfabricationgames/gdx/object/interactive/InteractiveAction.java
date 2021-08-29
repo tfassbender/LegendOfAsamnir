@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -11,7 +12,6 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public enum InteractiveAction {
@@ -41,7 +41,7 @@ public enum InteractiveAction {
 			String text = object.getMapProperties().get(MAP_PROPERTY_KEY_DISPLAY_TEXT, String.class);
 			String changedText = object.getMapProperties().get(MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED, String.class);
 			
-			PlayableCharacter player = GameMap.getInstance().getPlayer();
+			PlayableCharacter player = Player.getInstance();
 			
 			if (player.getActiveSpecialAction() == SpecialAction.FEATHER && !isValueChanged(globalConditionKey, globalConditionValue)) {
 				GlobalValuesDataHandler.getInstance().put(globalConditionKey, globalConditionValue);

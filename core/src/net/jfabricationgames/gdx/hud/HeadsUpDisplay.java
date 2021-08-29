@@ -3,7 +3,7 @@ package net.jfabricationgames.gdx.hud;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.character.player.Player;
 
 public class HeadsUpDisplay implements Disposable {
 	
@@ -25,7 +25,7 @@ public class HeadsUpDisplay implements Disposable {
 		this.hudSceneHeight = hudSceneHeight;
 		this.camera = camera;
 		
-		character = GameMap.getInstance().getPlayer();
+		character = Player.getInstance();
 		
 		statusBar = new StatusBar(this);
 		onScreenItemRenderer = new OnScreenItemRenderer(this);

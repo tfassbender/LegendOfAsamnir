@@ -13,6 +13,7 @@ import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -174,7 +175,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void checkGameOver() {
-		PlayableCharacter player = GameMap.getInstance().getPlayer();
+		PlayableCharacter player = Player.getInstance();
 		if (!gameOver && player.isGameOver()) {
 			gameOver = true;
 			showGameOverMenuScreen();
@@ -237,7 +238,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right)
 	 */
 	public Vector2 getPlayersPositionOnMap() {
-		PlayableCharacter player = GameMap.getInstance().getPlayer();
+		PlayableCharacter player = Player.getInstance();
 		Vector2 playersRelativePosition = player.getPosition().scl(SCREEN_TO_WORLD);
 		playersRelativePosition.x /= map.getMapWidth();
 		playersRelativePosition.y /= map.getMapHeight();

@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputContext;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class CameraMovementHandler {
@@ -40,7 +40,7 @@ public class CameraMovementHandler {
 			throw new IllegalStateException("The instance of CameraMovementHandler has already been created. "
 					+ "Use the getInstance() method to get the instance instead of creating one.");
 		}
-		PlayableCharacter player = GameMap.getInstance().getPlayer();
+		PlayableCharacter player = Player.getInstance();
 		instance = new CameraMovementHandler(camera, player);
 		return instance;
 	}

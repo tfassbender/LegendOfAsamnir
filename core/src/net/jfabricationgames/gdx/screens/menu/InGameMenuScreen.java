@@ -2,20 +2,20 @@ package net.jfabricationgames.gdx.screens.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 
 import net.jfabricationgames.gdx.DwarfScrollerGame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 
 public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends MenuScreen<T> {
-
+	
 	protected GameScreen gameScreen;
 	protected FrameBuffer gameSnapshotFrameBuffer;
 	protected Sprite gameSnapshotSprite;
@@ -30,7 +30,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 		
 		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 		
-		player = GameMap.getInstance().getPlayer();
+		player = Player.getInstance();
 	}
 	
 	protected void takeGameSnapshot() {
@@ -49,7 +49,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 		super.dispose();
 		gameSnapshotFrameBuffer.dispose();
 	}
-
+	
 	//****************************************************************
 	//*** State machine methods (called via reflection)
 	//****************************************************************
