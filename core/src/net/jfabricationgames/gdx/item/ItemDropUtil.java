@@ -5,8 +5,6 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-import net.jfabricationgames.gdx.map.GameMap;
-
 public class ItemDropUtil {
 	
 	public static final String MAP_PROPERTY_KEY_DROP_ITEM = "drop";
@@ -50,10 +48,10 @@ public class ItemDropUtil {
 	}
 	
 	private static void dropItem(String type, float x, float y, boolean renderDropsAboveObject) {
-		GameMap.getInstance().getItemFactory().createAndDropItem(type, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+		ItemFactory.createAndDropItem(type, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}
 	
 	public static void dropItem(String type, MapProperties mapProperties, float x, float y, boolean renderDropsAboveObject) {
-		GameMap.getInstance().getItemFactory().createAndDropItem(type, mapProperties, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+		ItemFactory.createAndDropItem(type, mapProperties, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
 	}
 }

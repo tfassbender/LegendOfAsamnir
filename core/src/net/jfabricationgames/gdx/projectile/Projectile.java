@@ -235,8 +235,8 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	}
 	
 	private void explode() {
-		Projectile explosion = ProjectileFactory.getInstance().createProjectileAndAddToMap(EXPLOSION_PROJECTILE_TYPE, body.getPosition(),
-				Vector2.Zero, collisionType);
+		Projectile explosion = ProjectileFactory.createProjectileAndAddToMap(EXPLOSION_PROJECTILE_TYPE, body.getPosition(), Vector2.Zero,
+				collisionType);
 		explosion.setDamage(explosionDamage);
 		explosion.setPushForce(explosionPushForce);
 		explosion.setPushForceAffectedByBlock(explosionPushForceAffectedByBlock);

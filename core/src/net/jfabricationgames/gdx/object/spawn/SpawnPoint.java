@@ -8,11 +8,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.MapUtil;
@@ -137,15 +140,15 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 		
 		switch (parts[0]) {
 			case GameMap.OBJECT_NAME_ITEM:
-				GameMap.getInstance().getItemFactory().createAndAddItemAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
+				ItemFactory.createAndAddItemAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
 						body.getPosition().y * GameScreen.SCREEN_TO_WORLD, mapProperties, true);
 				break;
 			case GameMap.OBJECT_NAME_OBJECT:
-				GameMap.getInstance().getObjectFactory().createAndAddObjectAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
+				GameObjectFactory.createAndAddObjectAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
 						body.getPosition().y * GameScreen.SCREEN_TO_WORLD, mapProperties);
 				break;
 			case GameMap.OBJECT_NAME_ENEMY:
-				GameMap.getInstance().getEnemyFactory().createAndAddEnemyAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
+				EnemyFactory.createAndAddEnemyAfterWorldStep(parts[1], body.getPosition().x * GameScreen.SCREEN_TO_WORLD,
 						body.getPosition().y * GameScreen.SCREEN_TO_WORLD, mapProperties);
 				break;
 			default:

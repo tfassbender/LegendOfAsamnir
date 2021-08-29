@@ -1,15 +1,12 @@
 package net.jfabricationgames.gdx.object;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
-import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.destroyable.DestroyableObject;
 import net.jfabricationgames.gdx.object.event.EventObject;
@@ -20,39 +17,33 @@ import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.FactoryUtil;
 
-public class GameObjectFactory extends AbstractFactory {
+public class GameObjectFactory {
 	
-	private static final String configFile = "config/factory/object_factory.json";
+	private GameObjectFactory() {}
+	
+	private static final String CONFIG_FILE = "config/factory/object_factory.json";
+	
 	private static Config config;
+	private static TextureAtlas atlas;
+	private static ObjectMap<String, GameObjectTypeConfig> typeConfigs;
 	
-	private Map<String, GameObjectTypeConfig> typeConfigs;
-	
-	public GameObjectFactory() {
-		if (config == null) {
-			config = loadConfig(Config.class, configFile);
-		}
-		
-		loadTypeConfigs();
-		
-		AssetGroupManager assetManager = AssetGroupManager.getInstance();
+	static {
+		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
+		typeConfigs = FactoryUtil.loadTypeConfigs(config.objectTypesConfig, GameObjectTypeConfig.class);
+		atlas = AssetGroupManager.getInstance().get(config.objectAtlas);
 		AnimationManager.getInstance().loadAnimations(config.objectAnimations);
-		atlas = assetManager.get(config.objectAtlas);
 	}
 	
-	@SuppressWarnings("unchecked")
-	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(HashMap.class, GameObjectTypeConfig.class, Gdx.files.internal(config.objectTypesConfig));
-	}
-	
-	public GameObject createObject(String type, float x, float y, MapProperties properties) {
+	public static GameObject createObject(String type, float x, float y, MapProperties properties) {
 		GameObjectTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: '" + type
-					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + configFile + "\")");
+					+ "'. Either the type name is wrong or you have to add it to the objectTypesConfig (see \"" + CONFIG_FILE + "\")");
 		}
 		
-		Sprite sprite = createSprite(x, y, typeConfig.texture);
+		Sprite sprite = FactoryUtil.createSprite(atlas, x, y, typeConfig.texture);
 		sprite.setScale(typeConfig.textureSizeFactorX * GameScreen.WORLD_TO_SCREEN, typeConfig.textureSizeFactorY * GameScreen.WORLD_TO_SCREEN);
 		
 		GameObject object;
@@ -87,7 +78,7 @@ public class GameObjectFactory extends AbstractFactory {
 		return object;
 	}
 	
-	public void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
+	public static void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			GameObject gameObject = createObject(type, x, y, mapProperties);
 			GameMap.getInstance().addObject(gameObject);

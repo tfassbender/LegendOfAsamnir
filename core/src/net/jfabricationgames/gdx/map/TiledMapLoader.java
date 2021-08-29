@@ -32,21 +32,9 @@ class TiledMapLoader {
 	private String mapAsset;
 	private GameMap gameMap;
 	
-	private ItemFactory itemFactory;
-	private GameObjectFactory objectFactory;
-	private EnemyFactory enemyFactory;
-	private NonPlayableCharacterFactory npcFactory;
-	private AnimalFactory animalFactory;
-	
 	private TiledMapLoader(String mapAsset) {
 		this.mapAsset = mapAsset;
 		this.gameMap = GameMap.getInstance();
-		
-		this.itemFactory = gameMap.itemFactory;
-		this.objectFactory = gameMap.objectFactory;
-		this.enemyFactory = gameMap.enemyFactory;
-		this.npcFactory = gameMap.npcFactory;
-		this.animalFactory = gameMap.animalFactory;
 	}
 	
 	private void loadMap() {
@@ -97,21 +85,21 @@ class TiledMapLoader {
 					}
 					break;
 				case GameMap.OBJECT_NAME_ITEM:
-					items.add(itemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
+					items.add(ItemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				case GameMap.OBJECT_NAME_OBJECT:
-					GameObject gameObject = objectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties);
+					GameObject gameObject = GameObjectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties);
 					objects.add(gameObject);
 					gameObject.postAddToGameMap();
 					break;
 				case GameMap.OBJECT_NAME_ENEMY:
-					enemies.add(enemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
+					enemies.add(EnemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				case GameMap.OBJECT_NAME_NPC:
-					npcs.add(npcFactory.createNpc(parts[1], rectangle.x, rectangle.y, properties));
+					npcs.add(NonPlayableCharacterFactory.createNonPlayableCharacter(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				case GameMap.OBJECT_NAME_ANIMAL:
-					animals.add(animalFactory.createAnimal(parts[1], rectangle.x, rectangle.y, properties));
+					animals.add(AnimalFactory.createAnimal(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				default:
 					throw new IllegalStateException(

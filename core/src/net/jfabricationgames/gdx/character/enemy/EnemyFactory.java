@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx.character.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
@@ -8,12 +7,14 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
-import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.FactoryUtil;
 
-public class EnemyFactory extends AbstractFactory {
+public class EnemyFactory {
+	
+	private EnemyFactory() {}
 	
 	private static final String ENEMY_NAME_BAT = "bat";
 	private static final String ENEMY_NAME_GLADIATOR = "gladiator";
@@ -25,37 +26,28 @@ public class EnemyFactory extends AbstractFactory {
 	private static final String ENEMY_NAME_FIRE_ELEMENTAL = "fire_elemental";
 	private static final String ENEMY_NAME_ICE_ELEMENTAL = "ice_elemental";
 	private static final String ENEMY_NAME_IMP = "imp";
-	
 	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
 	private static final String ENEMY_NAME_CYCLOPS = "cyclops";
 	
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
+	
 	private static Config config;
+	private static ObjectMap<String, EnemyTypeConfig> typeConfigs;
 	
-	private ObjectMap<String, EnemyTypeConfig> typeConfigs;
-	
-	public EnemyFactory() {
-		if (config == null) {
-			config = loadConfig(Config.class, CONFIG_FILE);
-		}
-		
-		loadTypeConfigs();
+	static {
+		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
+		typeConfigs = FactoryUtil.loadTypeConfigs(config.enemyTypesConfig, EnemyTypeConfig.class);
 		loadEnemyAnimations();
 	}
 	
-	@SuppressWarnings("unchecked")
-	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(ObjectMap.class, EnemyTypeConfig.class, Gdx.files.internal(config.enemyTypesConfig));
-	}
-	
-	private void loadEnemyAnimations() {
+	private static void loadEnemyAnimations() {
 		AnimationManager animationManager = AnimationManager.getInstance();
 		for (EnemyTypeConfig config : typeConfigs.values()) {
 			animationManager.loadAnimations(config.animationsConfig);
 		}
 	}
 	
-	public Enemy createEnemy(String type, float x, float y, MapProperties properties) {
+	public static Enemy createEnemy(String type, float x, float y, MapProperties properties) {
 		EnemyTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: '" + type
@@ -92,7 +84,7 @@ public class EnemyFactory extends AbstractFactory {
 		return enemy;
 	}
 	
-	public void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
+	public static void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Enemy gameObject = createEnemy(type, x, y, mapProperties);
 			GameMap.getInstance().addEnemy(gameObject);

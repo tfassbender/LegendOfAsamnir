@@ -8,7 +8,9 @@ import net.jfabricationgames.gdx.attack.implementation.MeleeAttack;
 import net.jfabricationgames.gdx.attack.implementation.ProjectileAttack;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-public abstract class AttackFactory {
+public class AttackFactory {
+	
+	private AttackFactory() {}
 	
 	public static Attack createAttack(AttackConfig config, Vector2 direction, Body body, PhysicsCollisionType collisionType) {
 		if (config.type.isSubTypeOf(AttackType.MELEE)) {

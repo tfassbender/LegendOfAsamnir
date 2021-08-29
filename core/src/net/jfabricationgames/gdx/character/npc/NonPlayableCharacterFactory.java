@@ -7,29 +7,26 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.factory.AbstractFactory;
-import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.FactoryUtil;
 
-public class NonPlayableCharacterFactory extends AbstractFactory {
+public class NonPlayableCharacterFactory {
+	
+	private NonPlayableCharacterFactory() {}
 	
 	private static final String CONFIG_FILE = "config/factory/npc_factory.json";
+	
 	private static Config config;
+	private static ObjectMap<String, NonPlayableCharacterTypeConfig> typeConfigs;
 	
-	private ObjectMap<String, NonPlayableCharacterTypeConfig> typeConfigs;
-	
-	public NonPlayableCharacterFactory() {
-		if (config == null) {
-			config = loadConfig(Config.class, CONFIG_FILE);
-		}
-		
+	static {
+		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
 		loadTypeConfigs();
 		loadAnimations();
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void loadTypeConfigs() {
+	private static void loadTypeConfigs() {
 		Json json = new Json();
 		ObjectMap<String, String> typeConfigFiles = json.fromJson(ObjectMap.class, String.class, Gdx.files.internal(config.npcTypes));
 		typeConfigs = new ObjectMap<>();
@@ -45,14 +42,14 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 		}
 	}
 	
-	private void loadAnimations() {
+	private static void loadAnimations() {
 		AnimationManager animationManager = AnimationManager.getInstance();
 		for (NonPlayableCharacterTypeConfig config : typeConfigs.values()) {
 			animationManager.loadAnimations(config.graphicsConfig.animationsConfig);
 		}
 	}
 	
-	public NonPlayableCharacter createNpc(String type, float x, float y, MapProperties properties) {
+	public static NonPlayableCharacter createNonPlayableCharacter(String type, float x, float y, MapProperties properties) {
 		NonPlayableCharacterTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: '" + type
@@ -63,13 +60,6 @@ public class NonPlayableCharacterFactory extends AbstractFactory {
 		npc.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
 		
 		return npc;
-	}
-	
-	public void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
-		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			NonPlayableCharacter gameObject = createNpc(type, x, y, mapProperties);
-			GameMap.getInstance().addNpc(gameObject);
-		});
 	}
 	
 	private static class Config {

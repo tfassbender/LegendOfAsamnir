@@ -31,8 +31,6 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
-	protected static ItemTypeConfig defaultTypeConfig;
-	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
 	protected MapProperties properties;
@@ -66,8 +64,8 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	
 	protected void readTypeConfig() {
 		pickUpSoundName = typeConfig.pickUpSound;
-		if (pickUpSoundName == null && defaultTypeConfig != null) {
-			pickUpSoundName = defaultTypeConfig.pickUpSound;
+		if (pickUpSoundName == null && ItemFactory.defaultTypeConfig != null) {
+			pickUpSoundName = ItemFactory.defaultTypeConfig.pickUpSound;
 		}
 	}
 	

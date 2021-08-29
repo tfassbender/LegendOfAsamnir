@@ -1,6 +1,8 @@
 package net.jfabricationgames.gdx.character.ai.util.timer;
 
-public abstract class AttackTimerFactory {
+public class AttackTimerFactory {
+	
+	private AttackTimerFactory() {}
 	
 	public static AttackTimer createAttackTimer(AttackTimerConfig config) {
 		switch (config.type) {

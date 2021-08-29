@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.item;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
@@ -9,56 +10,55 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
-import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.item.rune.RuneItem;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.util.FactoryUtil;
 import net.jfabricationgames.gdx.util.SerializationUtil;
 
-public class ItemFactory extends AbstractFactory {
+public class ItemFactory {
 	
-	private static final String configFile = "config/factory/item_factory.json";
+	private ItemFactory() {}
+	
+	private static final String CONFIG_FILE = "config/factory/item_factory.json";
+	
 	private static Config config;
+	private static TextureAtlas atlas;
+	private static ObjectMap<String, ItemTypeConfig> typeConfigs;
+	private static ObjectMap<String, ObjectMap<String, Object>> defaultValues;
 	
-	private ObjectMap<String, ItemTypeConfig> typeConfigs;
-	private ObjectMap<String, ObjectMap<String, Object>> defaultValues;
+	protected static ItemTypeConfig defaultTypeConfig;
 	
-	public ItemFactory() {
-		if (config == null) {
-			config = loadConfig(Config.class, configFile);
-		}
-		
-		loadTypeConfigs();
+	static {
+		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
+		typeConfigs = FactoryUtil.loadTypeConfigs(config.itemTypeConfig, ItemTypeConfig.class);
 		loadDefaultValues();
-		
-		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		AnimationManager.getInstance().loadAnimations(config.itemAnimations);
-		atlas = assetManager.get(config.itemAtlas);
+		atlas = AssetGroupManager.getInstance().get(config.itemAtlas);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(ObjectMap.class, ItemTypeConfig.class, Gdx.files.internal(config.itemTypeConfig));
-		Item.defaultTypeConfig = typeConfigs.get("__default");
-		if (Item.defaultTypeConfig == null) {
-			Gdx.app.error(getClass().getSimpleName(), "No default type config for items found. Add a type '__default' to 'config/items/types.json'.");
+	private static void loadDefaultValues() {
+		defaultValues = new Json().fromJson(ObjectMap.class, ObjectMap.class, Gdx.files.internal(config.defaultValuesConfig));
+		
+		defaultTypeConfig = typeConfigs.get("__default");
+		if (defaultTypeConfig == null) {
+			Gdx.app.error(ItemFactory.class.getSimpleName(),
+					"No default type config for items found. Add a type '__default' to 'config/items/types.json'.");
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	private void loadDefaultValues() {
-		defaultValues = json.fromJson(ObjectMap.class, ObjectMap.class, Gdx.files.internal(config.defaultValuesConfig));
-	}
-	
-	public void createAndDropItem(String type, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
+	public static void createAndDropItem(String type, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
 		createAndDropItem(type, new MapProperties(), x, y, renderAboveGameObjects, addBodyDelay);
 	}
-	public void createAndDropItem(String type, MapProperties mapProperties, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
+	
+	public static void createAndDropItem(String type, MapProperties mapProperties, float x, float y, boolean renderAboveGameObjects,
+			float addBodyDelay) {
 		Item item = createItem(type, x, y, mapProperties, addBodyDelay);
 		if (renderAboveGameObjects) {
 			GameMap.getInstance().addItemAboveGameObjects(item);
@@ -71,10 +71,7 @@ public class ItemFactory extends AbstractFactory {
 		MapObjectDataHandler.getInstance().addStatefulMapObject(item);
 	}
 	
-	public void createAndAddItemAfterWorldStep(String type, float x, float y, boolean renderAboveGameObjects) {
-		createAndAddItemAfterWorldStep(type, x, y, new MapProperties(), renderAboveGameObjects);
-	}
-	public void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
+	public static void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Item item = createItem(type, x, y, mapProperties);
 			if (renderAboveGameObjects) {
@@ -86,7 +83,7 @@ public class ItemFactory extends AbstractFactory {
 		});
 	}
 	
-	public void addItemFromSavedState(ObjectMap<String, String> state) {
+	public static void addItemFromSavedState(ObjectMap<String, String> state) {
 		boolean pickedUp = Boolean.parseBoolean(state.get("picked"));
 		
 		if (!pickedUp) {
@@ -99,19 +96,19 @@ public class ItemFactory extends AbstractFactory {
 		}
 	}
 	
-	public Item createItem(String name, float x, float y, MapProperties properties) {
+	public static Item createItem(String name, float x, float y, MapProperties properties) {
 		return createItem(name, x, y, properties, 0);
 	}
 	
-	private Item createItem(String name, float x, float y, MapProperties properties, float addBodyDelay) {
+	private static Item createItem(String name, float x, float y, MapProperties properties, float addBodyDelay) {
 		ItemTypeConfig typeConfig = typeConfigs.get(name);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: '" + name
-					+ "'. Either the type name is wrong or you have to add it to the itemTypesConfig (see \"" + configFile + "\")");
+					+ "'. Either the type name is wrong or you have to add it to the itemTypesConfig (see \"" + CONFIG_FILE + "\")");
 		}
 		
-		Sprite sprite = createSprite(x, y, typeConfig.texture);
-		AnimationDirector<TextureRegion> animation = createAnimation(x, y, typeConfig.animation);
+		Sprite sprite = FactoryUtil.createSprite(atlas, x, y, typeConfig.texture);
+		AnimationDirector<TextureRegion> animation = FactoryUtil.createAnimation(x, y, typeConfig.animation);
 		
 		addDefaultProperties(name, properties);
 		Item item;
@@ -147,7 +144,7 @@ public class ItemFactory extends AbstractFactory {
 		return item;
 	}
 	
-	private void addDefaultProperties(String name, MapProperties properties) {
+	private static void addDefaultProperties(String name, MapProperties properties) {
 		if (defaultValues.containsKey(name)) {
 			for (Entry<String, Object> entry : defaultValues.get(name).entries()) {
 				if (!properties.containsKey(entry.key)) {

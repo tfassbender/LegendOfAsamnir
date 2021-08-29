@@ -14,11 +14,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.animal.Animal;
-import net.jfabricationgames.gdx.character.animal.AnimalFactory;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
-import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
-import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
@@ -35,13 +32,11 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.physics.AfterWorldStep;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.Projectile;
-import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameMap implements EventListener, Disposable {
@@ -117,12 +112,6 @@ public class GameMap implements EventListener, Disposable {
 	protected Array<Animal> animals;
 	protected Array<Projectile> projectiles;
 	
-	protected ItemFactory itemFactory;
-	protected GameObjectFactory objectFactory;
-	protected EnemyFactory enemyFactory;
-	protected NonPlayableCharacterFactory npcFactory;
-	protected AnimalFactory animalFactory;
-	
 	protected PlayableCharacter player;
 	
 	private GameMap(OrthographicCamera camera) {
@@ -131,13 +120,6 @@ public class GameMap implements EventListener, Disposable {
 		
 		itemsAboveGameObjects = new Array<>();
 		projectiles = new Array<>();
-		ProjectileFactory.createInstance();
-		
-		itemFactory = new ItemFactory();
-		objectFactory = new GameObjectFactory();
-		enemyFactory = new EnemyFactory();
-		npcFactory = new NonPlayableCharacterFactory();
-		animalFactory = new AnimalFactory();
 		
 		// create the player before other map objects, because it contains event listeners that listen for events that are fired when these objects are created
 		player = Player.getInstance();
@@ -410,22 +392,6 @@ public class GameMap implements EventListener, Disposable {
 		PhysicsWorld.getInstance().removeBodyWhenPossible(body);
 	}
 	
-	public ItemFactory getItemFactory() {
-		return itemFactory;
-	}
-	
-	public GameObjectFactory getObjectFactory() {
-		return objectFactory;
-	}
-	
-	public EnemyFactory getEnemyFactory() {
-		return enemyFactory;
-	}
-	
-	public NonPlayableCharacterFactory getNpcFactory() {
-		return npcFactory;
-	}
-	
 	public MapProperties getGlobalMapProperties() {
 		return map.getProperties();
 	}
@@ -525,7 +491,7 @@ public class GameMap implements EventListener, Disposable {
 		String objectType = mapObjectStateProperties.state.get(MapObjectDataHandler.TYPE_DESCRIPTION_MAP_KEY);
 		switch (objectType) {
 			case "Item":
-				itemFactory.addItemFromSavedState(mapObjectStateProperties.state);
+				ItemFactory.addItemFromSavedState(mapObjectStateProperties.state);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected type: " + objectType);

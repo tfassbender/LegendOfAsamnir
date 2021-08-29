@@ -38,8 +38,6 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private static final Array<String> ITEM_NAMES = new Array<>(new String[] {"health", "shield", "mead", null, "arrow", "bomb"});
 	private static final Array<Integer> ITEM_COSTS = new Array<>(new Integer[] {30, 20, 15, 0, 25, 25});
 	
-	private static final ItemFactory ITEM_FACTORY = new ItemFactory();
-	
 	private MenuBox background;
 	private MenuBox headerBanner;
 	private MenuBox descriptionBox;
@@ -125,7 +123,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	}
 	
 	private void fireBuyItemEvent(String itemName, int itemCosts) {
-		Item boughtItem = ITEM_FACTORY.createItem(itemName, 0, 0, new MapProperties());
+		Item boughtItem = ItemFactory.createItem(itemName, 0, 0, new MapProperties());
 		
 		EventHandler eventHandler = EventHandler.getInstance();
 		eventHandler.fireEvent(new EventConfig().setEventType(EventType.TAKE_PLAYERS_COINS).setIntValue(itemCosts));

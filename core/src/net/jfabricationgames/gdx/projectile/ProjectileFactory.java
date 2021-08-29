@@ -1,19 +1,21 @@
 package net.jfabricationgames.gdx.projectile;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
-import net.jfabricationgames.gdx.factory.AbstractFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.util.FactoryUtil;
 
-public class ProjectileFactory extends AbstractFactory {
+public class ProjectileFactory {
+	
+	private ProjectileFactory() {}
 	
 	private static final String PROJECTILE_TYPE_ARROW = "arrow";
 	private static final String PROJECTILE_TYPE_BOMB = "bomb";
@@ -24,49 +26,21 @@ public class ProjectileFactory extends AbstractFactory {
 	private static final String PROJECTILE_TYPE_BOOMERANG = "boomerang";
 	private static final String PROJECTILT_TYPE_WAND = "wand";
 	
-	private static final String configFile = "config/factory/projectile_factory.json";
-	private static final String animationConfigFile = "config/animation/projectiles.json";
+	private static final String CONFIG_FILE = "config/factory/projectile_factory.json";
+	private static final String ANIMATION_CONFIG_FILE = "config/animation/projectiles.json";
+	
 	private static Config config;
+	private static TextureAtlas atlas;
+	private static ObjectMap<String, ProjectileTypeConfig> typeConfigs;
 	
-	private static ProjectileFactory instance;
-	
-	public static synchronized ProjectileFactory getInstance() {
-		if (instance == null) {
-			throw new IllegalStateException("The instance of ProjectileFactory has not yet been created. "
-					+ "Use the createInstance(GameMap) method to create the instance.");
-		}
-		return instance;
+	static {
+		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
+		typeConfigs = FactoryUtil.loadTypeConfigs(config.typesConfig, ProjectileTypeConfig.class);
+		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
+		atlas = AssetGroupManager.getInstance().get(config.atlas);
 	}
 	
-	public static synchronized ProjectileFactory createInstance() {
-		if (instance != null) {
-			Gdx.app.error(ProjectileFactory.class.getSimpleName(), "A ProjectileFactory for this game map has already been created.");
-		}
-		
-		AnimationManager.getInstance().loadAnimations(animationConfigFile);
-		instance = new ProjectileFactory();
-		return instance;
-	}
-	
-	private ObjectMap<String, ProjectileTypeConfig> typeConfigs;
-	
-	private ProjectileFactory() {
-		if (config == null) {
-			config = loadConfig(Config.class, configFile);
-		}
-		
-		loadTypeConfigs();
-		
-		AssetGroupManager assetManager = AssetGroupManager.getInstance();
-		atlas = assetManager.get(config.atlas);
-	}
-	
-	@SuppressWarnings("unchecked")
-	private void loadTypeConfigs() {
-		typeConfigs = json.fromJson(ObjectMap.class, ProjectileTypeConfig.class, Gdx.files.internal(config.typesConfig));
-	}
-	
-	public Projectile createProjectileAndAddToMap(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType) {
+	public static Projectile createProjectileAndAddToMap(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType) {
 		if (type == null) {
 			throw new IllegalStateException(
 					"The 'type' parameter mussn't be null. Maybe the projectileType was not configured in the attack config file?");
@@ -74,12 +48,12 @@ public class ProjectileFactory extends AbstractFactory {
 		ProjectileTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
 			throw new IllegalStateException("No type config known for type: " + type
-					+ ". Either the type name is wrong or you have to add it to the projectileTypesConfig (see \"" + configFile + "\")");
+					+ ". Either the type name is wrong or you have to add it to the projectileTypesConfig (see \"" + CONFIG_FILE + "\")");
 		}
 		
 		Sprite sprite = null;
 		if (typeConfig.texture != null) {
-			sprite = createSprite(position.x, position.y, typeConfig.texture);
+			sprite = FactoryUtil.createSprite(atlas, position.x, position.y, typeConfig.texture);
 		}
 		AnimationDirector<TextureRegion> animation = null;
 		if (typeConfig.animation != null) {
