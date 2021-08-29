@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
@@ -59,7 +59,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private static void showLoadingScreen(Runnable afterCreatingGameScreen) {
 		new LoadingScreen(() -> {
-			DwarfScrollerGame.getInstance().setScreen(new GameScreen());
+			Game.getInstance().setScreen(new GameScreen());
 			afterCreatingGameScreen.run();
 		}).showMenu();
 	}
@@ -113,8 +113,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void initializeInputContext() {
-		DwarfScrollerGame.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
-		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		Game.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
+		inputContext = Game.getInstance().getInputContext();
 		inputContext.addListener(this);
 	}
 	
@@ -175,8 +175,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void checkGameOver() {
-		PlayableCharacter player = Player.getInstance();
-		if (!gameOver && player.isGameOver()) {
+		if (!gameOver && Game.getInstance().isGameOver()) {
 			gameOver = true;
 			showGameOverMenuScreen();
 		}

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
@@ -56,7 +56,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 	
 	public void backToGame() {
 		removeInputListener();
-		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
+		Game game = Game.getInstance();
 		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
 		game.setScreen(gameScreen);
 	}

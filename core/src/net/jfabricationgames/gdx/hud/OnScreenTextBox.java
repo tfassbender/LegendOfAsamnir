@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -88,7 +88,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		textRenderer = new OnScreenTextRenderer(this, batch, shapeRenderer, screenTextWriter);
 		playerChoiceRenderer = new OnScreenPlayerChoiceRenderer(this, hud, batch, shapeRenderer, screenTextWriter);
 		
-		InputContext inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		InputContext inputContext = Game.getInstance().getInputContext();
 		inputContext.addListener(this);
 	}
 	

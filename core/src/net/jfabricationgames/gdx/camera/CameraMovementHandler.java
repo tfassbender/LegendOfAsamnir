@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
@@ -73,7 +73,7 @@ public class CameraMovementHandler {
 		this.player = player;
 		cutsceneHandler = CutsceneHandler.getInstance();
 		
-		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		inputContext = Game.getInstance().getInputContext();
 	}
 	
 	public void moveCamera(float delta) {

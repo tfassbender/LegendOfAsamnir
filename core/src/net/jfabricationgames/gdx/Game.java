@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -15,32 +14,34 @@ import net.jfabricationgames.gdx.screens.menu.MainMenuScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.text.FontManager;
 
-public class DwarfScrollerGame extends Game {
+public class Game extends com.badlogic.gdx.Game {
 	
 	public static final String ASSET_GROUP_MANAGER_CONFIG_PATH = "config/assets/asset_groups.json";
 	public static final String INPUT_PROFILE_CONFIG_PATH = "config/input/profile.xml";
 	public static final String SOUND_CONFIG_PATH = "config/sound/sound_sets.json";
 	public static final String FONT_CONFIG_PATH = "config/font/fonts.json";
 	
-	private static DwarfScrollerGame instance;
+	private static Game instance;
 	
 	private Runnable preGameConfigurator;
 	
 	private InputMultiplexer multiplexer;
 	private InputProfile gameInputProfile;
 	
-	public static synchronized DwarfScrollerGame createInstance(Runnable preGameConfigurator) {
+	private boolean gameOver;
+	
+	public static synchronized Game createInstance(Runnable preGameConfigurator) {
 		if (instance == null) {
-			instance = new DwarfScrollerGame(preGameConfigurator);
+			instance = new Game(preGameConfigurator);
 		}
 		return instance;
 	}
 	
-	public static DwarfScrollerGame getInstance() {
+	public static Game getInstance() {
 		return instance;
 	}
 	
-	private DwarfScrollerGame(Runnable preGameConfigurator) {
+	private Game(Runnable preGameConfigurator) {
 		this.preGameConfigurator = preGameConfigurator;
 	}
 	
@@ -60,6 +61,7 @@ public class DwarfScrollerGame extends Game {
 		setScreen(new MainMenuScreen());
 	}
 	
+	@Override
 	public void setScreen(Screen screen) {
 		Gdx.app.debug(getClass().getSimpleName(), "Changing screen to: " + screen);
 		super.setScreen(screen);
@@ -88,6 +90,13 @@ public class DwarfScrollerGame extends Game {
 	}
 	public InputContext getInputContext() {
 		return gameInputProfile.getContext();
+	}
+	
+	public boolean isGameOver() {
+		return gameOver;
+	}
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
 	}
 	
 	@Override

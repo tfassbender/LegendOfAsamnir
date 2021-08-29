@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
@@ -45,7 +45,7 @@ public class LoadingScreen extends MenuScreen<LoadingScreen> {
 	
 	@Override
 	public void showMenu() {
-		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
+		Game game = Game.getInstance();
 		game.setScreen(this);
 	}
 	

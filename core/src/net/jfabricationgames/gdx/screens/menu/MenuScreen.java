@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -47,7 +47,7 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	
 	@Override
 	public void showMenu() {
-		DwarfScrollerGame game = DwarfScrollerGame.getInstance();
+		Game game = Game.getInstance();
 		game.changeInputContext(getInputContextName());
 		game.getInputContext().addListener(this);
 		game.setScreen(this);
@@ -56,7 +56,7 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	protected abstract String getInputContextName();
 	
 	protected void removeInputListener() {
-		DwarfScrollerGame.getInstance().getInputContext().removeListener(this);
+		Game.getInstance().getInputContext().removeListener(this);
 	}
 	
 	@Override

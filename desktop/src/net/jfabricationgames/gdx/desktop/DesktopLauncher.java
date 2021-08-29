@@ -3,14 +3,14 @@ package net.jfabricationgames.gdx.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.desktop.log.LogConfiguration;
 
 public class DesktopLauncher {
 	
 	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = createApplicationConfiguration();
-		DwarfScrollerGame game = DwarfScrollerGame.createInstance(() -> configureLog());
+		Game game = Game.createInstance(() -> configureLog());
 		new LwjglApplication(game, config);
 	}
 	

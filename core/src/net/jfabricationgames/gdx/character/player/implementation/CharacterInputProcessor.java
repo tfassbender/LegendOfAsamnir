@@ -1,15 +1,25 @@
 package net.jfabricationgames.gdx.character.player.implementation;
 
-import net.jfabricationgames.gdx.DwarfScrollerGame;
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 
-public class CharacterInputProcessor implements InputActionListener {
+class CharacterInputProcessor implements InputActionListener {
 	
 	private static final float SQRT_0_5 = (float) Math.sqrt(0.5f);
+	
+	private static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
+	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
+	
+	
+	private static final float MOVING_SPEED = 300f;
+	private static final float MOVING_SPEED_JUMP = 425f;
+	private static final float MOVING_SPEED_SPRINT = 425f;
+	private static final float MOVING_SPEED_ATTACK = 150f;
+	
+	private static final String SOUND_SPIN_ATTACK_CHARGED = "spin_attack_charged";
 	
 	private static final String INPUT_MOVE_UP = "up";
 	private static final String INPUT_MOVE_DOWN = "down";
@@ -24,7 +34,7 @@ public class CharacterInputProcessor implements InputActionListener {
 	private static final String ACTION_PREVIOUS_SPECIAL_ACTION = "previousSpecialAction";
 	private static final String ACTION_NEXT_SPECIAL_ACTION = "nextSpecialAction";
 	
-	private PlayableCharacter inputCharacter;
+	private Dwarf player;
 	
 	private boolean moveUp = false;
 	private boolean moveDown = false;
@@ -51,13 +61,13 @@ public class CharacterInputProcessor implements InputActionListener {
 	
 	private boolean spinAttackCharged;
 	
-	public CharacterInputProcessor(PlayableCharacter inputCharacter) {
-		this.inputCharacter = inputCharacter;
-		timeTillIdleAnimation = inputCharacter.getTimeTillIdleAnimation();
-		timeTillSpinAttack = inputCharacter.getHoldTimeTillSpinAttack();
+	public CharacterInputProcessor(Dwarf player) {
+		this.player = player;
+		timeTillIdleAnimation = TIME_TILL_IDLE_ANIMATION;
+		timeTillSpinAttack = TIME_TILL_SPIN_ATTACK;
 		jumpDirection = MovingDirection.NONE;
 		lastMoveDirection = MovingDirection.NONE;
-		inputContext = DwarfScrollerGame.getInstance().getInputContext();
+		inputContext = Game.getInstance().getInputContext();
 		inputContext.addListener(this);
 	}
 	
@@ -72,58 +82,58 @@ public class CharacterInputProcessor implements InputActionListener {
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
 		boolean characterActionSet = false;
 		
-		if (inputCharacter.isAlive()) {
+		if (player.isAlive()) {
 			if (!characterActionSet && spinAttack) {
 				//hit and shield hit can only be interrupted by spin attacks (to free from near enemies)
-				if (getAction().isInterruptable() || getAction() == CharacterAction.HIT || getAction() == CharacterAction.SHIELD_HIT) {
-					inputCharacter.changeAction(CharacterAction.ATTACK_SPIN);
+				if (player.action.isInterruptable() || player.action == CharacterAction.HIT || player.action == CharacterAction.SHIELD_HIT) {
+					player.changeAction(CharacterAction.ATTACK_SPIN);
 				}
 			}
 			if (!characterActionSet && attack) {
-				if (getAction().isInterruptable()) {
+				if (player.action.isInterruptable()) {
 					if (move && sprint) {
 						lastMoveDirection = getDirectionFromInputs();
 						jumpDirection = getDirectionFromInputs();
-						characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK_JUMP);
+						characterActionSet = player.changeAction(CharacterAction.ATTACK_JUMP);
 					}
 					else {
-						characterActionSet = inputCharacter.changeAction(CharacterAction.ATTACK);
+						characterActionSet = player.changeAction(CharacterAction.ATTACK);
 					}
 				}
 			}
 			if (!characterActionSet && block) {
-				if (getAction().isInterruptable()) {
-					characterActionSet = inputCharacter.changeAction(CharacterAction.BLOCK);
+				if (player.action.isInterruptable()) {
+					characterActionSet = player.changeAction(CharacterAction.BLOCK);
 				}
 			}
 			if (!characterActionSet && special) {
-				if (getAction().isInterruptable()) {
+				if (player.action.isInterruptable()) {
 					jumpDirection = getDirectionFromInputs();
-					characterActionSet = inputCharacter.executeSpecialAction();
+					characterActionSet = player.executeSpecialAction();
 				}
 			}
 			if (!characterActionSet && move) {
 				lastMoveDirection = getDirectionFromInputs();
-				if (getAction().isInterruptable() && getAction() != CharacterAction.RUN) {
-					characterActionSet = inputCharacter.changeAction(CharacterAction.RUN);
+				if (player.action.isInterruptable() && player.action != CharacterAction.RUN) {
+					characterActionSet = player.changeAction(CharacterAction.RUN);
 				}
 			}
 			else {
-				if (getAction() == CharacterAction.RUN) {
-					characterActionSet = inputCharacter.changeAction(CharacterAction.NONE);
+				if (player.action == CharacterAction.RUN) {
+					characterActionSet = player.changeAction(CharacterAction.NONE);
 				}
 			}
 			
-			if (inputCharacter.getCurrentAction() == CharacterAction.NONE) {
+			if (player.action == CharacterAction.NONE) {
 				sprint = false;
 				idleTime += delta;
 				
 				if (idleTime > timeTillIdleAnimation) {
-					if (inputCharacter.getCurrentAction() != CharacterAction.IDLE) {
-						inputCharacter.changeAction(CharacterAction.IDLE);
+					if (player.action != CharacterAction.IDLE) {
+						player.changeAction(CharacterAction.IDLE);
 					}
-					else if (inputCharacter.isAnimationFinished()) {
-						inputCharacter.changeAction(CharacterAction.NONE);
+					else if (player.isAnimationFinished()) {
+						player.changeAction(CharacterAction.NONE);
 						idleTime = 0;
 					}
 				}
@@ -160,7 +170,7 @@ public class CharacterInputProcessor implements InputActionListener {
 			attackHeld += delta;
 			if (attackHeld >= timeTillSpinAttack && !spinAttackCharged) {
 				spinAttackCharged = true;
-				inputCharacter.playSpinAttackChargedSound();
+				player.soundHandler.playSound(SOUND_SPIN_ATTACK_CHARGED);
 			}
 		}
 		else {
@@ -241,18 +251,18 @@ public class CharacterInputProcessor implements InputActionListener {
 	}
 	
 	public void move(float delta) {
-		if (!getAction().isMoveBlocking()) {
+		if (!player.action.isMoveBlocking()) {
 			//reduce the endurance for sprinting before requesting the movement speed
 			if (sprint) {
-				inputCharacter.reduceEnduranceForSprinting(delta);
-				if (inputCharacter.isExhausted()) {
+				player.propertiesDataHandler.reduceEnduranceForSprinting(delta);
+				if (player.propertiesDataHandler.isExhausted()) {
 					sprint = false;
 				}
 			}
 			
-			float moveSpeedPerDirection = inputCharacter.getMovingSpeed(sprint);
+			float moveSpeedPerDirection = getMovingSpeed();
 			if ((moveUp || moveDown) && (moveLeft || moveRight)) {
-				moveSpeedPerDirection = inputCharacter.getMovingSpeed(sprint) * SQRT_0_5;
+				moveSpeedPerDirection = getMovingSpeed() * SQRT_0_5;
 			}
 			
 			float speedX = 0;
@@ -272,8 +282,8 @@ public class CharacterInputProcessor implements InputActionListener {
 			}
 			move(speedX, speedY, delta);
 		}
-		else if (getAction() == CharacterAction.JUMP || getAction() == CharacterAction.ATTACK_JUMP) {
-			float movingSpeed = inputCharacter.getMovingSpeed(sprint);
+		else if (player.action == CharacterAction.JUMP || player.action == CharacterAction.ATTACK_JUMP) {
+			float movingSpeed = getMovingSpeed();
 			float speedX = 0;
 			float speedY = 0;
 			
@@ -295,7 +305,7 @@ public class CharacterInputProcessor implements InputActionListener {
 			}
 			move(speedX, speedY, delta);
 		}
-		else if (getAction() == CharacterAction.BLOCK) {
+		else if (player.action == CharacterAction.BLOCK) {
 			if (moveLeft) {
 				lastMoveDirection = MovingDirection.LEFT;
 			}
@@ -306,11 +316,23 @@ public class CharacterInputProcessor implements InputActionListener {
 	}
 	
 	private void move(float speedX, float speedY, float delta) {
-		inputCharacter.move(speedX * delta, speedY * delta);
+		player.move(speedX * delta, speedY * delta);
 	}
 	
-	private CharacterAction getAction() {
-		return inputCharacter.getCurrentAction();
+	private float getMovingSpeed() {
+		float speed;
+		speed = MOVING_SPEED;
+		if (sprint) {
+			speed = MOVING_SPEED_SPRINT;
+		}
+		if (player.action == CharacterAction.ATTACK) {
+			speed = MOVING_SPEED_ATTACK;
+		}
+		if (player.action == CharacterAction.JUMP) {
+			speed = MOVING_SPEED_JUMP;
+		}
+		
+		return speed;
 	}
 	
 	public boolean isDrawDirectionRight() {
@@ -325,7 +347,7 @@ public class CharacterInputProcessor implements InputActionListener {
 	public boolean onAction(String action, Type type, Parameters parameters) {
 		if (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED) {
 			if (action.equals(ACTION_INTERACT)) {
-				InteractionManager.getInstance().interact(inputCharacter);
+				InteractionManager.getInstance().interact(player);
 			}
 			else if (action.equals(ACTION_PREVIOUS_SPECIAL_ACTION)) {
 				selectNextSpecialAction(-1);
@@ -342,12 +364,12 @@ public class CharacterInputProcessor implements InputActionListener {
 			throw new IllegalArgumentException("delta must be 1 or -1");
 		}
 		
-		SpecialAction specialAction = SpecialAction.getNextSpecialAction(inputCharacter.getActiveSpecialAction(), delta);
+		SpecialAction specialAction = SpecialAction.getNextSpecialAction(player.getActiveSpecialAction(), delta);
 		while (!specialAction.canBeUsed()) {
 			//search on till a special action can be used (should not be an infinite loop, since the jump action can always be used)
 			specialAction = SpecialAction.getNextSpecialAction(specialAction, delta);
 		}
 		
-		inputCharacter.setActiveSpecialAction(specialAction);
+		player.setActiveSpecialAction(specialAction);
 	}
 }
