@@ -117,4 +117,22 @@
 		
 		multipleHitsPossible: true,
 	}
+	magic_wave: {
+		attackType: MAGIC_WAVE,
+		
+		texture: force_field_totem,
+		textureScale: 2f,
+		
+		textureInitialRotation: 180,
+		rotateTextureToMovementDirection: true,
+		
+		speed: 50,
+		damping: 0,
+		range: 100,
+		removeAfterRangeExceeded: true,
+		dampingAfterRangeExceeded: 0,
+		dampingAfterObjectHit: 0,
+		
+		multipleHitsPossible: false,
+	}
 }

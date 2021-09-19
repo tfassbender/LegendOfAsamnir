@@ -99,7 +99,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
 		return new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false).setCollisionType(PhysicsCollisionType.OBSTACLE)
-				.setDensity(10_000f) // use a very high density, so the NPC can (almost) not be moved by the player or other forces
+				.setDensity(AbstractCharacter.DENSITY_IMMOVABLE) // use a very high density, so the NPC can (almost) not be moved by the player or other forces
 				.setLinearDamping(10f).setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(typeConfig.graphicsConfig.bodyWidth)
 				.setHeight(typeConfig.graphicsConfig.bodyHeight);
 	}

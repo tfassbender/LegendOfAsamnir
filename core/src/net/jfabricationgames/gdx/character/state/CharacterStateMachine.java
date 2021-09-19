@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectSet;
 
-import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 

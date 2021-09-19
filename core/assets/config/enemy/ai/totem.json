@@ -1,0 +1,21 @@
+{
+	defaultAI: totem,
+	aiConfigurations: {
+		totem: {
+			type: FIGHT_AI,
+			
+			stateNameAttack: attack,
+			
+			attackTimerConfig: {
+				type: FIXED,
+				fixedTime: 1f,
+			},
+			attackDistance: 6f,
+			minDistanceToTargetPlayer: 0f,
+			
+			subAI: {
+				type: BASE_AI,
+			}
+		}
+	}
+}

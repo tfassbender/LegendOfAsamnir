@@ -7,6 +7,7 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
+import net.jfabricationgames.gdx.character.enemy.implementation.Totem;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -28,6 +29,7 @@ public class EnemyFactory {
 	private static final String ENEMY_NAME_IMP = "imp";
 	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
 	private static final String ENEMY_NAME_CYCLOPS = "cyclops";
+	private static final String ENEMY_NAME_TOTEM = "totem";
 	
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	
@@ -69,6 +71,9 @@ public class EnemyFactory {
 				break;
 			case ENEMY_NAME_BAT:
 				enemy = new Bat(typeConfig, properties);
+				break;
+			case ENEMY_NAME_TOTEM:
+				enemy = new Totem(typeConfig, properties);
 				break;
 			case ENEMY_NAME_MINOTAUR:
 				enemy = new Minotaur(typeConfig, properties);

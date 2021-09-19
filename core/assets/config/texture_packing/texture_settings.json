@@ -161,6 +161,12 @@
 				enemy/cyclops/cyclops_idle,
 				enemy/cyclops/cyclops_move,
 				
+				// totem
+				enemy/totem/totem_appear,
+				enemy/totem/totem_damage,
+				enemy/totem/totem_die,
+				enemy/totem/totem_idle,
+				
 				//##############################################################
 				//### NPCs
 				//##############################################################

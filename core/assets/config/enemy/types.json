@@ -347,5 +347,29 @@
 		healthBarOffsetX: 0.6,
 		healthBarOffsetY: -0.4,
 		healthBarWidthFactor: 0.5,
-	}
+	},
+	totem: {
+		typeName: totem,
+		
+		animationsConfig: config/animation/enemy/totem.json,
+		stateConfig: config/enemy/states/totem.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/totem.json,
+		aiConfig: config/enemy/ai/totem.json,
+		
+		health: 10,
+		movingSpeed: 0,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: CIRCLE,
+		bodyRadius: 0.3f,
+		
+		addSensor: true,
+		sensorRadius: 8f,
+		
+		pushForceDamage: 0,
+		pushForceHit: 0,
+	},
 }

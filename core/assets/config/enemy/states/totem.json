@@ -1,0 +1,44 @@
+[
+	{
+		id: idle,
+		animation: totem_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			attack, damage, die
+		]
+	},
+	{
+		id: attack,
+		animation: totem_idle,
+		attack: magic_wave,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		]
+	},
+	{
+		id: damage,
+		animation: totem_damage,
+		endsWithAnimation: true,
+		stateEnteringSound: wood_hit_1,
+		followingState: idle,
+		interruptingStates: [
+			attack, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: totem_die,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 1f,
+		followingState: END,
+		stateEnteringSound: wood_hit_2,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]

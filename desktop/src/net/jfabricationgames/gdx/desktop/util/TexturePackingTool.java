@@ -50,9 +50,13 @@ public class TexturePackingTool {
 			
 			try {
 				createTmpDir();
-				copyTexturesToTmpDir(packSetting.getTextureDirs());
-				TexturePacker.process(textureSettings, TEXTURE_PACKING_TMP_DIR, packSetting.getOutputDir(), packSetting.getAtlasName());
-				dropTmpDir();
+				try {
+					copyTexturesToTmpDir(packSetting.getTextureDirs());
+					TexturePacker.process(textureSettings, TEXTURE_PACKING_TMP_DIR, packSetting.getOutputDir(), packSetting.getAtlasName());
+				}
+				finally {
+					dropTmpDir();
+				}
 			}
 			catch (IOException ioe) {
 				ioe.printStackTrace();
@@ -86,6 +90,9 @@ public class TexturePackingTool {
 		for (String textureDirPath : textureDirs) {
 			File textureDir = new File(textureDirPath);
 			File[] textureFiles = textureDir.listFiles();
+			if (textureFiles == null) {
+				throw new IllegalStateException("Texture files not found for directory '" + textureDirPath + "'. Maybe the path config is wrong?");
+			}
 			for (File textureFile : textureFiles) {
 				Files.copy(textureFile.toPath(), tmpDirPath.resolve(textureFile.getName()));
 			}

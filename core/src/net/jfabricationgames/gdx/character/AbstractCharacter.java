@@ -56,6 +56,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	protected float imageOffsetY;
 	
 	protected GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
+	public static final float DENSITY_IMMOVABLE = 10_000f;
 	
 	public AbstractCharacter(MapProperties properties) {
 		this.properties = properties;

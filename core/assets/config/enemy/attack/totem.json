@@ -1,0 +1,12 @@
+[
+	{
+		id: magic_wave,
+		type: MAGIC_WAVE,
+		projectileType: magic_wave,
+		delay: 0.1,
+		duration: 0,
+		damage: 5,
+		pushForce: 150,
+		pushForceAffectedByBlock: false,
+	},
+]
