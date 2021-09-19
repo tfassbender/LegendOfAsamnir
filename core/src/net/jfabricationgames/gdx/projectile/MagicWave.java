@@ -15,9 +15,4 @@ public class MagicWave extends Projectile {
 	protected PhysicsBodyProperties createShapePhysicsBodyProperties() {
 		return new PhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(0.9f).setSensor(true);
 	}
-	
-	@Override
-	protected boolean hasDamage() {
-		return true;
-	}
 }

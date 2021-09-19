@@ -258,7 +258,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	@Override
 	public void beginContact(Contact contact) {
-		if (isAttackOver() || !hasDamage()) {
+		if (isAttackOver()) {
 			return;
 		}
 		
@@ -283,10 +283,6 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	protected boolean isAttackOver() {
 		return attackPerformed && !typeConfig.multipleHitsPossible;
-	}
-	
-	protected boolean hasDamage() {
-		return damage > 0;
 	}
 	
 	protected void setBodyLinearDamping() {
