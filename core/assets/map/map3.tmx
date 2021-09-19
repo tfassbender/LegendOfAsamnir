@@ -2,6 +2,8 @@
 <map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="199">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
+  <property name="continuous_damage" value="1"/>
+  <property name="continuous_damage_interval" value="2"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
   <property name="terrain_layers" value="[2]"/>
  </properties>
@@ -20,7 +22,7 @@
   <object id="1" name="item.axe" x="480" y="639">
    <point/>
   </object>
-  <object id="2" name="player.startingPosition" x="911.333" y="656.667">
+  <object id="2" name="player.startingPosition" x="912.333" y="658.667">
    <point/>
   </object>
   <object id="3" name="item.coin" x="912" y="465.333">
@@ -508,7 +510,7 @@ Arrows: 25 Coins..</property>
   <object id="185" name="item.rune_gebo" x="288.33" y="144.542">
    <point/>
   </object>
-  <object id="186" name="item.rune_kenaz" x="1455" y="272.292">
+  <object id="186" name="item.rune_kenaz" x="912.583" y="621.792">
    <point/>
   </object>
   <object id="187" name="item.rune_laguz" x="1454.92" y="306.083">

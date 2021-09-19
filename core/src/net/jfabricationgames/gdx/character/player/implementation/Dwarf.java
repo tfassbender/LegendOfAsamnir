@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.attack.AttackCreator;
 import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
@@ -38,7 +37,7 @@ import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileReflector;
 import net.jfabricationgames.gdx.util.GameUtil;
 
-public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hittable, EventListener, ProjectileReflector {
+public class Dwarf implements PlayableCharacter, Disposable, ContactListener, EventListener, ProjectileReflector {
 	
 	private static final float MOVING_SPEED_CUTSCENE = 3.5f;
 	

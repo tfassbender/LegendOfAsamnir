@@ -17,7 +17,8 @@ public enum AttackType {
 	MAGIC(PROJECTILE), //
 	WAND(MAGIC), //
 	MAGIC_WAVE(MAGIC), //
-	BEAM(ATTACK); // 
+	BEAM(ATTACK), //
+	CONTINUOUS_MAP_DAMAGE(ATTACK); // 
 	
 	private final AttackType superType;
 	
@@ -46,6 +47,6 @@ public enum AttackType {
 	}
 	
 	public boolean canBeBlocked() {
-		return !isSubTypeOf(BEAM) && !isSubTypeOf(MAGIC);
+		return !isSubTypeOf(BEAM) && !isSubTypeOf(MAGIC) && !isSubTypeOf(CONTINUOUS_MAP_DAMAGE);
 	}
 }

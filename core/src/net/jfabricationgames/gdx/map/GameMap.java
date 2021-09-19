@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
@@ -31,6 +32,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.physics.AfterWorldStep;
@@ -47,7 +49,9 @@ public class GameMap implements EventListener, Disposable {
 		MAP_WIDTH_IN_TILE_DIMENSIONS("width"), //
 		MAP_HEIGHT_IN_TILE_DIMENSIONS("height"), //
 		MAP_TILE_WIDTH_IN_PIXELS("tilewidth"), // 
-		MAP_TILE_HEIGHT_IN_PIXELS("tileheight");
+		MAP_TILE_HEIGHT_IN_PIXELS("tileheight"), //
+		MAP_CONTINUOUSE_DAMAGE("continuous_damage"), //
+		MAP_CONTINUOUSE_DAMAGE_INTERVAL("continuous_damage_interval");
 		
 		private final String key;
 		
@@ -99,6 +103,10 @@ public class GameMap implements EventListener, Disposable {
 	private GameMapProcessor processor;
 	
 	private String currentMapIdentifier;
+	
+	private float continuousMapDamage;
+	private float continuousMapDamageInterval;
+	private float continuousMapDamageTimeDelta;
 	
 	protected TiledMap map;
 	protected Vector2 playerStartingPosition;
@@ -159,7 +167,6 @@ public class GameMap implements EventListener, Disposable {
 	
 	public void showMap(String mapIdentifier) {
 		currentMapIdentifier = mapIdentifier;
-		
 		removeCurrentMapIfPresent();
 		player.reAddToWorld();
 		
@@ -167,16 +174,13 @@ public class GameMap implements EventListener, Disposable {
 		TiledMapLoader.loadMap(mapAsset);
 		
 		renderer.changeMap(map);
-		
 		TiledMapPhysicsLoader.createPhysics(map);
-		
 		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
 		
 		updateMapObjectStates();
-		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
-		
 		resetLanternUsed();
+		updateContinuousMapDamageProperties();
 	}
 	
 	private void removeCurrentMapIfPresent() {
@@ -239,6 +243,13 @@ public class GameMap implements EventListener, Disposable {
 		GlobalValuesDataHandler.getInstance().put(GLOBAL_VALUE_KEY_LANTERN_USED, false);
 	}
 	
+	private void updateContinuousMapDamageProperties() {
+		continuousMapDamage = Float.parseFloat(map.getProperties().get(GlobalMapPropertyKeys.MAP_CONTINUOUSE_DAMAGE.getKey(), "0f", String.class));
+		continuousMapDamageInterval = Float
+				.parseFloat(map.getProperties().get(GlobalMapPropertyKeys.MAP_CONTINUOUSE_DAMAGE_INTERVAL.getKey(), "0f", String.class));
+		continuousMapDamageTimeDelta = 0f;
+	}
+	
 	public void executeBeforeWorldStep() {
 		executeAnnotatedMethodsOnAllObjects(BeforeWorldStep.class);
 	}
@@ -266,7 +277,23 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	public void processPlayer(float delta) {
+		handleMapContinuousDamage(delta);
 		player.process(delta);
+	}
+	
+	private void handleMapContinuousDamage(float delta) {
+		if (continuousMapDamage > 0 && !preventContinuousMapDamageRuneCollected()) {
+			continuousMapDamageTimeDelta += delta;
+			if (continuousMapDamageTimeDelta >= continuousMapDamageInterval) {
+				continuousMapDamageTimeDelta -= continuousMapDamageInterval;
+				player.takeDamage(continuousMapDamage, AttackType.CONTINUOUS_MAP_DAMAGE);
+			}
+		}
+	}
+	
+	private boolean preventContinuousMapDamageRuneCollected() {
+		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
+		return globalValues.getAsBoolean(RuneType.KENAZ.globalValueKeyCollected);
 	}
 	
 	public void processAndRender(float delta) {
