@@ -517,7 +517,7 @@ Arrows: 25 Coins..</property>
   <object id="188" name="item.rune_raidho" x="142.08" y="343.5">
    <point/>
   </object>
-  <object id="190" name="item.rune_mannaz" x="1454.88" y="339.625">
+  <object id="190" name="item.rune_mannaz" x="143.88" y="787.625">
    <point/>
   </object>
   <object id="191" name="item.rune_othala" x="833" y="662">

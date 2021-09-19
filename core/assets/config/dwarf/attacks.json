@@ -70,6 +70,17 @@
 		pushForce: 5,
 	},
 	{
+		//reflects the magic wave attack from a totem (so it should behave similar)
+		id: reflected_magic_wave,
+		type: MAGIC_WAVE,
+		projectileType: magic_wave,
+		delay: 0,
+		duration: 0,
+		damage: 5,
+		pushForce: 150,
+		pushForceAffectedByBlock: false,
+	},
+	{
 		//dummy attack, that just blocks the attack for one second
 		id: wait,
 		type: MELEE,

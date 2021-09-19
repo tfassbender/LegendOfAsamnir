@@ -357,7 +357,7 @@
 		attackConfig: config/enemy/attack/totem.json,
 		aiConfig: config/enemy/ai/totem.json,
 		
-		health: 10,
+		health: 15,
 		movingSpeed: 0,
 		
 		imageOffsetX: 0f,

@@ -39,6 +39,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	protected float distanceTraveled;
 	protected float timeActive;
 	protected boolean attackPerformed;
+	protected boolean reflected;
 	
 	protected float damage;
 	protected float pushForce;
@@ -88,6 +89,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 			throw new IllegalStateException("A Projectile can not be restricted to be removed after a given range AND use linear damping");
 		}
 		attackPerformed = false;
+		reflected = false;
 		
 		if (typeConfig.sound != null) {
 			SoundSet soundSet = SoundManager.getInstance().loadSoundSet(SOUND_SET_PROJECTILE);
@@ -134,6 +136,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		animationRotation = rotation;
 	}
 	
+	public float getRotation() {
+		return (sprite.getRotation() + typeConfig.textureInitialRotation) % 360f;
+	}
+	
 	protected float getSpriteVectorAngleOffset() {
 		return 0;
 	}
@@ -177,6 +183,9 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		}
 		if (explosionTimeReached()) {
 			explode();
+		}
+		if (reflected) {
+			remove();
 		}
 	}
 	
@@ -237,9 +246,9 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	private void explode() {
 		Projectile explosion = ProjectileFactory.createProjectileAndAddToMap(EXPLOSION_PROJECTILE_TYPE, body.getPosition(), Vector2.Zero,
 				collisionType);
-		explosion.setDamage(explosionDamage);
-		explosion.setPushForce(explosionPushForce);
-		explosion.setPushForceAffectedByBlock(explosionPushForceAffectedByBlock);
+		explosion.damage = explosionDamage;
+		explosion.pushForce = explosionPushForce;
+		explosion.pushForceAffectedByBlock = explosionPushForceAffectedByBlock;
 		remove();
 	}
 	
@@ -269,8 +278,12 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		if (attackUserData == this) {
 			Object attackedUserData = CollisionUtil.getOtherTypeUserData(collisionType, fixtureA, fixtureB);
 			
-			if (attackedUserData instanceof Hittable) {
-				Hittable hittable = ((Hittable) attackedUserData);
+			if (attackedUserData instanceof ProjectileReflector) {
+				ProjectileReflector reflector = (ProjectileReflector) attackedUserData;
+				reflected = reflector.reflectProjectile(this);
+			}
+			if (!reflected && attackedUserData instanceof Hittable) {
+				Hittable hittable = (Hittable) attackedUserData;
 				//enemies define the force themselves; the force parameter is a factor for this self defined force
 				hittable.pushByHit(body.getPosition().cpy(), pushForce, pushForceAffectedByBlock);
 				hittable.takeDamage(damage, typeConfig.attackType);
@@ -282,7 +295,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	}
 	
 	protected boolean isAttackOver() {
-		return attackPerformed && !typeConfig.multipleHitsPossible;
+		return reflected || (attackPerformed && !typeConfig.multipleHitsPossible);
 	}
 	
 	protected void setBodyLinearDamping() {

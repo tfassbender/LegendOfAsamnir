@@ -38,6 +38,10 @@
 				}
 				ammo_empty: {
 					path: "sound/dwarf/ammo_empty.mp3"
+				},
+				reflect_projectile: {
+					path: "sound/dwarf/hit2.wav",
+					volume: 0.5,
 				}
 			}
 		},

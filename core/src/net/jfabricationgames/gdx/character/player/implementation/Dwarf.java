@@ -33,9 +33,12 @@ import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.projectile.MagicWave;
+import net.jfabricationgames.gdx.projectile.Projectile;
+import net.jfabricationgames.gdx.projectile.ProjectileReflector;
 import net.jfabricationgames.gdx.util.GameUtil;
 
-public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hittable, EventListener {
+public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hittable, EventListener, ProjectileReflector {
 	
 	private static final float MOVING_SPEED_CUTSCENE = 3.5f;
 	
@@ -44,7 +47,9 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	private static final String ATTACK_CONFIG_FILE_NAME = "config/dwarf/attacks.json";
 	
 	private static final String SOUND_AMMO_EMPTY = "ammo_empty";
+	private static final String SOUND_REFLECT_PROJECTILE = "reflect_projectile";
 	private static final String ATTACK_NAME_WAIT = "wait";
+	private static final String ATTACK_NAME_REFLECT_MAGIC_WAVE = "reflected_magic_wave";
 	private static final String RUNE_HAGALAZ_ANIMATION_NAME = "rune_hagalaz";
 	
 	protected AttackCreator attackCreator;
@@ -360,7 +365,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 	}
 	
 	private void die() {
-		if (runeCollectedAndForged()) {
+		if (resurectionRuneCollectedAndForged()) {
 			propertiesDataHandler.increaseHealthByHalf();
 			GlobalValuesDataHandler.getInstance().put(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED, false);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_USED).setStringValue(RUNE_HAGALAZ_ANIMATION_NAME));
@@ -372,10 +377,33 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Hi
 		}
 	}
 	
-	private boolean runeCollectedAndForged() {
+	private boolean resurectionRuneCollectedAndForged() {
 		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
 		return globalValues.getAsBoolean(RuneType.HAGALAZ.globalValueKeyCollected) //
 				&& globalValues.getAsBoolean(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED);
+	}
+	
+	@Override
+	public boolean reflectProjectile(Projectile projectile) {
+		if (projectile instanceof MagicWave) {
+			if (isBlocking() && reflectionRuneCollected()) {
+				Vector2 reflectedRotationVector = vectorFromAngle((projectile.getRotation() + 180f) % 360f);
+				attackCreator.startAttack(ATTACK_NAME_REFLECT_MAGIC_WAVE, reflectedRotationVector);
+				soundHandler.playSound(SOUND_REFLECT_PROJECTILE);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private Vector2 vectorFromAngle(float angleInDegrees) {
+		return new Vector2((float) Math.cos(Math.toRadians(angleInDegrees)), (float) Math.sin(Math.toRadians(angleInDegrees)));
+	}
+	
+	private boolean reflectionRuneCollected() {
+		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
+		return globalValues.getAsBoolean(RuneType.MANNAZ.globalValueKeyCollected);
 	}
 	
 	@Override
