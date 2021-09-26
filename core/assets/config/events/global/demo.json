@@ -90,7 +90,7 @@
 		}
 		executionType: CONDITIONAL_EVENT,
 		condition: {
-			conditionId: demoLevel_bothSwitchesActivated,
+			conditionId: demoLevel_allSwitchesActivated,
 			thenCase: {
 				type: EVENT,
 				eventConfig: {

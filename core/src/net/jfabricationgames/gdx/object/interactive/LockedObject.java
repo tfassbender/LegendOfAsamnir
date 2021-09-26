@@ -59,7 +59,7 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	}
 	
 	private boolean lockedByMapProperty() {
-		return mapProperties.get(MAP_PROPERTY_KEY_LOCKED, false, Boolean.class) //
+		return Boolean.parseBoolean(mapProperties.get(MAP_PROPERTY_KEY_LOCKED, "false", String.class)) //
 				|| isUnlockedByCondition();
 	}
 	
@@ -69,7 +69,7 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		}
 		
 		if (isUnlockedByCondition()) {
-			return isUnlockConditionFulfilled();
+			return isUnlockConditionMet();
 		}
 		
 		if (!keyProperties.isEmpty()) {
@@ -91,9 +91,9 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		return mapProperties.get(MAP_PROPERTY_KEY_UNLOCK_CONDITION, String.class) != null;
 	}
 	
-	private boolean isUnlockConditionFulfilled() {
+	private boolean isUnlockConditionMet() {
 		String conditionId = mapProperties.get(MAP_PROPERTY_KEY_UNLOCK_CONDITION, String.class);
-		return ConditionHandler.getInstance().isConditionFulfilled(conditionId);
+		return ConditionHandler.getInstance().isConditionMet(conditionId);
 	}
 	
 	private void showLockMessage() {

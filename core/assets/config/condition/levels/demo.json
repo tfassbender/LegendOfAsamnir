@@ -5,7 +5,7 @@
 			itemId: demoLevel_endItem
 		}
 	},
-	demoLevel_bothSwitchesActivated: {
+	demoLevel_allSwitchesActivated: {
 		conditionType: AND,
 		conditionalParameters: {
 			condition: {

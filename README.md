@@ -576,7 +576,54 @@ Interactive Objects are used to let the player interact with the map. They use a
 
 ### Locked Objects
 
-A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a `boolean` value. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/player/container/data/KeyItem.java) class.
+A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* or a *Door* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a string value that can be converted into a `boolean`. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/player/container/data/KeyItem.java) class.
+
+
+**Unlock by Condition:**
+
+Locked objects can also be configured to be unlocked (and locked) by a [condition](#conditions), that is configured in the map properties of the locked object. To lock or unlock a locked object by a [condition](#conditions), the map parameter `unlockCondition` must be set to the name of a condition. So a locked object that is configured with an unlock condition `common__rune_laguz_collected` can be unlocked when a specific rune (called laguz) is collected. The condition is to be found in the configuration file [common.json](core/assets/config/condition/common.json). The locked object will not be unlocked automatically, but the player still has to interact with the locked object to unlock it (when the condition is met).
+
+
+** Unlock by Event:**
+
+Another way to configure locked objects is to configure them to be unlocked (and locked) by [events](#events). This will cause the locked object to be locked or unlocked automatically (the player doesn't need to interact with the locked object). Therefore the locked object's map properties must be configured to set the value `unlockedByEvent` to the string value `true`. Also a `lockId` must be configured, to identify the lock from the event configuration. Then one or more [event objects](#event-objects) need to be configured to execute an event, that can lock or unlock the locked object. An example can be found in the configuration file [demo.json](core/assets/config/events/global/demo.json):
+
+```javascript
+{
+  //...
+  demoLevel_stateSwitchesActivated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demoLevel_switch_group_1,
+		}
+		executionType: CONDITIONAL_EVENT,
+		condition: {
+			conditionId: demoLevel_allSwitchesActivated,
+			thenCase: {
+				type: EVENT,
+				eventConfig: {
+					executionType: OPEN_LOCK,
+					executionParameters: {
+						lockId: demoLevel_lock_switch_group_1
+					}
+				}
+			}
+			elseCase: {
+				type: EVENT,
+				eventConfig: {
+					executionType: CLOSE_LOCK,
+					executionParameters: {
+						lockId: demoLevel_lock_switch_group_1
+					}
+				}
+			}
+		}
+	},
+  //...
+}
+```
+
+This event is configured to unlock a locked object when the [condition](#conditions) `demoLevel_allSwitchesActivated` is met (see [event objects](#event-objects) for details on event switches). The event is triggered whenever a state switch object with the map properties `eventParameter: demoLevel_switch_group_1` is triggered. The [condition](#conditions) will check for multiple switches to be activated at the same time. The condition configuration is to be found in the configuration file [demo.json](core/assets/config/condition/levels/demo.json).
 
 ### Spawn Points
 
@@ -594,9 +641,51 @@ Map properties that can be configured in the event object are:
 
 - **eventParameter:** The string parameter that will be added to the event that is fired.
 - **singleExecution:** Determines whether the event can be fired only once (on the first contact with the player). The type of the parameter is a String (that will be parsed into a boolean). The default is false.
+- **stateSwitchId:** Used to identify a state switch object in a condition.
 
 **Respawn Checkpoints:**  
 Respawn checkpoints are a special type of Event Objects. They are configured in the map, by adding an Event Object with the **eventParameter 'respawnCheckpoint'**. This event is received and handled by the [PlayableCharacter](core/src/net/jfabricationgames/gdx/character/player/PlayableCharacter.java) implementation [Dwarf](core/src/net/jfabricationgames/gdx/character/player/implementation/Dwarf.java).
+
+**State Switch Objects:**
+
+State switch objects are a special type of Event Objects. They can have two states: *active* and *inactive*. These states usually can be seen in the texture of the object. The state switch objects can execute events when the state changes (just like other event objects do, when they are triggered). In addition to the events that can be fired, the state of the switches can be checked from a [condition](#conditions). An example for a condition that uses state switches can be found in the configuration file [demo.json](core/assets/config/condition/levels/demo.json):
+
+```javascript
+{
+  //...
+  demoLevel_allSwitchesActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demoLevel_switch_1,
+				}
+			},
+			condition2: {
+				conditionType: AND,
+				conditionalParameters: {
+					condition: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demoLevel_switch_2,
+						}
+					},
+					condition2: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demoLevel_pressure_switch,
+						}
+					}
+				}
+			}
+		}
+	},
+  //...
+}
+```
+
+This configuration uses the state of three switches in a condition that is used to unlock a [locked object](#locked-objects). The condition is met when the state of all three state switch objects `demoLevel_switch_1`, `demoLevel_switch_2` and `demoLevel_pressure_switch` is set to *active*.
 
 ## Maps
 
