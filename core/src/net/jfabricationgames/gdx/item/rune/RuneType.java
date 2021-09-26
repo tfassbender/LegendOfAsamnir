@@ -43,13 +43,13 @@ public enum RuneType {
 		throw new IllegalStateException("No rune found for searched order: " + order);
 	}
 	
-	public static RuneType getByContainingName(String itemName) {
+	public static RuneType getByContainingName(String runeName) {
 		for (RuneType type : values()) {
-			if (itemName.toUpperCase().contains(type.name())) {
+			if (runeName.toUpperCase().contains(type.name())) {
 				return type;
 			}
 		}
-		throw new IllegalStateException("No rune name contained in search string: " + itemName);
+		throw new IllegalStateException("No rune name contained in search string: " + runeName);
 	}
 	
 	public final int order;

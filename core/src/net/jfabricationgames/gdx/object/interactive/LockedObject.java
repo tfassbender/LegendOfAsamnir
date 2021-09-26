@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.condition.ConditionHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
@@ -21,11 +22,12 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	private static final String MAP_PROPERTY_KEY_LOCKED = "locked";
 	private static final String MAP_PROPERTY_KEY_UNLOCKED_BY_EVENT = "unlockedByEvent";
 	private static final String MAP_PROPERTY_KEY_LOCK_ID = "lockId";
+	private static final String MAP_PROPERTY_KEY_UNLOCK_CONDITION = "unlockCondition";
 	
 	private static final String LOCK_MESSAGE_HEADER = "Locked";
 	private static final String LOCK_MESSAGE_TEXT_SIMPLE_KEY = "I'll need a key to unlock this.";
 	private static final String LOCK_MESSAGE_TEXT_SPECIAL_KEY = "I'll need a special key to unlock this.";
-	private static final String LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT = "This does not seem to be opened with a key. There must be another way.";
+	private static final String LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION = "This does not seem to be opened with a key. There must be another way.";
 	
 	private ObjectMap<String, String> keyProperties;
 	
@@ -57,7 +59,8 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	}
 	
 	private boolean lockedByMapProperty() {
-		return mapProperties.get(MAP_PROPERTY_KEY_LOCKED, false, Boolean.class);
+		return mapProperties.get(MAP_PROPERTY_KEY_LOCKED, false, Boolean.class) //
+				|| isUnlockedByCondition();
 	}
 	
 	private boolean canBeUnlocked() {
@@ -65,10 +68,16 @@ public class LockedObject extends InteractiveObject implements EventListener {
 			return false;
 		}
 		
-		CharacterItemDataHandler itemContainer = CharacterItemDataHandler.getInstance();
-		if (itemContainer.containsKey(keyProperties)) {
-			itemContainer.takeKey(keyProperties);
-			return true;
+		if (isUnlockedByCondition()) {
+			return isUnlockConditionFulfilled();
+		}
+		
+		if (!keyProperties.isEmpty()) {
+			CharacterItemDataHandler itemContainer = CharacterItemDataHandler.getInstance();
+			if (itemContainer.containsKey(keyProperties)) {
+				itemContainer.takeKey(keyProperties);
+				return true;
+			}
 		}
 		
 		return false;
@@ -78,12 +87,21 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		return Boolean.parseBoolean(mapProperties.get(MAP_PROPERTY_KEY_UNLOCKED_BY_EVENT, "false", String.class));
 	}
 	
+	private boolean isUnlockedByCondition() {
+		return mapProperties.get(MAP_PROPERTY_KEY_UNLOCK_CONDITION, String.class) != null;
+	}
+	
+	private boolean isUnlockConditionFulfilled() {
+		String conditionId = mapProperties.get(MAP_PROPERTY_KEY_UNLOCK_CONDITION, String.class);
+		return ConditionHandler.getInstance().isConditionFulfilled(conditionId);
+	}
+	
 	private void showLockMessage() {
 		OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 		String messageText;
 		
-		if (isUnlockedByEvent()) {
-			messageText = LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT;
+		if (isUnlockedByEvent() || isUnlockedByCondition()) {
+			messageText = LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION;
 		}
 		else {
 			if (KeyItemProperties.isSpecialKey(keyProperties)) {

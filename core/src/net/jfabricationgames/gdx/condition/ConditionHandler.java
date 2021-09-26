@@ -36,7 +36,7 @@ public class ConditionHandler {
 		}
 	}
 	
-	public boolean checkCondition(String conditionId) {
+	public boolean isConditionFulfilled(String conditionId) {
 		Condition condition = conditions.get(conditionId);
 		if (condition == null) {
 			throw new IllegalStateException("A condition with the id '" + conditionId

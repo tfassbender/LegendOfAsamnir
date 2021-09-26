@@ -4,5 +4,11 @@
 		parameters: {
 			atLeast: 10
 		}
+	},
+	common__rune_laguz_collected: {
+		conditionType: RUNE_COLLECTED,
+		parameters: {
+			rune: LAGUZ
+		}
 	}
 }

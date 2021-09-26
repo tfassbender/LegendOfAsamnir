@@ -211,7 +211,7 @@
 		interactiveAction: ENABLE_FAST_TRAVEL_POINT,
 	},
 	door: {
-		type: INTERACTIVE,
+		type: LOCKED,
 		
 		texture: door_open_1,
 		hitSound: wood_hit_1,
@@ -232,7 +232,7 @@
 		interactionMarkerOffsetX: 0.15f,
 		interactionMarkerOffsetY: 0.15f,
 		
-		defaultLocked: true,
+		defaultLocked: false,
 	},
 	button: {
 		type: STATE_SWITCH,

@@ -193,8 +193,12 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private boolean isMapInitialized() {
-		return items != null && itemsAboveGameObjects != null && objects != null && enemies != null && nonPlayableCharacters != null
-				&& animals != null && projectiles != null;
+		return items != null // 
+				&& itemsAboveGameObjects != null // 
+				&& objects != null //
+				&& enemies != null //
+				&& nonPlayableCharacters != null //
+				&& animals != null && projectiles != null; //
 	}
 	
 	/**

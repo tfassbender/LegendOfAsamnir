@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.condition;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
+import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 
 public enum ConditionType {
@@ -35,21 +36,21 @@ public enum ConditionType {
 	},
 	HAS_ITEM {
 		
-		private static final String PARAMETERS_KEY_ITEM_ID = "itemId";
+		private static final String PARAMETERS_ITEM_ID = "itemId";
 		
 		@Override
 		public boolean check(Condition condition) {
-			String itemId = condition.parameters.get(PARAMETERS_KEY_ITEM_ID);
+			String itemId = condition.parameters.get(PARAMETERS_ITEM_ID);
 			return CharacterItemDataHandler.getInstance().containsSpecialItem(itemId);
 		}
 	},
 	HAS_COINS {
 		
-		private static final String PARAMETERS_KEY_COINS = "atLeast";
+		private static final String PARAMETERS_COINS = "atLeast";
 		
 		@Override
 		public boolean check(Condition condition) {
-			int coinsNeeded = Integer.parseInt(condition.parameters.get(PARAMETERS_KEY_COINS));
+			int coinsNeeded = Integer.parseInt(condition.parameters.get(PARAMETERS_COINS));
 			return CharacterPropertiesDataHandler.getInstance().getCoins() >= coinsNeeded;
 		}
 	},
@@ -74,6 +75,17 @@ public enum ConditionType {
 			String expectedValue = condition.parameters.get(PARAMETER_EXPECTED_VALUE);
 			
 			return GlobalValuesDataHandler.getInstance().isValueEqual(key, expectedValue);
+		}
+	},
+	RUNE_COLLECTED {
+		
+		private static final String PARAMETER_RUNE_NAME = "rune";
+		
+		@Override
+		public boolean check(Condition condition) {
+			String runeName = condition.parameters.get(PARAMETER_RUNE_NAME);
+			RuneType rune = RuneType.getByContainingName(runeName);
+			return rune.isCollected();
 		}
 	};
 	

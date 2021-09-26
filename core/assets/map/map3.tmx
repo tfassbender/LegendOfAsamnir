@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="205">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="206">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="continuous_damage" value="1"/>
@@ -24,7 +24,10 @@
    eJztzsEJACAMADGHF3cQdxBHtEO09JPA/W8MAAAAAAAAAKgzo9U9kWBHp3siwY1e9wQAFPmfAQOd
   </data>
  </layer>
- <objectgroup id="3" name="objects" locked="1">
+ <objectgroup id="3" name="objects">
+  <properties>
+   <property name="locked" value="false"/>
+  </properties>
   <object id="1" name="item.axe" x="480" y="639">
    <point/>
   </object>
@@ -519,7 +522,7 @@ Arrows: 25 Coins..</property>
   <object id="186" name="item.rune_kenaz" x="912.583" y="621.792">
    <point/>
   </object>
-  <object id="187" name="item.rune_laguz" x="1454.92" y="306.083">
+  <object id="187" name="item.rune_laguz" x="416.011" y="1408.17">
    <point/>
   </object>
   <object id="188" name="item.rune_raidho" x="142.08" y="343.5">
@@ -550,6 +553,12 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
   <object id="198" name="enemy.totem" x="143.5" y="977.5">
+   <point/>
+  </object>
+  <object id="205" name="object.door" x="561" y="1464.67">
+   <properties>
+    <property name="unlockCondition" value="common__rune_laguz_collected"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

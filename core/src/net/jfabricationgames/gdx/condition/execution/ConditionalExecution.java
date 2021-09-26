@@ -9,7 +9,7 @@ public class ConditionalExecution {
 	public ConditionExecutable elseCase;
 	
 	public void execute() {
-		if (ConditionHandler.getInstance().checkCondition(conditionId)) {
+		if (ConditionHandler.getInstance().isConditionFulfilled(conditionId)) {
 			thenCase.execute();
 		}
 		else {
