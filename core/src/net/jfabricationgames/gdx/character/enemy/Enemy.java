@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
-import net.jfabricationgames.gdx.attack.AttackCreator;
+import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
@@ -41,7 +41,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	protected EnemyHealthBarRenderer healthBarRenderer;
 	
 	protected EnemyTypeConfig typeConfig;
-	protected AttackCreator attackCreator;
+	protected AttackHandler attackHandler;
 	
 	protected float health;
 	
@@ -59,7 +59,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		
 		readTypeConfig();
 		readMapProperties(properties);
-		initializeAttackCreator();
+		initializeAttackHandler();
 		initializeStates();
 		initializeMovingState();
 		initializeIdleState();
@@ -79,13 +79,13 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		dropTypes = ItemDropUtil.processMapProperties(mapProperties, typeConfig.drops);
 	}
 	
-	private void initializeAttackCreator() {
+	private void initializeAttackHandler() {
 		//the body is not yet created -> set a null body here and update it when it is created (see createPhysicsBody(...))
-		attackCreator = new AttackCreator(typeConfig.attackConfig, null, PhysicsCollisionType.ENEMY_ATTACK);
+		attackHandler = new AttackHandler(typeConfig.attackConfig, null, PhysicsCollisionType.ENEMY_ATTACK);
 	}
 	
 	private void initializeStates() {
-		stateMachine = new CharacterStateMachine(typeConfig.stateConfig, typeConfig.initialState, attackCreator);
+		stateMachine = new CharacterStateMachine(typeConfig.stateConfig, typeConfig.initialState, attackHandler);
 	}
 	
 	/**
@@ -100,8 +100,8 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	public void createPhysicsBody(float x, float y) {
 		super.createPhysicsBody(x, y);
 		
-		//add the body to the attackCreator, because it needed to be initialized before the body was created
-		attackCreator.setBody(body);
+		//add the body to the attack handler, because it needed to be initialised before the body was created
+		attackHandler.setBody(body);
 	}
 	
 	@Override
@@ -142,7 +142,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	@Override
 	public void act(float delta) {
 		stateMachine.updateState(delta);
-		attackCreator.handleAttacks(delta);
+		attackHandler.handleAttacks(delta);
 		
 		if (!isAlive()) {
 			if (!droppedItems) {
@@ -162,7 +162,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	public void draw(float delta, SpriteBatch batch) {
 		super.draw(delta, batch);
 		
-		attackCreator.renderAttacks(delta, batch);
+		attackHandler.renderAttacks(delta, batch);
 	}
 	
 	private boolean isAlive() {
@@ -280,6 +280,6 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	@Override
 	public void beginContact(Contact contact) {
 		super.beginContact(contact);
-		attackCreator.handleAttackDamage(contact);
+		attackHandler.handleAttackDamage(contact);
 	}
 }

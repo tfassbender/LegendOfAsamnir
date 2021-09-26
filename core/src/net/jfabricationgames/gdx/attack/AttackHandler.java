@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-public class AttackCreator {
+public class AttackHandler {
 	
 	private Body body;
 	private PhysicsCollisionType collisionType;
@@ -22,7 +22,7 @@ public class AttackCreator {
 	private Array<Attack> attacks;
 	private ArrayMap<String, AttackConfig> configs;
 	
-	public AttackCreator(String attackConfigFile, Body body, PhysicsCollisionType collisionType) {
+	public AttackHandler(String attackConfigFile, Body body, PhysicsCollisionType collisionType) {
 		this.body = body;
 		this.collisionType = collisionType;
 		attacks = new Array<>();
@@ -90,7 +90,7 @@ public class AttackCreator {
 	}
 	
 	/**
-	 * Set the body that gets the hit fixtures, because the body might not have been created when the AttackCreator was initialized.
+	 * Set the body that gets the hit fixtures, because the body might not have been created when the {@link AttackHandler} was initialised.
 	 */
 	public void setBody(Body body) {
 		this.body = body;

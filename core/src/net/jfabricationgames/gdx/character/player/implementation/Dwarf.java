@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.Game;
-import net.jfabricationgames.gdx.attack.AttackCreator;
+import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.GameDataService;
@@ -51,7 +51,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	private static final String ATTACK_NAME_REFLECT_MAGIC_WAVE = "reflected_magic_wave";
 	private static final String RUNE_HAGALAZ_ANIMATION_NAME = "rune_hagalaz";
 	
-	protected AttackCreator attackCreator;
+	protected AttackHandler attackHandler;
 	
 	protected CharacterAction action;
 	protected SpecialAction activeSpecialAction;
@@ -79,7 +79,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		
 		PhysicsWorld.getInstance().registerContactListener(this);
 		
-		attackCreator = new AttackCreator(ATTACK_CONFIG_FILE_NAME, bodyHandler.body, PhysicsCollisionType.PLAYER_ATTACK);
+		attackHandler = new AttackHandler(ATTACK_CONFIG_FILE_NAME, bodyHandler.body, PhysicsCollisionType.PLAYER_ATTACK);
 		movementHandler = new CharacterInputProcessor(this);
 		
 		EventHandler.getInstance().registerEventListener(this);
@@ -88,7 +88,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	@Override
 	public void reAddToWorld() {
 		bodyHandler.createPhysicsBody();
-		attackCreator = new AttackCreator(ATTACK_CONFIG_FILE_NAME, bodyHandler.body, PhysicsCollisionType.PLAYER_ATTACK);
+		attackHandler = new AttackHandler(ATTACK_CONFIG_FILE_NAME, bodyHandler.body, PhysicsCollisionType.PLAYER_ATTACK);
 	}
 	
 	protected boolean changeAction(CharacterAction action) {
@@ -108,7 +108,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 			soundHandler.playSound(action);
 			
 			if (action.isAttack()) {
-				attackCreator.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
+				attackHandler.startAttack(action.getAttack(), movementHandler.getMovingDirection().getNormalizedDirectionVector());
 			}
 			
 			return true;
@@ -122,10 +122,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				case BOW:
 				case BOMB:
 					ItemAmmoType ammoType = ItemAmmoType.fromSpecialAction(activeSpecialAction);
-					if (attackCreator.allAttacksExecuted()) {
+					if (attackHandler.allAttacksExecuted()) {
 						if (itemDataHandler.hasAmmo(ammoType)) {
 							itemDataHandler.decreaseAmmo(ammoType);
-							attackCreator.startAttack(ammoType.name().toLowerCase(),
+							attackHandler.startAttack(ammoType.name().toLowerCase(),
 									movementHandler.getMovingDirection().getNormalizedDirectionVector());
 							
 							if (!itemDataHandler.hasAmmo(ammoType)) {
@@ -143,14 +143,14 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					break;
 				case BOOMERANG:
 				case WAND:
-					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
+					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackHandler.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
-						attackCreator.startAttack(activeSpecialAction.name().toLowerCase(),
+						attackHandler.startAttack(activeSpecialAction.name().toLowerCase(),
 								movementHandler.getMovingDirection().getNormalizedDirectionVector());
 					}
 					break;
 				case LANTERN:
-					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackCreator.allAttacksExecuted()) {
+					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackHandler.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
 						renderer.startDarknessFade();
 						
@@ -177,7 +177,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	}
 	
 	private void delayAttacks() {
-		attackCreator.startAttack(ATTACK_NAME_WAIT, movementHandler.getMovingDirection().getNormalizedDirectionVector());
+		attackHandler.startAttack(ATTACK_NAME_WAIT, movementHandler.getMovingDirection().getNormalizedDirectionVector());
 	}
 	
 	protected boolean isAnimationFinished() {
@@ -218,7 +218,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	public void process(float delta) {
 		updateAction(delta);
 		propertiesDataHandler.updateStats(delta, action);
-		attackCreator.handleAttacks(delta);
+		attackHandler.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
 		movementHandler.move(delta);
@@ -237,7 +237,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	public void render(float delta, SpriteBatch batch) {
 		renderer.drawDwarf(batch);
 		renderer.drawAimMarker(batch);
-		attackCreator.renderAttacks(delta, batch);
+		attackHandler.renderAttacks(delta, batch);
 	}
 	
 	@Override
@@ -386,7 +386,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		if (projectile instanceof MagicWave) {
 			if (isBlocking() && reflectionRuneCollected()) {
 				Vector2 reflectedRotationVector = vectorFromAngle((projectile.getRotation() + 180f) % 360f);
-				attackCreator.startAttack(ATTACK_NAME_REFLECT_MAGIC_WAVE, reflectedRotationVector);
+				attackHandler.startAttack(ATTACK_NAME_REFLECT_MAGIC_WAVE, reflectedRotationVector);
 				soundHandler.playSound(SOUND_REFLECT_PROJECTILE);
 				return true;
 			}

@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Attack;
-import net.jfabricationgames.gdx.attack.AttackCreator;
+import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
@@ -22,17 +22,17 @@ public class CharacterState {
 	protected CharacterState followingState;
 	protected ObjectSet<CharacterState> interruptingStates;
 	
-	protected AttackCreator attackCreator;
+	protected AttackHandler attackHandler;
 	private Array<Attack> attacks;
 	
 	private Array<CharacterStateListener> stateListeners;
 	
 	private Vector2 directionToTarget;
 	
-	public CharacterState(AnimationDirector<TextureRegion> animation, CharacterStateConfig config, AttackCreator attackCreator) {
+	public CharacterState(AnimationDirector<TextureRegion> animation, CharacterStateConfig config, AttackHandler attackHandler) {
 		this.animation = animation;
 		this.config = config;
-		this.attackCreator = attackCreator;
+		this.attackHandler = attackHandler;
 		attacks = new Array<>();
 		stateListeners = new Array<>();
 	}
@@ -84,7 +84,7 @@ public class CharacterState {
 			throw new IllegalStateException("The direction for the attack has not been set. "
 					+ "Use the setAttackDirection(Vector2) method to set the direction BEFORE changing to this state.");
 		}
-		Attack attack = attackCreator.startAttack(config.attack, directionToTarget);
+		Attack attack = attackHandler.startAttack(config.attack, directionToTarget);
 		attacks.add(attack);
 	}
 	

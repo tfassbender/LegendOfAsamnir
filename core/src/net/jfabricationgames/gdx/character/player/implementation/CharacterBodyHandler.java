@@ -64,7 +64,7 @@ class CharacterBodyHandler {
 			}
 		}
 		
-		player.attackCreator.handleAttackDamage(contact);
+		player.attackHandler.handleAttackDamage(contact);
 	}
 	
 	public void preSolve(Contact contact) {

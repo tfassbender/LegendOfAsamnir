@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.ObjectSet;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
-import net.jfabricationgames.gdx.attack.AttackCreator;
+import net.jfabricationgames.gdx.attack.AttackHandler;
 
 public class CharacterStateMachine {
 	
@@ -32,12 +32,12 @@ public class CharacterStateMachine {
 	
 	private ArrayMap<String, CharacterState> states;
 	
-	private AttackCreator attackCreator;
+	private AttackHandler attackHandler;
 	
 	private String configFileName;
 	
-	public CharacterStateMachine(String stateConfigFile, String initialState, AttackCreator attackCreator) {
-		this.attackCreator = attackCreator;
+	public CharacterStateMachine(String stateConfigFile, String initialState, AttackHandler attackHandler) {
+		this.attackHandler = attackHandler;
 		animationManager = AnimationManager.getInstance();
 		
 		FileHandle stateConfigFileHandle = Gdx.files.internal(stateConfigFile);
@@ -63,7 +63,7 @@ public class CharacterStateMachine {
 	
 	private void initializeStates(Array<CharacterStateConfig> stateConfig) {
 		for (CharacterStateConfig config : stateConfig) {
-			CharacterState state = new CharacterState(animationManager.getTextureAnimationDirector(config.animation), config, attackCreator);
+			CharacterState state = new CharacterState(animationManager.getTextureAnimationDirector(config.animation), config, attackHandler);
 			states.put(config.id, state);
 		}
 		
