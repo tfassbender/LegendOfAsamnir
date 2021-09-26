@@ -41,6 +41,9 @@ task dist(type: Jar) {
     with jar
 }
 
+tasks.jar.configure {
+  exclude('**/raw_images')
+}
 
 dist.dependsOn classes
 

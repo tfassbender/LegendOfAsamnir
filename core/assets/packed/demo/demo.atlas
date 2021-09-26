@@ -122,14 +122,14 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 13
 adventurer_idle
   rotate: false
   xy: 610, 370
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 13
+  index: 1
 adventurer_idle
   rotate: false
   xy: 610, 370
@@ -787,14 +787,14 @@ armadillo_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 1
 armadillo_idle
   rotate: false
   xy: 2016, 596
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 8
 armadillo_move
   rotate: false
   xy: 2016, 596
@@ -2089,14 +2089,14 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 1
+  index: 11
 cyclops_idle
   rotate: false
   xy: 1904, 960
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 11
+  index: 1
 cyclops_attack_beam
   rotate: false
   xy: 1970, 960
@@ -3447,14 +3447,14 @@ elemental_ice_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 6
 elemental_ice_idle
   rotate: false
   xy: 1886, 490
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
+  index: 1
 elemental_ice_move
   rotate: false
   xy: 1886, 490

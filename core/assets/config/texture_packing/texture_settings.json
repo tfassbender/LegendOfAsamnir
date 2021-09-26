@@ -7,286 +7,286 @@
 				//##############################################################
 				//### dwarf
 				//##############################################################
-				dwarf,
-				dwarf/dwarf_attack_right, 
-				dwarf/dwarf_attack_jump_right, 
-				dwarf/dwarf_die_right, 
-				dwarf/dwarf_hit_right, 
-				dwarf/dwarf_shield_hit_right,
-				dwarf/dwarf_idle_right, 
-				dwarf/dwarf_jump_right, 
-				dwarf/dwarf_run_right, 
-				dwarf/dwarf_spin_right,
+				raw_images/dwarf,
+				raw_images/dwarf/dwarf_attack_right, 
+				raw_images/dwarf/dwarf_attack_jump_right, 
+				raw_images/dwarf/dwarf_die_right, 
+				raw_images/dwarf/dwarf_hit_right, 
+				raw_images/dwarf/dwarf_shield_hit_right,
+				raw_images/dwarf/dwarf_idle_right, 
+				raw_images/dwarf/dwarf_jump_right, 
+				raw_images/dwarf/dwarf_run_right, 
+				raw_images/dwarf/dwarf_spin_right,
 				
 				//##############################################################
 				//### items
 				//##############################################################
-				items,
-				items/key,
-				items/runes,
+				raw_images/items,
+				raw_images/items/key,
+				raw_images/items/runes,
 				
 				//##############################################################
 				//### interactions
 				//##############################################################
-				interaction/dialogue/exclamation,
-				interaction/dialogue/interrogation,
-				interaction/dialogue/skull,
+				raw_images/interaction/dialogue/exclamation,
+				raw_images/interaction/dialogue/interrogation,
+				raw_images/interaction/dialogue/skull,
 				
 				//##############################################################
 				//### projectiles
 				//##############################################################
-				projectiles,
-				projectiles/explosion,
+				raw_images/projectiles,
+				raw_images/projectiles/explosion,
 				
 				//##############################################################
 				//### objects
 				//##############################################################
-				objects/all,
-				objects/animated/barrel/hit,
-				objects/animated/barrel/break,
-				objects/animated/box/hit,
-				objects/animated/box/break,
-				objects/animated/chest/hit,
-				objects/animated/chest/open,
-				objects/animated/direction_board/hit,
-				objects/animated/direction_board/break,
-				objects/animated/pot/break,
-				objects/animated/pot/hit,
-				objects/animated/signboard/hit,
-				objects/animated/signboard/break,
-				objects/animated/map/idle,
-				objects/animated/map/unfold,
-				objects/animated/key_wall/key_wall_open,
-				objects/animated/door/door_open,
+				raw_images/objects/all,
+				raw_images/objects/animated/barrel/hit,
+				raw_images/objects/animated/barrel/break,
+				raw_images/objects/animated/box/hit,
+				raw_images/objects/animated/box/break,
+				raw_images/objects/animated/chest/hit,
+				raw_images/objects/animated/chest/open,
+				raw_images/objects/animated/direction_board/hit,
+				raw_images/objects/animated/direction_board/break,
+				raw_images/objects/animated/pot/break,
+				raw_images/objects/animated/pot/hit,
+				raw_images/objects/animated/signboard/hit,
+				raw_images/objects/animated/signboard/break,
+				raw_images/objects/animated/map/idle,
+				raw_images/objects/animated/map/unfold,
+				raw_images/objects/animated/key_wall/key_wall_open,
+				raw_images/objects/animated/door/door_open,
 				
 				//##############################################################
 				//### enemies
 				//##############################################################
 				
 				// bat
-				enemy/bat/bat_attack,
-				enemy/bat/bat_die,
-				enemy/bat/bat_fly,
+				raw_images/enemy/bat/bat_attack,
+				raw_images/enemy/bat/bat_die,
+				raw_images/enemy/bat/bat_fly,
 				
 				// gladiator
-				enemy/gladiator/gladiator_attack,
-				enemy/gladiator/gladiator_damage,
-				enemy/gladiator/gladiator_die,
-				enemy/gladiator/gladiator_idle,
-				enemy/gladiator/gladiator_move,
+				raw_images/enemy/gladiator/gladiator_attack,
+				raw_images/enemy/gladiator/gladiator_damage,
+				raw_images/enemy/gladiator/gladiator_die,
+				raw_images/enemy/gladiator/gladiator_idle,
+				raw_images/enemy/gladiator/gladiator_move,
 				
 				// mini_golem
-				enemy/mini_golem/mini_golem_attack,
-				enemy/mini_golem/mini_golem_damage,
-				enemy/mini_golem/mini_golem_die,
-				enemy/mini_golem/mini_golem_idle,
-				enemy/mini_golem/mini_golem_move,
+				raw_images/enemy/mini_golem/mini_golem_attack,
+				raw_images/enemy/mini_golem/mini_golem_damage,
+				raw_images/enemy/mini_golem/mini_golem_die,
+				raw_images/enemy/mini_golem/mini_golem_idle,
+				raw_images/enemy/mini_golem/mini_golem_move,
 				
 				//minotaur
-				enemy/minotaur/minotaur_attack_hit,
-				enemy/minotaur/minotaur_attack_knock,
-				enemy/minotaur/minotaur_attack_spin,
-				enemy/minotaur/minotaur_attack_stab,
-				enemy/minotaur/minotaur_damage_high,
-				enemy/minotaur/minotaur_damage_low,
-				enemy/minotaur/minotaur_die,
-				enemy/minotaur/minotaur_idle,
-				enemy/minotaur/minotaur_move,
-				enemy/minotaur/minotaur_taunt,
+				raw_images/enemy/minotaur/minotaur_attack_hit,
+				raw_images/enemy/minotaur/minotaur_attack_knock,
+				raw_images/enemy/minotaur/minotaur_attack_spin,
+				raw_images/enemy/minotaur/minotaur_attack_stab,
+				raw_images/enemy/minotaur/minotaur_damage_high,
+				raw_images/enemy/minotaur/minotaur_damage_low,
+				raw_images/enemy/minotaur/minotaur_die,
+				raw_images/enemy/minotaur/minotaur_idle,
+				raw_images/enemy/minotaur/minotaur_move,
+				raw_images/enemy/minotaur/minotaur_taunt,
 				
 				//spider
-				enemy/spider/spider_damage,
-				enemy/spider/spider_die,
-				enemy/spider/spider_emerge,
-				enemy/spider/spider_idle,
-				enemy/spider/spider_jump,
-				enemy/spider/spider_shoot,
-				enemy/spider/spider_move,
-				enemy/spider/spider_web,
+				raw_images/enemy/spider/spider_damage,
+				raw_images/enemy/spider/spider_die,
+				raw_images/enemy/spider/spider_emerge,
+				raw_images/enemy/spider/spider_idle,
+				raw_images/enemy/spider/spider_jump,
+				raw_images/enemy/spider/spider_shoot,
+				raw_images/enemy/spider/spider_move,
+				raw_images/enemy/spider/spider_web,
 				
 				//mimic_barrel
-				enemy/mimic_barrel/mimic_barrel_die,
-				enemy/mimic_barrel/mimic_barrel_idle,
-				enemy/mimic_barrel/mimic_barrel_move,
-				enemy/mimic_barrel/mimic_barrel_surprise,
-				enemy/mimic_barrel/mimic_barrel_waiting,
+				raw_images/enemy/mimic_barrel/mimic_barrel_die,
+				raw_images/enemy/mimic_barrel/mimic_barrel_idle,
+				raw_images/enemy/mimic_barrel/mimic_barrel_move,
+				raw_images/enemy/mimic_barrel/mimic_barrel_surprise,
+				raw_images/enemy/mimic_barrel/mimic_barrel_waiting,
 				
 				//mimic_barrel
-				enemy/mimic_chest/mimic_chest_die,
-				enemy/mimic_chest/mimic_chest_idle,
-				enemy/mimic_chest/mimic_chest_move,
-				enemy/mimic_chest/mimic_chest_surprise,
-				enemy/mimic_chest/mimic_chest_waiting,
+				raw_images/enemy/mimic_chest/mimic_chest_die,
+				raw_images/enemy/mimic_chest/mimic_chest_idle,
+				raw_images/enemy/mimic_chest/mimic_chest_move,
+				raw_images/enemy/mimic_chest/mimic_chest_surprise,
+				raw_images/enemy/mimic_chest/mimic_chest_waiting,
 				
 				//cobra
-				enemy/cobra/cobra_attack,
-				enemy/cobra/cobra_damage,
-				enemy/cobra/cobra_die,
-				enemy/cobra/cobra_idle,
-				enemy/cobra/cobra_move,
+				raw_images/enemy/cobra/cobra_attack,
+				raw_images/enemy/cobra/cobra_damage,
+				raw_images/enemy/cobra/cobra_die,
+				raw_images/enemy/cobra/cobra_idle,
+				raw_images/enemy/cobra/cobra_move,
 				
 				// fire elemental
-				enemy/elemental_fire/elemental_fire_attack,
-				enemy/elemental_fire/elemental_fire_damage,
-				enemy/elemental_fire/elemental_fire_die,
-				enemy/elemental_fire/elemental_fire_idle,
-				enemy/elemental_fire/elemental_fire_move,
+				raw_images/enemy/elemental_fire/elemental_fire_attack,
+				raw_images/enemy/elemental_fire/elemental_fire_damage,
+				raw_images/enemy/elemental_fire/elemental_fire_die,
+				raw_images/enemy/elemental_fire/elemental_fire_idle,
+				raw_images/enemy/elemental_fire/elemental_fire_move,
 				
 				// ice elemental
-				enemy/elemental_ice/elemental_ice_attack,
-				enemy/elemental_ice/elemental_ice_damage,
-				enemy/elemental_ice/elemental_ice_die,
-				enemy/elemental_ice/elemental_ice_idle,
-				//enemy/elemental_ice/elemental_ice_jump,
-				enemy/elemental_ice/elemental_ice_move,
-				//enemy/elemental_ice/elemental_ice_sleep,
+				raw_images/enemy/elemental_ice/elemental_ice_attack,
+				raw_images/enemy/elemental_ice/elemental_ice_damage,
+				raw_images/enemy/elemental_ice/elemental_ice_die,
+				raw_images/enemy/elemental_ice/elemental_ice_idle,
+				//raw_images/enemy/elemental_ice/elemental_ice_jump,
+				raw_images/enemy/elemental_ice/elemental_ice_move,
+				//raw_images/enemy/elemental_ice/elemental_ice_sleep,
 				
 				// imp
-				enemy/imp/imp_attack,
-				enemy/imp/imp_damage,
-				enemy/imp/imp_die,
-				enemy/imp/imp_fire,
-				enemy/imp/imp_idle,
-				enemy/imp/imp_move,
+				raw_images/enemy/imp/imp_attack,
+				raw_images/enemy/imp/imp_damage,
+				raw_images/enemy/imp/imp_die,
+				raw_images/enemy/imp/imp_fire,
+				raw_images/enemy/imp/imp_idle,
+				raw_images/enemy/imp/imp_move,
 				
 				// cyclops
-				enemy/cyclops/cyclops_attack_beam,
-				enemy/cyclops/cyclops_beam,
-				enemy/cyclops/cyclops_attack_stomp,
-				enemy/cyclops/cyclops_attack_throw,
-				enemy/cyclops/cyclops_damage_high,
-				enemy/cyclops/cyclops_damage_low,
-				enemy/cyclops/cyclops_defense,
-				enemy/cyclops/cyclops_die,
-				enemy/cyclops/cyclops_idle,
-				enemy/cyclops/cyclops_move,
+				raw_images/enemy/cyclops/cyclops_attack_beam,
+				raw_images/enemy/cyclops/cyclops_beam,
+				raw_images/enemy/cyclops/cyclops_attack_stomp,
+				raw_images/enemy/cyclops/cyclops_attack_throw,
+				raw_images/enemy/cyclops/cyclops_damage_high,
+				raw_images/enemy/cyclops/cyclops_damage_low,
+				raw_images/enemy/cyclops/cyclops_defense,
+				raw_images/enemy/cyclops/cyclops_die,
+				raw_images/enemy/cyclops/cyclops_idle,
+				raw_images/enemy/cyclops/cyclops_move,
 				
 				// totem
-				enemy/totem/totem_appear,
-				enemy/totem/totem_damage,
-				enemy/totem/totem_die,
-				enemy/totem/totem_idle,
+				raw_images/enemy/totem/totem_appear,
+				raw_images/enemy/totem/totem_damage,
+				raw_images/enemy/totem/totem_die,
+				raw_images/enemy/totem/totem_idle,
 				
 				//##############################################################
 				//### NPCs
 				//##############################################################
 				
 				// adventurer
-				npc/adventurer/adventurer_attack,
-				npc/adventurer/adventurer_attack_2,
-				npc/adventurer/adventurer_attack_3,
-				npc/adventurer/adventurer_damage,
-				npc/adventurer/adventurer_die,
-				npc/adventurer/adventurer_idle,
-				npc/adventurer/adventurer_jump,
-				npc/adventurer/adventurer_move,
+				raw_images/npc/adventurer/adventurer_attack,
+				raw_images/npc/adventurer/adventurer_attack_2,
+				raw_images/npc/adventurer/adventurer_attack_3,
+				raw_images/npc/adventurer/adventurer_damage,
+				raw_images/npc/adventurer/adventurer_die,
+				raw_images/npc/adventurer/adventurer_idle,
+				raw_images/npc/adventurer/adventurer_jump,
+				raw_images/npc/adventurer/adventurer_move,
 				
 				// adventurer female
-				npc/adventurer_female/adventurer_female_attack,
-				npc/adventurer_female/adventurer_female_attack_2,
-				npc/adventurer_female/adventurer_female_damage,
-				npc/adventurer_female/adventurer_female_die,
-				npc/adventurer_female/adventurer_female_idle,
-				npc/adventurer_female/adventurer_female_move,
+				raw_images/npc/adventurer_female/adventurer_female_attack,
+				raw_images/npc/adventurer_female/adventurer_female_attack_2,
+				raw_images/npc/adventurer_female/adventurer_female_damage,
+				raw_images/npc/adventurer_female/adventurer_female_die,
+				raw_images/npc/adventurer_female/adventurer_female_idle,
+				raw_images/npc/adventurer_female/adventurer_female_move,
 				
 				//##############################################################
 				//### Animals
 				//##############################################################
 				
 				//armadillo
-				animals/armadillo/armadillo_curl,
-				animals/armadillo/armadillo_idle,
-				animals/armadillo/armadillo_move,
+				raw_images/animals/armadillo/armadillo_curl,
+				raw_images/animals/armadillo/armadillo_idle,
+				raw_images/animals/armadillo/armadillo_move,
 				
 				//cat
-				animals/cat/cat_hiss,
-				animals/cat/cat_idle,
-				animals/cat/cat_idle_2,
-				animals/cat/cat_jump,
-				animals/cat/cat_lick,
-				animals/cat/cat_paw,
-				animals/cat/cat_paw_2,
-				animals/cat/cat_run,
-				animals/cat/cat_sleep,
-				animals/cat/cat_walk,
+				raw_images/animals/cat/cat_hiss,
+				raw_images/animals/cat/cat_idle,
+				raw_images/animals/cat/cat_idle_2,
+				raw_images/animals/cat/cat_jump,
+				raw_images/animals/cat/cat_lick,
+				raw_images/animals/cat/cat_paw,
+				raw_images/animals/cat/cat_paw_2,
+				raw_images/animals/cat/cat_run,
+				raw_images/animals/cat/cat_sleep,
+				raw_images/animals/cat/cat_walk,
 				
 				//crab
-				animals/crab/crab_idle,
-				animals/crab/crab_move,
+				raw_images/animals/crab/crab_idle,
+				raw_images/animals/crab/crab_move,
 				
 				//dragonfly
-				animals/dragonfly/dragonfly_idle,
-				animals/dragonfly/dragonfly_move,
+				raw_images/animals/dragonfly/dragonfly_idle,
+				raw_images/animals/dragonfly/dragonfly_move,
 				
 				//fox
-				animals/fox/fox_idle,
-				animals/fox/fox_idle_2,
-				animals/fox/fox_leap,
-				animals/fox/fox_move,
-				animals/fox/fox_sleep,
+				raw_images/animals/fox/fox_idle,
+				raw_images/animals/fox/fox_idle_2,
+				raw_images/animals/fox/fox_leap,
+				raw_images/animals/fox/fox_move,
+				raw_images/animals/fox/fox_sleep,
 				
 				//hedgehog
-				animals/hedgehog/hedgehog_idle,
-				animals/hedgehog/hedgehog_move,
+				raw_images/animals/hedgehog/hedgehog_idle,
+				raw_images/animals/hedgehog/hedgehog_move,
 				
 				//pig
-				animals/pig/pig_idle,
-				animals/pig/pig_move,
-				animals/pig/pig_sleep,
+				raw_images/animals/pig/pig_idle,
+				raw_images/animals/pig/pig_move,
+				raw_images/animals/pig/pig_sleep,
 				
 				//squirrel
-				animals/squirrel/squirrel_dig,
-				animals/squirrel/squirrel_eat,
-				animals/squirrel/squirrel_idle,
-				animals/squirrel/squirrel_idle_2,
-				animals/squirrel/squirrel_move,
+				raw_images/animals/squirrel/squirrel_dig,
+				raw_images/animals/squirrel/squirrel_eat,
+				raw_images/animals/squirrel/squirrel_idle,
+				raw_images/animals/squirrel/squirrel_idle_2,
+				raw_images/animals/squirrel/squirrel_move,
 				
 				//twig blight
-				animals/twig_blight/twig_blight_idle,
-				animals/twig_blight/twig_blight_move,
+				raw_images/animals/twig_blight/twig_blight_idle,
+				raw_images/animals/twig_blight/twig_blight_move,
 			]
 		},
 		menu: {
 			outputDir: packed/menu,
 			atlasName: menu,
 			textureDirs: [
-				menu,
-				menu/items,
-				menu/buttons,
-				menu/background/big_banner,
-				menu/background/green_board,
-				menu/background/inventory,
-				menu/background/small_banner,
-				menu/background/yellow_board,
-				menu/background/yellow_paper,
+				raw_images/menu/,
+				raw_images/menu//items,
+				raw_images/menu//buttons,
+				raw_images/menu//background/big_banner,
+				raw_images/menu//background/green_board,
+				raw_images/menu//background/inventory,
+				raw_images/menu//background/small_banner,
+				raw_images/menu//background/yellow_board,
+				raw_images/menu//background/yellow_paper,
 				
-				dwarf/dwarf_run_right,
-				dwarf/dwarf_idle_right,
-				dwarf/dwarf_attack_jump_right,
-				enemy/minotaur/minotaur_move,
-				enemy/minotaur/minotaur_die,
+				raw_images/dwarf/dwarf_run_right,
+				raw_images/dwarf/dwarf_idle_right,
+				raw_images/dwarf/dwarf_attack_jump_right,
+				raw_images/enemy/minotaur/minotaur_move,
+				raw_images/enemy/minotaur/minotaur_die,
 				
 				//runes
-				items/runes,
+				raw_images/items/runes,
 				
 				//mini maps
-				map/mini_maps,
+				raw_images/map/mini_maps,
 				
 				//map texture
-				objects/animated/map/idle,
-				objects/animated/map/unfold,
+				raw_images/objects/animated/map/idle,
+				raw_images/objects/animated/map/unfold,
 			]
 		},
 		loading_screen: {
 			outputDir: packed/loading_screen,
 			atlasName: loading_screen
 			textureDirs: [
-				menu/loading_screen,
+				raw_images/menu/loading_screen,
 				
-				menu/background/big_banner,
-				menu/background/yellow_board,
+				raw_images/menu/background/big_banner,
+				raw_images/menu/background/yellow_board,
 				
-				dwarf/dwarf_run_right,
+				raw_images/dwarf/dwarf_run_right,
 			]
 		}
 	}
