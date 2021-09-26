@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -101,7 +100,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 			int itemCosts = ITEM_COSTS.get(selectedItemIndex);
 			
 			if (itemName != null && itemCosts > 0) {
-				if (runeCollected()) {
+				if (itemsRuneCollected()) {
 					if (player.getCoins() >= itemCosts) {
 						playMenuSound(SOUND_BUY_ITEM);
 						fireBuyItemEvent(itemName, itemCosts);
@@ -118,8 +117,8 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		}
 	}
 	
-	private boolean runeCollected() {
-		return GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.GEBO.globalValueKeyCollected);
+	private boolean itemsRuneCollected() {
+		return RuneType.GEBO.isCollected();
 	}
 	
 	private void fireBuyItemEvent(String itemName, int itemCosts) {

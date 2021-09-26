@@ -378,8 +378,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	private boolean resurectionRuneCollectedAndForged() {
 		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
-		return globalValues.getAsBoolean(RuneType.HAGALAZ.globalValueKeyCollected) //
-				&& globalValues.getAsBoolean(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED);
+		return RuneType.HAGALAZ.isCollected() && globalValues.getAsBoolean(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED);
 	}
 	
 	@Override
@@ -401,8 +400,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	}
 	
 	private boolean reflectionRuneCollected() {
-		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
-		return globalValues.getAsBoolean(RuneType.MANNAZ.globalValueKeyCollected);
+		return RuneType.MANNAZ.isCollected();
 	}
 	
 	@Override

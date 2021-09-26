@@ -25,9 +25,8 @@ public class RuneSubMenu extends ItemSubMenu {
 	@Override
 	public void updateStateAfterMenuShown() {
 		runeFound = new boolean[RuneType.values().length];
-		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
 		for (RuneType rune : RuneType.values()) {
-			runeFound[rune.order] = globalValues.getAsBoolean(rune.globalValueKeyCollected);
+			runeFound[rune.order] = rune.isCollected();
 		}
 		
 		runeHagalazForged = GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED);

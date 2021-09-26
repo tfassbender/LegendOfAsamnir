@@ -181,6 +181,7 @@ public class GameMap implements EventListener, Disposable {
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
 		resetLanternUsed();
 		updateContinuousMapDamageProperties();
+		updateRemovedObjects();
 	}
 	
 	private void removeCurrentMapIfPresent() {
@@ -250,6 +251,13 @@ public class GameMap implements EventListener, Disposable {
 		continuousMapDamageTimeDelta = 0f;
 	}
 	
+	private void updateRemovedObjects() {
+		if (RuneType.ALGIZ.isCollected()) {
+			// execute the picked up method again, to remove all objects that block invisible ways
+			RuneType.ALGIZ.runeItemPickedUp();
+		}
+	}
+	
 	public void executeBeforeWorldStep() {
 		executeAnnotatedMethodsOnAllObjects(BeforeWorldStep.class);
 	}
@@ -292,13 +300,12 @@ public class GameMap implements EventListener, Disposable {
 	}
 	
 	private boolean preventContinuousMapDamageRuneCollected() {
-		GlobalValuesDataHandler globalValues = GlobalValuesDataHandler.getInstance();
-		return globalValues.getAsBoolean(RuneType.KENAZ.globalValueKeyCollected);
+		return RuneType.KENAZ.isCollected();
 	}
 	
 	public void processAndRender(float delta) {
 		renderer.updateCamera();
-		renderer.renderBackground();
+		renderer.renderBackground(delta);
 		processAndRenderGameObject(delta);
 		renderer.renderAbovePlayer();
 		renderer.renderShadows();
@@ -349,6 +356,10 @@ public class GameMap implements EventListener, Disposable {
 		items.removeValue(item, false);
 		itemsAboveGameObjects.removeValue(item, false);
 		removePhysicsBody(body);
+	}
+	
+	private void removePhysicsBody(Body body) {
+		PhysicsWorld.getInstance().removeBodyWhenPossible(body);
 	}
 	
 	public void addObject(GameObject object) {
@@ -415,8 +426,12 @@ public class GameMap implements EventListener, Disposable {
 		removePhysicsBody(body);
 	}
 	
-	private void removePhysicsBody(Body body) {
-		PhysicsWorld.getInstance().removeBodyWhenPossible(body);
+	public void removePhysicsObjectsWithType(TiledMapObjectType type) {
+		PhysicsWorld world = PhysicsWorld.getInstance();
+		Array<Body> bodies = world.findBodiesWithType(type);
+		for (Body body : bodies) {
+			world.removeBodyWhenPossible(body);
+		}
 	}
 	
 	public MapProperties getGlobalMapProperties() {

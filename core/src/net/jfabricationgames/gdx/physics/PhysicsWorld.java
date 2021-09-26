@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.physics;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import net.jfabricationgames.gdx.map.TiledMapObjectType;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 /**
@@ -201,5 +204,21 @@ public class PhysicsWorld implements ContactListener {
 				world.destroyBody(body);
 			}
 		}
+	}
+	
+	public Array<Body> findBodiesWithType(TiledMapObjectType type) {
+		Array<Body> bodies = new Array<>();
+		world.getBodies(bodies);// getBodies method will add the bodies to the parameter list as a side-effect
+		Iterator<Body> iter = bodies.iterator();
+		while (iter.hasNext()) {
+			Body body = iter.next();
+			
+			// check with != because type is an enum-constant
+			if (body.getUserData() != type) {
+				iter.remove();
+			}
+		}
+		
+		return bodies;
 	}
 }

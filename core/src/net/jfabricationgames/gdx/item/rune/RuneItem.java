@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemTypeConfig;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
@@ -23,10 +22,6 @@ public class RuneItem extends Item {
 	@Override
 	public void pickUp() {
 		super.pickUp();
-		GlobalValuesDataHandler.getInstance().put(type.globalValueKeyCollected, true);
-		
-		if (type == RuneType.HAGALAZ) {
-			GlobalValuesDataHandler.getInstance().put(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED, true);
-		}
+		type.runeItemPickedUp();
 	}
 }

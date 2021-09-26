@@ -6,7 +6,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -78,7 +77,7 @@ public class StateSwitchObject extends InteractiveObject {
 	}
 	
 	private boolean runeCollected() {
-		return GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.ANSUZ.globalValueKeyCollected);
+		return RuneType.ANSUZ.isCollected();
 	}
 	
 	private void updateSprite() {

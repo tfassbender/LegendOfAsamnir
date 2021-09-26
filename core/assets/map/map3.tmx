@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="199">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="205">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="continuous_damage" value="1"/>
   <property name="continuous_damage_interval" value="2"/>
+  <property name="invisible_paths_layer" value="[2]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_3.json"/>
-  <property name="terrain_layers" value="[2]"/>
+  <property name="terrain_layers" value=""/>
  </properties>
  <tileset firstgid="1" source="tileset/rpg_nature_tileset_small.tsx"/>
  <layer id="1" name="background" width="50" height="50" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmUtOwzAQhuc+tJwhUJ47RFVBIc2qKqhFgm7b8/QQ3I7pwpIV2eOJ4zyM/sW3++XxF8eOY0+IaAJAh9wyd5lwL3i8MReZUCo8ZsxuYG4SeLww04FZDOxRMFcOnplfi7knd92Rh69fPpaeuhvm0mLtyZnaqT1C7WmBBzzgAQ94wMPm/J0+KDgO7LEleT9Xf85a+vYIcYJHrx4FyfvCXN6rUHsfzFMEnyPzSA084AEPeMADHvCAx3/3CP1HpeZLqGufwedy3u7CHiONxys1O5uOwZyrFw2yTT3GNA98WY3HA/MT4DEDDylj+G7pNhYPrZvPtQ+PFcn3ujbmrlqTP2erWt8067pZi2PmeUnuvtbv2KtaXrqDN9l3ilvb23rY41SRe+xLRxsSMWv70lEv5LFyPEeJph5tkTw089THPkEbMfUA6JI/byEWOA==
+   eJztmU1OwzAQRuc+FM4Q/mGHQBUU0qwQIECCbul5eojejqmEJSvyjCeOk9ToW7zdxDPPjh3HnhHRDIABOWcuCuFS8XhkDgqhNnicMh8Tc5bB4545nJj5xB4Vcxzgltl63AlxJwN5SHVJLIS8L8yRx7MQ53Ln9oi1ZwUe8IAHPOABD5/dd/rHwHpij3fS93PtfrYytkeMDTxG9ahI3xeW8l7F2ntlbhJ42zOP3MADHvCABzzgAQ94/HeP2H9Ubj6VvP4ZfCnn7SH8MbJ4PFC3s+kU3Ll61SG2q8c+zQMp1uJxxXxHuC7AQ4txfPV0G9PDv7/V7kc1N8l1DI/lX91+XSvhGedq8dzFNq3aLOu6W4tT5nlN4Vrbd+wNyWPYxsU+Udra3tfDH6eGwmNfB9rQSFnbF4F8MY9loB81unr0RfOwzFOJVYY2UvIBMCS/vOAXsA==
   </data>
  </layer>
  <layer id="2" name="terrain" width="50" height="50" locked="1">
@@ -18,7 +19,12 @@
    eJztmQ0OgyAMhfFnV5juwruOO+I0kYQ11ZYCa936JcTENBsPyqNgCI7jlDBpd+CP8bE/plvbsrYhebfs769Evz9n8OyR2DNmOqQptXS0ZgznY3UVHSmYT1jTIfWyGjpq+uiYEZvmWamOKdTfDyS/J9WRM26QR2Z8x2jW1gfGndk2rOoY6JAPSnS03gOf+39wW9onK/MhxXW04xXy8irNL0s6OL5L+bEFuL575sdX4caMg94Ka4ecWoKK1TrD1a6vsFyQ1EFxPLhz1ZqjfZaaN+7a0D7DY/2U5EZtL9C+D9K8Y8ByAq6HdF/8JnBesD7EM0zMCegD2jlPwc09ac5b108B59c6uecyx9Fi81NJvmrvl7XAdMR3VD25+ar2twGIpD/QV39lbh0+8a6Ag1YtyCHeE2BaSvJaa01wah7OfPiadpx2vAFKqw6l
   </data>
  </layer>
- <objectgroup id="3" name="objects">
+ <layer id="5" name="invisible_paths_background" width="50" height="50" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJACAMADGHF3cQdxBHtEO09JPA/W8MAAAAAAAAAKgzo9U9kWBHp3siwY1e9wQAFPmfAQOd
+  </data>
+ </layer>
+ <objectgroup id="3" name="objects" locked="1">
   <object id="1" name="item.axe" x="480" y="639">
    <point/>
   </object>
@@ -498,7 +504,7 @@ Arrows: 25 Coins..</property>
     <property name="eventParameter" value="go_to_map_6"/>
    </properties>
   </object>
-  <object id="181" name="item.rune_algiz" x="1455.33" y="138.667">
+  <object id="181" name="item.rune_algiz" x="207.33" y="1199.92">
    <point/>
   </object>
   <object id="182" name="item.rune_ansuz" x="657.33" y="1209">
@@ -684,23 +690,17 @@ Arrows: 25 Coins..</property>
    </properties>
    <polygon points="0,0 0.25,-156 -28.75,-156 -28,-0.5"/>
   </object>
-  <object id="44" x="209.75" y="1358.25">
+  <object id="45" x="210.25" y="1453.63">
    <properties>
     <property name="material" value="water"/>
    </properties>
-   <polygon points="0,0 0.5,-92.75 -31.75,-92.75 -31.75,-1.25"/>
-  </object>
-  <object id="45" x="210.25" y="1453.5">
-   <properties>
-    <property name="material" value="water"/>
-   </properties>
-   <polygon points="0,0 91.25,0.25 90.25,-188.25 0,-188"/>
+   <polygon points="0,0 91.25,0.122237 90.25,-92.0444 0,-91.9222"/>
   </object>
   <object id="46" x="301.25" y="1389.5">
    <properties>
     <property name="material" value="water"/>
    </properties>
-   <polygon points="0,0 68.75,0 68.25,-123.5 0,-124"/>
+   <polygon points="0,0 68.75,0 68.25,-27.2231 0,-27.3333"/>
   </object>
   <object id="47" x="864" y="256" width="32" height="352">
    <properties>
@@ -732,5 +732,13 @@ Arrows: 25 Coins..</property>
     <property name="material" value="stone"/>
    </properties>
   </object>
+  <object id="199" x="210.667" y="1266.83" width="26.6667" height="94.1667"/>
+  <object id="200" x="337.667" y="1265.92" width="32" height="95.75"/>
+  <object id="201" x="304.667" y="1266.08" width="33" height="58.9167"/>
+  <object id="202" x="237.667" y="1267" width="34.3333" height="58.3333"/>
+  <object id="203" x="179" y="1266.75" width="31.5" height="91.5"/>
+ </objectgroup>
+ <objectgroup id="6" name="invisible_paths_blocker_physics" locked="1">
+  <object id="204" x="272.5" y="1267" width="32" height="58.5"/>
  </objectgroup>
 </map>

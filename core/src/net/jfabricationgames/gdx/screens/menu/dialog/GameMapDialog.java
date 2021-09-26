@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
-import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -228,7 +227,7 @@ public class GameMapDialog extends InGameMenuDialog {
 	}
 	
 	private boolean runeCollected() {
-		return GlobalValuesDataHandler.getInstance().getAsBoolean(RuneType.RAIDHO.globalValueKeyCollected);
+		return RuneType.RAIDHO.isCollected();
 	}
 	
 	//****************************************************************

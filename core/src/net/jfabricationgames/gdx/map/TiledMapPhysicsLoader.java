@@ -43,6 +43,7 @@ class TiledMapPhysicsLoader {
 	
 	private static final String LAYER_NAME_SOLID_OBJECT_PHYSICS = "physics";
 	private static final String LAYER_NAME_GROUND_PHYSICS = "ground_physics";
+	private static final String LAYER_NAME_INVISIBLE_PATH_BLOCKER = "invisible_paths_blocker_physics";
 	
 	private static final String MAP_PROPERTY_KEY_MATERIAL = "material";
 	private static final String MAP_PROPERTY_KEY_GROUND_TYPE = "ground";
@@ -73,7 +74,7 @@ class TiledMapPhysicsLoader {
 	
 	/**
 	 * @param unitsPerPixel
-	 *        conversion ratio from pixel units to box2D metres.
+	 *        conversion ratio from pixel units to box2D meters.
 	 */
 	private TiledMapPhysicsLoader(float unitsPerPixel) {
 		this.worldUnitsPerPixel = unitsPerPixel;
@@ -87,18 +88,18 @@ class TiledMapPhysicsLoader {
 	private void createPhysicsFromMap(Map map) {
 		createPhysics(map, LAYER_NAME_SOLID_OBJECT_PHYSICS, this::createSolidObjectPhysics);
 		createPhysics(map, LAYER_NAME_GROUND_PHYSICS, this::createGroundPhysics);
+		createPhysics(map, LAYER_NAME_INVISIBLE_PATH_BLOCKER, this::createInvisiblePathBlockerObjectPhysics);
 	}
 	
 	private void createPhysics(Map map, String layerName, PhysicsCreationMethod physicsCreationMethod) {
 		MapLayer layer = map.getLayers().get(layerName);
 		
 		if (layer == null) {
-			Gdx.app.log(getClass().getSimpleName(), "layer " + layerName + " does not exist. Skipping.");
+			Gdx.app.debug(getClass().getSimpleName(), "layer " + layerName + " does not exist. Skipping.");
 			return;
 		}
 		
 		for (MapObject object : layer.getObjects()) {
-			
 			if (object instanceof TextureMapObject) {
 				continue;
 			}
@@ -130,6 +131,14 @@ class TiledMapPhysicsLoader {
 	}
 	
 	private void createSolidObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
+		createTypedObjectPhysics(object, shape, bodyDef, TiledMapObjectType.SOLID_OBJECT);
+	}
+	
+	private void createInvisiblePathBlockerObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
+		createTypedObjectPhysics(object, shape, bodyDef, TiledMapObjectType.INVISIBLE_PATH_BLOCKER);
+	}
+	
+	private void createTypedObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef, TiledMapObjectType type) {
 		MapProperties properties = object.getProperties();
 		String material = properties.get(MAP_PROPERTY_KEY_MATERIAL, String.class);
 		FixtureDef fixtureDef = null;
@@ -145,6 +154,7 @@ class TiledMapPhysicsLoader {
 		
 		Body body = PhysicsBodyCreator.createBody(bodyDef);
 		body.createFixture(fixtureDef);
+		body.setUserData(type);
 		
 		fixtureDef.shape = null;
 		shape.dispose();

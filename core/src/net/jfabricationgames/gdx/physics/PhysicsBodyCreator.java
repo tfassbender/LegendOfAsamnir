@@ -29,6 +29,7 @@ public class PhysicsBodyCreator {
 		
 		return body;
 	}
+	
 	public static Fixture addFixture(PhysicsBodyProperties properties) {
 		switch (properties.physicsBodyShape) {
 			case CIRCLE:
@@ -51,6 +52,7 @@ public class PhysicsBodyCreator {
 		
 		return body;
 	}
+	
 	public static Fixture addOctagonFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
 		shape.set(new Vector2[] {new Vector2(-0.5f * properties.width, -0.4f * properties.height),
@@ -75,6 +77,7 @@ public class PhysicsBodyCreator {
 		
 		return body;
 	}
+	
 	public static Fixture addCircularFixture(PhysicsBodyProperties properties) {
 		CircleShape shape = new CircleShape();
 		shape.setRadius(properties.radius);
@@ -96,6 +99,7 @@ public class PhysicsBodyCreator {
 		
 		return body;
 	}
+	
 	public static Fixture addRectangularFixture(PhysicsBodyProperties properties) {
 		PolygonShape shape = new PolygonShape();
 		if (properties.fixturePosition != null) {
