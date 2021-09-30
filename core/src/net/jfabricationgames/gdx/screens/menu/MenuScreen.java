@@ -40,7 +40,7 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 		assetManager.loadGroup(getAssetGroupName());
 		assetManager.finishLoading();
 	}
-
+	
 	protected String getAssetGroupName() {
 		return ASSET_GROUP_NAME;
 	}

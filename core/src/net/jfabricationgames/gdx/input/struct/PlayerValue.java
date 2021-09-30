@@ -1,12 +1,12 @@
 package net.jfabricationgames.gdx.input.struct;
 
-import net.jfabricationgames.gdx.input.InputContext;
-
 /**
  * A value from the controller of a specific player.
  * The value can be a string (e.g. for pov directions) or an integer (e.g. for button codes).
  */
 public class PlayerValue {
+	
+	public static final int CONTROLLER_ANY_PLAYER = -1;
 	
 	public int player;
 	public String value;
@@ -30,7 +30,7 @@ public class PlayerValue {
 		if (getClass() != obj.getClass())
 			return false;
 		PlayerValue other = (PlayerValue) obj;
-		if (player != other.player && player != InputContext.CONTROLLER_ANY_PLAYER && other.player != InputContext.CONTROLLER_ANY_PLAYER)
+		if (player != other.player && player != CONTROLLER_ANY_PLAYER && other.player != CONTROLLER_ANY_PLAYER)
 			// if one of the players is CONTROLLER_ANY_PLAYER consider them as equal
 			return false;
 		if (value == null) {

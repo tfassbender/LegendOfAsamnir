@@ -20,14 +20,14 @@ public class InputProfile implements InputProcessor, ControllerListener {
 	/** Can be changed (before the XML-profile is loaded) if higher or lower dead zones for the analog sticks are needed */
 	public static float CONTROLLER_AXIS_DEAD_ZONE = 0.1f;
 	
-	private ArrayMap<String, InputContext> contexts;
+	private ArrayMap<String, InputContext> contextsMap;
 	private InputContext context;
 	
 	public InputProfile(FileHandle handle, InputMultiplexer inputMultiplexer) {
 		inputMultiplexer.addProcessor(this);
 		Controllers.addListener(this);
 		
-		contexts = new ArrayMap<String, InputContext>();
+		contextsMap = new ArrayMap<String, InputContext>();
 		context = null;
 		
 		try {
@@ -42,8 +42,9 @@ public class InputProfile implements InputProcessor, ControllerListener {
 			for (int i = 0; i < numContexts; ++i) {
 				Element contextElement = root.getChild(i);
 				InputContext context = new InputContext();
-				context.load(contextElement);
-				contexts.put(context.getName(), context);
+				InputContextLoader loader = new InputContextLoader(context);
+				loader.load(contextElement);
+				contextsMap.put(context.getName(), context);
 			}
 		}
 		catch (UnsupportedEncodingException e) {
@@ -52,7 +53,7 @@ public class InputProfile implements InputProcessor, ControllerListener {
 	}
 	
 	public void setContext(String contextName) {
-		context = contexts.get(contextName);
+		context = contextsMap.get(contextName);
 	}
 	
 	public InputContext getContext() {
@@ -60,7 +61,7 @@ public class InputProfile implements InputProcessor, ControllerListener {
 	}
 	
 	public InputContext getContextByName(String name) {
-		return contexts.get(name);
+		return contextsMap.get(name);
 	}
 	
 	@Override
@@ -145,7 +146,7 @@ public class InputProfile implements InputProcessor, ControllerListener {
 	
 	@Override
 	public boolean axisMoved(Controller controller, int axisCode, float value) {
-		if (context != null && Math.abs(value) > CONTROLLER_AXIS_DEAD_ZONE) {
+		if (context != null && Math.abs(value) > InputProfile.CONTROLLER_AXIS_DEAD_ZONE) {
 			return context.controllerAxisMoved(controller, axisCode, value);
 		}
 		return false;

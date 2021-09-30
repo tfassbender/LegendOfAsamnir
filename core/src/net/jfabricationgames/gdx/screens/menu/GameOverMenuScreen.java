@@ -115,7 +115,7 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	}
 	
 	@Override
-	protected void setFocusTo(String stateName, String leavingState) {
+	public void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
 		switch (stateName) {
 			case "button_restartGame":

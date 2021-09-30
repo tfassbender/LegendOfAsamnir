@@ -2,12 +2,12 @@ package net.jfabricationgames.gdx.input.struct;
 
 import java.util.Objects;
 
-import net.jfabricationgames.gdx.input.InputContext;
-
 /**
  * An axis on a specific controller.
  */
 public class PlayerAxis {
+	
+	public static final int CONTROLLER_ANY_PLAYER = -1;
 	
 	public int axisCode;
 	public int player;
@@ -34,7 +34,7 @@ public class PlayerAxis {
 		if (getClass() != obj.getClass())
 			return false;
 		PlayerAxis other = (PlayerAxis) obj;
-		if (player != other.player && player != InputContext.CONTROLLER_ANY_PLAYER && other.player != InputContext.CONTROLLER_ANY_PLAYER)
+		if (player != other.player && player != CONTROLLER_ANY_PLAYER && other.player != CONTROLLER_ANY_PLAYER)
 			// if one of the players is CONTROLLER_ANY_PLAYER consider them as equal
 			return false;
 		return axisCode == other.axisCode;

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.XmlReader.Element;
 
 import net.jfabricationgames.gdx.input.InputActionListener.Parameters;
 import net.jfabricationgames.gdx.input.InputActionListener.Type;
@@ -59,24 +58,6 @@ public class InputContext {
 		controllerAxisStates = new ArrayMap<>();
 		controllerAxisActions = new ArrayMap<>();
 		namedAxes = new ArrayMap<>();
-	}
-	
-	protected void load(Element contextRoot) {
-		clearInputMaps();
-		new InputContextLoader(this).load(contextRoot);
-	}
-	
-	private void clearInputMaps() {
-		keyActions.clear();
-		keyStates.clear();
-		buttonStates.clear();
-		buttonActions.clear();
-		handledEvents.clear();
-		controllerButtonStates.clear();
-		controllerButtonActions.clear();
-		controllerAxisStates.clear();
-		controllerAxisActions.clear();
-		namedAxes.clear();
 	}
 	
 	public String getName() {
@@ -165,7 +146,7 @@ public class InputContext {
 		int player = playerButton.player;
 		int button = playerButton.intValue;
 		
-		if (player == CONTROLLER_ANY_PLAYER) {
+		if (player == InputContext.CONTROLLER_ANY_PLAYER) {
 			boolean buttonPressed = false;
 			for (Controller controller : Controllers.getControllers()) {
 				buttonPressed |= controller.getButton(button);
@@ -186,7 +167,7 @@ public class InputContext {
 		int axis = playerAxis.axisCode;
 		float threshold = playerAxis.threshold;
 		
-		if (player == CONTROLLER_ANY_PLAYER) {
+		if (player == InputContext.CONTROLLER_ANY_PLAYER) {
 			boolean axisStateActive = false;
 			for (Controller controller : Controllers.getControllers()) {
 				float axisValue = controller.getAxis(axis);

@@ -11,7 +11,7 @@ import net.jfabricationgames.gdx.screens.menu.control.MenuStateMachine.InputDire
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public abstract class ControlledMenu<T extends ControlledMenu<T>> extends ScreenAdapter implements InputActionListener {
+public abstract class ControlledMenu<T extends ControlledMenu<T>> extends ScreenAdapter implements InputActionListener, StatefullMenu {
 	
 	public static final String ACTION_SELECT = "select";
 	public static final String ACTION_SELECTION_RIGHT = "right";
@@ -21,17 +21,18 @@ public abstract class ControlledMenu<T extends ControlledMenu<T>> extends Screen
 	
 	public static final String SOUND_ERROR = "error";
 	
-	protected MenuStateMachine<T> stateMachine;
+	protected MenuStateMachine stateMachine;
 	
 	private SoundSet soundSet;
 	
 	public ControlledMenu(String... stateConfigFiles) {
 		if (stateConfigFiles != null) {
-			stateMachine = new MenuStateMachine<T>(this, stateConfigFiles);
+			stateMachine = new MenuStateMachine(this, stateConfigFiles);
 		}
 		soundSet = SoundManager.getInstance().loadSoundSet("menu");
 	}
 	
+	@Override
 	public void invokeMethod(String methodName) {
 		try {
 			Method method = getClass().getMethod(methodName);
@@ -42,7 +43,7 @@ public abstract class ControlledMenu<T extends ControlledMenu<T>> extends Screen
 		}
 	}
 	
-	protected abstract void setFocusTo(String stateName, String leavingState);
+	public abstract void setFocusTo(String stateName, String leavingState);
 	
 	public abstract void showMenu();
 	

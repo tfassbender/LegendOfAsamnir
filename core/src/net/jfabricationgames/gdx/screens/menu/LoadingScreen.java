@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.jfabricationgames.gdx.Game;
-import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screens.menu.components.MenuBox.TextureType;
@@ -60,7 +60,7 @@ public class LoadingScreen extends MenuScreen<LoadingScreen> {
 	}
 	
 	@Override
-	protected void setFocusTo(String stateName, String leavingState) {}
+	public void setFocusTo(String stateName, String leavingState) {}
 	
 	@Override
 	public void render(float delta) {

@@ -12,7 +12,9 @@ import net.jfabricationgames.gdx.input.struct.AxisThreshold;
 import net.jfabricationgames.gdx.input.struct.PlayerAxis;
 import net.jfabricationgames.gdx.input.struct.PlayerValue;
 
-public class InputContextLoader {
+class InputContextLoader {
+	
+	private static final float INPUT_THRESHOLD_MIN = 0.01f;
 	
 	private static final ArrayMap<String, Integer> BUTTONS = createButtonsMap();
 	
@@ -260,8 +262,8 @@ public class InputContextLoader {
 			int axisCode = Integer.parseInt(controllerAxisElement.getAttribute("code"));
 			float threshold = Float.parseFloat(controllerAxisElement.getAttribute("threshold"));
 			
-			if (Math.abs(threshold) < InputProfile.CONTROLLER_AXIS_DEAD_ZONE) {
-				throw new IllegalArgumentException("The absolute value of the 'threshold' attribute must be greater than 0.01");
+			if (Math.abs(threshold) < INPUT_THRESHOLD_MIN) {
+				throw new IllegalArgumentException("The absolute value of the 'threshold' attribute must be greater than " + INPUT_THRESHOLD_MIN);
 			}
 			
 			if (readingContextType == ContextType.STATES) {

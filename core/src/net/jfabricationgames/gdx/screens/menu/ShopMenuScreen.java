@@ -227,7 +227,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	}
 	
 	@Override
-	protected void setFocusTo(String stateName, String leavingState) {
+	public void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
 		if (stateName.startsWith(STATE_PREFIX_ITEM)) {
 			int itemIndex = Integer.parseInt(stateName.substring(STATE_PREFIX_ITEM.length())) - 1;

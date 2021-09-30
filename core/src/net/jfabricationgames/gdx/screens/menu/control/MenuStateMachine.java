@@ -10,19 +10,19 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-public class MenuStateMachine<T extends ControlledMenu<T>> {
+public class MenuStateMachine {
 	
 	public enum InputDirection {
 		UP, DOWN, LEFT, RIGHT;
 	}
 	
-	private ControlledMenu<T> menu;
+	private StatefullMenu menu;
 	private String[] stateConfigFiles;
 	
 	private ObjectMap<String, MenuState> states;
 	private String currentState;
 	
-	public MenuStateMachine(ControlledMenu<T> menu, String... stateConfigFiles) {
+	public MenuStateMachine(StatefullMenu menu, String... stateConfigFiles) {
 		this.menu = menu;
 		this.stateConfigFiles = stateConfigFiles;
 		

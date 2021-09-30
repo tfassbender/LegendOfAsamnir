@@ -148,7 +148,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	@Override
-	protected void setFocusTo(String stateName, String leavingState) {
+	public void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
 		
 		if (stateName.startsWith(STATE_PREFIX_LOAD_DIALOG)) {

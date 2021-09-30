@@ -156,7 +156,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void initializeStateMachine() {
-		stateMachine = new MenuStateMachine<PauseMenuScreen>(this, PAUSE_MENU_STATES_CONFIG, mapDialog.getMapStateConfigFile());
+		stateMachine = new MenuStateMachine(this, PAUSE_MENU_STATES_CONFIG, mapDialog.getMapStateConfigFile());
 		if (!GameScreen.DEBUG) {
 			stateMachine.removeDebugStates();
 		}
@@ -322,7 +322,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	@Override
-	protected void setFocusTo(String stateName, String leavingState) {
+	public void setFocusTo(String stateName, String leavingState) {
 		unfocusAll();
 		if (stateName.startsWith(STATE_PREFIX_ITEM)) {
 			int itemIndex = Integer.parseInt(stateName.substring(STATE_PREFIX_ITEM.length())) - 1;
