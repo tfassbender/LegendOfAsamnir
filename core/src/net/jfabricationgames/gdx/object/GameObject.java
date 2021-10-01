@@ -11,10 +11,10 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationFrame;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
-import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
@@ -101,7 +101,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	@Override
 	public void applyState(ObjectMap<String, String> state) {}
 	
-	protected void createPhysicsBody(float x, float y) {
+	public void createPhysicsBody(float x, float y) {
 		float width = sprite.getWidth() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.x;
 		float height = sprite.getHeight() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.y;
 		
@@ -237,7 +237,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 		return "MapObject [type=" + typeConfig + ", properties=" + MapUtil.mapPropertiesToString(mapProperties, true) + "]";
 	}
 	
-	protected void setTextureAtlas(TextureAtlas textureAtlas) {
+	public void setTextureAtlas(TextureAtlas textureAtlas) {
 		this.textureAtlas = textureAtlas;
 	}
 	

@@ -4,19 +4,37 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.utils.Array;
 
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class MovableObject extends GameObject {
 	
-	public MovableObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
-		super(typeConfig, sprite, mapProperties);
+	static {
+		GameMap.getInstance().addPostAddObjectProcessing(MovableObject::sortMovableGameObjectsLast);
 	}
 	
-	@Override
-	protected void createPhysicsBody(float x, float y) {
-		super.createPhysicsBody(x, y);
+	/**
+	 * Sort movable game objects to the end of the list, to make them drawn on top of other objects.
+	 */
+	private static Array<GameObject> sortMovableGameObjectsLast(Array<GameObject> objects) {
+		int listSize = objects.size;
+		for (int i = 0; i < listSize; i++) {
+			GameObject object = objects.get(i);
+			if (object instanceof MovableObject) {
+				objects.removeIndex(i);
+				listSize--;
+				i--;
+				objects.add(object);
+			}
+		}
+		return objects;
+	}
+	
+	public MovableObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
+		super(typeConfig, sprite, mapProperties);
 	}
 	
 	@Override

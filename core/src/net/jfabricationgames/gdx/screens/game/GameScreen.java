@@ -89,7 +89,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		camera = new OrthographicCamera();
 		cameraHud = new OrthographicCamera();
 		viewport = new FitViewport(Constants.SCENE_WIDTH, Constants.SCENE_HEIGHT, camera);
-		viewportHud = new FitViewport(Constants.SCENE_WIDTH * Constants.HUD_SCENE_FACTOR, Constants.SCENE_HEIGHT * Constants.HUD_SCENE_FACTOR, cameraHud);
+		viewportHud = new FitViewport(Constants.SCENE_WIDTH * Constants.HUD_SCENE_FACTOR, Constants.SCENE_HEIGHT * Constants.HUD_SCENE_FACTOR,
+				cameraHud);
 		
 		cameraHud.position.x = Constants.HUD_SCENE_WIDTH * 0.5f;
 		cameraHud.position.y = Constants.HUD_SCENE_HEIGHT * 0.5f;
@@ -117,12 +118,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		map = GameMap.getInstance();
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
-		map.showMap(initialMapIdentifier);
+		GameMapManager.getInstance().showMap(initialMapIdentifier);
 	}
 	
 	private void changeMap(String mapIdentifier) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			map.showMap(mapIdentifier);
+			GameMapManager.getInstance().showMap(mapIdentifier);
 			InteractionManager.getInstance().resetInteractions();
 		});
 	}

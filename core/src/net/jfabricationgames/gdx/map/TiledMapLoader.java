@@ -20,24 +20,20 @@ import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.GameObjectFactory;
+import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
 import net.jfabricationgames.gdx.util.MapUtil;
 
 class TiledMapLoader {
 	
-	protected static void loadMap(String mapAsset) {
-		new TiledMapLoader(mapAsset).loadMap();
-	}
-	
 	private String mapAsset;
 	private GameMap gameMap;
 	
-	private TiledMapLoader(String mapAsset) {
+	protected TiledMapLoader(String mapAsset) {
 		this.mapAsset = mapAsset;
 		this.gameMap = GameMap.getInstance();
 	}
 	
-	private void loadMap() {
+	protected void loadMap() {
 		gameMap.map = AssetGroupManager.getInstance().get(mapAsset);
 		loadMapObjects();
 	}

@@ -29,6 +29,15 @@ public class GameMapManager {
 		mapFiles = json.fromJson(Array.class, GameMapConfig.class, Gdx.files.internal(GAME_MAPS_CONFIG_FILE_PATH));
 	}
 	
+	public void showMap(String mapIdentifier) {
+		GameMap.getInstance().beforeLoadMap(mapIdentifier);
+		
+		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
+		new TiledMapLoader(mapAsset).loadMap();
+		
+		GameMap.getInstance().afterLoadMap(mapIdentifier);
+	}
+	
 	public String getMapFilePath(String mapName) {
 		for (GameMapConfig config : mapFiles) {
 			if (mapName.equals(config.name)) {

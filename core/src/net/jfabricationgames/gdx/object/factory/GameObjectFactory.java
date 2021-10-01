@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.factory;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -8,7 +8,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.constants.Constants;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.object.destroyable.DestroyableObject;
 import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
@@ -16,7 +17,6 @@ import net.jfabricationgames.gdx.object.interactive.LockedObject;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
-import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class GameObjectFactory {
@@ -76,13 +76,6 @@ public class GameObjectFactory {
 		object.setTextureAtlas(atlas);
 		
 		return object;
-	}
-	
-	public static void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
-		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			GameObject gameObject = createObject(type, x, y, mapProperties);
-			GameMap.getInstance().addObject(gameObject);
-		});
 	}
 	
 	public static class Config {

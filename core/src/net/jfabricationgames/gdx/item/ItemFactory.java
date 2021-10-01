@@ -71,18 +71,6 @@ public class ItemFactory {
 		MapObjectDataHandler.getInstance().addStatefulMapObject(item);
 	}
 	
-	public static void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
-		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			Item item = createItem(type, x, y, mapProperties);
-			if (renderAboveGameObjects) {
-				GameMap.getInstance().addItemAboveGameObjects(item);
-			}
-			else {
-				GameMap.getInstance().addItem(item);
-			}
-		});
-	}
-	
 	public static void addItemFromSavedState(ObjectMap<String, String> state) {
 		boolean pickedUp = Boolean.parseBoolean(state.get("picked"));
 		

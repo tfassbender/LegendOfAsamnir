@@ -49,7 +49,7 @@ public class EventObject extends GameObject implements ContactListener {
 	}
 	
 	@Override
-	protected void createPhysicsBody(float x, float y) {
+	public void createPhysicsBody(float x, float y) {
 		float width = mapProperties.get("width", Float.class) * Constants.WORLD_TO_SCREEN;
 		float height = mapProperties.get("height", Float.class) * Constants.WORLD_TO_SCREEN;
 		

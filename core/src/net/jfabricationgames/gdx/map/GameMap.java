@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.map;
 
 import java.lang.annotation.Annotation;
+import java.util.function.Function;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -34,7 +35,6 @@ import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.physics.AfterWorldStep;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -104,6 +104,8 @@ public class GameMap implements EventListener, Disposable {
 	
 	private String currentMapIdentifier;
 	
+	private Array<Function<Array<GameObject>, Array<GameObject>>> postAddObjectProcessingFunctions = new Array<>();
+	
 	private float continuousMapDamage;
 	private float continuousMapDamageInterval;
 	private float continuousMapDamageTimeDelta;
@@ -148,7 +150,7 @@ public class GameMap implements EventListener, Disposable {
 	
 	private void updateMap() {
 		String mapIdentifier = MapDataHandler.getInstance().getMapIdentifier();
-		showMap(mapIdentifier);
+		beforeLoadMap(mapIdentifier);
 	}
 	
 	private void updatePlayerPosition() {
@@ -165,14 +167,13 @@ public class GameMap implements EventListener, Disposable {
 		return currentMapIdentifier;
 	}
 	
-	public void showMap(String mapIdentifier) {
+	protected void beforeLoadMap(String mapIdentifier) {
 		currentMapIdentifier = mapIdentifier;
 		removeCurrentMapIfPresent();
 		player.reAddToWorld();
-		
-		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
-		TiledMapLoader.loadMap(mapAsset);
-		
+	}
+	
+	protected void afterLoadMap(String mapIdentifier) {
 		renderer.changeMap(map);
 		TiledMapPhysicsLoader.createPhysics(map);
 		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
@@ -370,23 +371,20 @@ public class GameMap implements EventListener, Disposable {
 		objects.add(object);
 		object.postAddToGameMap();
 		
-		sortMovableGameObjectsLast();
+		for (Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction : postAddObjectProcessingFunctions) {
+			objects = postAddObjectProcessingFunction.apply(objects);
+		}
 	}
 	
 	/**
-	 * Sort movable game objects to the end of the list, to make them drawn on top of other objects.
+	 * Add a function that will be executed after an object was added.
 	 */
-	private void sortMovableGameObjectsLast() {
-		int listSize = objects.size;
-		for (int i = 0; i < listSize; i++) {
-			GameObject object = objects.get(i);
-			if (object instanceof MovableObject) {
-				objects.removeIndex(i);
-				listSize--;
-				i--;
-				objects.add(object);
-			}
-		}
+	public void addPostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction) {
+		postAddObjectProcessingFunctions.add(postAddObjectProcessingFunction);
+	}
+	
+	public void removePostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction) {
+		postAddObjectProcessingFunctions.removeValue(postAddObjectProcessingFunction, false);
 	}
 	
 	public void removeObject(GameObject gameObject, Body body) {

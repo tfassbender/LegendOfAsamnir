@@ -8,16 +8,19 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
+import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
+import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.MapUtil;
 
 public class SpawnPoint extends GameObject implements EventListener, Disposable {
@@ -101,7 +104,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	@Override
-	protected void createPhysicsBody(float x, float y) {
+	public void createPhysicsBody(float x, float y) {
 		super.createPhysicsBody(x, y);
 		changeBodyToSensor();
 	}
@@ -140,20 +143,46 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 		
 		switch (parts[0]) {
 			case GameMap.OBJECT_NAME_ITEM:
-				ItemFactory.createAndAddItemAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
+				createAndAddItemAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
 						body.getPosition().y * Constants.SCREEN_TO_WORLD, mapProperties, true);
 				break;
 			case GameMap.OBJECT_NAME_OBJECT:
-				GameObjectFactory.createAndAddObjectAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
+				createAndAddObjectAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
 						body.getPosition().y * Constants.SCREEN_TO_WORLD, mapProperties);
 				break;
 			case GameMap.OBJECT_NAME_ENEMY:
-				EnemyFactory.createAndAddEnemyAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
+				createAndAddEnemyAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
 						body.getPosition().y * Constants.SCREEN_TO_WORLD, mapProperties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown spawn type: " + spawnConfig.spawnType);
 		}
+	}
+	
+	private void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			Item item = ItemFactory.createItem(type, x, y, mapProperties);
+			if (renderAboveGameObjects) {
+				GameMap.getInstance().addItemAboveGameObjects(item);
+			}
+			else {
+				GameMap.getInstance().addItem(item);
+			}
+		});
+	}
+	
+	private void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			Enemy gameObject = EnemyFactory.createEnemy(type, x, y, mapProperties);
+			GameMap.getInstance().addEnemy(gameObject);
+		});
+	}
+	
+	private void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
+		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
+			GameObject gameObject = GameObjectFactory.createObject(type, x, y, mapProperties);
+			GameMap.getInstance().addObject(gameObject);
+		});
 	}
 	
 	@Override
