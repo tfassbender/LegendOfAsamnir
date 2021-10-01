@@ -15,12 +15,12 @@ import com.badlogic.gdx.utils.Json;
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.projectile.Projectile;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 class GameMapRenderer implements Disposable {
 	
@@ -61,7 +61,7 @@ class GameMapRenderer implements Disposable {
 	
 	public void changeMap(TiledMap map) {
 		this.tiledMap = map;
-		renderer = new OrthogonalTiledMapRenderer(map, GameScreen.WORLD_TO_SCREEN, batch);
+		renderer = new OrthogonalTiledMapRenderer(map, Constants.WORLD_TO_SCREEN, batch);
 		renderer.setView(camera);
 		loadLayersFromMapProperties(map.getProperties());
 	}

@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.destroyable.DestroyableObject;
 import net.jfabricationgames.gdx.object.event.EventObject;
@@ -16,7 +17,6 @@ import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class GameObjectFactory {
@@ -44,7 +44,7 @@ public class GameObjectFactory {
 		}
 		
 		Sprite sprite = FactoryUtil.createSprite(atlas, x, y, typeConfig.texture);
-		sprite.setScale(typeConfig.textureSizeFactorX * GameScreen.WORLD_TO_SCREEN, typeConfig.textureSizeFactorY * GameScreen.WORLD_TO_SCREEN);
+		sprite.setScale(typeConfig.textureSizeFactorX * Constants.WORLD_TO_SCREEN, typeConfig.textureSizeFactorY * Constants.WORLD_TO_SCREEN);
 		
 		GameObject object;
 		switch (typeConfig.type) {
@@ -72,7 +72,7 @@ public class GameObjectFactory {
 			default:
 				throw new IllegalStateException("Unknown GameObjectType \"" + typeConfig.type + "\" of object type \"" + type + "\"");
 		}
-		object.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		object.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		object.setTextureAtlas(atlas);
 		
 		return object;

@@ -26,9 +26,9 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 /**
  * Populates the Box2D world with static bodies using data from a map object.
@@ -54,7 +54,7 @@ class TiledMapPhysicsLoader {
 	protected static ObjectMap<String, GameMapGroundType> groundTypes;
 	
 	protected static final void createPhysics(Map map) {
-		new TiledMapPhysicsLoader(GameScreen.SCREEN_TO_WORLD).createPhysicsFromMap(map);
+		new TiledMapPhysicsLoader(Constants.SCREEN_TO_WORLD).createPhysicsFromMap(map);
 	}
 	
 	private static FixtureDef createGroundFixtureDef() {

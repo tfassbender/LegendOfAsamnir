@@ -11,9 +11,9 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.animation.GrowingAnimationDirector;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
 class CharacterRenderer {
@@ -134,8 +134,8 @@ class CharacterRenderer {
 				x, y, // x, y
 				originX, originY, //originX, originY
 				width, height, // width, height
-				GameScreen.WORLD_TO_SCREEN, // scaleX
-				GameScreen.WORLD_TO_SCREEN, // scaleY
+				Constants.WORLD_TO_SCREEN, // scaleX
+				Constants.WORLD_TO_SCREEN, // scaleY
 				0.0f); // rotation
 	}
 	
@@ -178,28 +178,28 @@ class CharacterRenderer {
 		final float DOWN_OFFSET_Y = 0.5f;
 		
 		//left
-		shapeRenderer.rect(x - darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f + LEF_RIGHT_OFFSET_X, //
-				y + GameScreen.SCENE_HEIGHT, //
-				-GameScreen.SCENE_WIDTH, //
-				-GameScreen.SCENE_HEIGHT * 2f);
+		shapeRenderer.rect(x - darknessAnimation.getWidth() * Constants.WORLD_TO_SCREEN * 0.5f + LEF_RIGHT_OFFSET_X, //
+				y + Constants.SCENE_HEIGHT, //
+				-Constants.SCENE_WIDTH, //
+				-Constants.SCENE_HEIGHT * 2f);
 		
 		//right
-		shapeRenderer.rect(x + darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f - LEF_RIGHT_OFFSET_X, //
-				y + GameScreen.SCENE_HEIGHT, //
-				GameScreen.SCENE_WIDTH, //
-				-GameScreen.SCENE_HEIGHT * 2f);
+		shapeRenderer.rect(x + darknessAnimation.getWidth() * Constants.WORLD_TO_SCREEN * 0.5f - LEF_RIGHT_OFFSET_X, //
+				y + Constants.SCENE_HEIGHT, //
+				Constants.SCENE_WIDTH, //
+				-Constants.SCENE_HEIGHT * 2f);
 		
 		//up
-		shapeRenderer.rect(x - darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f, //
-				y + darknessAnimation.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.5f + UP_OFFSET_Y, //
-				GameScreen.SCENE_WIDTH * 2f, //
-				GameScreen.SCENE_HEIGHT);
+		shapeRenderer.rect(x - darknessAnimation.getWidth() * Constants.WORLD_TO_SCREEN * 0.5f, //
+				y + darknessAnimation.getHeight() * Constants.WORLD_TO_SCREEN * 0.5f + UP_OFFSET_Y, //
+				Constants.SCENE_WIDTH * 2f, //
+				Constants.SCENE_HEIGHT);
 		
 		//down
-		shapeRenderer.rect(x - darknessAnimation.getWidth() * GameScreen.WORLD_TO_SCREEN * 0.5f, //
-				y - darknessAnimation.getHeight() * GameScreen.WORLD_TO_SCREEN * 0.5f + DOWN_OFFSET_Y, //
-				GameScreen.SCENE_WIDTH * 2f, //
-				-GameScreen.SCENE_HEIGHT);
+		shapeRenderer.rect(x - darknessAnimation.getWidth() * Constants.WORLD_TO_SCREEN * 0.5f, //
+				y - darknessAnimation.getHeight() * Constants.WORLD_TO_SCREEN * 0.5f + DOWN_OFFSET_Y, //
+				Constants.SCENE_WIDTH * 2f, //
+				-Constants.SCENE_HEIGHT);
 		
 		shapeRenderer.end();
 		

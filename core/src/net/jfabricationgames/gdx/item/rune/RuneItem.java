@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemTypeConfig;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class RuneItem extends Item {
 	
@@ -16,7 +16,7 @@ public class RuneItem extends Item {
 	public RuneItem(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		super(itemName, typeConfig, sprite, animation, properties);
 		type = RuneType.getByContainingName(itemName);
-		sprite.setScale(GameScreen.WORLD_TO_SCREEN * 0.25f);//scale the items down, since the textures are larger than usual
+		sprite.setScale(Constants.WORLD_TO_SCREEN * 0.25f);//scale the items down, since the textures are larger than usual
 	}
 	
 	@Override

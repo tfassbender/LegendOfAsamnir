@@ -6,9 +6,9 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.item.rune.RuneType;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class SpecialActionItem extends Item {
 	
@@ -20,7 +20,7 @@ public class SpecialActionItem extends Item {
 		
 		if (action == SpecialAction.FEATHER || action == SpecialAction.LANTERN) {
 			//scale down the images, since these images are larger than the other
-			sprite.setScale(GameScreen.WORLD_TO_SCREEN * 0.65f);
+			sprite.setScale(Constants.WORLD_TO_SCREEN * 0.65f);
 		}
 	}
 	

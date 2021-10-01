@@ -16,11 +16,11 @@ import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectFactory;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.MapUtil;
 
 class TiledMapLoader {
@@ -67,7 +67,7 @@ class TiledMapLoader {
 				continue;
 			}
 			
-			if (isDebugObject(properties) && !GameScreen.DEBUG) {
+			if (isDebugObject(properties) && !Constants.DEBUG) {
 				Gdx.app.debug(getClass().getSimpleName(),
 						"Debug object will not be added, because the game is not in debug mode: " + MapUtil.mapPropertiesToString(properties, true));
 				continue;
@@ -81,7 +81,7 @@ class TiledMapLoader {
 			switch (parts[0]) {
 				case GameMap.OBJECT_NAME_PLAYER:
 					if (parts[1].equals("startingPosition")) {
-						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y).scl(GameScreen.WORLD_TO_SCREEN);
+						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y).scl(Constants.WORLD_TO_SCREEN);
 					}
 					break;
 				case GameMap.OBJECT_NAME_ITEM:

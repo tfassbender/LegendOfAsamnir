@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -162,8 +163,8 @@ public class GameMapDialog extends InGameMenuDialog {
 	
 	private void drawFastTravelPoints(float delta, float mapTextureX, float mapTextureY) {
 		for (FastTravelPointProperties fastTravelPoint : fastTravelPoints) {
-			float relativePositionX = fastTravelPoint.positionOnMapX * GameScreen.SCREEN_TO_WORLD / mapWidth;
-			float relativePositionY = fastTravelPoint.positionOnMapY * GameScreen.SCREEN_TO_WORLD / mapHeight;
+			float relativePositionX = fastTravelPoint.positionOnMapX * Constants.SCREEN_TO_WORLD / mapWidth;
+			float relativePositionY = fastTravelPoint.positionOnMapY * Constants.SCREEN_TO_WORLD / mapHeight;
 			
 			float positionX = mapTextureX + (config.textureWidth * relativePositionX);
 			float positionY = mapTextureY + (config.textureHeight * relativePositionY);

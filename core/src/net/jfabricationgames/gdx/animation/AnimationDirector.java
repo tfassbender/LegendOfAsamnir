@@ -3,7 +3,7 @@ package net.jfabricationgames.gdx.animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.constants.Constants;
 
 public abstract class AnimationDirector<T extends TextureRegion> {
 	
@@ -29,10 +29,10 @@ public abstract class AnimationDirector<T extends TextureRegion> {
 			throw new IllegalStateException("No AnimationSpriteConfig. Please add an AnimationSpriteConfig in order to use the draw method");
 		}
 		T keyFrame = getKeyFrame();
-		float x = spriteConfig.x + ((spriteConfig.width - keyFrame.getRegionWidth()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
-		float y = spriteConfig.y + ((spriteConfig.height - keyFrame.getRegionHeight()) * GameScreen.WORLD_TO_SCREEN * 0.5f);
+		float x = spriteConfig.x + ((spriteConfig.width - keyFrame.getRegionWidth()) * Constants.WORLD_TO_SCREEN * 0.5f);
+		float y = spriteConfig.y + ((spriteConfig.height - keyFrame.getRegionHeight()) * Constants.WORLD_TO_SCREEN * 0.5f);
 		batch.draw(keyFrame, x, y, spriteConfig.width * 0.5f, spriteConfig.height * 0.5f, keyFrame.getRegionWidth(), keyFrame.getRegionHeight(),
-				GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0f);
+				Constants.WORLD_TO_SCREEN, Constants.WORLD_TO_SCREEN, 0f);
 	}
 	
 	/**

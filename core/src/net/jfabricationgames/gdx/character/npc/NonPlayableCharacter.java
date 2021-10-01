@@ -16,6 +16,7 @@ import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -27,7 +28,6 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyPropertie
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class NonPlayableCharacter extends AbstractCharacter implements Interactive {
 	
@@ -73,9 +73,9 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		AnimationDirector<TextureRegion> animation = getAnimation();
 		if (animation != null) {
 			AnimationSpriteConfig spriteConfig = animation.getSpriteConfigCopy();
-			spriteConfig.x += (animation.getKeyFrame().getRegionWidth() * GameScreen.WORLD_TO_SCREEN
+			spriteConfig.x += (animation.getKeyFrame().getRegionWidth() * Constants.WORLD_TO_SCREEN
 					* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X + typeConfig.graphicsConfig.interactionMarkerOffsetX);
-			spriteConfig.y += (animation.getKeyFrame().getRegionHeight() * GameScreen.WORLD_TO_SCREEN
+			spriteConfig.y += (animation.getKeyFrame().getRegionHeight() * Constants.WORLD_TO_SCREEN
 					* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.graphicsConfig.interactionMarkerOffsetY);
 			
 			return spriteConfig;
@@ -90,9 +90,9 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		AnimationSpriteConfig animationSpriteConfig = animation.getSpriteConfig();
 		
 		interactionSpriteConfig.x = animationSpriteConfig.x
-				+ (animation.getKeyFrame().getRegionWidth() * GameScreen.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
+				+ (animation.getKeyFrame().getRegionWidth() * Constants.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
 						+ typeConfig.graphicsConfig.interactionMarkerOffsetX);
-		interactionSpriteConfig.y = animationSpriteConfig.y + (animation.getKeyFrame().getRegionHeight() * GameScreen.WORLD_TO_SCREEN
+		interactionSpriteConfig.y = animationSpriteConfig.y + (animation.getKeyFrame().getRegionHeight() * Constants.WORLD_TO_SCREEN
 				* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.graphicsConfig.interactionMarkerOffsetY);
 	}
 	

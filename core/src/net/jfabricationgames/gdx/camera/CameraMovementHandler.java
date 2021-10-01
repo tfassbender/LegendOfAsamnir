@@ -9,13 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputContext;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class CameraMovementHandler {
 	
-	public static final float CAMERA_MOVEMENT_SPEED = 150.0f * GameScreen.WORLD_TO_SCREEN;
+	public static final float CAMERA_MOVEMENT_SPEED = 150.0f * Constants.WORLD_TO_SCREEN;
 	
 	private static CameraMovementHandler instance;
 	
@@ -24,8 +24,8 @@ public class CameraMovementHandler {
 	private static final float CAMERA_ZOOM_MIN = 0.25f;
 	
 	private static final float MOVEMENT_EDGE_OFFSET = 75f;
-	private static final float MOVEMENT_RANGE_X = GameScreen.SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET * GameScreen.WORLD_TO_SCREEN;
-	private static final float MOVEMENT_RANGE_Y = GameScreen.SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET * GameScreen.WORLD_TO_SCREEN;
+	private static final float MOVEMENT_RANGE_X = Constants.SCENE_WIDTH * 0.5f - MOVEMENT_EDGE_OFFSET * Constants.WORLD_TO_SCREEN;
+	private static final float MOVEMENT_RANGE_Y = Constants.SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET * Constants.WORLD_TO_SCREEN;
 	
 	private static final String INPUT_AXIS_CAMERA_VERTICAL_MOVMENT = "camera_vertical_move_axis";
 	private static final String INPUT_AXIS_CAMERA_HORIZONTAL_MOVMENT = "camera_horizontal_move_axis";
@@ -78,7 +78,7 @@ public class CameraMovementHandler {
 	
 	public void moveCamera(float delta) {
 		if (!cutsceneHandler.isCameraControlledByCutscene()) {
-			if (GameScreen.DEBUG) {
+			if (Constants.DEBUG) {
 				moveDebugCamera(delta);
 			}
 			moveCameraToPlayer();

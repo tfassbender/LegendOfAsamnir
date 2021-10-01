@@ -8,9 +8,9 @@ import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.character.enemy.implementation.Totem;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class EnemyFactory {
@@ -84,7 +84,7 @@ public class EnemyFactory {
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);
 		}
-		enemy.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		enemy.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		
 		return enemy;
 	}

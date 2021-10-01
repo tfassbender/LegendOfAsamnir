@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.constants.Constants;
 
 public class WorldEdge implements Disposable {
 	
@@ -29,10 +29,10 @@ public class WorldEdge implements Disposable {
 	
 	private void drawWorldEdge() {
 		shapeRenderer.setColor(Color.GRAY);
-		shapeRenderer.rect(0, 0, GameScreen.HUD_SCENE_WIDTH, worldEdgeSize);
-		shapeRenderer.rect(0, 0, worldEdgeSize, GameScreen.HUD_SCENE_HEIGHT);
-		shapeRenderer.rect(GameScreen.HUD_SCENE_WIDTH, GameScreen.HUD_SCENE_HEIGHT, -GameScreen.HUD_SCENE_WIDTH, -worldEdgeSize);
-		shapeRenderer.rect(GameScreen.HUD_SCENE_WIDTH, GameScreen.HUD_SCENE_HEIGHT, -worldEdgeSize, -GameScreen.HUD_SCENE_HEIGHT);
+		shapeRenderer.rect(0, 0, Constants.HUD_SCENE_WIDTH, worldEdgeSize);
+		shapeRenderer.rect(0, 0, worldEdgeSize, Constants.HUD_SCENE_HEIGHT);
+		shapeRenderer.rect(Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT, -Constants.HUD_SCENE_WIDTH, -worldEdgeSize);
+		shapeRenderer.rect(Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT, -worldEdgeSize, -Constants.HUD_SCENE_HEIGHT);
 	}
 	
 	public float getWorldEdgeSize() {

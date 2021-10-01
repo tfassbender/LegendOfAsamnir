@@ -10,6 +10,7 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screens.menu.components.FocusButton;
@@ -157,7 +158,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	private void initializeStateMachine() {
 		stateMachine = new MenuStateMachine(this, PAUSE_MENU_STATES_CONFIG, mapDialog.getMapStateConfigFile());
-		if (!GameScreen.DEBUG) {
+		if (!Constants.DEBUG) {
 			stateMachine.removeDebugStates();
 		}
 		

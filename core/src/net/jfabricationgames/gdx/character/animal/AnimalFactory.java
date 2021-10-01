@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class AnimalFactory {
@@ -37,7 +37,7 @@ public class AnimalFactory {
 		}
 		
 		Animal animal = new Animal(typeConfig, properties);
-		animal.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		animal.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		
 		return animal;
 	}

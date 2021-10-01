@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -20,7 +21,6 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class EventObject extends GameObject implements ContactListener {
 	
@@ -50,11 +50,11 @@ public class EventObject extends GameObject implements ContactListener {
 	
 	@Override
 	protected void createPhysicsBody(float x, float y) {
-		float width = mapProperties.get("width", Float.class) * GameScreen.WORLD_TO_SCREEN;
-		float height = mapProperties.get("height", Float.class) * GameScreen.WORLD_TO_SCREEN;
+		float width = mapProperties.get("width", Float.class) * Constants.WORLD_TO_SCREEN;
+		float height = mapProperties.get("height", Float.class) * Constants.WORLD_TO_SCREEN;
 		
-		x = mapProperties.get("x", Float.class) * GameScreen.WORLD_TO_SCREEN + width * 0.5f;
-		y = mapProperties.get("y", Float.class) * GameScreen.WORLD_TO_SCREEN + height * 0.5f;
+		x = mapProperties.get("x", Float.class) * Constants.WORLD_TO_SCREEN + width * 0.5f;
+		y = mapProperties.get("y", Float.class) * Constants.WORLD_TO_SCREEN + height * 0.5f;
 		
 		eventObjectCenter = new Vector2(x, y);
 		

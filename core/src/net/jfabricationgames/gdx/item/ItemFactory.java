@@ -13,11 +13,11 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.item.rune.RuneItem;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 import net.jfabricationgames.gdx.util.SerializationUtil;
 
@@ -135,10 +135,10 @@ public class ItemFactory {
 		
 		if (addBodyDelay > 0) {
 			PhysicsWorld.getInstance().runDelayedAfterWorldStep(
-					() -> item.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN), addBodyDelay);
+					() -> item.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN), addBodyDelay);
 		}
 		else {
-			item.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+			item.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		}
 		
 		return item;

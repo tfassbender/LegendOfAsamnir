@@ -3,7 +3,7 @@ package net.jfabricationgames.gdx.character.enemy;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.constants.Constants;
 
 public class EnemyHealthBarRenderer {
 	
@@ -14,7 +14,7 @@ public class EnemyHealthBarRenderer {
 	
 	public void drawHealthBar(ShapeRenderer shapeRenderer, float health, float x, float y, float width) {
 		Color color = getColor(health);
-		shapeRenderer.rect(x, y, 0, 0, width * health, HEALTH_BAR_HEIGHT, GameScreen.WORLD_TO_SCREEN, GameScreen.WORLD_TO_SCREEN, 0, color, color,
+		shapeRenderer.rect(x, y, 0, 0, width * health, HEALTH_BAR_HEIGHT, Constants.WORLD_TO_SCREEN, Constants.WORLD_TO_SCREEN, 0, color, color,
 				color, color);
 	}
 	

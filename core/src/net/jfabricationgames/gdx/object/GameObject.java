@@ -18,6 +18,7 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutscenePositioningUnit;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
@@ -29,7 +30,6 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.util.MapUtil;
@@ -102,11 +102,11 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	public void applyState(ObjectMap<String, String> state) {}
 	
 	protected void createPhysicsBody(float x, float y) {
-		float width = sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.x;
-		float height = sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * physicsBodySizeFactor.y;
+		float width = sprite.getWidth() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.x;
+		float height = sprite.getHeight() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.y;
 		
-		x += sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * physicsBodyOffsetFactor.x;
-		y += sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * physicsBodyOffsetFactor.y;
+		x += sprite.getWidth() * Constants.WORLD_TO_SCREEN * physicsBodyOffsetFactor.x;
+		y += sprite.getHeight() * Constants.WORLD_TO_SCREEN * physicsBodyOffsetFactor.y;
 		
 		PhysicsBodyProperties properties = physicsBodyProperties.setX(x).setY(y).setWidth(width).setHeight(height);
 		body = PhysicsBodyCreator.createRectangularBody(properties);
@@ -126,7 +126,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 		Sprite sprite = new Sprite(textureRegion);
 		sprite.setX(this.sprite.getX());
 		sprite.setY(this.sprite.getY());
-		sprite.setScale(GameScreen.WORLD_TO_SCREEN);
+		sprite.setScale(Constants.WORLD_TO_SCREEN);
 		return sprite;
 	}
 	
@@ -183,8 +183,8 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	}
 	
 	protected void dropItems() {
-		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * GameScreen.SCREEN_TO_WORLD;
-		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * GameScreen.SCREEN_TO_WORLD;
+		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * Constants.SCREEN_TO_WORLD;
+		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * Constants.SCREEN_TO_WORLD;
 		
 		if (mapProperties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
 			String specialDropType = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);

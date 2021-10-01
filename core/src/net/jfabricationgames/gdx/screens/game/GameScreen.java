@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -33,18 +34,6 @@ import net.jfabricationgames.gdx.screens.menu.PauseMenuScreen;
 import net.jfabricationgames.gdx.screens.menu.ShopMenuScreen;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener {
-	
-	public static final boolean DEBUG = false;
-	
-	public static final float WORLD_TO_SCREEN = 0.04f;
-	public static final float SCREEN_TO_WORLD = 1f / WORLD_TO_SCREEN;
-	public static final float SCENE_WIDTH = 12.80f;
-	public static final float SCENE_HEIGHT = 8.20f;
-	
-	//the HUD uses a different scene size to make it easier to calculate in pixel units
-	public static final float HUD_SCENE_FACTOR = 100f;
-	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
-	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
 	public static final String INPUT_CONTEXT_NAME = "game";
 	public static final String ASSET_GROUP_NAME = "game";
@@ -99,14 +88,14 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void initializeCamerasAndViewports() {
 		camera = new OrthographicCamera();
 		cameraHud = new OrthographicCamera();
-		viewport = new FitViewport(SCENE_WIDTH, SCENE_HEIGHT, camera);
-		viewportHud = new FitViewport(SCENE_WIDTH * HUD_SCENE_FACTOR, SCENE_HEIGHT * HUD_SCENE_FACTOR, cameraHud);
+		viewport = new FitViewport(Constants.SCENE_WIDTH, Constants.SCENE_HEIGHT, camera);
+		viewportHud = new FitViewport(Constants.SCENE_WIDTH * Constants.HUD_SCENE_FACTOR, Constants.SCENE_HEIGHT * Constants.HUD_SCENE_FACTOR, cameraHud);
 		
-		cameraHud.position.x = HUD_SCENE_WIDTH * 0.5f;
-		cameraHud.position.y = HUD_SCENE_HEIGHT * 0.5f;
+		cameraHud.position.x = Constants.HUD_SCENE_WIDTH * 0.5f;
+		cameraHud.position.y = Constants.HUD_SCENE_HEIGHT * 0.5f;
 		
-		camera.position.x = SCENE_WIDTH;
-		camera.position.y = SCENE_HEIGHT;
+		camera.position.x = Constants.SCENE_WIDTH;
+		camera.position.y = Constants.SCENE_HEIGHT;
 		camera.zoom = 1.5f;
 		
 		cameraHud.update();
@@ -139,7 +128,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createHud() {
-		hud = new HeadsUpDisplay(HUD_SCENE_WIDTH, HUD_SCENE_HEIGHT, cameraHud);
+		hud = new HeadsUpDisplay(Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT, cameraHud);
 	}
 	
 	private void createCameraMovementHandler() {
@@ -169,7 +158,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		
 		checkGameOver();
 		
-		if (DEBUG) {
+		if (Constants.DEBUG) {
 			physicsWorld.renderDebugGraphics(camera.combined);
 		}
 	}
@@ -238,7 +227,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	 */
 	public Vector2 getPlayersPositionOnMap() {
 		PlayableCharacter player = Player.getInstance();
-		Vector2 playersRelativePosition = player.getPosition().scl(SCREEN_TO_WORLD);
+		Vector2 playersRelativePosition = player.getPosition().scl(Constants.SCREEN_TO_WORLD);
 		playersRelativePosition.x /= map.getMapWidth();
 		playersRelativePosition.y /= map.getMapHeight();
 		return playersRelativePosition;

@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class NonPlayableCharacterFactory {
@@ -57,7 +57,7 @@ public class NonPlayableCharacterFactory {
 		}
 		
 		NonPlayableCharacter npc = new NonPlayableCharacter(typeConfig, properties);
-		npc.createPhysicsBody(x * GameScreen.WORLD_TO_SCREEN, y * GameScreen.WORLD_TO_SCREEN);
+		npc.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		
 		return npc;
 	}

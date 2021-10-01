@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
@@ -13,7 +14,6 @@ import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 class CharacterBodyHandler {
 	
@@ -35,8 +35,8 @@ class CharacterBodyHandler {
 	
 	public void createPhysicsBody() {
 		PhysicsBodyProperties bodyProperties = new PhysicsBodyProperties().setType(BodyType.DynamicBody)
-				.setWidth(player.renderer.idleDwarfSprite.getRegionWidth() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
-				.setHeight(player.renderer.idleDwarfSprite.getRegionHeight() * GameScreen.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
+				.setWidth(player.renderer.idleDwarfSprite.getRegionWidth() * Constants.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_X)
+				.setHeight(player.renderer.idleDwarfSprite.getRegionHeight() * Constants.WORLD_TO_SCREEN * PHYSICS_BODY_SIZE_FACTOR_Y)
 				.setCollisionType(PhysicsCollisionType.PLAYER).setLinearDamping(10f);
 		body = PhysicsBodyCreator.createOctagonBody(bodyProperties);
 		body.setSleepingAllowed(false);

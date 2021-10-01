@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
@@ -21,7 +22,6 @@ import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
 
 public class InteractiveObject extends GameObject implements Interactive {
 	
@@ -45,9 +45,9 @@ public class InteractiveObject extends GameObject implements Interactive {
 	
 	private AnimationSpriteConfig createSpriteConfig() {
 		AnimationSpriteConfig spriteConfig = AnimationSpriteConfig.fromSprite(sprite);
-		spriteConfig.x += (sprite.getWidth() * GameScreen.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
+		spriteConfig.x += (sprite.getWidth() * Constants.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
 				+ typeConfig.interactionMarkerOffsetX);
-		spriteConfig.y += (sprite.getHeight() * GameScreen.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y
+		spriteConfig.y += (sprite.getHeight() * Constants.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y
 				+ typeConfig.interactionMarkerOffsetY);
 		return spriteConfig;
 	}
