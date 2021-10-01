@@ -579,13 +579,11 @@ Interactive Objects are used to let the player interact with the map. They use a
 A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* or a *Door* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a string value that can be converted into a `boolean`. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/player/container/data/KeyItem.java) class.
 
 
-**Unlock by Condition:**
-
+**Unlock by Condition:**  
 Locked objects can also be configured to be unlocked (and locked) by a [condition](#conditions), that is configured in the map properties of the locked object. To lock or unlock a locked object by a [condition](#conditions), the map parameter `unlockCondition` must be set to the name of a condition. So a locked object that is configured with an unlock condition `common__rune_laguz_collected` can be unlocked when a specific rune (called laguz) is collected. The condition is to be found in the configuration file [common.json](core/assets/config/condition/common.json). The locked object will not be unlocked automatically, but the player still has to interact with the locked object to unlock it (when the condition is met).
 
 
-** Unlock by Event:**
-
+**Unlock by Event:**  
 Another way to configure locked objects is to configure them to be unlocked (and locked) by [events](#events). This will cause the locked object to be locked or unlocked automatically (the player doesn't need to interact with the locked object). Therefore the locked object's map properties must be configured to set the value `unlockedByEvent` to the string value `true`. Also a `lockId` must be configured, to identify the lock from the event configuration. Then one or more [event objects](#event-objects) need to be configured to execute an event, that can lock or unlock the locked object. An example can be found in the configuration file [demo.json](core/assets/config/events/global/demo.json):
 
 ```javascript
@@ -646,8 +644,7 @@ Map properties that can be configured in the event object are:
 **Respawn Checkpoints:**  
 Respawn checkpoints are a special type of Event Objects. They are configured in the map, by adding an Event Object with the **eventParameter 'respawnCheckpoint'**. This event is received and handled by the [PlayableCharacter](core/src/net/jfabricationgames/gdx/character/player/PlayableCharacter.java) implementation [Dwarf](core/src/net/jfabricationgames/gdx/character/player/implementation/Dwarf.java).
 
-**State Switch Objects:**
-
+**State Switch Objects:**  
 State switch objects are a special type of Event Objects. They can have two states: *active* and *inactive*. These states usually can be seen in the texture of the object. The state switch objects can execute events when the state changes (just like other event objects do, when they are triggered). In addition to the events that can be fired, the state of the switches can be checked from a [condition](#conditions). An example for a condition that uses state switches can be found in the configuration file [demo.json](core/assets/config/condition/levels/demo.json):
 
 ```javascript
