@@ -25,7 +25,7 @@ public class CutsceneShowOnScreenTextAction extends AbstractCutsceneAction imple
 			generatedEvent.executionType = GlobalEventExecutionType.SHOW_ON_SCREEN_TEXT;
 			generatedEvent.executionParameters = actionConfig.executionParameters;
 					
-			EventHandler.getInstance().executeGeneratedEvent(generatedEvent);
+			executeGeneratedEvent(generatedEvent);
 			eventFired = true;
 		}
 	}

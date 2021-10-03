@@ -1,28 +1,6 @@
 package net.jfabricationgames.gdx.event.dto;
 
-import com.badlogic.gdx.maps.MapProperties;
-
-import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
-
 public class FastTravelPointEventDto {
-	
-	private static final String MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_ID = "fastTravelPointId";
-	private static final String MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_NAME = "fastTravelPointName";
-	
-	public static FastTravelPointEventDto createFromGameObject(InteractiveObject object, MapProperties mapProperties) {
-		String fastTravelPointId = mapProperties.get(MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_ID, String.class);
-		String fastTravelPointName = mapProperties.get(MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_NAME, String.class);
-		boolean enabled = object.isActivateOnStartup() || object.isActionExecuted();
-		float posX = object.getPosition().x;
-		float posY = object.getPosition().y;
-		
-		return new FastTravelPointEventDto() //
-				.setFastTravelPointId(fastTravelPointId) //
-				.setFastTravelPointName(fastTravelPointName) //
-				.setEnabled(enabled) //
-				.setPositionOnMapX(posX) //
-				.setPositionOnMapY(posY);
-	}
 	
 	/**
 	 * The fastTravelPointId must be equal in the map config of the object and in the map state config file (in config/menu/maps/...)

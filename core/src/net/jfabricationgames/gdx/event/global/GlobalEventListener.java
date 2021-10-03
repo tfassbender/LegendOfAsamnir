@@ -15,8 +15,16 @@ public class GlobalEventListener implements EventListener {
 	
 	private static final String GLOBAL_EVENTS_CONFIG_FILE = "config/events/globalListenedEvents.json";
 	
-	public static void create(EventHandler eventHandler) {
-		new GlobalEventListener(eventHandler);
+	private static GlobalEventListener instance;
+	
+	public static void createGlobalEventListener() {
+		if (instance != null) {
+			Gdx.app.error(GlobalEventListener.class.getSimpleName(),
+					"A GlobalEventListener was already created - skipping creation of another GlobalEventListener");
+			return;
+		}
+		
+		instance = new GlobalEventListener(EventHandler.getInstance());
 	}
 	
 	private Map<String, GlobalEventConfig> events;//don't use an libGDX ObjectMap here, because an iterator that works nested is needed

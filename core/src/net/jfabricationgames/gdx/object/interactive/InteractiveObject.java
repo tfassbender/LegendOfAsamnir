@@ -17,6 +17,7 @@ import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
+import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -26,6 +27,9 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 public class InteractiveObject extends GameObject implements Interactive {
 	
 	public static final String MAP_PROPERTY_KEY_ACTIVATE_ON_STARTUP = "activateOnStartup";
+	
+	private static final String MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_ID = "fastTravelPointId";
+	private static final String MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_NAME = "fastTravelPointName";
 	
 	@MapObjectState
 	protected boolean actionExecuted = false;
@@ -169,11 +173,23 @@ public class InteractiveObject extends GameObject implements Interactive {
 		}
 	}
 	
-	/**
-	 * Makes the MapProperties available in the InteractiveAction enum
-	 */
 	protected MapProperties getMapProperties() {
 		return mapProperties;
+	}
+	
+	public FastTravelPointEventDto createFastTravelPointEventDto() {
+		String fastTravelPointId = mapProperties.get(MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_ID, String.class);
+		String fastTravelPointName = mapProperties.get(MAP_PROPERTY_KEY_FAST_TRAVEL_POINT_NAME, String.class);
+		boolean enabled = isActivateOnStartup() || isActionExecuted();
+		float posX = getPosition().x;
+		float posY = getPosition().y;
+		
+		return new FastTravelPointEventDto() //
+				.setFastTravelPointId(fastTravelPointId) //
+				.setFastTravelPointName(fastTravelPointName) //
+				.setEnabled(enabled) //
+				.setPositionOnMapX(posX) //
+				.setPositionOnMapY(posY);
 	}
 	
 	@Override

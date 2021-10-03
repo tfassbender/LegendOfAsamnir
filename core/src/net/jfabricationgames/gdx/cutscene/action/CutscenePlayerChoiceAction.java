@@ -28,7 +28,7 @@ public class CutscenePlayerChoiceAction extends AbstractCutsceneAction implement
 			generatedEvent.executionType = GlobalEventExecutionType.SHOW_PLAYER_CHOICE;
 			generatedEvent.parameterObject = actionConfig.choice;
 			
-			EventHandler.getInstance().executeGeneratedEvent(generatedEvent);
+			executeGeneratedEvent(generatedEvent);
 			eventFired = true;
 		}
 	}

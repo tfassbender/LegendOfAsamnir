@@ -80,7 +80,7 @@ public enum InteractiveAction {
 		
 		@Override
 		public void execute(InteractiveObject object) {
-			FastTravelPointEventDto eventDto = FastTravelPointEventDto.createFromGameObject(object, object.getMapProperties());
+			FastTravelPointEventDto eventDto = object.createFastTravelPointEventDto();
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.FAST_TRAVEL_POINT_ENABLED).setParameterObject(eventDto));
 		}
 	};

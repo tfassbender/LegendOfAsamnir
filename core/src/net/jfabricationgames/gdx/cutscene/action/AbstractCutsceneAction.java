@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
+import net.jfabricationgames.gdx.event.global.GlobalEventConfig;
 import net.jfabricationgames.gdx.map.GameMapManager;
 
 public abstract class AbstractCutsceneAction {
@@ -57,5 +58,9 @@ public abstract class AbstractCutsceneAction {
 	
 	public CutsceneControlledActionConfig getActionConfig() {
 		return actionConfig;
+	}
+	
+	protected void executeGeneratedEvent(GlobalEventConfig generatedEvent) {
+		generatedEvent.executionType.execute(generatedEvent);
 	}
 }
