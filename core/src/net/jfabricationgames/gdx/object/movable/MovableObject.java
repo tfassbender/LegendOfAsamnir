@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class MovableObject extends GameObject {
 	
 	static {
-		GameMap.getInstance().addPostAddObjectProcessing(MovableObject::sortMovableGameObjectsLast);
+		GameMapManager.getInstance().getMap().addPostAddObjectProcessing(MovableObject::sortMovableGameObjectsLast);
 	}
 	
 	/**

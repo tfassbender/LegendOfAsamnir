@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
-import net.jfabricationgames.gdx.item.rune.RuneType;
+import net.jfabricationgames.gdx.rune.RuneType;
 
 public class RuneSubMenu extends ItemSubMenu {
 	

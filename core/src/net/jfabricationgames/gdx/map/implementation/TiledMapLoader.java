@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.map;
+package net.jfabricationgames.gdx.map.implementation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
@@ -19,21 +19,28 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
+import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapLoader;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
 import net.jfabricationgames.gdx.util.MapUtil;
 
-class TiledMapLoader {
+class TiledMapLoader implements GameMapLoader {
 	
 	private String mapAsset;
-	private GameMap gameMap;
+	private GameMapImplementation gameMap;
 	
-	protected TiledMapLoader(String mapAsset) {
+	protected TiledMapLoader(GameMap gameMap, String mapAsset) {
+		if (!(gameMap instanceof GameMapImplementation)) {
+			throw new IllegalArgumentException("This GameMapLoader implementation (" + getClass().getSimpleName() + ") needs a "
+					+ GameMapImplementation.class.getName() + " to load.");
+		}
 		this.mapAsset = mapAsset;
-		this.gameMap = GameMap.getInstance();
+		this.gameMap = (GameMapImplementation) gameMap;
 	}
 	
-	protected void loadMap() {
+	@Override
+	public void loadMap() {
 		gameMap.map = AssetGroupManager.getInstance().get(mapAsset);
 		loadMapObjects();
 	}

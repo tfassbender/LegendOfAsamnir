@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.map;
+package net.jfabricationgames.gdx.map.implementation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.Map;
@@ -27,6 +27,8 @@ import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.map.GameMapGroundType;
+import net.jfabricationgames.gdx.map.MapObjectType;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
@@ -131,14 +133,14 @@ class TiledMapPhysicsLoader {
 	}
 	
 	private void createSolidObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
-		createTypedObjectPhysics(object, shape, bodyDef, TiledMapObjectType.SOLID_OBJECT);
+		createTypedObjectPhysics(object, shape, bodyDef, MapObjectType.SOLID_OBJECT);
 	}
 	
 	private void createInvisiblePathBlockerObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
-		createTypedObjectPhysics(object, shape, bodyDef, TiledMapObjectType.INVISIBLE_PATH_BLOCKER);
+		createTypedObjectPhysics(object, shape, bodyDef, MapObjectType.INVISIBLE_PATH_BLOCKER);
 	}
 	
-	private void createTypedObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef, TiledMapObjectType type) {
+	private void createTypedObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef, MapObjectType type) {
 		MapProperties properties = object.getProperties();
 		String material = properties.get(MAP_PROPERTY_KEY_MATERIAL, String.class);
 		FixtureDef fixtureDef = null;

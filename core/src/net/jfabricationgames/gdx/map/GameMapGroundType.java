@@ -8,7 +8,10 @@ import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class GameMapGroundType {
 	
-	public static GameMapGroundType handleGameMapGroundContact(Contact contact, PhysicsCollisionType targetCollisionType, GameMapGroundType groundProperties) {
+	public static final GameMapGroundType DEFAULT_GROUND_PROPERTIES = new GameMapGroundType();
+	
+	public static GameMapGroundType handleGameMapGroundContact(Contact contact, PhysicsCollisionType targetCollisionType,
+			GameMapGroundType groundProperties) {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		
@@ -29,7 +32,7 @@ public class GameMapGroundType {
 	}
 	
 	private static GameMapGroundType applyGameMapGroundEffects(GameMapGroundType groundProperties, GameMapGroundType collidingGroundType) {
-		if (groundProperties == GameMap.DEFAULT_GROUND_PROPERTIES) {
+		if (groundProperties == GameMapGroundType.DEFAULT_GROUND_PROPERTIES) {
 			groundProperties = new GameMapGroundType();
 		}
 		groundProperties.movementSpeedFactor = Math.min(groundProperties.movementSpeedFactor, collidingGroundType.movementSpeedFactor);

@@ -11,6 +11,7 @@ import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 
@@ -57,7 +58,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 	public void backToGame() {
 		removeInputListener();
 		Game game = Game.getInstance();
-		game.changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
+		InputManager.getInstance().changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
 		game.setScreen(gameScreen);
 	}
 	

@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.data.state.BeforeAddStatefulObject;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -155,7 +155,7 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 	}
 	
 	public void remove() {
-		GameMap.getInstance().removeItem(this, body);
+		GameMapManager.getInstance().getMap().removeItem(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	

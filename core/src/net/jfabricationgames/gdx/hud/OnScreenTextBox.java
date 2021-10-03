@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 import net.jfabricationgames.gdx.util.GameUtil;
 
@@ -88,7 +88,7 @@ public class OnScreenTextBox implements Disposable, InputActionListener {
 		textRenderer = new OnScreenTextRenderer(this, batch, shapeRenderer, screenTextWriter);
 		playerChoiceRenderer = new OnScreenPlayerChoiceRenderer(this, hud, batch, shapeRenderer, screenTextWriter);
 		
-		InputContext inputContext = Game.getInstance().getInputContext();
+		InputContext inputContext = InputManager.getInstance().getInputContext();
 		inputContext.addListener(this);
 	}
 	

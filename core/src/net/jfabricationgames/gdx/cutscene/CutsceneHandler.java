@@ -20,6 +20,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 
 public class CutsceneHandler implements EventListener {
 	
@@ -123,7 +124,7 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	private void stopCutsceneActorsActions(CutsceneConfig cutscene) {
-		GameMap gameMap = GameMap.getInstance();
+		GameMap gameMap = GameMapManager.getInstance().getMap();
 		for (CutsceneControlledActionConfig actionConfig : cutscene.controlledActions.values()) {
 			if (actionConfig.controlledUnitId != null) {
 				Object controlledUnit = gameMap.getUnitById(actionConfig.controlledUnitId);

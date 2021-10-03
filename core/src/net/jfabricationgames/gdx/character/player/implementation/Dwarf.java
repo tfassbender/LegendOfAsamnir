@@ -26,8 +26,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.item.rune.RuneType;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -35,6 +34,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.MagicWave;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileReflector;
+import net.jfabricationgames.gdx.rune.RuneType;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public class Dwarf implements PlayableCharacter, Disposable, ContactListener, EventListener, ProjectileReflector {
@@ -190,7 +190,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	@BeforeWorldStep
 	public void resetGroundProperties() {
-		bodyHandler.groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
+		bodyHandler.groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
 	}
 	
 	@BeforePersistState

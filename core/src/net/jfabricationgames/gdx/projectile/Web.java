@@ -5,9 +5,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapGroundTypeContainer;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -63,6 +63,6 @@ public class Web extends Projectile implements GameMapGroundTypeContainer {
 	
 	@Override
 	public GameMapGroundType getGameMapGroundType() {
-		return GameMap.getGroundTypeByName(GROUND_TYPE_WEB);
+		return GameMapManager.getInstance().getMap().getGroundTypeByName(GROUND_TYPE_WEB);
 	}
 }

@@ -2,13 +2,11 @@ package net.jfabricationgames.gdx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.data.GameDataService;
-import net.jfabricationgames.gdx.input.InputContext;
-import net.jfabricationgames.gdx.input.InputProfile;
+import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screens.game.GameScreen;
 import net.jfabricationgames.gdx.screens.menu.MainMenuScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
@@ -24,9 +22,6 @@ public class Game extends com.badlogic.gdx.Game {
 	private static Game instance;
 	
 	private Runnable preGameConfigurator;
-	
-	private InputMultiplexer multiplexer;
-	private InputProfile gameInputProfile;
 	
 	private boolean gameOver;
 	
@@ -54,9 +49,9 @@ public class Game extends com.badlogic.gdx.Game {
 		FontManager.getInstance().loadConfig(FONT_CONFIG_PATH);
 		GameDataService.initializeEventListener();
 		
-		multiplexer = new InputMultiplexer();
+		InputMultiplexer multiplexer = new InputMultiplexer();
 		Gdx.input.setInputProcessor(multiplexer);
-		gameInputProfile = new InputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
+		InputManager.getInstance().createInputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
 		
 		setScreen(new MainMenuScreen());
 	}
@@ -72,24 +67,6 @@ public class Game extends com.badlogic.gdx.Game {
 			return (GameScreen) screen;
 		}
 		return null;
-	}
-	
-	public void addInputProcessor(InputProcessor processor) {
-		Gdx.app.debug(getClass().getSimpleName(), "Adding InputProcessor: " + processor);
-		multiplexer.addProcessor(processor);
-	}
-	public void removeInputProcessor(InputProcessor processor) {
-		Gdx.app.debug(getClass().getSimpleName(), "Removing InputProcessor: " + processor);
-		multiplexer.removeProcessor(processor);
-	}
-	
-	public InputContext changeInputContext(String contextName) {
-		Gdx.app.debug(getClass().getSimpleName(), "Changing InputContext to \"" + contextName + "\"");
-		gameInputProfile.setContext(contextName);
-		return gameInputProfile.getContext();
-	}
-	public InputContext getInputContext() {
-		return gameInputProfile.getContext();
 	}
 	
 	public boolean isGameOver() {

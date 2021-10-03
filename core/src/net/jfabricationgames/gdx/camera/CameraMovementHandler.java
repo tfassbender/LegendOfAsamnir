@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.input.InputManager;
 
 public class CameraMovementHandler {
 	
@@ -73,7 +73,7 @@ public class CameraMovementHandler {
 		this.player = player;
 		cutsceneHandler = CutsceneHandler.getInstance();
 		
-		inputContext = Game.getInstance().getInputContext();
+		inputContext = InputManager.getInstance().getInputContext();
 	}
 	
 	public void moveCamera(float delta) {

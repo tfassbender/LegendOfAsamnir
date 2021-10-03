@@ -18,12 +18,13 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutscenePositioningUnit;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -203,7 +204,7 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	}
 	
 	public void remove() {
-		GameMap.getInstance().removeObject(this, body);
+		GameMapManager.getInstance().getMap().removeObject(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
@@ -247,6 +248,6 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	}
 	
 	protected boolean isPlayableCharacterContact(Contact contact) {
-		return CollisionUtil.isPlayableCharacterContact(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact);
+		return CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact, PlayableCharacter.class) != null;
 	}
 }

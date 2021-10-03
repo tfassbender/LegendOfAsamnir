@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.item.rune;
+package net.jfabricationgames.gdx.item;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -6,8 +6,7 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.constants.Constants;
-import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.item.ItemTypeConfig;
+import net.jfabricationgames.gdx.rune.RuneType;
 
 public class RuneItem extends Item {
 	

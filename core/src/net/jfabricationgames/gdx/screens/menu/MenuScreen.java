@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
+import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screens.menu.control.ControlledMenu;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 
@@ -48,15 +50,15 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	@Override
 	public void showMenu() {
 		Game game = Game.getInstance();
-		game.changeInputContext(getInputContextName());
-		game.getInputContext().addListener(this);
+		InputContext inputContext = InputManager.getInstance().changeInputContext(getInputContextName());
+		inputContext.addListener(this);
 		game.setScreen(this);
 	}
 	
 	protected abstract String getInputContextName();
 	
 	protected void removeInputListener() {
-		Game.getInstance().getInputContext().removeListener(this);
+		InputManager.getInstance().getInputContext().removeListener(this);
 	}
 	
 	@Override

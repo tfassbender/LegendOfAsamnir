@@ -15,8 +15,7 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
-import net.jfabricationgames.gdx.item.rune.RuneItem;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 import net.jfabricationgames.gdx.util.SerializationUtil;
@@ -61,10 +60,10 @@ public class ItemFactory {
 			float addBodyDelay) {
 		Item item = createItem(type, x, y, mapProperties, addBodyDelay);
 		if (renderAboveGameObjects) {
-			GameMap.getInstance().addItemAboveGameObjects(item);
+			GameMapManager.getInstance().getMap().addItemAboveGameObjects(item);
 		}
 		else {
-			GameMap.getInstance().addItem(item);
+			GameMapManager.getInstance().getMap().addItem(item);
 		}
 		
 		item.setPosition(new Vector2(x, y));

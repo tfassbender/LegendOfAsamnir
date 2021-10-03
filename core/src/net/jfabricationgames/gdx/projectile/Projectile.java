@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Hittable;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -318,7 +318,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	public void remove() {
 		attackPerformed = true;
-		GameMap.getInstance().removeProjectile(this, body);
+		GameMapManager.getInstance().getMap().removeProjectile(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

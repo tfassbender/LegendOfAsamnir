@@ -1,10 +1,10 @@
-package net.jfabricationgames.gdx.item.rune;
+package net.jfabricationgames.gdx.rune;
 
 import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
-import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.map.TiledMapObjectType;
+import net.jfabricationgames.gdx.map.GameMapManager;
+import net.jfabricationgames.gdx.map.MapObjectType;
 
 public enum RuneType {
 	
@@ -15,7 +15,7 @@ public enum RuneType {
 	HAGALAZ(4, "rune_collected__hagalaz", "HAGALAZ - prevent death",
 			() -> GlobalValuesDataHandler.getInstance().put(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED, true)), //
 	ALGIZ(5, "rune_collected__algiz", "ALGIZ - see hidden paths",
-			() -> GameMap.getInstance().removePhysicsObjectsWithType(TiledMapObjectType.INVISIBLE_PATH_BLOCKER)), //
+			() -> GameMapManager.getInstance().getMap().removePhysicsObjectsWithType(MapObjectType.INVISIBLE_PATH_BLOCKER)), //
 	MANNAZ(6, "rune_collected__mannaz", "MANNAZ - reflect magical attacks", null), //
 	KENAZ(7, "rune_collected__kenaz", "KENAZ - prevent from freezing colds", null), //
 	LAGUZ(8, "rune_collected__laguz", "LAGUZ - open the last door to yggdrasiel", null); //

@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
@@ -97,7 +97,7 @@ public class OnScreenItemRenderer implements Disposable {
 	}
 	
 	private void chooseTextColor() {
-		if (GameMap.getInstance().isDungeonMap()) {
+		if (GameMapManager.getInstance().getMap().isDungeonMap()) {
 			screenTextWriter.setColor(Color.GRAY);
 		}
 		else {

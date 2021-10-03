@@ -23,7 +23,7 @@ public class InputProfile implements InputProcessor, ControllerListener {
 	private ArrayMap<String, InputContext> contextsMap;
 	private InputContext context;
 	
-	public InputProfile(FileHandle handle, InputMultiplexer inputMultiplexer) {
+	public InputProfile(FileHandle inputProfileFile, InputMultiplexer inputMultiplexer) {
 		inputMultiplexer.addProcessor(this);
 		Controllers.addListener(this);
 		
@@ -31,8 +31,8 @@ public class InputProfile implements InputProcessor, ControllerListener {
 		context = null;
 		
 		try {
-			Gdx.app.debug("InputProfile", "Reading file " + handle.path());
-			InputStream inputStream = handle.read();
+			Gdx.app.debug("InputProfile", "Reading file " + inputProfileFile.path());
+			InputStream inputStream = inputProfileFile.read();
 			InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
 			XmlReader reader = new XmlReader();
 			
@@ -48,7 +48,7 @@ public class InputProfile implements InputProcessor, ControllerListener {
 			}
 		}
 		catch (UnsupportedEncodingException e) {
-			Gdx.app.error("InputProfile", "error loading file " + handle.path(), e);
+			Gdx.app.error("InputProfile", "error loading file " + inputProfileFile.path(), e);
 		}
 	}
 	

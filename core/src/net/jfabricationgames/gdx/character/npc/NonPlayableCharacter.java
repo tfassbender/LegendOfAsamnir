@@ -22,10 +22,10 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
-import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.physics.CollisionUtil;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
+import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
@@ -92,8 +92,9 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 		interactionSpriteConfig.x = animationSpriteConfig.x
 				+ (animation.getKeyFrame().getRegionWidth() * Constants.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X
 						+ typeConfig.graphicsConfig.interactionMarkerOffsetX);
-		interactionSpriteConfig.y = animationSpriteConfig.y + (animation.getKeyFrame().getRegionHeight() * Constants.WORLD_TO_SCREEN
-				* InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y + typeConfig.graphicsConfig.interactionMarkerOffsetY);
+		interactionSpriteConfig.y = animationSpriteConfig.y
+				+ (animation.getKeyFrame().getRegionHeight() * Constants.WORLD_TO_SCREEN * InteractionManager.INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y
+						+ typeConfig.graphicsConfig.interactionMarkerOffsetY);
 	}
 	
 	@Override
@@ -156,7 +157,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	@Override
 	public void removeFromMap() {
 		ai.characterRemovedFromMap();
-		GameMap.getInstance().removeNpc(this, body);
+		GameMapManager.getInstance().getMap().removeNpc(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
@@ -215,7 +216,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	}
 	
 	private boolean isPlayableCharacterContact(Contact contact) {
-		return CollisionUtil.isPlayableCharacterContact(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact);
+		return CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact, PlayableCharacter.class) != null;
 	}
 	
 	private void playInteractionAnimationAppear() {

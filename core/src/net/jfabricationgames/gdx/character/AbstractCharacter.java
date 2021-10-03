@@ -22,7 +22,6 @@ import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
@@ -55,7 +54,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	protected float imageOffsetX;
 	protected float imageOffsetY;
 	
-	protected GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
+	protected GameMapGroundType groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
 	public static final float DENSITY_IMMOVABLE = 10_000f;
 	
 	public AbstractCharacter(MapProperties properties) {
@@ -248,7 +247,7 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 	
 	@BeforeWorldStep
 	public void resetGroundProperties() {
-		groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
+		groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
 	}
 	
 	@Override

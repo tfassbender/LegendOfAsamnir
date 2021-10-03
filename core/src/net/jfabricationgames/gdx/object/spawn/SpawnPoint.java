@@ -17,6 +17,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
@@ -163,10 +164,10 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Item item = ItemFactory.createItem(type, x, y, mapProperties);
 			if (renderAboveGameObjects) {
-				GameMap.getInstance().addItemAboveGameObjects(item);
+				GameMapManager.getInstance().getMap().addItemAboveGameObjects(item);
 			}
 			else {
-				GameMap.getInstance().addItem(item);
+				GameMapManager.getInstance().getMap().addItem(item);
 			}
 		});
 	}
@@ -174,14 +175,14 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	private void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			Enemy gameObject = EnemyFactory.createEnemy(type, x, y, mapProperties);
-			GameMap.getInstance().addEnemy(gameObject);
+			GameMapManager.getInstance().getMap().addEnemy(gameObject);
 		});
 	}
 	
 	private void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			GameObject gameObject = GameObjectFactory.createObject(type, x, y, mapProperties);
-			GameMap.getInstance().addObject(gameObject);
+			GameMapManager.getInstance().getMap().addObject(gameObject);
 		});
 	}
 	

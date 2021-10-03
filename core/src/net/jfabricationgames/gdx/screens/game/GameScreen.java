@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
@@ -103,8 +104,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void initializeInputContext() {
-		Game.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
-		inputContext = Game.getInstance().getInputContext();
+		inputContext = InputManager.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
 		inputContext.addListener(this);
 	}
 	
@@ -114,8 +114,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createGameMap() {
-		GameMap.createGameMap(camera);
-		map = GameMap.getInstance();
+		GameMapManager.getInstance().createGameMap(camera);
+		map = GameMapManager.getInstance().getMap();
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
 		GameMapManager.getInstance().showMap(initialMapIdentifier);

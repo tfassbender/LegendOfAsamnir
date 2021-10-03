@@ -3,8 +3,8 @@ package net.jfabricationgames.gdx.condition;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
-import net.jfabricationgames.gdx.item.rune.RuneType;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
+import net.jfabricationgames.gdx.rune.RuneType;
 
 public enum ConditionType {
 	

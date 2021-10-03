@@ -1,9 +1,9 @@
 package net.jfabricationgames.gdx.character.player.implementation;
 
-import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
+import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 
 class CharacterInputProcessor implements InputActionListener {
@@ -12,7 +12,6 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	private static final float TIME_TILL_IDLE_ANIMATION = 4.0f;
 	private static final float TIME_TILL_SPIN_ATTACK = 1.5f;
-	
 	
 	private static final float MOVING_SPEED = 300f;
 	private static final float MOVING_SPEED_JUMP = 425f;
@@ -67,7 +66,7 @@ class CharacterInputProcessor implements InputActionListener {
 		timeTillSpinAttack = TIME_TILL_SPIN_ATTACK;
 		jumpDirection = MovingDirection.NONE;
 		lastMoveDirection = MovingDirection.NONE;
-		inputContext = Game.getInstance().getInputContext();
+		inputContext = InputManager.getInstance().getInputContext();
 		inputContext.addListener(this);
 	}
 	

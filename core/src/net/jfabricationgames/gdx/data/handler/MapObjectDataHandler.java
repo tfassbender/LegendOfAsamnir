@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class MapObjectDataHandler {
@@ -80,7 +80,7 @@ public class MapObjectDataHandler {
 	}
 	
 	private String getCurrentMapIdentifier() {
-		return GameMap.getInstance().getCurrentMapIdentifier();
+		return GameMapManager.getInstance().getMap().getCurrentMapIdentifier();
 	}
 	
 	public void addStatefulMapObject(StatefulMapObject mapObject) {

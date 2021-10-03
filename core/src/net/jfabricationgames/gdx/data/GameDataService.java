@@ -17,7 +17,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameDataService implements EventListener {
@@ -65,7 +65,7 @@ public class GameDataService implements EventListener {
 	}
 	
 	private void executeAnnotatedMethodsBeforePersisting() {
-		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMap.getInstance());
+		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMapManager.getInstance().getMap());
 		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, Player.getInstance());
 	}
 	
@@ -85,7 +85,7 @@ public class GameDataService implements EventListener {
 		GameDataContainer gameData = json.fromJson(GameDataContainer.class, fileHandle);
 		
 		GameDataHandler.getInstance().updateData(gameData);
-		GameMap.getInstance().updateAfterLoadingGameState();
+		GameMapManager.getInstance().getMap().updateAfterLoadingGameState();
 		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
 	}

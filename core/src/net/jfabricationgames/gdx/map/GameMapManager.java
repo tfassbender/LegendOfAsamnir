@@ -1,8 +1,12 @@
 package net.jfabricationgames.gdx.map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+
+import net.jfabricationgames.gdx.map.implementation.GameMapFactory;
+import net.jfabricationgames.gdx.map.implementation.GameMapLoaderFactory;
 
 public class GameMapManager {
 	
@@ -19,6 +23,8 @@ public class GameMapManager {
 	
 	private Array<GameMapConfig> mapFiles;
 	
+	private GameMap gameMap;
+	
 	private GameMapManager() {
 		loadMapsConfig();
 	}
@@ -29,13 +35,21 @@ public class GameMapManager {
 		mapFiles = json.fromJson(Array.class, GameMapConfig.class, Gdx.files.internal(GAME_MAPS_CONFIG_FILE_PATH));
 	}
 	
+	public void createGameMap(OrthographicCamera camera) {
+		gameMap = GameMapFactory.createGameMap(camera);
+	}
+	
+	public GameMap getMap() {
+		return gameMap;
+	}
+	
 	public void showMap(String mapIdentifier) {
-		GameMap.getInstance().beforeLoadMap(mapIdentifier);
+		gameMap.beforeLoadMap(mapIdentifier);
 		
 		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
-		new TiledMapLoader(mapAsset).loadMap();
+		GameMapLoaderFactory.createGameMapLoader(gameMap, mapAsset).loadMap();
 		
-		GameMap.getInstance().afterLoadMap(mapIdentifier);
+		gameMap.afterLoadMap(mapIdentifier);
 	}
 	
 	public String getMapFilePath(String mapName) {

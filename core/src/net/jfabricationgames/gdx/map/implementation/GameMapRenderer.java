@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.map;
+package net.jfabricationgames.gdx.map.implementation;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,9 +18,10 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.item.rune.RuneType;
+import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.projectile.Projectile;
+import net.jfabricationgames.gdx.rune.RuneType;
 
 class GameMapRenderer implements Disposable {
 	
@@ -33,7 +34,7 @@ class GameMapRenderer implements Disposable {
 	private static final float INVISIBLE_PATH_OPACITY_MAX = 0.8f;
 	private static final float INVISIBLE_PATH_OPACITY_CHANGE_ABSOLUT = 0.2f;
 	
-	private GameMap gameMap;
+	private GameMapImplementation gameMap;
 	private TiledMap tiledMap;
 	
 	private OrthographicCamera camera;
@@ -50,7 +51,7 @@ class GameMapRenderer implements Disposable {
 	private int[] abovePlayerLayers;
 	private int[] shadowLayers;
 	
-	public GameMapRenderer(GameMap gameMap, OrthographicCamera camera) {
+	public GameMapRenderer(GameMapImplementation gameMap, OrthographicCamera camera) {
 		this.gameMap = gameMap;
 		this.camera = camera;
 		

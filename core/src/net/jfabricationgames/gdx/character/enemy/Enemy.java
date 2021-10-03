@@ -23,7 +23,7 @@ import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -272,7 +272,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	@Override
 	public void removeFromMap() {
 		ai.characterRemovedFromMap();
-		GameMap.getInstance().removeEnemy(this, body);
+		GameMapManager.getInstance().getMap().removeEnemy(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

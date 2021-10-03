@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.map;
+package net.jfabricationgames.gdx.map.implementation;
 
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
@@ -8,11 +8,11 @@ import net.jfabricationgames.gdx.projectile.Projectile;
 
 class GameMapProcessor {
 	
-	private GameMap gameMap;
+	private GameMapImplementation gameMap;
 	
 	private CutsceneHandler cutsceneHandler;
 	
-	public GameMapProcessor(GameMap gameMap) {
+	public GameMapProcessor(GameMapImplementation gameMap) {
 		this.gameMap = gameMap;
 		
 		cutsceneHandler = CutsceneHandler.getInstance();

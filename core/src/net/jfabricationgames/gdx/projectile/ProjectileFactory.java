@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
-import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
@@ -95,7 +95,7 @@ public class ProjectileFactory {
 		projectile.createPhysicsBody(position, collisionType);
 		projectile.startProjectile(direction);
 		
-		GameMap.getInstance().addProjectile(projectile);
+		GameMapManager.getInstance().getMap().addProjectile(projectile);
 		
 		return projectile;
 	}

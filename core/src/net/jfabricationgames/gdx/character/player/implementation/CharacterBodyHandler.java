@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -25,7 +24,7 @@ class CharacterBodyHandler {
 	
 	protected Body body;
 	
-	protected GameMapGroundType groundProperties = GameMap.DEFAULT_GROUND_PROPERTIES;
+	protected GameMapGroundType groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
 	
 	public CharacterBodyHandler(Dwarf player) {
 		this.player = player;
