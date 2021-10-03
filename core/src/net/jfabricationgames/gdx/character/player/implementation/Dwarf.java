@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.Game;
 import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
@@ -35,6 +34,7 @@ import net.jfabricationgames.gdx.projectile.MagicWave;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileReflector;
 import net.jfabricationgames.gdx.rune.RuneType;
+import net.jfabricationgames.gdx.state.GameStateManager;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public class Dwarf implements PlayableCharacter, Disposable, ContactListener, EventListener, ProjectileReflector {
@@ -372,7 +372,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		else {
 			soundHandler.playSound(CharacterAction.HIT);
 			changeAction(CharacterAction.DIE);
-			GameUtil.runDelayed(() -> Game.getInstance().setGameOver(true), TIME_TILL_GAME_OVER_MENU);
+			GameUtil.runDelayed(() -> GameStateManager.getInstance().setGameOver(true), TIME_TILL_GAME_OVER_MENU);
 		}
 	}
 	
@@ -445,7 +445,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		Vector2 respawnPoint = propertiesDataHandler.getRespawnPoint();
 		setPosition(respawnPoint.x, respawnPoint.y);
 		propertiesDataHandler.changeStatsAfterRespawn();
-		Game.getInstance().setGameOver(false);
+		GameStateManager.getInstance().setGameOver(false);
 		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.PLAYER_RESPAWNED));
 	}

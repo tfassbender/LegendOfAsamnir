@@ -2,13 +2,13 @@ package net.jfabricationgames.gdx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.input.InputManager;
-import net.jfabricationgames.gdx.screens.game.GameScreen;
-import net.jfabricationgames.gdx.screens.menu.MainMenuScreen;
+import net.jfabricationgames.gdx.screen.ScreenManager;
+import net.jfabricationgames.gdx.screen.game.GameScreen;
+import net.jfabricationgames.gdx.screen.menu.MainMenuScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.text.FontManager;
 
@@ -22,8 +22,6 @@ public class Game extends com.badlogic.gdx.Game {
 	private static Game instance;
 	
 	private Runnable preGameConfigurator;
-	
-	private boolean gameOver;
 	
 	public static synchronized Game createInstance(Runnable preGameConfigurator) {
 		if (instance == null) {
@@ -53,13 +51,9 @@ public class Game extends com.badlogic.gdx.Game {
 		Gdx.input.setInputProcessor(multiplexer);
 		InputManager.getInstance().createInputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
 		
-		setScreen(new MainMenuScreen());
-	}
-	
-	@Override
-	public void setScreen(Screen screen) {
-		Gdx.app.debug(getClass().getSimpleName(), "Changing screen to: " + screen);
-		super.setScreen(screen);
+		ScreenManager screenManager = ScreenManager.getInstance();
+		screenManager.setGame(this);
+		screenManager.setScreen(new MainMenuScreen());
 	}
 	
 	public GameScreen getGameScreen() {
@@ -67,13 +61,6 @@ public class Game extends com.badlogic.gdx.Game {
 			return (GameScreen) screen;
 		}
 		return null;
-	}
-	
-	public boolean isGameOver() {
-		return gameOver;
-	}
-	public void setGameOver(boolean gameOver) {
-		this.gameOver = gameOver;
 	}
 	
 	@Override
