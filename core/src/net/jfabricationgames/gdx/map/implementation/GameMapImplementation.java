@@ -42,7 +42,7 @@ import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.rune.RuneType;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
-class GameMapImplementation implements GameMap {
+public class GameMapImplementation implements GameMap {
 	
 	public static final String MAP_PROPERTY_KEY_DUNGEON_LEVEL = "dungeon_level";
 	
