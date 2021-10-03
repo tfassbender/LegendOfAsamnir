@@ -11,17 +11,15 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.constants.Constants;
-import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
+import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.components.RuneSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.SpecialActionItemSubMenu;
-import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.control.MenuStateMachine;
 import net.jfabricationgames.gdx.screen.menu.dialog.GameControlsDialog;
-import net.jfabricationgames.gdx.screen.menu.dialog.GameMapDialog;
 import net.jfabricationgames.gdx.screen.menu.dialog.LoadGameDialog;
 import net.jfabricationgames.gdx.screen.menu.dialog.SaveGameDialog;
 
@@ -72,7 +70,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private FocusButton buttonQuit;
 	private FocusButton buttonShowMap;
 	
-	public PauseMenuScreen(GameScreen gameScreen) {
+	public PauseMenuScreen(MenuGameScreen gameScreen) {
 		super(gameScreen, (String[]) null);
 		
 		initialize();

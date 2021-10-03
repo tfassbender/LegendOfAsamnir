@@ -5,10 +5,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Align;
 
-import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
-import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 
 public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	
@@ -21,7 +20,7 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	private FocusButton buttonStartNewGame;
 	private FocusButton buttonQuit;
 	
-	public GameOverMenuScreen(GameScreen gameScreen) {
+	public GameOverMenuScreen(MenuGameScreen gameScreen) {
 		super(gameScreen, GAME_OVER_MENU_STATE_CONFIG);
 		initialize();
 	}

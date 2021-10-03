@@ -8,7 +8,7 @@ import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.game.GameScreen;
-import net.jfabricationgames.gdx.screen.menu.MainMenuScreen;
+import net.jfabricationgames.gdx.screen.main.MainMenuScreen;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.text.FontManager;
 

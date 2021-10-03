@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screen.menu.dialog;
+package net.jfabricationgames.gdx.screen.menu;
 
 import java.util.function.Consumer;
 
@@ -19,12 +19,13 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.rune.RuneType;
-import net.jfabricationgames.gdx.screen.game.GameScreen;
+import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen.MenuGameScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
-import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.config.MapConfig;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
+import net.jfabricationgames.gdx.screen.menu.dialog.InGameMenuDialog;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
 public class GameMapDialog extends InGameMenuDialog {
@@ -54,7 +55,7 @@ public class GameMapDialog extends InGameMenuDialog {
 	private Runnable backToGameCallback;
 	private Consumer<String> playMenuSoundConsumer;
 	
-	public GameMapDialog(GameScreen gameScreen, Runnable backToGameCallback, Consumer<String> playMenuSoundConsumer) {
+	public GameMapDialog(MenuGameScreen gameScreen, Runnable backToGameCallback, Consumer<String> playMenuSoundConsumer) {
 		this.backToGameCallback = backToGameCallback;
 		this.playMenuSoundConsumer = playMenuSoundConsumer;
 		
@@ -66,7 +67,7 @@ public class GameMapDialog extends InGameMenuDialog {
 		shapeRenderer = new ShapeRenderer();
 	}
 	
-	public void updateMapConfig(GameScreen gameScreen) {
+	public void updateMapConfig(MenuGameScreen gameScreen) {
 		playersRelativePositionOnMap = gameScreen.getPlayersPositionOnMap();
 		fastTravelPoints = gameScreen.getFastTravelPositions();
 		mapWidth = gameScreen.getMapWidth();

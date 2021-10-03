@@ -1,29 +1,32 @@
 package net.jfabricationgames.gdx.screen.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screen.ScreenManager;
-import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
 
 public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends MenuScreen<T> {
 	
-	protected GameScreen gameScreen;
+	protected MenuGameScreen gameScreen;
 	protected FrameBuffer gameSnapshotFrameBuffer;
 	protected Sprite gameSnapshotSprite;
 	
 	protected PlayableCharacter player;
 	
-	public InGameMenuScreen(GameScreen gameScreen, String... stateConfigFiles) {
+	public InGameMenuScreen(MenuGameScreen gameScreen, String... stateConfigFiles) {
 		super(stateConfigFiles);
 		this.gameScreen = gameScreen;
 		
@@ -57,8 +60,8 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 	
 	public void backToGame() {
 		removeInputListener();
-		InputManager.getInstance().changeInputContext(GameScreen.INPUT_CONTEXT_NAME);
-		ScreenManager.getInstance().setScreen(gameScreen);
+		InputManager.getInstance().changeInputContext(ScreenManager.INPUT_CONTEXT_NAME);
+		ScreenManager.getInstance().backToGameScreen();
 	}
 	
 	public void respawnInLastCheckpoint() {
@@ -71,5 +74,22 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
 		gameScreen.restartGame();
 		backToGame();
+	}
+	
+	//*********************************************************************
+	//*** interfaces
+	//*********************************************************************
+	
+	public interface MenuGameScreen extends Screen {
+		
+		public void restartGame();
+		
+		public String getGameMapConfigPath();
+		
+		public float getMapHeight();
+		public float getMapWidth();
+		
+		public Vector2 getPlayersPositionOnMap();
+		public Array<FastTravelPointProperties> getFastTravelPositions();
 	}
 }

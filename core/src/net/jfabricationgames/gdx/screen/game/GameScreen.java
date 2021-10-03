@@ -30,22 +30,20 @@ import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.menu.GameOverMenuScreen;
+import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.LoadingScreen;
 import net.jfabricationgames.gdx.screen.menu.PauseMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.ShopMenuScreen;
 import net.jfabricationgames.gdx.state.GameStateManager;
 
-public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener {
-	
-	public static final String INPUT_CONTEXT_NAME = "game";
-	public static final String ASSET_GROUP_NAME = "game";
+public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener, InGameMenuScreen.MenuGameScreen {
 	
 	private static final String ACTION_SHOW_MENU = "menu";
 	
 	public static void loadAndShowGameScreen(Runnable afterCreatingGameScreen) {
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		showLoadingScreen(afterCreatingGameScreen);
-		assetManager.loadGroup(ASSET_GROUP_NAME);
+		assetManager.loadGroup(ScreenManager.ASSET_GROUP_NAME);
 	}
 	
 	private static void showLoadingScreen(Runnable afterCreatingGameScreen) {
@@ -85,6 +83,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		createHud();
 		createCameraMovementHandler();
 		initializeEventHandling();
+		
+		ScreenManager.getInstance().setGameScreen(this);
 	}
 	
 	private void initializeCamerasAndViewports() {
@@ -105,7 +105,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void initializeInputContext() {
-		inputContext = InputManager.getInstance().changeInputContext(INPUT_CONTEXT_NAME);
+		inputContext = InputManager.getInstance().changeInputContext(ScreenManager.INPUT_CONTEXT_NAME);
 		inputContext.addListener(this);
 	}
 	
@@ -212,6 +212,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		shopMenu.showMenu();
 	}
 	
+	@Override
 	public void restartGame() {
 		Gdx.app.log(getClass().getSimpleName(), "--- Restarting Game ------------------------------------------------------------");
 		changeMap(GameMapManager.getInstance().getInitialMapIdentifier());
@@ -220,6 +221,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	/**
 	 * Get the path of the configuration file, for the mini-map from the current game map or null if the property is not set.
 	 */
+	@Override
 	public String getGameMapConfigPath() {
 		return map.getGlobalMapProperties().get(GameMap.GlobalMapPropertyKeys.MINI_MAP_CONFIG_PATH.getKey(), String.class);
 	}
@@ -227,6 +229,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	/**
 	 * The players relative position on the map ((0, 0) -> lower left, (1, 1) -> upper right)
 	 */
+	@Override
 	public Vector2 getPlayersPositionOnMap() {
 		PlayableCharacter player = Player.getInstance();
 		Vector2 playersRelativePosition = player.getPosition().scl(Constants.SCREEN_TO_WORLD);
@@ -235,14 +238,17 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		return playersRelativePosition;
 	}
 	
+	@Override
 	public Array<FastTravelPointProperties> getFastTravelPositions() {
 		return FastTravelDataHandler.getInstance().getFastTravelPositions();
 	}
 	
+	@Override
 	public float getMapWidth() {
 		return map.getMapWidth();
 	}
 	
+	@Override
 	public float getMapHeight() {
 		return map.getMapHeight();
 	}
@@ -257,7 +263,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public void dispose() {
 		EventHandler.getInstance().removeEventListener(this);
 		inputContext.removeListener(this);
-		assetManager.unloadGroup(ASSET_GROUP_NAME);
+		assetManager.unloadGroup(ScreenManager.ASSET_GROUP_NAME);
 		
 		map.dispose();
 		hud.dispose();

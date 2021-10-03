@@ -13,13 +13,12 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.rune.RuneType;
-import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
+import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.components.ShopItemSubMenu;
-import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 
 public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	
@@ -46,7 +45,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private MenuBox ammoMenuBanner;
 	private FocusButton buttonBackToGame;
 	
-	public ShopMenuScreen(GameScreen gameScreen) {
+	public ShopMenuScreen(MenuGameScreen gameScreen) {
 		super(gameScreen, SHOP_MENU_STATES_CONFIG);
 		
 		initialize();

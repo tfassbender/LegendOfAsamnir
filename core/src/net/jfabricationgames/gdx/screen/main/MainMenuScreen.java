@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screen.menu;
+package net.jfabricationgames.gdx.screen.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -9,6 +9,7 @@ import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.screen.game.GameScreen;
+import net.jfabricationgames.gdx.screen.menu.MenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.MainMenuAnimation;
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
