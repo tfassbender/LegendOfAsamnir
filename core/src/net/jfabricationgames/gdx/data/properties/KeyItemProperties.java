@@ -70,7 +70,7 @@ public class KeyItemProperties {
 		return sb.substring(0, sb.length() - 1);
 	}
 	
-	public KeyItemProperties() {
+	private KeyItemProperties() {
 		this(new ObjectMap<>());
 	}
 	public KeyItemProperties(ObjectMap<String, String> mapProperties) {

@@ -27,10 +27,6 @@ public class GameDataService implements EventListener {
 	public static final String GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER = "<index>";
 	public static final String GAME_DATA_SAVE_FILENAME = "save_" + GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER + ".json";
 	
-	public static void fireQuickSaveEvent() {
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.QUICKSAVE));
-	}
-	
 	public static void initializeEventListener() {
 		GameDataService service = new GameDataService();
 		EventHandler.getInstance().registerEventListener(service);

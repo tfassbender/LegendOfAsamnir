@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
@@ -123,12 +122,12 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				case BOMB:
 					ItemAmmoType ammoType = ItemAmmoType.fromSpecialAction(activeSpecialAction);
 					if (attackHandler.allAttacksExecuted()) {
-						if (itemDataHandler.hasAmmo(ammoType)) {
-							itemDataHandler.decreaseAmmo(ammoType);
+						if (itemDataHandler.hasAmmo(ammoType.toDataType())) {
+							itemDataHandler.decreaseAmmo(ammoType.toDataType());
 							attackHandler.startAttack(ammoType.name().toLowerCase(),
 									movementHandler.getMovingDirection().getNormalizedDirectionVector());
 							
-							if (!itemDataHandler.hasAmmo(ammoType)) {
+							if (!itemDataHandler.hasAmmo(ammoType.toDataType())) {
 								fireOutOfAmmoEvent(ammoType);
 							}
 						}
@@ -211,7 +210,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	@Override
 	public int getAmmo(ItemAmmoType ammoType) {
-		return itemDataHandler.getAmmo(ammoType);
+		return itemDataHandler.getAmmo(ammoType.toDataType());
 	}
 	
 	@Override
@@ -420,13 +419,15 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				EventObject respawnObject = (EventObject) event.parameterObject;
 				propertiesDataHandler.setRespawnPoint(respawnObject.getEventObjectCenterPosition());
 			}
-			GameDataService.fireQuickSaveEvent();
+			GameStateManager.fireQuickSaveEvent();
 		}
 		if (event.eventType == EventType.TAKE_PLAYERS_COINS) {
 			propertiesDataHandler.reduceCoins(event.intValue);
 		}
 		if (event.eventType == EventType.PLAYER_BUY_ITEM) {
-			itemDataHandler.collectItem((Item) event.parameterObject, this);
+			Item item = (Item) event.parameterObject;
+			itemDataHandler.collectItem(item);
+			item.displaySpecialKeyProperties();
 		}
 		if (event.eventType == EventType.FAST_TRAVEL_TO_MAP_POSITION) {
 			FastTravelPointProperties fastTravelTargetPoint = fastTravelDataHandler.getFastTravelPropertiesById(event.stringValue);

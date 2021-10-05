@@ -5,15 +5,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Align;
 
+import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.MenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
+import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.MainMenuAnimation;
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
-import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.dialog.LoadGameDialog;
 
 public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
@@ -210,7 +211,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	
 	public void startGame() {
 		createGameScreen(() -> {
-			GlobalValuesDataHandler.getInstance().initializeGameStartValues();
+			GlobalValuesDataHandler.getInstance().put(SpecialAction.JUMP.actionEnabledGlobalValueKey, true);
 			dispose();
 		});
 	}

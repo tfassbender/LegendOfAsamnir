@@ -18,7 +18,6 @@ import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class MapObjectDataHandler {
@@ -38,6 +37,7 @@ public class MapObjectDataHandler {
 	}
 	
 	private MapObjectDataContainer properties;
+	private String mapIdentifier;
 	
 	private Json json = new Json();
 	
@@ -49,7 +49,7 @@ public class MapObjectDataHandler {
 	}
 	
 	public ObjectMap<String, MapObjectStateProperties> getCurrentMapStates() {
-		MapObjectStates mapObjectStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
+		MapObjectStates mapObjectStates = properties.mapObjectStates.get(mapIdentifier);
 		if (mapObjectStates == null) {
 			return null;
 		}
@@ -71,16 +71,12 @@ public class MapObjectDataHandler {
 	}
 	
 	private MapObjectStateProperties getMapObjectProperties(String mapObjectId) {
-		MapObjectStates currentMapStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
+		MapObjectStates currentMapStates = properties.mapObjectStates.get(mapIdentifier);
 		if (currentMapStates == null) {
 			return null;
 		}
 		
 		return currentMapStates.states.get(mapObjectId);
-	}
-	
-	private String getCurrentMapIdentifier() {
-		return GameMapManager.getInstance().getMap().getCurrentMapIdentifier();
 	}
 	
 	public void addStatefulMapObject(StatefulMapObject mapObject) {
@@ -147,11 +143,11 @@ public class MapObjectDataHandler {
 	}
 	
 	private void setMapObjectProperties(String mapObjectId, MapObjectStateProperties serializedState) {
-		MapObjectStates currentMapStates = properties.mapObjectStates.get(getCurrentMapIdentifier());
+		MapObjectStates currentMapStates = properties.mapObjectStates.get(mapIdentifier);
 		if (currentMapStates == null) {
 			currentMapStates = new MapObjectStates();
 			currentMapStates.states = new ObjectMap<>();
-			properties.mapObjectStates.put(getCurrentMapIdentifier(), currentMapStates);
+			properties.mapObjectStates.put(mapIdentifier, currentMapStates);
 		}
 		
 		currentMapStates.states.put(mapObjectId, serializedState);
@@ -159,5 +155,9 @@ public class MapObjectDataHandler {
 	
 	public synchronized int getUniqueObjectCount() {
 		return objectCounter.addAndGet(1);
+	}
+	
+	public void setMapIdentifier(String mapIdentifier) {
+		this.mapIdentifier = mapIdentifier;
 	}
 }

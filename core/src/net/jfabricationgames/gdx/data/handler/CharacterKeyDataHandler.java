@@ -4,13 +4,10 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
+import net.jfabricationgames.gdx.data.handler.type.DataItem;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.item.Item;
 
 public class CharacterKeyDataHandler implements DataHandler {
-	
-	private static final String SPECIAL_KEY_MESSAGE_HEADER = "Special Key";
 	
 	private static CharacterKeyDataHandler instance;
 	
@@ -30,13 +27,9 @@ public class CharacterKeyDataHandler implements DataHandler {
 		properties = dataContainer.itemDataContainer;
 	}
 	
-	public void addKey(Item item) {
+	public void addKey(DataItem item) {
 		KeyItemProperties key = new KeyItemProperties(item.getKeyProperties());
 		properties.keys.add(key);
-		
-		if (KeyItemProperties.isSpecialKey(key.mapProperties)) {
-			displaySpecialKeyProperties(key);
-		}
 		
 		countKeys();
 	}
@@ -52,12 +45,6 @@ public class CharacterKeyDataHandler implements DataHandler {
 	
 	public int getNumNormalKeys() {
 		return properties.numNormalKeys;
-	}
-	
-	private void displaySpecialKeyProperties(KeyItemProperties key) {
-		OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-		onScreenTextBox.setHeaderText(SPECIAL_KEY_MESSAGE_HEADER);
-		onScreenTextBox.setText(KeyItemProperties.getSpecialKeyPropertiesAsString(key.mapProperties));
 	}
 	
 	public boolean containsKey(ObjectMap<String, String> keyProperties) {

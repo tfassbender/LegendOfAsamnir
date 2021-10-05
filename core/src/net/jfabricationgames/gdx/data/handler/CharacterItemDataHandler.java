@@ -2,13 +2,11 @@ package net.jfabricationgames.gdx.data.handler;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
-import net.jfabricationgames.gdx.hud.StatsCharacter;
-import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.item.ItemPropertyKeys;
+import net.jfabricationgames.gdx.data.handler.type.DataItem;
+import net.jfabricationgames.gdx.data.handler.type.DataItemAmmoType;
+import net.jfabricationgames.gdx.data.handler.type.DataItemPropertyKeys;
 
 public class CharacterItemDataHandler implements DataHandler {
 	
@@ -37,25 +35,25 @@ public class CharacterItemDataHandler implements DataHandler {
 		properties = dataContainer.itemDataContainer;
 	}
 	
-	public <T extends PlayableCharacter & StatsCharacter> void collectItem(Item item, T player) {
-		if (item.canBePicked(player)) {
-			if (item.containsProperty(ItemPropertyKeys.HEALTH.getPropertyName())) {
-				float itemHealth = item.getProperty(ItemPropertyKeys.HEALTH.getPropertyName(), Float.class);
+	public void collectItem(DataItem item) {
+		if (item.canBePicked()) {
+			if (item.containsProperty(DataItemPropertyKeys.HEALTH.getPropertyName())) {
+				float itemHealth = item.getProperty(DataItemPropertyKeys.HEALTH.getPropertyName(), Float.class);
 				characterProperties.increaseHealth(itemHealth);
 			}
-			if (item.containsProperty(ItemPropertyKeys.MANA.getPropertyName())) {
-				float itemMana = item.getProperty(ItemPropertyKeys.MANA.getPropertyName(), Float.class);
+			if (item.containsProperty(DataItemPropertyKeys.MANA.getPropertyName())) {
+				float itemMana = item.getProperty(DataItemPropertyKeys.MANA.getPropertyName(), Float.class);
 				characterProperties.increaseMana(itemMana);
 			}
-			if (item.containsProperty(ItemPropertyKeys.ARMOR.getPropertyName())) {
-				float itemArmor = item.getProperty(ItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
+			if (item.containsProperty(DataItemPropertyKeys.ARMOR.getPropertyName())) {
+				float itemArmor = item.getProperty(DataItemPropertyKeys.ARMOR.getPropertyName(), Float.class);
 				characterProperties.increaseArmor(itemArmor);
 			}
-			if (item.containsProperty(ItemPropertyKeys.AMMO.getPropertyName())) {
-				int itemAmmo = item.getProperty(ItemPropertyKeys.AMMO.getPropertyName(), Float.class).intValue();
-				if (item.containsProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName())) {
-					ItemAmmoType ammoType = ItemAmmoType
-							.getByNameIgnoreCase(item.getProperty(ItemPropertyKeys.AMMO_TYPE.getPropertyName(), String.class));
+			if (item.containsProperty(DataItemPropertyKeys.AMMO.getPropertyName())) {
+				int itemAmmo = item.getProperty(DataItemPropertyKeys.AMMO.getPropertyName(), Float.class).intValue();
+				if (item.containsProperty(DataItemPropertyKeys.AMMO_TYPE.getPropertyName())) {
+					DataItemAmmoType ammoType = DataItemAmmoType
+							.getByNameIgnoreCase(item.getProperty(DataItemPropertyKeys.AMMO_TYPE.getPropertyName(), String.class));
 					increaseAmmo(itemAmmo, ammoType);
 				}
 				else {
@@ -65,8 +63,8 @@ public class CharacterItemDataHandler implements DataHandler {
 			if (item.getItemName().equals(ITEM_NAME_KEY)) {
 				characterKeyContainer.addKey(item);
 			}
-			if (item.containsProperty(ItemPropertyKeys.VALUE.getPropertyName())) {
-				int itemValue = item.getProperty(ItemPropertyKeys.VALUE.getPropertyName(), Float.class).intValue();
+			if (item.containsProperty(DataItemPropertyKeys.VALUE.getPropertyName())) {
+				int itemValue = item.getProperty(DataItemPropertyKeys.VALUE.getPropertyName(), Float.class).intValue();
 				characterProperties.increaseCoins(itemValue);
 			}
 			
@@ -74,7 +72,7 @@ public class CharacterItemDataHandler implements DataHandler {
 		}
 	}
 	
-	private void increaseAmmo(int itemAmmo, ItemAmmoType ammoType) {
+	private void increaseAmmo(int itemAmmo, DataItemAmmoType ammoType) {
 		switch (ammoType) {
 			case ARROW:
 				properties.ammoArrow = Math.min(properties.ammoArrow + itemAmmo, properties.maxAmmoArrow);
@@ -87,11 +85,11 @@ public class CharacterItemDataHandler implements DataHandler {
 		}
 	}
 	
-	public boolean hasAmmo(ItemAmmoType ammoType) {
+	public boolean hasAmmo(DataItemAmmoType ammoType) {
 		return getAmmo(ammoType) > 0;
 	}
 	
-	public int getAmmo(ItemAmmoType ammoType) {
+	public int getAmmo(DataItemAmmoType ammoType) {
 		switch (ammoType) {
 			case ARROW:
 				return properties.ammoArrow;
@@ -102,7 +100,7 @@ public class CharacterItemDataHandler implements DataHandler {
 		}
 	}
 	
-	public void decreaseAmmo(ItemAmmoType ammoType) {
+	public void decreaseAmmo(DataItemAmmoType ammoType) {
 		switch (ammoType) {
 			case ARROW:
 				properties.ammoArrow = Math.max(properties.ammoArrow - 1, 0);

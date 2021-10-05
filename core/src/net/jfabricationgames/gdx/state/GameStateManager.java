@@ -1,5 +1,9 @@
 package net.jfabricationgames.gdx.state;
 
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
+
 public class GameStateManager {
 	
 	private static GameStateManager instance;
@@ -20,5 +24,9 @@ public class GameStateManager {
 	}
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
+	}
+
+	public static void fireQuickSaveEvent() {
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.QUICKSAVE));
 	}
 }

@@ -9,15 +9,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.handler.type.DataItem;
 import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.data.state.BeforeAddStatefulObject;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
+import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -27,9 +29,11 @@ import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.util.SerializationUtil;
 
-public class Item implements GameMapObject, StatefulMapObject, CutsceneControlledUnit {
+public class Item implements GameMapObject, StatefulMapObject, CutsceneControlledUnit, DataItem {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
+	
+	private static final String SPECIAL_KEY_MESSAGE_HEADER = "Special Key";
 	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
@@ -110,7 +114,7 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 			return null;
 		}
 		
-		String specialKeyProperties = KeyItemProperties.getSpecialKeyPropertiesAsString(getKeyProperties());
+		String specialKeyProperties = getSpecialKeyPropertiesAsString();
 		return specialKeyProperties.replace("\\n", "_").replace(" ", "_").replace(":", "_");
 	}
 	
@@ -137,10 +141,12 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		}
 	}
 	
-	public boolean canBePicked(PlayableCharacter player) {
+	@Override
+	public boolean canBePicked() {
 		return true;
 	}
 	
+	@Override
 	public void pickUp() {
 		picked = true;
 		playPickUpSound();
@@ -165,18 +171,49 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		}
 	}
 	
+	public void displaySpecialKeyProperties() {
+		if (isSpecialKey()) {
+			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
+			onScreenTextBox.setHeaderText(SPECIAL_KEY_MESSAGE_HEADER);
+			onScreenTextBox.setText(getSpecialKeyPropertiesAsString());
+		}
+	}
+	
+	private boolean isSpecialKey() {
+		ObjectMap<String, String> keyProperties = getKeyProperties();
+		if (keyProperties.size == 0 || (keyProperties.size == 1 && keyProperties.containsKey(KeyItemProperties.COMMON_REQUIRED_PROPERTY))) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private String getSpecialKeyPropertiesAsString() {
+		StringBuilder sb = new StringBuilder();
+		for (Entry<String, String> entry : getKeyProperties().entries()) {
+			String propertyKey = entry.key.substring(KeyItemProperties.KEY_PROPERTY_PREFIX.length());
+			String propertyValue = entry.value;
+			sb.append(propertyKey).append(':').append(' ').append(propertyValue).append('\n');
+		}
+		return sb.substring(0, sb.length() - 1);
+	}
+	
+	@Override
 	public ObjectMap<String, String> getKeyProperties() {
 		return KeyItemProperties.getKeyProperties(properties);
 	}
 	
+	@Override
 	public boolean containsProperty(String property) {
 		return properties.containsKey(property);
 	}
 	
+	@Override
 	public <T> T getProperty(String property, Class<T> clazz) {
 		return properties.get(property, clazz);
 	}
 	
+	@Override
 	public String getItemName() {
 		return itemName;
 	}

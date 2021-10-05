@@ -2,9 +2,9 @@ package net.jfabricationgames.gdx.data.handler;
 
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.character.player.implementation.CharacterAction;
 import net.jfabricationgames.gdx.data.container.CharacterDataContainer;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
+import net.jfabricationgames.gdx.data.handler.type.DataCharacterAction;
 
 public class CharacterPropertiesDataHandler implements DataHandler {
 	
@@ -26,9 +26,9 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 		properties = dataContainer.characterDataContainer;
 	}
 	
-	public void updateStats(float delta, CharacterAction action) {
+	public void updateStats(float delta, DataCharacterAction action) {
 		//recharge endurance by time
-		properties.endurance = Math.min(properties.endurance + delta * getEnduranceCharge(action), properties.maxEndurance);
+		properties.endurance = Math.min(properties.endurance + delta * action.getEnduranceRecharge(), properties.maxEndurance);
 		
 		//increase health, mana and endurance
 		if (properties.increaseHealth > 0f) {
@@ -60,20 +60,12 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 			}
 		}
 	}
-	private float getEnduranceCharge(CharacterAction action) {
-		if (action == CharacterAction.NONE || action == CharacterAction.IDLE) {
-			return properties.enduranceChargeIdle;
-		}
-		else {
-			return properties.enduranceChargeMoving;
-		}
-	}
 	
-	public boolean hasEnoughEndurance(CharacterAction action) {
+	public boolean hasEnoughEndurance(DataCharacterAction action) {
 		return properties.endurance >= action.getEnduranceCosts();
 	}
 	
-	public void reduceEnduranceForAction(CharacterAction action) {
+	public void reduceEnduranceForAction(DataCharacterAction action) {
 		properties.endurance = Math.max(0, properties.endurance - action.getEnduranceCosts());
 	}
 	

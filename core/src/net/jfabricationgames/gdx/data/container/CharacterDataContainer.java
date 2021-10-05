@@ -21,8 +21,6 @@ public class CharacterDataContainer {
 	public float increaseEndurance = 0f;
 	public float enduranceIncreasePerSecond = 25f;
 	
-	public float enduranceChargeMoving = 7.5f;
-	public float enduranceChargeIdle = 15f;
 	public float enduranceCostsSprint = 15f;
 	
 	public float armor = 50f;

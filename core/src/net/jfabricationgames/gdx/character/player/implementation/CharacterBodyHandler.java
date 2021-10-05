@@ -59,7 +59,9 @@ class CharacterBodyHandler {
 			Object sensorCollidingUserData = CollisionUtil.getOtherTypeUserData(PhysicsCollisionType.PLAYER_SENSOR, fixtureA, fixtureB);
 			
 			if (sensorCollidingUserData instanceof Item) {
-				player.itemDataHandler.collectItem((Item) sensorCollidingUserData, player);
+				Item item = (Item) sensorCollidingUserData;
+				player.itemDataHandler.collectItem(item);
+				item.displaySpecialKeyProperties();
 			}
 		}
 		

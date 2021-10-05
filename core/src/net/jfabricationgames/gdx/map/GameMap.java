@@ -39,64 +39,48 @@ public interface GameMap extends EventListener, Disposable {
 	}
 	
 	public String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
-	String OBJECT_NAME_ANIMAL = "animal";
-	String OBJECT_NAME_NPC = "npc";
-	String OBJECT_NAME_ENEMY = "enemy";
-	String OBJECT_NAME_OBJECT = "object";
-	String OBJECT_NAME_ITEM = "item";
-	String OBJECT_NAME_PLAYER = "player";
+	public String OBJECT_NAME_ANIMAL = "animal";
+	public String OBJECT_NAME_NPC = "npc";
+	public String OBJECT_NAME_ENEMY = "enemy";
+	public String OBJECT_NAME_OBJECT = "object";
+	public String OBJECT_NAME_ITEM = "item";
+	public String OBJECT_NAME_PLAYER = "player";
 	
 	public void beforeLoadMap(String mapIdentifier);
-	
 	public void afterLoadMap(String mapIdentifier);
 	
 	public void executeBeforeWorldStep();
-	
 	public void executeAfterWorldStep();
 	
 	public void processPlayer(float delta);
-	
 	public void processAndRender(float delta);
 	
 	public MapProperties getGlobalMapProperties();
 	
-	public float getMapWidth();
-	
-	public float getMapHeight();
-	
-	public void removeAnimal(Animal animal, Body body);
-	
-	public void removeEnemy(Enemy enemy, Body body);
-	
-	public void removeNpc(NonPlayableCharacter nonPlayableCharacter, Body body);
+	public GameMapGroundType getGroundTypeByName(String groundTypeWeb);
 	
 	public Object getUnitById(String unitId);
-	
-	public String getCurrentMapIdentifier();
 	
 	public void updateAfterLoadingGameState();
 	
 	public boolean isDungeonMap();
 	
-	public void removePhysicsObjectsWithType(MapObjectType invisiblePathBlocker);
+	public float getMapWidth();
+	public float getMapHeight();
 	
-	public void removeItem(Item item, Body body);
-	
-	public void addItemAboveGameObjects(Item item);
-	
+	public void addObject(GameObject gameObject);
 	public void addItem(Item item);
+	public void addItemAboveGameObjects(Item item);
+	public void addProjectile(Projectile projectile);
+	public void addEnemy(Enemy gameObject);
 	
 	public void addPostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction);
 	
-	public void addEnemy(Enemy gameObject);
-	
-	public void addObject(GameObject gameObject);
-	
 	public void removeObject(GameObject gameObject, Body body);
-	
+	public void removeItem(Item item, Body body);
 	public void removeProjectile(Projectile projectile, Body body);
-	
-	public void addProjectile(Projectile projectile);
-	
-	public GameMapGroundType getGroundTypeByName(String groundTypeWeb);
+	public void removeEnemy(Enemy enemy, Body body);
+	public void removeNpc(NonPlayableCharacter nonPlayableCharacter, Body body);
+	public void removeAnimal(Animal animal, Body body);
+	public void removePhysicsObjectsWithType(MapObjectType invisiblePathBlocker);
 }

@@ -1,6 +1,6 @@
-package net.jfabricationgames.gdx.item;
+package net.jfabricationgames.gdx.data.handler.type;
 
-public enum ItemPropertyKeys {
+public enum DataItemPropertyKeys {
 	
 	HEALTH("health"), //
 	MANA("mana"), //
@@ -11,7 +11,7 @@ public enum ItemPropertyKeys {
 	
 	private final String propertyName;
 	
-	private ItemPropertyKeys(String propertyName) {
+	private DataItemPropertyKeys(String propertyName) {
 		this.propertyName = propertyName;
 	}
 	

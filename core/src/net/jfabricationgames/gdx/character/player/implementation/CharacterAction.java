@@ -1,6 +1,8 @@
 package net.jfabricationgames.gdx.character.player.implementation;
 
-public enum CharacterAction {
+import net.jfabricationgames.gdx.data.handler.type.DataCharacterAction;
+
+public enum CharacterAction implements DataCharacterAction {
 	
 	NONE("", null, 0f, false, true, false, null), // just stay still
 	BLOCK("", null, 0f, false, false, true, null), // hold a shield to block attacks
@@ -14,6 +16,10 @@ public enum CharacterAction {
 	DIE("dwarf_die_", "die", 0f, true, false, true, null), // dwarf died
 	SHIELD_HIT("dwarf_shield_hit_", "shield_damage", 0f, true, false, true, null); // dwarf holding a shield (and gets hit)
 	
+	private static final String DEFAULT_ANIMATION_DIRECTION = "right";
+	private static final float ENDURANCE_RECHARGE_IDLE = 15f;
+	private static final float ENDURANCE_RECHARGE_MOVIN = 7.5f;
+	
 	private final String animationPrefix;
 	private final String sound;
 	private final float enduranceCosts;
@@ -21,8 +27,6 @@ public enum CharacterAction {
 	private final boolean interruptable;
 	private final boolean moveBlocking;
 	private final String attack;
-	
-	private static final String defaultAnimationDirection = "right";
 	
 	private CharacterAction(String animationPrefix, String sound, float enduranceCosts, boolean animated, boolean interruptable, boolean moveBlocking,
 			String attack) {
@@ -40,7 +44,7 @@ public enum CharacterAction {
 	}
 	
 	public String getAnimationName() {
-		return animationPrefix + defaultAnimationDirection;
+		return animationPrefix + DEFAULT_ANIMATION_DIRECTION;
 	}
 	
 	public String getSound() {
@@ -49,6 +53,15 @@ public enum CharacterAction {
 	
 	public float getEnduranceCosts() {
 		return enduranceCosts;
+	}
+	
+	public float getEnduranceRecharge() {
+		if (this == CharacterAction.NONE || this == CharacterAction.IDLE) {
+			return ENDURANCE_RECHARGE_IDLE;
+		}
+		else {
+			return ENDURANCE_RECHARGE_MOVIN;
+		}
 	}
 	
 	public String getAnimationPrefix() {

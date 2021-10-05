@@ -117,13 +117,10 @@ public class GameMapImplementation implements GameMap {
 	}
 	
 	@Override
-	public String getCurrentMapIdentifier() {
-		return currentMapIdentifier;
-	}
-	
-	@Override
 	public void beforeLoadMap(String mapIdentifier) {
 		currentMapIdentifier = mapIdentifier;
+		MapObjectDataHandler.getInstance().setMapIdentifier(mapIdentifier);
+		
 		removeCurrentMapIfPresent();
 		player.reAddToWorld();
 	}
