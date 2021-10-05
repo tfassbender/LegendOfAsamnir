@@ -210,10 +210,25 @@ public class GameMapImplementation implements GameMap {
 		continuousMapDamageTimeDelta = 0f;
 	}
 	
+	@Override
+	public void processRunePickUp(RuneType rune) {
+		switch (rune) {
+			case ALGIZ:
+				removePhysicsObjectsWithType(MapObjectType.INVISIBLE_PATH_BLOCKER);
+			case HAGALAZ:
+				GlobalValuesDataHandler.getInstance().put(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED, true);
+			default:
+				//other runes only set global values
+				break;
+		}
+		
+		GlobalValuesDataHandler.getInstance().put(rune.globalValueKeyCollected, true);
+	}
+	
 	private void updateRemovedObjects() {
 		if (RuneType.ALGIZ.isCollected()) {
 			// execute the picked up method again, to remove all objects that block invisible ways
-			RuneType.ALGIZ.runeItemPickedUp();
+			processRunePickUp(RuneType.ALGIZ);
 		}
 	}
 	

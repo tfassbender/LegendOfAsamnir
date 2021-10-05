@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.rune.RuneType;
 
 public class RuneItem extends Item {
@@ -21,6 +22,6 @@ public class RuneItem extends Item {
 	@Override
 	public void pickUp() {
 		super.pickUp();
-		type.runeItemPickedUp();
+		GameMapManager.getInstance().getMap().processRunePickUp(type);
 	}
 }

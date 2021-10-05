@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.projectile.Projectile;
+import net.jfabricationgames.gdx.rune.RuneType;
 
 public interface GameMap extends EventListener, Disposable {
 	
@@ -64,6 +65,8 @@ public interface GameMap extends EventListener, Disposable {
 	public void updateAfterLoadingGameState();
 	
 	public boolean isDungeonMap();
+	
+	public void processRunePickUp(RuneType rune);
 	
 	public float getMapWidth();
 	public float getMapHeight();
