@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.ObjectSet;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
-import net.jfabricationgames.gdx.attack.AttackHandler;
 
 public class CharacterStateMachine {
 	
@@ -32,11 +31,11 @@ public class CharacterStateMachine {
 	
 	private ArrayMap<String, CharacterState> states;
 	
-	private AttackHandler attackHandler;
+	private CharacterStateAttackHandler attackHandler;
 	
 	private String configFileName;
 	
-	public CharacterStateMachine(String stateConfigFile, String initialState, AttackHandler attackHandler) {
+	public CharacterStateMachine(String stateConfigFile, String initialState, CharacterStateAttackHandler attackHandler) {
 		this.attackHandler = attackHandler;
 		animationManager = AnimationManager.getInstance();
 		

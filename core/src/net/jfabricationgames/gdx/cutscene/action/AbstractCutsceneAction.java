@@ -4,10 +4,11 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
+import net.jfabricationgames.gdx.cutscene.function.CutsceneFunctionAction;
 import net.jfabricationgames.gdx.event.global.GlobalEventConfig;
 import net.jfabricationgames.gdx.map.GameMapManager;
 
-public abstract class AbstractCutsceneAction {
+public abstract class AbstractCutsceneAction implements CutsceneFunctionAction {
 	
 	public static final String CONTROLLED_UNIT_ID_PLAYER = "PLAYER";
 	
@@ -29,6 +30,11 @@ public abstract class AbstractCutsceneAction {
 		return executionTimeInSeconds >= actionConfig.executionDelayInSeconds;
 	}
 	
+	@Override
+	public boolean isMoveAction() {
+		return false;
+	}
+	
 	public Array<String> getFollowingActions() {
 		return actionConfig.executes;
 	}
@@ -39,7 +45,7 @@ public abstract class AbstractCutsceneAction {
 	
 	protected <T> T getUnitAs(String unitId, Class<T> clazz) {
 		Object controlledUnit = null;
-		if (unitId.equals(CONTROLLED_UNIT_ID_PLAYER)) {
+		if (unitId.equals(AbstractCutsceneAction.CONTROLLED_UNIT_ID_PLAYER)) {
 			controlledUnit = Player.getInstance();
 		}
 		else {
@@ -56,8 +62,9 @@ public abstract class AbstractCutsceneAction {
 		return clazz.cast(controlledUnit);
 	}
 	
-	public CutsceneControlledActionConfig getActionConfig() {
-		return actionConfig;
+	@Override
+	public String getControlledUnitId() {
+		return actionConfig.controlledUnitId;
 	}
 	
 	protected void executeGeneratedEvent(GlobalEventConfig generatedEvent) {

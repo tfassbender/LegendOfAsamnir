@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -134,7 +135,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createCameraMovementHandler() {
-		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera);
+		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera, () -> Player.getInstance().getPosition(),
+				() -> CutsceneHandler.getInstance().isCameraControlledByCutscene());
 	}
 	
 	private void initializeEventHandling() {

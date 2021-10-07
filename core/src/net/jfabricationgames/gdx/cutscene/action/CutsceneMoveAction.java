@@ -31,6 +31,11 @@ public class CutsceneMoveAction extends AbstractCutsceneMoveAction {
 		return getDistanceToTarget() < MAX_DISTANCE_TO_TARGET_POINT;
 	}
 	
+	@Override
+	public boolean isMoveAction() {
+		return true;
+	}
+	
 	private float getDistanceToTarget() {
 		return target.cpy().sub(controlledUnit.getPosition()).len();
 	}

@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Attack;
-import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
@@ -22,26 +21,16 @@ public class CharacterState {
 	protected CharacterState followingState;
 	protected ObjectSet<CharacterState> interruptingStates;
 	
-	protected AttackHandler attackHandler;
+	protected CharacterStateAttackHandler attackHandler;
 	private Array<Attack> attacks;
-	
-	private Array<CharacterStateListener> stateListeners;
 	
 	private Vector2 directionToTarget;
 	
-	public CharacterState(AnimationDirector<TextureRegion> animation, CharacterStateConfig config, AttackHandler attackHandler) {
+	public CharacterState(AnimationDirector<TextureRegion> animation, CharacterStateConfig config, CharacterStateAttackHandler attackHandler) {
 		this.animation = animation;
 		this.config = config;
 		this.attackHandler = attackHandler;
 		attacks = new Array<>();
-		stateListeners = new Array<>();
-	}
-	
-	public void addStateListener(CharacterStateListener listener) {
-		stateListeners.add(listener);
-	}
-	public void removeStateListener(CharacterStateListener listener) {
-		stateListeners.removeValue(listener, false);
 	}
 	
 	public AnimationDirector<TextureRegion> getAnimation() {
@@ -49,10 +38,6 @@ public class CharacterState {
 	}
 	
 	public void leaveState() {
-		for (CharacterStateListener listener : stateListeners) {
-			listener.leavingState(this);
-		}
-		
 		abortAttacks();
 	}
 	
@@ -64,10 +49,6 @@ public class CharacterState {
 	}
 	
 	public void enterState(CharacterState previousState) {
-		for (CharacterStateListener listener : stateListeners) {
-			listener.enteringState(this);
-		}
-		
 		if (config.flipAnimationOnEnteringOnly) {
 			flipAnimationToMovementDirection(previousState);
 		}

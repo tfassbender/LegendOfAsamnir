@@ -12,9 +12,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 
+import net.jfabricationgames.gdx.character.state.CharacterStateAttackHandler;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-public class AttackHandler {
+public class AttackHandler implements CharacterStateAttackHandler {
 	
 	private Body body;
 	private PhysicsCollisionType collisionType;
@@ -76,6 +77,7 @@ public class AttackHandler {
 		return true;
 	}
 	
+	@Override
 	public Attack startAttack(String attack, Vector2 direction) {
 		return startAttack(attack, direction, collisionType);
 	}

@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
@@ -195,6 +196,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	@BeforePersistState
 	public void updatePositionToDataContainer() {
 		propertiesDataHandler.setPlayerPosition(getPosition());
+	}
+	
+	@Override
+	public void centerCameraOnPlayer() {
+		CameraMovementHandler.getInstance().centerCameraOnPlayer();
 	}
 	
 	@Override

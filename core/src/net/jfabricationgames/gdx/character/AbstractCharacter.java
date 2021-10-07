@@ -19,9 +19,9 @@ import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfi
 import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceTypesConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
+import net.jfabricationgames.gdx.cutscene.CutsceneControlledCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
-import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
@@ -30,7 +30,7 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyPropertie
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
-public abstract class AbstractCharacter implements GameMapObject, ContactListener, CutsceneControlledUnit, CutsceneMoveableUnit {
+public abstract class AbstractCharacter implements GameMapObject, ContactListener, CutsceneControlledCharacter {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	public static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";

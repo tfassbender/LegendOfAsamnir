@@ -28,4 +28,6 @@ public interface PlayableCharacter extends StatsCharacter, GameMapObject, Cutsce
 	public void setActiveSpecialAction(SpecialAction specialAction);
 	
 	public int getCoins();
+	
+	public void centerCameraOnPlayer();
 }

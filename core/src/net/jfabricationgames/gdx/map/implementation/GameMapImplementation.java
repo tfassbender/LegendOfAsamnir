@@ -13,12 +13,12 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapDataHandler;
@@ -113,7 +113,7 @@ public class GameMapImplementation implements GameMap {
 	}
 	
 	private void updateCameraPosition() {
-		CameraMovementHandler.getInstance().centerCameraOnPlayer();
+		player.centerCameraOnPlayer();
 	}
 	
 	@Override
@@ -441,6 +441,10 @@ public class GameMapImplementation implements GameMap {
 	
 	@Override
 	public Object getUnitById(String unitId) {
+		if (AbstractCutsceneAction.CONTROLLED_UNIT_ID_PLAYER.equals(unitId)) {
+			return player;
+		}
+		
 		for (Enemy enemy : enemies) {
 			if (unitId.equals(enemy.getUnitId())) {
 				return enemy;

@@ -15,7 +15,8 @@ public abstract class AbstractCutsceneMoveAction extends AbstractCutsceneAction 
 	}
 	
 	protected void findTarget() {
-		if (actionConfig.controlledUnitId != null && actionConfig.controlledUnitId.equals(actionConfig.targetPositionRelativeToUnitId) && actionConfig.updatePositionRelativeToTarget) {
+		if (actionConfig.controlledUnitId != null && actionConfig.controlledUnitId.equals(actionConfig.targetPositionRelativeToUnitId)
+				&& actionConfig.updatePositionRelativeToTarget) {
 			throw new IllegalStateException(
 					"The target position can't be relative to the controlled unit AND be updated. The unit will never reach the target.");
 		}

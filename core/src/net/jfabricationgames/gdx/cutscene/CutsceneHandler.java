@@ -8,11 +8,10 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-import net.jfabricationgames.gdx.character.AbstractCharacter;
-import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveCameraAction;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.cutscene.function.IsUnitMovingFunction;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
@@ -120,7 +119,8 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	private void stopPlayerAction() {
-		Player.getInstance().changeToIdleState();
+		((CutsceneMoveableUnit) GameMapManager.getInstance().getMap().getUnitById(AbstractCutsceneAction.CONTROLLED_UNIT_ID_PLAYER))
+				.changeToIdleState();
 	}
 	
 	private void stopCutsceneActorsActions(CutsceneConfig cutscene) {
@@ -128,8 +128,8 @@ public class CutsceneHandler implements EventListener {
 		for (CutsceneControlledActionConfig actionConfig : cutscene.controlledActions.values()) {
 			if (actionConfig.controlledUnitId != null) {
 				Object controlledUnit = gameMap.getUnitById(actionConfig.controlledUnitId);
-				if (controlledUnit instanceof AbstractCharacter) {
-					((AbstractCharacter) controlledUnit).changeToIdleState();
+				if (controlledUnit instanceof CutsceneControlledCharacter) {
+					((CutsceneControlledCharacter) controlledUnit).changeToIdleState();
 				}
 			}
 		}
@@ -137,12 +137,8 @@ public class CutsceneHandler implements EventListener {
 	
 	private void addExecutedAction(CutsceneControlledActionConfig actionConfig, String actionId) {
 		Gdx.app.debug(getClass().getSimpleName(), "adding action config for cutscene '" + activeCutsceneId + "'; actionId: '" + actionId + "'");
-		AbstractCutsceneAction action = CutsceneActionFactory.createAction(actionConfig, this);
+		AbstractCutsceneAction action = CutsceneActionFactory.createAction(actionConfig, new IsUnitMovingFunction(executedActions));
 		executedActions.add(action);
-	}
-	
-	public IsUnitMovingFunction createIsUnitMovingFunction() {
-		return new IsUnitMovingFunction(executedActions);
 	}
 	
 	public void act(float delta) {
