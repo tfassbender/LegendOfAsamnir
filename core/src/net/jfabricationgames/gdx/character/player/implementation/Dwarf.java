@@ -13,6 +13,7 @@ import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
@@ -274,6 +275,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		if (action != CharacterAction.IDLE) {
 			changeAction(CharacterAction.IDLE);
 		}
+	}
+	
+	@Override
+	public String getUnitId() {
+		return CutsceneHandler.CONTROLLED_UNIT_ID_PLAYER;
 	}
 	
 	@Override

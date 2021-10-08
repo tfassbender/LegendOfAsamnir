@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.cutscene;
 
 import java.util.Iterator;
+import java.util.function.Supplier;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -10,16 +11,15 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveCameraAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.cutscene.function.IsUnitMovingFunction;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.map.GameMapManager;
 
 public class CutsceneHandler implements EventListener {
 	
@@ -31,6 +31,11 @@ public class CutsceneHandler implements EventListener {
 	private Array<AbstractCutsceneAction> executedActions;
 	private String activeCutsceneId = null;
 	
+	private CutsceneUnitProvider unitProvider;
+	private Supplier<Boolean> isTextDisplayed;
+	
+	public static final String CONTROLLED_UNIT_ID_PLAYER = "PLAYER";
+	
 	public static synchronized CutsceneHandler getInstance() {
 		if (instance == null) {
 			instance = new CutsceneHandler();
@@ -38,7 +43,7 @@ public class CutsceneHandler implements EventListener {
 		return instance;
 	}
 	
-	public CutsceneHandler() {
+	private CutsceneHandler() {
 		Gdx.app.log(getClass().getSimpleName(), "creating CutsceneHandler");
 		loadCutscenes();
 		executedActions = new Array<>();
@@ -58,8 +63,16 @@ public class CutsceneHandler implements EventListener {
 		}
 	}
 	
+	public void setUnitProvider(CutsceneUnitProvider unitProvider) {
+		this.unitProvider = unitProvider;
+	}
+	
+	public void setTextDisplayedSupplier(Supplier<Boolean> isTextDisplayed) {
+		this.isTextDisplayed = isTextDisplayed;
+	}
+	
 	public boolean isCutsceneActive() {
-		return activeCutsceneId != null || OnScreenTextBox.getInstance().isDisplaying();
+		return activeCutsceneId != null || isTextDisplayed.get();
 	}
 	
 	public boolean isCameraControlledByCutscene() {
@@ -119,15 +132,13 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	private void stopPlayerAction() {
-		((CutsceneMoveableUnit) GameMapManager.getInstance().getMap().getUnitById(AbstractCutsceneAction.CONTROLLED_UNIT_ID_PLAYER))
-				.changeToIdleState();
+		((CutsceneMoveableUnit) unitProvider.getUnitById(CONTROLLED_UNIT_ID_PLAYER)).changeToIdleState();
 	}
 	
 	private void stopCutsceneActorsActions(CutsceneConfig cutscene) {
-		GameMap gameMap = GameMapManager.getInstance().getMap();
 		for (CutsceneControlledActionConfig actionConfig : cutscene.controlledActions.values()) {
 			if (actionConfig.controlledUnitId != null) {
-				Object controlledUnit = gameMap.getUnitById(actionConfig.controlledUnitId);
+				Object controlledUnit = unitProvider.getUnitById(actionConfig.controlledUnitId);
 				if (controlledUnit instanceof CutsceneControlledCharacter) {
 					((CutsceneControlledCharacter) controlledUnit).changeToIdleState();
 				}
@@ -137,7 +148,7 @@ public class CutsceneHandler implements EventListener {
 	
 	private void addExecutedAction(CutsceneControlledActionConfig actionConfig, String actionId) {
 		Gdx.app.debug(getClass().getSimpleName(), "adding action config for cutscene '" + activeCutsceneId + "'; actionId: '" + actionId + "'");
-		AbstractCutsceneAction action = CutsceneActionFactory.createAction(actionConfig, new IsUnitMovingFunction(executedActions));
+		AbstractCutsceneAction action = CutsceneActionFactory.createAction(unitProvider, actionConfig, new IsUnitMovingFunction(executedActions));
 		executedActions.add(action);
 	}
 	

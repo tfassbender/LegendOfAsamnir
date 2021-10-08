@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -13,8 +12,8 @@ public class CutsceneShowOnScreenTextAction extends AbstractCutsceneAction imple
 	private boolean eventFired = false;
 	private boolean eventHandlingFinished = false;
 	
-	public CutsceneShowOnScreenTextAction(CutsceneControlledActionConfig actionConfig) {
-		super(actionConfig);
+	public CutsceneShowOnScreenTextAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		super(unitProvider, actionConfig);
 		EventHandler.getInstance().registerEventListener(this);
 	}
 	
@@ -24,7 +23,7 @@ public class CutsceneShowOnScreenTextAction extends AbstractCutsceneAction imple
 			GlobalEventConfig generatedEvent = new GlobalEventConfig();
 			generatedEvent.executionType = GlobalEventExecutionType.SHOW_ON_SCREEN_TEXT;
 			generatedEvent.executionParameters = actionConfig.executionParameters;
-					
+			
 			executeGeneratedEvent(generatedEvent);
 			eventFired = true;
 		}

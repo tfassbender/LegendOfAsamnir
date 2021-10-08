@@ -2,7 +2,6 @@ package net.jfabricationgames.gdx.cutscene.action;
 
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -16,8 +15,8 @@ public class CutscenePlayerChoiceAction extends AbstractCutsceneAction implement
 	private boolean eventHandlingFinished = false;
 	private int chosenOption = -1;
 	
-	public CutscenePlayerChoiceAction(CutsceneControlledActionConfig actionConfig) {
-		super(actionConfig);
+	public CutscenePlayerChoiceAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		super(unitProvider, actionConfig);
 		EventHandler.getInstance().registerEventListener(this);
 	}
 	

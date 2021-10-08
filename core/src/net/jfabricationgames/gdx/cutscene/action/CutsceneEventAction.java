@@ -1,6 +1,5 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -11,8 +10,8 @@ public class CutsceneEventAction extends AbstractCutsceneAction implements Event
 	private boolean eventFired = false;
 	private boolean eventHandlingFinished = false;
 	
-	public CutsceneEventAction(CutsceneControlledActionConfig actionConfig) {
-		super(actionConfig);
+	public CutsceneEventAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		super(unitProvider, actionConfig);
 		EventHandler.getInstance().registerEventListener(this);
 	}
 	

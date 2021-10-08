@@ -3,7 +3,6 @@ package net.jfabricationgames.gdx.cutscene.action;
 import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.cutscene.function.IsUnitMovingFunction;
 
 public class CutsceneMoveCameraAction extends AbstractCutsceneMoveAction {
@@ -11,8 +10,9 @@ public class CutsceneMoveCameraAction extends AbstractCutsceneMoveAction {
 	private CameraMovementHandler cameraMovementHandler;
 	private IsUnitMovingFunction isUnitMovingFunction;
 	
-	public CutsceneMoveCameraAction(CutsceneControlledActionConfig actionConfig, IsUnitMovingFunction isUnitMovingFunction) {
-		super(actionConfig);
+	public CutsceneMoveCameraAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig,
+			IsUnitMovingFunction isUnitMovingFunction) {
+		super(unitProvider, actionConfig);
 		this.isUnitMovingFunction = isUnitMovingFunction;
 		cameraMovementHandler = CameraMovementHandler.getInstance();
 		

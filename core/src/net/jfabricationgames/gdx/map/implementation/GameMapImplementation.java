@@ -18,7 +18,8 @@ import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
-import net.jfabricationgames.gdx.cutscene.action.AbstractCutsceneAction;
+import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.data.handler.MapDataHandler;
@@ -440,8 +441,8 @@ public class GameMapImplementation implements GameMap {
 	}
 	
 	@Override
-	public Object getUnitById(String unitId) {
-		if (AbstractCutsceneAction.CONTROLLED_UNIT_ID_PLAYER.equals(unitId)) {
+	public CutsceneControlledUnit getUnitById(String unitId) {
+		if (CutsceneHandler.CONTROLLED_UNIT_ID_PLAYER.equals(unitId)) {
 			return player;
 		}
 		

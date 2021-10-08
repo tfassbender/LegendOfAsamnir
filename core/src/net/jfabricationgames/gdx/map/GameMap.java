@@ -10,13 +10,14 @@ import com.badlogic.gdx.utils.Disposable;
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.rune.RuneType;
 
-public interface GameMap extends EventListener, Disposable {
+public interface GameMap extends EventListener, CutsceneUnitProvider, Disposable {
 	
 	enum GlobalMapPropertyKeys {
 		
@@ -59,8 +60,6 @@ public interface GameMap extends EventListener, Disposable {
 	public MapProperties getGlobalMapProperties();
 	
 	public GameMapGroundType getGroundTypeByName(String groundTypeWeb);
-	
-	public Object getUnitById(String unitId);
 	
 	public void updateAfterLoadingGameState();
 	

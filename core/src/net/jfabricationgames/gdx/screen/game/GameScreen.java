@@ -22,6 +22,7 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
+import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputManager;
@@ -84,6 +85,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		createHud();
 		createCameraMovementHandler();
 		initializeEventHandling();
+		initializeCutsceneHandler();
 		
 		ScreenManager.getInstance().setGameScreen(this);
 	}
@@ -120,7 +122,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		map = GameMapManager.getInstance().getMap();
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
-		GameMapManager.getInstance().showMap(initialMapIdentifier);
+		gameMapManager.showMap(initialMapIdentifier);
 	}
 	
 	private void changeMap(String mapIdentifier) {
@@ -136,12 +138,17 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void createCameraMovementHandler() {
 		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera, () -> Player.getInstance().getPosition(),
-				() -> CutsceneHandler.getInstance().isCameraControlledByCutscene());
+				() -> CutsceneHandler.getInstance().isCameraControlledByCutscene() || OnScreenTextBox.getInstance().isDisplaying());
 	}
 	
 	private void initializeEventHandling() {
 		EventHandler.getInstance().registerEventListener(this);
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
+	}
+	
+	private void initializeCutsceneHandler() {
+		CutsceneHandler.getInstance().setUnitProvider(map);
+		CutsceneHandler.getInstance().setTextDisplayedSupplier(() -> OnScreenTextBox.getInstance().isDisplaying());
 	}
 	
 	@Override

@@ -1,11 +1,9 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
-
 public class CutsceneWaitAction extends AbstractCutsceneAction {
 	
-	public CutsceneWaitAction(CutsceneControlledActionConfig actionConfig) {
-		super(actionConfig);
+	public CutsceneWaitAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		super(unitProvider, actionConfig);
 	}
 	
 	@Override

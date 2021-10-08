@@ -2,20 +2,18 @@ package net.jfabricationgames.gdx.cutscene.action;
 
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.character.player.Player;
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
 import net.jfabricationgames.gdx.cutscene.function.CutsceneFunctionAction;
 import net.jfabricationgames.gdx.event.global.GlobalEventConfig;
-import net.jfabricationgames.gdx.map.GameMapManager;
 
 public abstract class AbstractCutsceneAction implements CutsceneFunctionAction {
-	
-	public static final String CONTROLLED_UNIT_ID_PLAYER = "PLAYER";
 	
 	protected CutsceneControlledActionConfig actionConfig;
 	protected float executionTimeInSeconds = 0f;
 	
-	public AbstractCutsceneAction(CutsceneControlledActionConfig actionConfig) {
+	private CutsceneUnitProvider unitProvider;
+	
+	public AbstractCutsceneAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		this.unitProvider = unitProvider;
 		this.actionConfig = actionConfig;
 	}
 	
@@ -39,18 +37,13 @@ public abstract class AbstractCutsceneAction implements CutsceneFunctionAction {
 		return actionConfig.executes;
 	}
 	
-	protected <T> T getControlledUnitAs(Class<T> clazz) {
+	protected <T extends CutsceneControlledUnit> T getControlledUnitAs(Class<T> clazz) {
 		return getUnitAs(actionConfig.controlledUnitId, clazz);
 	}
 	
-	protected <T> T getUnitAs(String unitId, Class<T> clazz) {
-		Object controlledUnit = null;
-		if (unitId.equals(AbstractCutsceneAction.CONTROLLED_UNIT_ID_PLAYER)) {
-			controlledUnit = Player.getInstance();
-		}
-		else {
-			controlledUnit = GameMapManager.getInstance().getMap().getUnitById(unitId);
-		}
+	protected <T extends CutsceneControlledUnit> T getUnitAs(String unitId, Class<T> clazz) {
+		CutsceneControlledUnit controlledUnit = null;
+		controlledUnit = unitProvider.getUnitById(unitId);
 		
 		if (controlledUnit == null) {
 			throw new IllegalStateException("The controlled unit with the id '" + unitId + "' was not found.");

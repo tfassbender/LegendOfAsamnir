@@ -7,10 +7,11 @@ import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Attack;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledState;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public class CharacterState {
+public class CharacterState implements CutsceneControlledState {
 	
 	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("enemy");
 	
@@ -106,6 +107,7 @@ public class CharacterState {
 	/**
 	 * Set the direction to the target (BEFORE changing to this state), to creating an attack, that aims in the correct direction
 	 */
+	@Override
 	public void setAttackDirection(Vector2 directionToTarget) {
 		this.directionToTarget = directionToTarget;
 	}

@@ -1,13 +1,11 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
-
 public class CutsceneMoveAction extends AbstractCutsceneMoveAction {
 	
 	private CutsceneMoveableUnit controlledUnit;
 	
-	public CutsceneMoveAction(CutsceneControlledActionConfig actionConfig) {
-		super(actionConfig);
+	public CutsceneMoveAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		super(unitProvider, actionConfig);
 		controlledUnit = getControlledUnitAs(CutsceneMoveableUnit.class);
 		findTarget();
 	}

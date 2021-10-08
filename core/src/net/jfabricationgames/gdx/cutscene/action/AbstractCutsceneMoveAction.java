@@ -2,16 +2,14 @@ package net.jfabricationgames.gdx.cutscene.action;
 
 import com.badlogic.gdx.math.Vector2;
 
-import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionConfig;
-
 public abstract class AbstractCutsceneMoveAction extends AbstractCutsceneAction {
 	
 	public static final float MAX_DISTANCE_TO_TARGET_POINT = 0.1f;
 	
 	protected Vector2 target;
 	
-	public AbstractCutsceneMoveAction(CutsceneControlledActionConfig actionConfig) {
-		super(actionConfig);
+	public AbstractCutsceneMoveAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig) {
+		super(unitProvider, actionConfig);
 	}
 	
 	protected void findTarget() {
