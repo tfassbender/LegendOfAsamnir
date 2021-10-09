@@ -7,17 +7,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.event.PlayerChoice;
+import net.jfabricationgames.gdx.event.global.GlobalEventTextBox;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 import net.jfabricationgames.gdx.util.GameUtil;
 
-public class OnScreenTextBox implements Disposable, InputActionListener {
+public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox, Disposable {
 	
 	protected static final float TEXT_SCALE = 1f;
 	protected static final int DISPLAYABLE_LINES = 5;

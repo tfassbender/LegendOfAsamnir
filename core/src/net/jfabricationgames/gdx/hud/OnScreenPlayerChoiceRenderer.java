@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.event.PlayerChoice;
 import net.jfabricationgames.gdx.input.InputActionListener.Parameters;
 import net.jfabricationgames.gdx.input.InputActionListener.Type;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;

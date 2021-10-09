@@ -3,11 +3,10 @@ package net.jfabricationgames.gdx.event.global;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.event.PlayerChoice;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public enum GlobalEventExecutionType {
@@ -26,9 +25,8 @@ public enum GlobalEventExecutionType {
 			String colorHeader = eventConfig.executionParameters.get(MAP_KEY_COLOR_HEADER);
 			boolean showNextPageIcon = Boolean.parseBoolean(eventConfig.executionParameters.get(MAP_KEY_SHOW_NEXT_PAGE_ICON));
 			
-			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(displayTextHeader, GameUtil.getColorFromRGB(colorHeader, Color.RED));
-			onScreenTextBox.setText(displayText, showNextPageIcon);
+			textBox.setHeaderText(displayTextHeader, GameUtil.getColorFromRGB(colorHeader, Color.RED));
+			textBox.setText(displayText, showNextPageIcon);
 		}
 	},
 	SHOW_PLAYER_CHOICE {
@@ -41,7 +39,7 @@ public enum GlobalEventExecutionType {
 		@Override
 		public void execute(GlobalEventConfig eventConfig) {
 			if (eventConfig.parameterObject != null && eventConfig.parameterObject instanceof PlayerChoice) {
-				OnScreenTextBox.getInstance().showPlayerChoice((PlayerChoice) eventConfig.parameterObject);
+				textBox.showPlayerChoice((PlayerChoice) eventConfig.parameterObject);
 			}
 			else {
 				PlayerChoice playerChoice = new PlayerChoice();
@@ -56,7 +54,7 @@ public enum GlobalEventExecutionType {
 					}
 				}
 				
-				OnScreenTextBox.getInstance().showPlayerChoice(playerChoice);
+				textBox.showPlayerChoice(playerChoice);
 			}
 		}
 	},
@@ -117,6 +115,12 @@ public enum GlobalEventExecutionType {
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CLOSE_LOCK).setStringValue(lockId));
 		}
 	};
+	
+	private static GlobalEventTextBox textBox;
+	
+	public static void setGlobalEventTextBox(GlobalEventTextBox textBox) {
+		GlobalEventExecutionType.textBox = textBox;
+	}
 	
 	public abstract void execute(GlobalEventConfig eventConfig);
 }

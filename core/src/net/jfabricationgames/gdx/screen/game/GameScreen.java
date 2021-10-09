@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.event.global.GlobalEventExecutionType;
 import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.input.InputActionListener;
@@ -144,6 +145,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void initializeEventHandling() {
 		EventHandler.getInstance().registerEventListener(this);
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
+		GlobalEventExecutionType.setGlobalEventTextBox(OnScreenTextBox.getInstance());
 	}
 	
 	private void initializeCutsceneHandler() {

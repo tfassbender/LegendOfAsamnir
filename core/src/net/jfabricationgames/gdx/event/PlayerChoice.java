@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.condition.choice;
+package net.jfabricationgames.gdx.event;
 
 import com.badlogic.gdx.utils.Array;
 

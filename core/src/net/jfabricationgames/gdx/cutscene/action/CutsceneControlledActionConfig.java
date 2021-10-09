@@ -4,10 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.condition.choice.PlayerChoice;
 import net.jfabricationgames.gdx.condition.execution.ConditionalExecution;
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledActionType;
 import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.PlayerChoice;
 
 public class CutsceneControlledActionConfig {
 	
