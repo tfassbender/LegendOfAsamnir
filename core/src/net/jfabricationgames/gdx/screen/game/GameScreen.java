@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.condition.ConditionHandler;
+import net.jfabricationgames.gdx.condition.ConditionType;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
@@ -31,6 +32,7 @@ import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
+import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.menu.GameOverMenuScreen;
@@ -88,6 +90,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		createCameraMovementHandler();
 		initializeEventHandling();
 		initializeCutsceneHandler();
+		initializeConditionType();
 		
 		ScreenManager.getInstance().setGameScreen(this);
 	}
@@ -153,6 +156,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void initializeCutsceneHandler() {
 		CutsceneHandler.getInstance().setUnitProvider(map);
 		CutsceneHandler.getInstance().setTextDisplayedSupplier(() -> OnScreenTextBox.getInstance().isDisplaying());
+	}
+	
+	private void initializeConditionType() {
+		ConditionType.setIsStateSwitchActive(StateSwitchObject::isStateSwitchActive);
 	}
 	
 	@Override

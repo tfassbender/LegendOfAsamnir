@@ -1,9 +1,10 @@
 package net.jfabricationgames.gdx.condition;
 
+import java.util.function.Function;
+
 import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
-import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 import net.jfabricationgames.gdx.rune.RuneType;
 
 public enum ConditionType {
@@ -61,7 +62,7 @@ public enum ConditionType {
 		@Override
 		public boolean check(Condition condition) {
 			String stateSwitchId = condition.parameters.get(PARAMETER_STATE_SWITCH_ID);
-			return StateSwitchObject.isStateSwitchActive(stateSwitchId);
+			return isStateSwitchActive.apply(stateSwitchId);
 		}
 	},
 	GLOBAL_VALUE_SET {
@@ -91,6 +92,12 @@ public enum ConditionType {
 	
 	private static final String CONDITIONAL_PARAMETERS_KEY_CONDITION_1 = "condition";
 	private static final String CONDITIONAL_PARAMETERS_KEY_CONDITION_2 = "condition2";
+	
+	private static Function<String, Boolean> isStateSwitchActive;
+	
+	public static void setIsStateSwitchActive(Function<String, Boolean> isStateSwitchActive) {
+		ConditionType.isStateSwitchActive = isStateSwitchActive;
+	}
 	
 	public abstract boolean check(Condition condition);
 }
