@@ -1,0 +1,38 @@
+{
+    demoLevel_openLock_ifAllSwitchesAreActivated: {
+        conditionId: demoLevel_allSwitchesActivated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demoLevel_lock_switch_group_1
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demoLevel_lock_switch_group_1
+                }
+            }
+        }
+    },
+    demoLevel_changeToNextMap_ifEndItemIsCollected: {
+        conditionId: demoLevel_endItemCollected,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CHANGE_MAP,
+                executionParameters: {
+                    map: test_map_4,
+                }
+            }
+        },
+        elseCase: {
+            type: NO_EXECUTION,
+        }
+    }
+}

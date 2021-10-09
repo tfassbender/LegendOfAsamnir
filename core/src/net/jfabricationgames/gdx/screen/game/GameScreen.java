@@ -13,6 +13,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.condition.ConditionHandler;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
@@ -146,6 +147,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		EventHandler.getInstance().registerEventListener(this);
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
 		GlobalEventExecutionType.setGlobalEventTextBox(OnScreenTextBox.getInstance());
+		GlobalEventExecutionType.setConditionalExecutor(ConditionHandler.getInstance());
 	}
 	
 	private void initializeCutsceneHandler() {

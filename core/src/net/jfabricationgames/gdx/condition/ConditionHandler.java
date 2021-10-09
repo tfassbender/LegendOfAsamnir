@@ -5,9 +5,13 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
-public class ConditionHandler {
+import net.jfabricationgames.gdx.condition.execution.ConditionalExecution;
+import net.jfabricationgames.gdx.event.global.GlobalEventConditionalExecutor;
+
+public class ConditionHandler implements GlobalEventConditionalExecutor {
 	
-	public static final String CONDITIONS_CONFIG_FILE_PATH = "config/condition/conditions.json";
+	private static final String CONDITIONS_CONFIG_FILE_PATH = "config/condition/condition/conditions.json";
+	private static final String CONDITIONAL_EXECUTIONS_CONFIG_FILE_PATH = "config/condition/execution/conditionalExecutions.json";
 	
 	private static ConditionHandler instance;
 	
@@ -19,9 +23,11 @@ public class ConditionHandler {
 	}
 	
 	private ObjectMap<String, Condition> conditions;
+	private ObjectMap<String, ConditionalExecution> conditionalExecutions;
 	
 	private ConditionHandler() {
 		loadConditions();
+		loadConditionalExecutions();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,6 +42,19 @@ public class ConditionHandler {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	private void loadConditionalExecutions() {
+		Json json = new Json();
+		conditionalExecutions = new ObjectMap<String, ConditionalExecution>();
+		
+		Array<String> conditionFiles = json.fromJson(Array.class, String.class, Gdx.files.internal(CONDITIONAL_EXECUTIONS_CONFIG_FILE_PATH));
+		for (String conditionFile : conditionFiles) {
+			ObjectMap<String, ConditionalExecution> conditionalExecution = json.fromJson(ObjectMap.class, ConditionalExecution.class,
+					Gdx.files.internal(conditionFile));
+			conditionalExecutions.putAll(conditionalExecution);
+		}
+	}
+	
 	public boolean isConditionMet(String conditionId) {
 		Condition condition = conditions.get(conditionId);
 		if (condition == null) {
@@ -44,5 +63,17 @@ public class ConditionHandler {
 		}
 		
 		return condition.check();
+	}
+	
+	@Override
+	public void executeConditional(String conditionalExecutionId) {
+		ConditionalExecution conditionalExecution = conditionalExecutions.get(conditionalExecutionId);
+		if (conditionalExecution == null) {
+			throw new IllegalStateException("A conditional execution with the id '" + conditionalExecutionId
+					+ "' was not found. Conditional executions need to be added to the config file '" + CONDITIONAL_EXECUTIONS_CONFIG_FILE_PATH
+					+ "'");
+		}
+		
+		conditionalExecution.execute();
 	}
 }

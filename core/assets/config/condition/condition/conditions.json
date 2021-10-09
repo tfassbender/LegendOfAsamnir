@@ -1,0 +1,5 @@
+[
+	config/condition/condition/common.json,
+	config/condition/condition/levels/demo.json,
+	config/condition/condition/levels/tutorial.json,
+]

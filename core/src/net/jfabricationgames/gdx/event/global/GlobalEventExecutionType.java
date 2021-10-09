@@ -82,7 +82,7 @@ public enum GlobalEventExecutionType {
 		
 		@Override
 		public void execute(GlobalEventConfig eventConfig) {
-			eventConfig.condition.execute();
+			conditionalExecutor.executeConditional(eventConfig.conditionalExecutionId);
 		}
 	},
 	SET_ITEM {
@@ -117,6 +117,11 @@ public enum GlobalEventExecutionType {
 	};
 	
 	private static GlobalEventTextBox textBox;
+	private static GlobalEventConditionalExecutor conditionalExecutor;
+	
+	public static void setConditionalExecutor(GlobalEventConditionalExecutor conditionalExecutor) {
+		GlobalEventExecutionType.conditionalExecutor = conditionalExecutor;
+	}
 	
 	public static void setGlobalEventTextBox(GlobalEventTextBox textBox) {
 		GlobalEventExecutionType.textBox = textBox;

@@ -36,21 +36,7 @@
 			stringValue: go_to_map_4,
 		},
 		executionType: CONDITIONAL_EVENT,
-		condition: {
-			conditionId: demoLevel_endItemCollected,
-			thenCase: {
-				type: EVENT,
-				eventConfig: {
-					executionType: CHANGE_MAP,
-					executionParameters: {
-						map: test_map_4,
-					}
-				}
-			},
-			elseCase: {
-				type: NO_EXECUTION,
-			}
-		}
+		conditionalExecutionId: demoLevel_changeToNextMap_ifEndItemIsCollected,
 	},
 	demoLevelChangeToDungeonMap: {
 		event: {
@@ -89,27 +75,7 @@
 			stringValue: demoLevel_switch_group_1,
 		}
 		executionType: CONDITIONAL_EVENT,
-		condition: {
-			conditionId: demoLevel_allSwitchesActivated,
-			thenCase: {
-				type: EVENT,
-				eventConfig: {
-					executionType: OPEN_LOCK,
-					executionParameters: {
-						lockId: demoLevel_lock_switch_group_1
-					}
-				}
-			}
-			elseCase: {
-				type: EVENT,
-				eventConfig: {
-					executionType: CLOSE_LOCK,
-					executionParameters: {
-						lockId: demoLevel_lock_switch_group_1
-					}
-				}
-			}
-		}
+		conditionalExecutionId: demoLevel_openLock_ifAllSwitchesAreActivated,
 	},
 	demoLevel_interactWithGuardBlockingTheWay: {
 		event: {

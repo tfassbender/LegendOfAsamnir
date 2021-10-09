@@ -29,9 +29,9 @@ The project uses a data-driven approach, to make it configurable and reusable fo
 
 The structure of the libGDX project is documented by [libGDX](https://libgdx.badlogicgames.com/documentation/gettingstarted/Creating%20Projects.html). The mayority of the classes is to be found in the `core` project.
 
-The main class of the project is the class [DwarfScrollerGame](core/src/net/jfabricationgames/gdx/DwarfScrollerGame.java), which is instantiated by the desctop project (see libGDX documentation for details). This class contains some config paths, initializes [global classes](#globally-used-classes) and sets the screen, so the execution is directed to the active screen (the first one will be the main menu).
+The main class of the project is the class [Game](core/src/net/jfabricationgames/gdx/Game.java), which is instantiated by the desctop project (see libGDX documentation for details). This class contains some config paths, initializes [global classes](#globally-used-classes) and sets the screen, so the execution is directed to the active screen (the first one will be the main menu).
 
-The screens, that handle the whole game (when the screen is active), are placed in the `screens` package. Here the [GameScreen](core/src/net/jfabricationgames/gdx/screens/game/GameScreen.java) class is the central class, that is called from the libGDX engine, on every render step.
+The screens, that handle the whole game (when the screen is active), are placed in the `screen` package. Here the [GameScreen](core/src/net/jfabricationgames/gdx/screen/game/GameScreen.java) class is the central class, that is called from the libGDX engine, on every render step.
 
 The playable character and it's movement is to be found in the `character` package. The [Dwarf](core/src/net/jfabricationgames/gdx/character/player/implementation/Dwarf.java) is the character, that is controlled by the player. The inputs, the player maked are handled in the [CharacterInputProcessor](core/src/net/jfabricationgames/gdx/character/player/implementation/CharacterInputProcessor.java), which uses the configurable input (explained in the [inputs section](#inputs)).
 
@@ -59,7 +59,7 @@ Input handling in libGDX (as described in the [libGDX wiki](https://github.com/l
 
 ## Enemies
 
-The code for the enemies is divided into several packages. The base class for every enemy in the game is the class [Enemy](core/src/net/jfabricationgames/gdx/character/enemy/Enemy.java). This class keeps track of all information of the enemeis, like their AI, the states, physics bodies and configurations. An Enemy instance is added to the map by the [TiledMapLoader](core/src/net/jfabricationgames/gdx/map/TiledMapLoader.java), which is explained in the [Maps](#maps) section. This loader uses the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) class to create all enemies. Therefore the enemies that are mentioned in the map properties have to be added in the EnemyFactory, for the enemies to be created.
+The code for the enemies is divided into several packages. The base class for every enemy in the game is the class [Enemy](core/src/net/jfabricationgames/gdx/character/enemy/Enemy.java). This class keeps track of all information of the enemeis, like their AI, the states, physics bodies and configurations. An Enemy instance is added to the map by the [TiledMapLoader](core/src/net/jfabricationgames/gdx/map/implementation/TiledMapLoader.java), which is explained in the [Maps](#maps) section. This loader uses the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) class to create all enemies. Therefore the enemies that are mentioned in the map properties have to be added in the EnemyFactory, for the enemies to be created.
 
 **Note:** The EnemyFactory class has to be expanded for every new enemy type that is created. The names used for the types of enemies have to be the same as referenced in the map properties.
 
@@ -75,7 +75,7 @@ Most enemies act slightly different, but have many things in common. But not all
 
 #### Configuration
 
-Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/ai/config/AiConfig.java), that includes a map of named AI types. Which of the AI types is chosen for an instance can be configured in the map properties of the enemy. If nothing is configured in the map properties, the default value, that is configured in the [EnemyAiConfig](core/src/net/jfabricationgames/gdx/character/enemy/ai/config/EnemyAiConfig.java) object is used. The type configurations can be parsed to an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
+Most AIs can be configured to define their behavior without writing code. The configuration is done in configuration files, that are referenced in the main enemy type configuration file [types.json](core/assets/config/enemy/types.json). If an AI configuration file is configured for the enemy type, the file is loaded by the enemy class and converted into an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/config/ArtificialIntelligenceConfig.java), that includes a map of named AI types. Which of the AI types is chosen for an instance can be configured in the map properties of the enemy. If nothing is configured in the map properties, the default value, that is configured in the [ArtificialIntelligenceTypesConfig](core/src/net/jfabricationgames/gdx/character/ai/config/ArtificialIntelligenceTypesConfig.java) object is used. The type configurations can be parsed to an [ArtificialIntelligenceConfig](core/src/net/jfabricationgames/gdx/character/ai/config/ArtificialIntelligenceConfig.java). The field `type` of this class is a value of the enum [ArtificialIntelligenceType](core/src/net/jfabricationgames/gdx/character/ai/ArtificialIntelligenceType.java). These enum constants are then used to build the AI from the `ArtificialIntelligenceConfig` object.
 
 Most enemy types can be configured in these files, because they use the common AI types. Some enemies are to specialized to be build by a configuration file. The AI of these enemies is created in the code. An example for a class that creates it's AI in the code is [Minotaur](core/src/net/jfabricationgames/gdx/character/enemy/implementation/Minotaur.java).  
 **Note:** A subclass of Enemy, that defines it's AI in the class code needs to be added to the [EnemyFactory](core/src/net/jfabricationgames/gdx/character/enemy/EnemyFactory.java) code, to load the correct class when instantiating the enemy.
@@ -134,7 +134,7 @@ The following image shows the call hierarchy of the AI classes:
 
 ### States
 
-An enemy can be in different states, which can be interrupted by other states, or changed to other states when the state ends. Therefore the enemy states are designed as a (kind of) [state pattern](https://en.wikipedia.org/wiki/State_pattern). These states of the enemy and the transitions between the states can be configured in json configuration files. An example of a state configuration file for the gladiator is the [gladiator.json](https://github.com/tfassbender/DwarfScrollerGDX/blob/master/core/assets/config/enemy/states/gladiator.json) file. It defines a list of states, that are identified by their id. The states may define the following attributes:
+An enemy can be in different states, which can be interrupted by other states, or changed to other states when the state ends. Therefore the enemy states are designed as a (kind of) [state pattern](https://en.wikipedia.org/wiki/State_pattern). These states of the enemy and the transitions between the states can be configured in json configuration files. An example of a state configuration file for the gladiator is the [gladiator.json](core/assets/config/enemy/states/gladiator.json) file. It defines a list of states, that are identified by their id. The states may define the following attributes:
 
 - **id:** A string to identify the state (within this enemy the id has to be unique).
 - **animation:** The animation that is to be played in the state. The animation references the animation name, that is defined in the animation config file, for this enemy. For the gladiator this configuration file is the [gladiator.json](core/assets/config/animation/enemy/gladiator.json) file. The animation will be started when the state is entered.
@@ -149,7 +149,7 @@ An enemy can be in different states, which can be interrupted by other states, o
 
 NPCs can be all types of characters. They are similar to [Enemies](#enemies), except that they are restricted and can not attack the player or other enemies. In addition to the other enemy functionalities, the player can interact with NPCs by moving close to them and clicking the interact button (just like he would interact with [Interactive Objects](#interactive-objects)).
 
-Since there can be many NPCs in a game, the configuration files [types.json](core/assets/config/npc/types.json) defines a map of all NPCs and their configuration file. An example of an NPC configuration file is [adventurer.json](core/assets/config/npc/adventurer.json):
+Since there can be many NPCs in a game, the configuration files [types.json](core/assets/config/npc/types.json) defines a map of all NPCs and their configuration file. An example of an NPC configuration file is [adventurer.json](core/assets/config/npc/levels/demo/adventurer.json):
 
 ```javascript
 {
@@ -259,17 +259,17 @@ There are several types of attacks, but they can be divided into two classes: **
 
 ### Melee Attacks
 
-Melee Attacks are quite simple attacks. They create a hit fixture (a Box2D sensor, with a mask to hit the targeted objects / enemies) that is created near the executing character (a player, an enemy, ...) and deals a defined damage to the target if a collision is found by Box2D. Melee attacks are executed in the [MeleeAttack](core/src/net/jfabricationgames/gdx/attack/MeleeAttack.java) class. For the configuration of attacks see [Attacks](#attacks).
+Melee Attacks are quite simple attacks. They create a hit fixture (a Box2D sensor, with a mask to hit the targeted objects / enemies) that is created near the executing character (a player, an enemy, ...) and deals a defined damage to the target if a collision is found by Box2D. Melee attacks are executed in the [MeleeAttack](core/src/net/jfabricationgames/gdx/attack/implementation/MeleeAttack.java) class. For the configuration of attacks see [Attacks](#attacks).
 
 ### Projectile Attacks
 
-Projectile Attacks are attacks that don't just create a hit fixture, that deals damage, but create a projectile that moves in the map like a new map object. A projectile attack is created using the [ProjectileAttack](core/src/net/jfabricationgames/gdx/attack/ProjectileAttack.java) class, that creates a [Projectile](core/src/net/jfabricationgames/gdx/projectile/Projectile.java). This projectile behaves like a Game Object but also like an attack. Because all projectiles can show very different behavior there are multiple projectile subclasses like [Arrow](core/src/net/jfabricationgames/gdx/projectile/Arrow.java) (a quite simple projectile that moves in a straight line and deals damage), [Bomb](core/src/net/jfabricationgames/gdx/projectile/Bomb.java) (a projectile that waits some time before exploding, which creates an explosion. The explosion is also a projectile) or [Web](core/src/net/jfabricationgames/gdx/projectile/Web.java) (a projectile that deals damage to the player and slows him down if he's in it's range).
+Projectile Attacks are attacks that don't just create a hit fixture, that deals damage, but create a projectile that moves in the map like a new map object. A projectile attack is created using the [ProjectileAttack](core/src/net/jfabricationgames/gdx/attack/implementation/ProjectileAttack.java) class, that creates a [Projectile](core/src/net/jfabricationgames/gdx/projectile/Projectile.java). This projectile behaves like a Game Object but also like an attack. Because all projectiles can show very different behavior there are multiple projectile subclasses like [Arrow](core/src/net/jfabricationgames/gdx/projectile/Arrow.java) (a quite simple projectile that moves in a straight line and deals damage), [Bomb](core/src/net/jfabricationgames/gdx/projectile/Bomb.java) (a projectile that waits some time before exploding, which creates an explosion. The explosion is also a projectile) or [Web](core/src/net/jfabricationgames/gdx/projectile/Web.java) (a projectile that deals damage to the player and slows him down if he's in it's range).
 
 ### Creating Attack Objects
 
-Attacks can be created using an [AttackCreator](core/src/net/jfabricationgames/gdx/attack/AttackCreator.java) instance. Every object that is able to attack others (usually an enemy or a player) has an instance of an AttackCreator, that keeps track of all the attacks of the object. It can be used to start attacks by it's startAttack methods that take the name of the attack, the direction and optionally the Box2D [PhysicsCollisionType](core/src/net/jfabricationgames/gdx/physics/PhysicsCollisionType.java) to create an attack using an [AttackFactory](core/src/net/jfabricationgames/gdx/attack/AttackFactory.java). After creating the Attack, the AttackCreator keeps the attacks, handles them and removes them after they are over.
+Attacks can be created using an [AttackHandler](core/src/net/jfabricationgames/gdx/attack/AttackHandler.java) instance. Every object that is able to attack others (usually an enemy or a player) has an instance of an AttackHandler, that keeps track of all the attacks of the object. It can be used to start attacks by it's startAttack methods that take the name of the attack, the direction and optionally the Box2D [PhysicsCollisionType](core/src/net/jfabricationgames/gdx/physics/PhysicsCollisionType.java) to create an attack using an [AttackFactory](core/src/net/jfabricationgames/gdx/attack/AttackFactory.java). After creating the Attack, the AttackHandler keeps the attacks, handles them and removes them after they are over.
 
-The attacks that can be used are defined in configuration files, that are given to the AttackCreator as constructor parameters. These configuration files define all attacks of the attacking object as a list of [AttackConfig](core/src/net/jfabricationgames/gdx/attack/AttackConfig.java) objects, that define the behaviour of the attack. An example for an attack configuration file is [minotaur.json](core/assets/config/enemy/attack/minotaur.json). The attacks, that are configured in these files can be created in the AttackCreator and are referenced by their **id**.
+The attacks that can be used are defined in configuration files, that are given to the AttackHandler as constructor parameters. These configuration files define all attacks of the attacking object as a list of [AttackConfig](core/src/net/jfabricationgames/gdx/attack/AttackConfig.java) objects, that define the behaviour of the attack. An example for an attack configuration file is [minotaur.json](core/assets/config/enemy/attack/minotaur.json). The attacks, that are configured in these files can be created in the AttackHandler and are referenced by their **id**.
 
 The call hierarchy, that is used to create an attack (from an enemy object) is shown in the diagram below:
 
@@ -300,11 +300,11 @@ All cutscenes, that are configured in the game, need to be configured in an own 
 ### Configuring Cutscenes
 
 An example of a cutscene configuration file is [minotaur_cutscene.json](core/assets/config/cutscene/demo/minotaur_cutscene.json). It defines an `id`, which is the name that can be used to attain the cutscene, and a map named `controlledActions`, which defines the actions of the cutscene.  
-The actions, defined in the `controlledActions` map are a key value pairs, that map a name of the action to a [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) object, that defines how this action of the cutscene is to be interpreted and executed.
+The actions, defined in the `controlledActions` map are a key value pairs, that map a name of the action to a [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneControlledActionConfig.java) object, that defines how this action of the cutscene is to be interpreted and executed.
 
 Another example of a cutscene configuration file is [talk_to_female_adventurer.json](core/assets/config/cutscene/demo/talk_to_female_adventurer.json). This configuration does not include unit or camera movement, but conditions and player choices. See [Conditions in Cutscenes](#conditions-in-cutscenes) for more information.
 
-A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) defines the following parameters:
+A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneControlledActionConfig.java) defines the following parameters:
 
 - **type:** A [CutsceneControlledActionType](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionType.java) that defines how the action is executed.
 - **executes:** The actions that are executed after this action ends. The actions are referenced by their names.
@@ -313,7 +313,7 @@ A [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/C
 - **event:** An [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is executed by the cutscene.
 - **globalEvent:** A String value that is added to an [EventConfig](core/src/net/jfabricationgames/gdx/event/EventConfig.java) that is fired, when this action is executed. The [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) of the EventConfig that is fired is `CUTSCENE_EVENT`. This event can be registered by the [GlobalEventListener](core/src/net/jfabricationgames/gdx/event/global/GlobalEventListener.java) that handles the event (see [Global Events](#global-events) for more details on how global events work).
 - **waitForEventToFinish:** A boolean flag, that defines whether the execution of this action should wait for the fired event to be finished. This will only work for events that show text on the screen. The event (and this action) then end as soon as the text on the screen is confirmed by the user. For other events this will not work, but wait infinitely.
-- **choice:** A [PlayerChoice](core/src/net/jfabricationgames/gdx/condition/choice/PlayerChoice.java) that shows a textbox with different options from which the player can choose.
+- **choice:** A [PlayerChoice](core/src/net/jfabricationgames/gdx/event/PlayerChoice.java) that shows a textbox with different options from which the player can choose.
 - **choiceExecutionOptions:** A list of Strings that define which following `CutsceneControlledActionConfig` will be executed, depending on which option the player chooses. For `CutsceneControlledActionConfig`s that use the type `PLAYER_CHOICE`, this parameter replaces the **executes** parameter.
 - **condition:** A [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that defines which `CutsceneControlledActionConfig` will be executed next, depending on the result of the condition. See [Conditions in Cutscenes](#conditions-in-cutscenes) for more information.
 - **conditionOptionExecutions:** A map of strings, that map the configured condition result, to the name of the `CutsceneControlledActionConfig` that will be executed if the condition is met. See [Conditions in Cutscenes](#conditions-in-cutscenes) for more information.
@@ -350,7 +350,7 @@ Cutscenes are usually started by a [Global Event](#global-events), that's type i
 
 ## Conditions
 
-Conditions can be used to add conditional executions to the game (e.g. the text of an interaction with an NPC, that changes if the player has completed a quest). The conditions can be configured in the configuration json file: [conditions.json](core/assets/config/condition/conditions.json).
+Conditions can be used to add conditional executions to the game (e.g. the text of an interaction with an NPC, that changes if the player has completed a quest). The conditions can be configured in the configuration json file: [conditions.json](core/assets/config/condition/condition/conditions.json).
 
 The condition names have to be unique to be correctly loaded [ConditionHandler](core/src/net/jfabricationgames/gdx/condition/ConditionHandler.java), where the conditions can be checked by calling the `checkCondition(String)` method, with the id of the condition that is to be checked. The method returns whether the condition is met or not (by returning a boolean).  
 The conditions can be configured with the following parameters:
@@ -361,7 +361,7 @@ The conditions can be configured with the following parameters:
 
 ### Conditions in Events
 
-To actually use the conditions that are defined in the [conditions.json](core/assets/config/condition/conditions.json) file, they can be used in events (see [Events](#events) for more information on events). To be used in [Global Events](#global-events), the conditions need to be added to the configuration json file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json). An example of a conditional global event is the global event `demoLevelChangeToNextMap`, that is defined in [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json):
+To actually use the conditions that are defined in the [conditions.json](core/assets/config/condition/condition/conditions.json) file, they can be used in events (see [Events](#events) for more information on events). To be used in [Global Events](#global-events), the conditions need to be added to the configuration json file [globalListenedEvents.json](core/assets/config/events/globalListenedEvents.json). An example of a conditional global event is the global event `demoLevelChangeToNextMap`, that is defined in [demo.json](core/assets/config/events/global/demo.json):
 
 ```javascript
 {
@@ -372,31 +372,36 @@ To actually use the conditions that are defined in the [conditions.json](core/as
       stringValue: go_to_map_4,
     },
     executionType: CONDITIONAL_EVENT,
-    condition: {
-      conditionId: demoLevel_endItemCollected,
-      thenCase: {
-        type: EVENT,
-        eventConfig: {
-          executionType: CHANGE_MAP,
-          executionParameters: {
-            map: test_map_4,
-          }
-        }
-      },
-      elseCase: {
-        type: NO_EXECUTION,
-      }
-    }
-    executionParameters: {
-      map: test_map_4,
-    }
+    conditionalExecutionId: demoLevel_changeToNextMap_ifEndItemIsCollected,
   },
   //...
 }
 ```
 
-In this conditional, global event the `event` parameter, defines what is needed to execute the event (see [Global Events](#global-events), that decides what will be executed, based on the condition. The `executionType` of the event has to be `CONDITIONAL_EVENT`, for the event to be executed as conditional event. The `condition` parameter defines a [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that contains a `conditionId` (which is a String parameter), a `thenCase` and an `elseCase` (which both are [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects).   
-The `conditionId` references the name of a condition, that was defined in a configuration file, that is referenced by the main configuration file for conditions: [conditions.json](core/assets/config/condition/conditions.json). Whenever the event is executed, it checks the defined condition and then executes either the `thenCase` (if the condition is met) or the `elseCase` (if the condition is not met).  
+In this conditional, global event the `event` parameter, defines what is needed to execute the event (see [Global Events](#global-events), that decides what will be executed, based on the condition. The `executionType` of the event has to be `CONDITIONAL_EVENT`, for the event to be executed as conditional event. The `conditionalExecutionId` parameter references a [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java) that is configured in the configuration file [demo.json](core/assets/config/condition/execution/levels/demo.json):
+
+```javascript
+{
+  demoLevel_changeToNextMap_ifEndItemIsCollected: {
+    conditionId: demoLevel_endItemCollected,
+    thenCase: {
+    type: EVENT,
+      eventConfig: {
+        executionType: CHANGE_MAP,
+        executionParameters: {
+          map: test_map_4,
+        }
+      }
+    },
+    elseCase: {
+      type: NO_EXECUTION,
+    }
+  }
+}
+```
+
+This conditional execution contains a `conditionId` (which is a String parameter), a `thenCase` and an `elseCase` (which both are [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects).   
+The `conditionId` references the name of a condition, that was defined in a configuration file, that is referenced by the main configuration file for conditions: [conditions.json](core/assets/config/condition/condition/conditions.json). Whenever the event is executed, it checks the defined condition and then executes either the `thenCase` (if the condition is met) or the `elseCase` (if the condition is not met).  
 The `thenCase` and the `elseCase` are both [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects, that need to have a `type` parameter that references an enum constant of the [ConditionExecutableType](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutableType.java) enum.  
 The [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) type again defines parameters, that can be used to fire events, for cascading [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java)s or for other executions.  
 If a case must not be executed it can't be left out, but needs to be defined with a `NO_EXECUTION` type, like the `elseCase` in the example above.
@@ -437,15 +442,15 @@ In cutscenes there are two types of conditions, that can be configured. The firs
 }
 ```
 
-In this [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) the type `CONDITION` shows that this action config is to be executed as a [CutsceneConditionAction](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneConditionAction.java).   
+In this [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneControlledActionConfig.java) the type `CONDITION` shows that this action config is to be executed as a [CutsceneConditionAction](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneConditionAction.java).   
 The `condition` parameter defines a [ConditionalExecution](core/src/net/jfabricationgames/gdx/condition/execution/ConditionalExecution.java), that contains a `conditionId` (which is a String parameter), a `thenCase` and an `elseCase` (which both are [ConditionExecutable](core/src/net/jfabricationgames/gdx/condition/execution/ConditionExecutable.java) objects).   
-The `conditionId` references the name of a condition, that was defined in a configuration file, that is referenced by the main configuration file for conditions: [conditions.json](core/assets/config/condition/conditions.json).
+The `conditionId` references the name of a condition, that was defined in a configuration file, that is referenced by the main configuration file for conditions: [conditions.json](core/assets/config/condition/condition/conditions.json).
 
-To be used in cutscenes, the type of the `thenCase` and `elseCase` need to be `CUTSCENE`, to notify the active cutscene about the result of the condition. It is also possible to configure the type `CONDITION` to define cascading conditions with more than two possible results. Here the final case still has to use the type `CUTSCENE`. The `executionParameters` define a map of strings. Here the key `conditionCase` has to be used and mapped to a unique string value. This string value is then used as key in the `conditionOptionExecutions` map, that maps it to the name of the next [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java), that is executed, depending on the result of the condition.
+To be used in cutscenes, the type of the `thenCase` and `elseCase` need to be `CUTSCENE`, to notify the active cutscene about the result of the condition. It is also possible to configure the type `CONDITION` to define cascading conditions with more than two possible results. Here the final case still has to use the type `CUTSCENE`. The `executionParameters` define a map of strings. Here the key `conditionCase` has to be used and mapped to a unique string value. This string value is then used as key in the `conditionOptionExecutions` map, that maps it to the name of the next [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneControlledActionConfig.java), that is executed, depending on the result of the condition.
 
 In the example above this means, that if the condition with the conditionId **demoLevel_endItemCollected** is met (the condition is defined in a condition configuration file), the string **condition_met** will be sent to the cutscene, which causes the execution of the next cutscene action: **answer_condition_met**.
 
-The second type of condition, is a [PlayerChoice](core/src/net/jfabricationgames/gdx/condition/choice/PlayerChoice.java). This condition creates a textbox on the screen, that shows options from which the player can choose. An example of such a condition is the following (taken from the configuration file [talk_to_female_adventurer.json](core/assets/config/cutscene/demo/talk_to_female_adventurer.json).
+The second type of condition, is a [PlayerChoice](core/src/net/jfabricationgames/gdx/event/PlayerChoice.java). This condition creates a textbox on the screen, that shows options from which the player can choose. An example of such a condition is the following (taken from the configuration file [talk_to_female_adventurer.json](core/assets/config/cutscene/demo/talk_to_female_adventurer.json).
 
 ```javascript
 {
@@ -473,8 +478,8 @@ The second type of condition, is a [PlayerChoice](core/src/net/jfabricationgames
 }
 ```
 
-In the example above the type `PLAYER_CHOICE` defines, that the [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java) is to be executed as a [CutscenePlayerChoiceAction](core/src/net/jfabricationgames/gdx/cutscene/action/CutscenePlayerChoiceAction.java). The `choice` parameter is a [PlayerChoice](core/src/net/jfabricationgames/gdx/condition/choice/PlayerChoice.java), that is used to define the header, the header color, a description text and up to three options that the user can pick. These are shown in a textbox on the screen.  
-The list `choiceOptionExecutions` defines the list of possible next [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/CutsceneControlledActionConfig.java)s that can be executed, based on the players choice. If the player chooses the first option, the first entry from the `choiceOptionExecutions` list will be chosen. If the player chooses the second option, the second entry from the list will be chosen...
+In the example above the type `PLAYER_CHOICE` defines, that the [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneControlledActionConfig.java) is to be executed as a [CutscenePlayerChoiceAction](core/src/net/jfabricationgames/gdx/cutscene/action/CutscenePlayerChoiceAction.java). The `choice` parameter is a [PlayerChoice](core/src/net/jfabricationgames/gdx/event/PlayerChoice.java), that is used to define the header, the header color, a description text and up to three options that the user can pick. These are shown in a textbox on the screen.  
+The list `choiceOptionExecutions` defines the list of possible next [CutsceneControlledActionConfig](core/src/net/jfabricationgames/gdx/cutscene/action/CutsceneControlledActionConfig.java)s that can be executed, based on the players choice. If the player chooses the first option, the first entry from the `choiceOptionExecutions` list will be chosen. If the player chooses the second option, the second entry from the list will be chosen...
 
 ## Items
 
@@ -576,11 +581,11 @@ Interactive Objects are used to let the player interact with the map. They use a
 
 ### Locked Objects
 
-A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* or a *Door* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a string value that can be converted into a `boolean`. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItem](core/src/net/jfabricationgames/gdx/character/player/container/data/KeyItem.java) class.
+A locked object is a special kind of [Interactive Object](#interactive-objects), that is used to lock doors or chests, so the player can't simply reach something. A *Chest* or a *Door* is not locked by default, but a *Key Wall* is locked by default (see the configuration possibilities of [Game Objects](#game-objects)). The default behaviour can be changed by a map property with the key *locked*, which needs a string value that can be converted into a `boolean`. To unlock a locked object the player has to find a key item and afterwards interact with the locked object. For normal locked objects, a normal key can be used. To unlock a special locked object a special key with the same map properties is needed. To define a special locked object (or a special key) a map property key that starts with `key_` is to be used. To match a key to a locked object the name and the value of the map property have to be equal. The properties are loaded and matched using the [KeyItemProperties](core/src/net/jfabricationgames/gdx/data/properties/KeyItemProperties.java) class.
 
 
 **Unlock by Condition:**  
-Locked objects can also be configured to be unlocked (and locked) by a [condition](#conditions), that is configured in the map properties of the locked object. To lock or unlock a locked object by a [condition](#conditions), the map parameter `unlockCondition` must be set to the name of a condition. So a locked object that is configured with an unlock condition `common__rune_laguz_collected` can be unlocked when a specific rune (called laguz) is collected. The condition is to be found in the configuration file [common.json](core/assets/config/condition/common.json). The locked object will not be unlocked automatically, but the player still has to interact with the locked object to unlock it (when the condition is met).
+Locked objects can also be configured to be unlocked (and locked) by a [condition](#conditions), that is configured in the map properties of the locked object. To lock or unlock a locked object by a [condition](#conditions), the map parameter `unlockCondition` must be set to the name of a condition. So a locked object that is configured with an unlock condition `common__rune_laguz_collected` can be unlocked when a specific rune (called laguz) is collected. The condition is to be found in the configuration file [common.json](core/assets/config/condition/condition/common.json). The locked object will not be unlocked automatically, but the player still has to interact with the locked object to unlock it (when the condition is met).
 
 
 **Unlock by Event:**  
@@ -621,7 +626,7 @@ Another way to configure locked objects is to configure them to be unlocked (and
 }
 ```
 
-This event is configured to unlock a locked object when the [condition](#conditions) `demoLevel_allSwitchesActivated` is met (see [event objects](#event-objects) for details on event switches). The event is triggered whenever a state switch object with the map properties `eventParameter: demoLevel_switch_group_1` is triggered. The [condition](#conditions) will check for multiple switches to be activated at the same time. The condition configuration is to be found in the configuration file [demo.json](core/assets/config/condition/levels/demo.json).
+This event is configured to unlock a locked object when the [condition](#conditions) `demoLevel_allSwitchesActivated` is met (see [event objects](#event-objects) for details on event switches). The event is triggered whenever a state switch object with the map properties `eventParameter: demoLevel_switch_group_1` is triggered. The [condition](#conditions) will check for multiple switches to be activated at the same time. The condition configuration is to be found in the configuration file [demo.json](core/assets/config/condition/condition/levels/demo.json).
 
 ### Spawn Points
 
@@ -645,7 +650,7 @@ Map properties that can be configured in the event object are:
 Respawn checkpoints are a special type of Event Objects. They are configured in the map, by adding an Event Object with the **eventParameter 'respawnCheckpoint'**. This event is received and handled by the [PlayableCharacter](core/src/net/jfabricationgames/gdx/character/player/PlayableCharacter.java) implementation [Dwarf](core/src/net/jfabricationgames/gdx/character/player/implementation/Dwarf.java).
 
 **State Switch Objects:**  
-State switch objects are a special type of Event Objects. They can have two states: *active* and *inactive*. These states usually can be seen in the texture of the object. The state switch objects can execute events when the state changes (just like other event objects do, when they are triggered). In addition to the events that can be fired, the state of the switches can be checked from a [condition](#conditions). An example for a condition that uses state switches can be found in the configuration file [demo.json](core/assets/config/condition/levels/demo.json):
+State switch objects are a special type of Event Objects. They can have two states: *active* and *inactive*. These states usually can be seen in the texture of the object. The state switch objects can execute events when the state changes (just like other event objects do, when they are triggered). In addition to the events that can be fired, the state of the switches can be checked from a [condition](#conditions). An example for a condition that uses state switches can be found in the configuration file [demo.json](core/assets/config/condition/condition/levels/demo.json):
 
 ```javascript
 {
@@ -692,7 +697,7 @@ Tiled maps are used to create a map with textures, physics and objects. Enemies,
 
 All maps that will be used in the game have to be configured in the json configuration file [maps.json](core/assets/config/map/maps.json). This file includes all maps, that can be loaded and used in the game, with their names and path. When the game is started, the map configuration is loaded into the [GameMapManager](core/src/net/jfabricationgames/gdx/map/GameMapManager.java), where they can be referenced by the configured name.
 
-The map, that is configured with the `initial: true` parameter, will be the first map to be loaded when the game is started. If there are multiple maps, that are configured to be the initial map, the first one wins. To change a map the method `changeMap(String)` in the [GameScreen](core/src/net/jfabricationgames/gdx/screens/game/GameScreen.java) class is to be used. This method is private and can not be called directly. To change the map from within the game execution, an event with the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) `CHANGE_MAP` has to be used. The following example shows a global event, that is configured to change the map, when the player touches an event object on the map:
+The map, that is configured with the `initial: true` parameter, will be the first map to be loaded when the game is started. If there are multiple maps, that are configured to be the initial map, the first one wins. To change a map the method `changeMap(String)` in the [GameScreen](core/src/net/jfabricationgames/gdx/screen/game/GameScreen.java) class is to be used. This method is private and can not be called directly. To change the map from within the game execution, an event with the [EventType](core/src/net/jfabricationgames/gdx/event/EventType.java) `CHANGE_MAP` has to be used. The following example shows a global event, that is configured to change the map, when the player touches an event object on the map:
 
 ```javascript
 {
@@ -713,7 +718,7 @@ The map, that is configured with the `initial: true` parameter, will be the firs
 
 ### Global Map Properties
 
-There are several properties that can be configured for objects on the map. The map itself has only one property that needs to be configured: **mini_map_config_path**. The value of this property is the path to the main config file of this map. This file is a JSON file that can be deserialized to a [MapConfig](core/src/net/jfabricationgames/gdx/screens/menu/config/MapConfig.java) object. An example for such a file is [tutorial.json](core/assets/config/menu/maps/tutorial.json).
+There are several properties that can be configured for objects on the map. The map itself has only one property that needs to be configured: **mini_map_config_path**. The value of this property is the path to the main config file of this map. This file is a JSON file that can be deserialized to a [MapConfig](core/src/net/jfabricationgames/gdx/screen/menu/config/MapConfig.java) object. An example for such a file is [tutorial.json](core/assets/config/menu/maps/tutorial.json).
 
 ### Fast Travel
 
@@ -723,7 +728,7 @@ Fast travel positions can be created by adding [Game objects](#game-objects) to 
 - **fastTravelPointName:** The name of the fast travel point that is shown to the user.
 - **activeOnStartup:** A boolean flag that indicates whether the fast travel point is active when the game is started, or it needs to be activated by touching it (the default value is *false*)
 
-The second part of configuration is done in a separate config file, that defines the UI buttons, that are used to select the fast travel points on the mini-map in the menu. This configuration is a JSON object, that maps the **fastTravelPointId**s (that reference the ones in the map object config by name) to [MenuState](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuState.java) objects, that define the selection and iteraction of the fast travel points in the UI. This file needs to be referenced from the map config file. An example for such a file is [tutorial_fast_travel_states.json](core/assets/config/menu/maps/tutorial_fast_travel_states.json).
+The second part of configuration is done in a separate config file, that defines the UI buttons, that are used to select the fast travel points on the mini-map in the menu. This configuration is a JSON object, that maps the **fastTravelPointId**s (that reference the ones in the map object config by name) to [MenuState](core/src/net/jfabricationgames/gdx/screen/menu/control/MenuState.java) objects, that define the selection and iteraction of the fast travel points in the UI. This file needs to be referenced from the map config file. An example for such a file is [tutorial_fast_travel_states.json](core/assets/config/menu/maps/tutorial_fast_travel_states.json).
 
 ### Ground Physics
 
@@ -1088,13 +1093,13 @@ private void executeAnnotatedMethodsBeforePersisting() {
 
 ## Menus
 
-In game menus are libGDX screens, that can be shown to stop the games execution. They usually extend the abstract class [InGameMenuScreen](core/src/net/jfabricationgames/gdx/screens/menu/InGameMenuScreen.java). Since InGameMenuScreen extends the abstract class [ControlledMenu](core/src/net/jfabricationgames/gdx/screens/menu/control/ControlledMenu.java) all in game menus are by default controlled menus, which can be controlled using the keyboard or controller.
+In game menus are libGDX screens, that can be shown to stop the games execution. They usually extend the abstract class [InGameMenuScreen](core/src/net/jfabricationgames/gdx/screen/menu/InGameMenuScreen.java). Since InGameMenuScreen extends the abstract class [ControlledMenu](core/src/net/jfabricationgames/gdx/screen/menu/control/ControlledMenu.java) all in game menus are by default controlled menus, which can be controlled using the keyboard or controller.
 
 The Pause Menu for each map needs to be configured to use the correct mini map and fast travel points (see [Global Map Properties](#global-map-properties) for details).
 
 ### Menu State Machine
 
-To use keyboard or controller buttons to navigate in the menu, every in game menu has a [MenuStateMachine](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuStateMachine.java). This state machine holds the states and transitions between the states of the menu. The states and transitions are modeled as [MenuState](core/src/net/jfabricationgames/gdx/screens/menu/control/MenuState.java) objects.
+To use keyboard or controller buttons to navigate in the menu, every in game menu has a [MenuStateMachine](core/src/net/jfabricationgames/gdx/screen/menu/control/MenuStateMachine.java). This state machine holds the states and transitions between the states of the menu. The states and transitions are modeled as [MenuState](core/src/net/jfabricationgames/gdx/screen/menu/control/MenuState.java) objects.
 
 To initialize a MenuStateMachine, it is given an array of file names, that lead to one or more configuration files, that contain a list of MenuState objects, serialized as JSON objects. An example of such a config file is [pause_menu_states.json](core/assets/config/menu/pause_menu_states.json), which defines the button states and transitions for the pause menu. In addition to the main state config file there can be other files that are also passed to the MenuStateMachine as constructor parameters, that define additional states, that may add more states and transitions. The methods that are defined as *select* object in the configuration of a MenuState are called via reflection in the menu class that holds the MenuStateMachine.
 
@@ -1104,8 +1109,8 @@ An example for such a file is [tutorial_fast_travel_states.json](core/assets/con
 
 There are some components, that can be used in all menus. The most important ones are:
 
-- **[MenuBox](core/src/net/jfabricationgames/gdx/screens/menu/components/MenuBox.java):** A background for menus, dialogs or other components, that uses nine-patch images to display the controll (the central parts of the nine-patch can be multiplied, to not stretch the images).
-- **[FocusButton](core/src/net/jfabricationgames/gdx/screens/menu/components/FocusButton.java):** A button for menus, that can be focused and triggered. For the button image a nine-patch is used.
+- **[MenuBox](core/src/net/jfabricationgames/gdx/screen/menu/components/MenuBox.java):** A background for menus, dialogs or other components, that uses nine-patch images to display the controll (the central parts of the nine-patch can be multiplied, to not stretch the images).
+- **[FocusButton](core/src/net/jfabricationgames/gdx/screen/menu/components/FocusButton.java):** A button for menus, that can be focused and triggered. For the button image a nine-patch is used.
 
 ## Others
 
@@ -1115,4 +1120,4 @@ The texture packing tool can be used to easily pack multiple texture files from 
 
 ### Credits
 
-All of the graphics used for this game are available on [itch.io](https://itch.io/). Most of them came from [Elthen's Pixel Art Shop](https://elthen.itch.io/) and [Pixel Frog](https://pixelfrog-store.itch.io/).
+All of the graphics used for this game are available on [itch.io](https://itch.io/). Most of them came from [Elthen's Pixel Art Shop](https://elthen.itch.io/) and [Pixel Frog](https://pixelfrog-store.itch.io/). The main tileset came from [Pipoya](https://pipoya.itch.io/).
