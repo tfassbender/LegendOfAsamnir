@@ -34,6 +34,7 @@ import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
+import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.menu.GameOverMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen;
@@ -91,6 +92,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		initializeEventHandling();
 		initializeCutsceneHandler();
 		initializeConditionType();
+		initializeFactories();
 		
 		ScreenManager.getInstance().setGameScreen(this);
 	}
@@ -160,6 +162,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void initializeConditionType() {
 		ConditionType.setIsStateSwitchActive(StateSwitchObject::isStateSwitchActive);
+	}
+	
+	private void initializeFactories() {
+		ProjectileFactory.setGameMap(GameMapManager.getInstance().getMap());
 	}
 	
 	@Override

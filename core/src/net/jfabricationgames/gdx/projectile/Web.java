@@ -7,7 +7,6 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.GameMapGroundTypeContainer;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -18,8 +17,8 @@ public class Web extends Projectile implements GameMapGroundTypeContainer {
 	
 	private boolean touchingPlayer;
 	
-	public Web(ProjectileTypeConfig typeConfig, AnimationDirector<TextureRegion> animation) {
-		super(typeConfig, animation);
+	public Web(ProjectileTypeConfig typeConfig, AnimationDirector<TextureRegion> animation, ProjectileMap gameMap) {
+		super(typeConfig, animation, gameMap);
 		setImageOffset(0f, 0.5f);
 	}
 	
@@ -63,6 +62,6 @@ public class Web extends Projectile implements GameMapGroundTypeContainer {
 	
 	@Override
 	public GameMapGroundType getGameMapGroundType() {
-		return GameMapManager.getInstance().getMap().getGroundTypeByName(GROUND_TYPE_WEB);
+		return gameMap.getGroundTypeByName(GROUND_TYPE_WEB);
 	}
 }

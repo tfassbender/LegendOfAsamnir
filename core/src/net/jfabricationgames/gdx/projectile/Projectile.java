@@ -15,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Hittable;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
@@ -33,6 +32,8 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	protected Body body;
 	protected ProjectileTypeConfig typeConfig;
 	protected PhysicsCollisionType collisionType;
+	
+	protected ProjectileMap gameMap;
 	
 	protected Body playerBody;
 	
@@ -57,9 +58,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
 	
-	public Projectile(ProjectileTypeConfig typeConfig, Sprite sprite) {
+	public Projectile(ProjectileTypeConfig typeConfig, Sprite sprite, ProjectileMap gameMap) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
+		this.gameMap = gameMap;
 		if (!typeConfig.textureScaleGrowing) {
 			scaleSprite();
 		}
@@ -67,9 +69,10 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 		initialize();
 	}
 	
-	public Projectile(ProjectileTypeConfig typeConfig, AnimationDirector<TextureRegion> animation) {
+	public Projectile(ProjectileTypeConfig typeConfig, AnimationDirector<TextureRegion> animation, ProjectileMap gameMap) {
 		this.typeConfig = typeConfig;
 		this.animation = animation;
+		this.gameMap = gameMap;
 		
 		sprite = new Sprite(animation.getKeyFrame());
 		if (!typeConfig.textureScaleGrowing) {
@@ -318,7 +321,7 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	
 	public void remove() {
 		attackPerformed = true;
-		GameMapManager.getInstance().getMap().removeProjectile(this, body);
+		gameMap.removeProjectile(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

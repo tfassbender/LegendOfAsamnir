@@ -9,8 +9,8 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class Explosion extends Projectile {
 	
-	public Explosion(ProjectileTypeConfig typeConfig, AnimationDirector<TextureRegion> animation) {
-		super(typeConfig, animation);
+	public Explosion(ProjectileTypeConfig typeConfig, AnimationDirector<TextureRegion> animation, ProjectileMap gameMap) {
+		super(typeConfig, animation, gameMap);
 	}
 	
 	@Override

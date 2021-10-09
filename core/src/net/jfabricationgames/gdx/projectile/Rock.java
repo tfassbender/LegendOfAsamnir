@@ -7,8 +7,8 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class Rock extends Projectile {
 	
-	public Rock(ProjectileTypeConfig typeConfig, Sprite sprite) {
-		super(typeConfig, sprite);
+	public Rock(ProjectileTypeConfig typeConfig, Sprite sprite, ProjectileMap gameMap) {
+		super(typeConfig, sprite, gameMap);
 	}
 	
 	@Override

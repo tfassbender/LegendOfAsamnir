@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
@@ -34,11 +33,17 @@ public class ProjectileFactory {
 	private static TextureAtlas atlas;
 	private static ObjectMap<String, ProjectileTypeConfig> typeConfigs;
 	
+	private static ProjectileMap gameMap;
+	
 	static {
 		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
 		typeConfigs = FactoryUtil.loadTypeConfigs(config.typesConfig, ProjectileTypeConfig.class);
 		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 		atlas = AssetGroupManager.getInstance().get(config.atlas);
+	}
+	
+	public static void setGameMap(ProjectileMap gameMap) {
+		ProjectileFactory.gameMap = gameMap;
 	}
 	
 	public static Projectile createProjectileAndAddToMap(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType) {
@@ -64,30 +69,30 @@ public class ProjectileFactory {
 		Projectile projectile;
 		switch (type) {
 			case PROJECTILE_TYPE_ARROW:
-				projectile = new Arrow(typeConfig, sprite);
+				projectile = new Arrow(typeConfig, sprite, gameMap);
 				break;
 			case PROJECTILE_TYPE_BOMB:
-				projectile = new Bomb(typeConfig, sprite);
+				projectile = new Bomb(typeConfig, sprite, gameMap);
 				break;
 			case PROJECTILE_TYPE_EXPLOSION:
-				projectile = new Explosion(typeConfig, animation);
+				projectile = new Explosion(typeConfig, animation, gameMap);
 				collisionType = PhysicsCollisionType.EXPLOSION;
 				break;
 			case PROJECTILE_TYPE_WEB:
-				projectile = new Web(typeConfig, animation);
+				projectile = new Web(typeConfig, animation, gameMap);
 				break;
 			case PROJECTILE_TYPE_IMP_FIRE:
-				projectile = new ImpFireball(typeConfig, animation);
+				projectile = new ImpFireball(typeConfig, animation, gameMap);
 				break;
 			case PROJECTILE_TYPE_ROCK:
-				projectile = new Rock(typeConfig, sprite);
+				projectile = new Rock(typeConfig, sprite, gameMap);
 				break;
 			case PROJECTILE_TYPE_BOOMERANG:
-				projectile = new Boomerang(typeConfig, sprite);
+				projectile = new Boomerang(typeConfig, sprite, gameMap);
 				break;
 			case PROJECTILE_TYPE_WAND:
 			case PROJECTILE_TYPE_MAGIC_WAVE:
-				projectile = new MagicWave(typeConfig, sprite);
+				projectile = new MagicWave(typeConfig, sprite, gameMap);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);
@@ -95,7 +100,7 @@ public class ProjectileFactory {
 		projectile.createPhysicsBody(position, collisionType);
 		projectile.startProjectile(direction);
 		
-		GameMapManager.getInstance().getMap().addProjectile(projectile);
+		gameMap.addProjectile(projectile);
 		
 		return projectile;
 	}

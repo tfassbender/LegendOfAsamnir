@@ -9,8 +9,8 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class Bomb extends Projectile {
 	
-	public Bomb(ProjectileTypeConfig typeConfig, Sprite sprite) {
-		super(typeConfig, sprite);
+	public Bomb(ProjectileTypeConfig typeConfig, Sprite sprite, ProjectileMap gameMap) {
+		super(typeConfig, sprite, gameMap);
 	}
 	
 	@Override

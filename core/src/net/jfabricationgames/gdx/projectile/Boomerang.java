@@ -16,8 +16,8 @@ public class Boomerang extends Projectile {
 	
 	private boolean moveBackToPlayer = false;
 	
-	public Boomerang(ProjectileTypeConfig typeConfig, Sprite sprite) {
-		super(typeConfig, sprite);
+	public Boomerang(ProjectileTypeConfig typeConfig, Sprite sprite, ProjectileMap gameMap) {
+		super(typeConfig, sprite, gameMap);
 	}
 	
 	@Override

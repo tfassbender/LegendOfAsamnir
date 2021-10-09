@@ -7,8 +7,8 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 
 public class MagicWave extends Projectile {
 	
-	public MagicWave(ProjectileTypeConfig typeConfig, Sprite sprite) {
-		super(typeConfig, sprite);
+	public MagicWave(ProjectileTypeConfig typeConfig, Sprite sprite, ProjectileMap gameMap) {
+		super(typeConfig, sprite, gameMap);
 	}
 	
 	@Override

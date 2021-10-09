@@ -9,8 +9,8 @@ public class Arrow extends Projectile {
 	
 	private static final int ANGLE_OFFSET_SPRITE_VECTOR = 90;
 	
-	protected Arrow(ProjectileTypeConfig typeConfig, Sprite sprite) {
-		super(typeConfig, sprite);
+	protected Arrow(ProjectileTypeConfig typeConfig, Sprite sprite, ProjectileMap gameMap) {
+		super(typeConfig, sprite, gameMap);
 	}
 	
 	@Override

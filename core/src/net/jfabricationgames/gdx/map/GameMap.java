@@ -15,9 +15,10 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.projectile.Projectile;
+import net.jfabricationgames.gdx.projectile.ProjectileMap;
 import net.jfabricationgames.gdx.rune.RuneType;
 
-public interface GameMap extends EventListener, CutsceneUnitProvider, Disposable {
+public interface GameMap extends EventListener, CutsceneUnitProvider, ProjectileMap, Disposable {
 	
 	enum GlobalMapPropertyKeys {
 		
@@ -59,8 +60,6 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, Disposable
 	
 	public MapProperties getGlobalMapProperties();
 	
-	public GameMapGroundType getGroundTypeByName(String groundTypeWeb);
-	
 	public void updateAfterLoadingGameState();
 	
 	public boolean isDungeonMap();
@@ -73,6 +72,7 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, Disposable
 	public void addObject(GameObject gameObject);
 	public void addItem(Item item);
 	public void addItemAboveGameObjects(Item item);
+	@Override
 	public void addProjectile(Projectile projectile);
 	public void addEnemy(Enemy gameObject);
 	
@@ -80,9 +80,11 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, Disposable
 	
 	public void removeObject(GameObject gameObject, Body body);
 	public void removeItem(Item item, Body body);
+	@Override
 	public void removeProjectile(Projectile projectile, Body body);
 	public void removeEnemy(Enemy enemy, Body body);
 	public void removeNpc(NonPlayableCharacter nonPlayableCharacter, Body body);
 	public void removeAnimal(Animal animal, Body body);
+	
 	public void removePhysicsObjectsWithType(MapObjectType invisiblePathBlocker);
 }
