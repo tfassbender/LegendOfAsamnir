@@ -14,6 +14,7 @@ import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.condition.ConditionHandler;
 import net.jfabricationgames.gdx.condition.ConditionType;
 import net.jfabricationgames.gdx.constants.Constants;
@@ -153,6 +154,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		GameObjectFactory.setItemDropUtil(ItemDropUtil.asInstance());
 		GameObjectFactory.setGameObjectTextBox(OnScreenTextBox.getInstance());
 		GameObjectFactory.setPlayerObjectClass(PlayableCharacter.class);
+		
+		ItemFactory.setItemMap(map);
+		ItemFactory.setItemTextBox(OnScreenTextBox.getInstance());
+		ItemFactory.setItemSpecialActionByNameFunction(SpecialAction::getByContainingName);
+		ItemFactory.setPlayerCoinsSupplier(Player.getInstance()::getCoins);
 		
 		ProjectileFactory.setGameMap(gameMap);
 	}

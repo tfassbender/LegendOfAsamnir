@@ -20,12 +20,11 @@ public class Constants {
 	public static final String OBJECT_NAME_OBJECT = "object";
 	public static final String OBJECT_NAME_ITEM = "item";
 	public static final String OBJECT_NAME_PLAYER = "player";
-
+	
 	public static final String MAP_PROPERTY_KEY_DROP_ITEM = "drop";
-
 	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE = "specialDropType";
-
 	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES = "specialDropMapProperties";
+	public static final String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
 	
 	private Constants() {}
 }

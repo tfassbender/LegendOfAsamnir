@@ -13,7 +13,6 @@ import net.jfabricationgames.gdx.animation.DummyAnimationDirector;
 import net.jfabricationgames.gdx.animation.GrowingAnimationDirector;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
 class CharacterRenderer {
@@ -208,7 +207,7 @@ class CharacterRenderer {
 			darknessFading = false;
 			
 			//set the global value for lantern used, to not render the darkness anymore
-			GlobalValuesDataHandler.getInstance().put(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED, true);
+			GlobalValuesDataHandler.getInstance().put(Constants.GLOBAL_VALUE_KEY_LANTERN_USED, true);
 		}
 	}
 }

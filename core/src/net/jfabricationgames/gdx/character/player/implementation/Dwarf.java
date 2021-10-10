@@ -122,7 +122,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 			switch (activeSpecialAction) {
 				case BOW:
 				case BOMB:
-					ItemAmmoType ammoType = ItemAmmoType.fromSpecialAction(activeSpecialAction);
+					ItemAmmoType ammoType = ItemAmmoType.getByName(activeSpecialAction.name());
 					if (attackHandler.allAttacksExecuted()) {
 						if (itemDataHandler.hasAmmo(ammoType.toDataType())) {
 							itemDataHandler.decreaseAmmo(ammoType.toDataType());

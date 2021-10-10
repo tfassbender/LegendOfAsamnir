@@ -19,8 +19,6 @@ import net.jfabricationgames.gdx.data.properties.KeyItemProperties;
 import net.jfabricationgames.gdx.data.state.BeforeAddStatefulObject;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -38,6 +36,9 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	protected Sprite sprite;
 	protected MapProperties properties;
 	protected Body body;
+	
+	protected ItemMap itemMap;
+	protected ItemTextBox itemTextBox;
 	
 	@MapObjectState
 	protected final String itemName;
@@ -77,6 +78,14 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 				.setRadius(typeConfig.physicsObjectRadius).setCollisionType(PhysicsCollisionType.ITEM);
 		body = PhysicsBodyCreator.createCircularBody(properties);
 		body.setUserData(this);
+	}
+	
+	public void setItemMap(ItemMap itemMap) {
+		this.itemMap = itemMap;
+	}
+	
+	public void setItemTextBox(ItemTextBox itemTextBox) {
+		this.itemTextBox = itemTextBox;
 	}
 	
 	public void setPosition(Vector2 position) {
@@ -159,7 +168,7 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	}
 	
 	public void remove() {
-		GameMapManager.getInstance().getMap().removeItem(this, body);
+		itemMap.removeItem(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
@@ -171,9 +180,8 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	
 	public void displaySpecialKeyProperties() {
 		if (isSpecialKey()) {
-			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(SPECIAL_KEY_MESSAGE_HEADER);
-			onScreenTextBox.setText(getSpecialKeyPropertiesAsString());
+			itemTextBox.setHeaderText(SPECIAL_KEY_MESSAGE_HEADER);
+			itemTextBox.setText(getSpecialKeyPropertiesAsString());
 		}
 	}
 	

@@ -1,5 +1,8 @@
 package net.jfabricationgames.gdx.item;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,7 +18,6 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.object.spawn.ItemSpawnFactory;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.FactoryUtil;
@@ -25,6 +27,8 @@ public class ItemFactory {
 	
 	private ItemFactory() {}
 	
+	protected static ItemTypeConfig defaultTypeConfig;
+	
 	private static final String CONFIG_FILE = "config/factory/item_factory.json";
 	
 	private static Config config;
@@ -32,7 +36,10 @@ public class ItemFactory {
 	private static ObjectMap<String, ItemTypeConfig> typeConfigs;
 	private static ObjectMap<String, ObjectMap<String, Object>> defaultValues;
 	
-	protected static ItemTypeConfig defaultTypeConfig;
+	private static ItemMap itemMap;
+	private static ItemTextBox itemTextBox;
+	private static Function<String, ItemSpecialAction> itemSpecialActionByNameFunction;
+	private static Supplier<Integer> playerCoinsSupplier;
 	
 	static {
 		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
@@ -53,6 +60,22 @@ public class ItemFactory {
 		}
 	}
 	
+	public static void setItemMap(ItemMap itemMap) {
+		ItemFactory.itemMap = itemMap;
+	}
+	
+	public static void setItemTextBox(ItemTextBox itemTextBox) {
+		ItemFactory.itemTextBox = itemTextBox;
+	}
+	
+	public static void setItemSpecialActionByNameFunction(Function<String, ItemSpecialAction> itemSpecialActionByNameFunction) {
+		ItemFactory.itemSpecialActionByNameFunction = itemSpecialActionByNameFunction;
+	}
+	
+	public static void setPlayerCoinsSupplier(Supplier<Integer> playerCoinsSupplier) {
+		ItemFactory.playerCoinsSupplier = playerCoinsSupplier;
+	}
+	
 	public static void createAndDropItem(String type, float x, float y, boolean renderAboveGameObjects, float addBodyDelay) {
 		createAndDropItem(type, new MapProperties(), x, y, renderAboveGameObjects, addBodyDelay);
 	}
@@ -61,10 +84,10 @@ public class ItemFactory {
 			float addBodyDelay) {
 		Item item = createItem(type, x, y, mapProperties, addBodyDelay);
 		if (renderAboveGameObjects) {
-			GameMapManager.getInstance().getMap().addItemAboveGameObjects(item);
+			itemMap.addItemAboveGameObjects(item);
 		}
 		else {
-			GameMapManager.getInstance().getMap().addItem(item);
+			itemMap.addItem(item);
 		}
 		
 		item.setPosition(new Vector2(x, y));
@@ -109,17 +132,23 @@ public class ItemFactory {
 				item = new EventItem(name, typeConfig, sprite, animation, properties);
 				break;
 			case BUYABLE_ITEM:
-				item = new BuyableItem(name, typeConfig, sprite, animation, properties);
+				BuyableItem buyableItem = new BuyableItem(name, typeConfig, sprite, animation, properties);
+				buyableItem.setPlayerCoinsSupplier(playerCoinsSupplier);
+				item = buyableItem;
 				break;
 			case RUNE:
 				item = new RuneItem(name, typeConfig, sprite, animation, properties);
 				break;
 			case SPECIAL_ACTION:
-				item = new SpecialActionItem(name, typeConfig, sprite, animation, properties);
+				ItemSpecialAction itemSpecialAction = itemSpecialActionByNameFunction.apply(name);
+				item = new SpecialActionItem(name, typeConfig, sprite, animation, properties, itemSpecialAction);
 				break;
 			default:
 				throw new IllegalStateException("Unknown ItemType \"" + typeConfig.type + "\" of object type \"" + name + "\"");
 		}
+		
+		item.setItemMap(itemMap);
+		item.setItemTextBox(itemTextBox);
 		
 		if (addBodyDelay > 0) {
 			PhysicsWorld.getInstance().runDelayedAfterWorldStep(
@@ -152,10 +181,10 @@ public class ItemFactory {
 		public void createAndAddItem(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
 			Item item = createItem(type, x, y, mapProperties);
 			if (renderAboveGameObjects) {
-				GameMapManager.getInstance().getMap().addItemAboveGameObjects(item);
+				itemMap.addItemAboveGameObjects(item);
 			}
 			else {
-				GameMapManager.getInstance().getMap().addItem(item);
+				itemMap.addItem(item);
 			}
 		}
 	}

@@ -13,12 +13,10 @@ import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.event.EventListener;
-import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemMap;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.projectile.ProjectileMap;
-import net.jfabricationgames.gdx.rune.RuneType;
 
 public interface GameMap extends EventListener, CutsceneUnitProvider, CharacterMap, GameObjectMap, ItemMap, ProjectileMap, Disposable {
 	
@@ -43,8 +41,6 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, CharacterM
 		}
 	}
 	
-	public String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
-	
 	public void beforeLoadMap(String mapIdentifier);
 	public void afterLoadMap(String mapIdentifier);
 	
@@ -60,19 +56,11 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, CharacterM
 	
 	public boolean isDungeonMap();
 	
-	public void processRunePickUp(RuneType rune);
-	
 	public float getMapWidth();
 	public float getMapHeight();
 	
-	@Override
-	public void addObject(GameObject gameObject);
-	@Override
-	public void addEnemy(Enemy gameObject);
-	
 	public void addPostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction);
 	
-	public void removeItem(Item item, Body body);
 	public void removeEnemy(Enemy enemy, Body body);
 	public void removeNpc(NonPlayableCharacter nonPlayableCharacter, Body body);
 	public void removeAnimal(Animal animal, Body body);

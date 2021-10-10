@@ -18,7 +18,6 @@ import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.rune.RuneType;
@@ -164,7 +163,7 @@ class GameMapRenderer implements Disposable {
 	}
 	
 	private boolean isLanternUsed() {
-		return GlobalValuesDataHandler.getInstance().getAsBoolean(GameMap.GLOBAL_VALUE_KEY_LANTERN_USED);
+		return GlobalValuesDataHandler.getInstance().getAsBoolean(Constants.GLOBAL_VALUE_KEY_LANTERN_USED);
 	}
 	
 	public void beginBatch() {

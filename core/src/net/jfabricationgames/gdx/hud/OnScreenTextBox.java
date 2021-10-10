@@ -15,11 +15,12 @@ import net.jfabricationgames.gdx.event.global.GlobalEventTextBox;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputManager;
+import net.jfabricationgames.gdx.item.ItemTextBox;
 import net.jfabricationgames.gdx.object.GameObjectTextBox;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 import net.jfabricationgames.gdx.util.GameUtil;
 
-public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox, GameObjectTextBox, Disposable {
+public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox, GameObjectTextBox, ItemTextBox, Disposable {
 	
 	protected static final float TEXT_SCALE = 1f;
 	protected static final int DISPLAYABLE_LINES = 5;
@@ -130,6 +131,7 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		shapeRenderer.end();
 	}
 	
+	@Override
 	public void setText(String text) {
 		setText(text, false);
 	}
@@ -143,6 +145,7 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		return headerText;
 	}
 	
+	@Override
 	public void setHeaderText(String headerText) {
 		setHeaderText(headerText, Color.RED);
 	}

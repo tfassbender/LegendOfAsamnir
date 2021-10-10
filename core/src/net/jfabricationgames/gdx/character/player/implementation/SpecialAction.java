@@ -3,16 +3,17 @@ package net.jfabricationgames.gdx.character.player.implementation;
 import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
+import net.jfabricationgames.gdx.item.ItemSpecialAction;
 
-public enum SpecialAction {
+public enum SpecialAction implements ItemSpecialAction {
 	
-	JUMP(0, 0f, "special_action_available__jump"), //
-	BOW(1, 0f, "special_action_available__bow"), //
-	BOMB(2, 0f, "special_action_available__bomb"), //
-	BOOMERANG(3, 5f, "special_action_available__boomerang"), //
-	WAND(4, 10f, "special_action_available__wand"), // 
-	FEATHER(5, 0f, "special_action_available__feather"), //
-	LANTERN(6, 10f, "special_action_available__lantern"); //
+	JUMP(0, 0f, 1f, "special_action_available__jump"), //
+	BOW(1, 0f, 1f, "special_action_available__bow"), //
+	BOMB(2, 0f, 1f, "special_action_available__bomb"), //
+	BOOMERANG(3, 5f, 1f, "special_action_available__boomerang"), //
+	WAND(4, 10f, 1f, "special_action_available__wand"), // 
+	FEATHER(5, 0f, 0.65f, "special_action_available__feather"), //
+	LANTERN(6, 10f, 0.65f, "special_action_available__lantern"); //
 	
 	public static SpecialAction findByNameIgnoringCase(String specialAction) {
 		for (SpecialAction action : values()) {
@@ -56,13 +57,26 @@ public enum SpecialAction {
 	public final float manaCost;
 	public final String actionEnabledGlobalValueKey;
 	
-	private SpecialAction(int indexInMenu, float manaCost, String globalValueKey) {
+	private final float textureScaleFactor;
+	
+	private SpecialAction(int indexInMenu, float manaCost, float textureScaleFactor, String globalValueKey) {
 		this.indexInMenu = indexInMenu;
 		this.manaCost = manaCost;
+		this.textureScaleFactor = textureScaleFactor;
 		this.actionEnabledGlobalValueKey = globalValueKey;
 	}
 	
 	public boolean canBeUsed() {
 		return GlobalValuesDataHandler.getInstance().getAsBoolean(actionEnabledGlobalValueKey);
+	}
+	
+	@Override
+	public float getScaleFactor() {
+		return textureScaleFactor;
+	}
+	
+	@Override
+	public String getActionEnabledGlobalValueKey() {
+		return actionEnabledGlobalValueKey;
 	}
 }
