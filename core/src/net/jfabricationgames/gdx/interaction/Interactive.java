@@ -1,8 +1,7 @@
 package net.jfabricationgames.gdx.interaction;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.ContactListener;
-
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 
 public interface Interactive extends ContactListener {
 	
@@ -10,5 +9,5 @@ public interface Interactive extends ContactListener {
 	
 	public boolean interactionCanBeExecuted();
 	
-	public float getDistanceToPlayer(PlayableCharacter character);
+	public float getDistanceToPlayer(Vector2 playerPosition);
 }

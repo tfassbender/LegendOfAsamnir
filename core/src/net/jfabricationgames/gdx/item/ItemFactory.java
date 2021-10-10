@@ -16,6 +16,7 @@ import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.map.GameMapManager;
+import net.jfabricationgames.gdx.object.spawn.ItemSpawnFactory;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 import net.jfabricationgames.gdx.util.SerializationUtil;
@@ -141,7 +142,25 @@ public class ItemFactory {
 		}
 	}
 	
-	public static class Config {
+	public static ItemSpawnFactory asInstance() {
+		return new ItemFactoryInstance();
+	}
+	
+	public static class ItemFactoryInstance implements ItemSpawnFactory {
+		
+		@Override
+		public void createAndAddItem(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
+			Item item = createItem(type, x, y, mapProperties);
+			if (renderAboveGameObjects) {
+				GameMapManager.getInstance().getMap().addItemAboveGameObjects(item);
+			}
+			else {
+				GameMapManager.getInstance().getMap().addItem(item);
+			}
+		}
+	}
+	
+	private static class Config {
 		
 		public String itemAtlas;
 		public String itemAnimations;

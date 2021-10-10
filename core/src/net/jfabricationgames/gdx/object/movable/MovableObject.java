@@ -6,20 +6,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class MovableObject extends GameObject {
 	
-	static {
-		GameMapManager.getInstance().getMap().addPostAddObjectProcessing(MovableObject::sortMovableGameObjectsLast);
-	}
-	
 	/**
 	 * Sort movable game objects to the end of the list, to make them drawn on top of other objects.
 	 */
-	private static Array<GameObject> sortMovableGameObjectsLast(Array<GameObject> objects) {
+	public static Array<GameObject> sortMovableGameObjectsLast(Array<GameObject> objects) {
 		int listSize = objects.size;
 		for (int i = 0; i < listSize; i++) {
 			GameObject object = objects.get(i);
@@ -33,8 +29,8 @@ public class MovableObject extends GameObject {
 		return objects;
 	}
 	
-	public MovableObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
-		super(typeConfig, sprite, mapProperties);
+	public MovableObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties, GameObjectMap gameMap) {
+		super(typeConfig, sprite, mapProperties, gameMap);
 	}
 	
 	@Override

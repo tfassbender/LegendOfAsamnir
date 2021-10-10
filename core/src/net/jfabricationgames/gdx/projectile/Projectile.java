@@ -15,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.attack.Hittable;
-import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -24,7 +23,7 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
-public abstract class Projectile implements ContactListener, GameMapObject {
+public abstract class Projectile implements ContactListener {
 	
 	private static final String SOUND_SET_PROJECTILE = "projectile";
 	private static final String EXPLOSION_PROJECTILE_TYPE = "explosion";
@@ -314,7 +313,6 @@ public abstract class Projectile implements ContactListener, GameMapObject {
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	
-	@Override
 	public void removeFromMap() {
 		remove();
 	}

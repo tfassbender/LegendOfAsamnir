@@ -3,15 +3,12 @@ package net.jfabricationgames.gdx.object.interactive;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapProperties;
 
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
-import net.jfabricationgames.gdx.character.player.Player;
-import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.object.GameObjectTextBox;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public enum InteractiveAction {
@@ -25,9 +22,8 @@ public enum InteractiveAction {
 			String text = mapProperties.get(MAP_PROPERTY_KEY_DISPLAY_TEXT, String.class);
 			String headerColor = mapProperties.get(MAP_PROPERTY_KEY_COLOR_HEADER, String.class);
 			
-			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(headerText, GameUtil.getColorFromRGB(headerColor, Color.RED));
-			onScreenTextBox.setText(text);
+			textBox.setHeaderText(headerText, GameUtil.getColorFromRGB(headerColor, Color.RED));
+			textBox.setText(text);
 		}
 	},
 	SHOW_OR_CHANGE_TEXT {
@@ -41,9 +37,7 @@ public enum InteractiveAction {
 			String text = object.getMapProperties().get(MAP_PROPERTY_KEY_DISPLAY_TEXT, String.class);
 			String changedText = object.getMapProperties().get(MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED, String.class);
 			
-			PlayableCharacter player = Player.getInstance();
-			
-			if (player.getActiveSpecialAction() == SpecialAction.FEATHER && !isValueChanged(globalConditionKey, globalConditionValue)) {
+			if (player.isSpecialActionFeatherSelected() && !isValueChanged(globalConditionKey, globalConditionValue)) {
 				GlobalValuesDataHandler.getInstance().put(globalConditionKey, globalConditionValue);
 				
 				showOnScreenText("The text was changed.", "Text changed", headerColor);
@@ -59,9 +53,8 @@ public enum InteractiveAction {
 		}
 		
 		private void showOnScreenText(String text, String header, String headerColor) {
-			OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
-			onScreenTextBox.setHeaderText(header, GameUtil.getColorFromRGB(headerColor, Color.RED));
-			onScreenTextBox.setText(text);
+			textBox.setHeaderText(header, GameUtil.getColorFromRGB(headerColor, Color.RED));
+			textBox.setText(text);
 		}
 		
 		private boolean isValueChanged(String globalConditionKey, String globalConditionValue) {
@@ -92,6 +85,17 @@ public enum InteractiveAction {
 	private static final String MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED = "displayTextChanged";
 	private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_VALUE = "globalConditionValue";
 	private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_KEY = "globalConditionKey";
+	
+	private static GameObjectTextBox textBox;
+	private static InteractivePlayer player;
+	
+	public static void setTextBox(GameObjectTextBox textBox) {
+		InteractiveAction.textBox = textBox;
+	}
+	
+	public static void setPlayer(InteractivePlayer player) {
+		InteractiveAction.player = player;
+	}
 	
 	public abstract void execute(InteractiveObject object);
 }

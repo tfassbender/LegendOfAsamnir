@@ -15,10 +15,11 @@ import net.jfabricationgames.gdx.event.global.GlobalEventTextBox;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputManager;
+import net.jfabricationgames.gdx.object.GameObjectTextBox;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 import net.jfabricationgames.gdx.util.GameUtil;
 
-public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox, Disposable {
+public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox, GameObjectTextBox, Disposable {
 	
 	protected static final float TEXT_SCALE = 1f;
 	protected static final int DISPLAYABLE_LINES = 5;
@@ -133,6 +134,7 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		setText(text, false);
 	}
 	
+	@Override
 	public void setText(String text, boolean showNextPageIcon) {
 		textRenderer.setText(text, showNextPageIcon);
 	}
@@ -144,11 +146,13 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 	public void setHeaderText(String headerText) {
 		setHeaderText(headerText, Color.RED);
 	}
+	@Override
 	public void setHeaderText(String headerText, Color headerColor) {
 		this.headerText = headerText;
 		this.headerColor = headerColor;
 	}
 	
+	@Override
 	public void showPlayerChoice(PlayerChoice playerChoice) {
 		Color headerColor = GameUtil.getColorFromRGB(playerChoice.headerColor, Color.RED);
 		setHeaderText(playerChoice.header, headerColor);

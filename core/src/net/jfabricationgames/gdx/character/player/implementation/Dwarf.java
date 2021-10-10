@@ -333,6 +333,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	}
 	
 	@Override
+	public boolean isSpecialActionFeatherSelected() {
+		return activeSpecialAction == SpecialAction.FEATHER;
+	}
+	
+	@Override
 	public void beginContact(Contact contact) {
 		bodyHandler.beginContact(contact);
 	}

@@ -82,26 +82,26 @@ class TiledMapLoader implements GameMapLoader {
 					+ rectangle.width + ", h: " + rectangle.height + "] properties: " + MapUtil.mapPropertiesToString(properties, false));
 			
 			switch (parts[0]) {
-				case GameMap.OBJECT_NAME_PLAYER:
+				case Constants.OBJECT_NAME_PLAYER:
 					if (parts[1].equals("startingPosition")) {
 						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y).scl(Constants.WORLD_TO_SCREEN);
 					}
 					break;
-				case GameMap.OBJECT_NAME_ITEM:
+				case Constants.OBJECT_NAME_ITEM:
 					items.add(ItemFactory.createItem(parts[1], rectangle.x, rectangle.y, properties));
 					break;
-				case GameMap.OBJECT_NAME_OBJECT:
+				case Constants.OBJECT_NAME_OBJECT:
 					GameObject gameObject = GameObjectFactory.createObject(parts[1], rectangle.x, rectangle.y, properties);
 					objects.add(gameObject);
 					gameObject.postAddToGameMap();
 					break;
-				case GameMap.OBJECT_NAME_ENEMY:
+				case Constants.OBJECT_NAME_ENEMY:
 					enemies.add(EnemyFactory.createEnemy(parts[1], rectangle.x, rectangle.y, properties));
 					break;
-				case GameMap.OBJECT_NAME_NPC:
+				case Constants.OBJECT_NAME_NPC:
 					npcs.add(NonPlayableCharacterFactory.createNonPlayableCharacter(parts[1], rectangle.x, rectangle.y, properties));
 					break;
-				case GameMap.OBJECT_NAME_ANIMAL:
+				case Constants.OBJECT_NAME_ANIMAL:
 					animals.add(AnimalFactory.createAnimal(parts[1], rectangle.x, rectangle.y, properties));
 					break;
 				default:

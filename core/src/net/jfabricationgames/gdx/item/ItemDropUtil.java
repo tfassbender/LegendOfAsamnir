@@ -5,17 +5,16 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
+import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.object.GameObjectItemDropUtil;
+
 public class ItemDropUtil {
-	
-	public static final String MAP_PROPERTY_KEY_DROP_ITEM = "drop";
-	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE = "specialDropType";
-	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES = "specialDropMapProperties";
 	
 	public static final float ITEM_DROP_PICKUP_DELAY = 0.75f;
 	
 	public static ObjectMap<String, Float> processMapProperties(MapProperties mapProperties, ObjectMap<String, Float> defaultDrops) {
-		if (mapProperties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_DROP_ITEM)) {
-			String droppedItemConfig = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_DROP_ITEM, String.class);
+		if (mapProperties.containsKey(Constants.MAP_PROPERTY_KEY_DROP_ITEM)) {
+			String droppedItemConfig = mapProperties.get(Constants.MAP_PROPERTY_KEY_DROP_ITEM, String.class);
 			return readDroppedItemConfig(droppedItemConfig);
 		}
 		return defaultDrops;
@@ -53,5 +52,27 @@ public class ItemDropUtil {
 	
 	public static void dropItem(String type, MapProperties mapProperties, float x, float y, boolean renderDropsAboveObject) {
 		ItemFactory.createAndDropItem(type, mapProperties, x, y, renderDropsAboveObject, ITEM_DROP_PICKUP_DELAY);
+	}
+	
+	public static GameObjectItemDropUtil asInstance() {
+		return new ItemDropUtilInstance();
+	}
+	
+	public static class ItemDropUtilInstance implements GameObjectItemDropUtil {
+		
+		@Override
+		public ObjectMap<String, Float> processMapProperties(MapProperties mapProperties, ObjectMap<String, Float> drops) {
+			return ItemDropUtil.processMapProperties(mapProperties, drops);
+		}
+		
+		@Override
+		public void dropItem(String specialDropType, MapProperties mapProperties, float x, float y, boolean renderDropsAboveObject) {
+			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, renderDropsAboveObject);
+		}
+		
+		@Override
+		public void dropItems(ObjectMap<String, Float> dropTypes, float x, float y, boolean renderDropsAboveObject) {
+			ItemDropUtil.dropItems(dropTypes, x, y, renderDropsAboveObject);
+		}
 	}
 }

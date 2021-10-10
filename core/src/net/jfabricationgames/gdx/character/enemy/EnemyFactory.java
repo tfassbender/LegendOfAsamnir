@@ -9,6 +9,8 @@ import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.character.enemy.implementation.Totem;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.map.GameMapManager;
+import net.jfabricationgames.gdx.object.spawn.EnemySpawnFactory;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class EnemyFactory {
@@ -85,6 +87,19 @@ public class EnemyFactory {
 		enemy.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		
 		return enemy;
+	}
+	
+	public static EnemyFactoryInstance asInstance() {
+		return new EnemyFactoryInstance();
+	}
+	
+	public static class EnemyFactoryInstance implements EnemySpawnFactory {
+		
+		@Override
+		public void createAndAddEnemy(String type, float x, float y, MapProperties mapProperties) {
+			Enemy enemy = createEnemy(type, x, y, mapProperties);
+			GameMapManager.getInstance().getMap().addEnemy(enemy);
+		}
 	}
 	
 	private static class Config {

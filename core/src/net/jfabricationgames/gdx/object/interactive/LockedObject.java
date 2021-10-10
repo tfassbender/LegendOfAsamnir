@@ -14,7 +14,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class LockedObject extends InteractiveObject implements EventListener {
@@ -31,8 +31,8 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	
 	private ObjectMap<String, String> keyProperties;
 	
-	public LockedObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
-		super(typeConfig, sprite, properties);
+	public LockedObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties, GameObjectMap gameMap) {
+		super(typeConfig, sprite, properties, gameMap);
 		
 		keyProperties = KeyItemProperties.getKeyProperties(properties);
 		
@@ -97,7 +97,6 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	}
 	
 	private void showLockMessage() {
-		OnScreenTextBox onScreenTextBox = OnScreenTextBox.getInstance();
 		String messageText;
 		
 		if (isUnlockedByEvent() || isUnlockedByCondition()) {
@@ -112,8 +111,8 @@ public class LockedObject extends InteractiveObject implements EventListener {
 			}
 		}
 		
-		onScreenTextBox.setHeaderText(LOCK_MESSAGE_HEADER);
-		onScreenTextBox.setText(messageText);
+		textBox.setHeaderText(LOCK_MESSAGE_HEADER);
+		textBox.setText(messageText);
 	}
 	
 	@Override

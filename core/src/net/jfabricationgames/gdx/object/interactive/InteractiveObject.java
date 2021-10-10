@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
@@ -36,8 +37,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	protected boolean changedBodyToSensor = false;
 	private TextureAnimationDirector<TextureRegion> interactionAnimation;
 	
-	public InteractiveObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
-		super(typeConfig, sprite, properties);
+	public InteractiveObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties, GameObjectMap gameMap) {
+		super(typeConfig, sprite, properties, gameMap);
 		PhysicsWorld.getInstance().registerContactListener(this);
 		
 		interactionAnimation = InteractionManager.getInstance().getInteractionAnimationCopy();
@@ -163,8 +164,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	@Override
-	public float getDistanceToPlayer(PlayableCharacter character) {
-		return character.getPosition().sub(body.getPosition()).len();
+	public float getDistanceToPlayer(Vector2 playerPosition) {
+		return playerPosition.sub(body.getPosition()).len();
 	}
 	
 	protected void performAction() {

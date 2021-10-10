@@ -11,6 +11,7 @@ import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -42,14 +43,12 @@ public class StateSwitchObject extends InteractiveObject {
 	private boolean active;
 	private String stateSwitchId;
 	
-	public StateSwitchObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties) {
-		super(typeConfig, sprite, properties);
-		
-		changeSwitchObjectState(stateSwitchId, false);
+	public StateSwitchObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties, GameObjectMap gameMap) {
+		super(typeConfig, sprite, properties, gameMap);
 	}
 	
 	@Override
-	protected void processMapProperties() {
+	public void processMapProperties() {
 		super.processMapProperties();
 		
 		stateSwitchId = mapProperties.get(MAP_PROPERTIES_KEY_STATE_SWITCH_ID, String.class);
@@ -57,6 +56,8 @@ public class StateSwitchObject extends InteractiveObject {
 			Gdx.app.error(getClass().getSimpleName(),
 					"A StateSwitchObject should have stateSwitchId (configured in the map properties). Map-ID: " + getMapObjectId());
 		}
+		
+		changeSwitchObjectState(stateSwitchId, false);
 	}
 	
 	@Override

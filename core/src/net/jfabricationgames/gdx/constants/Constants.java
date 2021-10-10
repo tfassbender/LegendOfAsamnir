@@ -14,5 +14,18 @@ public class Constants {
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;
 	public static final float HUD_SCENE_HEIGHT = SCENE_HEIGHT * HUD_SCENE_FACTOR;
 	
+	public static final String OBJECT_NAME_ANIMAL = "animal";
+	public static final String OBJECT_NAME_NPC = "npc";
+	public static final String OBJECT_NAME_ENEMY = "enemy";
+	public static final String OBJECT_NAME_OBJECT = "object";
+	public static final String OBJECT_NAME_ITEM = "item";
+	public static final String OBJECT_NAME_PLAYER = "player";
+
+	public static final String MAP_PROPERTY_KEY_DROP_ITEM = "drop";
+
+	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE = "specialDropType";
+
+	public static final String MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES = "specialDropMapProperties";
+	
 	private Constants() {}
 }

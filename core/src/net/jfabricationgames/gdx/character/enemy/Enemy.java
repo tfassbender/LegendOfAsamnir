@@ -270,8 +270,8 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * Constants.SCREEN_TO_WORLD;
 		
 		if (dropsSpecialItems()) {
-			String specialDropType = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
-			String specialDropMapProperties = properties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
+			String specialDropType = properties.get(Constants.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
+			String specialDropMapProperties = properties.get(Constants.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
 			MapProperties mapProperties = MapUtil.createMapPropertiesFromString(specialDropMapProperties);
 			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
 		}
@@ -284,7 +284,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	}
 	
 	private boolean dropsSpecialItems() {
-		return properties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE);
+		return properties.containsKey(Constants.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE);
 	}
 	
 	@Override

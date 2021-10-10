@@ -16,6 +16,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -35,8 +36,8 @@ public class EventObject extends GameObject implements ContactListener {
 	private boolean executed = false;
 	private Vector2 eventObjectCenter;
 	
-	public EventObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
-		super(typeConfig, sprite, mapProperties);
+	public EventObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties, GameObjectMap gameMap) {
+		super(typeConfig, sprite, mapProperties, gameMap);
 		PhysicsWorld.getInstance().registerContactListener(this);
 	}
 	
@@ -68,7 +69,7 @@ public class EventObject extends GameObject implements ContactListener {
 	}
 	
 	@Override
-	protected void processMapProperties() {
+	public void processMapProperties() {
 		super.processMapProperties();
 		eventParameter = mapProperties.get(MAP_PROPERTY_KEY_EVENT_PARAMETER, String.class);
 		singleExecution = Boolean.parseBoolean(mapProperties.get(MAP_PROPERTY_KEY_MULTIPLE_EXECUTIONS_POSSIBLE, "false", String.class));

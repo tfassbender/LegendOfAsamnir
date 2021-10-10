@@ -7,18 +7,20 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.character.CharacterMap;
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.Item;
+import net.jfabricationgames.gdx.item.ItemMap;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.projectile.Projectile;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.projectile.ProjectileMap;
 import net.jfabricationgames.gdx.rune.RuneType;
 
-public interface GameMap extends EventListener, CutsceneUnitProvider, ProjectileMap, Disposable {
+public interface GameMap extends EventListener, CutsceneUnitProvider, CharacterMap, GameObjectMap, ItemMap, ProjectileMap, Disposable {
 	
 	enum GlobalMapPropertyKeys {
 		
@@ -42,12 +44,6 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, Projectile
 	}
 	
 	public String GLOBAL_VALUE_KEY_LANTERN_USED = "game_map__lantern_used";
-	public String OBJECT_NAME_ANIMAL = "animal";
-	public String OBJECT_NAME_NPC = "npc";
-	public String OBJECT_NAME_ENEMY = "enemy";
-	public String OBJECT_NAME_OBJECT = "object";
-	public String OBJECT_NAME_ITEM = "item";
-	public String OBJECT_NAME_PLAYER = "player";
 	
 	public void beforeLoadMap(String mapIdentifier);
 	public void afterLoadMap(String mapIdentifier);
@@ -69,19 +65,14 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, Projectile
 	public float getMapWidth();
 	public float getMapHeight();
 	
-	public void addObject(GameObject gameObject);
-	public void addItem(Item item);
-	public void addItemAboveGameObjects(Item item);
 	@Override
-	public void addProjectile(Projectile projectile);
+	public void addObject(GameObject gameObject);
+	@Override
 	public void addEnemy(Enemy gameObject);
 	
 	public void addPostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction);
 	
-	public void removeObject(GameObject gameObject, Body body);
 	public void removeItem(Item item, Body body);
-	@Override
-	public void removeProjectile(Projectile projectile, Body body);
 	public void removeEnemy(Enemy enemy, Body body);
 	public void removeNpc(NonPlayableCharacter nonPlayableCharacter, Body body);
 	public void removeAnimal(Animal animal, Body body);

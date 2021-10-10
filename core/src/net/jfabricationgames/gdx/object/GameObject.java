@@ -18,14 +18,10 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.attack.Hittable;
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.cutscene.action.CutscenePositioningUnit;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
-import net.jfabricationgames.gdx.item.ItemDropUtil;
-import net.jfabricationgames.gdx.map.GameMapManager;
-import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -35,7 +31,7 @@ import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.util.MapUtil;
 
-public class GameObject implements Hittable, GameMapObject, StatefulMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
+public class GameObject implements Hittable, StatefulMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
 	
 	public static final String MAP_PROPERTY_KEY_DEBUG_OBJECT = "debugObject";
 	
@@ -45,6 +41,11 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	protected Sprite sprite;
 	protected MapProperties mapProperties;
 	protected Body body;
+	protected GameObjectMap gameMap;
+	protected GameObjectItemDropUtil itemDropUtil;
+	protected GameObjectTextBox textBox;
+	protected Class<?> playerObjectClass;
+	
 	protected TextureAtlas textureAtlas;
 	protected GameObjectTypeConfig typeConfig;
 	protected ObjectMap<String, Float> dropTypes;
@@ -57,18 +58,18 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	protected Vector2 physicsBodySizeFactor;
 	protected Vector2 physicsBodyOffsetFactor;
 	
-	public GameObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties) {
+	public GameObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties, GameObjectMap gameMap) {
 		this.typeConfig = typeConfig;
 		this.sprite = sprite;
 		this.mapProperties = mapProperties;
+		this.gameMap = gameMap;
 		animationManager = AnimationManager.getInstance();
 		
-		processMapProperties();
 		readTypeConfig();
 	}
 	
-	protected void processMapProperties() {
-		dropTypes = ItemDropUtil.processMapProperties(mapProperties, typeConfig.drops);
+	public void processMapProperties() {
+		dropTypes = itemDropUtil.processMapProperties(mapProperties, typeConfig.drops);
 	}
 	
 	protected void readTypeConfig() {
@@ -79,6 +80,18 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 		physicsBodyOffsetFactor = new Vector2(typeConfig.physicsBodyOffsetFactorX, typeConfig.physicsBodyOffsetFactorY);
 		
 		hitSound = typeConfig.hitSound;
+	}
+	
+	public void setItemDropUtil(GameObjectItemDropUtil itemDropUtil) {
+		this.itemDropUtil = itemDropUtil;
+	}
+	
+	public void setTextBox(GameObjectTextBox textBox) {
+		this.textBox = textBox;
+	}
+	
+	public void setPlayerObjectClass(Class<?> playerObjectClass) {
+		this.playerObjectClass = playerObjectClass;
 	}
 	
 	/**
@@ -187,24 +200,23 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 		float x = (body.getPosition().x + typeConfig.dropPositionOffsetX) * Constants.SCREEN_TO_WORLD;
 		float y = (body.getPosition().y + typeConfig.dropPositionOffsetY) * Constants.SCREEN_TO_WORLD;
 		
-		if (mapProperties.containsKey(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
-			String specialDropType = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
-			String specialDropMapProperties = mapProperties.get(ItemDropUtil.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
+		if (mapProperties.containsKey(Constants.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE)) {
+			String specialDropType = mapProperties.get(Constants.MAP_PROPERTY_KEY_SPECIAL_DROP_TYPE, String.class);
+			String specialDropMapProperties = mapProperties.get(Constants.MAP_PROPERTY_KEY_SPECIAL_DROP_MAP_PROPERTIES, String.class);
 			MapProperties mapProperties = MapUtil.createMapPropertiesFromString(specialDropMapProperties);
-			ItemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
+			itemDropUtil.dropItem(specialDropType, mapProperties, x, y, typeConfig.renderDropsAboveObject);
 		}
 		else {
-			ItemDropUtil.dropItems(dropTypes, x, y, typeConfig.renderDropsAboveObject);
+			itemDropUtil.dropItems(dropTypes, x, y, typeConfig.renderDropsAboveObject);
 		}
 	}
 	
-	@Override
 	public void removeFromMap() {
 		remove();
 	}
 	
 	public void remove() {
-		GameMapManager.getInstance().getMap().removeObject(this, body);
+		gameMap.removeObject(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}
 	
@@ -248,6 +260,6 @@ public class GameObject implements Hittable, GameMapObject, StatefulMapObject, C
 	}
 	
 	protected boolean isPlayableCharacterContact(Contact contact) {
-		return CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact, PlayableCharacter.class) != null;
+		return CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE_SENSOR, contact, playerObjectClass) != null;
 	}
 }

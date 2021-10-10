@@ -251,7 +251,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	}
 	
 	@Override
-	public float getDistanceToPlayer(PlayableCharacter character) {
-		return getPosition().sub(character.getPosition()).len();
+	public float getDistanceToPlayer(Vector2 playerPosition) {
+		return getPosition().sub(playerPosition).len();
 	}
 }

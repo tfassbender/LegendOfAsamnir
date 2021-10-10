@@ -23,14 +23,13 @@ import net.jfabricationgames.gdx.cutscene.CutsceneControlledCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
 import net.jfabricationgames.gdx.map.GameMapGroundType;
-import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
-public abstract class AbstractCharacter implements GameMapObject, ContactListener, CutsceneControlledCharacter {
+public abstract class AbstractCharacter implements ContactListener, CutsceneControlledCharacter {
 	
 	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
 	public static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";
@@ -250,7 +249,6 @@ public abstract class AbstractCharacter implements GameMapObject, ContactListene
 		groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
 	}
 	
-	@Override
 	public abstract void removeFromMap();
 	
 	public boolean isRemovedFromMap() {

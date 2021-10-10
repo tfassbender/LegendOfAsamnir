@@ -21,7 +21,6 @@ import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.hud.OnScreenTextBox;
 import net.jfabricationgames.gdx.map.GameMapManager;
-import net.jfabricationgames.gdx.map.GameMapObject;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -29,7 +28,7 @@ import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 import net.jfabricationgames.gdx.util.SerializationUtil;
 
-public class Item implements GameMapObject, StatefulMapObject, CutsceneControlledUnit, DataItem {
+public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem {
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
@@ -155,7 +154,6 @@ public class Item implements GameMapObject, StatefulMapObject, CutsceneControlle
 		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
-	@Override
 	public void removeFromMap() {
 		remove();
 	}

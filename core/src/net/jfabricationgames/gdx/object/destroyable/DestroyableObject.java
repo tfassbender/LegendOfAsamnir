@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 
-import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
+import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackType;
 import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class DestroyableObject extends GameObject {
@@ -18,8 +19,8 @@ public class DestroyableObject extends GameObject {
 	
 	protected String destroySound;
 	
-	public DestroyableObject(GameObjectTypeConfig type, Sprite sprite, MapProperties properties) {
-		super(type, sprite, properties);
+	public DestroyableObject(GameObjectTypeConfig type, Sprite sprite, MapProperties properties, GameObjectMap gameMap) {
+		super(type, sprite, properties, gameMap);
 		destroyed = false;
 	}
 	

@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
+import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.condition.ConditionHandler;
@@ -30,9 +31,14 @@ import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
+import net.jfabricationgames.gdx.item.ItemDropUtil;
+import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
+import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
+import net.jfabricationgames.gdx.object.interactive.InteractiveAction;
 import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
+import net.jfabricationgames.gdx.object.movable.MovableObject;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screen.ScreenManager;
@@ -86,13 +92,18 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		initializeCamerasAndViewports();
 		initializeInputContext();
 		createBox2DWorld();
-		createGameMap();
 		createHud();
+		
+		createGameMap();
+		initializeGameMapObjectProcessing();
+		initializeFactories();
+		loadGameMap();
+		
 		createCameraMovementHandler();
 		initializeEventHandling();
 		initializeCutsceneHandler();
 		initializeConditionType();
-		initializeFactories();
+		initializeInteractiveAction();
 		
 		ScreenManager.getInstance().setGameScreen(this);
 	}
@@ -127,6 +138,26 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void createGameMap() {
 		GameMapManager.getInstance().createGameMap(camera);
 		map = GameMapManager.getInstance().getMap();
+	}
+	
+	private void initializeGameMapObjectProcessing() {
+		GameMapManager.getInstance().getMap().addPostAddObjectProcessing(MovableObject::sortMovableGameObjectsLast);
+	}
+	
+	private void initializeFactories() {
+		GameMap gameMap = GameMapManager.getInstance().getMap();
+		
+		GameObjectFactory.setGameMap(gameMap);
+		GameObjectFactory.setEnemySpawnFactory(EnemyFactory.asInstance());
+		GameObjectFactory.setItemSpawnFactory(ItemFactory.asInstance());
+		GameObjectFactory.setItemDropUtil(ItemDropUtil.asInstance());
+		GameObjectFactory.setGameObjectTextBox(OnScreenTextBox.getInstance());
+		GameObjectFactory.setPlayerObjectClass(PlayableCharacter.class);
+		
+		ProjectileFactory.setGameMap(gameMap);
+	}
+	
+	private void loadGameMap() {
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
 		gameMapManager.showMap(initialMapIdentifier);
@@ -164,8 +195,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		ConditionType.setIsStateSwitchActive(StateSwitchObject::isStateSwitchActive);
 	}
 	
-	private void initializeFactories() {
-		ProjectileFactory.setGameMap(GameMapManager.getInstance().getMap());
+	private void initializeInteractiveAction() {
+		InteractiveAction.setTextBox(OnScreenTextBox.getInstance());
+		InteractiveAction.setPlayer(Player.getInstance());
 	}
 	
 	@Override

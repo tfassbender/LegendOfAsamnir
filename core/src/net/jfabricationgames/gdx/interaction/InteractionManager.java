@@ -29,7 +29,7 @@ public class InteractionManager {
 			return 1;
 		}
 		else {
-			return Float.compare(i1.getDistanceToPlayer(character), i2.getDistanceToPlayer(character));
+			return Float.compare(i1.getDistanceToPlayer(character.getPosition()), i2.getDistanceToPlayer(character.getPosition()));
 		}
 	};
 	
