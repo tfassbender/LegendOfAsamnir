@@ -4,9 +4,9 @@ import java.util.Random;
 
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig.StateConfig;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceCharacter;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceStateConfig;
 import net.jfabricationgames.gdx.character.ai.implementation.RandomMovementAI;
 import net.jfabricationgames.gdx.character.ai.move.AIActionMove;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
@@ -17,12 +17,12 @@ import net.jfabricationgames.gdx.character.state.CharacterState;
 public class RandomIdleStatesMovementAI extends RandomMovementAI {
 	
 	private RandomIdleStatesHandler handler;
-	private ObjectMap<CharacterState, StateConfig> idleStateProbabilities;
+	private ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbabilities;
 	
 	private float movementProbability;
 	private Random random;
 	
-	public RandomIdleStatesMovementAI(ArtificialIntelligence subAI, ObjectMap<CharacterState, StateConfig> idleStateProbabilities,
+	public RandomIdleStatesMovementAI(ArtificialIntelligence subAI, ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbabilities,
 			float movementProbability, CharacterState movingState, CharacterState idleState, float maxDistance) {
 		super(subAI, movingState, idleState, maxDistance);
 		this.idleStateProbabilities = idleStateProbabilities;
@@ -32,7 +32,7 @@ public class RandomIdleStatesMovementAI extends RandomMovementAI {
 	}
 	
 	@Override
-	public void setCharacter(AbstractCharacter character) {
+	public void setCharacter(ArtificialIntelligenceCharacter character) {
 		super.setCharacter(character);
 		handler = new RandomIdleStatesHandler(character, stateMachine, idleStateProbabilities);
 	}

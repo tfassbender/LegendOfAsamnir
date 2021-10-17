@@ -40,16 +40,9 @@ public class ArtificialIntelligenceConfig {
 	
 	public AttackTimerConfig attackTimerConfig;
 	
-	public ObjectMap<String, StateConfig> idleStates;
+	public ObjectMap<String, ArtificialIntelligenceStateConfig> idleStates;
 	
 	public ArtificialIntelligence buildAI(CharacterStateMachine stateMachine, MapProperties mapProperties) {
 		return type.buildAI(this, stateMachine, mapProperties);
-	}
-	
-	public static class StateConfig {
-		
-		public float probability;
-		public int minRepetitions = 1;
-		public int maxRepetitions = 1;
 	}
 }

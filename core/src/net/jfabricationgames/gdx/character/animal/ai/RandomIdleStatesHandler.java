@@ -6,21 +6,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
-import net.jfabricationgames.gdx.character.AbstractCharacter;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig.StateConfig;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceCharacter;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceStateConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 
 public class RandomIdleStatesHandler {
 	
-	private AbstractCharacter character;
+	private ArtificialIntelligenceCharacter character;
 	private CharacterStateMachine stateMachine;
 	
-	private ObjectMap<CharacterState, StateConfig> idleStateProbabilities;
+	private ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbabilities;
 	private Random random;
 	
-	public RandomIdleStatesHandler(AbstractCharacter character, CharacterStateMachine stateMachine,
-			ObjectMap<CharacterState, StateConfig> idleStateProbabilities) {
+	public RandomIdleStatesHandler(ArtificialIntelligenceCharacter character, CharacterStateMachine stateMachine,
+			ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbabilities) {
 		this.character = character;
 		this.stateMachine = stateMachine;
 		this.idleStateProbabilities = idleStateProbabilities;
@@ -36,7 +36,7 @@ public class RandomIdleStatesHandler {
 	}
 	
 	public void setOverridingFollowingState() {
-		Entry<CharacterState, StateConfig> randomIdleState = getRandomIdleState();
+		Entry<CharacterState, ArtificialIntelligenceStateConfig> randomIdleState = getRandomIdleState();
 		if (randomIdleState != null) {
 			int repetitions = getRandomRepetitions(randomIdleState.value);
 			
@@ -44,11 +44,11 @@ public class RandomIdleStatesHandler {
 		}
 	}
 	
-	private Entry<CharacterState, StateConfig> getRandomIdleState() {
+	private Entry<CharacterState, ArtificialIntelligenceStateConfig> getRandomIdleState() {
 		float randomValue = random.nextFloat();
 		float summedProbabilities = 0f;
 		
-		for (Entry<CharacterState, StateConfig> idleStateProbability : idleStateProbabilities) {
+		for (Entry<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbability : idleStateProbabilities) {
 			summedProbabilities += idleStateProbability.value.probability;
 			if (randomValue < summedProbabilities) {
 				return idleStateProbability;
@@ -60,7 +60,7 @@ public class RandomIdleStatesHandler {
 		return null;
 	}
 	
-	private int getRandomRepetitions(StateConfig config) {
+	private int getRandomRepetitions(ArtificialIntelligenceStateConfig config) {
 		if (config.minRepetitions == config.maxRepetitions) {
 			return config.minRepetitions;
 		}
@@ -69,7 +69,7 @@ public class RandomIdleStatesHandler {
 	}
 	
 	public void changeToRandomIdleState() {
-		Entry<CharacterState, StateConfig> randomIdleState = getRandomIdleState();
+		Entry<CharacterState, ArtificialIntelligenceStateConfig> randomIdleState = getRandomIdleState();
 		if (randomIdleState != null) {
 			int repetitions = getRandomRepetitions(randomIdleState.value);
 			

@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Json;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceCharacter;
 import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
 import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceTypesConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
@@ -29,10 +30,8 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyPropertie
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
-public abstract class AbstractCharacter implements ContactListener, CutsceneControlledCharacter {
+public abstract class AbstractCharacter implements ContactListener, CutsceneControlledCharacter, ArtificialIntelligenceCharacter {
 	
-	public static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
-	public static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";
 	public static final String MAP_PROPERTIES_KEY_AI_TYPE = "aiType";
 	
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
@@ -94,7 +93,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 					"The configured AI type '" + configuredAiName + "' is not available in the config file '" + aiConfigFile + "'.");
 		}
 		
-		ai = chosenAiConfig.type.buildAI(chosenAiConfig, stateMachine, properties);
+		ai = chosenAiConfig.buildAI(stateMachine, properties);
 	}
 	
 	private ArtificialIntelligenceTypesConfig loadAiConfig(String aiConfigFile) {
@@ -124,6 +123,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 		return stateMachine.getCurrentState().getAnimation();
 	}
 	
+	@Override
 	public CharacterStateMachine getStateMachine() {
 		return stateMachine;
 	}
@@ -133,6 +133,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 		return getTypeAndPositionAsString();
 	}
 	
+	@Override
 	public String getTypeAndPositionAsString() {
 		return "[Type: " + getTypeConfig().typeName + " ; Position: " + properties.get("x") + ", " + properties.get("y") + "]";
 	}
@@ -187,10 +188,12 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 		return new Vector2(body.getPosition());
 	}
 	
+	@Override
 	public float getMovingSpeed() {
 		return movingSpeed;
 	}
 	
+	@Override
 	public void moveTo(Vector2 pos) {
 		moveTo(pos, 1f);
 	}
@@ -212,6 +215,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	public void moveToDirection(Vector2 pos) {
 		moveToDirection(pos, 1f);
 	}
+	@Override
 	public void moveToDirection(Vector2 pos, float speedFactor) {
 		Vector2 direction = pos.cpy().nor().scl(movingSpeed * speedFactor);
 		move(direction);
@@ -251,6 +255,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	
 	public abstract void removeFromMap();
 	
+	@Override
 	public boolean isRemovedFromMap() {
 		return body == null;
 	}

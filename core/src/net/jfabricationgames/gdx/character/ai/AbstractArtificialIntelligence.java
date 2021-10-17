@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
@@ -16,7 +15,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	
 	/** The next sub-AI in the decorator chain */
 	protected ArtificialIntelligence subAI;
-	protected AbstractCharacter character;
+	protected ArtificialIntelligenceCharacter character;
 	protected CharacterStateMachine stateMachine;
 	
 	public AbstractArtificialIntelligence(ArtificialIntelligence subAI) {
@@ -33,7 +32,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	 */
 	@Override
 	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz) {
-		return (T) subAI.getMove(moveType, clazz);
+		return subAI.getMove(moveType, clazz);
 	}
 	
 	protected boolean isExecutedByMe(AIMove move) {
@@ -52,7 +51,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	}
 	
 	@Override
-	public void setCharacter(AbstractCharacter character) {
+	public void setCharacter(ArtificialIntelligenceCharacter character) {
 		this.character = character;
 		this.stateMachine = character.getStateMachine();
 		subAI.setCharacter(character);

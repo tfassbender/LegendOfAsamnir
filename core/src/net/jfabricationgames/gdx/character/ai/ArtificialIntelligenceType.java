@@ -7,9 +7,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.SerializationException;
 
-import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig.StateConfig;
+import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceStateConfig;
 import net.jfabricationgames.gdx.character.ai.implementation.BackToStartingPointMovementAI;
 import net.jfabricationgames.gdx.character.ai.implementation.FollowAI;
 import net.jfabricationgames.gdx.character.ai.implementation.PreDefinedMovementAI;
@@ -113,7 +112,7 @@ public enum ArtificialIntelligenceType {
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			float maxDistance = aiConfig.maxMoveDistance;
 			
-			String maxDistanceString = mapProperties.get(AbstractCharacter.MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
+			String maxDistanceString = mapProperties.get(MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
 			if (maxDistanceString != null && !maxDistanceString.isEmpty()) {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
@@ -224,7 +223,7 @@ public enum ArtificialIntelligenceType {
 		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
 				MapProperties mapProperties) {
 			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
-			ObjectMap<CharacterState, StateConfig> idleStates = new ObjectMap<>();
+			ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStates = new ObjectMap<>();
 			for (String stateName : aiConfig.idleStates.keys()) {
 				idleStates.put(stateMachine.getState(stateName), aiConfig.idleStates.get(stateName));
 			}
@@ -239,7 +238,7 @@ public enum ArtificialIntelligenceType {
 		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
 				MapProperties mapProperties) {
 			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
-			ObjectMap<CharacterState, StateConfig> idleStates = new ObjectMap<>();
+			ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStates = new ObjectMap<>();
 			for (String stateName : aiConfig.idleStates.keys()) {
 				idleStates.put(stateMachine.getState(stateName), aiConfig.idleStates.get(stateName));
 			}
@@ -249,7 +248,7 @@ public enum ArtificialIntelligenceType {
 			float maxDistance = aiConfig.maxMoveDistance;
 			float movementProbability = aiConfig.movementProbability;
 			
-			String maxDistanceString = mapProperties.get(AbstractCharacter.MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
+			String maxDistanceString = mapProperties.get(MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
 			if (maxDistanceString != null && !maxDistanceString.isEmpty()) {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
@@ -277,12 +276,12 @@ public enum ArtificialIntelligenceType {
 		}
 	};
 	
-	public abstract ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
-			MapProperties mapProperties);
+	private static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
+	private static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";
 	
 	@SuppressWarnings("unchecked")
 	private static Array<Vector2> loadPositionsFromMapProperties(MapProperties mapProperties) {
-		String predefinedMovingPositions = mapProperties.get(AbstractCharacter.MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS, String.class);
+		String predefinedMovingPositions = mapProperties.get(MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS, String.class);
 		if (predefinedMovingPositions != null) {
 			try {
 				Json json = new Json();
@@ -299,4 +298,7 @@ public enum ArtificialIntelligenceType {
 	private static AttackTimer createAttackTimer(AttackTimerConfig config) {
 		return AttackTimerFactory.createAttackTimer(config);
 	}
+	
+	public abstract ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+			MapProperties mapProperties);
 }

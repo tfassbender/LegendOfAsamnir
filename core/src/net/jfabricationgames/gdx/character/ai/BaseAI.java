@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
 
@@ -44,7 +43,7 @@ public class BaseAI extends AbstractArtificialIntelligence implements Artificial
 	public void executeMove(float delta) {}
 	
 	@Override
-	public void setCharacter(AbstractCharacter character) {}
+	public void setCharacter(ArtificialIntelligenceCharacter character) {}
 	
 	@Override
 	public void beginContact(Contact contact) {}
