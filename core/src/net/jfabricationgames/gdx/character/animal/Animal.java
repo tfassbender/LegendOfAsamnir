@@ -7,7 +7,6 @@ import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -81,7 +80,7 @@ public class Animal extends AbstractCharacter {
 	@Override
 	public void removeFromMap() {
 		ai.characterRemovedFromMap();
-		GameMapManager.getInstance().getMap().removeAnimal(this, body);
+		gameMap.removeAnimal(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

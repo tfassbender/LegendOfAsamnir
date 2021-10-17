@@ -22,7 +22,6 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.interaction.InteractionManager;
 import net.jfabricationgames.gdx.interaction.Interactive;
-import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
@@ -157,7 +156,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	@Override
 	public void removeFromMap() {
 		ai.characterRemovedFromMap();
-		GameMapManager.getInstance().getMap().removeNpc(this, body);
+		gameMap.removeNpc(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

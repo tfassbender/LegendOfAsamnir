@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
+import net.jfabricationgames.gdx.character.CharacterMap;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
@@ -15,6 +16,8 @@ public class AnimalFactory {
 	
 	private static Config config;
 	private static ObjectMap<String, AnimalTypeConfig> typeConfigs;
+	
+	private static CharacterMap gameMap;
 	
 	static {
 		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
@@ -29,6 +32,10 @@ public class AnimalFactory {
 		}
 	}
 	
+	public static void setGameMap(CharacterMap gameMap) {
+		AnimalFactory.gameMap = gameMap;
+	}
+	
 	public static Animal createAnimal(String type, float x, float y, MapProperties properties) {
 		AnimalTypeConfig typeConfig = typeConfigs.get(type);
 		if (typeConfig == null) {
@@ -37,6 +44,7 @@ public class AnimalFactory {
 		}
 		
 		Animal animal = new Animal(typeConfig, properties);
+		animal.setGameMap(gameMap);
 		animal.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);
 		
 		return animal;

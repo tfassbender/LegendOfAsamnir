@@ -3,14 +3,10 @@ package net.jfabricationgames.gdx.map;
 import java.util.function.Function;
 
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.character.CharacterMap;
-import net.jfabricationgames.gdx.character.animal.Animal;
-import net.jfabricationgames.gdx.character.enemy.Enemy;
-import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.ItemMap;
@@ -60,10 +56,6 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, CharacterM
 	public float getMapHeight();
 	
 	public void addPostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction);
-	
-	public void removeEnemy(Enemy enemy, Body body);
-	public void removeNpc(NonPlayableCharacter nonPlayableCharacter, Body body);
-	public void removeAnimal(Animal animal, Body body);
 	
 	public void removePhysicsObjectsWithType(MapObjectType invisiblePathBlocker);
 }

@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
+import net.jfabricationgames.gdx.character.animal.AnimalFactory;
 import net.jfabricationgames.gdx.character.enemy.EnemyFactory;
+import net.jfabricationgames.gdx.character.npc.NonPlayableCharacterFactory;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
@@ -147,6 +149,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void initializeFactories() {
 		GameMap gameMap = GameMapManager.getInstance().getMap();
+		
+		EnemyFactory.setGameMap(gameMap);
+		AnimalFactory.setGameMap(gameMap);
+		NonPlayableCharacterFactory.setGameMap(gameMap);
 		
 		GameObjectFactory.setGameMap(gameMap);
 		GameObjectFactory.setEnemySpawnFactory(EnemyFactory.asInstance());

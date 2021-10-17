@@ -44,6 +44,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	protected ArtificialIntelligence ai;
 	protected CutsceneHandler cutsceneHandler;
 	
+	protected CharacterMap gameMap;
 	protected MapProperties properties;
 	protected Body body;
 	
@@ -53,6 +54,7 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	protected float imageOffsetY;
 	
 	protected GameMapGroundType groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
+	
 	public static final float DENSITY_IMMOVABLE = 10_000f;
 	
 	public AbstractCharacter(MapProperties properties) {
@@ -66,6 +68,10 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	protected void setImageOffset(float x, float y) {
 		this.imageOffsetX = x;
 		this.imageOffsetY = y;
+	}
+	
+	public void setGameMap(CharacterMap gameMap) {
+		this.gameMap = gameMap;
 	}
 	
 	/**
