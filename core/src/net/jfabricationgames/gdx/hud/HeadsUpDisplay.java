@@ -7,8 +7,6 @@ import net.jfabricationgames.gdx.character.player.Player;
 
 public class HeadsUpDisplay implements Disposable {
 	
-	public static final String DEFAULT_FONT_NAME = "vikingMedium";
-	
 	private final float hudSceneWidth;
 	private final float hudSceneHeight;
 	private OrthographicCamera camera;
@@ -20,18 +18,18 @@ public class HeadsUpDisplay implements Disposable {
 	private OnScreenTextBox onScreenText;
 	private WorldEdge worldEdge;
 	
-	public HeadsUpDisplay(float hudSceneWidht, float hudSceneHeight, OrthographicCamera camera) {
-		this.hudSceneWidth = hudSceneWidht;
+	public HeadsUpDisplay(float hudSceneWidth, float hudSceneHeight, OrthographicCamera camera) {
+		this.hudSceneWidth = hudSceneWidth;
 		this.hudSceneHeight = hudSceneHeight;
 		this.camera = camera;
 		
 		character = Player.getInstance();
 		
-		statusBar = new StatusBar(this);
-		onScreenItemRenderer = new OnScreenItemRenderer(this);
-		onScreenRuneRenderer = new OnScreenRuneRenderer(this);
-		onScreenText = OnScreenTextBox.createInstance(this);
-		worldEdge = new WorldEdge(this);
+		statusBar = new StatusBar(camera, character, hudSceneWidth, hudSceneHeight);
+		onScreenItemRenderer = new OnScreenItemRenderer(camera, character, hudSceneWidth, hudSceneHeight);
+		onScreenRuneRenderer = new OnScreenRuneRenderer(camera, hudSceneWidth, hudSceneHeight);
+		onScreenText = OnScreenTextBox.createInstance(camera, hudSceneWidth, hudSceneHeight);
+		worldEdge = new WorldEdge(camera);
 	}
 	
 	public void render(float delta) {

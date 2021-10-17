@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
@@ -31,13 +32,13 @@ public class OnScreenItemRenderer implements Disposable {
 	private TextureRegion keyIcon;
 	private ObjectMap<String, TextureRegion> specialActionIcons;
 	
-	public OnScreenItemRenderer(HeadsUpDisplay hud) {
-		this.camera = hud.getCamera();
-		this.character = hud.getCharacter();
+	public OnScreenItemRenderer(OrthographicCamera camera, StatsCharacter character, float sceneWidth, float sceneHeight) {
+		this.camera = camera;
+		this.character = character;
 		batch = new SpriteBatch();
 		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont(HeadsUpDisplay.DEFAULT_FONT_NAME);
-		tileUpperRight = new Vector2(hud.getHudSceneWidth() - 20f, hud.getHudSceneHeight() - 20f);
+		screenTextWriter.setFont(Constants.DEFAULT_FONT_NAME);
+		tileUpperRight = new Vector2(sceneWidth - 20f, sceneHeight - 20f);
 		
 		loadIcons();
 	}

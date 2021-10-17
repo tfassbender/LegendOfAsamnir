@@ -9,6 +9,8 @@ public class Constants {
 	public static final float SCENE_WIDTH = 12.80f;
 	public static final float SCENE_HEIGHT = 8.20f;
 	
+	public static final String DEFAULT_FONT_NAME = "vikingMedium";
+	
 	//the HUD uses a different scene size to make it easier to calculate in pixel units
 	public static final float HUD_SCENE_FACTOR = 100f;
 	public static final float HUD_SCENE_WIDTH = SCENE_WIDTH * HUD_SCENE_FACTOR;

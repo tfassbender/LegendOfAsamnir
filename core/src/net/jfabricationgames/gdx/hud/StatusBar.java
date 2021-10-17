@@ -105,13 +105,13 @@ public class StatusBar implements Disposable {
 	private TextureRegion armorIcon;
 	private TextureRegion manaIcon;
 	
-	public StatusBar(HeadsUpDisplay hud) {
-		this.character = hud.getCharacter();
-		this.camera = hud.getCamera();
+	public StatusBar(OrthographicCamera camera, StatsCharacter character, float sceneWidth, float sceneHeight) {
+		this.camera = camera;
+		this.character = character;
 		shapeRenderer = new ShapeRenderer();
 		batch = new SpriteBatch();
 		
-		tileUpperRight = new Vector2(hud.getHudSceneWidth() - 20f, hud.getHudSceneHeight() - 20f);
+		tileUpperRight = new Vector2(sceneWidth - 20f, sceneHeight - 20f);
 		
 		loadIcons();
 	}

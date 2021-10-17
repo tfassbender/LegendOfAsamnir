@@ -28,15 +28,15 @@ public class OnScreenPlayerChoiceRenderer {
 	
 	private int selectedOption = 0;
 	
-	public OnScreenPlayerChoiceRenderer(OnScreenTextBox onScreenTextBox, HeadsUpDisplay hud, SpriteBatch batch, ShapeRenderer shapeRenderer,
-			ScreenTextWriter screenTextWriter) {
+	public OnScreenPlayerChoiceRenderer(OnScreenTextBox onScreenTextBox, float sceneWidth, float sceneHeight, SpriteBatch batch,
+			ShapeRenderer shapeRenderer, ScreenTextWriter screenTextWriter) {
 		this.onScreenTextBox = onScreenTextBox;
 		this.batch = batch;
 		this.shapeRenderer = shapeRenderer;
 		this.screenTextWriter = screenTextWriter;
 		
-		OPTION_OFFSET_X = hud.getHudSceneWidth() * 0.03f;
-		OPTION_LINE_OFFSET_Y = -(hud.getHudSceneHeight() * 0.065f);
+		OPTION_OFFSET_X = sceneWidth * 0.03f;
+		OPTION_LINE_OFFSET_Y = -(sceneHeight * 0.065f);
 	}
 	
 	protected void render(float delta) {

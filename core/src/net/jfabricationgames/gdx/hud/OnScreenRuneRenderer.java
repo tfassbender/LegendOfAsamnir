@@ -25,11 +25,11 @@ public class OnScreenRuneRenderer implements Disposable, EventListener {
 	
 	private Vector2 screenCenter;
 	
-	public OnScreenRuneRenderer(HeadsUpDisplay hud) {
-		this.camera = hud.getCamera();
+	public OnScreenRuneRenderer(OrthographicCamera camera, float sceneWidth, float sceneHeight) {
+		this.camera = camera;
 		batch = new SpriteBatch();
 		
-		screenCenter = new Vector2(hud.getHudSceneWidth() * 0.5f, hud.getHudSceneHeight() * 0.5f);
+		screenCenter = new Vector2(sceneWidth * 0.5f, sceneHeight * 0.5f);
 		
 		animationManager = AnimationManager.getInstance();
 		animationManager.loadAnimations(ANIMATION_RUNE_CONFIG_FILE);

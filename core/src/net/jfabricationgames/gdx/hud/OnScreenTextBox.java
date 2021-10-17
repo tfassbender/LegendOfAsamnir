@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -42,8 +43,8 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		return instance;
 	}
 	
-	protected static synchronized OnScreenTextBox createInstance(HeadsUpDisplay hud) {
-		instance = new OnScreenTextBox(hud);
+	protected static synchronized OnScreenTextBox createInstance(OrthographicCamera camera, float sceneWidth, float sceneHeight) {
+		instance = new OnScreenTextBox(camera, sceneWidth, sceneHeight);
 		return instance;
 	}
 	
@@ -70,15 +71,15 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 	private String headerText;
 	private Color headerColor = Color.RED;
 	
-	private OnScreenTextBox(HeadsUpDisplay hud) {
-		this.camera = hud.getCamera();
+	private OnScreenTextBox(OrthographicCamera camera, float sceneWidth, float sceneHeight) {
+		this.camera = camera;
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		
-		textBoxX = hud.getHudSceneWidth() * 0.025f;
-		textBoxY = hud.getHudSceneHeight() * 0.025f;
-		textBoxWidth = hud.getHudSceneWidth() * 0.95f;
-		textBoxHeight = hud.getHudSceneHeight() * 0.37f;
+		textBoxX = sceneWidth * 0.025f;
+		textBoxY = sceneHeight * 0.025f;
+		textBoxWidth = sceneWidth * 0.95f;
+		textBoxHeight = sceneHeight * 0.37f;
 		textBoxEdge = textBoxHeight * 0.015f;
 		textOffsetX = textBoxEdge * 6f;
 		textOffsetY = 90f;
@@ -86,10 +87,10 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		headerOffsetY = textOffsetX * 1.2f;
 		
 		screenTextWriter = new ScreenTextWriter();
-		screenTextWriter.setFont(HeadsUpDisplay.DEFAULT_FONT_NAME);
+		screenTextWriter.setFont(Constants.DEFAULT_FONT_NAME);
 		
 		textRenderer = new OnScreenTextRenderer(this, batch, shapeRenderer, screenTextWriter);
-		playerChoiceRenderer = new OnScreenPlayerChoiceRenderer(this, hud, batch, shapeRenderer, screenTextWriter);
+		playerChoiceRenderer = new OnScreenPlayerChoiceRenderer(this, sceneWidth, sceneHeight, batch, shapeRenderer, screenTextWriter);
 		
 		InputContext inputContext = InputManager.getInstance().getInputContext();
 		inputContext.addListener(this);

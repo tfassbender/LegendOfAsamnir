@@ -15,8 +15,8 @@ public class WorldEdge implements Disposable {
 	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	
-	public WorldEdge(HeadsUpDisplay hud) {
-		this.camera = hud.getCamera();
+	public WorldEdge(OrthographicCamera camera) {
+		this.camera = camera;
 		shapeRenderer = new ShapeRenderer();
 	}
 	
