@@ -27,8 +27,6 @@ public class ItemFactory {
 	
 	private ItemFactory() {}
 	
-	protected static ItemTypeConfig defaultTypeConfig;
-	
 	private static final String CONFIG_FILE = "config/factory/item_factory.json";
 	
 	private static Config config;
@@ -53,8 +51,8 @@ public class ItemFactory {
 	private static void loadDefaultValues() {
 		defaultValues = new Json().fromJson(ObjectMap.class, ObjectMap.class, Gdx.files.internal(config.defaultValuesConfig));
 		
-		defaultTypeConfig = typeConfigs.get("__default");
-		if (defaultTypeConfig == null) {
+		Item.defaultTypeConfig = typeConfigs.get("__default");
+		if (Item.defaultTypeConfig == null) {
 			Gdx.app.error(ItemFactory.class.getSimpleName(),
 					"No default type config for items found. Add a type '__default' to 'config/items/types.json'.");
 		}

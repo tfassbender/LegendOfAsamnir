@@ -97,6 +97,7 @@ public class ProjectileFactory {
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);
 		}
+		projectile.setExplosionFactory(ProjectileFactory::createProjectileAndAddToMap);
 		projectile.createPhysicsBody(position, collisionType);
 		projectile.startProjectile(direction);
 		

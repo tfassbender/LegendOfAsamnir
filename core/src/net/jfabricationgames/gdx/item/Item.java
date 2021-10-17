@@ -52,6 +52,8 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	@MapObjectState
 	private String mapProperties;
 	
+	protected static ItemTypeConfig defaultTypeConfig;
+	
 	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		this.itemName = itemName;
 		this.typeConfig = typeConfig;
@@ -68,8 +70,8 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	
 	protected void readTypeConfig() {
 		pickUpSoundName = typeConfig.pickUpSound;
-		if (pickUpSoundName == null && ItemFactory.defaultTypeConfig != null) {
-			pickUpSoundName = ItemFactory.defaultTypeConfig.pickUpSound;
+		if (pickUpSoundName == null && defaultTypeConfig != null) {
+			pickUpSoundName = defaultTypeConfig.pickUpSound;
 		}
 	}
 	

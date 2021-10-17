@@ -32,6 +32,7 @@ public abstract class Projectile implements ContactListener {
 	protected ProjectileTypeConfig typeConfig;
 	protected PhysicsCollisionType collisionType;
 	
+	protected ExplosionFactory explosionFactory;
 	protected ProjectileMap gameMap;
 	
 	protected Body playerBody;
@@ -104,6 +105,10 @@ public abstract class Projectile implements ContactListener {
 	private void registerAsContactListener() {
 		PhysicsWorld physicsWorld = PhysicsWorld.getInstance();
 		physicsWorld.registerContactListener(this);
+	}
+	
+	protected void setExplosionFactory(ExplosionFactory explosionFactory) {
+		this.explosionFactory = explosionFactory;
 	}
 	
 	protected void createPhysicsBody(Vector2 position, PhysicsCollisionType collisionType) {
@@ -246,8 +251,7 @@ public abstract class Projectile implements ContactListener {
 	}
 	
 	private void explode() {
-		Projectile explosion = ProjectileFactory.createProjectileAndAddToMap(EXPLOSION_PROJECTILE_TYPE, body.getPosition(), Vector2.Zero,
-				collisionType);
+		Projectile explosion = explosionFactory.createExplosion(EXPLOSION_PROJECTILE_TYPE, body.getPosition(), Vector2.Zero, collisionType);
 		explosion.damage = explosionDamage;
 		explosion.pushForce = explosionPushForce;
 		explosion.pushForceAffectedByBlock = explosionPushForceAffectedByBlock;
@@ -342,5 +346,11 @@ public abstract class Projectile implements ContactListener {
 	
 	public void setPlayerBody(Body body) {
 		this.playerBody = body;
+	}
+	
+	@FunctionalInterface
+	protected interface ExplosionFactory {
+		
+		public Projectile createExplosion(String type, Vector2 position, Vector2 direction, PhysicsCollisionType collisionType);
 	}
 }
