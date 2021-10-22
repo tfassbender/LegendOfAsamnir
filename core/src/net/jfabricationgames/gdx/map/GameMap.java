@@ -6,7 +6,9 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
-import net.jfabricationgames.gdx.character.CharacterMap;
+import net.jfabricationgames.gdx.character.animal.AnimalCharacterMap;
+import net.jfabricationgames.gdx.character.enemy.EnemyCharacterMap;
+import net.jfabricationgames.gdx.character.npc.NpcCharacterMap;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.ItemMap;
@@ -14,7 +16,8 @@ import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.projectile.ProjectileMap;
 
-public interface GameMap extends EventListener, CutsceneUnitProvider, CharacterMap, GameObjectMap, ItemMap, ProjectileMap, Disposable {
+public interface GameMap extends EventListener, CutsceneUnitProvider, EnemyCharacterMap, NpcCharacterMap, AnimalCharacterMap, GameObjectMap, ItemMap,
+		ProjectileMap, Disposable {
 	
 	enum GlobalMapPropertyKeys {
 		

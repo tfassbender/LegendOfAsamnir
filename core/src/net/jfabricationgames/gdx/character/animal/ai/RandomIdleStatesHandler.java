@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceCharacter;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceStateConfig;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceStateConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 

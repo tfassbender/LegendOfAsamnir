@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
-import net.jfabricationgames.gdx.object.spawn.ItemSpawnFactory;
+import net.jfabricationgames.gdx.object.ItemSpawnFactory;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 import net.jfabricationgames.gdx.util.SerializationUtil;

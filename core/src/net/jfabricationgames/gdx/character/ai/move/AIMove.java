@@ -1,13 +1,11 @@
 package net.jfabricationgames.gdx.character.ai.move;
 
-import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
-
 public abstract class AIMove {
 	
 	private boolean executed;
-	private ArtificialIntelligence creatingAi;
+	private Object creatingAi;
 	
-	public AIMove(ArtificialIntelligence creatingAi) {
+	public AIMove(Object creatingAi) {
 		this.creatingAi = creatingAi;
 	}
 	
@@ -18,7 +16,7 @@ public abstract class AIMove {
 		executed = true;
 	}
 	
-	public boolean isCreatingAi(ArtificialIntelligence executingAi) {
+	public boolean isCreatingAi(Object executingAi) {
 		return creatingAi == executingAi;
 	}
 }

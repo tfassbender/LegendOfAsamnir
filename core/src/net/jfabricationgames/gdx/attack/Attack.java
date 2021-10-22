@@ -6,10 +6,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
+import net.jfabricationgames.gdx.attack.hit.AttackType;
+import net.jfabricationgames.gdx.character.state.CharacterStateAttack;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
-public abstract class Attack {
+public abstract class Attack implements CharacterStateAttack {
 	
 	protected float timer;
 	protected boolean started;

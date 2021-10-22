@@ -3,11 +3,11 @@ package net.jfabricationgames.gdx.interaction;
 import java.util.Comparator;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
-import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 
 public class InteractionManager {
@@ -18,7 +18,8 @@ public class InteractionManager {
 	public static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_X = 0.3f;
 	public static final float INTERACTION_MARK_DEFAULT_OFFSET_FACTOR_Y = 0.3f;
 	
-	private static PlayableCharacter character;
+	private static Vector2 playerPosition;
+	
 	private static final Comparator<Interactive> distanceComparator = (i1, i2) -> {
 		boolean i1Executable = i1.interactionCanBeExecuted();
 		boolean i2Executable = i2.interactionCanBeExecuted();
@@ -29,7 +30,7 @@ public class InteractionManager {
 			return 1;
 		}
 		else {
-			return Float.compare(i1.getDistanceToPlayer(character.getPosition()), i2.getDistanceToPlayer(character.getPosition()));
+			return Float.compare(i1.getDistanceToPlayer(playerPosition), i2.getDistanceToPlayer(playerPosition));
 		}
 	};
 	
@@ -50,9 +51,9 @@ public class InteractionManager {
 		AnimationManager.getInstance().loadAnimations(ANIMATION_CONFIG_FILE);
 	}
 	
-	public void interact(PlayableCharacter character) {
+	public void interact(Vector2 playerPosition) {
 		if (!CutsceneHandler.getInstance().isCutsceneActive() && !interactivesInRange.isEmpty()) {
-			InteractionManager.character = character;
+			InteractionManager.playerPosition = playerPosition;
 			interactivesInRange.sort(distanceComparator);
 			
 			Interactive nearest = interactivesInRange.first();

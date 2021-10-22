@@ -11,10 +11,9 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.AttackHandler;
-import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.attack.hit.AttackType;
+import net.jfabricationgames.gdx.attack.hit.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
-import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.state.CharacterState;
@@ -28,6 +27,7 @@ import net.jfabricationgames.gdx.data.state.StatefulMapObject;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.physics.PhysicsUtil;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.MapUtil;
 
@@ -52,6 +52,8 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	protected boolean droppedItems;
 	@MapObjectState
 	protected boolean defeated;
+	
+	private EnemyCharacterMap gameMap;
 	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(properties);
@@ -98,6 +100,10 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		createAiFromConfiguration(typeConfig.aiConfig);
 	}
 	
+	public void setGameMap(EnemyCharacterMap gameMap) {
+		this.gameMap = gameMap;
+	}
+	
 	@Override
 	public void createPhysicsBody(float x, float y) {
 		super.createPhysicsBody(x, y);
@@ -115,7 +121,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	@Override
 	protected void addAdditionalPhysicsParts() {
 		if (typeConfig.addSensor) {
-			CharacterPhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
+			PhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
 		}
 	}
 	

@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.attack.hit.Hittable;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;

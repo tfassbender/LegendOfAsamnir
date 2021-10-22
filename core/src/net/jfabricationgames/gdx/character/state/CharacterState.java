@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
-import net.jfabricationgames.gdx.attack.Attack;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledState;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
@@ -23,7 +22,7 @@ public class CharacterState implements CutsceneControlledState {
 	protected ObjectSet<CharacterState> interruptingStates;
 	
 	protected CharacterStateAttackHandler attackHandler;
-	private Array<Attack> attacks;
+	private Array<CharacterStateAttack> attacks;
 	
 	private Vector2 directionToTarget;
 	
@@ -43,7 +42,7 @@ public class CharacterState implements CutsceneControlledState {
 	}
 	
 	private void abortAttacks() {
-		for (Attack attack : attacks) {
+		for (CharacterStateAttack attack : attacks) {
 			attack.abort();
 		}
 		attacks.clear();
@@ -66,13 +65,13 @@ public class CharacterState implements CutsceneControlledState {
 			throw new IllegalStateException("The direction for the attack has not been set. "
 					+ "Use the setAttackDirection(Vector2) method to set the direction BEFORE changing to this state.");
 		}
-		Attack attack = attackHandler.startAttack(config.attack, directionToTarget);
+		CharacterStateAttack attack = attackHandler.startAttack(config.attack, directionToTarget);
 		attacks.add(attack);
 	}
 	
 	public boolean allAttacksFinished() {
 		boolean allAttacksFinished = !attacks.isEmpty();
-		for (Attack attack : attacks) {
+		for (CharacterStateAttack attack : attacks) {
 			allAttacksFinished &= attack.isExecuted();
 		}
 		return allAttacksFinished;

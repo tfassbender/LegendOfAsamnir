@@ -12,7 +12,6 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
-import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
@@ -26,11 +25,14 @@ import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyShape;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.physics.PhysicsUtil;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class NonPlayableCharacter extends AbstractCharacter implements Interactive {
 	
 	private NonPlayableCharacterTypeConfig typeConfig;
+	
+	private NpcCharacterMap gameMap;
 	
 	private PlayableCharacter player;
 	private TextureAnimationDirector<TextureRegion> interactionAnimation;
@@ -96,10 +98,14 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 						+ typeConfig.graphicsConfig.interactionMarkerOffsetY);
 	}
 	
+	public void setGameMap(NpcCharacterMap gameMap) {
+		this.gameMap = gameMap;
+	}
+	
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
 		return new PhysicsBodyProperties().setType(BodyType.DynamicBody).setSensor(false).setCollisionType(PhysicsCollisionType.OBSTACLE)
-				.setDensity(AbstractCharacter.DENSITY_IMMOVABLE) // use a very high density, so the NPC can (almost) not be moved by the player or other forces
+				.setDensity(Constants.DENSITY_IMMOVABLE) // use a very high density, so the NPC can (almost) not be moved by the player or other forces
 				.setLinearDamping(10f).setPhysicsBodyShape(PhysicsBodyShape.OCTAGON).setWidth(typeConfig.graphicsConfig.bodyWidth)
 				.setHeight(typeConfig.graphicsConfig.bodyHeight);
 	}
@@ -107,7 +113,7 @@ public class NonPlayableCharacter extends AbstractCharacter implements Interacti
 	@Override
 	protected void addAdditionalPhysicsParts() {
 		if (typeConfig.addSensor) {
-			CharacterPhysicsUtil.addNpcSensor(body, typeConfig.sensorRadius);
+			PhysicsUtil.addNpcSensor(body, typeConfig.sensorRadius);
 		}
 	}
 	

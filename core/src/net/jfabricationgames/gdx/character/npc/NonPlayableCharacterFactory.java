@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectMap.Entry;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.character.CharacterMap;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
@@ -20,7 +19,7 @@ public class NonPlayableCharacterFactory {
 	private static Config config;
 	private static ObjectMap<String, NonPlayableCharacterTypeConfig> typeConfigs;
 	
-	private static CharacterMap gameMap;
+	private static NpcCharacterMap gameMap;
 	
 	static {
 		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
@@ -52,7 +51,7 @@ public class NonPlayableCharacterFactory {
 		}
 	}
 	
-	public static void setGameMap(CharacterMap gameMap) {
+	public static void setGameMap(NpcCharacterMap gameMap) {
 		NonPlayableCharacterFactory.gameMap = gameMap;
 	}
 	

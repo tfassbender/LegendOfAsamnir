@@ -4,7 +4,6 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
-import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
 
 public enum GameObjectAction {
 	

@@ -4,11 +4,11 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import net.jfabricationgames.gdx.character.AbstractCharacter;
-import net.jfabricationgames.gdx.character.CharacterPhysicsUtil;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.physics.PhysicsUtil;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 
 public class Animal extends AbstractCharacter {
@@ -21,6 +21,8 @@ public class Animal extends AbstractCharacter {
 	}
 	
 	protected AnimalTypeConfig typeConfig;
+	
+	private AnimalCharacterMap gameMap;
 	
 	public Animal(AnimalTypeConfig typeConfig, MapProperties properties) {
 		super(properties);
@@ -49,6 +51,10 @@ public class Animal extends AbstractCharacter {
 		createAiFromConfiguration(typeConfig.aiConfig);
 	}
 	
+	public void setGameMap(AnimalCharacterMap gameMap) {
+		this.gameMap = gameMap;
+	}
+	
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
 		return physicsBodyProperties.setRadius(typeConfig.bodyRadius).setWidth(typeConfig.bodyWidth).setHeight(typeConfig.bodyHeight)
@@ -58,7 +64,7 @@ public class Animal extends AbstractCharacter {
 	@Override
 	protected void addAdditionalPhysicsParts() {
 		if (typeConfig.addSensor) {
-			CharacterPhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
+			PhysicsUtil.addEnemySensor(body, typeConfig.sensorRadius);
 		}
 	}
 	

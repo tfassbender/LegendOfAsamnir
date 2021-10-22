@@ -27,8 +27,8 @@ import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.constants.Constants;
-import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.MapObjectType;
+import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 

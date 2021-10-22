@@ -3,8 +3,7 @@ package net.jfabricationgames.gdx.object;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.object.interactive.InteractiveAction;
+import net.jfabricationgames.gdx.attack.hit.AttackType;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
 public class GameObjectTypeConfig {

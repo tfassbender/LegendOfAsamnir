@@ -28,8 +28,8 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.global.GlobalEventExecutionType;
-import net.jfabricationgames.gdx.hud.HeadsUpDisplay;
-import net.jfabricationgames.gdx.hud.OnScreenTextBox;
+import net.jfabricationgames.gdx.hud.implementation.HeadsUpDisplay;
+import net.jfabricationgames.gdx.hud.implementation.OnScreenTextBox;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
 import net.jfabricationgames.gdx.input.InputManager;
@@ -38,10 +38,10 @@ import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapManager;
-import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
-import net.jfabricationgames.gdx.object.interactive.InteractiveAction;
-import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
-import net.jfabricationgames.gdx.object.movable.MovableObject;
+import net.jfabricationgames.gdx.object.GameObjectFactory;
+import net.jfabricationgames.gdx.object.InteractiveAction;
+import net.jfabricationgames.gdx.object.MovableObject;
+import net.jfabricationgames.gdx.object.StateSwitchObject;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.projectile.ProjectileFactory;
 import net.jfabricationgames.gdx.screen.ScreenManager;
@@ -183,7 +183,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	}
 	
 	private void createHud() {
-		hud = new HeadsUpDisplay(Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT, cameraHud);
+		hud = new HeadsUpDisplay(Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT, cameraHud, Player.getInstance());
 	}
 	
 	private void createCameraMovementHandler() {

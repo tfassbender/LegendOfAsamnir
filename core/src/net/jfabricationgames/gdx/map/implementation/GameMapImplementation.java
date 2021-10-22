@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.attack.hit.AttackType;
 import net.jfabricationgames.gdx.character.animal.Animal;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.npc.NonPlayableCharacter;
@@ -34,8 +34,8 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
-import net.jfabricationgames.gdx.map.GameMapGroundType;
 import net.jfabricationgames.gdx.map.MapObjectType;
+import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.physics.AfterWorldStep;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;

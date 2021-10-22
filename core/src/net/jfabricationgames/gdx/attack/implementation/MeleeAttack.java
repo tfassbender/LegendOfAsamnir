@@ -7,8 +7,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.attack.Attack;
 import net.jfabricationgames.gdx.attack.AttackConfig;
-import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.attack.Hittable;
+import net.jfabricationgames.gdx.attack.hit.AttackType;
+import net.jfabricationgames.gdx.attack.hit.Hittable;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;

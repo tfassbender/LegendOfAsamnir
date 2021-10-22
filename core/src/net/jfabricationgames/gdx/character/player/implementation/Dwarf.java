@@ -7,10 +7,11 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.attack.AttackHandler;
-import net.jfabricationgames.gdx.attack.AttackType;
+import net.jfabricationgames.gdx.attack.hit.AttackType;
 import net.jfabricationgames.gdx.camera.CameraMovementHandler;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
@@ -18,6 +19,7 @@ import net.jfabricationgames.gdx.data.handler.CharacterItemDataHandler;
 import net.jfabricationgames.gdx.data.handler.CharacterPropertiesDataHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
+import net.jfabricationgames.gdx.data.handler.type.DataItemAmmoType;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -26,8 +28,8 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
-import net.jfabricationgames.gdx.map.GameMapGroundType;
-import net.jfabricationgames.gdx.object.event.EventObject;
+import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
+import net.jfabricationgames.gdx.object.EventObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
@@ -122,7 +124,13 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 			switch (activeSpecialAction) {
 				case BOW:
 				case BOMB:
-					ItemAmmoType ammoType = ItemAmmoType.getByName(activeSpecialAction.name());
+					ItemAmmoType ammoType;
+					if (activeSpecialAction == SpecialAction.BOW) {
+						ammoType = ItemAmmoType.getByName("ARROW");
+					}
+					else {
+						ammoType = ItemAmmoType.getByName(activeSpecialAction.name());
+					}
 					if (attackHandler.allAttacksExecuted()) {
 						if (itemDataHandler.hasAmmo(ammoType.toDataType())) {
 							itemDataHandler.decreaseAmmo(ammoType.toDataType());
@@ -216,8 +224,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	}
 	
 	@Override
-	public int getAmmo(ItemAmmoType ammoType) {
-		return itemDataHandler.getAmmo(ammoType.toDataType());
+	public int getAmmo(String ammoType) {
+		return itemDataHandler.getAmmo(DataItemAmmoType.getByNameIgnoreCase(ammoType));
 	}
 	
 	@Override
@@ -320,6 +328,16 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	@Override
 	public int getNormalKeys() {
 		return itemDataHandler.getNumNormalKeys();
+	}
+	
+	@Override
+	public String getActiveAction() {
+		return activeSpecialAction.name();
+	}
+	
+	@Override
+	public Array<String> getActionList() {
+		return SpecialAction.getNamesAsList();
 	}
 	
 	@Override

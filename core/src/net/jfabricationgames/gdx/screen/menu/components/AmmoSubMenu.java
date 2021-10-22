@@ -86,7 +86,7 @@ public class AmmoSubMenu extends SingleLineMenuBox {
 			batch.draw(itemTexture, posX + scaledWidth * borderFactor + outerBorderOffset, posY + scaledHeight * borderFactor,
 					scaledWidth * sizeFactor, scaledHeight * sizeFactor);
 			
-			String ammo = Integer.toString(character.getAmmo(ammoType));
+			String ammo = Integer.toString(character.getAmmo(ammoType.name()));
 			float textPosX = posX + scaledWidth * 0.4f + outerBorderOffset;
 			float textPosY = posY + scaledHeight * 0.38f;
 			ammoTextPositions.put(ammoType, new AmmoText(ammo, textPosX, textPosY, scaledWidth * sizeFactor));

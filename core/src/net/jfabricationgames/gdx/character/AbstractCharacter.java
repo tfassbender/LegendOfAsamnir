@@ -16,14 +16,14 @@ import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceCharacter;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceConfig;
-import net.jfabricationgames.gdx.character.ai.config.ArtificialIntelligenceTypesConfig;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceConfig;
+import net.jfabricationgames.gdx.character.ai.ArtificialIntelligenceTypesConfig;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.cutscene.CutsceneControlledCharacter;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledUnit;
-import net.jfabricationgames.gdx.map.GameMapGroundType;
+import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
@@ -44,7 +44,6 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	protected ArtificialIntelligence ai;
 	protected CutsceneHandler cutsceneHandler;
 	
-	protected CharacterMap gameMap;
 	protected MapProperties properties;
 	protected Body body;
 	
@@ -54,8 +53,6 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	protected float imageOffsetY;
 	
 	protected GameMapGroundType groundProperties = GameMapGroundType.DEFAULT_GROUND_PROPERTIES;
-	
-	public static final float DENSITY_IMMOVABLE = 10_000f;
 	
 	public AbstractCharacter(MapProperties properties) {
 		this.properties = properties;
@@ -68,10 +65,6 @@ public abstract class AbstractCharacter implements ContactListener, CutsceneCont
 	protected void setImageOffset(float x, float y) {
 		this.imageOffsetX = x;
 		this.imageOffsetY = y;
-	}
-	
-	public void setGameMap(CharacterMap gameMap) {
-		this.gameMap = gameMap;
 	}
 	
 	/**

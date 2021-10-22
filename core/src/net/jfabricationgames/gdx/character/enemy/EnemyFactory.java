@@ -4,13 +4,12 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.animation.AnimationManager;
-import net.jfabricationgames.gdx.character.CharacterMap;
 import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.character.enemy.implementation.Totem;
 import net.jfabricationgames.gdx.constants.Constants;
-import net.jfabricationgames.gdx.object.spawn.EnemySpawnFactory;
+import net.jfabricationgames.gdx.object.EnemySpawnFactory;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class EnemyFactory {
@@ -36,7 +35,7 @@ public class EnemyFactory {
 	private static Config config;
 	private static ObjectMap<String, EnemyTypeConfig> typeConfigs;
 	
-	private static CharacterMap gameMap;
+	private static EnemyCharacterMap gameMap;
 	
 	static {
 		config = FactoryUtil.loadConfig(Config.class, CONFIG_FILE);
@@ -51,7 +50,7 @@ public class EnemyFactory {
 		}
 	}
 	
-	public static void setGameMap(CharacterMap gameMap) {
+	public static void setGameMap(EnemyCharacterMap gameMap) {
 		EnemyFactory.gameMap = gameMap;
 	}
 	

@@ -2,7 +2,7 @@ package net.jfabricationgames.gdx.projectile;
 
 import com.badlogic.gdx.physics.box2d.Body;
 
-import net.jfabricationgames.gdx.map.GameMapGroundType;
+import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 
 public interface ProjectileMap {
 	

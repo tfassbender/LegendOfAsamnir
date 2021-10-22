@@ -2,10 +2,10 @@ package net.jfabricationgames.gdx.character.enemy.implementation;
 
 import com.badlogic.gdx.maps.MapProperties;
 
-import net.jfabricationgames.gdx.attack.AttackType;
-import net.jfabricationgames.gdx.character.AbstractCharacter;
+import net.jfabricationgames.gdx.attack.hit.AttackType;
 import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
+import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 
 public class Totem extends Enemy {
@@ -19,7 +19,7 @@ public class Totem extends Enemy {
 	@Override
 	protected PhysicsBodyProperties definePhysicsBodyProperties() {
 		PhysicsBodyProperties properties = super.definePhysicsBodyProperties();
-		properties.setDensity(AbstractCharacter.DENSITY_IMMOVABLE);
+		properties.setDensity(Constants.DENSITY_IMMOVABLE);
 		return properties;
 	}
 	

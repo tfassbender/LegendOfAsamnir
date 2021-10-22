@@ -1,7 +1,6 @@
 package net.jfabricationgames.gdx.hud;
 
-import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
-import net.jfabricationgames.gdx.item.ItemAmmoType;
+import com.badlogic.gdx.utils.Array;
 
 public interface StatsCharacter {
 	
@@ -13,6 +12,8 @@ public interface StatsCharacter {
 	public int getNormalKeys();
 	public int getCoinsForHud();
 	
-	public SpecialAction getActiveSpecialAction();
-	public int getAmmo(ItemAmmoType ammoType);
+	public String getActiveAction();
+	public Array<String> getActionList();
+	
+	public int getAmmo(String ammoType);
 }

@@ -22,7 +22,7 @@ import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
 import net.jfabricationgames.gdx.map.GameMapLoader;
 import net.jfabricationgames.gdx.object.GameObject;
-import net.jfabricationgames.gdx.object.factory.GameObjectFactory;
+import net.jfabricationgames.gdx.object.GameObjectFactory;
 import net.jfabricationgames.gdx.util.MapUtil;
 
 class TiledMapLoader implements GameMapLoader {
