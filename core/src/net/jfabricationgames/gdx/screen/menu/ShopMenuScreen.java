@@ -33,7 +33,8 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	
 	private static final String RUNE_NEEDED_EVENT_KEY = "rune_needed__gebo";
 	
-	private static final Array<String> ITEM_NAMES = new Array<>(new String[] {"health", "shield", "mead", null, "arrow", "bomb"});
+	private static final Array<String> ITEM_DISPLAY_NAMES = new Array<>(new String[] {"saehrimnir", "shield", "mead", null, "arrows", "bombs"});
+	private static final Array<String> ITEM_NAMES = new Array<>(new String[] {"health", "shield", "mana", null, "arrow", "bomb"});
 	private static final Array<Integer> ITEM_COSTS = new Array<>(new Integer[] {30, 20, 15, 0, 25, 25});
 	
 	private MenuBox background;
@@ -208,8 +209,8 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		int playersCoins = player.getCoins();
 		
 		int selectedItemIndex = itemMenu.getHoveredIndex();
-		if (selectedItemIndex >= 0 && ITEM_NAMES.size > selectedItemIndex) {
-			itemName = ITEM_NAMES.get(selectedItemIndex);
+		if (selectedItemIndex >= 0 && ITEM_DISPLAY_NAMES.size > selectedItemIndex) {
+			itemName = ITEM_DISPLAY_NAMES.get(selectedItemIndex);
 			itemCosts = ITEM_COSTS.get(selectedItemIndex);
 		}
 		if (itemName == null || itemName.isEmpty()) {
