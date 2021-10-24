@@ -180,7 +180,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void changeMap(String mapIdentifier) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
 			GameMapManager.getInstance().showMap(mapIdentifier);
+			
+			// reset interactions that would not be removed, because the player contact doesn't end when the map is changed (or at least it seems to not end for the box2d world)
 			InteractionManager.getInstance().resetInteractions();
+			
+			// fire a MAP_ENTERED event for the spawn points to know that they need to add their objects to the world
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED));
 		});
 	}
 	

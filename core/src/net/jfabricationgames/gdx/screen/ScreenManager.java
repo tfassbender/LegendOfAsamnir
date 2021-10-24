@@ -6,6 +6,9 @@ import com.badlogic.gdx.Screen;
 
 public class ScreenManager {
 	
+	public static final String ASSET_GROUP_NAME = "game";
+	public static final String INPUT_CONTEXT_NAME = "game";
+	
 	private static ScreenManager instance;
 	
 	public static synchronized ScreenManager getInstance() {
@@ -17,8 +20,6 @@ public class ScreenManager {
 	
 	private Game game;
 	private Screen gameScreen;
-	public static final String ASSET_GROUP_NAME = "game";
-	public static final String INPUT_CONTEXT_NAME = "game";
 	
 	private ScreenManager() {}
 	
