@@ -101,7 +101,7 @@ public class MenuBox {
 				TextureRegion texture = getTextureRegion(j, i);
 				float scaledWidth = texture.getRegionWidth() * widthFactor;
 				float scaledHeight = texture.getRegionHeight() * heightFactor;
-				batch.draw(texture, x + offsetX, y + offsetY, scaledWidth, scaledHeight);
+				batch.draw(texture, x + offsetX - 1, y + offsetY - 1, scaledWidth + 1, scaledHeight + 1); //add padding
 				
 				drawOnMenuField(batch, j, i, x + offsetX, y + offsetY, scaledWidth, scaledHeight);
 				
@@ -118,12 +118,14 @@ public class MenuBox {
 	
 	protected float summedWidth() {
 		return textureParts.get(Part.LEFT).getRegionWidth() + textureParts.get(Part.MID).getRegionWidth() * (partsX - 2)
-				+ textureParts.get(Part.RIGHT).getRegionWidth();
+				+ textureParts.get(Part.RIGHT).getRegionWidth() //
+				- 2 - (partsX - 2); //subtract padding
 	}
 	
 	protected float summedHeight() {
 		return textureParts.get(Part.UP).getRegionHeight() + textureParts.get(Part.MID).getRegionHeight() * (partsY - 2)
-				+ textureParts.get(Part.DOWN).getRegionHeight();
+				+ textureParts.get(Part.DOWN).getRegionHeight() //
+				- 2 - (partsY - 2); //subtract padding
 	}
 	
 	protected TextureRegion getTextureRegion(int x, int y) {

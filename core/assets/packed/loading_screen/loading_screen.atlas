@@ -6,260 +6,260 @@ filter: Nearest, Nearest
 repeat: none
 big_banner_down
   rotate: false
-  xy: 0, 204
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_down_left
   rotate: false
-  xy: 0, 170
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 180
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_down_right
   rotate: false
-  xy: 34, 204
-  size: 32, 32
-  orig: 32, 32
+  xy: 36, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_left
   rotate: false
-  xy: 0, 136
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 144
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_low_down_left
   rotate: false
-  xy: 34, 170
-  size: 32, 32
-  orig: 32, 32
+  xy: 36, 180
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_low_down_right
   rotate: false
-  xy: 68, 204
-  size: 32, 32
-  orig: 32, 32
+  xy: 72, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_low_up_left
   rotate: false
-  xy: 0, 102
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 108
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_low_up_right
   rotate: false
-  xy: 34, 136
-  size: 32, 32
-  orig: 32, 32
+  xy: 36, 144
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_mid
   rotate: false
-  xy: 68, 170
-  size: 32, 32
-  orig: 32, 32
+  xy: 72, 180
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_right
   rotate: false
-  xy: 102, 204
-  size: 32, 32
-  orig: 32, 32
+  xy: 108, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_up
   rotate: false
-  xy: 0, 68
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 72
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_up_left
   rotate: false
-  xy: 34, 102
-  size: 32, 32
-  orig: 32, 32
+  xy: 36, 108
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 big_banner_up_right
   rotate: false
-  xy: 68, 136
-  size: 32, 32
-  orig: 32, 32
+  xy: 72, 144
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 chest
   rotate: false
-  xy: 102, 170
+  xy: 36, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 dwarf_run_right
   rotate: false
-  xy: 136, 204
+  xy: 72, 38
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 dwarf_run_right
   rotate: false
-  xy: 136, 204
+  xy: 72, 38
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
 dwarf_run_right
   rotate: false
-  xy: 0, 34
+  xy: 108, 74
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 2
 dwarf_run_right
   rotate: false
-  xy: 34, 68
+  xy: 144, 110
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 4
 dwarf_run_right
   rotate: false
-  xy: 34, 68
+  xy: 144, 110
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 8
 dwarf_run_right
   rotate: false
-  xy: 68, 102
+  xy: 180, 146
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 5
 dwarf_run_right
   rotate: false
-  xy: 102, 136
+  xy: 216, 182
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 6
 dwarf_run_right
   rotate: false
-  xy: 136, 170
+  xy: 70, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 7
 yellow_board_down
   rotate: false
-  xy: 170, 204
-  size: 32, 32
-  orig: 32, 32
+  xy: 108, 180
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_down_left
   rotate: false
-  xy: 0, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 144, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_down_right
   rotate: false
-  xy: 34, 34
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 36
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_left
   rotate: false
-  xy: 68, 68
-  size: 32, 32
-  orig: 32, 32
+  xy: 36, 72
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_mid
   rotate: false
-  xy: 102, 102
-  size: 32, 32
-  orig: 32, 32
+  xy: 72, 108
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_right
   rotate: false
-  xy: 136, 136
-  size: 32, 32
-  orig: 32, 32
+  xy: 108, 144
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_single_col_down
   rotate: false
-  xy: 170, 170
-  size: 32, 32
-  orig: 32, 32
+  xy: 144, 180
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_single_col_mid
   rotate: false
-  xy: 204, 204
-  size: 32, 32
-  orig: 32, 32
+  xy: 180, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_single_col_up
   rotate: false
-  xy: 34, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 0, 0
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_single_line_left
   rotate: false
-  xy: 68, 34
-  size: 32, 32
-  orig: 32, 32
+  xy: 36, 36
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_single_line_mid
   rotate: false
-  xy: 102, 68
-  size: 32, 32
-  orig: 32, 32
+  xy: 72, 72
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_single_line_right
   rotate: false
-  xy: 136, 102
-  size: 32, 32
-  orig: 32, 32
+  xy: 108, 108
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_up
   rotate: false
-  xy: 170, 136
-  size: 32, 32
-  orig: 32, 32
+  xy: 144, 144
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_up_left
   rotate: false
-  xy: 204, 170
-  size: 32, 32
-  orig: 32, 32
+  xy: 180, 180
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
 yellow_board_up_right
   rotate: false
-  xy: 68, 0
-  size: 32, 32
-  orig: 32, 32
+  xy: 216, 216
+  size: 34, 34
+  orig: 34, 34
   offset: 0, 0
   index: -1
