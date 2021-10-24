@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.spawn;
 
 import com.badlogic.gdx.utils.Array;
 

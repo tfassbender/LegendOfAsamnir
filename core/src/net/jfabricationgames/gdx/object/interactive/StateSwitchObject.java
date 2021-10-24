@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.interactive;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -11,6 +11,8 @@ import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.object.GameObjectMap;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.rune.RuneType;

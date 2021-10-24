@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.destroyable;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +8,9 @@ import com.badlogic.gdx.maps.MapProperties;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.attack.hit.AttackType;
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectMap;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class DestroyableObject extends GameObject {
 	

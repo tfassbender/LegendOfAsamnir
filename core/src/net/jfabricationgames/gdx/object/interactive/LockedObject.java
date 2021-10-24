@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.interactive;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,6 +14,8 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.object.GameObjectMap;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class LockedObject extends InteractiveObject implements EventListener {
 	

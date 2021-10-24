@@ -7,7 +7,7 @@ import net.jfabricationgames.gdx.attack.hit.Hittable;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneMoveableUnit;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
-import net.jfabricationgames.gdx.object.InteractivePlayer;
+import net.jfabricationgames.gdx.object.interactive.InteractivePlayer;
 
 public interface PlayableCharacter extends StatsCharacter, CutsceneMoveableUnit, Hittable, InteractivePlayer {
 	

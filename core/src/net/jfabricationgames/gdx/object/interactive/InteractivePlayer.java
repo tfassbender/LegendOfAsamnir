@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.interactive;
 
 public interface InteractivePlayer {
 	

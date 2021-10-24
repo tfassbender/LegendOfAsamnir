@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.spawn;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,6 +12,12 @@ import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.object.EnemySpawnFactory;
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectFactory;
+import net.jfabricationgames.gdx.object.GameObjectMap;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
+import net.jfabricationgames.gdx.object.ItemSpawnFactory;
 import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.MapUtil;
 

@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.interactive;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapProperties;
@@ -8,6 +8,7 @@ import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.event.dto.FastTravelPointEventDto;
+import net.jfabricationgames.gdx.object.GameObjectTextBox;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public enum InteractiveAction {

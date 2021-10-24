@@ -1,10 +1,14 @@
-package net.jfabricationgames.gdx.object;
+package net.jfabricationgames.gdx.object.moveable;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Array;
+
+import net.jfabricationgames.gdx.object.GameObject;
+import net.jfabricationgames.gdx.object.GameObjectMap;
+import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 
 public class MovableObject extends GameObject {
 	

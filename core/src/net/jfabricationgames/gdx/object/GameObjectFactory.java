@@ -8,6 +8,13 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.assets.AssetGroupManager;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.object.destroyable.DestroyableObject;
+import net.jfabricationgames.gdx.object.event.EventObject;
+import net.jfabricationgames.gdx.object.interactive.InteractiveObject;
+import net.jfabricationgames.gdx.object.interactive.LockedObject;
+import net.jfabricationgames.gdx.object.interactive.StateSwitchObject;
+import net.jfabricationgames.gdx.object.moveable.MovableObject;
+import net.jfabricationgames.gdx.object.spawn.SpawnPoint;
 import net.jfabricationgames.gdx.util.FactoryUtil;
 
 public class GameObjectFactory {
