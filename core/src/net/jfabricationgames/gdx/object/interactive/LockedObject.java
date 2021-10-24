@@ -72,12 +72,10 @@ public class LockedObject extends InteractiveObject implements EventListener {
 			return isUnlockConditionMet();
 		}
 		
-		if (!keyProperties.isEmpty()) {
-			CharacterItemDataHandler itemContainer = CharacterItemDataHandler.getInstance();
-			if (itemContainer.containsKey(keyProperties)) {
-				itemContainer.takeKey(keyProperties);
-				return true;
-			}
+		CharacterItemDataHandler itemContainer = CharacterItemDataHandler.getInstance();
+		if (itemContainer.containsKey(keyProperties)) {
+			itemContainer.takeKey(keyProperties);
+			return true;
 		}
 		
 		return false;
