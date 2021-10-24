@@ -18,9 +18,9 @@ public class CameraMovementHandler {
 	private static final float MOVEMENT_RANGE_Y = Constants.SCENE_HEIGHT * 0.5f - MOVEMENT_EDGE_OFFSET * Constants.WORLD_TO_SCREEN;
 	
 	public static synchronized CameraMovementHandler createInstanceIfAbsent(OrthographicCamera camera, Supplier<Vector2> playerPosition,
-			Supplier<Boolean> isCutscene) {
+			Supplier<Boolean> isCameraControlledByCutscene) {
 		if (instance == null) {
-			instance = new CameraMovementHandler(camera, playerPosition, isCutscene);
+			instance = new CameraMovementHandler(camera, playerPosition, isCameraControlledByCutscene);
 		}
 		
 		return getInstance();
@@ -35,17 +35,17 @@ public class CameraMovementHandler {
 	}
 	
 	private OrthographicCamera camera;
-	private Supplier<Boolean> isCutscene;
+	private Supplier<Boolean> isCameraControlledByCutscene;
 	private Supplier<Vector2> playerPosition;
 	
 	private CameraMovementHandler(OrthographicCamera camera, Supplier<Vector2> playerPosition, Supplier<Boolean> isCutscene) {
 		this.camera = camera;
 		this.playerPosition = playerPosition;
-		this.isCutscene = isCutscene;
+		this.isCameraControlledByCutscene = isCutscene;
 	}
 	
 	public void moveCamera(float delta) {
-		if (!isCutscene.get()) {
+		if (!isCameraControlledByCutscene.get()) {
 			moveCameraToPlayer();
 		}
 		

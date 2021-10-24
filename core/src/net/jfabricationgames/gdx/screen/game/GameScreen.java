@@ -54,6 +54,8 @@ import net.jfabricationgames.gdx.state.GameStateManager;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener, InGameMenuScreen.MenuGameScreen {
 	
+	private static final float WORLD_TIME_STEP = 1f / 60f;
+	
 	private static final String ACTION_SHOW_MENU = "menu";
 	
 	public static void loadAndShowGameScreen(Runnable afterCreatingGameScreen) {
@@ -188,7 +190,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void createCameraMovementHandler() {
 		cameraMovementHandler = CameraMovementHandler.createInstanceIfAbsent(camera, () -> Player.getInstance().getPosition(),
-				() -> CutsceneHandler.getInstance().isCameraControlledByCutscene() || OnScreenTextBox.getInstance().isDisplaying());
+				() -> CutsceneHandler.getInstance().isCameraControlledByCutscene());
 	}
 	
 	private void initializeEventHandling() {
@@ -219,7 +221,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		map.executeBeforeWorldStep();
-		physicsWorld.step(1f / 60f);
+		physicsWorld.step(WORLD_TIME_STEP);
 		map.executeAfterWorldStep();
 		
 		map.processPlayer(delta);
