@@ -173,26 +173,26 @@ public abstract class Projectile implements ContactListener {
 			sprite.setRotation(animationRotation);
 			
 			if (animation.isAnimationFinished() && typeConfig.removeAfterAnimationFinished) {
-				remove();
+				removeFromMap();
 			}
 		}
 		
 		if (reachedMaxRange()) {
 			if (isRangeRestricted()) {
-				remove();
+				removeFromMap();
 			}
 			else if (isDampedAfterRangeExceeds()) {
 				stopProjectileAfterRangeExceeds();
 			}
 		}
 		if (activeTimeOver()) {
-			remove();
+			removeFromMap();
 		}
 		if (explosionTimeReached()) {
 			explode();
 		}
 		if (reflected) {
-			remove();
+			removeFromMap();
 		}
 	}
 	
@@ -255,7 +255,7 @@ public abstract class Projectile implements ContactListener {
 		explosion.damage = explosionDamage;
 		explosion.pushForce = explosionPushForce;
 		explosion.pushForceAffectedByBlock = explosionPushForceAffectedByBlock;
-		remove();
+		removeFromMap();
 	}
 	
 	public void draw(float delta, SpriteBatch batch) {
@@ -297,6 +297,8 @@ public abstract class Projectile implements ContactListener {
 			
 			setBodyLinearDamping();
 			attackPerformed = true;
+			
+			processContact(attackedUserData);
 		}
 	}
 	
@@ -306,6 +308,10 @@ public abstract class Projectile implements ContactListener {
 	
 	protected void setBodyLinearDamping() {
 		body.setLinearDamping(typeConfig.dampingAfterObjectHit);
+	}
+	
+	protected void processContact(Object contactUserData) {
+		// method can be overwritten by subclasses to handle contacts
 	}
 	
 	@Override
@@ -318,10 +324,6 @@ public abstract class Projectile implements ContactListener {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	
 	public void removeFromMap() {
-		remove();
-	}
-	
-	public void remove() {
 		attackPerformed = true;
 		gameMap.removeProjectile(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);

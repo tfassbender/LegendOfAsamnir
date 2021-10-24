@@ -27,8 +27,8 @@ import com.badlogic.gdx.utils.JsonValue.JsonIterator;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.constants.Constants;
-import net.jfabricationgames.gdx.map.MapObjectType;
 import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
+import net.jfabricationgames.gdx.map.ground.MapObjectType;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 
@@ -44,6 +44,7 @@ class TiledMapPhysicsLoader {
 	public static final String MAP_GROUND_TYPES_CONFIG_FILE = "config/map/ground_types.json";
 	
 	private static final String LAYER_NAME_SOLID_OBJECT_PHYSICS = "physics";
+	private static final String LAYER_NAME_UNREACHABLE_AREA_BLOCKER = "unreachable_area_physics";
 	private static final String LAYER_NAME_GROUND_PHYSICS = "ground_physics";
 	private static final String LAYER_NAME_INVISIBLE_PATH_BLOCKER = "invisible_paths_blocker_physics";
 	
@@ -89,6 +90,7 @@ class TiledMapPhysicsLoader {
 	
 	private void createPhysicsFromMap(Map map) {
 		createPhysics(map, LAYER_NAME_SOLID_OBJECT_PHYSICS, this::createSolidObjectPhysics);
+		createPhysics(map, LAYER_NAME_UNREACHABLE_AREA_BLOCKER, this::createUnreachableAreaPhysics);
 		createPhysics(map, LAYER_NAME_GROUND_PHYSICS, this::createGroundPhysics);
 		createPhysics(map, LAYER_NAME_INVISIBLE_PATH_BLOCKER, this::createInvisiblePathBlockerObjectPhysics);
 	}
@@ -134,6 +136,10 @@ class TiledMapPhysicsLoader {
 	
 	private void createSolidObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
 		createTypedObjectPhysics(object, shape, bodyDef, MapObjectType.SOLID_OBJECT);
+	}
+	
+	private void createUnreachableAreaPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
+		createTypedObjectPhysics(object, shape, bodyDef, MapObjectType.UNREACHABLE_AREA);
 	}
 	
 	private void createInvisiblePathBlockerObjectPhysics(MapObject object, Shape shape, BodyDef bodyDef) {

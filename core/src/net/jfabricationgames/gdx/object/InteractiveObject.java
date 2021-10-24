@@ -227,8 +227,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	public void postSolve(Contact contact, ContactImpulse impulse) {}
 	
 	@Override
-	public void remove() {
-		super.remove();
+	public void removeFromMap() {
+		super.removeFromMap();
 		PhysicsWorld.getInstance().removeContactListener(this);
 	}
 }

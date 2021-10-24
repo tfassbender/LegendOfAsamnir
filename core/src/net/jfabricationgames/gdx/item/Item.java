@@ -137,7 +137,7 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	public void applyState(ObjectMap<String, String> state) {
 		if (Boolean.parseBoolean(state.get("picked"))) {
 			picked = true;
-			remove();
+			removeFromMap();
 		}
 	}
 	
@@ -160,16 +160,12 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	public void pickUp() {
 		picked = true;
 		playPickUpSound();
-		remove();
+		removeFromMap();
 		
 		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
 	public void removeFromMap() {
-		remove();
-	}
-	
-	public void remove() {
 		itemMap.removeItem(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

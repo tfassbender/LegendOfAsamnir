@@ -101,8 +101,8 @@ public class EventObject extends GameObject implements ContactListener {
 	}
 	
 	@Override
-	public void remove() {
-		super.remove();
+	public void removeFromMap() {
+		super.removeFromMap();
 		PhysicsWorld.getInstance().removeContactListener(this);
 	}
 }

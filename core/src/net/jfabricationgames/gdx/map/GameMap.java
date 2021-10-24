@@ -12,6 +12,7 @@ import net.jfabricationgames.gdx.character.npc.NpcCharacterMap;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneUnitProvider;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.item.ItemMap;
+import net.jfabricationgames.gdx.map.ground.MapObjectType;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.projectile.ProjectileMap;

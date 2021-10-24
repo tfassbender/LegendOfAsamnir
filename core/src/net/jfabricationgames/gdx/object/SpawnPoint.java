@@ -181,8 +181,8 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	@Override
-	public void remove() {
-		super.remove();
+	public void removeFromMap() {
+		super.removeFromMap();
 		removeEventListener();
 	}
 	

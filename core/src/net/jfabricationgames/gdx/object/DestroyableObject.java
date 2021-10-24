@@ -50,7 +50,7 @@ public class DestroyableObject extends GameObject {
 		
 		//remove this object, if it is destroyed and the destroy animation has finished
 		if (destroyed && (animation == null || animation.isAnimationFinished())) {
-			remove();
+			removeFromMap();
 		}
 	}
 	

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="206">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="206">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="continuous_damage" value="1"/>
@@ -24,7 +24,7 @@
    eJztzsEJACAMADGHF3cQdxBHtEO09JPA/W8MAAAAAAAAAKgzo9U9kWBHp3siwY1e9wQAFPmfAQOd
   </data>
  </layer>
- <objectgroup id="3" name="objects">
+ <objectgroup id="3" name="objects" locked="1">
   <properties>
    <property name="locked" value="false"/>
   </properties>
@@ -562,7 +562,7 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="4" name="physics" locked="1">
+ <objectgroup id="4" name="physics">
   <properties>
    <property name="material" value="water"/>
   </properties>
@@ -627,12 +627,38 @@ Arrows: 25 Coins..</property>
     <property name="material" value="stone"/>
    </properties>
   </object>
-  <object id="32" x="-0.181818" y="108.727">
+  <object id="47" x="864" y="256" width="32" height="352">
    <properties>
-    <property name="material" value="water"/>
+    <property name="material" value="stone"/>
    </properties>
-   <polygon points="0,0 1600,0.363636 1600.18,-108.727 0.181818,-108.727"/>
   </object>
+  <object id="48" x="928" y="256" width="32" height="448">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="50" x="544" y="672" width="384" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="51" x="544" y="576" width="320" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="136" x="800" y="1376" width="64" height="32">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+  <object id="137" x="800" y="1440" width="64" height="50">
+   <properties>
+    <property name="material" value="stone"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="unreachable_area_physics">
   <object id="33" x="109.438" y="108.938">
    <properties>
     <property name="material" value="water"/>
@@ -645,12 +671,15 @@ Arrows: 25 Coins..</property>
    </properties>
    <polygon points="0,0 1489.75,0.5 1490,110 -0.75,110"/>
   </object>
-  <object id="35" x="1490" y="1490">
+  <object id="45" x="210.25" y="1453.63">
    <properties>
     <property name="material" value="water"/>
    </properties>
-   <polygon points="0,0 109.75,0 109.75,-1380.25 0,-1380.5"/>
+   <polygon points="0,0 91.25,0.122237 90.25,-92.0444 0,-91.9222"/>
   </object>
+  <object id="199" x="210.667" y="1266.83" width="26.6667" height="94.1667"/>
+  <object id="202" x="237.667" y="1267" width="34.3333" height="58.3333"/>
+  <object id="203" x="179" y="1266.75" width="31.5" height="91.5"/>
   <object id="36" x="653.5" y="1390.25">
    <properties>
     <property name="material" value="water"/>
@@ -699,53 +728,26 @@ Arrows: 25 Coins..</property>
    </properties>
    <polygon points="0,0 0.25,-156 -28.75,-156 -28,-0.5"/>
   </object>
-  <object id="45" x="210.25" y="1453.63">
-   <properties>
-    <property name="material" value="water"/>
-   </properties>
-   <polygon points="0,0 91.25,0.122237 90.25,-92.0444 0,-91.9222"/>
-  </object>
   <object id="46" x="301.25" y="1389.5">
    <properties>
     <property name="material" value="water"/>
    </properties>
    <polygon points="0,0 68.75,0 68.25,-27.2231 0,-27.3333"/>
   </object>
-  <object id="47" x="864" y="256" width="32" height="352">
-   <properties>
-    <property name="material" value="stone"/>
-   </properties>
-  </object>
-  <object id="48" x="928" y="256" width="32" height="448">
-   <properties>
-    <property name="material" value="stone"/>
-   </properties>
-  </object>
-  <object id="50" x="544" y="672" width="384" height="32">
-   <properties>
-    <property name="material" value="stone"/>
-   </properties>
-  </object>
-  <object id="51" x="544" y="576" width="320" height="32">
-   <properties>
-    <property name="material" value="stone"/>
-   </properties>
-  </object>
-  <object id="136" x="800" y="1376" width="64" height="32">
-   <properties>
-    <property name="material" value="stone"/>
-   </properties>
-  </object>
-  <object id="137" x="800" y="1440" width="64" height="50">
-   <properties>
-    <property name="material" value="stone"/>
-   </properties>
-  </object>
-  <object id="199" x="210.667" y="1266.83" width="26.6667" height="94.1667"/>
   <object id="200" x="337.667" y="1265.92" width="32" height="95.75"/>
   <object id="201" x="304.667" y="1266.08" width="33" height="58.9167"/>
-  <object id="202" x="237.667" y="1267" width="34.3333" height="58.3333"/>
-  <object id="203" x="179" y="1266.75" width="31.5" height="91.5"/>
+  <object id="32" x="-0.181818" y="108.727">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 1600,0.363636 1600.18,-108.727 0.181818,-108.727"/>
+  </object>
+  <object id="35" x="1490" y="1490">
+   <properties>
+    <property name="material" value="water"/>
+   </properties>
+   <polygon points="0,0 109.75,0 109.75,-1380.25 0,-1380.5"/>
+  </object>
  </objectgroup>
  <objectgroup id="6" name="invisible_paths_blocker_physics" locked="1">
   <object id="204" x="272.5" y="1267" width="32" height="58.5"/>

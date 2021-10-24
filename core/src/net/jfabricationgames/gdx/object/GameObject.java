@@ -212,10 +212,6 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 	}
 	
 	public void removeFromMap() {
-		remove();
-	}
-	
-	public void remove() {
 		gameMap.removeObject(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
 	}

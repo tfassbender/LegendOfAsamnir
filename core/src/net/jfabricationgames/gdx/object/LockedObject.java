@@ -175,8 +175,8 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	}
 	
 	@Override
-	public void remove() {
-		super.remove();
+	public void removeFromMap() {
+		super.removeFromMap();
 		EventHandler.getInstance().removeEventListener(this);
 	}
 }

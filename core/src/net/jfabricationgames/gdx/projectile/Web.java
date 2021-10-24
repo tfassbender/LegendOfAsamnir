@@ -54,9 +54,9 @@ public class Web extends Projectile implements GameMapGroundTypeContainer {
 	}
 	
 	@Override
-	public void remove() {
+	public void removeFromMap() {
 		if (!touchingPlayer) {
-			super.remove();
+			super.removeFromMap();
 		}
 	}
 	

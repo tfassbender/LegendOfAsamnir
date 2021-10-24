@@ -40,7 +40,7 @@ public class Boomerang extends Projectile {
 		else {
 			moveToPlayer();
 			if (reachedPlayer()) {
-				super.remove();
+				super.removeFromMap();
 			}
 		}
 	}
@@ -58,7 +58,7 @@ public class Boomerang extends Projectile {
 	}
 	
 	@Override
-	public void remove() {
+	public void removeFromMap() {
 		moveBackToPlayer = true;
 		changeBodyToSensor();
 	}
