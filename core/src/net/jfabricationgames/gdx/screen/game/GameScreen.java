@@ -200,7 +200,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void initializeEventHandling() {
 		EventHandler.getInstance().registerEventListener(this);
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_START));
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_STARTED));
 		GlobalEventExecutionType.setGlobalEventTextBox(OnScreenTextBox.getInstance());
 		GlobalEventExecutionType.setConditionalExecutor(ConditionHandler.getInstance());
 	}

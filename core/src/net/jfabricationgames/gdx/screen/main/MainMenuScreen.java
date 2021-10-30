@@ -9,6 +9,9 @@ import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.MenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
@@ -212,6 +215,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	public void startGame() {
 		createGameScreen(() -> {
 			GlobalValuesDataHandler.getInstance().put(SpecialAction.JUMP.actionEnabledGlobalValueKey, true);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.NEW_GAME_STARTED));
 			dispose();
 		});
 	}

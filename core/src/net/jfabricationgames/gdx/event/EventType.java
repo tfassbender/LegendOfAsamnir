@@ -5,7 +5,8 @@ public enum EventType {
 	//*******************************
 	//*** General
 	//*******************************
-	GAME_START, //
+	NEW_GAME_STARTED, //
+	GAME_STARTED, //
 	GAME_LOADED, //
 	MAP_ENTERED, //
 	SHOW_IN_GAME_SHOP_MENU, //
@@ -20,6 +21,9 @@ public enum EventType {
 	OUT_OF_AMMO, //
 	TAKE_PLAYERS_COINS, //
 	PLAYER_BUY_ITEM, //
+	CHANGE_HEALTH, //
+	CHANGE_SHIELD, //
+	CHANGE_MANA, //
 	//*******************************
 	//*** Game Objects
 	//*******************************
