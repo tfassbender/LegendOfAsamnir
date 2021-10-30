@@ -95,6 +95,36 @@ public enum GlobalEventExecutionType {
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SET_ITEM).setStringValue(item));
 		}
 	},
+	CHANGE_HEALTH {
+		
+		private static final String MAP_KEY_AMOUNT = "amount";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String amount = eventConfig.executionParameters.get(MAP_KEY_AMOUNT);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CHANGE_HEALTH).setFloatValue(Float.parseFloat(amount)));
+		}
+	},
+	CHANGE_SHIELD {
+		
+		private static final String MAP_KEY_AMOUNT = "amount";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String amount = eventConfig.executionParameters.get(MAP_KEY_AMOUNT);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CHANGE_SHIELD).setFloatValue(Float.parseFloat(amount)));
+		}
+	},
+	CHANGE_MANA {
+		
+		private static final String MAP_KEY_AMOUNT = "amount";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String amount = eventConfig.executionParameters.get(MAP_KEY_AMOUNT);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CHANGE_MANA).setFloatValue(Float.parseFloat(amount)));
+		}
+	},
 	OPEN_LOCK {
 		
 		private static final String MAP_KEY_LOCK_ID = "lockId";

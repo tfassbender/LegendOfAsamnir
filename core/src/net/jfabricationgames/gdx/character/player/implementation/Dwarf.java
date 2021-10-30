@@ -449,30 +449,65 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	@Override
 	public void handleEvent(EventConfig event) {
-		if (event.eventType == EventType.EVENT_OBJECT_TOUCHED && event.stringValue.equals(EventObject.EVENT_KEY_RESPAWN_CHECKPOINT)) {
-			if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
-				EventObject respawnObject = (EventObject) event.parameterObject;
-				propertiesDataHandler.setRespawnPoint(respawnObject.getEventObjectCenterPosition());
-			}
-			GameStateManager.fireQuickSaveEvent();
-		}
-		if (event.eventType == EventType.TAKE_PLAYERS_COINS) {
-			propertiesDataHandler.reduceCoins(event.intValue);
-		}
-		if (event.eventType == EventType.PLAYER_BUY_ITEM) {
-			Item item = (Item) event.parameterObject;
-			itemDataHandler.collectItem(item);
-			item.displaySpecialKeyProperties();
-		}
-		if (event.eventType == EventType.FAST_TRAVEL_TO_MAP_POSITION) {
-			FastTravelPointProperties fastTravelTargetPoint = fastTravelDataHandler.getFastTravelPropertiesById(event.stringValue);
-			if (fastTravelTargetPoint.enabled) {
-				setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
-			}
-		}
-		if (event.eventType == EventType.SET_ITEM) {
-			String itemId = event.stringValue;
-			itemDataHandler.addSpecialItem(itemId);
+		float change;
+		switch (event.eventType) {
+			case EVENT_OBJECT_TOUCHED:
+				if (event.stringValue.equals(EventObject.EVENT_KEY_RESPAWN_CHECKPOINT)) {
+					if (event.parameterObject != null && event.parameterObject instanceof EventObject) {
+						EventObject respawnObject = (EventObject) event.parameterObject;
+						propertiesDataHandler.setRespawnPoint(respawnObject.getEventObjectCenterPosition());
+					}
+					GameStateManager.fireQuickSaveEvent();
+				}
+				break;
+			case TAKE_PLAYERS_COINS:
+				propertiesDataHandler.reduceCoins(event.intValue);
+				break;
+			case PLAYER_BUY_ITEM:
+				Item item = (Item) event.parameterObject;
+				itemDataHandler.collectItem(item);
+				item.displaySpecialKeyProperties();
+				break;
+			case FAST_TRAVEL_TO_MAP_POSITION:
+				FastTravelPointProperties fastTravelTargetPoint = fastTravelDataHandler.getFastTravelPropertiesById(event.stringValue);
+				if (fastTravelTargetPoint.enabled) {
+					setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
+				}
+				break;
+			case SET_ITEM:
+				String itemId = event.stringValue;
+				itemDataHandler.addSpecialItem(itemId);
+				break;
+			case CHANGE_HEALTH:
+				change = event.floatValue;
+				if (change > 0) {
+					propertiesDataHandler.increaseHealth(change);
+				}
+				else if (change < 0) {
+					propertiesDataHandler.takeDamage(-change);
+				}
+				break;
+			case CHANGE_SHIELD:
+				change = event.floatValue;
+				if (change > 0) {
+					propertiesDataHandler.increaseArmor(change);
+				}
+				else if (change < 0) {
+					propertiesDataHandler.takeArmorDamage(-change);
+				}
+				break;
+			case CHANGE_MANA:
+				change = event.floatValue;
+				if (change > 0) {
+					propertiesDataHandler.increaseMana(change);
+				}
+				else if (change < 0) {
+					propertiesDataHandler.reduceMana(-change);
+				}
+				break;
+			default:
+				// do nothing, because this event type is not handled here
+				break;
 		}
 	}
 	
