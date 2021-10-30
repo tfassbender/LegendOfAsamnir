@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.condition.execution;
 
+import com.badlogic.gdx.Gdx;
+
 import net.jfabricationgames.gdx.condition.ConditionHandler;
 
 public class ConditionalExecution {
@@ -9,11 +11,18 @@ public class ConditionalExecution {
 	public ConditionExecutable elseCase;
 	
 	public void execute() {
-		if (ConditionHandler.getInstance().isConditionMet(conditionId)) {
+		boolean conditionMet = ConditionHandler.getInstance().isConditionMet(conditionId);
+		Gdx.app.debug(getClass().getSimpleName(), "Condition \"" + conditionId + "\" result is: " + conditionMet);
+		if (conditionMet) {
 			thenCase.execute();
 		}
 		else {
 			elseCase.execute();
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "ConditionalExecution [conditionId=" + conditionId + "]";
 	}
 }

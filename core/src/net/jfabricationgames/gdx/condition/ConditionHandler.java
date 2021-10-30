@@ -68,6 +68,7 @@ public class ConditionHandler implements GlobalEventConditionalExecutor {
 	@Override
 	public void executeConditional(String conditionalExecutionId) {
 		ConditionalExecution conditionalExecution = conditionalExecutions.get(conditionalExecutionId);
+		Gdx.app.debug(getClass().getSimpleName(), "Executing conditional: " + conditionalExecution);
 		if (conditionalExecution == null) {
 			throw new IllegalStateException("A conditional execution with the id '" + conditionalExecutionId
 					+ "' was not found. Conditional executions need to be added to the config file '" + CONDITIONAL_EXECUTIONS_CONFIG_FILE_PATH

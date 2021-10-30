@@ -60,4 +60,10 @@ public class EventConfig {
 				&& Float.floatToIntBits(floatValue) == Float.floatToIntBits(other.floatValue) && intValue == other.intValue
 				&& Objects.equals(stringValue, other.stringValue);
 	}
+	
+	@Override
+	public String toString() {
+		return "EventConfig [eventType=" + eventType + ", intValue=" + intValue + ", floatValue=" + floatValue + ", booleanValue=" + booleanValue
+				+ ", stringValue=" + stringValue + ", parameterObject=" + parameterObject + "]";
+	}
 }

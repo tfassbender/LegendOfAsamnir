@@ -32,6 +32,7 @@ public class EventHandler {
 	}
 	
 	public void fireEvent(EventConfig event) {
+		Gdx.app.debug(getClass().getSimpleName(), "Firing event: " + event);
 		// create a copy of the event listeners list, so it can be iterated (without problems because the iterator cannot be used nested) 
 		// and the items in the real list can be removed while processing the whole list
 		Array<EventListener> iterableListeners = new Array<>(listeners);
