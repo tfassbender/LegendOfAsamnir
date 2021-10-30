@@ -1,0 +1,36 @@
+{
+	demo_2_prolog_gate_1: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: HAS_ITEM,
+				parameters: {
+					itemId: demo_2_prolog_mead_1
+				}
+			},
+			condition2: {
+				conditionType: HAS_ITEM,
+				parameters: {
+					itemId: demo_2_prolog_mead_2
+				}
+			}
+		}
+	},
+	demo_2_prolog_gate_2: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: HAS_ITEM,
+				parameters: {
+					itemId: demo_2_prolog_shield
+				}
+			},
+			condition2: {
+				conditionType: HAS_ITEM,
+				parameters: {
+					itemId: demo_2_prolog_saehrimnir
+				}
+			}
+		}
+	},
+}

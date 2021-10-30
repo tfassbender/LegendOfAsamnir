@@ -3,16 +3,23 @@
 	//*** Demo Level
 	//********************************************************
 	
-	"config/cutscene/demo/minotaur_cutscene.json",
-	"config/cutscene/demo/talk_to_female_adventurer.json",
-	"config/cutscene/demo/talk_to_guard_blocking_the_way.json",
+	config/cutscene/demo/minotaur_cutscene.json,
+	config/cutscene/demo/talk_to_female_adventurer.json,
+	config/cutscene/demo/talk_to_guard_blocking_the_way.json,
 	
 	//********************************************************
 	//*** Tutorial Level
 	//********************************************************
 	
-	"config/cutscene/tutorial/talk_to_female_adventurer.json",
-	"config/cutscene/tutorial/minotaur_cutscene.json",
-	"config/cutscene/tutorial/adventurer_tells_a_tale.json",
-	"config/cutscene/tutorial/adventurer_introduces_the_boss.json",
+	config/cutscene/tutorial/talk_to_female_adventurer.json,
+	config/cutscene/tutorial/minotaur_cutscene.json,
+	config/cutscene/tutorial/adventurer_tells_a_tale.json,
+	config/cutscene/tutorial/adventurer_introduces_the_boss.json,
+	
+	//********************************************************
+	//*** Demo 2
+	//********************************************************
+	
+	config/cutscene/demo_2/gate_1.json,
+	config/cutscene/demo_2/gate_2.json,
 ]

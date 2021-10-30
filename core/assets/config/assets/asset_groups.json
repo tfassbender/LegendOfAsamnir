@@ -81,5 +81,19 @@
 				"textureMagFilter": "Nearest"
 			}
 		}
+		
+		//***************************************************
+		//*** demo 2
+		//***************************************************
+		
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/demo_2_prolog.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		}
 	]
 }

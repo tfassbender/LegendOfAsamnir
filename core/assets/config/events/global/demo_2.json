@@ -1,0 +1,130 @@
+{
+	demo_2_prolog_game_start__reduce_health: {
+		event: {
+			eventType: NEW_GAME_STARTED,
+		},
+		executionType: CHANGE_HEALTH,
+		executionParameters: {
+			amount: -20,
+		}
+	},
+	demo_2_prolog_game_start__reduce_armor: {
+		event: {
+			eventType: NEW_GAME_STARTED,
+		},
+		executionType: CHANGE_SHIELD,
+		executionParameters: {
+			amount: -30,
+		}
+	},
+	demo_2_prolog_game_start__reduce_mana: {
+		event: {
+			eventType: NEW_GAME_STARTED,
+		},
+		executionType: CHANGE_MANA,
+		executionParameters: {
+			amount: -80,
+		}
+	},
+	
+	demo_2_prolog_mead_1_picked__set_item: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_mead_1_picked,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: demo_2_prolog_mead_1,
+		}
+	},
+	demo_2_prolog_mead_1_picked__increase_mana: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_mead_1_picked,
+		},
+		executionType: CHANGE_MANA,
+		executionParameters: {
+			amount: 40,
+		}
+	},
+	
+	demo_2_prolog_mead_2_picked__set_item: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_mead_2_picked,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: demo_2_prolog_mead_2,
+		}
+	},
+	demo_2_prolog_mead_2_picked__increase_mana: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_mead_2_picked,
+		},
+		executionType: CHANGE_MANA,
+		executionParameters: {
+			amount: 40,
+		}
+	},
+	
+	demo_2_prolog_shield_picked__set_item: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_shield_picked,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: demo_2_prolog_shield,
+		}
+	},
+	demo_2_prolog_shield_picked__increase_shield: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_shield_picked,
+		},
+		executionType: CHANGE_SHIELD,
+		executionParameters: {
+			amount: 30,
+		}
+	},
+	
+	demo_2_prolog_saehrimnir_picked__set_item: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_saehrimnir_picked,
+		},
+		executionType: SET_ITEM,
+		executionParameters: {
+			item: demo_2_prolog_saehrimnir,
+		}
+	},
+	demo_2_prolog_saehrimnir_picked__increase_health: {
+		event: {
+			eventType: EVENT_ITEM_PICKED_UP,
+			stringValue: demo_2_prolog_saehrimnir_picked,
+		},
+		executionType: CHANGE_HEALTH,
+		executionParameters: {
+			amount: 20,
+		}
+	},
+	
+	demo_2_prolog_gate_1: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_prolog_gate_1,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_prolog_gate_1
+	},
+	demo_2_prolog_gate_2: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_prolog_gate_2,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_prolog_gate_2
+	},
+}

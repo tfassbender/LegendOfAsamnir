@@ -13,7 +13,7 @@
 	{
 		name: test_map_3,
 		map: "map/map3.tmx",
-		initial: true
+		//initial: true
 	},
 	{
 		name: test_map_4,
@@ -33,8 +33,15 @@
 	
 	// demo / tutorial
 	{
-		name: level_tutorial
+		name: level_tutorial,
 		map: "map/level_tutorial.tmx",
+		//initial: true
+	}
+	
+	// demo 2
+	{
+		name: level_demo_2_prolog,
+		map: "map/demo_2_prolog.tmx",
 		initial: true
 	}
 ]

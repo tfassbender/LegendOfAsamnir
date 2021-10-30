@@ -1,0 +1,27 @@
+{
+	id: demo_2_prolog_gate_1,
+	controlledActions: {
+		initial: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: PLAYER,
+			controlledUnitTarget: {x: -1, y: 0},
+			startsWithCutscene: true,
+			
+			executes: [
+				showText,
+			],
+		},
+		showText: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText:  "I need to find some mead before I can leave.",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

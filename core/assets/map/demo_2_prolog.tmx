@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="53" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="146">
+ <properties>
+  <property name="above_player_layers" value="[3, 4]"/>
+  <property name="background_layers" value="[0, 1, 2]"/>
+  <property name="shadow_layers" value="[5, 6]"/>
+ </properties>
+ <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
+ <layer id="1" name="background" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztmEEKwjAQRbORQr2ONxXUrYoHcKF2q+IFXKh7j6C4NoKBEi2UzKTG9j34y07z2kmY1phwRrkxY5ubzVAx93ddP5NcsNiarO09NjaFzSIzZqYUV9dPgZPY6WDXslNKKk7Xnl5Ott65lEcLnKYVvVjXaSk4nwb9NJ1Wgv0d6z1tK/ZXE06u7y/KTn5CnELPLNcj8yw9J2nfS5yq+JWT6/t9i5w00hUnf01NOsUCp244pQhOzSCZi185JugkmSG/zSU4fSLtG9c7km95f9aSOkmfcYw5XcNJ+r9EMtPGctJcD05xnMq4mpJrccIJJwAAAAAAAAAAAAAA+HeeNCcGuQ==
+  </data>
+ </layer>
+ <layer id="4" name="terrain" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt2G8KgjAYBvCBZkzoIH7oIBXVOfpDdY3KixRexAjqGn3rCL1Ro6HO1Gpu+fzgBbcM3odyzDEG3xA5dXdQ3lbqee2l54+O+n4w08ZnLPTr7iLb0n1fK7fuLqvpttLj5Ny/uefraM6pWoOKrE2i3+Rc1n02kfvNyqizD+6pPw/bj5KvxdhkQU6mJFsy/VodawMAAEBVO9pH7i19zz1xxs78Nb4+r2PKc7A0kxBKe7A+vd/2qDhVzNXfMV0kZZpSlglVQHWxINM4ccYwMvTMIY/Yq8+xX2+chcb/6ydnFv9sWOA3mNFaOLBgPQSzlX0Gm/5sAgAAAAAAAAAAAIBeN+FPIrE=
+  </data>
+ </layer>
+ <layer id="8" name="terrain_2" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztzrERABAUREEhtSpFKSrThVAoMfgzu9EFF7yUAO5oZe2R33VwRi/7z09qsF4AAAAAAAAAAAAAYpvZKwKu
+  </data>
+ </layer>
+ <layer id="5" name="background_above_player" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKwjAQheHZCXXryVV0XcUDKFTdqngA3eg9vIDTRSGUgG2TkjH8HwzdzjRT+iICAADwn/aFyKJVhyJ1V2Eq7X83Edk4VTGTOXX/d53j6lRKK+1nrfXxfBNd62nsTI7az0nr7NmfrrVNfC5tVmd6BOzNbCry0ufb8010rdsIM5UD36/l/clxpsvAnRl7fwAAwzW5Yulky3nPfGHtTld6/qN9/8vW7j85ztTkCjcb9M0a1maKISTr/8r/qcTIxdayco4zxcj65H8AAAAAAAAAufgCphXb+Q==
+  </data>
+ </layer>
+ <layer id="6" name="terrain_above_player" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt1zENADAIAEEGzJDUv75qYCKEOwW/fgTs9nK6AAAAAOgoLw8AAAAAAADAAR93WgBe
+  </data>
+ </layer>
+ <layer id="2" name="shadows" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEOgCAMhWF22PUoXsSLmng/JxYJg/RVSvJ/CSOkD9CUlNBz59kV6JFpDWRaQ7RMinrI5G9mpq2kdOV27GVOPeo1lOsp6jmM+/oWIZParEy9b+HLUNekmu+BTK1TfG8UIu6zFZnWEDET/y39fA/WmqL1Wqo1lCL2tFbR9lih9hX1XTbSq1rfdF4s5xX1rMmkm+vJUtdor/93/w8AAAAAAAAAANbxALxsVH8=
+  </data>
+ </layer>
+ <layer id="3" name="shadows_2" width="53" height="60" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztw0EJAAAIBLALYP9iFvJhCYUNlgAAAAAAAPzXtQEAAAAAAC4YSCkBvw==
+  </data>
+ </layer>
+ <objectgroup id="10" name="objects">
+  <object id="112" name="player.startingPosition" x="256.5" y="960.167">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="113" name="player.startingPosition" x="111" y="361.5">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="114" name="item.demo_2_prolog_mead" x="367.667" y="338">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_mead_1_picked"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="115" name="item.demo_2_prolog_mead" x="463" y="540.667">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_mead_2_picked"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="116" name="object.eventObject" x="480.333" y="366.333" width="31" height="97.6667">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_gate_1"/>
+   </properties>
+  </object>
+  <object id="117" name="item.demo_2_prolog_saehrimnir" x="593" y="145">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_saehrimnir_picked"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="118" name="item.demo_2_prolog_shield" x="914.333" y="267.667">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_shield_picked"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="119" name="object.eventObject" x="1184.83" y="238.833" width="31" height="97.6667">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_gate_2"/>
+   </properties>
+  </object>
+  <object id="126" name="enemy.gladiator" x="911.333" y="779.333">
+   <properties>
+    <property name="specialDropType" value="key"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="127" name="object.signboard" x="1297" y="467">
+   <properties>
+    <property name="displayText" value="Note: We need to get rid of all these barrels and boxes that block the way! Sometimes the only way to get through is to destroy them by attacking them with the left mouse button, the right controll key on the keyboard or the controller button A. "/>
+    <property name="displayTextHeader" value="Way Blocked"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="128" name="object.eventObject" x="1216.5" y="447.167" width="94.5" height="32.6667">
+   <properties>
+    <property name="eventParameter" value="demo_2_plolog_gate_2"/>
+   </properties>
+  </object>
+  <object id="129" name="object.signboard" x="1152.5" y="750.5">
+   <properties>
+    <property name="displayText" value="Important Training Note: You take much less damage when you block an attack. To block you need to push the right mouse button, the right shift key or the controller button B."/>
+    <property name="displayTextHeader" value="Blocking Attacks"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="130" name="object.barrel" x="1238.5" y="534.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="131" name="object.barrel" x="1266.5" y="525">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="132" name="object.barrel" x="1296" y="536.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="133" name="object.barrel" x="1230.5" y="576">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="134" name="object.barrel" x="1266" y="564">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="135" name="object.barrel" x="1291.5" y="595.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="136" name="object.barrel" x="1256" y="660.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="137" name="object.barrel" x="1233" y="687.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="138" name="object.barrel" x="1296.5" y="724.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="139" name="object.box" x="1258.5" y="597.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="140" name="object.box" x="1269" y="626.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="141" name="object.box" x="1295.5" y="637.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="142" name="object.box" x="1232.5" y="725">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="143" name="object.box" x="1297" y="683.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="144" name="object.eventObject" x="224.5" y="985" width="63" height="6">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_goto_main_map"/>
+   </properties>
+  </object>
+  <object id="145" name="object.signboard" x="686.5" y="816.5">
+   <properties>
+    <property name="displayText" value="The door is locked. Use the key to open it my moving close and pressing the interaction button E on the keyboard or Y on the controller."/>
+    <property name="displayTextHeader" value="Locked Doors"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="124" name="object.key_wall" x="640.333" y="850.333">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="physics" locked="1">
+  <object id="1" x="0" y="192" width="480" height="111.333"/>
+  <object id="3" x="32" y="560.5" width="448" height="111.5"/>
+  <object id="4" x="480" y="464.5" width="96" height="207.5"/>
+  <object id="5" x="0" y="303.5" width="32" height="368.5"/>
+  <object id="6" x="576" y="464.5" width="480" height="111.5"/>
+  <object id="7" x="1024" y="336" width="192" height="112"/>
+  <object id="8" x="1184" y="448" width="32" height="270"/>
+  <object id="9" x="672" y="608" width="512" height="110"/>
+  <object id="10" x="128" y="736" width="576" height="47.5"/>
+  <object id="11" x="128" y="704" width="544" height="32"/>
+  <object id="12" x="128" y="783.5" width="32" height="208.5"/>
+  <object id="13" x="160" y="881" width="64" height="111"/>
+  <object id="14" x="288" y="880" width="416" height="112"/>
+  <object id="15" x="672" y="1008" width="736" height="112"/>
+  <object id="17" x="1312" y="0" width="96" height="1007.5"/>
+  <object id="18" x="1184" y="0" width="128" height="238.5"/>
+  <object id="19" x="480" y="0" width="704" height="110"/>
+  <object id="20" x="480" y="110.5" width="96" height="256"/>
+  <object id="77" x="1024" y="447.5" width="32" height="17"/>
+  <object id="78" x="672.182" y="718.182" width="31.8182" height="17.8182"/>
+  <object id="79" x="672" y="992" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup id="11" name="unreachable_area_physics" locked="1">
+  <object id="21" x="64.1818" y="322.545" width="31.8182" height="52.6061"/>
+  <object id="23" x="289.455" y="320.727" width="61.8182" height="25.8182"/>
+  <object id="24" x="385.818" y="320.364" width="31.2727" height="27.4545"/>
+  <object id="25" x="417.455" y="320.182" width="61.6364" height="58.3636"/>
+  <object id="30" x="48.375" y="339.125">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="31" x="48.625" y="339.375">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="32" x="53.75" y="330.25">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="33" x="656.443" y="308.148">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="34" x="656.693" y="308.398">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="35" x="661.818" y="299.273">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="36" x="624.625" y="276.148">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="37" x="624.875" y="276.398">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="38" x="630" y="267.273">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="39" x="752.807" y="308.148">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="40" x="753.057" y="308.398">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="41" x="758.182" y="299.273">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="45" x="783.898" y="276.33">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="46" x="784.148" y="276.58">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="47" x="789.273" y="267.455">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="48" x="656.443" y="212.693">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="49" x="656.693" y="212.943">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="50" x="661.818" y="203.818">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="51" x="784.989" y="212.33">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="52" x="785.239" y="212.58">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="53" x="790.364" y="203.455">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="54" x="816.625" y="212.33">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="55" x="816.875" y="212.58">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="56" x="822" y="203.455">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="60" x="912.989" y="244.33">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="61" x="913.239" y="244.58">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="62" x="918.364" y="235.455">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="63" x="976.807" y="244.33">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="64" x="977.057" y="244.58">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="65" x="982.182" y="235.455">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="66" x="944.08" y="276.693">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="67" x="944.33" y="276.943">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="68" x="949.455" y="267.818">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="69" x="848.261" y="404.057">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="70" x="848.511" y="404.307">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="71" x="853.636" y="395.182">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="72" x="912.261" y="404.239">
+   <polygon points="0,0 -8.625,-3.25 -2.875,-11.375"/>
+  </object>
+  <object id="73" x="912.511" y="404.489">
+   <polygon points="0,0 6.125,-1.5 5.25,-9.375"/>
+  </object>
+  <object id="74" x="917.636" y="395.364">
+   <polygon points="0,0 -8.375,-2.625 -5.125,8.625"/>
+  </object>
+  <object id="83" x="576" y="160" width="320" height="20"/>
+  <object id="84" x="1025" y="131.667" width="60" height="20"/>
+  <object id="85" x="895.667" y="718.667" width="31.3333" height="37.3333"/>
+  <object id="86" x="992" y="718" width="95.6667" height="39.6667"/>
+  <object id="87" x="1119.33" y="739">
+   <polygon points="0,0 -15,13.6667 -31,12.3333"/>
+  </object>
+  <object id="90" x="1119.67" y="739">
+   <polygon points="0,0 -11.6667,-11 -31,1.33333"/>
+  </object>
+  <object id="91" x="721.727" y="770.682">
+   <polygon points="0,0 -9.63636,3.54545 5.63636,6.45455"/>
+  </object>
+  <object id="92" x="1263.82" y="865.818">
+   <polygon points="0,0 -8.54545,8.54545 8.90909,8.72727"/>
+  </object>
+  <object id="93" x="1290.55" y="929.455">
+   <polygon points="0,0 -1.81818,9.45455 14.7273,7.09091"/>
+  </object>
+  <object id="95" x="656" y="277.636">
+   <polygon points="0,0 -15.6364,-5.63636 -10.1818,-19.2727"/>
+  </object>
+  <object id="96" x="656" y="277.636">
+   <polygon points="0,0 -9.81818,-18.9091 2.90909,-21.2727"/>
+  </object>
+  <object id="97" x="656.182" y="277.455">
+   <polygon points="0,0 2.90909,-21.2727 14.7273,-13.2727"/>
+  </object>
+  <object id="98" x="656.364" y="277.455">
+   <polygon points="0,0 14.5455,-13.2727 13.0909,-3.63636"/>
+  </object>
+  <object id="99" x="784.181" y="309.273">
+   <polygon points="0,0 -15.6364,-5.63636 -10.1818,-19.2727"/>
+  </object>
+  <object id="100" x="784.181" y="309.273">
+   <polygon points="0,0 -9.81818,-18.9091 2.90909,-21.2727"/>
+  </object>
+  <object id="101" x="784.363" y="309.091">
+   <polygon points="0,0 2.90909,-21.2727 14.7273,-13.2727"/>
+  </object>
+  <object id="102" x="784.545" y="309.091">
+   <polygon points="0,0 14.5455,-13.2727 13.0909,-3.63636"/>
+  </object>
+  <object id="103" x="943.818" y="245.818">
+   <polygon points="0,0 -15.6364,-5.63636 -10.1818,-19.2727"/>
+  </object>
+  <object id="104" x="943.818" y="245.818">
+   <polygon points="0,0 -9.81818,-18.9091 2.90909,-21.2727"/>
+  </object>
+  <object id="105" x="944" y="245.636">
+   <polygon points="0,0 2.90909,-21.2727 14.7273,-13.2727"/>
+  </object>
+  <object id="106" x="944.182" y="245.636">
+   <polygon points="0,0 14.5455,-13.2727 13.0909,-3.63636"/>
+  </object>
+  <object id="107" x="879.636" y="406.182">
+   <polygon points="0,0 -15.6364,-5.63636 -10.1818,-19.2727"/>
+  </object>
+  <object id="108" x="879.636" y="406.182">
+   <polygon points="0,0 -9.81818,-18.9091 2.90909,-21.2727"/>
+  </object>
+  <object id="109" x="879.818" y="406">
+   <polygon points="0,0 2.90909,-21.2727 14.7273,-13.2727"/>
+  </object>
+  <object id="110" x="880" y="406">
+   <polygon points="0,0 14.5455,-13.2727 13.0909,-3.63636"/>
+  </object>
+  <object id="120" x="577.333" y="784.333" width="60.6667" height="40.6667"/>
+  <object id="121" x="670.667" y="809.333">
+   <polygon points="0,0 -12.6667,-25.6667 -31.6667,-25.3333"/>
+  </object>
+  <object id="122" x="670" y="808.333">
+   <polygon points="0,0 -31.3333,-24.6667 -31.3333,16"/>
+  </object>
+  <object id="123" x="670.333" y="808.667">
+   <polygon points="0,0 -30,15 -15,18.6667"/>
+  </object>
+ </objectgroup>
+</map>

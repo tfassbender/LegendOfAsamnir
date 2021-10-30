@@ -1,0 +1,32 @@
+{
+    demo_2_prolog_gate_1: {
+        conditionId: demo_2_prolog_gate_1,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_prolog_gate_1,
+				}
+            }
+        }
+    },
+	demo_2_prolog_gate_2: {
+        conditionId: demo_2_prolog_gate_2,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_prolog_gate_2,
+				}
+            }
+        }
+    },
+}

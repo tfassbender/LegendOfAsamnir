@@ -67,6 +67,26 @@
 	},
 	
 	//**********************************
+	//*** demo 2 - prolog
+	//**********************************
+	
+	demo_2_prolog_mead: {
+		type: EVENT_ITEM,
+		texture: mana,
+		pickUpSound: mana
+	},
+	demo_2_prolog_saehrimnir: {
+		type: EVENT_ITEM,
+		texture: health,
+		pickUpSound: health_small,
+	},
+	demo_2_prolog_shield: {
+		type: EVENT_ITEM,
+		texture: shield,
+		pickUpSound: pickup
+	},
+	
+	//**********************************
 	//*** menu items
 	//**********************************
 	

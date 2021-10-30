@@ -24,7 +24,7 @@
    eJztzsEJACAMADGHF3cQdxBHtEO09JPA/W8MAAAAAAAAAKgzo9U9kWBHp3siwY1e9wQAFPmfAQOd
   </data>
  </layer>
- <objectgroup id="3" name="objects" locked="1">
+ <objectgroup id="3" name="objects">
   <properties>
    <property name="locked" value="false"/>
   </properties>
@@ -59,6 +59,9 @@
    <point/>
   </object>
   <object id="56" name="object.box" x="458.5" y="488.5">
+   <properties>
+    <property name="drop" value="{}"/>
+   </properties>
    <point/>
   </object>
   <object id="57" name="object.chest" x="347.5" y="475.5">
@@ -562,7 +565,7 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="4" name="physics">
+ <objectgroup id="4" name="physics" locked="1">
   <properties>
    <property name="material" value="water"/>
   </properties>
@@ -658,7 +661,7 @@ Arrows: 25 Coins..</property>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="unreachable_area_physics">
+ <objectgroup id="7" name="unreachable_area_physics" locked="1">
   <object id="33" x="109.438" y="108.938">
    <properties>
     <property name="material" value="water"/>
