@@ -1,6 +1,11 @@
 {
 	id: demo_2_prolog_opening,
 	controlledActions: {
+		
+		//******************************
+		//*** controlls
+		//******************************
+		
 		initial_wait: {
 			type: WAIT,
 			executionDurationInSeconds: 2f,
@@ -25,9 +30,62 @@
 			waitForEventToFinish: true,
 			
 			executes: [
+				wait_before_beginning_story,
+			]
+		},
+		wait_before_beginning_story: {
+			type: WAIT,
+			executionDurationInSeconds: 2f,
+			showBlackScreen: true,
+			
+			executes: [
+				show_beginning_story_1,
+			]
+		},
+		
+		//******************************
+		//*** beginning story
+		//******************************
+		
+		show_beginning_story_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "???",
+				displayText: "In the beginning there was a giant named Ymir...",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+				showOnBlackScreen: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_2,
+			]
+		},
+		show_beginning_story_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "???",
+				displayText: "Oh ... wait ... \nThat was the wrong chapter...\nLet's skipp a view pages...\n...\nThis seems to be a good point to start!",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+				showOnBlackScreen: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
 				color_transition,
 			]
 		},
+		
+		//******************************
+		//*** color transition
+		//******************************
+		
 		color_transition: {
 			type: COLOR_TRANSITION,
 			fadeIntoColor: false,
@@ -38,16 +96,145 @@
 			waitForEventToFinish: true,
 			
 			executes: [
-				show_text,
+				show_beginning_story_3,
 			],
 		},
-		show_text: {
+		
+		//******************************
+		//*** continue beginning story
+		//******************************
+		
+		show_beginning_story_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "???",
+				displayText: "Our story beginns with a dwarf called Thorin.\nThe bravest and one of the mightiest dwarfes in all of Svartalfheim (the land where all dwarfes lived).",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_4,
+			]
+		},
+		show_beginning_story_4: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "???",
+				displayText: "One day Thorin woke up in a place, that did not seem familiar to him.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_5,
+			]
+		},
+		show_beginning_story_5: {
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
 				displayTextHeader: "Thorin",
-				displayText:  "Where am I?",
-				showNextPageIcon: false,
+				displayText: "What?!\nWhere did that strange voice come from?!\n\n... and where am I? ",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_6,
+			]
+		},
+		show_beginning_story_6: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "???",
+				displayText: "I'm the narrator!\nBut you can't here me. So just shut up and let me tell the story.",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_7,
+			]
+		},
+		show_beginning_story_7: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Who?!\nWhich story?!\n...\nWhat's going on here?",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_8,
+			]
+		},
+		show_beginning_story_8: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Maybe I just had a view drinks to much last night...\n...\nOr not enough drinks!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_9,
+			]
+		},
+		show_beginning_story_9: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "That must be it! I am almost getting sober!\nI need to find some mead...\nThen this pain in my head and the voice of this strange narrator guy should be gone.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_10,
+			]
+		},
+		show_beginning_story_10: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Guy",
+				displayText: "And so our glorious hero Thorin began his mighty quest for ... mead ...",
+				colorHeader: #0000FF,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_beginning_story_11,
+			]
+		},
+		show_beginning_story_11: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Oh, just shut up already!",
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,

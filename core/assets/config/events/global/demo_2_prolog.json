@@ -150,4 +150,10 @@
 		executionType: CONDITIONAL_EVENT,
 		conditionalExecutionId: demo_2_prolog_gate_2
 	},
+	
+	//*******************************************
+	//*** cutscenes
+	//*******************************************
+	
+	// TODO demo_2_prolog_tavern_cutscene
 }
