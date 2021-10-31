@@ -120,20 +120,20 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	private void drawBanners() {
-		banner.draw(batch, 0, 520, 1200, 350);
-		bannerMainMenu.draw(batch, 315, 430, 550, 250);
+		banner.draw(batch, -15, 520, 1200, 350);
+		bannerMainMenu.draw(batch, 310, 430, 550, 250);
 	}
 	
 	private void drawTexts() {
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(2f);
-		screenTextWriter.drawText("Dwarf Scroller GDX", 110, 720);
+		screenTextWriter.drawText("Legend of Asamnir", 150, 720);
 		
 		int buttonTextX = 370;
 		int buttonTextWidth = 430;
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.5f);
-		screenTextWriter.drawText("Main Menu", buttonTextX + 5, 573, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText("Main Menu", buttonTextX + 10, 573, buttonTextWidth, Align.center, false);
 		
 		screenTextWriter.setScale(1.15f);
 		screenTextWriter.drawText(getButtonTextColorEncoding(buttonContinueGame) + "Continue", buttonTextX, 462, buttonTextWidth, Align.center,

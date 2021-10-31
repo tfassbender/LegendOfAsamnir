@@ -43,13 +43,13 @@ public class GameMapManager {
 		return gameMap;
 	}
 	
-	public void showMap(String mapIdentifier) {
+	public void showMap(String mapIdentifier, int playerStartingPointId) {
 		gameMap.beforeLoadMap(mapIdentifier);
 		
 		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
 		GameMapLoaderFactory.createGameMapLoader(gameMap, mapAsset).loadMap();
 		
-		gameMap.afterLoadMap(mapIdentifier);
+		gameMap.afterLoadMap(mapIdentifier, playerStartingPointId);
 	}
 	
 	public String getMapFilePath(String mapName) {

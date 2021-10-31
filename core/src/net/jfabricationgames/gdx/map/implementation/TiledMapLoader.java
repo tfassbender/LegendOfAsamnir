@@ -84,7 +84,14 @@ class TiledMapLoader implements GameMapLoader {
 			switch (parts[0]) {
 				case Constants.OBJECT_NAME_PLAYER:
 					if (parts[1].equals("startingPosition")) {
-						gameMap.playerStartingPosition = new Vector2(rectangle.x, rectangle.y).scl(Constants.WORLD_TO_SCREEN);
+						int id = Integer.parseInt(properties.get("startingPointId", "0", String.class));
+						Vector2 startingPosition = new Vector2(rectangle.x, rectangle.y).scl(Constants.WORLD_TO_SCREEN);
+						Vector2 oldValue = gameMap.playerStartingPositions.put(id, startingPosition);
+						if (oldValue != null) {
+							Gdx.app.debug(getClass().getSimpleName(),
+									"A startingPosition with the id '" + id + "' already existed. The starting position at " + oldValue
+											+ " was overwritten by the new starting position at " + startingPosition);
+						}
 					}
 					break;
 				case Constants.OBJECT_NAME_ITEM:

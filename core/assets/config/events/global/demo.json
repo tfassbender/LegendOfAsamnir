@@ -48,6 +48,28 @@
 			map: test_map_6,
 		}
 	},
+	demoLevel_changeToDemo2Map_start: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: go_to_demo_2_prolog_start,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_prolog,
+			startingPointId: 0,
+		}
+	},
+	demoLevel_changeToDemo2Map_end: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: go_to_demo_2_prolog_end,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_prolog,
+			startingPointId: 1,
+		}
+	},
 	demoLevel_interactWithAdventurer: {
 		event: {
 			eventType: NPC_INTERACTION,

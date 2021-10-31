@@ -71,11 +71,14 @@ public enum GlobalEventExecutionType {
 	CHANGE_MAP {
 		
 		private static final String MAP_KEY_TARGET_MAP = "map";
+		private static final String MAP_KEY_STARTING_POINT_ID = "startingPointId";
 		
 		@Override
 		public void execute(GlobalEventConfig eventConfig) {
 			String targetMap = eventConfig.executionParameters.get(MAP_KEY_TARGET_MAP);
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CHANGE_MAP).setStringValue(targetMap));
+			int targetPointId = Integer.parseInt(eventConfig.executionParameters.get(MAP_KEY_STARTING_POINT_ID, "0"));
+			EventHandler.getInstance()
+					.fireEvent(new EventConfig().setEventType(EventType.CHANGE_MAP).setStringValue(targetMap).setIntValue(targetPointId));
 		}
 	},
 	CONDITIONAL_EVENT {

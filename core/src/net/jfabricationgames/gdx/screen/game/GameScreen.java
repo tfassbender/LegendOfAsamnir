@@ -174,12 +174,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void loadGameMap() {
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
-		gameMapManager.showMap(initialMapIdentifier);
+		gameMapManager.showMap(initialMapIdentifier, 0);
 	}
 	
-	private void changeMap(String mapIdentifier) {
+	private void changeMap(String mapIdentifier, int playerStartingPointId) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			GameMapManager.getInstance().showMap(mapIdentifier);
+			GameMapManager.getInstance().showMap(mapIdentifier, playerStartingPointId);
 			
 			// reset interactions that would not be removed, because the player contact doesn't end when the map is changed (or at least it seems to not end for the box2d world)
 			InteractionManager.getInstance().resetInteractions();
@@ -278,7 +278,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			showShopMenu();
 		}
 		if (event.eventType == EventType.CHANGE_MAP) {
-			changeMap(event.stringValue);
+			changeMap(event.stringValue, event.intValue);
 		}
 	}
 	
@@ -292,7 +292,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	@Override
 	public void restartGame() {
 		Gdx.app.log(getClass().getSimpleName(), "--- Restarting Game ------------------------------------------------------------");
-		changeMap(GameMapManager.getInstance().getInitialMapIdentifier());
+		changeMap(GameMapManager.getInstance().getInitialMapIdentifier(), 0);
 	}
 	
 	/**

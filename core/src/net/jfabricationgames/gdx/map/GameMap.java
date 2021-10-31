@@ -42,7 +42,7 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, EnemyChara
 	}
 	
 	public void beforeLoadMap(String mapIdentifier);
-	public void afterLoadMap(String mapIdentifier);
+	public void afterLoadMap(String mapIdentifier, int playerStartingPointId);
 	
 	public void executeBeforeWorldStep();
 	public void executeAfterWorldStep();

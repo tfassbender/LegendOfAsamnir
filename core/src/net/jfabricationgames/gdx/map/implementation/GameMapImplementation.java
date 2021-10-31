@@ -65,7 +65,7 @@ public class GameMapImplementation implements GameMap {
 	private float continuousMapDamageTimeDelta;
 	
 	protected TiledMap map;
-	protected Vector2 playerStartingPosition;
+	protected ObjectMap<Integer, Vector2> playerStartingPositions = new ObjectMap<>();
 	
 	//the lists are initialized in the factories
 	protected Array<Item> items;
@@ -128,10 +128,16 @@ public class GameMapImplementation implements GameMap {
 	}
 	
 	@Override
-	public void afterLoadMap(String mapIdentifier) {
+	public void afterLoadMap(String mapIdentifier, int playerStartingPointId) {
 		renderer.changeMap(map);
 		TiledMapPhysicsLoader.createPhysics(map);
-		player.setPosition(playerStartingPosition.x, playerStartingPosition.y);
+		Vector2 startingPosition = playerStartingPositions.get(playerStartingPointId);
+		if (startingPosition == null) {
+			String message = "The starting point with the id '" + playerStartingPointId + "' was not found on map '" + mapIdentifier + "'";
+			Gdx.app.error(getClass().getSimpleName(), message);
+			throw new IllegalStateException(message);
+		}
+		player.setPosition(startingPosition.x, startingPosition.y);
 		
 		updateMapObjectStates();
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
@@ -319,10 +325,6 @@ public class GameMapImplementation implements GameMap {
 	@Override
 	public boolean isDungeonMap() {
 		return Boolean.parseBoolean(map.getProperties().get(MAP_PROPERTY_KEY_DUNGEON_LEVEL, "false", String.class));
-	}
-	
-	public Vector2 getPlayerStartingPosition() {
-		return playerStartingPosition;
 	}
 	
 	@Override

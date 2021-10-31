@@ -44,13 +44,13 @@
  <objectgroup id="10" name="objects">
   <object id="112" name="player.startingPosition" x="256.5" y="960.167">
    <properties>
-    <property name="id" value="1"/>
+    <property name="startingPointId" value="1"/>
    </properties>
    <point/>
   </object>
   <object id="113" name="player.startingPosition" x="111" y="361.5">
    <properties>
-    <property name="id" value="0"/>
+    <property name="startingPointId" value="0"/>
    </properties>
    <point/>
   </object>

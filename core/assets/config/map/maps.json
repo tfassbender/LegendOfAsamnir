@@ -40,7 +40,7 @@
 	
 	// demo 2
 	{
-		name: level_demo_2_prolog,
+		name: demo_2_prolog,
 		map: "map/demo_2_prolog.tmx",
 		initial: true
 	}
