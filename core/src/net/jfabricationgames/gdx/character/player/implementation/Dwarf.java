@@ -265,6 +265,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		direction.nor().scl(MOVING_SPEED_CUTSCENE * speedFactor);
 		
 		move(direction.x, direction.y);
+		movementHandler.setMovingDirection(direction);
 	}
 	
 	protected void move(float deltaX, float deltaY) {

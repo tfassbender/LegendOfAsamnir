@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.character.player.implementation;
 
+import com.badlogic.gdx.math.Vector2;
+
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.input.InputActionListener;
 import net.jfabricationgames.gdx.input.InputContext;
@@ -340,6 +342,40 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	public MovingDirection getMovingDirection() {
 		return lastMoveDirection;
+	}
+	
+	public void setMovingDirection(Vector2 moveDirection) {
+		if (moveDirection.len2() > 0) {
+			final float angle = moveDirection.angleDeg();
+			final float mid = 22.5f;
+			if (angle < mid) {
+				lastMoveDirection = MovingDirection.RIGHT;
+			}
+			else if (angle < 90f - mid) {
+				lastMoveDirection = MovingDirection.UP_RIGHT;
+			}
+			else if (angle < 135f - mid) {
+				lastMoveDirection = MovingDirection.UP;
+			}
+			else if (angle < 180f - mid) {
+				lastMoveDirection = MovingDirection.UP_LEFT;
+			}
+			else if (angle < 225f - mid) {
+				lastMoveDirection = MovingDirection.LEFT;
+			}
+			else if (angle < 270f - mid) {
+				lastMoveDirection = MovingDirection.DOWN_LEFT;
+			}
+			else if (angle < 315f - mid) {
+				lastMoveDirection = MovingDirection.DOWN;
+			}
+			else if (angle < 360f - mid) {
+				lastMoveDirection = MovingDirection.DOWN_RIGHT;
+			}
+			else {
+				lastMoveDirection = MovingDirection.RIGHT;
+			}
+		}
 	}
 	
 	@Override
