@@ -24,6 +24,9 @@ import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledStatefullUnit
 import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.data.state.StatefulMapObject;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.ItemDropUtil;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
@@ -32,6 +35,8 @@ import net.jfabricationgames.gdx.physics.PhysicsWorld;
 import net.jfabricationgames.gdx.util.MapUtil;
 
 public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObject, CutsceneControlledStatefullUnit {
+	
+	private static final String MAP_PROPERTIES_KEY_ENEMY_DEFEATED_EVENT_TEXT = "enemyDefeatedEventText";
 	
 	private static PhysicsBodyProperties physicsBodyProperties = createDefaultPhysicsBodyProperties();
 	
@@ -261,6 +266,11 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		
 		defeated = true;
 		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
+		
+		if (properties.containsKey(MAP_PROPERTIES_KEY_ENEMY_DEFEATED_EVENT_TEXT)) {
+			String enemyDefeatedEventText = properties.get(MAP_PROPERTIES_KEY_ENEMY_DEFEATED_EVENT_TEXT, "", String.class);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.ENEMY_DEFEATED).setStringValue(enemyDefeatedEventText));
+		}
 	}
 	
 	/**

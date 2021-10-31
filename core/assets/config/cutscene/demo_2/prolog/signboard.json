@@ -1,0 +1,48 @@
+{
+	id: demo_2_prolog_signboard_cutscene,
+	controlledActions: {
+		show_text_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "There seems to be something written on that board. I should try to read it.",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true,
+			
+			executes: [
+				show_text_2,
+			]
+		},
+		show_text_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Guy",
+				displayText: "Thorin proceeded reading the text on the signboard by moving closer and pressing the E key on the keyboard or the Y key on the controller.",
+				colorHeader: #0000FF,
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_text_3,
+			]
+		},
+		show_text_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "What are you even talking about? What is a controller?!\nThis damn voice is getting more and more strange...",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

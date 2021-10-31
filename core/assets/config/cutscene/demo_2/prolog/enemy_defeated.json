@@ -1,0 +1,33 @@
+{
+	id: demo_2_prolog_enemy_defeated_cutscene,
+	controlledActions: {
+		show_text_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Guy",
+				displayText: "After Thorin's glorious victory against his enmey, he took his key and proceeded his quest.",
+				colorHeader: #0000FF,
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true,
+			
+			executes: [
+				show_text_2,
+			]
+		},
+		show_text_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "That was the first time, anything this strange narrator guy said, made sense.",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

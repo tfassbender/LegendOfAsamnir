@@ -185,4 +185,37 @@
 			cutsceneId: demo_2_prolog_tavern,
 		}
 	}
+	
+	demo_2_prolog_signboard_cutscene: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED
+			stringValue: demo_2_prolog_signboard_cutscene,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_prolog_signboard_cutscene,
+		}
+	}
+	
+	demo_2_prolog_signboard_2_cutscene: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED
+			stringValue: demo_2_prolog_signboard_2_cutscene,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_prolog_signboard_2_cutscene,
+		}
+	}
+	
+	demo_2_prolog_enemy_defeated: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_prolog_enemy_defeated,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_prolog_enemy_defeated_cutscene,
+		}
+	}
 }

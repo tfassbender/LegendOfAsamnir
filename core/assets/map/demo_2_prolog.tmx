@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="53" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="148">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="44" height="35" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="149">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -7,39 +7,39 @@
   <property name="shadow_layers" value="[5, 6]"/>
  </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
- <layer id="1" name="background" width="53" height="60" locked="1">
+ <layer id="1" name="background" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmEEKwjAQRbORQr2ONxXUrYoHcKF2q+IFXKh7j6C4NoKBEi2UzKTG9j34y07z2kmY1phwRrkxY5ubzVAx93ddP5NcsNiarO09NjaFzSIzZqYUV9dPgZPY6WDXslNKKk7Xnl5Ott65lEcLnKYVvVjXaSk4nwb9NJ1Wgv0d6z1tK/ZXE06u7y/KTn5CnELPLNcj8yw9J2nfS5yq+JWT6/t9i5w00hUnf01NOsUCp244pQhOzSCZi185JugkmSG/zSU4fSLtG9c7km95f9aSOkmfcYw5XcNJ+r9EMtPGctJcD05xnMq4mpJrccIJJwAAAAAAAAAAAAAA+HeeNCcGuQ==
+   eJztl0EKwjAQRWcjhXodbyqoWxUP4ELtVsULuFD3HkFx7RQckGAq5E/SWOfD27XJI5mQCVF4RiXRmLkxQ0Xur3FdJiUgy1nz/xumYhYF0UwJGdel+mPfA8+zUyKF77Wnx4nHO7/xyNx36qmPep4lcI4H/fS+K+CsxFrfraeeUV+ps4uyr4vrG3q2Zd/mRVpftM4QX19i+Eqd7X/EV4Mu+LpOWr6xYr7t+eYY820O0kPVHBP7Ij3Jp/uyS77oXsp+Iu8j935v8kXXJka/9s0XfTsi/U+Ir+Zc5uuPfB8S8zXftn0tltzzBKEbBrk=
   </data>
  </layer>
- <layer id="4" name="terrain" width="53" height="60" locked="1">
+ <layer id="4" name="terrain" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt2G8KgjAYBvCBZkzoIH7oIBXVOfpDdY3KixRexAjqGn3rCL1Ro6HO1Gpu+fzgBbcM3odyzDEG3xA5dXdQ3lbqee2l54+O+n4w08ZnLPTr7iLb0n1fK7fuLqvpttLj5Ny/uefraM6pWoOKrE2i3+Rc1n02kfvNyqizD+6pPw/bj5KvxdhkQU6mJFsy/VodawMAAEBVO9pH7i19zz1xxs78Nb4+r2PKc7A0kxBKe7A+vd/2qDhVzNXfMV0kZZpSlglVQHWxINM4ccYwMvTMIY/Yq8+xX2+chcb/6ydnFv9sWOA3mNFaOLBgPQSzlX0Gm/5sAgAAAAAAAAAAAIBeN+FPIrE=
+   eJxjYBgFhMAa5oF2ASroRnJPJxum+Blm3OpHAXVBFxcDQw8X/e3NZyGMC1jo7y5CQJcVk48uNpQAyO28VPQDrrxKTB6GuQVdDJu6wQKQ3YLN/dSyg5MNt3wPOwQjs2H8gQKaeNyLDgaDe2kNqJ3PRsEoGAWjYBRQBlYC2yWrBmH/4jwnA8MFTgT/A5R9EujWU4PQvTDQg1TvewH7FZ5AzAnEJzlx6xlIsAbJvVlAd2YCsSYQvxxg9/qj9cn8BqCPhg/A2mw5w7zdNpxAHpXSECV9vKEKfIkIu2xgmeE9SMu5UUAZIDXND+e8MJgBADH2IrE=
   </data>
  </layer>
- <layer id="8" name="terrain_2" width="53" height="60" locked="1">
+ <layer id="8" name="terrain_2" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztzrERABAUREEhtSpFKSrThVAoMfgzu9EFF7yUAO5oZe2R33VwRi/7z09qsF4AAAAAAAAAAAAAYpvZKwKu
+   eJztzrEVABAQREEhtSpFKSrThVAo4zwz0QYb/JSAF7Wy9sj3On7Xy/5zSg3UAgAAAEA8E2/BAq4=
   </data>
  </layer>
- <layer id="5" name="background_above_player" width="53" height="60" locked="1">
+ <layer id="5" name="background_above_player" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt10EKwjAQheHZCXXryVV0XcUDKFTdqngA3eg9vIDTRSGUgG2TkjH8HwzdzjRT+iICAADwn/aFyKJVhyJ1V2Eq7X83Edk4VTGTOXX/d53j6lRKK+1nrfXxfBNd62nsTI7az0nr7NmfrrVNfC5tVmd6BOzNbCry0ufb8010rdsIM5UD36/l/clxpsvAnRl7fwAAwzW5Yulky3nPfGHtTld6/qN9/8vW7j85ztTkCjcb9M0a1maKISTr/8r/qcTIxdayco4zxcj65H8AAAAAAAAAufgCphXb+Q==
+   eJztl0EKwjAQRWcn1G1PrqLrKh5AobbbWjyAbvQeXsDpohBkSpMmmTbwH3yyzGcm8H+IAAAAABCaS0a0/dM1m9vVMCV7O6+IjoZK+A1G5+3BHu+GYrHnuw6sr/AGbfVSnOWN76pYtbBTW50iznMJfp8eu8zXRG8+P8IbtFXr6LeYOJe5dpqa32biHn12CgAAGvR5tzN6yMYx9zT7diFkgGumaPbX1Pz2eWdmlmsGLvl/IOHT+cZ6YAxCdCjNXpWa3xCdb6gH/gBaN9v5
   </data>
  </layer>
- <layer id="6" name="terrain_above_player" width="53" height="60" locked="1">
+ <layer id="6" name="terrain_above_player" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1zENADAIAEEGzJDUv75qYCKEOwW/fgTs9nK6AAAAAOgoLw8AAAAAAADAAR93WgBe
+   eJzt1zENAAAIwDAOzJDgXx8mSOBoFexdBOzrvC4AAAD4ofwRAPDEAK2LAF4=
   </data>
  </layer>
- <layer id="2" name="shadows" width="53" height="60" locked="1">
+ <layer id="2" name="shadows" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1zEOgCAMhWF22PUoXsSLmng/JxYJg/RVSvJ/CSOkD9CUlNBz59kV6JFpDWRaQ7RMinrI5G9mpq2kdOV27GVOPeo1lOsp6jmM+/oWIZParEy9b+HLUNekmu+BTK1TfG8UIu6zFZnWEDET/y39fA/WmqL1Wqo1lCL2tFbR9lih9hX1XTbSq1rfdF4s5xX1rMmkm+vJUtdor/93/w8AAAAAAAAAANbxALxsVH8=
+   eJztlkEOgCAQA/eOd32KH/GjJv7PEycjkaVdUDsJ1+0ECNTsnxypt0Ed8uUiXy6Rvogs+XKzvDPmyWxP17VM+Cz0jKfzEFlrYT88sH3RMHzv7l7NivRl8iXfDXyWbN8RkS+XaN/WPPly82r+9xH7DzsL3X9KvO0tyf9d7syeXlPq2yxa9rnHGcmXS0umt/NF90AhIjkBjlFUfw==
   </data>
  </layer>
- <layer id="3" name="shadows_2" width="53" height="60" locked="1">
+ <layer id="3" name="shadows_2" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztw0EJAAAIBLALYP9iFvJhCYUNlgAAAAAAAPzXtQEAAAAAAC4YSCkBvw==
+   eJztwzENAAAIA7AJwL8xDHFggYOjTZoAAAAAAPzTtYEbA+EfAb8=
   </data>
  </layer>
  <objectgroup id="10" name="objects">
@@ -91,6 +91,7 @@
   </object>
   <object id="126" name="enemy.gladiator" x="911.333" y="779.333">
    <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_prolog_enemy_defeated"/>
     <property name="specialDropType" value="key"/>
    </properties>
    <point/>
@@ -104,7 +105,7 @@
   </object>
   <object id="128" name="object.eventObject" x="1216.5" y="447.167" width="94.5" height="32.6667">
    <properties>
-    <property name="eventParameter" value="demo_2_plolog_gate_2"/>
+    <property name="eventParameter" value="demo_2_prolog_signboard_cutscene"/>
    </properties>
   </object>
   <object id="129" name="object.signboard" x="1184.17" y="768.167">
@@ -156,13 +157,13 @@
    </properties>
    <point/>
   </object>
-  <object id="137" name="object.barrel" x="1233" y="687.5">
+  <object id="137" name="object.barrel" x="1233" y="676.5">
    <properties>
     <property name="drop" value="{}"/>
    </properties>
    <point/>
   </object>
-  <object id="138" name="object.barrel" x="1296.5" y="724.5">
+  <object id="138" name="object.barrel" x="1296.5" y="706.5">
    <properties>
     <property name="drop" value="{}"/>
    </properties>
@@ -186,13 +187,13 @@
    </properties>
    <point/>
   </object>
-  <object id="142" name="object.box" x="1232.5" y="725">
+  <object id="142" name="object.box" x="1250.5" y="704">
    <properties>
     <property name="drop" value="{}"/>
    </properties>
    <point/>
   </object>
-  <object id="143" name="object.box" x="1297" y="683.5">
+  <object id="143" name="object.box" x="1292" y="672.5">
    <properties>
     <property name="drop" value="{}"/>
    </properties>
@@ -221,6 +222,12 @@
   <object id="147" name="object.eventObject" x="576.167" y="320.167" width="165" height="19.3334">
    <properties>
     <property name="eventParameter" value="demo_2_prolog_tavern_cutscene"/>
+   </properties>
+  </object>
+  <object id="148" name="object.eventObject" x="1216" y="718.333" width="96.3333" height="17.6667">
+   <properties>
+    <property name="eventParameter" value="demo_2_prolog_signboard_2_cutscene"/>
+    <property name="singleExecution" value="true"/>
    </properties>
   </object>
  </objectgroup>

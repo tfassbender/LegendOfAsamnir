@@ -1,0 +1,17 @@
+{
+	id: demo_2_prolog_signboard_2_cutscene,
+	controlledActions: {
+		show_text_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "There is another of these boards. I hope this one does not contain such strange texts.",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true,
+		},
+	}
+}

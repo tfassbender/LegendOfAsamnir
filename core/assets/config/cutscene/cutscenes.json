@@ -24,4 +24,7 @@
 	config/cutscene/demo_2/prolog/gate_1.json,
 	config/cutscene/demo_2/prolog/gate_2.json,
 	config/cutscene/demo_2/prolog/tavern.json,
+	config/cutscene/demo_2/prolog/signboard.json,
+	config/cutscene/demo_2/prolog/signboard_2.json,
+	config/cutscene/demo_2/prolog/enemy_defeated.json,
 ]
