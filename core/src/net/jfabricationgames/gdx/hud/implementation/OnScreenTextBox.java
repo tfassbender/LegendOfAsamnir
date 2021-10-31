@@ -71,6 +71,8 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 	private String headerText;
 	private Color headerColor = Color.RED;
 	
+	private boolean showOnBlackScreen = false;
+	
 	private OnScreenTextBox(OrthographicCamera camera, float sceneWidth, float sceneHeight) {
 		this.camera = camera;
 		batch = new SpriteBatch();
@@ -125,6 +127,11 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		shapeRenderer.begin(ShapeType.Filled);
 		
 		shapeRenderer.setColor(Color.BLACK);
+		
+		if (showOnBlackScreen) {
+			shapeRenderer.rect(0f, 0f, Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT);
+		}
+		
 		shapeRenderer.rect(textBoxX, textBoxY, textBoxWidth, textBoxHeight);
 		shapeRenderer.rect(textBoxX + textBoxEdge, textBoxY + textBoxEdge, textBoxWidth - 2f * textBoxEdge, textBoxHeight - 2f * textBoxEdge,
 				TEXTURE_CONFIG[0], TEXTURE_CONFIG[1], TEXTURE_CONFIG[2], TEXTURE_CONFIG[3]);
@@ -140,6 +147,14 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 	@Override
 	public void setText(String text, boolean showNextPageIcon) {
 		textRenderer.setText(text, showNextPageIcon);
+		
+		//reset the black screen property for every displayed text
+		showOnBlackScreen = false;
+	}
+	
+	@Override
+	public void setShowOnBlackScreen(boolean showOnBlackScreen) {
+		this.showOnBlackScreen = showOnBlackScreen;
 	}
 	
 	public String getHeaderText() {

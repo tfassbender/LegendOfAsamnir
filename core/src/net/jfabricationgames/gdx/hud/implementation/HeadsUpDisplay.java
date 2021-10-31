@@ -32,10 +32,10 @@ public class HeadsUpDisplay implements Disposable {
 	}
 	
 	public void render(float delta) {
+		onScreenText.render(delta);//render the screen text first, to not overdraw the status bar, when using a black background
 		statusBar.render(delta);
 		onScreenItemRenderer.render(delta);
 		onScreenRuneRenderer.render(delta);
-		onScreenText.render(delta);
 		worldEdge.render(delta);
 	}
 	

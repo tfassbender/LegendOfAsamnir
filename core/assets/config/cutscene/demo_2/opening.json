@@ -1,21 +1,47 @@
 {
 	id: demo_2_prolog_opening,
 	controlledActions: {
-		initial: {
+		initial_wait: {
+			type: WAIT,
+			executionDurationInSeconds: 2f,
+			showBlackScreen: true,
+			
+			startsWithCutscene: true,
+			
+			executes: [
+				show_controlls_text,
+			]
+		},
+		show_controlls_text: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "",
+				displayText: "(press the E key on the keyboard or the Y button on the controller to continue)",
+				showNextPageIcon: true,
+				showOnBlackScreen: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				color_transition,
+			]
+		},
+		color_transition: {
 			type: COLOR_TRANSITION,
 			fadeIntoColor: false,
 			colorTransitionDelayInSeconds: 1f,
 			colorTransitionDurationInSeconds: 3f,
 			delayAfterColorTransitionInSeconds: 2f,
 	
-			startsWithCutscene: true,
 			waitForEventToFinish: true,
 			
 			executes: [
-				showText,
+				show_text,
 			],
 		},
-		showText: {
+		show_text: {
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {

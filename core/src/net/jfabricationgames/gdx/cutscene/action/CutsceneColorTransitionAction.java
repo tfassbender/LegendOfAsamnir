@@ -73,7 +73,7 @@ public class CutsceneColorTransitionAction extends AbstractCutsceneAction {
 		shapeRenderer.setProjectionMatrix(hudCamera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(transitionColor);
-		shapeRenderer.rect(0, 0, Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT);
+		shapeRenderer.rect(0f, 0f, Constants.HUD_SCENE_WIDTH, Constants.HUD_SCENE_HEIGHT);
 		shapeRenderer.end();
 		Gdx.gl.glDisable(GL20.GL_BLEND);
 	}

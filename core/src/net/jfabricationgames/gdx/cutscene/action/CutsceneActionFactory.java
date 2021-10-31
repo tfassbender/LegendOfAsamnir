@@ -26,7 +26,7 @@ public class CutsceneActionFactory {
 			case MOVE_CAMERA:
 				return new CutsceneMoveCameraAction(unitProvider, actionConfig, isUnitMovingFunction);
 			case WAIT:
-				return new CutsceneWaitAction(unitProvider, actionConfig);
+				return new CutsceneWaitAction(unitProvider, actionConfig, hudCamera);
 			case SHOW_ON_SCREEN_TEXT:
 				return new CutsceneShowOnScreenTextAction(unitProvider, actionConfig);
 			case PLAYER_CHOICE:

@@ -16,6 +16,8 @@ public class CutsceneControlledActionConfig {
 	
 	public boolean startsWithCutscene = false;
 	public float executionDelayInSeconds = 0f;
+	public float executionDurationInSeconds = 0f;
+	public boolean showBlackScreen = false;
 	
 	public EventConfig event;
 	public String globalEvent;

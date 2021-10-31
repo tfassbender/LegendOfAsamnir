@@ -17,6 +17,7 @@ public enum GlobalEventExecutionType {
 		private static final String MAP_KEY_DISPLAY_TEXT_HEADER = "displayTextHeader";
 		private static final String MAP_KEY_COLOR_HEADER = "colorHeader";
 		private static final String MAP_KEY_SHOW_NEXT_PAGE_ICON = "showNextPageIcon";
+		private static final String MAP_KEY_SHOW_ON_BLACK_SCREEN = "showOnBlackScreen";
 		
 		@Override
 		public void execute(GlobalEventConfig eventConfig) {
@@ -24,9 +25,11 @@ public enum GlobalEventExecutionType {
 			String displayTextHeader = eventConfig.executionParameters.get(MAP_KEY_DISPLAY_TEXT_HEADER);
 			String colorHeader = eventConfig.executionParameters.get(MAP_KEY_COLOR_HEADER);
 			boolean showNextPageIcon = Boolean.parseBoolean(eventConfig.executionParameters.get(MAP_KEY_SHOW_NEXT_PAGE_ICON));
+			boolean showOnBlackScreen = Boolean.parseBoolean(eventConfig.executionParameters.get(MAP_KEY_SHOW_ON_BLACK_SCREEN));
 			
 			textBox.setHeaderText(displayTextHeader, GameUtil.getColorFromRGB(colorHeader, Color.RED));
 			textBox.setText(displayText, showNextPageIcon);
+			textBox.setShowOnBlackScreen(showOnBlackScreen);
 		}
 	},
 	SHOW_PLAYER_CHOICE {
