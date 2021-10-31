@@ -1,0 +1,48 @@
+{
+	id: demo_2_prolog_tavern,
+	controlledActions: {
+		show_text_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "This is much better. But now I'm hungry.\nThis looks like a tavern. There should be something to eat here. And maybe I can find some armor or weapons too.",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true,
+			
+			executes: [
+				show_text_2,
+			]
+		},
+		show_text_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Guy",
+				displayText: "So our hero Thorin continued his quest, and searched for food and armor...",
+				colorHeader: #0000FF,
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_text_3,
+			]
+		},
+		show_text_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "There is this strange narrator voice again! But there seems to be no more mead here...\nI need to find some other way to silence this damn voice.",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

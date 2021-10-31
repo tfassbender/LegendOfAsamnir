@@ -1,5 +1,5 @@
 {
-	id: demo_2_prolog_gate_1,
+	id: demo_2_prolog_gate_2,
 	controlledActions: {
 		initial: {
 			type: MOVE,
@@ -17,7 +17,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Thorin",
-				displayText:  "I need to find some mead before I can leave.",
+				displayText: "I need to find a shield and something to eat before I can leave.",
 				showNextPageIcon: false,
 			}
 			

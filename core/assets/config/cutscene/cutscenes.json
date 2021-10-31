@@ -20,7 +20,8 @@
 	//*** Demo 2
 	//********************************************************
 	
-	config/cutscene/demo_2/opening.json,
-	config/cutscene/demo_2/gate_1.json,
-	config/cutscene/demo_2/gate_2.json,
+	config/cutscene/demo_2/prolog/opening.json,
+	config/cutscene/demo_2/prolog/gate_1.json,
+	config/cutscene/demo_2/prolog/gate_2.json,
+	config/cutscene/demo_2/prolog/tavern.json,
 ]

@@ -36,6 +36,13 @@ public enum ConditionExecutableType {
 			String conditionCase = conditionExecutable.executionParameters.get(MAP_KEY_CONDITION_CASE);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.CUTSCENE_CONDITION).setStringValue(conditionCase));
 		}
+	},
+	FIRE_EVENT {
+		
+		@Override
+		public void execute(ConditionExecutable conditionExecutable) {
+			EventHandler.getInstance().fireEvent(conditionExecutable.eventConfig.event);
+		}
 	};
 	
 	public abstract void execute(ConditionExecutable conditionExecutable);

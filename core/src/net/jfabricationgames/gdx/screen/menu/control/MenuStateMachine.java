@@ -34,6 +34,11 @@ public class MenuStateMachine {
 		Json json = new Json();
 		states = new ObjectMap<>();
 		for (String stateConfig : stateConfigFiles) {
+			if (stateConfig == null) {
+				Gdx.app.debug(getClass().getSimpleName(),
+						"A config file is not set. Maybe the property 'mini_map_config_path' was not set in the tiled map or is not correct?");
+				continue;
+			}
 			FileHandle statesConfigFileHandle = Gdx.files.internal(stateConfig);
 			ObjectMap<String, MenuState> newStates = json.fromJson(ObjectMap.class, MenuState.class, statesConfigFileHandle);
 			addNewStates(newStates);

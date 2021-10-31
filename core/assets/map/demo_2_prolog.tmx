@@ -3,6 +3,7 @@
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
+  <property name="mini_map_config_path" value="config/menu/maps/demo_2/prolog.json"/>
   <property name="shadow_layers" value="[5, 6]"/>
  </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
@@ -106,7 +107,7 @@
     <property name="eventParameter" value="demo_2_plolog_gate_2"/>
    </properties>
   </object>
-  <object id="129" name="object.signboard" x="1152.5" y="750.5">
+  <object id="129" name="object.signboard" x="1184.17" y="768.167">
    <properties>
     <property name="displayText" value="Important Training Note: You take much less damage when you block an attack. To block you need to push the right mouse button, the right shift key or the controller button B."/>
     <property name="displayTextHeader" value="Blocking Attacks"/>

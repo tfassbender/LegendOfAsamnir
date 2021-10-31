@@ -1,4 +1,8 @@
 {
+	//*******************************************
+	//*** gates
+	//*******************************************
+	
     demo_2_prolog_gate_1: {
         conditionId: demo_2_prolog_gate_1,
         thenCase: {
@@ -29,4 +33,24 @@
             }
         }
     },
+	
+	//*******************************************
+	//*** cutscenes
+	//*******************************************
+	
+	demo_2_prolog_tavern_cutscene: {
+		conditionId: demo_2_prolog_tavern_cutscene,
+		thenCase: {
+			type: NO_EXECUTION,
+		},
+		elseCase: {
+			type: FIRE_EVENT,
+            eventConfig: {
+				event: {
+					eventType: CONFIG_GENERATED_EVENT,
+					stringValue: demo_2_prolog_tavern_cutscene_execution
+				}
+            }
+		}
+	}
 }

@@ -1,4 +1,8 @@
 {
+	//*******************************************
+	//*** gates
+	//*******************************************
+	
 	demo_2_prolog_gate_1: {
 		conditionType: AND,
 		conditionalParameters: {
@@ -33,4 +37,16 @@
 			}
 		}
 	},
+	
+	//*******************************************
+	//*** cutscenes
+	//*******************************************
+	
+	demo_2_prolog_tavern_cutscene: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_prolog_tavert_cutscene_started,
+			expectedValue: true,
+		}
+	}
 }

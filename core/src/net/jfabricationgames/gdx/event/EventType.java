@@ -60,4 +60,8 @@ public enum EventType {
 	//*** Conditions
 	//*******************************
 	SET_GLOBAL_CONDITION_VALUE,
+	//*******************************
+	//*** Configuration
+	//*******************************
+	CONFIG_GENERATED_EVENT,
 }
