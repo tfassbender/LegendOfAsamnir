@@ -1,0 +1,30 @@
+{
+	id: demo_2_prolog_opening,
+	controlledActions: {
+		initial: {
+			type: COLOR_TRANSITION,
+			fadeIntoColor: false,
+			colorTransitionDelayInSeconds: 1f,
+			colorTransitionDurationInSeconds: 3f,
+			delayAfterColorTransitionInSeconds: 2f,
+	
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				showText,
+			],
+		},
+		showText: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText:  "Where am I?",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

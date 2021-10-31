@@ -167,6 +167,7 @@ public class CutsceneHandler implements EventListener {
 				
 				if (action.isExecutionFinished()) {
 					createFollowingActions(action);
+					action.dispose();
 					iter.remove();
 				}
 			}

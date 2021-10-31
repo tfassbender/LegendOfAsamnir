@@ -119,7 +119,7 @@
    </properties>
    <point/>
   </object>
-  <object id="131" name="object.barrel" x="1266.5" y="525">
+  <object id="131" name="object.barrel" x="1271.17" y="525.667">
    <properties>
     <property name="drop" value="{}"/>
    </properties>

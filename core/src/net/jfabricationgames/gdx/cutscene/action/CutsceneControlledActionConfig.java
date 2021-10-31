@@ -39,4 +39,10 @@ public class CutsceneControlledActionConfig {
 	public boolean updatePositionRelativeToTarget = false;
 	
 	public boolean cameraFollowsTarget = true;
+	
+	public String rgbColor = "#000000";
+	public boolean fadeIntoColor = true;
+	public float colorTransitionDelayInSeconds = 0f;
+	public float colorTransitionDurationInSeconds = 1f;
+	public float delayAfterColorTransitionInSeconds = 0f;
 }

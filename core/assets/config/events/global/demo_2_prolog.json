@@ -1,4 +1,18 @@
 {
+	//*******************************************
+	//*** new game started
+	//*******************************************
+	
+	demo_2_prolog_game_start__startCutscene: {
+		event: {
+			eventType: NEW_GAME_STARTED,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_prolog_opening,
+		}
+	},
+	
 	demo_2_prolog_game_start__reduce_health: {
 		event: {
 			eventType: NEW_GAME_STARTED,
@@ -26,6 +40,11 @@
 			amount: -80,
 		}
 	},
+	
+	//*******************************************
+	//*** event items
+	//*******************************************
+	
 	
 	demo_2_prolog_mead_1_picked__set_item: {
 		event: {
@@ -110,6 +129,10 @@
 			amount: 20,
 		}
 	},
+	
+	//*******************************************
+	//*** gates
+	//*******************************************
 	
 	demo_2_prolog_gate_1: {
 		event: {

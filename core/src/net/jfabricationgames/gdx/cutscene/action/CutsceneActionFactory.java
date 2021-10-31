@@ -1,8 +1,18 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+
 import net.jfabricationgames.gdx.cutscene.function.IsUnitMovingFunction;
 
-public abstract class CutsceneActionFactory {
+public class CutsceneActionFactory {
+	
+	private static OrthographicCamera hudCamera;
+	
+	private CutsceneActionFactory() {}
+	
+	public static void setHudCamera(OrthographicCamera hudCamera) {
+		CutsceneActionFactory.hudCamera = hudCamera;
+	}
 	
 	public static AbstractCutsceneAction createAction(CutsceneUnitProvider unitProvider, CutsceneControlledActionConfig actionConfig,
 			IsUnitMovingFunction isUnitMovingFunction) {
@@ -23,6 +33,8 @@ public abstract class CutsceneActionFactory {
 				return new CutscenePlayerChoiceAction(unitProvider, actionConfig);
 			case CONDITION:
 				return new CutsceneConditionAction(unitProvider, actionConfig);
+			case COLOR_TRANSITION:
+				return new CutsceneColorTransitionAction(unitProvider, actionConfig, hudCamera);
 			default:
 				throw new IllegalStateException("Unexpected CutsceneControlledActionType in parameter actionConfig: " + actionConfig.type);
 		}

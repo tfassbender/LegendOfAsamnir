@@ -21,6 +21,7 @@ import net.jfabricationgames.gdx.condition.ConditionHandler;
 import net.jfabricationgames.gdx.condition.ConditionType;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
+import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -169,6 +170,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		ItemFactory.setPlayerCoinsSupplier(Player.getInstance()::getCoins);
 		
 		ProjectileFactory.setGameMap(gameMap);
+		
+		CutsceneActionFactory.setHudCamera(cameraHud);
 	}
 	
 	private void loadGameMap() {

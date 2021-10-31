@@ -304,7 +304,6 @@ public class GameMapImplementation implements GameMap {
 		renderer.renderObjects(delta);
 		renderer.renderItemsAboveGameObjects(delta);
 		
-		processor.processCutscene(delta);
 		processor.processEnemies(delta);
 		renderer.renderEnemies(delta);
 		processor.processNpcs(delta);
@@ -320,6 +319,10 @@ public class GameMapImplementation implements GameMap {
 		renderer.beginShapeRenderer();
 		renderer.renderEnemyHealthBars();
 		renderer.endShapeRenderer();
+		
+		// process the cutscene last, otherwise the color transition won't work correctly 
+		// (because it can't be rendered within the GameMapRenderer batch)
+		processor.processCutscene(delta);
 	}
 	
 	@Override

@@ -10,4 +10,5 @@ public enum CutsceneControlledActionType {
 	SHOW_ON_SCREEN_TEXT, //
 	PLAYER_CHOICE, //
 	CONDITION, //
+	COLOR_TRANSITION, //
 }

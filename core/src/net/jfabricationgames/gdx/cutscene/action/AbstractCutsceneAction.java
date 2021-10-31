@@ -1,11 +1,12 @@
 package net.jfabricationgames.gdx.cutscene.action;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.cutscene.function.CutsceneFunctionAction;
 import net.jfabricationgames.gdx.event.global.GlobalEventConfig;
 
-public abstract class AbstractCutsceneAction implements CutsceneFunctionAction {
+public abstract class AbstractCutsceneAction implements CutsceneFunctionAction, Disposable {
 	
 	protected CutsceneControlledActionConfig actionConfig;
 	protected float executionTimeInSeconds = 0f;
@@ -63,4 +64,7 @@ public abstract class AbstractCutsceneAction implements CutsceneFunctionAction {
 	protected void executeGeneratedEvent(GlobalEventConfig generatedEvent) {
 		generatedEvent.executionType.execute(generatedEvent);
 	}
+	
+	@Override
+	public void dispose() {}
 }
