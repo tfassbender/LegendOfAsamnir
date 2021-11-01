@@ -3,15 +3,15 @@
 	//*** new game started
 	//*******************************************
 	
-//	demo_2_prolog_game_start__startCutscene: {
-//		event: {
-//			eventType: NEW_GAME_STARTED,
-//		},
-//		executionType: START_CUTSCENE,
-//		executionParameters: {
-//			cutsceneId: demo_2_prolog_opening,
-//		}
-//	},
+	demo_2_prolog_game_start__startCutscene: {
+		event: {
+			eventType: NEW_GAME_STARTED,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_prolog_opening,
+		}
+	},
 	
 	demo_2_prolog_game_start__reduce_health: {
 		event: {
@@ -188,7 +188,7 @@
 	
 	demo_2_prolog_signboard_cutscene: {
 		event: {
-			eventType: EVENT_OBJECT_TOUCHED
+			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: demo_2_prolog_signboard_cutscene,
 		},
 		executionType: START_CUTSCENE,
@@ -199,7 +199,7 @@
 	
 	demo_2_prolog_signboard_2_cutscene: {
 		event: {
-			eventType: EVENT_OBJECT_TOUCHED
+			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: demo_2_prolog_signboard_2_cutscene,
 		},
 		executionType: START_CUTSCENE,
@@ -216,6 +216,22 @@
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: demo_2_prolog_enemy_defeated_cutscene,
+		}
+	}
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_prolog_goto_main_map: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_prolog_goto_main_map,
+		}
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Demo end reached",
+			displayText: "\nYou've reached the end of this demo.\n\nMore content coming soon. ",
 		}
 	}
 }

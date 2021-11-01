@@ -7,7 +7,7 @@
 			executionParameters: {
 				displayTextHeader: "Thorin",
 				displayText: "This is much better. But now I'm hungry.\nThis looks like a tavern. There should be something to eat here. And maybe I can find some armor or weapons too.",
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,
@@ -21,10 +21,10 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Strange Narrator Guy",
+				displayTextHeader: "Strange Narrator Voice",
 				displayText: "So our hero Thorin continued his quest, and searched for food and armor...",
 				colorHeader: #0000FF,
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,
@@ -39,7 +39,7 @@
 			executionParameters: {
 				displayTextHeader: "Thorin",
 				displayText: "There is this strange narrator voice again! But there seems to be no more mead here...\nI need to find some other way to silence this damn voice.",
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,

@@ -5,10 +5,10 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Strange Narrator Guy",
-				displayText: "After Thorin's glorious victory against his enmey, he took his key and proceeded his quest.",
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "After his glorious victory against his enmey, Thorin took his key and proceeded his quest.",
 				colorHeader: #0000FF,
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,
@@ -23,8 +23,8 @@
 			
 			executionParameters: {
 				displayTextHeader: "Thorin",
-				displayText: "That was the first time, anything this strange narrator guy said, made sense.",
-				showNextPageIcon: false,
+				displayText: "That was the first time, anything this strange narrator voice said, made any sense.",
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,

@@ -7,7 +7,7 @@
 			executionParameters: {
 				displayTextHeader: "Thorin",
 				displayText: "There seems to be something written on that board. I should try to read it.",
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,
@@ -21,10 +21,10 @@
 			type: SHOW_ON_SCREEN_TEXT,
 			
 			executionParameters: {
-				displayTextHeader: "Strange Narrator Guy",
+				displayTextHeader: "Strange Narrator Voice",
 				displayText: "Thorin proceeded reading the text on the signboard by moving closer and pressing the E key on the keyboard or the Y key on the controller.",
 				colorHeader: #0000FF,
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,
@@ -39,7 +39,7 @@
 			executionParameters: {
 				displayTextHeader: "Thorin",
 				displayText: "What are you even talking about? What is a controller?!\nThis damn voice is getting more and more strange...",
-				showNextPageIcon: false,
+				showNextPageIcon: true,
 			}
 			
 			waitForEventToFinish: true,
