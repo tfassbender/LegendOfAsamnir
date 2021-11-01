@@ -36,12 +36,17 @@
 		name: level_tutorial,
 		map: "map/level_tutorial.tmx",
 		//initial: true
-	}
+	},
 	
 	// demo 2
 	{
 		name: demo_2_prolog,
 		map: "map/demo_2_prolog.tmx",
+		//initial: true
+	},
+	{
+		name: demo_2_tutorial,
+		map: "map/demo_2_tutorial.tmx",
 		initial: true
 	}
 ]

@@ -122,7 +122,7 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 13
+  index: 1
 adventurer_idle
   rotate: false
   xy: 610, 370
@@ -136,7 +136,7 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 13
 adventurer_jump
   rotate: false
   xy: 610, 370
@@ -633,14 +633,14 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 9
 adventurer_idle
   rotate: false
   xy: 1574, 626
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 9
+  index: 8
 adventurer_idle
   rotate: false
   xy: 1608, 626
@@ -787,14 +787,14 @@ armadillo_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 1
 armadillo_idle
   rotate: false
   xy: 2016, 596
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 8
 armadillo_move
   rotate: false
   xy: 2016, 596
@@ -1781,14 +1781,14 @@ cobra_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 1
 cobra_move
   rotate: false
   xy: 1138, 532
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 5
 cobra_attack
   rotate: false
   xy: 1172, 532
@@ -2460,13 +2460,6 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 4
-cyclops_idle
-  rotate: false
-  xy: 640, 405
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
   index: 14
 cyclops_idle
   rotate: false
@@ -2475,6 +2468,13 @@ cyclops_idle
   orig: 64, 64
   offset: 0, 0
   index: 13
+cyclops_idle
+  rotate: false
+  xy: 640, 405
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
 cyclops_idle
   rotate: false
   xy: 770, 666

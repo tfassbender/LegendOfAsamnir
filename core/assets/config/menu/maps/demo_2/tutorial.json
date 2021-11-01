@@ -1,0 +1,9 @@
+{
+	name: Tutorial Map,
+	texture: {
+		atlas: packed/menu/menu.atlas,
+		texture: mini_map_demo_2_tutorial
+	},
+	textureWidth: 500,
+	textureHeight: 500,
+}

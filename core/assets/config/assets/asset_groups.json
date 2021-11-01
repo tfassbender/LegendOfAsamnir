@@ -80,7 +80,7 @@
 				"textureMinFilter": "Nearest",
 				"textureMagFilter": "Nearest"
 			}
-		}
+		},
 		
 		//***************************************************
 		//*** demo 2
@@ -94,6 +94,15 @@
 				"textureMinFilter": "Nearest",
 				"textureMagFilter": "Nearest"
 			}
-		}
+		},
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/demo_2_tutorial.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		},
 	]
 }

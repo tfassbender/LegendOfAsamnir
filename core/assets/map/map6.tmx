@@ -48,7 +48,7 @@
    eJztzjEBADAMwKAIqH9jM1QRPfaAAgoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKs3vwcAALUcYADg
   </data>
  </layer>
- <objectgroup id="11" name="objects">
+ <objectgroup id="11" name="objects" locked="1">
   <object id="203" name="player.startingPosition" x="1520.33" y="116.667">
    <point/>
   </object>
@@ -1221,7 +1221,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="12" name="physics" locked="1">
+ <objectgroup id="12" name="physics">
   <object id="17" x="1344" y="32" width="32" height="224"/>
   <object id="18" x="1184" y="192" width="32" height="192"/>
   <object id="19" x="1568" y="32" width="32" height="256"/>
