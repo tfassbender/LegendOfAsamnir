@@ -1,0 +1,21 @@
+{
+	//*******************************************
+	//*** gates
+	//*******************************************
+	
+    demo_2_tutorial_gate_adventurer: {
+        conditionId: demo_2_tutorial_gate_adventurer,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_tutorial_gate_adventurer,
+				}
+            }
+        }
+    },
+}

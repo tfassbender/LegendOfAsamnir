@@ -17,7 +17,7 @@
 	config/cutscene/tutorial/adventurer_introduces_the_boss.json,
 	
 	//********************************************************
-	//*** Demo 2
+	//*** Demo 2 Prolog
 	//********************************************************
 	
 	config/cutscene/demo_2/prolog/opening.json,
@@ -27,4 +27,12 @@
 	config/cutscene/demo_2/prolog/signboard.json,
 	config/cutscene/demo_2/prolog/signboard_2.json,
 	config/cutscene/demo_2/prolog/enemy_defeated.json,
+	
+	//********************************************************
+	//*** Demo 2 Tutorial
+	//********************************************************
+	
+	config/cutscene/demo_2/tutorial/adventurer.json,
+	config/cutscene/demo_2/tutorial/gate_adventurer.json,
+	config/cutscene/demo_2/tutorial/running_adventurer.json,
 ]

@@ -1,0 +1,71 @@
+{
+	//*******************************************
+	//*** gates
+	//*******************************************
+	
+	demo_2_tutorial_gate_adventurer: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_tutorial_gate_adventurer,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_tutorial_gate_adventurer
+	},
+	
+	//*******************************************
+	//*** cutscenes
+	//*******************************************
+	
+	demo_2_tutorial_adventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_tutorial_adventurer,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_tutorial_talk_to_adventurer,
+		}
+	},
+	demo_2_tutorial_running_adventurer: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_tutorial_running_adventurer,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_tutorial_talk_to_running_adventurer,
+		}
+	},
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_tutorial_goto_prolog: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_tutorial_goto_prolog,
+		}
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_prolog,
+			startingPointId: 1,
+		}
+	},
+	
+	//*******************************************
+	//*** enemies defeated
+	//*******************************************
+	
+	demo_2_tutorial_spider_killed: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_tutorial_spider_killed,
+		},
+		executionType: SET_GLOBAL_VALUE,
+		executionParameters: {
+			globalValueKey: demo_2_tutorial_spider_killed,
+			globalValue: true,
+		}
+	},
+}

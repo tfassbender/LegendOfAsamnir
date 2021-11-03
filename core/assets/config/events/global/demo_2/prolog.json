@@ -223,15 +223,20 @@
 	//*** change map
 	//*******************************************
 	
-	demo_2_prolog_goto_main_map: {
+	demo_2_prolog_goto_tutorial_map: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_prolog_goto_main_map,
+			stringValue: demo_2_prolog_goto_tutorial_map,
 		}
-		executionType: SHOW_ON_SCREEN_TEXT,
+		executionType: CHANGE_MAP,
 		executionParameters: {
-			displayTextHeader: "Demo end reached",
-			displayText: "\nYou've reached the end of this demo.\n\nMore content coming soon. ",
+			map: demo_2_tutorial,
+			startingPointId: 0,
 		}
+//		executionType: SHOW_ON_SCREEN_TEXT,
+//		executionParameters: {
+//			displayTextHeader: "Demo end reached",
+//			displayText: "\nYou've reached the end of this demo.\n\nMore content coming soon. ",
+//		}
 	}
 }

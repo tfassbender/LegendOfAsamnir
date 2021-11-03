@@ -2,6 +2,7 @@
 	//************************************************
 	//*** Demo Level
 	//************************************************
+	
 	adventurer: config/npc/levels/demo/adventurer.json,
 	adventurer_female: config/npc/levels/demo/adventurer_female.json,
 	guard_blocking_the_way: config/npc/levels/demo/guard_blocking_the_way.json
@@ -13,4 +14,11 @@
 	tutorial_level_adventurer_female: config/npc/levels/tutorial/adventurer_female.json,
 	tutorial_level_tale_teller: config/npc/levels/tutorial/tale_teller.json,
 	tutorial_level_boss_introducer: config/npc/levels/tutorial/boss_introducer.json,
+	
+	//************************************************
+	//*** Demo 2
+	//************************************************
+	
+	demo_2_tutorial__adventurer_female: config/npc/levels/demo_2/adventurer_female.json,
+	demo_2_tutorial__running_adventurer: config/npc/levels/demo_2/running_adventurer.json,
 }

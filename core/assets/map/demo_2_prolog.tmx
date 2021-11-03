@@ -202,7 +202,7 @@
   </object>
   <object id="144" name="object.eventObject" x="224" y="986" width="63.5" height="6">
    <properties>
-    <property name="eventParameter" value="demo_2_prolog_goto_main_map"/>
+    <property name="eventParameter" value="demo_2_prolog_goto_tutorial_map"/>
    </properties>
   </object>
   <object id="145" name="object.signboard" x="686.5" y="816.5">

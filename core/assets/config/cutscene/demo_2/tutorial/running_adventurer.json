@@ -1,0 +1,19 @@
+{
+	id: demo_2_tutorial_talk_to_running_adventurer,
+	controlledActions: {
+		greeting: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I'm running arround!",
+				colorHeader: #00FF00,
+				showNextPageIcon: false,
+			},
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

@@ -3,4 +3,5 @@
 	config/events/global/demo.json,
 	config/events/global/tutorial.json,
 	config/events/global/demo_2/prolog.json,
+	config/events/global/demo_2/tutorial.json,
 ]

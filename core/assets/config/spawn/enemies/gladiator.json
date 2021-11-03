@@ -2,6 +2,7 @@
 	//*********************************
 	//*** no movement
 	//*********************************
+	
 	enemy__gladiator: {
 		spawnType: enemy.gladiator,
 		spawnOnGameStart: true,
@@ -9,8 +10,32 @@
 	},
 	
 	//*********************************
+	//*** teams
+	//*********************************
+	
+	enemy__gladiator__team_1: {
+		spawnType: enemy.gladiator,
+		spawnTypeMapProperties: "{aiType: \"gladiator_team\", teamId: \"gladiator_team_1\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__gladiator__team_2: {
+		spawnType: enemy.gladiator,
+		spawnTypeMapProperties: "{aiType: \"gladiator_team\", teamId: \"gladiator_team_2\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	enemy__gladiator__team_3: {
+		spawnType: enemy.gladiator,
+		spawnTypeMapProperties: "{aiType: \"gladiator_team\", teamId: \"gladiator_team_3\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
+	//*********************************
 	//*** movement up
 	//*********************************
+	
 	enemy__gladiator__movement_up_1: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:1}, {x:0, y:0}]\"}",
@@ -45,6 +70,7 @@
 	//*********************************
 	//*** movement down
 	//*********************************
+	
 	enemy__gladiator__movement_down_1: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-1}, {x:0, y:0}]\"}",
@@ -79,6 +105,7 @@
 	//*********************************
 	//*** movement left
 	//*********************************
+	
 	enemy__gladiator__movement_left_1: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-1, y:0}, {x:0, y:0}]\"}",
@@ -113,6 +140,7 @@
 	//*********************************
 	//*** movement right
 	//*********************************
+	
 	enemy__gladiator__movement_right_1: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:1, y:0}, {x:0, y:0}]\"}",
