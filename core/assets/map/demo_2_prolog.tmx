@@ -98,6 +98,7 @@
   </object>
   <object id="127" name="object.signboard" x="1297" y="467">
    <properties>
+    <property name="colorHeader" value="#0000ff"/>
     <property name="displayText" value="Note: We need to get rid of all these barrels and boxes that block the way! Sometimes the only way to get through is to destroy them by attacking them with the left mouse button, the right controll key on the keyboard or the controller button A. "/>
     <property name="displayTextHeader" value="Way Blocked"/>
    </properties>
@@ -111,6 +112,7 @@
   </object>
   <object id="129" name="object.signboard" x="1184.17" y="768.167">
    <properties>
+    <property name="colorHeader" value="#0000ff"/>
     <property name="displayText" value="Important Training Note: You take much less damage when you block an attack. To block you need to push the right mouse button, the right shift key or the controller button B."/>
     <property name="displayTextHeader" value="Blocking Attacks"/>
    </properties>
@@ -207,6 +209,7 @@
   </object>
   <object id="145" name="object.signboard" x="686.5" y="816.5">
    <properties>
+    <property name="colorHeader" value="#0000ff"/>
     <property name="displayText" value="The door is locked. Use the key to open it my moving close and pressing the interaction button E on the keyboard or Y on the controller."/>
     <property name="displayTextHeader" value="Locked Doors"/>
    </properties>

@@ -8,12 +8,68 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "I'm running arround!",
-				colorHeader: #00FF00,
-				showNextPageIcon: false,
+				displayText: "Don't disturb me! I need to run arround!",
+				colorHeader: #009933,
+				showNextPageIcon: true,
 			},
 			
 			waitForEventToFinish: true,
+			
+			executes: [
+				question__greeting,
+			]
 		},
+		
+		question__greeting: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Alright. Have fun.",
+					"Why do you run arround here?"
+				],
+			},
+			choiceOptionExecutions: [
+				answer__alright,
+				answer__why_do_you_run,
+			],
+		},
+		
+		answer__alright: {
+			type: WAIT,
+			executionDurationInSeconds: 0f,
+		},
+		
+		answer__why_do_you_run: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I want to be able to run faster!\nSomeone told me that I could run faster if I press the shift key on the keyboard or press down the left analog stick on the controller or double clicked the direction in which I want to run. But I don't realy know what any of this means, so I'm still trying to run faster.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				answer__thanks_for_the_info,
+			]
+		},
+		
+		answer__thanks_for_the_info: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Keybard? Controller? ...\nThe boards in this house in the north also told of some this things. But I have no idea what they mean.",
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+		}
 	}
 }

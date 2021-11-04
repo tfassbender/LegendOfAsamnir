@@ -53,6 +53,29 @@
 		}
 	},
 	
+	demo_2_tutorial_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_tutorial_goto_main,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_tutorial_goto_main,
+		}
+	},
+	
+	demo_2_tutorial_goto_main_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_tutorial_goto_main_after_cutscene,
+		}
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 0,
+		}
+	},
+	
 	//*******************************************
 	//*** enemies defeated
 	//*******************************************

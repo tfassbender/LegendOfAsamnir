@@ -1,8 +1,8 @@
 {
-	name: Unknown Area,
+	name: Village,
 	texture: {
 		atlas: packed/menu/menu.atlas,
-		texture: mini_map_demo_2_tutorial
+		texture: mini_map_demo_2_prolog //TODO change when main map is ready
 	},
 	textureWidth: 500,
 	textureHeight: 500,

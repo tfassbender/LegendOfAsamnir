@@ -23,7 +23,7 @@
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
 				displayText: "So our hero Thorin continued his quest, and searched for food and armor...",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			

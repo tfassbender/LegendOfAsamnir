@@ -35,4 +35,5 @@
 	config/cutscene/demo_2/tutorial/adventurer.json,
 	config/cutscene/demo_2/tutorial/gate_adventurer.json,
 	config/cutscene/demo_2/tutorial/running_adventurer.json,
+	config/cutscene/demo_2/tutorial/goto_main.json,
 ]

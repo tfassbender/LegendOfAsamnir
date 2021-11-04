@@ -34,6 +34,10 @@ public abstract class AbstractCutsceneAction implements CutsceneFunctionAction, 
 		return false;
 	}
 	
+	public boolean isCameraSteady() {
+		return !actionConfig.cameraFollowsTarget;
+	}
+	
 	public Array<String> getFollowingActions() {
 		return actionConfig.executes;
 	}

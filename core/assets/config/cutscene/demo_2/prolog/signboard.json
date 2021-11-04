@@ -23,7 +23,7 @@
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
 				displayText: "Thorin proceeded reading the text on the signboard by moving closer and pressing the E key on the keyboard or the Y key on the controller.",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			

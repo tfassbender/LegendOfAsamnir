@@ -283,7 +283,7 @@
 			choice: {
 				header: "Thorin",
 				options: [
-					"Yes! Teach me about the magic of the runes, please!",
+					"Yes! Teach me about the runes, please!",
 					"Not now! Thanks.",
 				],
 			},

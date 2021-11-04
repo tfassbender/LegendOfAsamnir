@@ -7,7 +7,7 @@
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
 				displayText: "After his glorious victory against his enmey, Thorin took his key and proceeded his quest.",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			

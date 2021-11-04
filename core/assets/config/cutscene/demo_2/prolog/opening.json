@@ -53,7 +53,7 @@
 			executionParameters: {
 				displayTextHeader: "???",
 				displayText: "In the beginning there was a giant named Ymir...",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 				showOnBlackScreen: true,
 			}
@@ -70,7 +70,7 @@
 			executionParameters: {
 				displayTextHeader: "???",
 				displayText: "Oh ... wait ... \nThat was the wrong chapter...\nLet's skipp a view pages...\n...\nThis seems to be a good point to start!",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 				showOnBlackScreen: true,
 			}
@@ -110,7 +110,7 @@
 			executionParameters: {
 				displayTextHeader: "???",
 				displayText: "Our story beginns with a dwarf called Thorin.\nThe bravest and one of the mightiest dwarfes in all of Svartalfheim (the land where all dwarfes lived).",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			
@@ -126,7 +126,7 @@
 			executionParameters: {
 				displayTextHeader: "???",
 				displayText: "One day Thorin woke up in a place, that did not seem familiar to him.",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			
@@ -157,7 +157,7 @@
 			executionParameters: {
 				displayTextHeader: "???",
 				displayText: "After the first confusion abated, Thorin began to explore this unknown place he found himself in...",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			
@@ -188,7 +188,7 @@
 			executionParameters: {
 				displayTextHeader: "???",
 				displayText: "I'm the narrator!\n...\nBut thou can't hear me. So let me tell the story and just do what I tell thee. ",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			
@@ -249,7 +249,7 @@
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
 				displayText: "And so our glorious hero Thorin began his mighty quest for ... mead ...",
-				colorHeader: #0000FF,
+				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
 			

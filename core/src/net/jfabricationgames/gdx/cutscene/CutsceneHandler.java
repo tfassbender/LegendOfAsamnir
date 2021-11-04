@@ -76,12 +76,21 @@ public class CutsceneHandler implements EventListener {
 	}
 	
 	public boolean isCameraControlledByCutscene() {
-		return isCutsceneActive() && isCameraMovementActionActive();
+		return isCutsceneActive() && (isCameraMovementActionActive() || isCameraSteady());
 	}
 	
 	private boolean isCameraMovementActionActive() {
 		for (AbstractCutsceneAction action : executedActions) {
 			if (action instanceof CutsceneMoveCameraAction) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean isCameraSteady() {
+		for (AbstractCutsceneAction action : executedActions) {
+			if (action.isCameraSteady()) {
 				return true;
 			}
 		}
