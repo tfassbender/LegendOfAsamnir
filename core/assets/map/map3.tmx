@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="208">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="209">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="continuous_damage" value="1"/>
@@ -573,6 +573,12 @@ Arrows: 25 Coins..</property>
    <properties>
     <property name="eventParameter" value="go_to_demo_2_prolog_start"/>
    </properties>
+  </object>
+  <object id="208" name="object.cutscene_signboard" x="592.75" y="559.75">
+   <properties>
+    <property name="cutsceneId" value="demo_signboard_cutscene"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="4" name="physics" locked="1">

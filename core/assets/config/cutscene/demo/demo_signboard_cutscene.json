@@ -1,0 +1,34 @@
+{
+	id: demo_signboard_cutscene,
+	controlledActions: {
+		initial: {
+			type: SHOW_ON_SCREEN_TEXT,
+			startsWithCutscene: true,
+			
+			executionParameters: {
+				displayTextHeader: "Cutscene Signboard Text",
+				displayText: "First Text, that is shown in this cutscene.",
+				colorHeader: #FF0000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				end,
+			]
+		},
+		end: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Second Cutscene Signboard Text",
+				displayText: "Second text...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+	}
+}

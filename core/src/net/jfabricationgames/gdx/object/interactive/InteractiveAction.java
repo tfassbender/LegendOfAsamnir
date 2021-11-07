@@ -28,6 +28,10 @@ public enum InteractiveAction {
 	},
 	SHOW_OR_CHANGE_TEXT {
 		
+		private static final String MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED = "displayTextChanged";
+		private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_VALUE = "globalConditionValue";
+		private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_KEY = "globalConditionKey";
+		
 		@Override
 		public void execute(InteractiveObject object) {
 			String globalConditionKey = object.getMapProperties().get(MAP_PROPERTIES_KEY_GLOBAL_CONDITION_KEY, String.class);
@@ -76,15 +80,21 @@ public enum InteractiveAction {
 			FastTravelPointEventDto eventDto = object.createFastTravelPointEventDto();
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.FAST_TRAVEL_POINT_ENABLED).setParameterObject(eventDto));
 		}
+	},
+	START_CUTSCENE {
+		
+		private static final String MAP_PROPERTY_KEY_CUTSCENE_ID = "cutsceneId";
+		
+		@Override
+		public void execute(InteractiveObject object) {
+			String cutsceneId = object.getMapProperties().get(MAP_PROPERTY_KEY_CUTSCENE_ID, String.class);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.START_CUTSCENE).setStringValue(cutsceneId));
+		}
 	};
 	
 	private static final String MAP_PROPERTY_KEY_COLOR_HEADER = "colorHeader";
 	private static final String MAP_PROPERTY_KEY_DISPLAY_TEXT_HEADER = "displayTextHeader";
 	private static final String MAP_PROPERTY_KEY_DISPLAY_TEXT = "displayText";
-	
-	private static final String MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED = "displayTextChanged";
-	private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_VALUE = "globalConditionValue";
-	private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_KEY = "globalConditionKey";
 	
 	private static GameObjectTextBox textBox;
 	private static InteractivePlayer player;
