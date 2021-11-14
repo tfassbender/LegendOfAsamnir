@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="91" height="103" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="1992">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="91" height="103" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="1992">
  <properties>
   <property name="above_player_layers" value="[6]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -42,7 +42,7 @@
    eJzt2E1OwzAURlFnKcBKEGHhYScM2AJjyiASPxVtgv21tc+RPK3qqxfHbSkAAAAAAAAAAAAAUM8ylfIyXfpb9Gltu643natbtG1O44xF4widc151jtE6R+v23Dva07itxe+/Zu4OPe8P673o29Jn52dtv1ln7+t6+Eej9fN0/t32WJOnHZ00Pq/tT3taPw7W+Nh5sGfOtrYe8WyuNVtbW48w03vOh3PMG9+TI7RO7PHUjPd+fiTf+ada9z7Tyf3Nf5wlI8z0JfY3T3XuOLek92f2mmido3WO1jlaZ/R+x7omZro9/w3nmOcMZ3SOmc7ROkdrAAAAAAAAAAAAAAAAgHo+AB41LLQ=
   </data>
  </layer>
- <objectgroup id="9" name="objects">
+ <objectgroup id="9" name="objects" locked="1">
   <object id="135" name="player.startingPosition" x="1280" y="622.667">
    <properties>
     <property name="startingPointId" value="0"/>
