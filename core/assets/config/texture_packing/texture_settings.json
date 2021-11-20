@@ -189,6 +189,16 @@
 				raw_images/npc/adventurer_female/adventurer_female_idle,
 				raw_images/npc/adventurer_female/adventurer_female_move,
 				
+				// archaeologist
+				
+				raw_images/npc/archaeologist/archaeologist_idle,
+				raw_images/npc/archaeologist/archaeologist_move,
+				
+				// builder
+				
+				raw_images/npc/builder/builder_idle,
+				raw_images/npc/builder/builder_move,
+				
 				//##############################################################
 				//### Animals
 				//##############################################################

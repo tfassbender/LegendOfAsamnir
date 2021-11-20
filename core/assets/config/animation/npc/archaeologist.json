@@ -1,0 +1,19 @@
+{
+	configList: 
+	[
+		{
+			name: archaeologist_idle,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
+		{
+			name: archaeologist_move,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL
+		},
+		
+		// other animations need to be added to the texture_settings.json file and need to be packed before they can be used
+	]
+}

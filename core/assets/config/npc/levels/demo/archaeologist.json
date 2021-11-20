@@ -1,0 +1,21 @@
+{
+	graphicsConfigFile: config/npc/graphics/archaeologist.json
+	 
+	aiConfig: {
+		type: RANDOM_MOVEMENT_AI,
+		
+		maxMoveDistance: 3f,
+		
+		stateNameMove: move,
+		stateNameIdle: idle,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
+	
+	interactionPossible: false,
+	movingSpeed: 1f,
+}
