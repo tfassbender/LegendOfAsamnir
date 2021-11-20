@@ -22,9 +22,10 @@ public class RandomIdleStatesMovementAI extends RandomMovementAI {
 	private float movementProbability;
 	private Random random;
 	
-	public RandomIdleStatesMovementAI(ArtificialIntelligence subAI, ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbabilities,
-			float movementProbability, CharacterState movingState, CharacterState idleState, float maxDistance) {
-		super(subAI, movingState, idleState, maxDistance);
+	public RandomIdleStatesMovementAI(ArtificialIntelligence subAI,
+			ObjectMap<CharacterState, ArtificialIntelligenceStateConfig> idleStateProbabilities, float movementProbability,
+			CharacterState movingState, CharacterState idleState, float maxDistance) {
+		super(subAI, movingState, idleState, maxDistance, 0f);
 		this.idleStateProbabilities = idleStateProbabilities;
 		this.movementProbability = movementProbability;
 		

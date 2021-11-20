@@ -93,8 +93,10 @@ public enum ArtificialIntelligenceType {
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			Array<Vector2> positions = loadPositionsFromMapProperties(mapProperties);
+			float idleTimeBetweenMovements = Float.parseFloat(mapProperties.get(MAP_PROPERTIES_KEY_IDLE_TIME_BETWEEN_MOVEMENTS, "0f", String.class));
 			
-			PreDefinedMovementAI ai = new PreDefinedMovementAI(subAI, movingState, idleState, aiConfig.useRelativePositions, positions);
+			PreDefinedMovementAI ai = new PreDefinedMovementAI(subAI, movingState, idleState, aiConfig.useRelativePositions, idleTimeBetweenMovements,
+					positions);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
 			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
@@ -109,13 +111,14 @@ public enum ArtificialIntelligenceType {
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
 			float maxDistance = aiConfig.maxMoveDistance;
+			float idleTimeBetweenMovements = Float.parseFloat(mapProperties.get(MAP_PROPERTIES_KEY_IDLE_TIME_BETWEEN_MOVEMENTS, "0f", String.class));
 			
 			String maxDistanceString = mapProperties.get(MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE, String.class);
 			if (maxDistanceString != null && !maxDistanceString.isEmpty()) {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
 			
-			RandomMovementAI ai = new RandomMovementAI(subAI, movingState, idleState, maxDistance);
+			RandomMovementAI ai = new RandomMovementAI(subAI, movingState, idleState, maxDistance, idleTimeBetweenMovements);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
 			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
@@ -129,8 +132,9 @@ public enum ArtificialIntelligenceType {
 			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
 			CharacterState movingState = stateMachine.getState(aiConfig.stateNameMove);
 			CharacterState idleState = stateMachine.getState(aiConfig.stateNameIdle);
+			float idleTimeBetweenMovements = Float.parseFloat(mapProperties.get(MAP_PROPERTIES_KEY_IDLE_TIME_BETWEEN_MOVEMENTS, "0f", String.class));
 			
-			BackToStartingPointMovementAI ai = new BackToStartingPointMovementAI(subAI, movingState, idleState);
+			BackToStartingPointMovementAI ai = new BackToStartingPointMovementAI(subAI, movingState, idleState, idleTimeBetweenMovements);
 			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
 		}
@@ -275,6 +279,7 @@ public enum ArtificialIntelligenceType {
 	};
 	
 	private static final String MAP_PROPERTIES_KEY_PREDEFINED_MOVEMENT_POSITIONS = "predefinedMovementPositions";
+	private static final String MAP_PROPERTIES_KEY_IDLE_TIME_BETWEEN_MOVEMENTS = "idleTimeBetweenMovements";
 	private static final String MAP_PROPERTIES_KEY_MAX_MOVE_DISTANCE = "maxMoveDistance";
 	
 	@SuppressWarnings("unchecked")

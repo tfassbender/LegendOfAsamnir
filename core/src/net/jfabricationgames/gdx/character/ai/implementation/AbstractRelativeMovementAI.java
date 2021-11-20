@@ -22,10 +22,16 @@ public abstract class AbstractRelativeMovementAI extends AbstractMovementAI {
 	 */
 	protected float distanceToKeepFromPlayer = 0f;
 	
+	private final float idleTimeBetweenMovements;
+	private float idleTime;
+	
 	protected PlayableCharacter playerCharacter;
 	
-	public AbstractRelativeMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState) {
+	public AbstractRelativeMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState,
+			float idleTimeBetweenMovements) {
 		super(subAI, movingState, idleState);
+		
+		this.idleTimeBetweenMovements = idleTimeBetweenMovements;
 	}
 	
 	public void updateRelativeZero(Vector2 relativeZero) {
@@ -92,5 +98,14 @@ public abstract class AbstractRelativeMovementAI extends AbstractMovementAI {
 	
 	public void setDistanceToKeepFromPlayer(float distanceToKeepFromPlayer) {
 		this.distanceToKeepFromPlayer = distanceToKeepFromPlayer;
+	}
+	
+	protected boolean waitBetweenMovements(float delta) {
+		idleTime += delta;
+		return idleTime < idleTimeBetweenMovements;
+	}
+	
+	protected void resetIdleTimeBetweenMovements() {
+		idleTime = 0;
 	}
 }

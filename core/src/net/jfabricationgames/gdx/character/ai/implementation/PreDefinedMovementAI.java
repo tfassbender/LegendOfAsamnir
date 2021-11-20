@@ -22,12 +22,12 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 	private int targetPointIndex = 0;
 	
 	public PreDefinedMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState, boolean relativePositions,
-			Vector2... positions) {
-		this(subAI, movingState, idleState, relativePositions, new Array<>(positions));
+			float idleTimeBetweenMovements, Vector2... positions) {
+		this(subAI, movingState, idleState, relativePositions, idleTimeBetweenMovements, new Array<>(positions));
 	}
 	public PreDefinedMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState, boolean relativePositions,
-			Array<Vector2> positions) {
-		super(subAI, movingState, idleState);
+			float idleTimeBetweenMovements, Array<Vector2> positions) {
+		super(subAI, movingState, idleState, idleTimeBetweenMovements);
 		positionsDefined = positions != null && !positions.isEmpty();
 		absolutePositionSet = !relativePositions;
 		this.relativePositions = positions;
@@ -52,6 +52,10 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 	@Override
 	public void executeMove(float delta) {
 		if (positionsDefined) {
+			if (waitBetweenMovements(delta)) {
+				return;
+			}
+			
 			AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 			if (isExecutedByMe(move)) {
 				Vector2 targetPoint = move.movementTarget;
@@ -60,6 +64,7 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 						if (reachedTargetPoint(targetPoint)) {
 							// next target point
 							targetPointIndex = (targetPointIndex + 1) % absolutePositions.size;
+							resetIdleTimeBetweenMovements();
 						}
 						else {
 							character.moveTo(targetPoint, movementSpeedFactor);

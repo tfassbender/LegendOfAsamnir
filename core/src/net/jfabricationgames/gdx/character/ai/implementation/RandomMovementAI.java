@@ -13,8 +13,9 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 	
 	private float maxDistance;
 	
-	public RandomMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState, float maxDistance) {
-		super(subAI, movingState, idleState);
+	public RandomMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState, float maxDistance,
+			float idleTimeBetweenMovements) {
+		super(subAI, movingState, idleState, idleTimeBetweenMovements);
 		this.maxDistance = maxDistance;
 	}
 	
@@ -40,6 +41,10 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 	
 	@Override
 	public void executeMove(float delta) {
+		if (waitBetweenMovements(delta)) {
+			return;
+		}
+		
 		AIPositionChangingMove move = getMove(MoveType.MOVE, AIPositionChangingMove.class);
 		if (isExecutedByMe(move)) {
 			Vector2 targetPoint = move.movementTarget;
@@ -68,6 +73,8 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 		targetPosition.setLength((float) (Math.random() * maxDistance));
 		targetPosition.setAngleDeg((float) (Math.random() * 360f));
 		targetPosition.add(relativeZero);
+		
+		resetIdleTimeBetweenMovements();
 	}
 	
 	protected boolean isTargetPositionSet() {

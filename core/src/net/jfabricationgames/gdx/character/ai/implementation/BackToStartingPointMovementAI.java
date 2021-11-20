@@ -7,7 +7,8 @@ import net.jfabricationgames.gdx.character.state.CharacterState;
 
 public class BackToStartingPointMovementAI extends PreDefinedMovementAI {
 	
-	public BackToStartingPointMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState) {
-		super(subAI, movingState, idleState, true, new Vector2(0, 0));
+	public BackToStartingPointMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState,
+			float idleTimeBetweenMovements) {
+		super(subAI, movingState, idleState, true, idleTimeBetweenMovements, new Vector2(0, 0));
 	}
 }

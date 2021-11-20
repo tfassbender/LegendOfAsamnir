@@ -4,5 +4,14 @@
 	},
 	stairs: {
 		movementSpeedFactor: 0.4,
+	},
+	ladder: {
+		movementSpeedFactor: 0.25,
+	},
+	rope: {
+		movementSpeedFactor: 0.25,
+	},
+	stones_on_water: {
+		movementSpeedFactor: 0.35,
 	}
 }

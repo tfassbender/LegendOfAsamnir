@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="125" height="132" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="147">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="125" height="132" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="147">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="mini_map_config_path" value="config/menu/maps/test_map_4.json"/>
@@ -223,7 +223,7 @@
    <polygon points="0,0 5,-12 18,-12 23,0"/>
   </object>
  </objectgroup>
- <objectgroup id="7" name="ground_physics" locked="1">
+ <objectgroup id="7" name="ground_physics">
   <object id="135" x="240" y="503" width="32" height="4">
    <properties>
     <property name="ground" value="stairs"/>

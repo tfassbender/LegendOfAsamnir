@@ -20,7 +20,7 @@ public class FollowAI extends AbstractRelativeMovementAI {
 	protected float maxDistanceFromStart;
 	
 	public FollowAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState) {
-		super(subAI, movingState, idleState);
+		super(subAI, movingState, idleState, 0f);
 	}
 	
 	@Override
