@@ -42,7 +42,7 @@
    eJzt2E1OwzAURlFnKcBKEGHhYScM2AJjyiASPxVtgv21tc+RPK3qqxfHbSkAAAAAAAAAAAAAUM8ylfIyXfpb9Gltu643natbtG1O44xF4widc151jtE6R+v23Dva07itxe+/Zu4OPe8P673o29Jn52dtv1ln7+t6+Eej9fN0/t32WJOnHZ00Pq/tT3taPw7W+Nh5sGfOtrYe8WyuNVtbW48w03vOh3PMG9+TI7RO7PHUjPd+fiTf+ada9z7Tyf3Nf5wlI8z0JfY3T3XuOLek92f2mmido3WO1jlaZ/R+x7omZro9/w3nmOcMZ3SOmc7ROkdrAAAAAAAAAAAAAAAAgHo+AB41LLQ=
   </data>
  </layer>
- <objectgroup id="9" name="objects" locked="1">
+ <objectgroup id="9" name="objects">
   <object id="135" name="player.startingPosition" x="1280" y="622.667">
    <properties>
     <property name="startingPointId" value="0"/>
@@ -5036,7 +5036,7 @@
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
  </objectgroup>
- <objectgroup id="10" name="unreachable_area_physics">
+ <objectgroup id="10" name="unreachable_area_physics" locked="1">
   <object id="11" x="992" y="288" width="32" height="116.667"/>
   <object id="12" x="928" y="288" width="64" height="369"/>
   <object id="13" x="992" y="480" width="32" height="146.667"/>
