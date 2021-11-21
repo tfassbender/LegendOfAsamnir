@@ -1,0 +1,452 @@
+{
+	id: demo_2_main_adventurer_female_mid_village,
+	controlledActions: {
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			startsWithCutscene: true,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Greetings adventurer comrade! I am an adventurer too.\nBut I needed a break from all the mighty quests and evil monsters out in the lands. So I wait here to guide other adventurers on their quests. Do you need help?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		
+		adventurer_other_questions: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Can I help you with anything else?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I'm good for now. Thank you.",
+					"Can you tell me about these lands?",
+					"Do you know where I can find a lantern?",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_no_help_needed,
+				adventurer_answer_tell_about_lands,
+				adventurer_answer_lantern,
+			],
+		},
+		
+		adventurer_answer_no_help_needed: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Alright! I'll rest here for a while. Tell me if you need my help.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		//***************************************************
+		//*** adventurer tells about the lands
+		//***************************************************
+		
+		adventurer_answer_tell_about_lands: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_adventurer_female_mid_village_summary_heard,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: land_summary_already_heard,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: land_summary_not_yet_heard,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				land_summary_already_heard: adventurer_tell_about_lands__question_options,
+				land_summary_not_yet_heard: adventurer_tell_about_lands__summary,
+			}
+		},
+		
+		//***************************************************
+		//*** adventurer tells about the lands: summary
+		//***************************************************
+		
+		adventurer_tell_about_lands__summary: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "You are in the kingdom of Hyrgat, which lies in the world of Midgard.\nSince you are a dwarf I would assume that you are from Svartalfheim, right?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_svartalfheim,
+			]
+		},
+		thorin_svartalfheim: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Yes, I'm a warior from Svartalfheim. I just woke up in a house in the west, and I have no idea how I got there. Now I'm trying to get back to Svartalfheim.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_tell_about_lands_continued,
+			]
+		},
+		adventurer_answer_tell_about_lands_continued: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "There is a dungeon in the west, that leads to svartalfheim. You should have seen it on your way to this village.\nBut the enemies in this dungeon are very strong, so you should do some easier quests before you go into this dungeon.'",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_tell_about_lands_continued_2,
+			]
+		},
+		adventurer_answer_tell_about_lands_continued_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "The forrests in the east are a good point to start. You can find some smaller monsters there.\nAlso there is the castle in the east, which lies on the way to the forrest. But the guards probably won't let you enter it.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_tell_about_lands_continued_3,
+			]
+		},
+		adventurer_answer_tell_about_lands_continued_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "In the north there are the hills. Also there are many monsters to be found, but they are much harder to kill.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_tell_about_lands_continued_4,
+			]
+		},
+		adventurer_answer_tell_about_lands_continued_4: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Then there is the graveyard, which lies in the west of the castle. In the old vault, there are many evil creatures to be found, but also many treasures.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_tell_about_lands_continued_5,
+			]
+		},
+		adventurer_answer_tell_about_lands_continued_5: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "And I have heard of another area where many monsters are to be found. It lies in the south east of the village, but even I haven't managed to get there yet.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_value_summary_heard,
+			]
+		},
+		set_value_summary_heard: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_adventurer_female_mid_village_summary_heard, value: true}",
+			},
+			
+			executes: [
+				adventurer_tell_about_lands__question_options,
+			]
+		}
+		
+		//*********************************************************
+		//*** adventurer tells about the lands: question options
+		//*********************************************************
+		
+		adventurer_tell_about_lands__question_options: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Do you want me to tell you more about a specific area?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_tell_about_lands__options_1,
+			]
+		},
+		thorin_tell_about_lands__options_1: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"That'll do for the moment. Thank you.",
+					"The forrest in the east",
+					"more options...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_no_help_needed,
+				adventurer_answer_tell_about_lands__forest_in_the_east,
+				thorin_tell_about_lands__options_2,
+			],
+		},
+		thorin_tell_about_lands__options_2: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"The castle",
+					"The hills in the north",
+					"more options...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_tell_about_lands__castle,
+				adventurer_answer_tell_about_lands__hills_in_the_north,
+				thorin_tell_about_lands__options_3,
+			],
+		},
+		thorin_tell_about_lands__options_3: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"The graveyards vault",
+					"The area in the south",
+					"more options...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_tell_about_lands__graveyard_vault,
+				adventurer_answer_tell_about_lands__area_to_the_south,
+				thorin_tell_about_lands__options_4,
+			],
+		}
+		thorin_tell_about_lands__options_4: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"A summary of these lands",
+					"more options...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_tell_about_lands__summary,
+				thorin_tell_about_lands__options_1,
+			],
+		}
+		
+		//************************************************************
+		//*** adventurer tells about the lands: forest in the east
+		//************************************************************
+		
+		adventurer_answer_tell_about_lands__forest_in_the_east: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "If you follow the path to the east you'll find the forrest very soon. When the path ends, just enter the forrest and head on to the east. After a short while you'll reach the heart of the forrest, where many smaller monsters hide.\nThese monsters are not that dangerouse, but there are quite many of them, so be carefull.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tell_about_lands__question_options,
+			]
+		},
+		
+		//************************************************************
+		//*** adventurer tells about the lands: castle
+		//************************************************************
+		
+		adventurer_answer_tell_about_lands__castle: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "The castle of Hyrgat is in the east, near the forest. It's surrounded by a mighty wall and it's guarded by the royal sentinels.\nWithin the castle walls there is a big palace, where the king's family lives. And there is a tavern, where they sell a realy good mead.\nBut the sentinels probably won't let you enter the castle. They don't trust adventurers they don't know.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tell_about_lands__question_options,
+			]
+		},
+		
+		//************************************************************
+		//*** adventurer tells about the lands: hills in the north
+		//************************************************************
+		
+		adventurer_answer_tell_about_lands__hills_in_the_north: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "The hills in the north are easy to reach, but they are guarded by some strange creatures, that use some kind of magic, to defend the entry. They are not easy to kill, so you should first try to finish some quests in the other parts of the lands.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tell_about_lands__question_options,
+			]
+		},
+		
+		//***************************************************************
+		//*** adventurer tells about the lands: vault in the graveyard
+		//***************************************************************
+		
+		adventurer_answer_tell_about_lands__graveyard_vault: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "The graveyard of the castle is a quite scary place, where some smaller monsters live. It is only a short way to the west of the castle. But within the vault of the graveyard there are some very dangerous creatures.\nThis area is realy nothing for beginners. But an experienced adventurer like you are, probably has a chance to survive this vault.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tell_about_lands__question_options,
+			]
+		},
+		
+		//***************************************************************
+		//*** adventurer tells about the lands: area to the south
+		//***************************************************************
+		
+		adventurer_answer_tell_about_lands__area_to_the_south: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "In the south east of the village, there is a canyon. Stories tell, that on the other side of the canyon, there is an area with mighty enemies and great treasures.\nBut even I could not find a way to enter these lands, although I have travelt far and experienced many dangers in these lands.\nIf you find a way, to enter this area, please tell me how!",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tell_about_lands__question_options,
+			]
+		},
+		
+		//***************************************************************
+		//*** adventurer answer lantern
+		//***************************************************************
+		
+		adventurer_answer_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "You want a lantern, to enter the dungeon that leads to svartalfheim?\nAn adventurer, I spoke to had one. I think he got it from the barkeeper of the tavern up there. You should ask him.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_other_questions,
+			]
+		},
+	}
+}

@@ -17,7 +17,7 @@
 			key: demo_2_main_final_dungeon_tested,
 			expectedValue: true,
 		}
-	}
+	},
 	
 	demo_2_main_adventurer_mid_village_helped: {
 		conditionType: GLOBAL_VALUE_SET,
@@ -25,5 +25,13 @@
 			key: demo_2_main_adventurer_mid_village_helped,
 			expectedValue: true,
 		}
-	}
+	},
+	
+	demo_2_main_adventurer_female_mid_village_summary_heard: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_main_adventurer_female_mid_village_summary_heard,
+			expectedValue: true,
+		}
+	},
 }

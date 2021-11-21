@@ -49,6 +49,17 @@
 		}
 	},
 	
+	demo_2_main_adventurer_female_mid_village: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_main_adventurer_female_mid_village,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_adventurer_female_mid_village,
+		}
+	}
+	
 	//*******************************************
 	//*** change map
 	//*******************************************
