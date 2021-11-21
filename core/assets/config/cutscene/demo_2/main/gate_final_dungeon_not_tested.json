@@ -1,0 +1,27 @@
+{
+	id: demo_2_main_gate_final_dungeon_not_tested,
+	controlledActions: {
+		showText: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Why should I take the long way, instead of just going through that dungeon? Because the text on a board told me so?",
+				showNextPageIcon: false,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				move,
+			],
+		},
+		move: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: PLAYER,
+			controlledUnitTarget: {x: -2, y: 0},
+		},
+	}
+}

@@ -35,4 +35,8 @@
 		atlas: packed/demo/demo.atlas,
 		texture: lantern,
 	},
+	ring: {
+		atlas: packed/demo/demo.atlas,
+		texture: ring,
+	},
 }

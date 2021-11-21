@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="6916">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="6917">
  <properties>
-  <property name="above_player_layers" value="[9, 13, 17, 18, 27]"/>
-  <property name="background_layers" value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26]"/>
+  <property name="above_player_layers" value="[9, 12, 17, 18, 27]"/>
+  <property name="background_layers" value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26]"/>
   <property name="invisible_path_layer" value="[28]"/>
   <property name="mini_map_config_path" value="config/menu/maps/demo_2/main.json"/>
   <property name="shadow_layers" value="[29]"/>
@@ -167,43 +167,47 @@
   </object>
   <object id="6774" name="object.eventObject" x="151.273" y="2192.73" width="8.72727" height="79.2727">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_goto_tutorial"/>
    </properties>
   </object>
-  <object id="6775" name="object.eventObject" x="523.125" y="2111.38" width="45.875" height="4.75"/>
+  <object id="6775" name="object.eventObject" x="523.125" y="2111.38" width="45.875" height="4.75">
+   <properties>
+    <property name="eventParameter" value="demo_2_main_goto_final_dungeon"/>
+   </properties>
+  </object>
   <object id="6791" name="object.eventObject" x="2559.94" y="1929.81" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_goto_store"/>
    </properties>
   </object>
   <object id="6792" name="object.eventObject" x="2528.06" y="1421" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_door_locked"/>
    </properties>
   </object>
   <object id="6793" name="object.eventObject" x="3008.02" y="1481.75" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_goto_village_tavern"/>
    </properties>
   </object>
   <object id="6794" name="object.eventObject" x="3360.15" y="1481.77" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_goto_village_tavern_2"/>
    </properties>
   </object>
   <object id="6795" name="object.eventObject" x="3520.06" y="1865.68" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_goto_blacksmith"/>
    </properties>
   </object>
   <object id="6796" name="object.eventObject" x="3616.02" y="2188.88" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_door_locked"/>
    </properties>
   </object>
   <object id="6797" name="object.eventObject" x="3071.97" y="2188.95" width="31.875" height="1.375">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_door_locked"/>
    </properties>
   </object>
   <object id="6798" name="object.eventObject" x="2240.5" y="115" width="64" height="6.5">
@@ -233,12 +237,12 @@
   </object>
   <object id="6807" name="object.eventObject" x="5888.07" y="619.215" width="64" height="0.956522">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_door_locked"/>
    </properties>
   </object>
   <object id="6809" name="object.eventObject" x="6560" y="680.125" width="32" height="1.75">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_door_locked"/>
    </properties>
   </object>
   <object id="6810" name="object.eventObject" x="5279.38" y="906.625" width="31.625" height="1.5">
@@ -253,18 +257,18 @@
   </object>
   <object id="6812" name="object.cutscene_signboard" x="480" y="2156">
    <properties>
-    <property name="cutsceneId" value=""/>
+    <property name="cutsceneId" value="demo_2_main_signboard_near_final_dungeon_entry"/>
    </properties>
    <point/>
   </object>
   <object id="6813" name="object.eventObject" x="736" y="2161" width="5.5" height="111">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_gate_final_dungeon"/>
    </properties>
   </object>
   <object id="6815" name="object.eventObject" x="4159.82" y="2988" width="32.1818" height="0.909091">
    <properties>
-    <property name="eventParameter" value=""/>
+    <property name="eventParameter" value="demo_2_main_door_locked"/>
    </properties>
   </object>
   <object id="6824" name="object.eventObject" x="4416.33" y="3428.33" width="159.333" height="4">
@@ -277,9 +281,9 @@
     <property name="eventProperty" value=""/>
    </properties>
   </object>
-  <object id="6828" name="object.spawnPoint.mini_golem" x="640" y="2158.67">
+  <object id="6828" name="object.spawnPoint.mini_golem" x="655.273" y="2158.67">
    <properties>
-    <property name="spawn" value="enemy__mini_golem__movement_leftt_1"/>
+    <property name="spawn" value="enemy__mini_golem__movement_left_3"/>
    </properties>
    <point/>
   </object>
@@ -727,13 +731,13 @@
    </properties>
    <point/>
   </object>
-  <object id="6908" name="npc.demo_2_main_adventurer_at_villate_entry" x="2097.5" y="1935.5">
+  <object id="6908" name="npc.demo_2_main_adventurer_at_village_entry" x="2097.5" y="1908.17">
    <point/>
   </object>
   <object id="6909" name="npc.demo_2_main_adventurer_mid_village" x="2624" y="1664">
    <point/>
   </object>
-  <object id="6910" name="npc.demo_2_main_builder_near_farm" x="2275" y="1357">
+  <object id="6910" name="npc.demo_2_main_builder_near_village_farm" x="2275" y="1357">
    <point/>
   </object>
   <object id="6911" name="npc.demo_2_main_adventurer_female_mid_village" x="3200" y="1760">
@@ -753,6 +757,12 @@
    <point/>
   </object>
   <object id="6915" name="npc.demo_2_main_adventurer_female_on_the_hill" x="5262.5" y="3129.75">
+   <point/>
+  </object>
+  <object id="6916" name="player.startingPosition" x="2048" y="1984">
+   <properties>
+    <property name="startingPointId" value="1"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
@@ -18437,7 +18447,11 @@
     <property name="ground" value="rope"/>
    </properties>
   </object>
-  <object id="6821" x="5870.33" y="653.333" width="100" height="99"/>
+  <object id="6821" x="5870.33" y="653.333" width="100" height="99">
+   <properties>
+    <property name="ground" value="stairs"/>
+   </properties>
+  </object>
   <object id="6822" x="4078" y="621.667" width="164.333" height="34">
    <properties>
     <property name="ground" value="stairs"/>

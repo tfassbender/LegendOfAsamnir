@@ -18,9 +18,23 @@
 	tutorial_level_boss_introducer: config/npc/levels/tutorial/boss_introducer.json,
 	
 	//************************************************
-	//*** Demo 2
+	//*** Demo 2 - Tutorial
 	//************************************************
 	
-	demo_2_tutorial__adventurer_female: config/npc/levels/demo_2/adventurer_female.json,
-	demo_2_tutorial__running_adventurer: config/npc/levels/demo_2/running_adventurer.json,
+	demo_2_tutorial__adventurer_female: config/npc/levels/demo_2/tutorial/adventurer_female.json,
+	demo_2_tutorial__running_adventurer: config/npc/levels/demo_2/tutorial/running_adventurer.json,
+	
+	//************************************************
+	//*** Demo 2 - Main
+	//************************************************
+	
+	demo_2_main_builder_on_farm: config/npc/levels/demo_2/main/builder_on_farm.json,
+	demo_2_main_adventurer_at_village_entry: config/npc/levels/demo_2/main/adventurer_at_village_entry.json,
+	demo_2_main_adventurer_mid_village: config/npc/levels/demo_2/main/adventurer_mid_village.json,
+	demo_2_main_adventurer_female_mid_village: config/npc/levels/demo_2/main/adventurer_female_mid_village.json,
+	demo_2_main_builder_near_village_farm: config/npc/levels/demo_2/main/builder_near_village_farm.json
+	demo_2_main_archaeologist_near_invisible_path: config/npc/levels/demo_2/main/archaeologist_near_invisible_path.json,
+	demo_2_main_adventurer_female_on_the_hill: config/npc/levels/demo_2/main/adventurer_female_on_the_hill.json,
+	demo_2_main_adventurer_blocking_castle_entry: config/npc/levels/demo_2/main/adventurer_blocking_castle_entry.json,
+	demo_2_main_builder_on_second_farm: config/npc/levels/demo_2/main/builder_on_second_farm.json,
 }

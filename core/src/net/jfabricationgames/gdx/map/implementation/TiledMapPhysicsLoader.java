@@ -31,6 +31,7 @@ import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.map.ground.MapObjectType;
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.util.MapUtil;
 
 /**
  * Populates the Box2D world with static bodies using data from a map object.
@@ -171,6 +172,12 @@ class TiledMapPhysicsLoader {
 	private void createGroundPhysics(MapObject object, Shape shape, BodyDef bodyDef) {
 		MapProperties properties = object.getProperties();
 		String groundType = properties.get(MAP_PROPERTY_KEY_GROUND_TYPE, String.class);
+		if (groundType == null) {
+			throw new IllegalStateException(
+					"The ground type of the object is not configured in the map properties. Either the property has to be configured with the key '"
+							+ MAP_PROPERTY_KEY_GROUND_TYPE + "' or the object must not be configured on the '" + LAYER_NAME_GROUND_PHYSICS
+							+ "' layer. Object properties are: " + MapUtil.mapPropertiesToString(properties, true));
+		}
 		
 		GROUND_FIXTURE_DEF.shape = shape;
 		Body body = PhysicsBodyCreator.createBody(bodyDef);

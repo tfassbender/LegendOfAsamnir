@@ -62,9 +62,17 @@ public class GameMapManager {
 	}
 	
 	public String getInitialMapIdentifier() {
+		return getInitialMap().name;
+	}
+	
+	public int getInitialStartingPointId() {
+		return getInitialMap().initialStartingPointId;
+	}
+	
+	private GameMapConfig getInitialMap() {
 		for (GameMapConfig config : mapFiles) {
 			if (config.initial) {
-				return config.name;
+				return config;
 			}
 		}
 		throw new IllegalStateException("The configuration file '" + GAME_MAPS_CONFIG_FILE_PATH + "' does not configure an initial map.");

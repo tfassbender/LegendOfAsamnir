@@ -11,9 +11,11 @@
 		atlas: packed/menu/menu.atlas,
 		texture: mana,
 	},
+	
 	//********************
 	//*** items
 	//********************
+	
 	jump: {
 		atlas: packed/menu/menu.atlas,
 		texture: jump,
@@ -46,9 +48,15 @@
 		atlas: packed/menu/menu.atlas,
 		texture: lantern,
 	},
+	ring: {
+		atlas: packed/menu/menu.atlas,
+		texture: ring,
+	},
+	
 	//********************
 	//*** runes
 	//********************
+	
 	othala: {
 		atlas: packed/menu/menu.atlas,
 		texture: rune_othala,

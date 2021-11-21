@@ -1,0 +1,145 @@
+{
+	id: demo_2_main_adventurer_mid_village,
+	controlledActions: {
+		initial: {
+			type: CONDITION,
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_adventurer_mid_village_helped,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: question_answered,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: question_not_answered,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				question_answered: adventurer_wait,
+				question_not_answered: adventurer_question,
+			}
+		},
+		
+		// before the player helped the adventurer
+		
+		adventurer_question: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Hey, you seem to be an adventurer too. I'm waiting here for a friend. She wanted to explore the forrest in the west. Have you seen her?",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"No. I haven't seen her.",
+					"Yes. I helped here slay a spider.",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_no,
+				adventurer_answer_yes,
+			],
+		},
+		adventurer_answer_no: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Then I'll just wait here for her. Thank you anyway.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		adventurer_answer_yes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "That must have been her. She hates spiders. Now that I know where she is I'm relieved. Thank you. Here take this for your help.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				event_pay,
+			]
+		},
+		event_pay: {
+			type: EVENT,
+			
+			event: {
+				eventType: GIVE_COINS_TO_PLAYER,
+				intValue: 10,
+			},
+			
+			executes: [
+				event_set_global_value,
+			]
+		},
+		event_set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_adventurer_mid_village_helped, value: true}",
+			},
+			
+			executes: [
+				thorin_answer_mead,
+			]
+		},
+		thorin_answer_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Thanks! Now I can buy some mead.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+		
+		// after the player helped the adventurer
+		
+		adventurer_wait: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I'm still waiting for my friend. Thank you for telling me where she is.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+	}
+}

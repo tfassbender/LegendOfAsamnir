@@ -122,6 +122,13 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
+  index: 13
+adventurer_idle
+  rotate: false
+  xy: 874, 567
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
   index: 1
 adventurer_idle
   rotate: false
@@ -130,13 +137,6 @@ adventurer_idle
   orig: 32, 32
   offset: 0, 0
   index: 12
-adventurer_idle
-  rotate: false
-  xy: 874, 567
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 13
 adventurer_jump
   rotate: false
   xy: 874, 567
@@ -633,14 +633,14 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 9
+  index: 8
 adventurer_idle
   rotate: false
   xy: 348, 82
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 9
 adventurer_idle
   rotate: false
   xy: 348, 48
@@ -762,14 +762,14 @@ adventurer_move
   index: 6
 aim_marker_gray
   rotate: false
-  xy: 554, 0
+  xy: 724, 542
   size: 5, 5
   orig: 5, 5
   offset: 0, 0
   index: -1
 aim_marker_red
   rotate: false
-  xy: 561, 0
+  xy: 731, 542
   size: 5, 5
   orig: 5, 5
   offset: 0, 0
@@ -815,14 +815,14 @@ archaeologist_idle
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
-  index: 6
+  index: 5
 archaeologist_idle
   rotate: false
   xy: 1046, 926
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
-  index: 5
+  index: 6
 archaeologist_idle
   rotate: false
   xy: 1112, 926
@@ -913,14 +913,14 @@ armadillo_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 armadillo_move
   rotate: false
   xy: 450, 39
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 armadillo_curl
   rotate: false
   xy: 484, 141
@@ -2656,7 +2656,7 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 14
+  index: 13
 cyclops_idle
   rotate: false
   xy: 378, 208
@@ -2670,7 +2670,7 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 13
+  index: 14
 cyclops_idle
   rotate: false
   xy: 444, 275
@@ -6346,6 +6346,13 @@ rainbow_bridge_enabled
   orig: 16, 16
   offset: 0, 0
   index: -1
+ring
+  rotate: false
+  xy: 1718, 170
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 rune_algiz
   rotate: false
   xy: 98, 47
@@ -6411,14 +6418,14 @@ rune_raidho
   index: -1
 scroll
   rotate: false
-  xy: 1718, 170
+  xy: 1736, 170
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 shield
   rotate: false
-  xy: 1736, 170
+  xy: 1754, 170
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -6527,14 +6534,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_idle
   rotate: false
   xy: 970, 320
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_jump
   rotate: false
   xy: 970, 320
@@ -6999,35 +7006,35 @@ stone
   index: -1
 switch_floor_down
   rotate: false
-  xy: 1754, 170
+  xy: 1718, 152
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 switch_floor_up
   rotate: false
-  xy: 1718, 152
+  xy: 1736, 152
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 switch_wall_down
   rotate: false
-  xy: 1736, 152
+  xy: 1754, 152
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 switch_wall_up
   rotate: false
-  xy: 1754, 152
+  xy: 2020, 502
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 sword
   rotate: false
-  xy: 2020, 502
+  xy: 2020, 484
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -7321,14 +7328,14 @@ twig_blight_move
   index: 7
 wand
   rotate: false
-  xy: 2020, 484
+  xy: 2020, 466
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wand_alt
   rotate: false
-  xy: 2020, 466
+  xy: 724, 549
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

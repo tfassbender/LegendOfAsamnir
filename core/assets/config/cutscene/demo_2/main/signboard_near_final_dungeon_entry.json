@@ -1,0 +1,45 @@
+{
+	id: demo_2_main_signboard_near_final_dungeon_entry,
+	controlledActions: {
+		show_text_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Final Dungeon",
+				displayText: "This is the final dungeon. Do not enter until you have finished all other quests!",
+				colorHeader: #0000ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true,
+			
+			executes: [
+				show_text_2,
+			]
+		},
+		show_text_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Oh, shure. Why should I use the fastest way home, if I could take the much longer and more difficult way?",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_signboard_near_final_dungeon_entry_read, value: true}",
+			},
+		}
+	}
+}

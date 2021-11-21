@@ -13,7 +13,8 @@ public enum SpecialAction implements ItemSpecialAction {
 	BOOMERANG(3, 5f, 1f, "special_action_available__boomerang"), //
 	WAND(4, 10f, 1f, "special_action_available__wand"), // 
 	FEATHER(5, 0f, 0.65f, "special_action_available__feather"), //
-	LANTERN(6, 10f, 0.65f, "special_action_available__lantern"); //
+	LANTERN(6, 10f, 0.65f, "special_action_available__lantern"), //
+	RING(7, 0f, 1f, "special_action_available__ring"); //
 	
 	public static SpecialAction findByNameIgnoringCase(String specialAction) {
 		for (SpecialAction action : values()) {

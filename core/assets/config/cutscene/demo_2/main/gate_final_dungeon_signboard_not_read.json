@@ -1,0 +1,27 @@
+{
+	id: demo_2_main_gate_final_dungeon_signboard_not_read,
+	controlledActions: {
+		showText: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I should have a look at this cave before I go further.",
+				showNextPageIcon: false,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				move,
+			],
+		},
+		move: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: PLAYER,
+			controlledUnitTarget: {x: -2, y: 0},
+		},
+	}
+}

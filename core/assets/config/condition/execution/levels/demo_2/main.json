@@ -1,0 +1,36 @@
+{
+	//*******************************************
+	//*** gates
+	//*******************************************
+	
+    demo_2_main_gate_final_dungeon: {
+        conditionId: demo_2_main_final_dungeon_tested,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+			type: CONDITION,
+			conditionalExecution: {
+				conditionId: demo_2_main_signboard_near_final_dungeon_entry_read,
+				thenCase: {
+					type: EVENT,
+            		eventConfig: {
+                		executionType: START_CUTSCENE,
+						executionParameters: {
+							cutsceneId: demo_2_main_gate_final_dungeon_not_tested,
+						}
+            		}
+        		},
+        		elseCase: {
+					type: EVENT,
+            		eventConfig: {
+                		executionType: START_CUTSCENE,
+						executionParameters: {
+							cutsceneId: demo_2_main_gate_final_dungeon_signboard_not_read,
+						}
+            		}
+        		}
+			}
+        }
+    },
+}

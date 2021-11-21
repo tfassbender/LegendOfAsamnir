@@ -125,7 +125,7 @@ bow
   index: -1
 button_green
   rotate: false
-  xy: 1742, 266
+  xy: 1760, 266
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -139,7 +139,7 @@ button_green_focus
   index: -1
 button_yellow
   rotate: false
-  xy: 1758, 266
+  xy: 1776, 266
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -809,6 +809,13 @@ minotaur_move
   orig: 96, 96
   offset: 0, 0
   index: 8
+ring
+  rotate: false
+  xy: 1706, 264
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 rune_algiz
   rotate: false
   xy: 3436, 733
@@ -874,7 +881,7 @@ rune_raidho
   index: -1
 shield
   rotate: false
-  xy: 1706, 264
+  xy: 1724, 264
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -902,7 +909,7 @@ small_banner_right
   index: -1
 wand
   rotate: false
-  xy: 1724, 264
+  xy: 1742, 264
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

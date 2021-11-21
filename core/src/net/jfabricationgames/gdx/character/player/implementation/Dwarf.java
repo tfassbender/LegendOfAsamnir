@@ -50,6 +50,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	private static final String SOUND_AMMO_EMPTY = "ammo_empty";
 	private static final String SOUND_REFLECT_PROJECTILE = "reflect_projectile";
+	private static final String SOUND_SELL_OR_BUY_ITEM = "sell_buy_item";
 	private static final String ATTACK_NAME_WAIT = "wait";
 	private static final String ATTACK_NAME_REFLECT_MAGIC_WAVE = "reflected_magic_wave";
 	private static final String RUNE_HAGALAZ_ANIMATION_NAME = "rune_hagalaz";
@@ -171,6 +172,9 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					return changeAction(CharacterAction.JUMP);
 				case FEATHER:
 					//do nothing here - the action will be executed in InteractiveAction.SHOW_OR_CHANGE_TEXT
+					break;
+				case RING:
+					//do nothing here - the ring will be used in a cutscene
 					break;
 				default:
 					throw new IllegalStateException("Unexpected SpecialAction: " + activeSpecialAction);
@@ -463,6 +467,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				break;
 			case TAKE_PLAYERS_COINS:
 				propertiesDataHandler.reduceCoins(event.intValue);
+				break;
+			case GIVE_COINS_TO_PLAYER:
+				soundHandler.playSound(SOUND_SELL_OR_BUY_ITEM);
+				propertiesDataHandler.increaseCoins(event.intValue);
 				break;
 			case PLAYER_BUY_ITEM:
 				Item item = (Item) event.parameterObject;

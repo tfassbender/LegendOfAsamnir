@@ -37,4 +37,16 @@
 	config/cutscene/demo_2/tutorial/gate_adventurer.json,
 	config/cutscene/demo_2/tutorial/running_adventurer.json,
 	config/cutscene/demo_2/tutorial/goto_main.json,
+	
+	//********************************************************
+	//*** Demo 2 Main
+	//********************************************************
+	
+	config/cutscene/demo_2/main/goto_tutorial.json,
+	config/cutscene/demo_2/main/signboard_near_final_dungeon_entry.json,
+	config/cutscene/demo_2/main/gate_final_dungeon_signboard_not_read.json,
+	config/cutscene/demo_2/main/gate_final_dungeon_not_tested.json,
+	config/cutscene/demo_2/main/adventurer_at_village_entry.json,
+	config/cutscene/demo_2/main/builder_near_village_farm.json
+	config/cutscene/demo_2/main/adventurer_mid_village.json
 ]

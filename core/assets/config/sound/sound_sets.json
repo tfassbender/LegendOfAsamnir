@@ -42,7 +42,10 @@
 				reflect_projectile: {
 					path: "sound/dwarf/hit2.wav",
 					volume: 0.5,
-				}
+				},
+				sell_buy_item: {
+					path: "sound/item/sell_buy_item.wav",
+				},
 			}
 		},
 		common: {

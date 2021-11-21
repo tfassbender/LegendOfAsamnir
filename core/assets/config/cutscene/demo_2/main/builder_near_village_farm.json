@@ -1,0 +1,108 @@
+{
+	id: demo_2_main_builder_near_village_farm,
+	controlledActions: {
+		farmer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "Another adventurer?! There are realy many adventurers in this village these days.\nDo you need help on your quest?",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I'm fine. Thank you.",
+					"Have you got a lantern?",
+					"Do you produce mead on your farm?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				farmer_lantern,
+				farmer_mead,
+			],
+		},
+		farmer_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "A Lantern?\nNo I don't have one.\nSorry.",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				farmer_other_questions,
+			]
+		},
+		farmer_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "For sure!\nI produce the best mead in the whole village!\nWell, I'm also the only one who produces mead here... but it's realy good. If you want you can buy some in the shop down there.",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_mead,
+			]
+		},
+		thorin_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "That sounds great! I'm starting to like this village!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				farmer_other_questions,
+			]
+		},
+		farmer_other_questions: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "Can I help you with anything else?",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			]
+		},
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

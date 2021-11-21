@@ -56,7 +56,6 @@ import net.jfabricationgames.gdx.state.GameStateManager;
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener, InGameMenuScreen.MenuGameScreen {
 	
 	private static final float WORLD_TIME_STEP = 1f / 60f;
-	private static final int INITIAL_STARTING_POINT_ID = 0;
 	
 	private static final String ACTION_SHOW_MENU = "menu";
 	
@@ -178,7 +177,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private void loadGameMap() {
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
-		gameMapManager.showMap(initialMapIdentifier, INITIAL_STARTING_POINT_ID);
+		gameMapManager.showMap(initialMapIdentifier, gameMapManager.getInitialStartingPointId());
 	}
 	
 	private void changeMap(String mapIdentifier, int playerStartingPointId) {
@@ -296,7 +295,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	@Override
 	public void restartGame() {
 		Gdx.app.log(getClass().getSimpleName(), "--- Restarting Game ------------------------------------------------------------");
-		changeMap(GameMapManager.getInstance().getInitialMapIdentifier(), INITIAL_STARTING_POINT_ID);
+		GameMapManager gameMapManager = GameMapManager.getInstance();
+		changeMap(gameMapManager.getInitialMapIdentifier(), gameMapManager.getInitialStartingPointId());
 	}
 	
 	/**

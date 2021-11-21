@@ -42,6 +42,11 @@
 		animation: key,
 		pickUpSound: pickup_4
 	},
+	
+	//**********************************
+	//*** demo
+	//**********************************
+	
 	levelEnd: {
 		type: EVENT_ITEM,
 		texture: scroll,
@@ -121,7 +126,11 @@
 	lantern: {
 		type: SPECIAL_ACTION,
 		texture: lantern,
-	}
+	},
+	ring: {
+		type: SPECIAL_ACTION,
+		texture: ring,
+	},
 	
 	//**********************************
 	//*** runes

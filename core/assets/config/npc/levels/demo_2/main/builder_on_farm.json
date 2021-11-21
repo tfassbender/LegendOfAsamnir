@@ -1,0 +1,21 @@
+{
+	graphicsConfigFile: config/npc/graphics/builder.json
+	
+	aiConfig: {
+		type: RANDOM_MOVEMENT_AI,
+		
+		maxMoveDistance: 2f,
+		
+		stateNameMove: move,
+		stateNameIdle: idle,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
+	
+	interactionPossible: false,
+	movingSpeed: 0.75f,
+}

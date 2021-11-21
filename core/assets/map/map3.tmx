@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="211">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="212">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="continuous_damage" value="1"/>
@@ -591,6 +591,9 @@ Arrows: 25 Coins..</property>
    <properties>
     <property name="idleTimeBetweenMovements" value="1.5"/>
    </properties>
+   <point/>
+  </object>
+  <object id="211" name="item.ring" x="512" y="464">
    <point/>
   </object>
  </objectgroup>
