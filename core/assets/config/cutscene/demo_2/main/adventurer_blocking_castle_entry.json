@@ -1,0 +1,611 @@
+{
+	id: demo_2_main_adventurer_blocking_castle_entry,
+	controlledActions: {
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Stop! I can't let you enter the castle.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				condition_quest_finished,
+			],
+		},
+		
+		condition_quest_finished: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_adventurer_blocking_castle__quest_finished,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: quest_finished,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: quest_not_finished,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				quest_finished: guard_greeting_after_quest_finished,
+				quest_not_finished: condition_quest_started,
+			}
+		}
+		
+		condition_quest_started: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_adventurer_blocking_castle__quest_started,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: quest_started,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: quest_not_started,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				quest_started: guard_greeting_after_quest_started,
+				quest_not_started: thorin_answer_before_quest_started,
+			}
+		},
+		
+		//**********************************************
+		//*** Dialogs after quest finished
+		//**********************************************
+		
+		guard_greeting_after_quest_finished: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Oh it's you again. Alright you can enter.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				end,
+			],
+		},
+		
+		//**********************************************
+		//*** Dialogs after quest starts
+		//**********************************************
+		
+		guard_greeting_after_quest_started: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Oh it's you again. Have you already found my ring in the forest to the east?",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_quest_finished,
+			],
+		},
+		
+		thorin_answer_quest_finished: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Not yet.",
+					"I found your ring!",
+				],
+			},
+			choiceOptionExecutions: [
+				guard_answer_quest_not_finished,
+				condition_ring_found,
+			],
+		},
+		
+		guard_answer_quest_not_finished: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Too bad...\nThen I can't let you enter the castle yet.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_before_quest_started,
+			],
+		},
+		
+		condition_ring_found: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_adventurer_blocking_castle__ring_found,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: ring_found,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: ring_not_found,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				ring_found: guard_ring_found,
+				ring_not_found: guard_ring_not_found,
+			}
+		},
+		
+		guard_ring_found: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Realy?!\nGreat!\nNow my wife won't be angry anymore. Or at least I hope so...\nAnd Like I promised you can enter the castle now.\nMake sure to taste the mead in the tavern. It's realy great!",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				take_ring,
+			],
+		},
+		
+		guard_ring_not_found: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Realy?!\nGreat!\nWhere is it?",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_ring_not_found,
+			],
+		},
+		
+		thorin_answer_ring_not_found: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Well, actually ...",
+					"Oh, this ring ...",
+					"I forgot it ... in the forest ...",
+				],
+			},
+			choiceOptionExecutions: [
+				guard_answer_quest_not_finished,
+				guard_answer_quest_not_finished,
+				guard_answer_quest_not_finished,
+			],
+		},
+		
+		//**********************************************
+		//*** Dialogs before quest starts
+		//**********************************************
+		
+		thorin_answer_before_quest_started: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"But I need to get to the tavern.",
+					"I'm a royal messenger! Let me pass!",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_tavern,
+				guard_answer_messenger,
+			],
+		},
+		
+		//**********************************************
+		//*** Tavern dialog
+		//**********************************************
+		
+		guard_answer_tavern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "We cannot let every adventurer pass, that wants to enter. Although the mead in the tavern is realy great...\n...\nBut you cannot pass anyway!",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_tavern
+			]
+		},
+		
+		thorin_answer_tavern: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"What if I bring you a jug of mead, too?",
+					"I'm a royal messenger! Let me pass!",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_tavern_2,
+				guard_answer_messenger,
+			],
+		},
+		
+		guard_answer_tavern_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "I realy love the mead from the tavern...\nBut I can't let you pass anyway!",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_tavern_2
+			]
+		},
+		
+		thorin_answer_tavern_2: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"What if I pay you?",
+					"I'm a royal messenger! Let me pass!",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_tavern_3,
+				guard_answer_messenger,
+			],
+		},
+		
+		guard_answer_tavern_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Royal guards get food and mead for free in the tavern. I don't need your money.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_tavern_3
+			]
+		},
+		
+		thorin_answer_tavern_3: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"Free mead?! Where can I register myself?",
+					"I'm a royal messenger! Let me pass!",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_tavern_4,
+				guard_answer_messenger,
+			],
+		},
+		
+		guard_answer_tavern_4: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "There are no more guards needed in the castle at the moment...\nAnd the tavern probably hasn't stored enough mead for a dwarf...",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_tavern_4
+			]
+		},
+		
+		thorin_answer_tavern_4: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"Don't you need anything?",
+					"I'm a royal messenger! Let me pass!",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_tavern_5,
+				guard_answer_messenger,
+			],
+		},
+		
+		guard_answer_tavern_5: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Well...\n...\nThere might be one thing...",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				guard_answer_tavern_6
+			]
+		},
+		
+		guard_answer_tavern_6: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "A while ago I was sent to the forest in the east to fight some raiders.\nWe succeeded, but I lost my ring in the forest... and my wife was ... not realy happy about that...\nIf you manage to find my ring and bring it back to me, I'll let you enter.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_tavern_5
+			]
+		},
+		
+		thorin_answer_tavern_5: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Alright! I'll find your ring. And then I come back to taste the mead of this tavern!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value__quest_started,
+			]
+		},
+		
+		set_global_value__quest_started: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_adventurer_blocking_castle__quest_started, value: true}",
+			},
+			
+			executes: [
+				leave,
+			]
+		}
+		
+		//**********************************************
+		//*** Royal messenger dialog
+		//**********************************************
+		
+		guard_answer_messenger: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "A royal messenger?!\n...\nYou're a dwarf in full armor and armed with a battle axe ...",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_messenger,
+			]
+		},
+		
+		thorin_answer_messenger: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"But I need to get to the tavern.",
+					"All dwarf messengers have a battle axe!",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_tavern,
+				guard_answer_messenger_2,
+			],
+		},
+		
+		guard_answer_messenger_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "And where is the messege that you carry?",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_messenger_2,
+			]
+		},
+		
+		thorin_answer_messenger_2: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok I'll leave.",
+					"Well...",
+					"That's ... confidential ...",
+				],
+			},
+			choiceOptionExecutions: [
+				leave,
+				guard_answer_messenger_3,
+				guard_answer_messenger_3,
+			],
+		},
+		
+		guard_answer_messenger_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Nice try. But I won't let you pass.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_before_quest_started,
+			]
+		},
+		
+		//**********************************************
+		//*** end
+		//**********************************************
+		
+		leave: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -3},
+			
+			executes: [
+				end,
+			],
+		},
+		
+		take_ring: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: special_action_available__ring, value: false}",
+			},
+			
+			executes: [
+				set_global_value__quest_finished,
+			]
+		},
+		
+		set_global_value__quest_finished: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_adventurer_blocking_castle__quest_finished, value: true}",
+			},
+			
+			executes: [
+				end,
+			]
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

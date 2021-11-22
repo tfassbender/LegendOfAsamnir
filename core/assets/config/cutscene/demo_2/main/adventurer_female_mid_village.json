@@ -226,7 +226,7 @@
 			executes: [
 				adventurer_tell_about_lands__question_options,
 			]
-		}
+		},
 		
 		//*********************************************************
 		//*** adventurer tells about the lands: question options
@@ -353,7 +353,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "The castle of Hyrgat is in the east, near the forest. It's surrounded by a mighty wall and it's guarded by the royal sentinels.\nWithin the castle walls there is a big palace, where the king's family lives. And there is a tavern, where they sell a realy good mead.\nBut the sentinels probably won't let you enter the castle. They don't trust adventurers they don't know.",
+				displayText: "The castle of Hyrgat is in the east, near the forest. It's surrounded by a mighty wall and the royal guards.\nWithin the castle walls there is a big palace, where the king's family lives. And there is a tavern, where they sell a realy good mead.\nBut the guards probably won't let you enter the castle. They don't trust adventurers they don't know.",
 				colorHeader: #ff00ff,
 				showNextPageIcon: true,
 			}

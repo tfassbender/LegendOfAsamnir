@@ -20,7 +20,7 @@
 		event: {
 			eventType: NPC_INTERACTION,
 			stringValue: demo_2_main_adventurer_at_village_entry,
-		}
+		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: demo_2_main_adventurer_at_village_entry,
@@ -31,7 +31,7 @@
 		event: {
 			eventType: NPC_INTERACTION,
 			stringValue: demo_2_main_builder_near_village_farm,
-		}
+		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: demo_2_main_builder_near_village_farm,
@@ -42,7 +42,7 @@
 		event: {
 			eventType: NPC_INTERACTION,
 			stringValue: demo_2_main_adventurer_mid_village,
-		}
+		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: demo_2_main_adventurer_mid_village,
@@ -53,10 +53,32 @@
 		event: {
 			eventType: NPC_INTERACTION,
 			stringValue: demo_2_main_adventurer_female_mid_village,
-		}
+		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: demo_2_main_adventurer_female_mid_village,
+		}
+	},
+	
+	demo_2_main_adventurer_blocking_castle_entry: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_main_adventurer_blocking_castle_entry,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_adventurer_blocking_castle_entry,
+		}
+	}
+	
+	demo_2_main_goard_blocking_castle_entry: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goard_blocking_castle_entry,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_adventurer_blocking_castle_entry,
 		}
 	}
 	
@@ -68,7 +90,7 @@
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: demo_2_main_goto_tutorial,
-		}
+		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
 			cutsceneId: demo_2_main_goto_tutorial,
@@ -79,7 +101,7 @@
 		event: {
 			eventType: CUTSCENE_EVENT,
 			stringValue: demo_2_main_goto_tutorial_after_cutscene,
-		}
+		},
 		executionType: CHANGE_MAP,
 		executionParameters: {
 			map: demo_2_tutorial,
@@ -91,7 +113,7 @@
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: demo_2_main_goto_final_dungeon,
-		}
+		},
 		
 //		executionType: CHANGE_MAP,
 //		executionParameters: {

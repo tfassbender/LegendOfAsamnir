@@ -47,7 +47,8 @@
 	config/cutscene/demo_2/main/gate_final_dungeon_signboard_not_read.json,
 	config/cutscene/demo_2/main/gate_final_dungeon_not_tested.json,
 	config/cutscene/demo_2/main/adventurer_at_village_entry.json,
-	config/cutscene/demo_2/main/builder_near_village_farm.json
-	config/cutscene/demo_2/main/adventurer_mid_village.json
-	config/cutscene/demo_2/main/adventurer_female_mid_village.json
+	config/cutscene/demo_2/main/builder_near_village_farm.json,
+	config/cutscene/demo_2/main/adventurer_mid_village.json,
+	config/cutscene/demo_2/main/adventurer_female_mid_village.json,
+	config/cutscene/demo_2/main/adventurer_blocking_castle_entry.json,
 ]
