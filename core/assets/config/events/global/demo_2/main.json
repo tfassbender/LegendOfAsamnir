@@ -93,6 +93,17 @@
 		}
 	},
 	
+	demo_2_main_archaeologist_near_invisible_path: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_main_archaeologist_near_invisible_path,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_archaeologist_near_invisible_path,
+		}
+	},
+	
 	//*******************************************
 	//*** cutscenes - map area reached
 	//*******************************************

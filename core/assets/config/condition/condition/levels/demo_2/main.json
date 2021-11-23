@@ -73,5 +73,12 @@
 			key: demo_2_main_builder_on_second_farm_mead_dialog_executed,
 			expectedValue: true,
 		}
+	},
+	
+	demo_2_main_archaeologist_near_invisible_path__rune_found: {
+		conditionType: RUNE_COLLECTED,
+		parameters: {
+			rune: algiz
+		}
 	}
 }

@@ -1,0 +1,189 @@
+{
+	id: demo_2_main_archaeologist_near_invisible_path,
+	controlledActions: {
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "An adventurer in the village told me about a quest, that starts here, but I can't find the entry.\nAre you searching for this quest too?",
+				colorHeader: #a36124,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"No, I'm just exploring the area.",
+					"Yes, I search for this quest too.",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_no,
+				adventurer_answer_yes,
+			],
+		},
+		
+		adventurer_answer_no: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Alright, then I'll just go on searching for the path to enter this area...",
+				colorHeader: #a36124,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		adventurer_answer_yes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Oh, good. Have you got any idea how to enter the area?",
+				colorHeader: #a36124,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				condition_rune_found,
+			]
+		},
+		
+		condition_rune_found: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_archaeologist_near_invisible_path__rune_found,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: rune_found,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: rune_not_found,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				rune_found: thorin_answer_rune_found,
+				rune_not_found: thorin_answer_rune_not_found,
+			}
+		},
+		
+		thorin_answer_rune_found: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Yes, you need a magical rune.",
+					"No, I haven't found a way yet.",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_way_found,
+				adventurer_answer_way_not_found,
+			],
+		},
+		
+		thorin_answer_rune_not_found: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "No, I haven't found a way yet.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_way_not_found,
+			]
+		},
+		
+		adventurer_answer_way_found: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "A magical rune reveals the path to this area?\nOh, ok. Then I should start to search for this rune.\nThank you for your help!",
+				colorHeader: #a36124,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+		
+		adventurer_answer_way_not_found: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I don't think we can jump over the canyon.\nBut maybe you can find someone who tosses you.",
+				colorHeader: #a36124,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_toss_dwarf,
+			]
+		},
+		
+		thorin_answer_toss_dwarf: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Nobody tosses a dwarf!\n \nI'll find a different way.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_nobody_tosses_a_dwarf,
+			]
+		},
+		
+		adventurer_answer_nobody_tosses_a_dwarf: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Alright.\nBut please tell me if you find a way.",
+				colorHeader: #a36124,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+	}
+}
