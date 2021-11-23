@@ -1,0 +1,252 @@
+{
+	id: demo_2_main_builder_on_second_farm,
+	controlledActions: {
+		condition_farmer_already_met: {
+			type: CONDITION,
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_main_builder_on_second_farm_mead_dialog_executed,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: farmer_already_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: farmer_not_met_yet,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				farmer_already_met: farmer_greeting_again,
+				farmer_not_met_yet: farmer_greeting,
+			}
+		},
+		
+		//*********************************************************
+		//*** Dialog options if the farmer is already known
+		//*********************************************************
+		
+		farmer_greeting_again: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "Hey, it's you again! May I offer you another jug of mead?",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_mead,
+			],
+		}
+		
+		//*****************************************************
+		//*** Dialog options for the first contact
+		//*****************************************************
+		
+		farmer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "A visitor?!\nI haven't seen any visitors in quite some time!\nHow did you get here?",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_invisible_path,
+			],
+		},
+		
+		thorin_answer_invisible_path: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "There is this invisible path over the lake, that one can only see with this rune...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				farmer_answer_invisible_path,
+			],
+		},
+		
+		farmer_answer_invisible_path: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "Ah, the invisible path over the lake...\nDon't you think jumping over the fence would have been much easier?",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_fence,
+			]
+		},
+		
+		thorin_answer_fence: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"That would have been too easy!",
+					"It wasn't that hard...",
+				],
+			},
+			choiceOptionExecutions: [
+				farmer_answer_fence,
+				farmer_answer_fence,
+			],
+		},
+		
+		farmer_answer_fence: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "Maybe for a dwarf it's even easier to find invisible pathes than to jump over such a high fence...",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_dwarf_joke,
+			]
+		},
+		
+		thorin_answer_dwarf_joke: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"That might be right...",
+					"Very funy...",
+					"...",
+				],
+			},
+			choiceOptionExecutions: [
+				farmer_answer_dwarf_joke,
+				farmer_answer_dwarf_joke,
+				farmer_answer_dwarf_joke,
+			],
+		},
+		
+		farmer_answer_dwarf_joke: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "But now since you've managed to come here, may I offer you a jug of mead?",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_builder_on_second_farm_mead_dialog_executed, value: true}",
+			},
+			
+			executes: [
+				thorin_answer_mead,
+			]
+		}
+		
+		thorin_answer_mead: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Of cause I'll take one",
+					"Not now. Thanks.",
+				],
+			},
+			choiceOptionExecutions: [
+				take_mead,
+				dont_take_mead,
+			],
+		},
+		
+		take_mead: {
+			type: EVENT,
+			
+			event: {
+				eventType: GIVE_ITEM_TO_PLAYER,
+				stringValue: "mana",
+			},
+			
+			executes: [
+				after_mead,
+			]
+		},
+		
+		dont_take_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "A drawf, who refuses a jug of mead?! You are a strange kind of dwarf...",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				after_mead,
+			]
+		},
+		
+		after_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Farmer",
+				displayText: "I need to get back to work now.\nI wish you good luck on your quests.",
+				colorHeader: #8db828,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

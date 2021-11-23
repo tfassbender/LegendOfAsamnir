@@ -1,0 +1,76 @@
+{
+	id: demo_2_main_first_enter_village,
+	controlledActions: {
+		narrator_comment_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "As Thorin reached a nearby village, he started to ask the villagers in search for a lantern, to get through the dungeon.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_1,
+			],
+		},
+		thorin_answer_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I ask the villagers for a lantern?\nWho would have guessed that?!\nThanks strange narrator voice!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				narrator_comment_2,
+			]
+		},
+		narrator_comment_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "But before proceeding his quest, thorin stopped for a while for some more sarcastic comments...",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_2,
+			]
+		},
+		thorin_answer_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Two correct predictions in a row...\nI'm almost impressed!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_main_first_enter_village_cutscene_executed, value: true}",
+			},
+		}
+	}
+}

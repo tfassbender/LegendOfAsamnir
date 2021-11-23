@@ -51,4 +51,6 @@
 	config/cutscene/demo_2/main/adventurer_mid_village.json,
 	config/cutscene/demo_2/main/adventurer_female_mid_village.json,
 	config/cutscene/demo_2/main/adventurer_blocking_castle_entry.json,
+	config/cutscene/demo_2/main/builder_on_second_farm.json
+	config/cutscene/demo_2/main/first_enter_village.json,
 ]

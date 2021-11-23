@@ -2,6 +2,7 @@ package net.jfabricationgames.gdx.character.player.implementation;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -28,6 +29,7 @@ import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemAmmoType;
+import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.object.event.EventObject;
 import net.jfabricationgames.gdx.physics.BeforeWorldStep;
@@ -482,6 +484,11 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				if (fastTravelTargetPoint.enabled) {
 					setPosition(fastTravelTargetPoint.positionOnMapX, fastTravelTargetPoint.positionOnMapY);
 				}
+				break;
+			case GIVE_ITEM_TO_PLAYER:
+				Item createdItem = ItemFactory.createItem(event.stringValue, 0f, 0f, new MapProperties());
+				createdItem.pickUp();
+				itemDataHandler.collectItem(createdItem);
 				break;
 			case SET_ITEM:
 				String itemId = event.stringValue;

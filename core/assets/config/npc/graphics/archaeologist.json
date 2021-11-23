@@ -9,6 +9,6 @@
 	imageOffsetX: 0f,
 	imageOffsetY: 0.2f,
 	
-	interactionMarkerOffsetX: 0f,
+	interactionMarkerOffsetX: -0.4f,
 	interactionMarkerOffsetY: 0f,
 }

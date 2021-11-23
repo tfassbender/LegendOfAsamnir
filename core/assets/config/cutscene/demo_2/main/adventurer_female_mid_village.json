@@ -140,7 +140,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "There is a dungeon in the west, that leads to svartalfheim. You should have seen it on your way to this village.\nBut the enemies in this dungeon are very strong, so you should do some easier quests before you go into this dungeon.'",
+				displayText: "There is a dungeon in the west, that leads to svartalfheim. You should have seen it on your way to this village.\nBut the enemies in this dungeon are very strong, so you should do some easier quests before you go into this dungeon.",
 				colorHeader: #ff00ff,
 				showNextPageIcon: true,
 			}
