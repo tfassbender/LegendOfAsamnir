@@ -52,7 +52,7 @@
 	{
 		name: demo_2_main,
 		map: "map/demo_2_main.tmx",
-		initialStartingPointId: 4,
+		initialStartingPointId: 1,
 		initial: true
 	}
 ]

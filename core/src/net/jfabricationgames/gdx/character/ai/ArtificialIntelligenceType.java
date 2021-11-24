@@ -118,7 +118,8 @@ public enum ArtificialIntelligenceType {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
 			
-			RandomMovementAI ai = new RandomMovementAI(subAI, movingState, idleState, maxDistance, idleTimeBetweenMovements);
+			RandomMovementAI ai = new RandomMovementAI(subAI, movingState, idleState, maxDistance, idleTimeBetweenMovements,
+					aiConfig.changeTargetWhenStaticBodyHit);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
 			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;
@@ -255,7 +256,8 @@ public enum ArtificialIntelligenceType {
 				maxDistance = Float.parseFloat(maxDistanceString);
 			}
 			
-			RandomMovementAI ai = new RandomIdleStatesMovementAI(subAI, idleStates, movementProbability, movingState, idleState, maxDistance);
+			RandomMovementAI ai = new RandomIdleStatesMovementAI(subAI, idleStates, movementProbability, movingState, idleState, maxDistance,
+					aiConfig.changeTargetWhenStaticBodyHit);
 			ai.setDistanceToKeepFromPlayer(aiConfig.distanceToKeepFromPlayer);
 			ai.setMovementSpeedFactor(aiConfig.movementSpeedFactor);
 			return ai;

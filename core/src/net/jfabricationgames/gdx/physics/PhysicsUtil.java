@@ -4,7 +4,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyProperties;
 
-public abstract class PhysicsUtil {
+public class PhysicsUtil {
+	
+	private PhysicsUtil() {}
 	
 	public static void addNpcSensor(Body body, float radius) {
 		PhysicsBodyProperties sensorProperties = new PhysicsBodyProperties().setBody(body).setSensor(true).setRadius(radius)

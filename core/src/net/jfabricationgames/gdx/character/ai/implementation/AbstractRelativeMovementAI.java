@@ -57,7 +57,6 @@ public abstract class AbstractRelativeMovementAI extends AbstractMovementAI {
 	@Override
 	public void beginContact(Contact contact) {
 		PlayableCharacter collidingCharacter = getObjectCollidingWithEnemySensor(contact, PlayableCharacter.class);
-		// if the sensor touches a PlayableCharacter -> start following him
 		if (collidingCharacter != null) {
 			playerCharacter = collidingCharacter;
 		}
