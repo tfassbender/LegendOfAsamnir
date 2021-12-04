@@ -233,10 +233,5 @@
 			map: demo_2_tutorial,
 			startingPointId: 0,
 		}
-//		executionType: SHOW_ON_SCREEN_TEXT,
-//		executionParameters: {
-//			displayTextHeader: "Demo end reached",
-//			displayText: "\nYou've reached the end of this demo.\n\nMore content coming soon. ",
-//		}
 	}
 }

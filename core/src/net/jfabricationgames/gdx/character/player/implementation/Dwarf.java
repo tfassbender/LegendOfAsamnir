@@ -475,7 +475,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				propertiesDataHandler.increaseCoins(event.intValue);
 				break;
 			case PLAYER_BUY_ITEM:
-				Item item = (Item) event.parameterObject;
+				Item item = ItemFactory.createItem(event.stringValue, 0f, 0f, new MapProperties());
+				item.pickUp();
 				itemDataHandler.collectItem(item);
 				item.displaySpecialKeyProperties();
 				break;

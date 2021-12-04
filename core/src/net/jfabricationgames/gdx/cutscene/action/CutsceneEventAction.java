@@ -18,6 +18,9 @@ public class CutsceneEventAction extends AbstractCutsceneAction implements Event
 	@Override
 	public void execute(float delta) {
 		if (!eventFired) {
+			// eventFired needs to be set before firing the event. Otherwise a change to a menu screen will cause an infinite loop and a stack overflow
+			eventFired = true;
+			
 			if (actionConfig.event != null) {
 				EventHandler.getInstance().fireEvent(actionConfig.event);
 			}
@@ -25,7 +28,6 @@ public class CutsceneEventAction extends AbstractCutsceneAction implements Event
 				EventHandler.getInstance().fireEvent(
 						new EventConfig().setEventType(EventType.CUTSCENE_EVENT).setStringValue(actionConfig.globalEvent).setParameterObject(this));
 			}
-			eventFired = true;
 		}
 	}
 	

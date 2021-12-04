@@ -1,0 +1,66 @@
+{
+	//*******************************************
+	//*** cutscenes - npc interaction
+	//*******************************************
+	
+	demo_2_village_tavern_builder_barkeeper: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_village_tavern_builder_barkeeper,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_village_tavern_builder_barkeeper,
+		}
+	},
+	
+	demo_2_village_tavern_adventurer_eating: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_village_tavern_adventurer_eating,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_village_tavern_adventurer_eating,
+		}
+	},
+	
+	demo_2_village_tavern_adventurer_female_drinking: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_village_tavern_adventurer_female_drinking,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_village_tavern_adventurer_female_drinking,
+		}
+	},
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_village_tavern_left_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_village_tavern_left_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 6,
+		}
+	},
+	
+	demo_2_village_tavern_right_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_village_tavern_right_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 7,
+		}
+	},
+}

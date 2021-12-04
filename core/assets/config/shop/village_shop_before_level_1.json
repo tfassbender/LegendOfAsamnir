@@ -1,0 +1,12 @@
+[
+	{
+		displayName: saehrimnir,
+		technicalName: health,
+		cost: 30,
+	},
+	{
+		displayName: mead,
+		technicalName: mana,
+		cost: 15,
+	},
+]

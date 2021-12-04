@@ -123,6 +123,7 @@ public class GameMapImplementation implements GameMap {
 		currentMapIdentifier = mapIdentifier;
 		MapObjectDataHandler.getInstance().setMapIdentifier(mapIdentifier);
 		
+		//PhysicsWorld.getInstance().createWorld();
 		removeCurrentMapIfPresent();
 		player.reAddToWorld();
 	}
@@ -140,7 +141,6 @@ public class GameMapImplementation implements GameMap {
 		player.setPosition(startingPosition.x, startingPosition.y);
 		
 		updateMapObjectStates();
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
 		resetLanternUsed();
 		updateContinuousMapDamageProperties();
 		updateRemovedObjects();
@@ -332,16 +332,19 @@ public class GameMapImplementation implements GameMap {
 	
 	@Override
 	public void addItem(Item item) {
+		logAddObject(item, items.size);
 		items.add(item);
 	}
 	
 	@Override
 	public void addItemAboveGameObjects(Item item) {
+		logAddObject(item, itemsAboveGameObjects.size, "above game objects");
 		itemsAboveGameObjects.add(item);
 	}
 	
 	@Override
 	public void removeItem(Item item, Body body) {
+		logRemoveObject(item, items.size, "maybe above game objects");
 		items.removeValue(item, false);
 		itemsAboveGameObjects.removeValue(item, false);
 		removePhysicsBody(body);
@@ -353,6 +356,7 @@ public class GameMapImplementation implements GameMap {
 	
 	@Override
 	public void addObject(GameObject object) {
+		logAddObject(object, objects.size);
 		objects.add(object);
 		object.postAddToGameMap();
 		
@@ -375,48 +379,57 @@ public class GameMapImplementation implements GameMap {
 	
 	@Override
 	public void removeObject(GameObject gameObject, Body body) {
+		logRemoveObject(gameObject, objects.size);
 		objects.removeValue(gameObject, false);
 		removePhysicsBody(body);
 	}
 	
 	@Override
 	public void addEnemy(Enemy enemy) {
+		logAddObject(enemy, enemies.size);
 		enemies.add(enemy);
 	}
 	
 	@Override
 	public void removeEnemy(Enemy enemy, Body body) {
+		logRemoveObject(enemy, enemies.size);
 		enemies.removeValue(enemy, false);
 		removePhysicsBody(body);
 	}
 	
 	public void addNpc(NonPlayableCharacter npc) {
+		logAddObject(npc, nonPlayableCharacters.size);
 		nonPlayableCharacters.add(npc);
 	}
 	
 	@Override
 	public void removeNpc(NonPlayableCharacter npc, Body body) {
+		logRemoveObject(npc, nonPlayableCharacters.size);
 		nonPlayableCharacters.removeValue(npc, false);
 		removePhysicsBody(body);
 	}
 	
 	public void addAnimal(Animal animal) {
+		logAddObject(animal, animals.size);
 		animals.add(animal);
 	}
 	
 	@Override
 	public void removeAnimal(Animal animal, Body body) {
+		logRemoveObject(animal, animals.size);
 		animals.removeValue(animal, false);
 		removePhysicsBody(body);
 	}
 	
 	@Override
 	public void addProjectile(Projectile projectile) {
+		logAddObject(projectile, projectiles.size);
 		projectiles.add(projectile);
 	}
 	
 	@Override
 	public void removeProjectile(Projectile projectile, Body body) {
+		logRemoveObject(projectile, projectiles.size);
 		projectiles.removeValue(projectile, false);
 		removePhysicsBody(body);
 	}
@@ -542,6 +555,38 @@ public class GameMapImplementation implements GameMap {
 			default:
 				throw new IllegalStateException("Unexpected type: " + objectType);
 		}
+	}
+	
+	private void logAddObject(Object object, int count) {
+		logAddObject(object, count, "");
+	}
+	
+	private void logAddObject(Object object, int count, String objectDescription) {
+		if (objectDescription != null && !objectDescription.isEmpty()) {
+			objectDescription = " (" + objectDescription + ") ";
+		}
+		else {
+			objectDescription = "";
+		}
+		
+		Gdx.app.debug(getClass().getSimpleName(),
+				"Adding " + object.getClass().getSimpleName() + objectDescription + " (count: " + count + "): " + object);
+	}
+	
+	private void logRemoveObject(Object object, int count) {
+		logRemoveObject(object, count, "");
+	}
+	
+	private void logRemoveObject(Object object, int count, String objectDescription) {
+		if (objectDescription != null && !objectDescription.isEmpty()) {
+			objectDescription = " (" + objectDescription + ") ";
+		}
+		else {
+			objectDescription = "";
+		}
+		
+		Gdx.app.debug(getClass().getSimpleName(),
+				"Removing " + object.getClass().getSimpleName() + objectDescription + " (count: " + count + "): " + object);
 	}
 	
 	@Override

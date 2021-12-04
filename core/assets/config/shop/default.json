@@ -1,0 +1,30 @@
+[
+	{
+		displayName: saehrimnir,
+		technicalName: health,
+		cost: 30,
+	},
+	{
+		displayName: shield,
+		technicalName: shield,
+		cost: 20,
+	},
+	{
+		displayName: mead,
+		technicalName: mana,
+		cost: 15,
+	},
+	{
+		cost: 0,
+	},
+	{
+		displayName: arrows,
+		technicalName: arrow,
+		cost: 25,
+	},
+	{
+		displayName: bombs,
+		technicalName: bomb,
+		cost: 25,
+	},
+]

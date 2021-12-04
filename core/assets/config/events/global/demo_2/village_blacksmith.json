@@ -1,0 +1,43 @@
+{
+	//*******************************************
+	//*** cutscenes - npc interaction
+	//*******************************************
+	
+	demo_2_village_blacksmith_builder_left: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_village_blacksmith_builder_left,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_village_blacksmith_builder_left,
+		}
+	},
+	
+	demo_2_village_blacksmith_builder_right: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_village_blacksmith_builder_right,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_village_blacksmith_builder_right,
+		}
+	},
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_village_blacksmith_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_village_blacksmith_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 8,
+		}
+	},
+}

@@ -1,0 +1,18 @@
+{
+	id: demo_2_village_blacksmith_builder_right,
+	controlledActions: {
+		blacksmith_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Blacksmith",
+				displayText: "I'm busy! If you want to buy something you need to ask my brother.",
+				colorHeader: #630000,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+		},
+	}
+}

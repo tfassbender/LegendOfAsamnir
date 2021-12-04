@@ -1,0 +1,188 @@
+{
+	id: demo_2_village_shop_adventurer_female,
+	controlledActions: {
+		merchant_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Merchant",
+				displayText: "Greetings adventurer! How may I help you?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I don't need anything.",
+					"I want to buy something.",
+					"Do you have a lantern?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				open_shop_menu_condition_1,
+				merchant_lantern,
+			],
+		},
+		
+		open_shop_menu_condition_1: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_village_shop_after_level_3,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_shop_menu_after_level_3,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_shop_menu_condition_2,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				open_shop_menu_after_level_3: open_shop_menu_after_level_3,
+				open_shop_menu_condition_2: open_shop_menu_condition_2,
+			}
+		},
+		open_shop_menu_condition_2: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_village_shop_after_level_2,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_shop_menu_after_level_2,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_shop_menu_condition_3,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				open_shop_menu_after_level_2: open_shop_menu_after_level_2,
+				open_shop_menu_condition_3: open_shop_menu_condition_3,
+			}
+		},
+		open_shop_menu_condition_3: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_village_shop_after_level_1,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_shop_menu_after_level_1,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_shop_menu_before_level_1,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				open_shop_menu_after_level_1: open_shop_menu_after_level_1,
+				open_shop_menu_before_level_1: open_shop_menu_before_level_1,
+			}
+		},
+		
+		open_shop_menu_after_level_3: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_shop_after_level_3.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		open_shop_menu_after_level_2: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_shop_after_level_2.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		open_shop_menu_after_level_1: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_shop_after_level_1.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		open_shop_menu_before_level_1: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_shop_before_level_1.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		
+		merchant_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Merchant",
+				displayText: "A lantern? No, I only sell food, mead and things, that other adventurers found on their quests.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			]
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

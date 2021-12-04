@@ -87,10 +87,12 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 	}
 	
 	protected void calculateNextTargetPoint() {
-		targetPosition = new Vector2(1, 1);//don't use a null-vector; otherwise setLength will not work
-		targetPosition.setLength((float) (Math.random() * maxDistance));
-		targetPosition.setAngleDeg((float) (Math.random() * 360f));
-		targetPosition.add(relativeZero);
+		if (relativeZero != null) {
+			targetPosition = new Vector2(1, 1);//don't use a null-vector; otherwise setLength will not work
+			targetPosition.setLength((float) (Math.random() * maxDistance));
+			targetPosition.setAngleDeg((float) (Math.random() * 360f));
+			targetPosition.add(relativeZero);
+		}
 		
 		resetIdleTimeBetweenMovements();
 	}

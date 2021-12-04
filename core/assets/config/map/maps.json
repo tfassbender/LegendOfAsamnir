@@ -54,5 +54,20 @@
 		map: "map/demo_2_main.tmx",
 		initialStartingPointId: 1,
 		initial: true
-	}
+	},
+	{
+		name: demo_2_village_blacksmith,
+		map: "map/demo_2_village_blacksmith.tmx",
+		//initial: true
+	},
+	{
+		name: demo_2_village_shop,
+		map: "map/demo_2_village_shop.tmx",
+		//initial: true
+	},
+	{
+		name: demo_2_village_tavern,
+		map: "map/demo_2_village_tavern.tmx",
+		//initial: true
+	},
 ]

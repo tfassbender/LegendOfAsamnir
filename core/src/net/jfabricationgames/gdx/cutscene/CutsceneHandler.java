@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.event.EventType;
 public class CutsceneHandler implements EventListener {
 	
 	public static final String CONFIG_PATH = "config/cutscene/cutscenes.json";
+	public static final String CONTROLLED_UNIT_ID_PLAYER = "PLAYER";
 	
 	private static CutsceneHandler instance;
 	
@@ -34,7 +35,10 @@ public class CutsceneHandler implements EventListener {
 	private CutsceneUnitProvider unitProvider;
 	private Supplier<Boolean> isTextDisplayed;
 	
-	public static final String CONTROLLED_UNIT_ID_PLAYER = "PLAYER";
+	/**
+	 * A boolean field to be used as lock, to prevent looping executions which lead to stack overflows.
+	 */
+	private boolean isInCutsceneExecution;
 	
 	public static synchronized CutsceneHandler getInstance() {
 		if (instance == null) {
@@ -167,19 +171,25 @@ public class CutsceneHandler implements EventListener {
 			return;
 		}
 		
-		for (Iterator<AbstractCutsceneAction> iter = executedActions.iterator(); iter.hasNext();) {
-			AbstractCutsceneAction action = iter.next();
-			action.increaseExecutionTime(delta);
+		if (!isInCutsceneExecution) {
+			isInCutsceneExecution = true;
 			
-			if (action.isExecutionDelayPassed()) {
-				action.execute(delta);
+			for (Iterator<AbstractCutsceneAction> iter = executedActions.iterator(); iter.hasNext();) {
+				AbstractCutsceneAction action = iter.next();
+				action.increaseExecutionTime(delta);
 				
-				if (action.isExecutionFinished()) {
-					createFollowingActions(action);
-					action.dispose();
-					iter.remove();
+				if (action.isExecutionDelayPassed()) {
+					action.execute(delta);
+					
+					if (action.isExecutionFinished()) {
+						createFollowingActions(action);
+						action.dispose();
+						iter.remove();
+					}
 				}
 			}
+			
+			isInCutsceneExecution = false;
 		}
 	}
 	

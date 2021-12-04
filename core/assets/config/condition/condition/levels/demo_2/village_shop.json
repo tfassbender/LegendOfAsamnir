@@ -1,0 +1,22 @@
+{
+	demo_2_village_shop_after_level_3: {
+		conditionType: RUNE_COLLECTED,
+		parameters: {
+			rune: ALGIZ
+		}
+	},
+	
+	demo_2_village_shop_after_level_2: {
+		conditionType: RUNE_COLLECTED,
+		parameters: {
+			rune: MANNAZ
+		}
+	},
+	
+	demo_2_village_shop_after_level_1: {
+		conditionType: RUNE_COLLECTED,
+		parameters: {
+			rune: ANSUZ
+		}
+	},
+}

@@ -16,13 +16,13 @@ public class PhysicsBodyCreator {
 	private PhysicsBodyCreator() {}
 	
 	public static Body createBody(BodyDef bodyDef) {
-		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().createBody(bodyDef);
 		return body;
 	}
 	
 	public static Body createBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addFixture(properties);
@@ -45,7 +45,7 @@ public class PhysicsBodyCreator {
 	
 	public static Body createOctagonBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addOctagonFixture(properties);
@@ -70,7 +70,7 @@ public class PhysicsBodyCreator {
 	
 	public static Body createCircularBody(PhysicsBodyProperties properties) {
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addCircularFixture(properties);
@@ -91,8 +91,9 @@ public class PhysicsBodyCreator {
 	}
 	
 	public static Body createRectangularBody(PhysicsBodyProperties properties) {
+		
 		BodyDef bodyDef = createBodyDef(properties);
-		Body body = PhysicsWorld.getInstance().getWorld().createBody(bodyDef);
+		Body body = PhysicsWorld.getInstance().createBody(bodyDef);
 		
 		properties.setBody(body);
 		addRectangularFixture(properties);

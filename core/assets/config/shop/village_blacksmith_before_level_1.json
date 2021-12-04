@@ -1,0 +1,12 @@
+[
+	{
+		displayName: shield,
+		technicalName: shield,
+		cost: 20,
+	},
+	{
+		displayName: arrows,
+		technicalName: arrow,
+		cost: 25,
+	},
+]

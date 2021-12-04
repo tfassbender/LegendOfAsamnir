@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
-public abstract class ItemSubMenu extends MenuBox {
+public class ItemSubMenu extends MenuBox {
 	
 	private static final String selectionTextureConfigName = "selected";
 	private static final String hoverTextureConfigName = "hover";
@@ -23,9 +23,13 @@ public abstract class ItemSubMenu extends MenuBox {
 	
 	private TextureLoader itemTextureLoader;
 	
-	private Array<String> items;
 	private Array<TextureRegion> itemTextures;
 	
+	protected Array<String> items;
+	
+	public ItemSubMenu(int numItemsPerLine, int numItemRows) {
+		this(numItemsPerLine, numItemRows, new Array<>());
+	}
 	public ItemSubMenu(int numItemsPerLine, int numItemRows, Array<String> items) {
 		super(numItemsPerLine + 2, numItemRows + 2, TextureType.INVENTORY);
 		this.numItemsPerLine = numItemsPerLine;
@@ -44,7 +48,7 @@ public abstract class ItemSubMenu extends MenuBox {
 	
 	public void updateStateAfterMenuShown() {}
 	
-	private void loadItemTextures() {
+	protected void loadItemTextures() {
 		itemTextures = new Array<>(items.size);
 		for (String item : items) {
 			if (item != null) {
@@ -54,6 +58,11 @@ public abstract class ItemSubMenu extends MenuBox {
 				itemTextures.add(null);
 			}
 		}
+	}
+	
+	public void setDisplayedItems(Array<String> items) {
+		this.items = items;
+		loadItemTextures();
 	}
 	
 	@Override

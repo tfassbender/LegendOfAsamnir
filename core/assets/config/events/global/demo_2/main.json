@@ -173,5 +173,53 @@
 			globalValueKey: demo_2_main_final_dungeon_tested,
 			globalValue: true,
 		}
-	}
+	},
+	
+	demo_2_main_goto_village_shop: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_village_shop,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_village_shop,
+			startingPointId: 0,
+		}
+	},
+	
+	demo_2_main_goto_village_tavern_left: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_village_tavern_left,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_village_tavern,
+			startingPointId: 0,
+		}
+	},
+	
+	demo_2_main_goto_village_tavern_right: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_village_tavern_right,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_village_tavern,
+			startingPointId: 1,
+		}
+	},
+	
+	demo_2_main_goto_village_blacksmith: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_village_blacksmith,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_village_blacksmith,
+			startingPointId: 0,
+		}
+	},
 }

@@ -1,0 +1,76 @@
+{
+	id: demo_2_village_tavern_builder_barkeeper,
+	controlledActions: {
+		barkeeper_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "Oh a dwarf! We don't see many dwarfs in this village.\nHow may I help you? A jug of mead probably?",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I don't need anything.",
+					"I want to buy something.",
+					"Do you have a lantern?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				open_shop_menu,
+				barkeeper_lantern,
+			],
+		},
+		
+		open_shop_menu: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_tavern.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		
+		barkeeper_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "A lantern? I had one, but a view days ago an adventurer needed it and so I sold it to him. Unfortunately I haven't seen him since...\n \nBut there is another tavern in the castle to the east. They shurely have a lantern there.\nBut they usually don't let adventurers enter the castle, so you'll have to find a way to get into the castle's tavern.",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			]
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

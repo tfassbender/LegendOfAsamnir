@@ -1,0 +1,8 @@
+{
+	demo_2_village_blacksmith_after_level_1: {
+		conditionType: RUNE_COLLECTED,
+		parameters: {
+			rune: ANSUZ
+		}
+	},
+}

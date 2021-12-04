@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="44" height="35" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="150">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="44" height="35" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="150">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -14,7 +14,7 @@
  </layer>
  <layer id="4" name="terrain" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFhMAa5oF2ASroRnJPJxum+Blm3OpHAXVBFxcDQw8X/e3NZyGMC1jo7y5CQJcVk48uNpQAyO28VPQDrrxKTB6GuQVdDJu6wQKQ3YLN/dSyg5MNt3wPOwQjs2H8gQKaeNyLDgaDe2kNqJ3PRsEoGAWjYBRQBlYC2yWrBmH/4jwnA8MFTgT/A5R9EujWU4PQvTDQg1TvewH7FZ5AzAnEJzlx6xlIsAbJvVlAd2YCsSYQvxxg9/qj9cn8BqCPhg/A2mw5w7zdNpxAHpXSECV9vKEKfIkIu2xgmeE9SMu5UUAZIDXND+e8MJgBADH2IrE=
+   eJxjYBgFhMAa5oF2ASroRnJPJxum+Blm3OpHAXVBFxcDQw8X/e3NZyGMC1jo7y5CQJcVk48uNpQAyO28VPQDrrxKTB6GuQVdDJu6wQKQ3YLN/dSyg5MNt3wPOwQjs2H8gQKaeNyLDgaDe2kNqJ3PRsEoGAWjYBRQBlYC2yWrBmH/4jwnA8MFTgT/A5R9EujWU4PQvTDQg1TvewH7FZ5AzAnEJzlx6xlIsAbJvVlAd2YCsSYQvxxg9/qj9cn8BqCPhg/A2mw5w7zdNpxA3iBLQ0MJ+BIRdtnAMsN7kJZzo2AUjAQAAIgtH+s=
   </data>
  </layer>
  <layer id="8" name="terrain_2" width="44" height="35" locked="1">
@@ -29,7 +29,7 @@
  </layer>
  <layer id="6" name="terrain_above_player" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1zENAAAIwDAOzJDgXx8mSOBoFexdBOzrvC4AAAD4ofwRAPDEAK2LAF4=
+   eJzt17EJACAQA0BBlxHc1KWdQFAQfOWuTJUiTVKC81q53QAAACCG6h8BwfW8lsFPZhvfzV8zAHW+AyQ=
   </data>
  </layer>
  <layer id="2" name="shadows" width="44" height="35" locked="1">
@@ -42,7 +42,7 @@
    eJztwzENAAAIA7AJwL8xDHFggYOjTZoAAAAAAPzTtYEbA+EfAb8=
   </data>
  </layer>
- <objectgroup id="10" name="objects">
+ <objectgroup id="10" name="objects" locked="1">
   <object id="112" name="player.startingPosition" x="256.5" y="960.167">
    <properties>
     <property name="startingPointId" value="1"/>

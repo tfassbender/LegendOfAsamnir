@@ -1,0 +1,112 @@
+{
+	id: demo_2_village_blacksmith_builder_left,
+	controlledActions: {
+		blacksmith_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Blacksmith",
+				displayText: "Greetings adventurer! My brother and I are the blacksmiths of this village. Here you can buy the best weapons and armor in all of midgard!\nWhat do you need?",
+				colorHeader: #630000,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I don't need anything.",
+					"I want to buy something.",
+					"Do you have a lantern?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				open_shop_menu,
+				blacksmith_lantern,
+			],
+		},
+		
+		open_shop_menu: {
+			type: CONDITION,
+			
+			waitForEventToFinish: true,
+			
+			condition: {
+				conditionId: demo_2_village_blacksmith_after_level_1,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_full_shop_menu,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: open_partial_shop_menu,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				open_full_shop_menu: open_full_shop_menu,
+				open_partial_shop_menu: open_partial_shop_menu,
+			}
+		},
+		open_full_shop_menu: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_blacksmith_after_level_1.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		open_partial_shop_menu: {
+			type: EVENT,
+			
+			event: {
+				eventType: SHOW_IN_GAME_SHOP_MENU,
+				stringValue: "config/shop/village_blacksmith_before_level_1.json",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		
+		blacksmith_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Blacksmith",
+				displayText: "A lantern? No, we don't have such a thing here. The fire in the forge lightens up the whole building.",
+				colorHeader: #630000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			]
+		},
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

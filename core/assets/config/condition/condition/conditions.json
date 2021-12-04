@@ -5,4 +5,6 @@
 	config/condition/condition/levels/demo_2/prolog.json,
 	config/condition/condition/levels/demo_2/tutorial.json,
 	config/condition/condition/levels/demo_2/main.json,
+	config/condition/condition/levels/demo_2/village_blacksmith.json,
+	config/condition/condition/levels/demo_2/village_shop.json,
 ]

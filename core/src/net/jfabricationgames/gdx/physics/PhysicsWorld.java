@@ -3,9 +3,11 @@ package net.jfabricationgames.gdx.physics;
 import java.util.Iterator;
 import java.util.function.Function;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -42,15 +44,10 @@ public class PhysicsWorld implements ContactListener {
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	
-	private Array<ContactListener> contactListeners;
-	private Array<Body> bodiesToRemove;
-	private ArrayMap<Body, Array<Fixture>> fixturesToRemove;
-	private Array<Runnable> runAfterWorldStep;
-	
-	private PhysicsWorld() {
-		bodiesToRemove = new Array<>();
-		fixturesToRemove = new ArrayMap<>();
-	}
+	private Array<ContactListener> contactListeners = new Array<>();
+	private Array<Body> bodiesToRemove = new Array<>();
+	private ArrayMap<Body, Array<Fixture>> fixturesToRemove = new ArrayMap<>();
+	private Array<Runnable> runAfterWorldStep = new Array<>();
 	
 	public void createWorld() {
 		disposeWorld();
@@ -62,12 +59,10 @@ public class PhysicsWorld implements ContactListener {
 				true, /* inactive bodies */
 				true, /* velocities */
 				false /* contacts */);
-		
-		contactListeners = new Array<>();
-		runAfterWorldStep = new Array<>();
 	}
 	
 	public void removeBodiesFromWorld() {
+		Gdx.app.debug(getClass().getSimpleName(), "Removing bodies from world");
 		Array<Body> bodies = new Array<Body>();
 		world.getBodies(bodies);
 		for (Body body : bodies) {
@@ -77,12 +72,15 @@ public class PhysicsWorld implements ContactListener {
 	
 	public void disposeWorld() {
 		if (world != null) {
+			Gdx.app.debug(getClass().getSimpleName(), "Disposing world");
 			world.dispose();
 		}
 	}
 	
-	protected World getWorld() {
-		return world;
+	protected Body createBody(BodyDef bodyDef) {
+		//hide this log, because it's to verbose to be always displayed (and there is no "trace" logging)
+		//Gdx.app.debug(getClass().getSimpleName(), "Creating body on world (count: " + world.getBodyCount() + ")");
+		return world.createBody(bodyDef);
 	}
 	
 	public void registerContactListener(ContactListener contactListener) {
@@ -137,6 +135,7 @@ public class PhysicsWorld implements ContactListener {
 		}
 		for (Body body : bodiesToRemove) {
 			body.setUserData(null);
+			Gdx.app.debug(getClass().getSimpleName(), "Destroying body from world: " + body);
 			world.destroyBody(body);
 		}
 		
@@ -197,9 +196,11 @@ public class PhysicsWorld implements ContactListener {
 	public void removeBodyWhenPossible(Body body) {
 		if (body != null) {
 			if (isInWorldStepExecution()) {
+				Gdx.app.debug(getClass().getSimpleName(), "Marking body to be destroyed after world step: " + body);
 				bodiesToRemove.add(body);
 			}
 			else {
+				Gdx.app.debug(getClass().getSimpleName(), "Destroying body from world: " + body);
 				body.setUserData(null);
 				world.destroyBody(body);
 			}

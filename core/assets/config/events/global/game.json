@@ -31,5 +31,16 @@
 			displayTextHeader: "Thorin",
 			displayText: "I won't give away any of my gold.",
 		}
+	},
+	
+	item_already_owned: {
+		event: {
+			eventType: ITEM_BOUGHT_BUT_ALREADY_OWNED,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Thorin",
+			displayText: "I already have one of these. Why should I buy another one?",
+		}
 	}
 }

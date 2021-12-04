@@ -1,0 +1,21 @@
+{
+	graphicsConfigFile: config/npc/graphics/adventurer_female.json
+	
+	aiConfig: {
+		type: PRE_DEFINED_MOVEMENT_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: idle,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
+	
+	interactionPossible: true,
+	movingSpeed: 0.75f,
+	
+	interactionEventId: demo_2_village_shop_adventurer_female,
+}

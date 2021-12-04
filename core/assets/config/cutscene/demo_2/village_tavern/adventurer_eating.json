@@ -1,0 +1,18 @@
+{
+	id: demo_2_village_tavern_adventurer_eating,
+	controlledActions: {
+		blacksmith_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "After a long quest I always rest here and eat something. The food here is realy good!",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+		},
+	}
+}

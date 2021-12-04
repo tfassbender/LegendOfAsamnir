@@ -188,7 +188,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			InteractionManager.getInstance().resetInteractions();
 			
 			// fire a MAP_ENTERED event for the spawn points to know that they need to add their objects to the world
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED));
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
 		});
 	}
 	
@@ -278,17 +278,18 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			gameOver = false;
 		}
 		if (event.eventType == EventType.SHOW_IN_GAME_SHOP_MENU) {
-			showShopMenu();
+			showShopMenu(event.stringValue);
 		}
 		if (event.eventType == EventType.CHANGE_MAP) {
 			changeMap(event.stringValue, event.intValue);
 		}
 	}
 	
-	private void showShopMenu() {
+	private void showShopMenu(String shopConfigFilePath) {
 		if (shopMenu == null) {
 			shopMenu = new ShopMenuScreen(this);
 		}
+		shopMenu.loadBuyableItemConfig(shopConfigFilePath);
 		shopMenu.showMenu();
 	}
 	

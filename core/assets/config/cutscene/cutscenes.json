@@ -53,5 +53,26 @@
 	config/cutscene/demo_2/main/adventurer_blocking_castle_entry.json,
 	config/cutscene/demo_2/main/builder_on_second_farm.json
 	config/cutscene/demo_2/main/first_enter_village.json,
-	config/cutscene/demo_2/main/archaeologist_near_invisible_path.json
+	config/cutscene/demo_2/main/archaeologist_near_invisible_path.json,
+	
+	//********************************************************
+	//*** Demo 2 Village Blacksmith
+	//********************************************************
+	
+	config/cutscene/demo_2/village_blacksmith/builder_left.json,
+	config/cutscene/demo_2/village_blacksmith/builder_right.json,
+	
+	//********************************************************
+	//*** Demo 2 Village Shop
+	//********************************************************
+	
+	config/cutscene/demo_2/village_shop/adventurer_female.json,
+	
+	//********************************************************
+	//*** Demo 2 Village Tavern
+	//********************************************************
+	
+	config/cutscene/demo_2/village_tavern/builder_barkeeper.json,
+	config/cutscene/demo_2/village_tavern/adventurer_eating.json,
+	config/cutscene/demo_2/village_tavern/adventurer_female_drinking.json,
 ]

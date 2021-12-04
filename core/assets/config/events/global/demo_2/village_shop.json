@@ -1,0 +1,32 @@
+{
+	//*******************************************
+	//*** cutscenes - npc interaction
+	//*******************************************
+	
+	demo_2_village_shop_adventurer_female: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_village_shop_adventurer_female,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_village_shop_adventurer_female,
+		}
+	},
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_village_shop_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_village_shop_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 5,
+		}
+	},
+}

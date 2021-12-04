@@ -1,0 +1,31 @@
+[
+	{
+		displayName: saehrimnir,
+		technicalName: health,
+		cost: 30,
+	},
+	{
+		displayName: mead,
+		technicalName: mana,
+		cost: 15,
+	},
+	{
+		cost: 0,
+	},
+	{
+		cost: 0,
+	},
+	
+	{
+		displayName: bow,
+		technicalName: bow,
+		cost: 75,
+		itemOwnedGlobalValueKey: special_action_available__bow,
+	},
+	{
+		displayName: boomerang,
+		technicalName: boomerang,
+		cost: 150,
+		itemOwnedGlobalValueKey: special_action_available__boomerang,
+	},
+]

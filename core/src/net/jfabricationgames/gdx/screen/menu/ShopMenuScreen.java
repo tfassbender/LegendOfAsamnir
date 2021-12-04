@@ -1,28 +1,28 @@
 package net.jfabricationgames.gdx.screen.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.item.Item;
-import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.rune.RuneType;
 import net.jfabricationgames.gdx.screen.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.ItemSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
-import net.jfabricationgames.gdx.screen.menu.components.ShopItemSubMenu;
 
 public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	
 	private static final String SHOP_MENU_STATES_CONFIG = "config/menu/shop_menu_states.json";
+	private static final String DEFAULT_BUYABLE_ITEMS = "config/shop/default.json";
 	private static final String SOUND_BUY_ITEM = "buy";
 	private static final String INPUT_CONTEXT_NAME = "shopMenu";
 	
@@ -33,9 +33,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	
 	private static final String RUNE_NEEDED_EVENT_KEY = "rune_needed__gebo";
 	
-	private static final Array<String> ITEM_DISPLAY_NAMES = new Array<>(new String[] {"saehrimnir", "shield", "mead", null, "arrows", "bombs"});
-	private static final Array<String> ITEM_NAMES = new Array<>(new String[] {"health", "shield", "mana", null, "arrow", "bomb"});
-	private static final Array<Integer> ITEM_COSTS = new Array<>(new Integer[] {30, 20, 15, 0, 25, 25});
+	private Array<ItemConfig> items;
 	
 	private MenuBox background;
 	private MenuBox headerBanner;
@@ -53,9 +51,31 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	}
 	
 	private void initialize() {
+		itemMenu = new ItemSubMenu(4, 2); // needs to be created before loading the item config
+		loadBuyableItemConfig(DEFAULT_BUYABLE_ITEMS);
 		createComponents();
 		
 		stateMachine.changeToInitialState();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadBuyableItemConfig(String configPath) {
+		if (configPath == null || configPath.isEmpty()) {
+			Gdx.app.debug(getClass().getSimpleName(), "Config path is empty. New config will not be loaded");
+			return;
+		}
+		
+		Gdx.app.debug(getClass().getSimpleName(), "Loading shop menu items config from path: " + configPath);
+		
+		Json json = new Json();
+		FileHandle configFile = Gdx.files.internal(configPath);
+		items = json.fromJson(Array.class, ItemConfig.class, configFile);
+		
+		Array<String> displayedItems = new Array<>(items.size);
+		for (ItemConfig config : items) {
+			displayedItems.add(config.technicalName);
+		}
+		itemMenu.setDisplayedItems(displayedItems);
 	}
 	
 	private void createComponents() {
@@ -63,7 +83,6 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		headerBanner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		descriptionBox = new MenuBox(5, 4, MenuBox.TextureType.YELLOW_PAPER);
 		
-		itemMenu = new ShopItemSubMenu();
 		itemMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER);
 		
 		int buttonWidth = 290;
@@ -95,18 +114,25 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	 */
 	public void selectCurrentItem() {
 		int selectedItemIndex = itemMenu.getHoveredIndex();
-		if (ITEM_NAMES.size > selectedItemIndex) {
-			String itemName = ITEM_NAMES.get(selectedItemIndex);
-			int itemCosts = ITEM_COSTS.get(selectedItemIndex);
+		if (items.size > selectedItemIndex) {
+			ItemConfig item = items.get(selectedItemIndex);
+			String itemName = item.technicalName;
+			int itemCosts = item.cost;
 			
 			if (itemName != null && itemCosts > 0) {
 				if (itemsRuneCollected()) {
-					if (player.getCoins() >= itemCosts) {
-						playMenuSound(SOUND_BUY_ITEM);
-						fireBuyItemEvent(itemName, itemCosts);
+					if (!isItemAlreadyOwned(item)) {
+						if (player.getCoins() >= itemCosts) {
+							playMenuSound(SOUND_BUY_ITEM);
+							fireBuyItemEvent(itemName, itemCosts);
+						}
+						else {
+							playMenuSound(InGameMenuScreen.SOUND_ERROR);
+						}
 					}
 					else {
-						playMenuSound(InGameMenuScreen.SOUND_ERROR);
+						backToGame();
+						EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.ITEM_BOUGHT_BUT_ALREADY_OWNED));
 					}
 				}
 				else {
@@ -121,12 +147,15 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		return RuneType.GEBO.isCollected();
 	}
 	
+	private boolean isItemAlreadyOwned(ItemConfig item) {
+		return item.itemOwnedGlobalValueKey != null && !item.itemOwnedGlobalValueKey.isEmpty()
+				&& GlobalValuesDataHandler.getInstance().getAsBoolean(item.itemOwnedGlobalValueKey);
+	}
+	
 	private void fireBuyItemEvent(String itemName, int itemCosts) {
-		Item boughtItem = ItemFactory.createItem(itemName, 0, 0, new MapProperties());
-		
 		EventHandler eventHandler = EventHandler.getInstance();
 		eventHandler.fireEvent(new EventConfig().setEventType(EventType.TAKE_PLAYERS_COINS).setIntValue(itemCosts));
-		eventHandler.fireEvent(new EventConfig().setEventType(EventType.PLAYER_BUY_ITEM).setParameterObject(boughtItem));
+		eventHandler.fireEvent(new EventConfig().setEventType(EventType.PLAYER_BUY_ITEM).setStringValue(itemName));
 	}
 	
 	@Override
@@ -200,7 +229,7 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		screenTextWriter.setScale(1.15f);
 		int buttonTextX = 290;
 		int buttonTextWidth = 430;
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToGame) + "Back to Game", buttonTextX, 300, buttonTextWidth, Align.center,
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonBackToGame) + "Leave Shop", buttonTextX, 296, buttonTextWidth, Align.center,
 				false);
 		
 		screenTextWriter.setScale(0.7f);
@@ -209,9 +238,9 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 		int playersCoins = player.getCoins();
 		
 		int selectedItemIndex = itemMenu.getHoveredIndex();
-		if (selectedItemIndex >= 0 && ITEM_DISPLAY_NAMES.size > selectedItemIndex) {
-			itemName = ITEM_DISPLAY_NAMES.get(selectedItemIndex);
-			itemCosts = ITEM_COSTS.get(selectedItemIndex);
+		if (selectedItemIndex >= 0 && items.size > selectedItemIndex) {
+			itemName = items.get(selectedItemIndex).displayName;
+			itemCosts = items.get(selectedItemIndex).cost;
 		}
 		if (itemName == null || itemName.isEmpty()) {
 			itemName = "---";
@@ -252,5 +281,13 @@ public class ShopMenuScreen extends InGameMenuScreen<ShopMenuScreen> {
 	private void unfocusAll() {
 		buttonBackToGame.setFocused(false);
 		itemMenu.setHoveredIndex(-1);
+	}
+	
+	public static class ItemConfig {
+		
+		public String displayName;
+		public String technicalName;
+		public int cost;
+		public String itemOwnedGlobalValueKey;
 	}
 }

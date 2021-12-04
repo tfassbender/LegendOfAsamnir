@@ -37,4 +37,25 @@
 	demo_2_main_adventurer_female_on_the_hill: config/npc/levels/demo_2/main/adventurer_female_on_the_hill.json,
 	demo_2_main_adventurer_blocking_castle_entry: config/npc/levels/demo_2/main/adventurer_blocking_castle_entry.json,
 	demo_2_main_builder_on_second_farm: config/npc/levels/demo_2/main/builder_on_second_farm.json,
+	
+	//************************************************
+	//*** Demo 2 - Village Blacksmith
+	//************************************************
+	
+	demo_2_village_blacksmith_builder_left: config/npc/levels/demo_2/village_blacksmith/builder_left.json,
+	demo_2_village_blacksmith_builder_right: config/npc/levels/demo_2/village_blacksmith/builder_right.json,
+	
+	//************************************************
+	//*** Demo 2 - Village Shop
+	//************************************************
+	
+	demo_2_village_shop_adventurer_female: config/npc/levels/demo_2/village_shop/adventurer_female.json,
+	
+	//************************************************
+	//*** Demo 2 - Village Tavern
+	//************************************************
+	
+	demo_2_village_tavern_adventurer_eating: config/npc/levels/demo_2/village_tavern/adventurer_eating.json,
+	demo_2_village_tavern_adventurer_female_drinking: config/npc/levels/demo_2/village_tavern/adventurer_female_drinking.json,
+	demo_2_village_tavern_builder_barkeeper: config/npc/levels/demo_2/village_tavern/builder_barkeeper.json,
 }
