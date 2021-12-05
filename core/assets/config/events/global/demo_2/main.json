@@ -104,6 +104,17 @@
 		}
 	},
 	
+	demo_2_main_adventurer_female_on_the_hill: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_main_adventurer_female_on_the_hill,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_adventurer_female_on_the_hill,
+		}
+	}
+	
 	//*******************************************
 	//*** cutscenes - map area reached
 	//*******************************************

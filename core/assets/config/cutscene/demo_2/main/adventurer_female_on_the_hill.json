@@ -1,0 +1,574 @@
+{
+	id: demo_2_main_adventurer_female_on_the_hill,
+	controlledActions: {
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			startsWithCutscene: true,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "A dwarv?! Here in Midgard?\n \nAre you searching for mighty quests and the magic of the runes like all the other adventurers here?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_question,
+			],
+		},
+		
+		thorin_question: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Yes, I'm searching for the runes too.",
+					"I'm searching the way to Svartalfheim.",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_yes,
+				adventurer_answer_no,
+			],
+		},
+		
+		adventurer_answer_yes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I have traveled many lands and have heard many stories about the magic of the runes.\nI can tell you some secrets about the magic of the runes, if you want.\nWhat do you want to learn about the runes?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales,
+			]
+		},
+		
+		adventurer_answer_no: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Svartalfheim lies deep down under the lands of midgard. You'll have to find a way that leads you down the world tree.\nI think there is a dungeon in the west of the village that leads there.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_way_to_svartalfheim,
+			],
+		},
+		
+		thorin_answer_way_to_svartalfheim: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"But I need a lantern to get through it.",
+					"Thanks, I'll have a look at it.",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_lantern,
+				end,
+			],
+		},
+		
+		adventurer_answer_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Oh, that's right. These dungeons are dark and very dangerous.\n \nUnfortuately I have no idea where you could find a lantern.\nBut I can tell you some secrets about the magic of the runes, if you want.\nWhat do you want to learn about the runes?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales,
+			],
+		},
+		
+		//************************************************************
+		//*** answer options for rune tales
+		//************************************************************
+		
+		thorin_answer_rune_tales: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I think I've heard enouth. Thank you.",
+					"How many runes are there?",
+					"How can I find them?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				adventurer_tale_number_of_runes,
+				adventurer_tale_find_runes,
+			],
+		},
+		
+		thorin_answer_rune_tales_after_number_of_runes: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Why are there only 9 runes?",
+					"How can I find the other runes?",
+					"Other questions...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_tale_number_of_runes_in_these_lands,
+				adventurer_tale_runes_of_odin_1,
+				thorin_answer_rune_tales,
+			],
+		},
+		
+		thorin_answer_rune_tales_after_find_runes: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Do you know where I can find them?",
+					"What are these other ways to find them?",
+					"Other questions...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_tale_where_to_find_runes,
+				adventurer_tale_runes_of_odin_1,
+				thorin_answer_rune_tales,
+			],
+		},
+		
+		//************************************************************
+		//*** adventurer tells about the runes
+		//************************************************************
+		
+		adventurer_tale_number_of_runes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "In these lands there are 9 runes to be found. But legends tell of the existence of many more runes.\nNoone that I know has seen the other runes, but wanderers tell the tail, that the arsen goods have found many more runes.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales_after_number_of_runes,
+			],
+		},
+		
+		adventurer_tale_number_of_runes_in_these_lands: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Only 9 runes were found so far in these lands. Maybe there are more, but we haven't found them yet. Indeed the 9th rune was not seen by anyone for centuries. There are only tales of this rune left and noone remembers what it was used for...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				narrator_number_of_runes,
+			],
+		},
+		
+		narrator_number_of_runes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "Indeed there are only 5 runes to be found yet, because this is just a demo version...",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_to_narrator,
+			],
+		},
+		
+		thorin_answer_to_narrator: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "What is this strange voice talking about now? I need to get rid of this idiot.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_answer_to_narrator,
+			],
+		},
+		
+		adventurer_answer_to_narrator: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Which voice? What are you talking about?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_to_narrator_2,
+			],
+		},
+		
+		thorin_answer_to_narrator_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "A strange narrator guy, that only I seem to hear. Just ignore what I said...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales_after_number_of_runes,
+			],
+		},
+		
+		adventurer_tale_find_runes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Most adventurers in these lands try to find the runes in their quests. Some of the runes are quite common and can be found in many places. Others are more difficult to find and are only found in some dangerous quests.\nBut there are also stories of other ways to find the magic of the runes.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales_after_find_runes,
+			],
+		},
+		
+		adventurer_tale_where_to_find_runes: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Noone knows where you can find which rune. They just appear in different positions and noone knows how or why.\nMost adventurers think that the aresen gods placed the runes on their ways.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales_after_find_runes,
+			],
+		},
+		
+		//************************************************************
+		//*** adventurer tells tale about odin
+		//************************************************************
+		
+		adventurer_tale_runes_of_odin_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Have you ever heard about the tale of the arsen good Odin?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_2,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "The legends tell, that he was searching for great wisdom. So he went through all nine worlds, in search of it.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_3,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "After a while, he arrived at the roots of the world tree yggdrasil, where he found the giant Mimir, who was guarding the wisdom spring.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_4,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_4: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "To drink from wisdoms spring, Odin paid with one eye and was granted supreme wisdom.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_interrupts_the_tale_of_odin_1,
+			],
+		},
+		
+		thorin_interrupts_the_tale_of_odin_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "One eye for all the runes?\n \nSounds fair to me...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_5,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_5: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "After he drank from wisdom spring, Odin hung himself to the world tree...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_6,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_6: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "... wounded by his own spear ...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_7,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_7: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "... nine days and nights ...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_8,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_8: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "... no food ... nor mead ...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_interrupts_the_tale_of_odin_2,
+			],
+		},
+		
+		thorin_interrupts_the_tale_of_odin_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "What?!?! Nine days without mead?!\n \nI think I'll just search for the runes in these annoying quests...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_9,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_9: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "After nine days he looked down and with a loud cry, he fell screaming from the world tree.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_10,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_10: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "In a flash of insight the secret magic of the runes was revealed to him.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_11,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_11: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "He took up the runes and mastered them ...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_12,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_12: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "... eighteen powerful charms for protection, success in battle, lovemaking, healing and the power to bring back the dead ...",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_tale_runes_of_odin_13,
+			],
+		},
+		
+		adventurer_tale_runes_of_odin_13: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "...\n \nThis is the tale of how Odin found the first runes.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_rune_tales_after_find_runes,
+			],
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}
