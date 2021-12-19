@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="11" height="13" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="110">
+ <properties>
+  <property name="above_player_layers" value="[]"/>
+  <property name="background_layers" value="[0]"/>
+  <property name="shadow_layers" value="[]"/>
+ </properties>
+ <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
+ <layer id="1" name="background" width="11" height="13">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,5,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,5,1,6,
+1,1,1,1,1,1,1,1,1,1,6,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,5,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="8" name="objects">
+  <object id="105" name="player.startingPosition" x="272.5" y="179.5">
+   <properties>
+    <property name="startingPointId" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="106" name="object.spawnPoint.mini_golem" x="79" y="112">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="107" name="object.spawnPoint.gladiator" x="79.5" y="306">
+   <properties>
+    <property name="spawn" value="enemy__gladiator"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="109" name="object.eventObject" x="320" y="160" width="31.2273" height="63.2727">
+   <properties>
+    <property name="eventParameter" value="map_change_test_1_to_2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="physics" locked="1"/>
+ <objectgroup id="10" name="unreachable_area_physics" locked="1"/>
+</map>

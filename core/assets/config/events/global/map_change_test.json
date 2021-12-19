@@ -1,0 +1,25 @@
+{
+	map_change_test_1_to_2: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: map_change_test_1_to_2,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: map_change_test_2,
+			startingPointId: 0,
+		}
+	},
+	
+	map_change_test_2_to_1: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: map_change_test_2_to_1,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: map_change_test_1,
+			startingPointId: 0,
+		}
+	},
+}

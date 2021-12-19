@@ -53,7 +53,7 @@ public class AnimationManager {
 	 *        The configuration files, that's animations are to be loaded
 	 */
 	public void loadAnimations(String... configurations) {
-		Gdx.app.log(getClass().getSimpleName(), "Loading animations from config: " + Arrays.toString(configurations));
+		Gdx.app.debug(getClass().getSimpleName(), "Loading animations from config: " + Arrays.toString(configurations));
 		configFiles.addAll(configurations);
 		for (String config : configurations) {
 			AnimationConfigList animationConfig = loadAnimationConfig(config);

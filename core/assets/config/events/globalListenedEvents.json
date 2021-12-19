@@ -1,7 +1,10 @@
 [
 	config/events/global/game.json,
 	config/events/global/demo.json,
+	config/events/global/map_change_test.json,
+	
 	config/events/global/tutorial.json,
+	
 	config/events/global/demo_2/prolog.json,
 	config/events/global/demo_2/tutorial.json,
 	config/events/global/demo_2/main.json,

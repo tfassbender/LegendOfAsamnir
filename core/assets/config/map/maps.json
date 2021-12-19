@@ -31,6 +31,18 @@
 		//initial: true
 	},
 	
+	// map test change
+	{
+		name: map_change_test_1,
+		map: "map/map_change_test_1.tmx",
+		//initial: true
+	},
+	{
+		name: map_change_test_2,
+		map: "map/map_change_test_2.tmx",
+		//initial: true
+	},
+	
 	// demo / tutorial
 	{
 		name: level_tutorial,
@@ -52,7 +64,7 @@
 	{
 		name: demo_2_main,
 		map: "map/demo_2_main.tmx",
-		initialStartingPointId: 4,
+		initialStartingPointId: 0,
 		initial: true
 	},
 	{

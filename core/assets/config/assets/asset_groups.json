@@ -72,6 +72,34 @@
 				"textureMagFilter": "Nearest"
 			}
 		},
+		
+		//***************************************************
+		//*** map change test
+		//***************************************************
+		
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/map_change_test_1.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		},
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/map_change_test_2.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		},
+		
+		//***************************************************
+		//*** demo / tutorial
+		//***************************************************
+		
 		{
 			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
 			"path": "map/level_tutorial.tmx",
