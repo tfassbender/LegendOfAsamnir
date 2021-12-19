@@ -128,7 +128,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	private boolean isEventHandled(EventConfig event) {
 		for (String eventName : spawnConfig.events) {
 			EventConfig handledEvent = EventHandler.getInstance().getEventByName(eventName);
-			if (handledEvent != null && handledEvent.equals(event)) {
+			if (handledEvent != null && handledEvent.eventType == event.eventType) {
 				return true;
 			}
 		}

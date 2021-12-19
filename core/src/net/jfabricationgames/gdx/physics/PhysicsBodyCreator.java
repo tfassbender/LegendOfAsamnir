@@ -91,7 +91,6 @@ public class PhysicsBodyCreator {
 	}
 	
 	public static Body createRectangularBody(PhysicsBodyProperties properties) {
-		
 		BodyDef bodyDef = createBodyDef(properties);
 		Body body = PhysicsWorld.getInstance().createBody(bodyDef);
 		

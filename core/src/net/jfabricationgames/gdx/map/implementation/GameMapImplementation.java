@@ -123,7 +123,6 @@ public class GameMapImplementation implements GameMap {
 		currentMapIdentifier = mapIdentifier;
 		MapObjectDataHandler.getInstance().setMapIdentifier(mapIdentifier);
 		
-		//PhysicsWorld.getInstance().createWorld();
 		removeCurrentMapIfPresent();
 		player.reAddToWorld();
 	}
