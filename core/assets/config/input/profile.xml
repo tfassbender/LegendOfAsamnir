@@ -94,22 +94,6 @@
 				</controller>
 			</action>
 			
-			<action name="choice_up">
-				<key code="W" />
-				<controller player="1">
-					<button code="11" />
-					<axis code="1" threshold="-0.5" />
-				</controller>
-			</action>
-			
-			<action name="choice_down">
-				<key code="S" />
-				<controller player="1">
-					<button code="12" />
-					<axis code="1" threshold="0.5" />
-				</controller>
-			</action>
-			
 			<action name="previousSpecialAction">
 				<key code="R" />
 				<controller player="1">
@@ -121,6 +105,36 @@
 				<key code="T" />
 				<controller player="1">
 					<button code="10" />
+				</controller>
+			</action>
+			
+			<!-- Direction keys as events (for sprinting) -->
+			<action name="up_action">
+				<key code="W" />
+				<controller player="1">
+					<button code="11" />
+					<axis code="1" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="down_action">
+				<key code="S" />
+				<controller player="1">
+					<button code="12" />
+					<axis code="1" threshold="0.5" />
+				</controller>
+			</action>
+			<action name="left_action">
+				<key code="A" />
+				<controller player="1">
+					<button code="13" />
+					<axis code="0" threshold="-0.5" />
+				</controller>
+			</action>
+			<action name="right_action">
+				<key code="D" />
+				<controller player="1">
+					<button code="14" />
+					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
 		</actions>

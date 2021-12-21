@@ -88,11 +88,13 @@ public class OnScreenPlayerChoiceRenderer {
 				choseSelectedOption();
 				return true;
 			}
-			else if (action.equals("choice_up") && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
+			else if (action.equals("up_action")
+					&& (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.CONTROLLER_AXIS_THRESHOLD_PASSED)) {
 				selectedOption = (selectedOption + playerChoice.options.size - 1) % playerChoice.options.size;
 				return true;
 			}
-			else if (action.equals("choice_down") && (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED)) {
+			else if (action.equals("down_action")
+					&& (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.CONTROLLER_AXIS_THRESHOLD_PASSED)) {
 				selectedOption = (selectedOption + 1) % playerChoice.options.size;
 				return true;
 			}

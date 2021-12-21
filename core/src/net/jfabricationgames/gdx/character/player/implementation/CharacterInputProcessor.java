@@ -20,6 +20,8 @@ class CharacterInputProcessor implements InputActionListener {
 	private static final float MOVING_SPEED_SPRINT = 425f;
 	private static final float MOVING_SPEED_ATTACK = 150f;
 	
+	private static final float SPRINT_INPUT_ACTIONS_MAX_DELTA = 0.5f;
+	
 	private static final String SOUND_SPIN_ATTACK_CHARGED = "spin_attack_charged";
 	
 	private static final String INPUT_MOVE_UP = "up";
@@ -34,6 +36,11 @@ class CharacterInputProcessor implements InputActionListener {
 	private static final String ACTION_INTERACT = "interact";
 	private static final String ACTION_PREVIOUS_SPECIAL_ACTION = "previousSpecialAction";
 	private static final String ACTION_NEXT_SPECIAL_ACTION = "nextSpecialAction";
+	
+	private static final String ACTION_UP = "up_action";
+	private static final String ACTION_DOWN = "down_action";
+	private static final String ACTION_LEFT = "left_action";
+	private static final String ACTION_RIGHT = "right_action";
 	
 	private Dwarf player;
 	
@@ -62,6 +69,9 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	private boolean spinAttackCharged;
 	
+	private MovingDirection lastInputActionDirection = MovingDirection.NONE;
+	private float lastInputActionDelta = 0f;
+	
 	public CharacterInputProcessor(Dwarf player) {
 		this.player = player;
 		timeTillIdleAnimation = TIME_TILL_IDLE_ANIMATION;
@@ -78,6 +88,7 @@ class CharacterInputProcessor implements InputActionListener {
 			return;
 		}
 		
+		lastInputActionDelta += delta;
 		readInputs(delta);
 		
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
@@ -390,6 +401,18 @@ class CharacterInputProcessor implements InputActionListener {
 			else if (action.equals(ACTION_NEXT_SPECIAL_ACTION)) {
 				selectNextSpecialAction(1);
 			}
+			else if (action.equals(ACTION_UP)) {
+				handleSprintByInputAction(MovingDirection.UP);
+			}
+			else if (action.equals(ACTION_DOWN)) {
+				handleSprintByInputAction(MovingDirection.DOWN);
+			}
+			else if (action.equals(ACTION_LEFT)) {
+				handleSprintByInputAction(MovingDirection.LEFT);
+			}
+			else if (action.equals(ACTION_RIGHT)) {
+				handleSprintByInputAction(MovingDirection.RIGHT);
+			}
 		}
 		return false;
 	}
@@ -406,5 +429,13 @@ class CharacterInputProcessor implements InputActionListener {
 		}
 		
 		player.setActiveSpecialAction(specialAction);
+	}
+	
+	private void handleSprintByInputAction(MovingDirection direction) {
+		if (lastInputActionDirection == direction && lastInputActionDelta < SPRINT_INPUT_ACTIONS_MAX_DELTA) {
+			sprint = true;
+		}
+		lastInputActionDirection = direction;
+		lastInputActionDelta = 0f;
 	}
 }
