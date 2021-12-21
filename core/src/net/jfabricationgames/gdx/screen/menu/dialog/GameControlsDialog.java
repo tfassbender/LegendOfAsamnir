@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 
 import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
-import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 
 public class GameControlsDialog extends InGameMenuDialog {
 	
@@ -17,7 +17,7 @@ public class GameControlsDialog extends InGameMenuDialog {
 		background = new MenuBox(12, 8, MenuBox.TextureType.YELLOW_PAPER);
 		banner = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER);
 		buttonBackToMenu = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG)
-				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(935, 550).setSize(110, 40).build();
+				.setNinePatchConfigFocused(FocusButton.BUTTON_YELLOW_NINEPATCH_CONFIG_FOCUSED).setPosition(935, 670).setSize(110, 40).build();
 		buttonBackToMenu.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonBackToMenu.setFocused(true);
 	}
@@ -26,8 +26,8 @@ public class GameControlsDialog extends InGameMenuDialog {
 		if (visible) {
 			batch.begin();
 			
-			background.draw(batch, 20, -20, 1150, 640);
-			banner.draw(batch, 80, 480, 400, 200);
+			background.draw(batch, 20, -20, 1150, 800);
+			banner.draw(batch, 80, 595, 400, 200);
 			buttonBackToMenu.draw(batch);
 			
 			drawText();
@@ -39,12 +39,12 @@ public class GameControlsDialog extends InGameMenuDialog {
 	private void drawText() {
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.2f);
-		screenTextWriter.drawText("Controls", 155, 594);
+		screenTextWriter.drawText("Controls", 155, 711);
 		
 		screenTextWriter.setScale(0.8f);
-		screenTextWriter.drawText(InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS + "Back", 970, 593);
+		screenTextWriter.drawText(InGameMenuScreen.TEXT_COLOR_ENCODING_FOCUS + "Back", 970, 713);
 		
-		float headlineY = 530;
+		float headlineY = 650;
 		float textColOneX = 100;
 		float textColTwoX = 440;
 		float textColThreeX = 790;
@@ -54,7 +54,7 @@ public class GameControlsDialog extends InGameMenuDialog {
 		screenTextWriter.drawText("Keyboard", textColTwoX, headlineY);
 		screenTextWriter.drawText("Controller", textColThreeX, headlineY);
 		
-		float textRowOneY = 470;
+		float textRowOneY = 590;
 		float textRowOffset = 50;
 		screenTextWriter.setScale(1f);
 		screenTextWriter.setColor(Color.BLACK);
@@ -66,7 +66,8 @@ public class GameControlsDialog extends InGameMenuDialog {
 		screenTextWriter.drawText("Interact", textColOneX, textRowOneY - 5f * textRowOffset);
 		screenTextWriter.drawText("Attack", textColOneX, textRowOneY - 6f * textRowOffset);
 		screenTextWriter.drawText("Block", textColOneX, textRowOneY - 7f * textRowOffset);
-		screenTextWriter.drawText("Menu", textColOneX, textRowOneY - 8f * textRowOffset);
+		screenTextWriter.drawText("Change Item", textColOneX, textRowOneY - 8f * textRowOffset);
+		screenTextWriter.drawText("Menu", textColOneX, textRowOneY - 9f * textRowOffset);
 		
 		screenTextWriter.drawText("W", textColTwoX, textRowOneY);
 		screenTextWriter.drawText("S", textColTwoX, textRowOneY - 1f * textRowOffset);
@@ -76,7 +77,8 @@ public class GameControlsDialog extends InGameMenuDialog {
 		screenTextWriter.drawText("E", textColTwoX, textRowOneY - 5f * textRowOffset);
 		screenTextWriter.drawText("Mouse Left", textColTwoX, textRowOneY - 6f * textRowOffset);
 		screenTextWriter.drawText("Mouse Right", textColTwoX, textRowOneY - 7f * textRowOffset);
-		screenTextWriter.drawText("Esc", textColTwoX, textRowOneY - 8f * textRowOffset);
+		screenTextWriter.drawText("R / T", textColTwoX, textRowOneY - 8f * textRowOffset);
+		screenTextWriter.drawText("Esc", textColTwoX, textRowOneY - 9f * textRowOffset);
 		
 		screenTextWriter.drawText("UP", textColThreeX, textRowOneY);
 		screenTextWriter.drawText("DOWN", textColThreeX, textRowOneY - 1f * textRowOffset);
@@ -84,8 +86,9 @@ public class GameControlsDialog extends InGameMenuDialog {
 		screenTextWriter.drawText("RIGHT", textColThreeX, textRowOneY - 3f * textRowOffset);
 		screenTextWriter.drawText("X", textColThreeX, textRowOneY - 4f * textRowOffset);
 		screenTextWriter.drawText("Y", textColThreeX, textRowOneY - 5f * textRowOffset);
-		screenTextWriter.drawText("B", textColThreeX, textRowOneY - 6f * textRowOffset);
-		screenTextWriter.drawText("A", textColThreeX, textRowOneY - 7f * textRowOffset);
-		screenTextWriter.drawText("START", textColThreeX, textRowOneY - 8f * textRowOffset);
+		screenTextWriter.drawText("B / RT", textColThreeX, textRowOneY - 6f * textRowOffset);
+		screenTextWriter.drawText("A / LT", textColThreeX, textRowOneY - 7f * textRowOffset);
+		screenTextWriter.drawText("LB / RB", textColThreeX, textRowOneY - 8f * textRowOffset);
+		screenTextWriter.drawText("START", textColThreeX, textRowOneY - 9f * textRowOffset);
 	}
 }
