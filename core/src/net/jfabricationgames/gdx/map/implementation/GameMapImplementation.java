@@ -166,25 +166,34 @@ public class GameMapImplementation implements GameMap {
 	 * Remove the game objects first, to avoid using their bodies again (what would lead to segmentation faults in the native box2d methods)
 	 */
 	private void removeGameObjects() {
-		for (Item item : items) {
+		//create copies of the lists, because the iterator doesn't work correctly: it's concurrently modified, but doesn't throw an exception
+		Array<Item> itemsCopy = new Array<>(items);
+		Array<Item> itemsAboveGameObjectsCopy = new Array<>(itemsAboveGameObjects);
+		Array<GameObject> objectsCopy = new Array<>(objects);
+		Array<Enemy> enemiesCopy = new Array<>(enemies);
+		Array<NonPlayableCharacter> nonPlayableCharactersCopy = new Array<>(nonPlayableCharacters);
+		Array<Animal> animalsCopy = new Array<>(animals);
+		Array<Projectile> projectilesCopy = new Array<>(projectiles);
+		
+		for (Item item : itemsCopy) {
 			item.removeFromMap();
 		}
-		for (Item item : itemsAboveGameObjects) {
+		for (Item item : itemsAboveGameObjectsCopy) {
 			item.removeFromMap();
 		}
-		for (GameObject object : objects) {
+		for (GameObject object : objectsCopy) {
 			object.removeFromMap();
 		}
-		for (Enemy enemy : enemies) {
+		for (Enemy enemy : enemiesCopy) {
 			enemy.removeFromMap();
 		}
-		for (NonPlayableCharacter npc : nonPlayableCharacters) {
+		for (NonPlayableCharacter npc : nonPlayableCharactersCopy) {
 			npc.removeFromMap();
 		}
-		for (Animal animal : animals) {
+		for (Animal animal : animalsCopy) {
 			animal.removeFromMap();
 		}
-		for (Projectile projectile : projectiles) {
+		for (Projectile projectile : projectilesCopy) {
 			projectile.removeFromMap();
 		}
 		player.removeFromMap();

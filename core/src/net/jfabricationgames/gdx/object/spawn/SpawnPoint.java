@@ -146,6 +146,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 		}
 		
 		MapProperties mapProperties = new MapProperties();
+		addPropertiesFromSpawn(mapProperties);
 		if (spawnConfig.spawnTypeMapProperties != null) {
 			mapProperties = MapUtil.createMapPropertiesFromString(spawnConfig.spawnTypeMapProperties);
 		}
@@ -166,6 +167,12 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 			default:
 				throw new IllegalStateException("Unknown spawn type: " + spawnConfig.spawnType);
 		}
+	}
+	
+	private void addPropertiesFromSpawn(MapProperties properties) {
+		properties.put("x", mapProperties.get("x"));
+		properties.put("y", mapProperties.get("y"));
+		properties.put("spawn", mapProperties.get("spawn"));
 	}
 	
 	private void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
