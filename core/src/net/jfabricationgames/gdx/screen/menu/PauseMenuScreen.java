@@ -28,7 +28,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	public static final String INPUT_CONTEXT_NAME = "pauseMenu";
 	
 	private static final String SOUND_ENTER_PAUSE_MENU = "enter_pause_menu";
-	private static final String ACTION_BACK_TO_GAME = "backToGame";
+	private static final String ACTION_BACK = "back";
 	
 	private static final String STATE_PREFIX_ITEM = "item_";
 	private static final String STATE_PREFIX_BUTTON = "button_";
@@ -165,8 +165,23 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
-		if (action.equals(ACTION_BACK_TO_GAME) && isEventTypeHandled(type)) {
-			backToGame();
+		if (action.equals(ACTION_BACK) && isEventTypeHandled(type)) {
+			if (controlsDialog.isVisible()) {
+				closeControlsDialog();
+			}
+			else if (mapDialog.isVisible()) {
+				closeMapDialog();
+			}
+			else if (saveGameDialog.isVisible()) {
+				closeSaveGameDialog();
+			}
+			else if (loadGameDialog.isVisible()) {
+				closeLoadGameDialog();
+			}
+			else {
+				backToGame();
+			}
+			
 			return true;
 		}
 		

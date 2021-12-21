@@ -237,7 +237,7 @@
 				</controller>
 			</action>
 
-			<action name="backToGame">
+			<action name="back">
 				<key code="Escape" />
 				<controller>
 					<button code="6" />
