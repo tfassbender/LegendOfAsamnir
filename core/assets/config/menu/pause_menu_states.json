@@ -23,15 +23,15 @@
 	},
 	button_loadGame: {
 		up: button_saveGame,
-		down: button_quit,
+		down: button_main_menu,
 		right: item_1,
 		select: loadGame,
 	},
-	button_quit: {
+	button_main_menu: {
 		up: button_loadGame,
 		down: rune_1,
 		right: item_5,
-		select: quitGame,
+		select: backToMainMenu,
 	},
 	button_showMap: {
 		left: button_saveGame,
@@ -73,7 +73,7 @@
 	item_5: {
 		up: item_1,
 		down: rune_6,
-		left: button_quit,
+		left: button_main_menu,
 		right: item_6,
 		select: selectCurrentItem, 
 	},
@@ -103,30 +103,30 @@
 	//*********************************************
 	
 	rune_1: {
-		up: button_quit,
+		up: button_main_menu,
 		right: rune_2,
 		select: noAction,
 	},
 	rune_2: {
-		up: button_quit,
+		up: button_main_menu,
 		left: rune_1,
 		right: rune_3,
 		select: noAction,
 	},
 	rune_3: {
-		up: button_quit,
+		up: button_main_menu,
 		left: rune_2,
 		right: rune_4,
 		select: noAction,
 	},
 	rune_4: {
-		up: button_quit,
+		up: button_main_menu,
 		left: rune_3,
 		right: rune_5,
 		select: noAction,
 	},
 	rune_5: {
-		up: button_quit,
+		up: button_main_menu,
 		left: rune_4,
 		right: rune_6,
 		select: noAction,

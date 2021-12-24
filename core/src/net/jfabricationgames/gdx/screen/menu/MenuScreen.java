@@ -49,9 +49,13 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	
 	@Override
 	public void showMenu() {
+		setInputContext();
+		ScreenManager.getInstance().setScreen(this);
+	}
+	
+	protected void setInputContext() {
 		InputContext inputContext = InputManager.getInstance().changeInputContext(getInputContextName());
 		inputContext.addListener(this);
-		ScreenManager.getInstance().setScreen(this);
 	}
 	
 	protected abstract String getInputContextName();
@@ -67,7 +71,8 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	
 	@Override
 	public void dispose() {
-		assetManager.unloadGroup(getAssetGroupName());
+		//do not unload the asset group, because the menu will still be needed (at least for loading screens)
+		
 		removeInputListener();
 	}
 	

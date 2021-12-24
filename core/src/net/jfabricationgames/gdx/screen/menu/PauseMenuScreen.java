@@ -11,6 +11,8 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.screen.ScreenManager;
+import net.jfabricationgames.gdx.screen.main.MainMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
@@ -67,7 +69,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	private FocusButton buttonControls;
 	private FocusButton buttonSave;
 	private FocusButton buttonLoad;
-	private FocusButton buttonQuit;
+	private FocusButton buttonMainMenu;
 	private FocusButton buttonShowMap;
 	
 	public PauseMenuScreen(MenuGameScreen gameScreen) {
@@ -122,7 +124,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				.setSize(buttonWidth, buttonHeight) //
 				.setPosition(buttonPosX, lowestButtonY + 1f * (buttonHeight + buttonGapY)) //
 				.build();
-		buttonQuit = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
+		buttonMainMenu = new FocusButtonBuilder().setNinePatchConfig(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG) //
 				.setNinePatchConfigFocused(FocusButton.BUTTON_GREEN_NINEPATCH_CONFIG_FOCUSED) //
 				.setSize(buttonWidth, buttonHeight) //
 				.setPosition(buttonPosX, lowestButtonY) //
@@ -132,7 +134,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonControls.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonSave.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonLoad.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
-		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonMainMenu.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		
 		ammoMenu = new AmmoSubMenu(player);
 		ammoMenuBanner = new MenuBox(4, 2, MenuBox.TextureType.BIG_BANNER_LOW);
@@ -269,7 +271,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonControls.draw(batch);
 		buttonSave.draw(batch);
 		buttonLoad.draw(batch);
-		buttonQuit.draw(batch);
+		buttonMainMenu.draw(batch);
 		buttonShowMap.draw(batch);
 	}
 	
@@ -328,7 +330,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		screenTextWriter.drawText(getButtonTextColorEncoding(buttonControls) + "Controlls", buttonTextX, 564, buttonTextWidth, Align.center, false);
 		screenTextWriter.drawText(getButtonTextColorEncoding(buttonSave) + "Save Game", buttonTextX, 467, buttonTextWidth, Align.center, false);
 		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoad) + "Load Game", buttonTextX, 372, buttonTextWidth, Align.center, false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 276, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonMainMenu) + "Main Menu", buttonTextX, 276, buttonTextWidth, Align.center, false);
 	}
 	
 	private String getButtonTextColorEncoding(FocusButton button) {
@@ -373,8 +375,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 				case "loadGame":
 					button = buttonLoad;
 					break;
-				case "quit":
-					button = buttonQuit;
+				case "main_menu":
+					button = buttonMainMenu;
 					break;
 				case "showMap":
 					button = buttonShowMap;
@@ -400,7 +402,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		buttonControls.setFocused(false);
 		buttonSave.setFocused(false);
 		buttonLoad.setFocused(false);
-		buttonQuit.setFocused(false);
+		buttonMainMenu.setFocused(false);
 		buttonShowMap.setFocused(false);
 		itemMenu.setHoveredIndex(-1);
 		runeMenu.setHoveredIndex(-1);
@@ -435,6 +437,14 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		Gdx.app.debug(getClass().getSimpleName(), "'Load Game' selected");
 		loadGameDialog.setVisible(true);
 		stateMachine.changeState("loadDialog_button_loadGameDialogBack");
+	}
+	
+	public void backToMainMenu() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Main Menu' selected");
+		removeInputListener();
+		gameScreen.dispose();
+		
+		ScreenManager.getInstance().setScreen(new MainMenuScreen());
 	}
 	
 	public void showMap() {

@@ -607,5 +607,6 @@ public class GameMapImplementation implements GameMap {
 	public void dispose() {
 		renderer.dispose();
 		map.dispose();
+		PhysicsWorld.getInstance().dispose();
 	}
 }

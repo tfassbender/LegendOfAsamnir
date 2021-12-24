@@ -47,7 +47,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		
 		mainMenuAnimation = new MainMenuAnimation();
 		
-		showMenu();
+		setInputContext();
 	}
 	
 	private void createComponents() {
@@ -191,8 +191,10 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	private void createGameScreen(Runnable afterCreatingGameScreen) {
+		Gdx.app.log(getClass().getSimpleName(), "Crating game screen");
 		GameDataHandler.getInstance().createNewGameData();
 		GameScreen.loadAndShowGameScreen(afterCreatingGameScreen);
+		dispose();
 	}
 	
 	//****************************************************************
@@ -202,7 +204,6 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	public void continueGame() {
 		createGameScreen(() -> {
 			new GameDataService().loadGameDataFromQuicksaveSlot();
-			dispose();
 		});
 		
 	}
@@ -216,7 +217,6 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		createGameScreen(() -> {
 			GlobalValuesDataHandler.getInstance().put(SpecialAction.JUMP.actionEnabledGlobalValueKey, true);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.NEW_GAME_STARTED));
-			dispose();
 		});
 	}
 	

@@ -78,7 +78,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private Viewport viewportHud;
 	private CameraMovementHandler cameraMovementHandler;
 	
-	private AssetGroupManager assetManager;
 	private InputContext inputContext;
 	private HeadsUpDisplay hud;
 	private GameMap map;
@@ -345,7 +344,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public void dispose() {
 		EventHandler.getInstance().removeEventListener(this);
 		inputContext.removeListener(this);
-		assetManager.unloadGroup(ScreenManager.ASSET_GROUP_NAME);
+		AssetGroupManager.getInstance().unloadGroup(ScreenManager.ASSET_GROUP_NAME);
 		
 		map.dispose();
 		hud.dispose();

@@ -18,13 +18,14 @@ import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.Disposable;
 
 import net.jfabricationgames.gdx.util.GameUtil;
 
 /**
  * A singleton that keeps track of the current world instance.
  */
-public class PhysicsWorld implements ContactListener {
+public class PhysicsWorld implements ContactListener, Disposable {
 	
 	public static final int VELOCITY_ITERATIONS = 6;
 	public static final int POSITION_ITERATIONS = 2;
@@ -50,7 +51,6 @@ public class PhysicsWorld implements ContactListener {
 	private Array<Runnable> runAfterWorldStep = new Array<>();
 	
 	public void createWorld() {
-		disposeWorld();
 		world = new World(WORLD_GRAVITY, WORLD_SLEEP);
 		world.setContactListener(this);
 		debugRenderer = new Box2DDebugRenderer(true, /* bodies */
@@ -220,5 +220,12 @@ public class PhysicsWorld implements ContactListener {
 		}
 		
 		return bodies;
+	}
+	
+	@Override
+	public void dispose() {
+		Gdx.app.log(getClass().getSimpleName(), "Disposing physics world");
+		removeBodiesFromWorld();
+		disposeWorld();
 	}
 }
