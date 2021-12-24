@@ -103,7 +103,7 @@ public class LoadingScreen extends MenuScreen<LoadingScreen> {
 	private void drawTexts() {
 		screenTextWriter.setColor(Color.RED);
 		screenTextWriter.setScale(2f);
-		screenTextWriter.drawText("Dwarf Scroller GDX", 100, 700);
+		screenTextWriter.drawText("Legend of Asamnir", 150, 700);
 		
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.5f);
