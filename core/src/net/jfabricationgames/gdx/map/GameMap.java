@@ -55,6 +55,7 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, EnemyChara
 	public void updateAfterLoadingGameState();
 	
 	public boolean isDungeonMap();
+	public boolean isBuildingMap();
 	
 	public float getMapWidth();
 	public float getMapHeight();

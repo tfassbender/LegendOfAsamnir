@@ -103,7 +103,7 @@ public class OnScreenItemRenderer implements Disposable {
 	}
 	
 	private void chooseTextColor() {
-		if (GameMapManager.getInstance().getMap().isDungeonMap()) {
+		if (GameMapManager.getInstance().getMap().isDungeonMap() || GameMapManager.getInstance().getMap().isBuildingMap()) {
 			screenTextWriter.setColor(Color.GRAY);
 		}
 		else {

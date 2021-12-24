@@ -46,7 +46,8 @@ import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameMapImplementation implements GameMap {
 	
-	public static final String MAP_PROPERTY_KEY_DUNGEON_LEVEL = "dungeon_level";
+	private static final String MAP_PROPERTY_KEY_DUNGEON_LEVEL = "dungeon_level";
+	private static final String MAP_PROPERTY_KEY_BUILDING_LEVEL = "building_level";
 	
 	@Override
 	public GameMapGroundType getGroundTypeByName(String name) {
@@ -336,6 +337,11 @@ public class GameMapImplementation implements GameMap {
 	@Override
 	public boolean isDungeonMap() {
 		return Boolean.parseBoolean(map.getProperties().get(MAP_PROPERTY_KEY_DUNGEON_LEVEL, "false", String.class));
+	}
+	
+	@Override
+	public boolean isBuildingMap() {
+		return Boolean.parseBoolean(map.getProperties().get(MAP_PROPERTY_KEY_BUILDING_LEVEL, "false", String.class));
 	}
 	
 	@Override
