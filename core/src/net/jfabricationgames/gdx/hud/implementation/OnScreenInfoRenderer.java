@@ -10,12 +10,16 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.hud.StatsCharacter;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.text.ScreenTextWriter;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
-public class OnScreenItemRenderer implements Disposable {
+public class OnScreenInfoRenderer implements EventListener, Disposable {
 	
 	private static final String CHARACTER_ACTION_BOW = "BOW";
 	private static final String CHARACTER_ACTION_BOMB = "BOMB";
@@ -25,6 +29,9 @@ public class OnScreenItemRenderer implements Disposable {
 	
 	private static final String TEXTURE_CONFIG = "config/hud/on_screen_item_renderer/textures.json";
 	private static final float TEXT_SCALE = 0.9f;
+	
+	private static final float RENDER_SAVE_INFO_TIME = 3f;
+	private static final float RENDER_SAVE_INFO_DOTS_CHANGING_TIME = 0.25f;
 	
 	private OrthographicCamera camera;
 	private StatsCharacter character;
@@ -37,13 +44,18 @@ public class OnScreenItemRenderer implements Disposable {
 	private TextureRegion keyIcon;
 	private ObjectMap<String, TextureRegion> specialActionIcons;
 	
-	public OnScreenItemRenderer(OrthographicCamera camera, StatsCharacter character, float sceneWidth, float sceneHeight) {
+	private boolean renderSaveInfo;
+	private float renderSaveInfoDeltaTime;
+	
+	public OnScreenInfoRenderer(OrthographicCamera camera, StatsCharacter character, float sceneWidth, float sceneHeight) {
 		this.camera = camera;
 		this.character = character;
 		batch = new SpriteBatch();
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(Constants.DEFAULT_FONT_NAME);
 		tileUpperRight = new Vector2(sceneWidth - 20f, sceneHeight - 20f);
+		
+		EventHandler.getInstance().registerEventListener(this);
 		
 		loadIcons();
 	}
@@ -63,7 +75,11 @@ public class OnScreenItemRenderer implements Disposable {
 		batch.setProjectionMatrix(camera.combined);
 		
 		drawIcons();
-		drawText();
+		drawIconText();
+		if (renderSaveInfo) {
+			drawSaveInfo();
+			updateSaveInfoTimer(delta);
+		}
 	}
 	
 	private void drawIcons() {
@@ -76,7 +92,7 @@ public class OnScreenItemRenderer implements Disposable {
 		batch.end();
 	}
 	
-	private void drawText() {
+	private void drawIconText() {
 		int coins = character.getCoinsForHud();
 		int keys = character.getNormalKeys();
 		int ammo;
@@ -111,8 +127,44 @@ public class OnScreenItemRenderer implements Disposable {
 		}
 	}
 	
+	private void drawSaveInfo() {
+		chooseTextColor();
+		
+		String text = getDisplayedSaveInfoText();
+		
+		screenTextWriter.setScale(0.65f);
+		screenTextWriter.drawText(text, 25, 40);
+	}
+
+	private String getDisplayedSaveInfoText() {
+		String text = "Saving";
+		final int displayStates = 4; // 0 to 3 dots
+		int displayedDots = (int) ((renderSaveInfoDeltaTime % (displayStates * RENDER_SAVE_INFO_DOTS_CHANGING_TIME))
+				/ RENDER_SAVE_INFO_DOTS_CHANGING_TIME);
+		for (int i = 0; i < displayedDots; i++) {
+			text += ".";
+		}
+		return text;
+	}
+	
+	private void updateSaveInfoTimer(float delta) {
+		renderSaveInfoDeltaTime += delta;
+		if (renderSaveInfoDeltaTime > RENDER_SAVE_INFO_TIME) {
+			renderSaveInfo = false;
+		}
+	}
+	
+	@Override
+	public void handleEvent(EventConfig event) {
+		if (event.eventType == EventType.QUICKSAVE || event.eventType == EventType.SAVE_GAME) {
+			renderSaveInfo = true;
+			renderSaveInfoDeltaTime = 0f;
+		}
+	}
+	
 	@Override
 	public void dispose() {
 		batch.dispose();
+		EventHandler.getInstance().removeEventListener(this);
 	}
 }

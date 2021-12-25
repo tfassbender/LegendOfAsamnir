@@ -44,6 +44,7 @@ public class GameDataService implements EventListener {
 	}
 	
 	public void storeGameDataToSaveSlot(int slot) {
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SAVE_GAME));
 		store(GAME_DATA_SAVE_FILENAME.replace(GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER, Integer.toString(slot)));
 	}
 	

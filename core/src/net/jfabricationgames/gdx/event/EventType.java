@@ -14,6 +14,7 @@ public enum EventType {
 	ON_SCREEN_TEXT_ENDED, //
 	CHANGE_MAP, // 
 	QUICKSAVE, //
+	SAVE_GAME, //
 	//*******************************
 	//*** Player Events
 	//*******************************
