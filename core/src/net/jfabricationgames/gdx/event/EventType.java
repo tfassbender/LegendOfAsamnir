@@ -13,8 +13,13 @@ public enum EventType {
 	START_CUTSCENE, //
 	ON_SCREEN_TEXT_ENDED, //
 	CHANGE_MAP, // 
+	//*******************************
+	//*** Save / load game
+	//*******************************
 	QUICKSAVE, //
 	SAVE_GAME, //
+	BEFORE_PERSIST_STATE, //
+	UPDATE_MAP_AFTER_LOADING_GAME_STATE, //
 	//*******************************
 	//*** Player Events
 	//*******************************

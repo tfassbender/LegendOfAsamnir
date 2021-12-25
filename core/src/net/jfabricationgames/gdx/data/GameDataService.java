@@ -10,15 +10,11 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
-import net.jfabricationgames.gdx.character.player.Player;
 import net.jfabricationgames.gdx.data.container.GameDataContainer;
-import net.jfabricationgames.gdx.data.state.BeforePersistState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.map.GameMapManager;
-import net.jfabricationgames.gdx.util.AnnotationUtil;
 
 public class GameDataService implements EventListener {
 	
@@ -62,8 +58,7 @@ public class GameDataService implements EventListener {
 	}
 	
 	private void executeAnnotatedMethodsBeforePersisting() {
-		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, GameMapManager.getInstance().getMap());
-		AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, Player.getInstance());
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.BEFORE_PERSIST_STATE));
 	}
 	
 	public void loadGameDataFromQuicksaveSlot() {
@@ -82,8 +77,8 @@ public class GameDataService implements EventListener {
 		GameDataContainer gameData = json.fromJson(GameDataContainer.class, fileHandle);
 		
 		GameDataHandler.getInstance().updateData(gameData);
-		GameMapManager.getInstance().getMap().updateAfterLoadingGameState();
 		
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_AFTER_LOADING_GAME_STATE));
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
 	}
 	

@@ -40,6 +40,7 @@ import net.jfabricationgames.gdx.projectile.Projectile;
 import net.jfabricationgames.gdx.projectile.ProjectileReflector;
 import net.jfabricationgames.gdx.rune.RuneType;
 import net.jfabricationgames.gdx.state.GameStateManager;
+import net.jfabricationgames.gdx.util.AnnotationUtil;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 public class Dwarf implements PlayableCharacter, Disposable, ContactListener, EventListener, ProjectileReflector {
@@ -521,6 +522,9 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				else if (change < 0) {
 					propertiesDataHandler.reduceMana(-change);
 				}
+				break;
+			case BEFORE_PERSIST_STATE:
+				AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, this);
 				break;
 			default:
 				// do nothing, because this event type is not handled here

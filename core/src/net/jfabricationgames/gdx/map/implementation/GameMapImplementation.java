@@ -517,6 +517,12 @@ public class GameMapImplementation implements GameMap {
 		if (event.eventType == EventType.UPDATE_MAP_OBJECT_STATES) {
 			updateMapObjectStates();
 		}
+		if (event.eventType == EventType.BEFORE_PERSIST_STATE) {
+			AnnotationUtil.executeAnnotatedMethods(BeforePersistState.class, this);
+		}
+		if (event.eventType == EventType.UPDATE_MAP_AFTER_LOADING_GAME_STATE) {
+			updateAfterLoadingGameState();
+		}
 	}
 	
 	private void updateMapObjectStates() {
