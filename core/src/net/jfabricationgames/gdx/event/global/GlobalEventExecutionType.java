@@ -2,8 +2,8 @@ package net.jfabricationgames.gdx.event.global;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
-import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
@@ -111,7 +111,13 @@ public enum GlobalEventExecutionType {
 		public void execute(GlobalEventConfig eventConfig) {
 			String key = eventConfig.executionParameters.get(MAP_KEY_GLOBAL_VALUE_KEY);
 			String value = eventConfig.executionParameters.get(MAP_KEY_GLOBAL_VALUE);
-			GlobalValuesDataHandler.getInstance().put(key, value);
+			
+			ObjectMap<String, Object> parameterObject = new ObjectMap<>();
+			parameterObject.put("key", key);
+			parameterObject.put("value", value);
+			
+			EventHandler.getInstance()
+					.fireEvent(new EventConfig().setEventType(EventType.SET_GLOBAL_CONDITION_VALUE).setParameterObject(parameterObject));
 		}
 	},
 	CHANGE_HEALTH {

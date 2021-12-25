@@ -71,10 +71,20 @@ public class GlobalValuesDataHandler implements DataHandler, EventListener {
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public void handleEvent(EventConfig event) {
 		if (event.eventType == EventType.SET_GLOBAL_CONDITION_VALUE) {
-			@SuppressWarnings("unchecked")
-			ObjectMap<String, String> keyAndValue = json.fromJson(ObjectMap.class, String.class, event.stringValue);
+			ObjectMap<String, String> keyAndValue;
+			if (event.stringValue != null) {
+				keyAndValue = json.fromJson(ObjectMap.class, String.class, event.stringValue);
+			}
+			else if (event.parameterObject instanceof ObjectMap) {
+				keyAndValue = (ObjectMap<String, String>) event.parameterObject;
+			}
+			else {
+				throw new IllegalStateException(
+						"Either the stringValue or the parameterObject must be set when using a SET_GLOBAL_CONDITION_VALUE event");
+			}
 			put(keyAndValue.get("key"), keyAndValue.get("value"));
 		}
 	}
