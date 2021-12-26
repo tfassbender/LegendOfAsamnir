@@ -73,6 +73,7 @@ public class OnScreenInfoRenderer implements EventListener, Disposable {
 	
 	public void render(float delta) {
 		batch.setProjectionMatrix(camera.combined);
+		screenTextWriter.setBatchProjectionMatrix(camera.combined);
 		
 		drawIcons();
 		drawIconText();
@@ -111,10 +112,10 @@ public class OnScreenInfoRenderer implements EventListener, Disposable {
 		
 		chooseTextColor();
 		screenTextWriter.setScale(TEXT_SCALE);
-		screenTextWriter.drawText(Integer.toString(coins), tileUpperRight.x - 220f, tileUpperRight.y - 118f, 100, Align.right, false);
-		screenTextWriter.drawText(Integer.toString(keys), tileUpperRight.x - 220f, tileUpperRight.y - 163f, 100, Align.right, false);
+		screenTextWriter.drawText(Integer.toString(coins), tileUpperRight.x - 155f, tileUpperRight.y - 103f, 100, Align.right, false);
+		screenTextWriter.drawText(Integer.toString(keys), tileUpperRight.x - 155f, tileUpperRight.y - 148f, 100, Align.right, false);
 		if (ammo > -1) {
-			screenTextWriter.drawText(Integer.toString(ammo), tileUpperRight.x - 220f, tileUpperRight.y - 210f, 100, Align.right, false);
+			screenTextWriter.drawText(Integer.toString(ammo), tileUpperRight.x - 155f, tileUpperRight.y - 195f, 100, Align.right, false);
 		}
 	}
 	
@@ -135,7 +136,7 @@ public class OnScreenInfoRenderer implements EventListener, Disposable {
 		screenTextWriter.setScale(0.65f);
 		screenTextWriter.drawText(text, 25, 40);
 	}
-
+	
 	private String getDisplayedSaveInfoText() {
 		String text = "Saving";
 		final int displayStates = 4; // 0 to 3 dots

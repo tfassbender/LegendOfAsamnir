@@ -64,7 +64,7 @@ public class OnScreenPlayerChoiceRenderer {
 		shapeRenderer.setColor(Color.BLACK);
 		//draw an arrow in front of the selected option
 		float lineOffsetY = selectedOption * OPTION_LINE_OFFSET_Y;
-		shapeRenderer.triangle(60f, 188f + lineOffsetY, 91f, 172f + lineOffsetY, 60f, 156f + lineOffsetY);
+		shapeRenderer.triangle(60f, 185f + lineOffsetY, 91f, 169f + lineOffsetY, 60f, 153f + lineOffsetY);
 		
 		shapeRenderer.end();
 	}

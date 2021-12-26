@@ -3,15 +3,16 @@ package net.jfabricationgames.gdx.screen.menu.dialog;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 
 public class SaveGameDialog extends GameDataServiceDialog {
 	
-	public SaveGameDialog(Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
-		super(backToGame, playMenuSoundConsumer);
+	public SaveGameDialog(OrthographicCamera camera, Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
+		super(camera, backToGame, playMenuSoundConsumer);
 	}
-
+	
 	@Override
 	protected String getMenuTitle() {
 		return "Save Game";

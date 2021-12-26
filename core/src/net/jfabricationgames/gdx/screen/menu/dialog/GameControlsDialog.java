@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.screen.menu.dialog;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
@@ -9,7 +10,9 @@ import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 
 public class GameControlsDialog extends InGameMenuDialog {
 	
-	public GameControlsDialog() {
+	public GameControlsDialog(OrthographicCamera camera) {
+		super(camera);
+		
 		createControls();
 	}
 	
@@ -24,6 +27,7 @@ public class GameControlsDialog extends InGameMenuDialog {
 	
 	public void draw() {
 		if (visible) {
+			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			
 			background.draw(batch, 20, -20, 1150, 800);
@@ -37,6 +41,8 @@ public class GameControlsDialog extends InGameMenuDialog {
 	}
 	
 	private void drawText() {
+		screenTextWriter.setBatchProjectionMatrix(camera.combined);
+		
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.2f);
 		screenTextWriter.drawText("Controls", 155, 711);

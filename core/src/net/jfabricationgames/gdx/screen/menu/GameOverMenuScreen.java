@@ -69,6 +69,8 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		setProjectionMatrixBeforeRendering();
+		
 		batch.begin();
 		drawBackground();
 		drawButtons();
@@ -89,19 +91,18 @@ public class GameOverMenuScreen extends InGameMenuScreen<GameOverMenuScreen> {
 	}
 	
 	private void drawBanners() {
-		banner.draw(batch, 175, 440, 850, 350);
+		banner.draw(batch, 160, 440, 850, 350);
 	}
 	
 	private void drawTexts() {
-		screenTextWriter.setColor(Color.RED);
+		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(2f);
-		screenTextWriter.drawText("Game Over", 320, 640);
+		screenTextWriter.drawText("Game Over", 330, 645);
 		
 		int buttonTextX = 360;
 		int buttonTextWidth = 430;
-		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.5f);
-		screenTextWriter.drawText("You died...", buttonTextX, 520, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText("You died...", buttonTextX + 7, 520, buttonTextWidth, Align.center, false);
 		
 		screenTextWriter.setScale(1.15f);
 		screenTextWriter.drawText(getButtonTextColorEncoding(buttonStartNewGame) + "Die again", buttonTextX, 402, buttonTextWidth, Align.center,

@@ -12,7 +12,6 @@ import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.screen.ScreenManager;
-import net.jfabricationgames.gdx.screen.main.MainMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
@@ -86,6 +85,9 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		itemMenu.selectHoveredItem();
 		
 		initializeStateMachine();
+		
+		//adapt the camera position to center the menu on the screen (instead of changing all components)
+		camera.position.y -= 20;
 	}
 	
 	private void createComponents() {
@@ -150,10 +152,10 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void createDialogs() {
-		controlsDialog = new GameControlsDialog();
-		mapDialog = new GameMapDialog(gameScreen, this::backToGame, this::playMenuSound);
-		saveGameDialog = new SaveGameDialog(this::backToGame, this::playMenuSound);
-		loadGameDialog = new LoadGameDialog(this::backToGame, this::playMenuSound);
+		controlsDialog = new GameControlsDialog(camera);
+		mapDialog = new GameMapDialog(gameScreen, camera, this::backToGame, this::playMenuSound);
+		saveGameDialog = new SaveGameDialog(camera, this::backToGame, this::playMenuSound);
+		loadGameDialog = new LoadGameDialog(camera, this::backToGame, this::playMenuSound);
 	}
 	
 	private void initializeStateMachine() {
@@ -220,6 +222,8 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		setProjectionMatrixBeforeRendering();
+		
 		batch.begin();
 		drawBackground();
 		drawItemMenu();
@@ -263,6 +267,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	}
 	
 	private void drawAmmoMenu() {
+		ammoMenu.setBatchProjectionMatrix(camera.combined);
 		ammoMenu.draw(batch, 825, 450, 200, 110);
 	}
 	
@@ -444,7 +449,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 		removeInputListener();
 		gameScreen.dispose();
 		
-		ScreenManager.getInstance().setScreen(new MainMenuScreen());
+		ScreenManager.getInstance().changeToMainMenuScreen();
 	}
 	
 	public void showMap() {

@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -55,7 +56,9 @@ public class GameMapDialog extends InGameMenuDialog {
 	private Runnable backToGameCallback;
 	private Consumer<String> playMenuSoundConsumer;
 	
-	public GameMapDialog(MenuGameScreen gameScreen, Runnable backToGameCallback, Consumer<String> playMenuSoundConsumer) {
+	public GameMapDialog(MenuGameScreen gameScreen, OrthographicCamera camera, Runnable backToGameCallback, Consumer<String> playMenuSoundConsumer) {
+		super(camera);
+		
 		this.backToGameCallback = backToGameCallback;
 		this.playMenuSoundConsumer = playMenuSoundConsumer;
 		
@@ -107,6 +110,7 @@ public class GameMapDialog extends InGameMenuDialog {
 	
 	public void draw(float delta) {
 		if (visible) {
+			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			
 			background.draw(batch, 120, -20, 950, 640);
@@ -123,6 +127,7 @@ public class GameMapDialog extends InGameMenuDialog {
 			
 			batch.end();
 			
+			shapeRenderer.setProjectionMatrix(camera.combined);
 			shapeRenderer.begin(ShapeType.Filled);
 			drawPlayerPosition(delta, mapTextureX, mapTextureY);
 			drawFastTravelPoints(delta, mapTextureX, mapTextureY);
@@ -187,6 +192,8 @@ public class GameMapDialog extends InGameMenuDialog {
 	}
 	
 	private void drawText() {
+		screenTextWriter.setBatchProjectionMatrix(camera.combined);
+		
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.2f);
 		screenTextWriter.drawText(config.name, 275, 594, 450, Align.center, false);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Matrix4;
 
 import net.jfabricationgames.gdx.text.ScreenTextWriter.TextDrawCall.CallType;
 
@@ -29,6 +30,10 @@ public class ScreenTextWriter {
 		
 		color = Color.BLACK;
 		glyphLayout = new GlyphLayout();
+	}
+	
+	public void setBatchProjectionMatrix(Matrix4 matrix) {
+		batch.setProjectionMatrix(matrix);
 	}
 	
 	public void setFont(String fontName) {

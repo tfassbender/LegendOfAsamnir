@@ -90,10 +90,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private boolean gameOver = false;
 	
 	private GameScreen() {
-		initializeGame();
-	}
-	
-	private void initializeGame() {
 		initializeCamerasAndViewports();
 		initializeInputContext();
 		createBox2DWorld();
@@ -336,6 +332,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	@Override
 	public void resize(int width, int height) {
+		Gdx.app.log(getClass().getSimpleName(), "Resizing screen to: " + width + " x " + height);
 		viewport.update(width, height, false);
 		viewportHud.update(width, height, false);
 	}

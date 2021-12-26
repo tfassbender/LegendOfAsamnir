@@ -3,16 +3,17 @@ package net.jfabricationgames.gdx.screen.menu.dialog;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
 
 public class LoadGameDialog extends GameDataServiceDialog {
 	
-	public LoadGameDialog(Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
-		super(backToGame, playMenuSoundConsumer);
+	public LoadGameDialog(OrthographicCamera camera, Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
+		super(camera, backToGame, playMenuSoundConsumer);
 	}
-
+	
 	@Override
 	protected String getMenuTitle() {
 		return "Load Game";

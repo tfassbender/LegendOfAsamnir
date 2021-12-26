@@ -102,6 +102,7 @@ public class OnScreenTextBox implements InputActionListener, GlobalEventTextBox,
 		if (isDisplaying()) {
 			batch.setProjectionMatrix(camera.combined);
 			shapeRenderer.setProjectionMatrix(camera.combined);
+			screenTextWriter.setBatchProjectionMatrix(camera.combined);
 			
 			renderBackground();
 			renderHeader();

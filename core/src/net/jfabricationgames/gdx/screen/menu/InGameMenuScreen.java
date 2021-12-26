@@ -61,7 +61,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 	public void backToGame() {
 		removeInputListener();
 		InputManager.getInstance().changeInputContext(ScreenManager.INPUT_CONTEXT_NAME);
-		ScreenManager.getInstance().backToGameScreen();
+		ScreenManager.getInstance().changeToGameScreen();
 	}
 	
 	public void respawnInLastCheckpoint() {

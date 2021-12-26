@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.screen.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,8 +27,10 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 	
 	protected AssetGroupManager assetManager;
 	protected ScreenTextWriter screenTextWriter;
-	protected Viewport viewport;
 	protected SpriteBatch batch;
+	
+	protected OrthographicCamera camera;
+	private Viewport viewport;
 	
 	public MenuScreen(String... stateConfigFiles) {
 		super(stateConfigFiles);
@@ -35,7 +38,14 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 		screenTextWriter = new ScreenTextWriter();
 		screenTextWriter.setFont(FONT_NAME);
 		
-		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+		camera = new OrthographicCamera();
+		camera.position.x = VIRTUAL_WIDTH / 2;
+		camera.position.y = VIRTUAL_HEIGHT / 2;
+		
+		//adapt the camera position to center the menu on the screen (instead of changing all components)
+		camera.position.x -= 40;
+		
+		viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
 		batch = new SpriteBatch();
 		
 		assetManager = AssetGroupManager.getInstance();
@@ -64,8 +74,14 @@ public abstract class MenuScreen<T extends ControlledMenu<T>> extends Controlled
 		InputManager.getInstance().getInputContext().removeListener(this);
 	}
 	
+	protected void setProjectionMatrixBeforeRendering() {
+		batch.setProjectionMatrix(camera.combined);
+		screenTextWriter.setBatchProjectionMatrix(camera.combined);
+	}
+	
 	@Override
 	public void resize(int width, int height) {
+		Gdx.app.log(getClass().getSimpleName(), "Resizing screen to: " + width + " x " + height);
 		viewport.update(width, height);
 	}
 	

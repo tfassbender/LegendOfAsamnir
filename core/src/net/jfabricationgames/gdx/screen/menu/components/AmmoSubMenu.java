@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.screen.menu.components;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -65,6 +66,10 @@ public class AmmoSubMenu extends SingleLineMenuBox {
 		for (ItemAmmoType item : items) {
 			itemTextures.put(item, itemTextureLoader.loadTexture(item.name().toLowerCase()));
 		}
+	}
+	
+	public void setBatchProjectionMatrix(Matrix4 cameraMatrix) {
+		screenTextWriter.setBatchProjectionMatrix(cameraMatrix);
 	}
 	
 	@Override

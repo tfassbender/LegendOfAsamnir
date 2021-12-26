@@ -66,6 +66,8 @@ public class LoadingScreen extends MenuScreen<LoadingScreen> {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		setProjectionMatrixBeforeRendering();
+		
 		dwarfAnimation.increaseStateTime(delta);
 		
 		batch.begin();

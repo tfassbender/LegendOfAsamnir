@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.screen.menu.dialog;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -16,8 +17,11 @@ public abstract class InGameMenuDialog implements Disposable {
 	protected boolean visible;
 	protected SpriteBatch batch;
 	protected ScreenTextWriter screenTextWriter;
+	protected OrthographicCamera camera;
 	
-	public InGameMenuDialog() {
+	public InGameMenuDialog(OrthographicCamera camera) {
+		this.camera = camera;
+		
 		batch = new SpriteBatch();
 		
 		screenTextWriter = new ScreenTextWriter();

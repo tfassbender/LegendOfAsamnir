@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screen.main;
+package net.jfabricationgames.gdx.screen.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -12,8 +12,7 @@ import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.screen.game.GameScreen;
-import net.jfabricationgames.gdx.screen.menu.MenuScreen;
+import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.MainMenuAnimation;
@@ -48,6 +47,9 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		mainMenuAnimation = new MainMenuAnimation();
 		
 		setInputContext();
+		
+		//adapt the camera position to center the menu on the screen (instead of changing all components)
+		camera.position.y -= 20;
 	}
 	
 	private void createComponents() {
@@ -67,7 +69,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	private void createDialogs() {
-		loadGameDialog = new LoadGameDialog(() -> {
+		loadGameDialog = new LoadGameDialog(camera, () -> {
 		}, this::playMenuSound);
 	}
 	
@@ -95,6 +97,8 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		setProjectionMatrixBeforeRendering();
 		
 		batch.begin();
 		mainMenuAnimation.drawAnimation(batch, delta);
@@ -193,7 +197,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	private void createGameScreen(Runnable afterCreatingGameScreen) {
 		Gdx.app.log(getClass().getSimpleName(), "Crating game screen");
 		GameDataHandler.getInstance().createNewGameData();
-		GameScreen.loadAndShowGameScreen(afterCreatingGameScreen);
+		ScreenManager.getInstance().createGameScreen(afterCreatingGameScreen);
 		dispose();
 	}
 	

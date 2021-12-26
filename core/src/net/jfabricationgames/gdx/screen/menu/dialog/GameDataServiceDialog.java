@@ -3,11 +3,12 @@ package net.jfabricationgames.gdx.screen.menu.dialog;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
-import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
+import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 
 public abstract class GameDataServiceDialog extends InGameMenuDialog {
 	
@@ -21,7 +22,9 @@ public abstract class GameDataServiceDialog extends InGameMenuDialog {
 	private Runnable backToGame;
 	private Consumer<String> playMenuSoundConsumer;
 	
-	public GameDataServiceDialog(Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
+	public GameDataServiceDialog(OrthographicCamera camera, Runnable backToGame, Consumer<String> playMenuSoundConsumer) {
+		super(camera);
+		
 		this.backToGame = backToGame;
 		this.playMenuSoundConsumer = playMenuSoundConsumer;
 		gameDataService = new GameDataService();
@@ -69,6 +72,7 @@ public abstract class GameDataServiceDialog extends InGameMenuDialog {
 	
 	public void draw() {
 		if (visible) {
+			batch.setProjectionMatrix(camera.combined);
 			batch.begin();
 			
 			background.draw(batch, 40, 50, 1130, 570);
@@ -90,6 +94,8 @@ public abstract class GameDataServiceDialog extends InGameMenuDialog {
 	}
 	
 	private void drawText() {
+		screenTextWriter.setBatchProjectionMatrix(camera.combined);
+		
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.2f);
 		screenTextWriter.drawText(getMenuTitle(), 155, 594);
