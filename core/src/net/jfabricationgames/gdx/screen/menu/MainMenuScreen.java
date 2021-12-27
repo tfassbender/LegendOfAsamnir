@@ -12,7 +12,7 @@ import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
-import net.jfabricationgames.gdx.screen.ScreenManager;
+import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.MainMenuAnimation;
@@ -197,7 +197,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	private void createGameScreen(Runnable afterCreatingGameScreen) {
 		Gdx.app.log(getClass().getSimpleName(), "Crating game screen");
 		GameDataHandler.getInstance().createNewGameData();
-		ScreenManager.getInstance().createGameScreen(afterCreatingGameScreen);
+		GameScreen.loadAndShowGameScreen(afterCreatingGameScreen);
 		dispose();
 	}
 	

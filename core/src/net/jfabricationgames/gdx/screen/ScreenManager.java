@@ -1,16 +1,17 @@
 package net.jfabricationgames.gdx.screen;
 
+import java.util.function.Supplier;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-
-import net.jfabricationgames.gdx.screen.game.GameScreen;
-import net.jfabricationgames.gdx.screen.menu.MainMenuScreen;
 
 public class ScreenManager {
 	
 	public static final String ASSET_GROUP_NAME = "game";
 	public static final String INPUT_CONTEXT_NAME = "game";
+	
+	private static Supplier<Screen> mainMenuScreenSupplier;
 	
 	private static ScreenManager instance;
 	
@@ -21,14 +22,14 @@ public class ScreenManager {
 		return instance;
 	}
 	
+	public static void setMainMenuScreenSupplier(Supplier<Screen> mainMenuScreenSupplier) {
+		ScreenManager.mainMenuScreenSupplier = mainMenuScreenSupplier;
+	}
+	
 	private Game game;
 	private Screen gameScreen;
 	
 	private ScreenManager() {}
-	
-	public void createGameScreen(Runnable afterCreatingGameScreen) {
-		GameScreen.loadAndShowGameScreen(afterCreatingGameScreen);
-	}
 	
 	public void changeToGameScreen() {
 		if (gameScreen == null) {
@@ -39,7 +40,7 @@ public class ScreenManager {
 	}
 	
 	public void changeToMainMenuScreen() {
-		setScreen(new MainMenuScreen());
+		setScreen(mainMenuScreenSupplier.get());
 	}
 	
 	public void setGame(Game game) {

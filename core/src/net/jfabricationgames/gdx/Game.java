@@ -54,8 +54,9 @@ public class Game extends com.badlogic.gdx.Game {
 		InputManager.getInstance().createInputProfile(Gdx.files.internal(INPUT_PROFILE_CONFIG_PATH), multiplexer);
 		
 		ScreenManager screenManager = ScreenManager.getInstance();
+		ScreenManager.setMainMenuScreenSupplier(MainMenuScreen::new);
 		screenManager.setGame(this);
-		screenManager.setScreen(new MainMenuScreen());
+		screenManager.changeToMainMenuScreen();
 	}
 	
 	public GameScreen getGameScreen() {
