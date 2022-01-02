@@ -167,6 +167,8 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		changeBodyToNonSensor();
 		changedBodyToSensor = false;
 		
+		playInteractionSound();
+		
 		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	

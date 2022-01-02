@@ -7,12 +7,13 @@ import com.badlogic.gdx.utils.ObjectSet;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneControlledState;
+import net.jfabricationgames.gdx.sound.SoundHandler;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
 
 public class CharacterState implements CutsceneControlledState {
 	
-	private static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("enemy");
+	private static final SoundSet SOUND_SET = SoundManager.getInstance().loadSoundSet("enemy");
 	
 	protected AnimationDirector<TextureRegion> animation;
 	
@@ -25,6 +26,8 @@ public class CharacterState implements CutsceneControlledState {
 	private Array<CharacterStateAttack> attacks;
 	
 	private Vector2 directionToTarget;
+	
+	private SoundHandler sound;
 	
 	public CharacterState(AnimationDirector<TextureRegion> animation, CharacterStateConfig config, CharacterStateAttackHandler attackHandler) {
 		this.animation = animation;
@@ -39,6 +42,7 @@ public class CharacterState implements CutsceneControlledState {
 	
 	public void leaveState() {
 		abortAttacks();
+		abortSound();
 	}
 	
 	private void abortAttacks() {
@@ -46,6 +50,12 @@ public class CharacterState implements CutsceneControlledState {
 			attack.abort();
 		}
 		attacks.clear();
+	}
+	
+	private void abortSound() {
+		if (config.abortSoundWhenStateInterrupted && sound != null) {
+			sound.stop();
+		}
 	}
 	
 	public void enterState(CharacterState previousState) {
@@ -99,7 +109,7 @@ public class CharacterState implements CutsceneControlledState {
 	
 	private void playSound() {
 		if (config.stateEnteringSound != null) {
-			soundSet.playSound(config.stateEnteringSound);
+			sound = SOUND_SET.playSound(config.stateEnteringSound);
 		}
 	}
 	

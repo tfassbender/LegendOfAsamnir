@@ -120,6 +120,7 @@
 		texture: chest,
 		animationHit: chest_hit,
 		animationAction: chest_open,
+		interactionSound: chest_opening,
 		
 		physicsBodySizeFactorX: 0.4,
 		physicsBodySizeFactorY: 0.3,
@@ -148,6 +149,7 @@
 		
 		texture: key_wall_open_1,
 		hitSound: metal_hit_1,
+		interactionSound: key_wall_opening,
 		
 		physicsBodySizeFactorX: 0.7,
 		physicsBodySizeFactorY: 0.6,
@@ -256,6 +258,7 @@
 		
 		texture: button_wall_up,
 		textureAfterAction: button_wall_down,
+		interactionSound: switch_activated,
 		
 		physicsBodySizeFactorX: 0.6f,
 		physicsBodySizeFactorY: 0.6f,
@@ -273,6 +276,7 @@
 		
 		texture: switch_wall_up,
 		textureAfterAction: switch_wall_down,
+		interactionSound: switch_activated,
 		
 		physicsBodySizeFactorX: 0.6f,
 		physicsBodySizeFactorY: 0.6f,
@@ -290,6 +294,7 @@
 		
 		texture: button_floor_up,
 		textureAfterAction: button_floor_down,
+		interactionSound: switch_activated,
 		
 		physicsBodySizeFactorX: 0.2f,
 		physicsBodySizeFactorY: 0.2f,
@@ -305,6 +310,7 @@
 		
 		texture: switch_floor_up,
 		textureAfterAction: switch_floor_down,
+		interactionSound: switch_activated,
 		
 		physicsBodySizeFactorX: 0.6f,
 		physicsBodySizeFactorY: 0.6f,

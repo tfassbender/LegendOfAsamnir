@@ -410,6 +410,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 			propertiesDataHandler.increaseHealthByHalf();
 			GlobalValuesDataHandler.getInstance().put(RuneType.GLOBAL_VALUE_KEY_RUNE_HAGALAZ_FORGED, false);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_USED).setStringValue(RUNE_HAGALAZ_ANIMATION_NAME));
+			soundHandler.playSound("rune_hagalaz_used");
 		}
 		else {
 			soundHandler.playSound(CharacterAction.HIT);

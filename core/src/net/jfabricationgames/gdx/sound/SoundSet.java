@@ -65,51 +65,7 @@ public class SoundSet implements Disposable {
 		return this;
 	}
 	
-	public boolean containsSound(String name) {
-		return sounds.containsKey(name);
-	}
-	
-	public Sound getSound(String name) {
-		return getSoundChecked(name);
-	}
-	
-	public void playSound(String name) {
-		Sound sound = getSoundChecked(name);
-		float volume = soundConfigs.get(name).getVolume();
-		float delay = soundConfigs.get(name).getDelay();
-		if (delay > 0.01) {
-			Timer.schedule(new Task() {
-				
-				@Override
-				public void run() {
-					sound.play(volume);
-				}
-			}, delay);
-		}
-		else {
-			sound.play(volume);
-		}
-	}
-	
-	public void loopSound(String name) {
-		Sound sound = getSoundChecked(name);
-		float volume = soundConfigs.get(name).getVolume();
-		float delay = soundConfigs.get(name).getDelay();
-		if (delay > 0.01) {
-			Timer.schedule(new Task() {
-				
-				@Override
-				public void run() {
-					sound.loop(volume);
-				}
-			}, delay);
-		}
-		else {
-			sound.loop(volume);
-		}
-	}
-	
-	private Sound getSoundChecked(String name) {
+	private Sound getSound(String name) {
 		if (!loaded) {
 			throw new IllegalStateException("The sounds were not loaded yet or have been disposed.");
 		}
@@ -120,6 +76,55 @@ public class SoundSet implements Disposable {
 		return sound;
 	}
 	
+	public SoundHandler playSound(String name) {
+		Sound sound = getSound(name);
+		SoundHandler soundHandler = new SoundHandler(sound);
+		
+		float volume = soundConfigs.get(name).getVolume();
+		float delay = soundConfigs.get(name).getDelay();
+		if (delay > 0.01) {
+			Timer.schedule(new Task() {
+				
+				@Override
+				public void run() {
+					if (!soundHandler.isSoundStoped()) {
+						sound.play(volume);
+					}
+				}
+			}, delay);
+		}
+		else {
+			sound.play(volume);
+		}
+		
+		return soundHandler;
+	}
+	
+	public Sound loopSound(String name) {
+		Sound sound = getSound(name);
+		SoundHandler soundHandler = new SoundHandler(sound);
+		
+		float volume = soundConfigs.get(name).getVolume();
+		float delay = soundConfigs.get(name).getDelay();
+		if (delay > 0.01) {
+			Timer.schedule(new Task() {
+				
+				@Override
+				public void run() {
+					if (!soundHandler.isSoundStoped()) {
+						sound.loop(volume);
+					}
+				}
+			}, delay);
+		}
+		else {
+			sound.loop(volume);
+		}
+		
+		return sound;
+	}
+	
+	@Override
 	public void dispose() {
 		sounds.values().forEach(Sound::dispose);
 		loaded = false;

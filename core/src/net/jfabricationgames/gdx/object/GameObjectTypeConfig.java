@@ -56,6 +56,7 @@ public class GameObjectTypeConfig {
 	
 	public String animationAction;
 	public String textureAfterAction;
+	public String interactionSound;
 	public boolean multipleActionExecutionsPossible = false;
 	public boolean hitAnimationAfterAction = false;
 	public boolean changeBodyToSensorAfterAction = false;

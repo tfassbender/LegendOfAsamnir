@@ -69,6 +69,7 @@ public class StateSwitchObject extends InteractiveObject {
 			changeSwitchObjectState(stateSwitchId, active);
 			updateSprite();
 			executeEvent();
+			playInteractionSound();
 			
 			MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 		}

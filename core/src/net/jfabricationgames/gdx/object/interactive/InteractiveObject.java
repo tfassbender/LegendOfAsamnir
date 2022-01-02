@@ -148,6 +148,11 @@ public class InteractiveObject extends GameObject implements Interactive {
 		return typeConfig.multipleActionExecutionsPossible || !actionExecuted;
 	}
 	
+	@Override
+	public float getDistanceToPlayer(Vector2 playerPosition) {
+		return playerPosition.sub(body.getPosition()).len();
+	}
+	
 	protected void executeInteraction() {
 		actionExecuted = true;
 		if (typeConfig.animationAction != null) {
@@ -156,6 +161,7 @@ public class InteractiveObject extends GameObject implements Interactive {
 		
 		performAction();
 		dropItems();
+		playInteractionSound();
 		if (typeConfig.textureAfterAction != null) {
 			sprite = createSprite(typeConfig.textureAfterAction);
 		}
@@ -163,14 +169,15 @@ public class InteractiveObject extends GameObject implements Interactive {
 		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
-	@Override
-	public float getDistanceToPlayer(Vector2 playerPosition) {
-		return playerPosition.sub(body.getPosition()).len();
-	}
-	
 	protected void performAction() {
 		if (typeConfig.interactiveAction != null) {
 			typeConfig.interactiveAction.execute(this);
+		}
+	}
+	
+	protected void playInteractionSound() {
+		if (typeConfig.interactionSound != null) {
+			soundSet.playSound(typeConfig.interactionSound);
 		}
 	}
 	

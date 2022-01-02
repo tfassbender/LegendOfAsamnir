@@ -23,6 +23,7 @@
 		attack: fire,
 		endsWithAnimation: true,
 		followingState: idle,
+		stateEnteringSound: imp_attack,
 		interruptingStates: [
 			damage, die
 		]

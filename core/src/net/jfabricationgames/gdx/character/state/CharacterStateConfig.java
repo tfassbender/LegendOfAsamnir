@@ -7,7 +7,9 @@ public class CharacterStateConfig {
 	public String id;
 	public String animation;
 	public String attack;
+	
 	public String stateEnteringSound;
+	public boolean abortSoundWhenStateInterrupted = false;
 	
 	public boolean endsWithAnimation = true;
 	public boolean endsAfterAttackFinishes = false;

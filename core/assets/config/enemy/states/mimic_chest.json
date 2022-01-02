@@ -13,6 +13,7 @@
 		animation: mimic_chest_surprise,
 		endsWithAnimation: true,
 		followingState: idle,
+		stateEnteringSound: mimic_awakening,
 		interruptingStates: [
 			damage, die
 		]
@@ -38,7 +39,7 @@
 	{
 		id: attack,
 		animation: mimic_chest_move,
-		//stateEnteringSound: attack_mini_golem,
+		stateEnteringSound: mimic_attack,
 		attack: attack
 		endsWithAnimation: true,
 		followingState: move,

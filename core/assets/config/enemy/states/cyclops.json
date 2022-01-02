@@ -25,6 +25,8 @@
 		endsAfterAttackFinishes: true,
 		flipAnimationOnEnteringOnly: true,
 		followingState: idle,
+		stateEnteringSound: cyclops_attack_beam,
+		abortSoundWhenStateInterrupted: true,
 		interruptingStates: [
 			damage_low, die
 		]
@@ -46,6 +48,7 @@
 		attack: attack_throw
 		endsWithAnimation: true,
 		followingState: idle,
+		stateEnteringSound: cyclops_attack_stone,
 		interruptingStates: [
 			die
 		]

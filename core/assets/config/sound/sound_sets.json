@@ -46,6 +46,12 @@
 				sell_buy_item: {
 					path: "sound/item/sell_buy_item.wav",
 				},
+				boomerang_throw: {
+					path: "sound/dwarf/boomerang_throw.wav",
+				},
+				rune_hagalaz_used: {
+					path: "sound/dwarf/rune_hagalaz_used.wav",
+				},
 			}
 		},
 		common: {
@@ -61,6 +67,10 @@
 				},
 				explosion: {
 					path: "sound/common/explosion.wav",
+				},
+				show_on_screen_text_page: {//not used, because it's played too often and get's anoying
+					path: "sound/common/show_on_screen_text_page.wav",
+					volume: 0.1,
 				}
 			}
 		},
@@ -149,15 +159,23 @@
 				glass_break: {
 					path: "sound/object/glass_break_1.wav",
 				},
-				switch: {
-					path: "sound/object/switch.mp3",
-					volume: 0.75
-				},
 				rock_hit: {
 					path: "sound/enemy/rock_hit.wav",
 				},
 				rock_break: {
 					path: "sound/enemy/rock_break.wav",
+				},
+				chest_opening: {
+					path: "sound/object/chest_opening.wav",
+					volume: 0.25,
+				},
+				key_wall_opening: {
+					path: "sound/object/key_wall_opening.wav",
+					volume: 0.2,
+				},
+				switch_activated: {
+					path: "sound/object/switch_activated.wav",
+					volume: 0.3,
 				},
 			}
 		},
@@ -287,6 +305,32 @@
 					path: "sound/object/wood_knock.wav",
 					volume: 1
 					delay: 0.5
+				},
+				cyclops_attack_beam: {
+					path: "sound/enemy/attack/cyclops_beam_attack.wav",
+					delay: 0.4,
+					volume: 0.4,
+				},
+				cyclops_attack_stone: {
+					path: "sound/enemy/attack/cyclops_stone_attack.wav",
+					delay: 1.2,
+					volume: 0.4,
+				},
+				//imp
+				imp_attack: {
+					path: "sound/enemy/attack/imp_attack.wav",
+					volume: 0.4,
+					delay: 0.3,
+				},
+				//mimic
+				mimic_awakening: {
+					path: "sound/enemy/mimic_awakening.wav",
+					volume: 0.25,
+				},
+				mimic_attack: {
+					path: "sound/enemy/attack/mimic_attack.wav",
+					volume: 0.1,
+					delay: 0.3,
 				},
 			}
 		}
