@@ -42,6 +42,7 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 			properties.mana = Math.min(properties.mana + increaseStep, properties.maxMana);
 		}
 		if (properties.increaseEndurance > 0f) {
+			//only used when endurance is increased by an event or an item
 			float increaseStep = Math.min(delta * properties.enduranceIncreasePerSecond, properties.increaseEndurance);
 			properties.increaseEndurance -= increaseStep;
 			properties.endurance = Math.min(properties.endurance + increaseStep, properties.maxEndurance);
@@ -86,6 +87,19 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 			properties.endurance = 0;
 		}
 	}
+	public void reduceEnduranceForBlocking(float delta) {
+		properties.endurance -= properties.enduranceCostsBlock * delta;
+		if (properties.endurance < 0) {
+			properties.endurance = 0;
+		}
+	}
+	public void reduceEnduranceForHitBlocking() {
+		properties.endurance -= properties.enduranceCostHitBlocking;
+		if (properties.endurance < 0) {
+			properties.endurance = 0;
+		}
+	}
+	
 	public boolean isExhausted() {
 		return properties.endurance < 1e-5;
 	}

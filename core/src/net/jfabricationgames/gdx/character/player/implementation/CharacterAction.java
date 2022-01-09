@@ -5,7 +5,7 @@ import net.jfabricationgames.gdx.data.handler.type.DataCharacterAction;
 public enum CharacterAction implements DataCharacterAction {
 	
 	NONE("", null, 0f, false, true, false, null), // just stay still
-	BLOCK("", null, 0f, false, false, true, null), // hold a shield to block attacks
+	BLOCK("", null, 0f, false, true, true, null), // hold a shield to block attacks
 	IDLE("dwarf_idle_", null, 0f, true, true, false, null), // staying still for some time
 	RUN("dwarf_run_", null, 0f, true, true, false, null), // running in any direction
 	JUMP("dwarf_jump_", "jump", 10f, true, false, true, null), // jumping with or without direction
@@ -18,7 +18,8 @@ public enum CharacterAction implements DataCharacterAction {
 	
 	private static final String DEFAULT_ANIMATION_DIRECTION = "right";
 	private static final float ENDURANCE_RECHARGE_IDLE = 15f;
-	private static final float ENDURANCE_RECHARGE_MOVIN = 7.5f;
+	private static final float ENDURANCE_RECHARGE_MOVING = 7.5f;
+	private static final float ENDURANCE_RECHARGE_BLOCKING = 0f;
 	
 	private final String animationPrefix;
 	private final String sound;
@@ -30,10 +31,6 @@ public enum CharacterAction implements DataCharacterAction {
 	
 	private CharacterAction(String animationPrefix, String sound, float enduranceCosts, boolean animated, boolean interruptable, boolean moveBlocking,
 			String attack) {
-		if (interruptable && moveBlocking) {
-			throw new IllegalArgumentException("An action can't be interruptable and move blocking at the same time");
-		}
-		
 		this.animationPrefix = animationPrefix;
 		this.sound = sound;
 		this.enduranceCosts = enduranceCosts;
@@ -51,16 +48,21 @@ public enum CharacterAction implements DataCharacterAction {
 		return sound;
 	}
 	
+	@Override
 	public float getEnduranceCosts() {
 		return enduranceCosts;
 	}
 	
+	@Override
 	public float getEnduranceRecharge() {
 		if (this == CharacterAction.NONE || this == CharacterAction.IDLE) {
 			return ENDURANCE_RECHARGE_IDLE;
 		}
+		else if (this == CharacterAction.BLOCK) {
+			return ENDURANCE_RECHARGE_BLOCKING;
+		}
 		else {
-			return ENDURANCE_RECHARGE_MOVIN;
+			return ENDURANCE_RECHARGE_MOVING;
 		}
 	}
 	

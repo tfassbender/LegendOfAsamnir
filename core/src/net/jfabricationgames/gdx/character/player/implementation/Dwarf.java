@@ -237,8 +237,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	@Override
 	public void process(float delta) {
-		updateAction(delta);
 		propertiesDataHandler.updateStats(delta, action);
+		updateAction(delta);//update the action after updating the stats, to not end the block action before updating the endurance (because the animation finishes)
 		attackHandler.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
@@ -249,8 +249,15 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	private void updateAction(float delta) {
 		renderer.animation.increaseStateTime(delta);
-		if (renderer.animation.isAnimationFinished()) {
-			changeAction(CharacterAction.NONE);
+		if (action != CharacterAction.BLOCK) { // ending the block is done in the CharacterInputProcessor
+			if (renderer.animation.isAnimationFinished()) {
+				if (action == CharacterAction.SHIELD_HIT) {
+					changeAction(CharacterAction.BLOCK);
+				}
+				else {
+					changeAction(CharacterAction.NONE);
+				}
+			}
 		}
 	}
 	
@@ -402,6 +409,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	}
 	
 	private void takeArmorDamage(float damage) {
+		propertiesDataHandler.reduceEnduranceForHitBlocking();
 		propertiesDataHandler.takeArmorDamage(damage);
 	}
 	

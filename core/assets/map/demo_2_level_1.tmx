@@ -226,9 +226,6 @@
    </properties>
    <point/>
   </object>
-  <object id="14123" name="item.rune_othala" x="175" y="2417">
-   <point/>
-  </object>
  </objectgroup>
  <objectgroup id="33" name="physics">
   <object id="8161" x="224.01" y="2390">

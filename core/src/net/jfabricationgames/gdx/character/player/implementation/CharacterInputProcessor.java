@@ -34,6 +34,7 @@ class CharacterInputProcessor implements InputActionListener {
 	private static final String INPUT_BLOCK = "block";
 	
 	private static final String ACTION_INTERACT = "interact";
+	private static final String ACTION_BLOCK = "block_action";
 	private static final String ACTION_PREVIOUS_SPECIAL_ACTION = "previousSpecialAction";
 	private static final String ACTION_NEXT_SPECIAL_ACTION = "nextSpecialAction";
 	
@@ -52,6 +53,7 @@ class CharacterInputProcessor implements InputActionListener {
 	private boolean attack = false;
 	private boolean sprint = false;
 	private boolean block = false;
+	private boolean startBlock = false;
 	private boolean changeSprint = false;
 	private boolean spinAttack = false;
 	
@@ -113,8 +115,9 @@ class CharacterInputProcessor implements InputActionListener {
 					}
 				}
 			}
-			if (!characterActionSet && block) {
+			if (!characterActionSet && startBlock) {
 				if (player.action.isInterruptable()) {
+					startBlock = false;
 					characterActionSet = player.changeAction(CharacterAction.BLOCK);
 				}
 			}
@@ -126,12 +129,19 @@ class CharacterInputProcessor implements InputActionListener {
 			}
 			if (!characterActionSet && move) {
 				lastMoveDirection = getDirectionFromInputs();
-				if (player.action.isInterruptable() && player.action != CharacterAction.RUN) {
+				if (player.action.isInterruptable() && !player.action.isMoveBlocking() && player.action != CharacterAction.RUN) {
 					characterActionSet = player.changeAction(CharacterAction.RUN);
 				}
 			}
 			else {
 				if (player.action == CharacterAction.RUN) {
+					characterActionSet = player.changeAction(CharacterAction.NONE);
+				}
+			}
+			
+			if (player.isBlocking()) {
+				player.propertiesDataHandler.reduceEnduranceForBlocking(delta);
+				if (!block || player.propertiesDataHandler.isExhausted()) {
 					characterActionSet = player.changeAction(CharacterAction.NONE);
 				}
 			}
@@ -266,6 +276,7 @@ class CharacterInputProcessor implements InputActionListener {
 		if (!player.action.isMoveBlocking()) {
 			//reduce the endurance for sprinting before requesting the movement speed
 			if (sprint) {
+				//the endurance is increased at the same time (see CharacterAction.getEnduranceRecharge())
 				player.propertiesDataHandler.reduceEnduranceForSprinting(delta);
 				if (player.propertiesDataHandler.isExhausted()) {
 					sprint = false;
@@ -391,9 +402,12 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
-		if (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED) {
+		if (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.BUTTON_PRESSED) {
 			if (action.equals(ACTION_INTERACT)) {
 				InteractionManager.getInstance().interact(player.getPosition());
+			}
+			else if (action.equals(ACTION_BLOCK)) {
+				startBlock = true;
 			}
 			else if (action.equals(ACTION_PREVIOUS_SPECIAL_ACTION)) {
 				selectNextSpecialAction(-1);
@@ -432,6 +446,11 @@ class CharacterInputProcessor implements InputActionListener {
 	}
 	
 	private void handleSprintByInputAction(MovingDirection direction) {
+		if (moveUp || moveDown || moveLeft || moveRight) {
+			//don't activate the sprint when the player is already moving (in a different direction)
+			return;
+		}
+		
 		if (lastInputActionDirection == direction && lastInputActionDelta < SPRINT_INPUT_ACTIONS_MAX_DELTA) {
 			sprint = true;
 		}

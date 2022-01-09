@@ -13,7 +13,7 @@
 	{
 		name: test_map_3,
 		map: "map/map3.tmx",
-		//initial: true
+		initial: true
 	},
 	{
 		name: test_map_4,
@@ -85,8 +85,8 @@
 	{
 		name: demo_2_level_1,
 		map: "map/demo_2_level_1.tmx",
-		initialStartingPointId: 3,
-		//initial: true
+		initialStartingPointId: 0,
+		initial: true
 	},
 	
 ]

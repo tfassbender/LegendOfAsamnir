@@ -137,6 +137,16 @@
 					<axis code="0" threshold="0.5" />
 				</controller>
 			</action>
+			
+			<!-- Block key as event (to abort blocking when endurance is out) -->
+			<action name="block_action">
+				<key code="R-Shift" />
+				<button code="Right" /><!-- right mouse button to block -->
+				<controller>
+					<button code="1" />
+					<axis code="4" threshold="0.7" /><!-- left shoulder axis -->
+				</controller>
+			</action>
 		</actions>
 		
 		<controllerAxes>
