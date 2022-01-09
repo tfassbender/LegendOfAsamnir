@@ -34,10 +34,6 @@
         }
     },
 
-	//*******************************************
-	//*** gates
-	//*******************************************
-
 	demo_2_main_first_enter_village: {
 		conditionId: demo_2_main_first_enter_village,
 		thenCase: {

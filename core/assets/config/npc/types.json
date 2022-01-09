@@ -58,4 +58,10 @@
 	demo_2_village_tavern_adventurer_eating: config/npc/levels/demo_2/village_tavern/adventurer_eating.json,
 	demo_2_village_tavern_adventurer_female_drinking: config/npc/levels/demo_2/village_tavern/adventurer_female_drinking.json,
 	demo_2_village_tavern_builder_barkeeper: config/npc/levels/demo_2/village_tavern/builder_barkeeper.json,
+	
+	//************************************************
+	//*** Demo 2 - Level 1
+	//************************************************
+	
+	demo_2_level_1_adventurer_at_first_destroyable_wall: config/npc/levels/demo_2/level_1/adventurer_at_first_destroyable_wall.json,
 }

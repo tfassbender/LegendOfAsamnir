@@ -1,0 +1,71 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+    demo_2_level_1_switch_open_lock_end: {
+        conditionId: demo_2_level_1_end_switch_activated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_end
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_end
+                }
+            }
+        }
+    },
+    
+    demo_2_level_1_switch_open_lock_vault: {
+        conditionId: demo_2_level_1_switch_open_lock_vault,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_vault
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_vault
+                }
+            }
+        }
+    },
+    
+    demo_2_level_1_switch_open_lock_vault_2: {
+        conditionId: demo_2_level_1_switch_open_lock_vault_2,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_vault_2
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_vault_2
+                }
+            }
+        }
+    },
+}

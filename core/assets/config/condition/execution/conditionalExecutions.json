@@ -3,4 +3,5 @@
 	config/condition/execution/levels/demo_2/prolog.json,
 	config/condition/execution/levels/demo_2/tutorial.json,
 	config/condition/execution/levels/demo_2/main.json,
+	config/condition/execution/levels/demo_2/level_1.json,
 ]

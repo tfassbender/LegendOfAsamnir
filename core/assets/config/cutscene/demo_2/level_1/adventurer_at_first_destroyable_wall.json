@@ -1,0 +1,263 @@
+{
+	id: demo_2_level_1_adventurer_at_first_destroyable_wall,
+	controlledActions: {
+		initial_condition: {
+			startsWithCutscene: true,
+			
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_level_1_bombs_found,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: adventurer_greeting_bombs_found,
+				condition_not_met: adventurer_met_condition,
+			}
+		},
+		
+		adventurer_met_condition: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_level_1_adventurer_at_first_destroyable_wall_met,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: adventurer_greeting,
+				condition_not_met: adventurer_first_greeting,
+			}
+		},
+		
+		//****************************************
+		//*** First time meeting the adventurer
+		//****************************************
+		
+		adventurer_first_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Oh, another adventurer!\n \nI tried to explore this forrest too, but couldn't find a way to get through these stones.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_question,
+			],
+		},
+		
+		adventurer_question: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Do you know how we could get through?",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value_adventurer_met,
+			],
+		},
+		
+		set_global_value_adventurer_met: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_1_adventurer_at_first_destroyable_wall_met, value: true}",
+			},
+			
+			executes: [
+				thorin_answer,
+			]
+		},
+		
+		//****************************************
+		//*** Adventurer already met
+		//****************************************
+		
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Oh, you're back!\n \nHave you found a way to get through these stones?",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		adventurer_greeting_bombs_found: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Oh, you're back!\n \nAnd you have found some bombs?!\nGreat! Now we can continue our quests.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+		
+		//****************************************
+		//*** interaction
+		//****************************************
+		
+		thorin_answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I'll hit them with my axe!",
+					"I'll search for something...",
+				],
+			},
+			choiceOptionExecutions: [
+				adventurer_answer_worth_a_try,
+				adventurer_answer_search,
+			],
+		},
+		
+		adventurer_answer_worth_a_try: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Well, that's worth a try, I guess...",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		adventurer_answer_search: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Maybe a bomb could destroy them, but I couldn't find any in this forest.\nBut I didn't search this dark area in the south, because there are too many monsters...",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				condition_key,
+			],
+		},
+		
+		//****************************************
+		//*** Adventurer gives a key to Thorin
+		//****************************************
+		
+		condition_key: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_level_1_adventurer_at_first_destroyable_wall_key_given,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: end,
+				condition_not_met: adventurer_give_key,
+			}
+		},
+		
+		adventurer_give_key: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "While searching for a bomb I found this key, that I couldn't use yet. Maybe you can use it to find some bombs.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_give_key_event,
+			],
+		}
+		
+		adventurer_give_key_event: {
+			type: EVENT,
+			
+			event: {
+				eventType: GIVE_ITEM_TO_PLAYER,
+				stringValue: key,
+			},
+			
+			executes: [
+				set_global_value_key_given,
+			]
+		},
+		
+		set_global_value_key_given: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_1_adventurer_at_first_destroyable_wall_key_given, value: true}",
+			},
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

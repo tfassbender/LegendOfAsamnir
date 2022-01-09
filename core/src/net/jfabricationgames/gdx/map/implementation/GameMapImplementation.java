@@ -238,8 +238,6 @@ public class GameMapImplementation implements GameMap {
 				//other runes only set global values
 				break;
 		}
-		
-		GlobalValuesDataHandler.getInstance().put(rune.globalValueKeyCollected, true);
 	}
 	
 	private void updateRemovedObjects() {

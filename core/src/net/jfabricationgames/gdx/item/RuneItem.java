@@ -6,6 +6,10 @@ import com.badlogic.gdx.maps.MapProperties;
 
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.rune.RuneType;
 
 public class RuneItem extends Item {
@@ -22,5 +26,8 @@ public class RuneItem extends Item {
 	public void pickUp() {
 		super.pickUp();
 		itemMap.processRunePickUp(type);
+		GlobalValuesDataHandler.getInstance().put(type.globalValueKeyCollected, true);
+		EventHandler.getInstance()
+				.fireEvent(new EventConfig().setEventType(EventType.RUNE_FOUND).setStringValue(type.name()).setParameterObject(type));
 	}
 }

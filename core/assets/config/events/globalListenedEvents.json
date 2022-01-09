@@ -11,4 +11,5 @@
 	config/events/global/demo_2/village_blacksmith.json,
 	config/events/global/demo_2/village_shop.json,
 	config/events/global/demo_2/village_tavern.json,
+	config/events/global/demo_2/level_1.json,
 ]

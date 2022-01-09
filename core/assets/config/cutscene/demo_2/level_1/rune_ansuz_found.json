@@ -1,0 +1,60 @@
+{
+	id: demo_2_level_1_rune_ansuz_found,
+	controlledActions: {
+		initial_wait: {
+			startsWithCutscene: true,
+			
+			type: WAIT,
+			executionDelayInSeconds: 3f,
+			
+			executes: [
+				narrator_explanation,
+			]
+		},
+		
+		narrator_explanation: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "And so Thorin found the rune Ansuz and thenforth was able to interact with puzzles and switches.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I needed this rune to interact with some switches?!\n \nBecause that's so much of a difference from hitting them with my battle axe!",
+				showNextPageIcon: true,
+			}
+			
+			executes: [
+				thorin_answer_2,
+			]
+		},
+		
+		thorin_answer_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Damn narrator guy...\n \n*angry mumbling*",
+				showNextPageIcon: true,
+			}
+		},
+	}
+}

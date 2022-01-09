@@ -1,0 +1,89 @@
+{
+	//*******************************************
+	//*** cutscenes - npc interaction
+	//*******************************************
+	
+	demo_2_level_1_adventurer_at_first_destroyable_wall: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_level_1_adventurer_at_first_destroyable_wall,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_1_adventurer_at_first_destroyable_wall,
+		}
+	},
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_level_1_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_tutorial,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_1_goto_main,
+		}
+	},
+	
+	demo_2_level_1_goto_main_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_1_goto_main_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 5,
+		}
+	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_1_end_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_1_switch_end,
+		}
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_1_switch_open_lock_end,
+	},
+	
+	demo_2_level_1_vault_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_1_switch_vault,
+		}
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_1_switch_open_lock_vault,
+	},
+	
+	demo_2_level_1_vault_2_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_1_switch_vault_2,
+		}
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_1_switch_open_lock_vault_2,
+	},
+	
+	//*******************************************
+	//*** rune
+	//*******************************************
+	
+	demo_2_level_1_rune_ansuz_found: {
+		event: {
+			eventType: RUNE_FOUND,
+			stringValue: ANSUZ,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_1_rune_ansuz_found,
+		}
+	}
+}

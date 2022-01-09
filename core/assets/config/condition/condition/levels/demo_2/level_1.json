@@ -1,0 +1,53 @@
+{
+	//*******************************************
+	//*** npc interaction
+	//*******************************************
+	
+	demo_2_level_1_adventurer_at_first_destroyable_wall_met: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_1_adventurer_at_first_destroyable_wall_met,
+			expectedValue: true,
+		}
+	},
+	demo_2_level_1_adventurer_at_first_destroyable_wall_key_given: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_1_adventurer_at_first_destroyable_wall_key_given,
+			expectedValue: true,
+		}
+	},
+	
+	demo_2_level_1_bombs_found: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: special_action_available__bomb,
+			expectedValue: true,
+		}
+	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_1_end_switch_activated: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_1_switch_end,
+		}
+	},
+	
+	demo_2_level_1_switch_open_lock_vault: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_1_switch_vault,
+		}
+	},
+	
+	demo_2_level_1_switch_open_lock_vault_2: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_1_switch_vault_2,
+		}
+	},
+}

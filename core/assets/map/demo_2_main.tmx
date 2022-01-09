@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="8131">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="8140">
  <properties>
   <property name="above_player_layers" value="[9, 12, 17, 18, 27]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26]"/>
@@ -891,6 +891,12 @@
   <object id="8130" name="player.startingPosition" x="3535.67" y="1899">
    <properties>
     <property name="startingPointId" value="8"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8139" name="player.startingPosition" x="7039.67" y="2068">
+   <properties>
+    <property name="startingPointId" value="5"/>
    </properties>
    <point/>
   </object>
@@ -20236,6 +20242,30 @@
   <object id="8114" x="3584.01" y="3616">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
+  <object id="8131" x="703.031" y="2624.06">
+   <polygon points="0,0 -23.4545,3.45455 -42.3636,16.9091"/>
+  </object>
+  <object id="8132" x="703.031" y="2624.06">
+   <polygon points="0,0 20.3636,3.09091 40.3636,13.6364"/>
+  </object>
+  <object id="8133" x="743.031" y="2637.7">
+   <polygon points="0,0 19.8182,30.7273 20.1818,60"/>
+  </object>
+  <object id="8134" x="763.031" y="2697.7">
+   <polygon points="0,0 -13.2727,22.1818 -45.2727,29.2727"/>
+  </object>
+  <object id="8135" x="717.576" y="2727.15">
+   <polygon points="0,0 4.54545,10.5455 -12.1818,14.3636"/>
+  </object>
+  <object id="8136" x="705.94" y="2741.33">
+   <polygon points="0,0 -21.2727,-5.09091 -14.9091,-15.6364"/>
+  </object>
+  <object id="8137" x="691.031" y="2725.7">
+   <polygon points="0,0 -30.7273,-5.27273 -48.1818,-24.5455"/>
+  </object>
+  <object id="8138" x="642.667" y="2701.33">
+   <polygon points="0,0 0.727273,-30 18,-60.3636"/>
+  </object>
  </objectgroup>
  <objectgroup id="34" name="unreachable_area_physics" locked="1">
   <object id="5698" x="3200" y="543.5" width="128" height="32"/>
@@ -21151,30 +21181,6 @@
   </object>
   <object id="6424" x="559.5" y="2774">
    <polygon points="0,0 -0.217391,-20.1304 13.8696,-5.56522"/>
-  </object>
-  <object id="6425" x="704" y="2624">
-   <polygon points="0,0 -23.4545,3.45455 -42.3636,16.9091"/>
-  </object>
-  <object id="6426" x="704" y="2624">
-   <polygon points="0,0 20.3636,3.09091 40.3636,13.6364"/>
-  </object>
-  <object id="6427" x="744" y="2637.64">
-   <polygon points="0,0 19.8182,30.7273 20.1818,60"/>
-  </object>
-  <object id="6428" x="764" y="2697.64">
-   <polygon points="0,0 -13.2727,22.1818 -45.2727,29.2727"/>
-  </object>
-  <object id="6429" x="718.545" y="2727.09">
-   <polygon points="0,0 4.54545,10.5455 -12.1818,14.3636"/>
-  </object>
-  <object id="6430" x="706.909" y="2741.27">
-   <polygon points="0,0 -21.2727,-5.09091 -14.9091,-15.6364"/>
-  </object>
-  <object id="6431" x="692" y="2725.64">
-   <polygon points="0,0 -30.7273,-5.27273 -48.1818,-24.5455"/>
-  </object>
-  <object id="6432" x="643.636" y="2701.27">
-   <polygon points="0,0 0.727273,-30 18,-60.3636"/>
   </object>
   <object id="6433" x="1488.5" y="2804.54">
    <polygon points="0,0 -14,-6 -0.25,-20.25"/>
