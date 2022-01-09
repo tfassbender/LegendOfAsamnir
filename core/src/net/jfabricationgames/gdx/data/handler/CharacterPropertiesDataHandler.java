@@ -63,11 +63,17 @@ public class CharacterPropertiesDataHandler implements DataHandler {
 	}
 	
 	public boolean hasEnoughEndurance(DataCharacterAction action) {
-		return properties.endurance >= action.getEnduranceCosts();
+		return hasEnoughEndurance(action.getEnduranceCosts());
+	}
+	public boolean hasEnoughEndurance(float endurance) {
+		return properties.endurance >= endurance;
 	}
 	
 	public void reduceEnduranceForAction(DataCharacterAction action) {
-		properties.endurance = Math.max(0, properties.endurance - action.getEnduranceCosts());
+		reduceEndurance(action.getEnduranceCosts());
+	}
+	public void reduceEndurance(float endurance) {
+		properties.endurance = Math.max(0, properties.endurance - endurance);
 	}
 	
 	public boolean hasBlock() {

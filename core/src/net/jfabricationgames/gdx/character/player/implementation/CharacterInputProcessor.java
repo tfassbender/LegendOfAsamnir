@@ -402,7 +402,8 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	@Override
 	public boolean onAction(String action, Type type, Parameters parameters) {
-		if (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.BUTTON_PRESSED) {
+		if (type == Type.KEY_DOWN || type == Type.CONTROLLER_BUTTON_PRESSED || type == Type.BUTTON_PRESSED
+				|| type == Type.CONTROLLER_AXIS_THRESHOLD_PASSED) {
 			if (action.equals(ACTION_INTERACT)) {
 				InteractionManager.getInstance().interact(player.getPosition());
 			}

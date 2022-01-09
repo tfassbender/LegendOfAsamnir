@@ -137,12 +137,15 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					}
 					if (attackHandler.allAttacksExecuted()) {
 						if (itemDataHandler.hasAmmo(ammoType.toDataType())) {
-							itemDataHandler.decreaseAmmo(ammoType.toDataType());
-							attackHandler.startAttack(ammoType.name().toLowerCase(),
-									movementHandler.getMovingDirection().getNormalizedDirectionVector());
-							
-							if (!itemDataHandler.hasAmmo(ammoType.toDataType())) {
-								fireOutOfAmmoEvent(ammoType);
+							if (propertiesDataHandler.hasEnoughEndurance(activeSpecialAction.enduranceCost)) {
+								itemDataHandler.decreaseAmmo(ammoType.toDataType());
+								propertiesDataHandler.reduceEndurance(activeSpecialAction.enduranceCost);
+								attackHandler.startAttack(ammoType.name().toLowerCase(),
+										movementHandler.getMovingDirection().getNormalizedDirectionVector());
+								
+								if (!itemDataHandler.hasAmmo(ammoType.toDataType())) {
+									fireOutOfAmmoEvent(ammoType);
+								}
 							}
 						}
 						else {
@@ -156,15 +159,21 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					break;
 				case BOOMERANG:
 				case WAND:
-					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackHandler.allAttacksExecuted()) {
+					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) //
+							&& propertiesDataHandler.hasEnoughEndurance(activeSpecialAction.enduranceCost) // 
+							&& attackHandler.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						propertiesDataHandler.reduceEndurance(activeSpecialAction.enduranceCost);
 						attackHandler.startAttack(activeSpecialAction.name().toLowerCase(),
 								movementHandler.getMovingDirection().getNormalizedDirectionVector());
 					}
 					break;
 				case LANTERN:
-					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && attackHandler.allAttacksExecuted()) {
+					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && //
+							propertiesDataHandler.hasEnoughEndurance(activeSpecialAction.enduranceCost) // 
+							&& attackHandler.allAttacksExecuted()) {
 						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						propertiesDataHandler.reduceEndurance(activeSpecialAction.enduranceCost);
 						renderer.startDarknessFade();
 						
 						//handle the lantern as attack to have a duration (so it's not executed in every game step)
@@ -172,7 +181,10 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					}
 					break;
 				case JUMP:
-					return changeAction(CharacterAction.JUMP);
+					if (propertiesDataHandler.hasEnoughEndurance(activeSpecialAction.enduranceCost)) {
+						propertiesDataHandler.reduceEndurance(activeSpecialAction.enduranceCost);
+						return changeAction(CharacterAction.JUMP);
+					}
 				case FEATHER:
 					//do nothing here - the action will be executed in InteractiveAction.SHOW_OR_CHANGE_TEXT
 					break;
@@ -237,8 +249,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	@Override
 	public void process(float delta) {
+		updateAction(delta);
 		propertiesDataHandler.updateStats(delta, action);
-		updateAction(delta);//update the action after updating the stats, to not end the block action before updating the endurance (because the animation finishes)
 		attackHandler.handleAttacks(delta);
 		
 		movementHandler.handleInputs(delta);
