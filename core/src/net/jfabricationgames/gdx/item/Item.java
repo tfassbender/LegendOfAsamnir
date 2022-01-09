@@ -30,8 +30,6 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
-	private static final String SPECIAL_KEY_MESSAGE_HEADER = "Special Key";
-	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
 	protected MapProperties properties;
@@ -176,14 +174,7 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 		}
 	}
 	
-	public void displaySpecialKeyProperties() {
-		if (isSpecialKey()) {
-			itemTextBox.setHeaderText(SPECIAL_KEY_MESSAGE_HEADER);
-			itemTextBox.setText(getSpecialKeyPropertiesAsString());
-		}
-	}
-	
-	private boolean isSpecialKey() {
+	public boolean isSpecialKey() {
 		ObjectMap<String, String> keyProperties = getKeyProperties();
 		if (keyProperties.size == 0 || (keyProperties.size == 1 && keyProperties.containsKey(KeyItemProperties.COMMON_REQUIRED_PROPERTY))) {
 			return false;
@@ -192,7 +183,7 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 		return true;
 	}
 	
-	private String getSpecialKeyPropertiesAsString() {
+	public String getSpecialKeyPropertiesAsString() {
 		StringBuilder sb = new StringBuilder();
 		for (Entry<String, String> entry : getKeyProperties().entries()) {
 			String propertyKey = entry.key.substring(KeyItemProperties.KEY_PROPERTY_PREFIX.length());

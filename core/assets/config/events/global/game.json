@@ -42,5 +42,16 @@
 			displayTextHeader: "Thorin",
 			displayText: "I already have one of these. Why should I buy another one?",
 		}
-	}
+	},
+	
+	special_key_picked_up: {
+		event: {
+			eventType: SPECIAL_KEY_ITEM_PICKED_UP,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Thorin",
+			displayText: "This one doesn't look like the other keys. It seems to be special.",
+		}
+	},
 }

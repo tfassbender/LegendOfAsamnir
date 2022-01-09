@@ -26,7 +26,7 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	
 	private static final String LOCK_MESSAGE_HEADER = "Locked";
 	private static final String LOCK_MESSAGE_TEXT_SIMPLE_KEY = "I'll need a key to unlock this.";
-	private static final String LOCK_MESSAGE_TEXT_SPECIAL_KEY = "I'll need a special key to unlock this.";
+	private static final String LOCK_MESSAGE_TEXT_SPECIAL_KEY = "This one looks different. I'll need a special key to unlock this.";
 	private static final String LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION = "This does not seem to be opened with a key. There must be another way.";
 	
 	private ObjectMap<String, String> keyProperties;
@@ -102,7 +102,7 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		}
 		else {
 			if (KeyItemProperties.isSpecialKey(keyProperties)) {
-				messageText = LOCK_MESSAGE_TEXT_SPECIAL_KEY + '\n' + KeyItemProperties.getSpecialKeyPropertiesAsString(keyProperties);
+				messageText = LOCK_MESSAGE_TEXT_SPECIAL_KEY;
 			}
 			else {
 				messageText = LOCK_MESSAGE_TEXT_SIMPLE_KEY;

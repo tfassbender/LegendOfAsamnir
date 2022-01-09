@@ -45,6 +45,7 @@ public enum EventType {
 	//*** Items
 	//*******************************
 	EVENT_ITEM_PICKED_UP, //
+	SPECIAL_KEY_ITEM_PICKED_UP, //
 	SET_ITEM, //
 	RUNE_FOUND, //
 	RUNE_NEEDED, //

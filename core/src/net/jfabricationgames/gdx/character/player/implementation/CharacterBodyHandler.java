@@ -7,6 +7,9 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
@@ -61,7 +64,9 @@ class CharacterBodyHandler {
 			if (sensorCollidingUserData instanceof Item) {
 				Item item = (Item) sensorCollidingUserData;
 				player.itemDataHandler.collectItem(item);
-				item.displaySpecialKeyProperties();
+				if (item.isSpecialKey()) {
+					EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SPECIAL_KEY_ITEM_PICKED_UP));
+				}
 			}
 		}
 		

@@ -1,9 +1,9 @@
 {
 	health: {
-		health: 20
+		health: 40
 	},
 	health_big: {
-		health: 35
+		health: 60
 	},
 	coin: {
 		value: 1
@@ -12,10 +12,10 @@
 		value: 5
 	},
 	mana: {
-		mana: 20
+		mana: 40
 	},
 	shield: {
-		armor: 15
+		armor: 30
 	},
 	arrow: {
 		ammo: 10,
@@ -26,10 +26,10 @@
 		ammoType: bomb
 	}
 	buyable_health: {
-		health: 20
+		health: 40
 	},
 	buyable_shield: {
-		armor: 15
+		armor: 30
 	},
 	buyable_arrow: {
 		ammo: 10,

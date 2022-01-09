@@ -500,7 +500,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 				Item item = ItemFactory.createItem(event.stringValue, 0f, 0f, new MapProperties());
 				item.pickUp();
 				itemDataHandler.collectItem(item);
-				item.displaySpecialKeyProperties();
 				break;
 			case FAST_TRAVEL_TO_MAP_POSITION:
 				FastTravelPointProperties fastTravelTargetPoint = fastTravelDataHandler.getFastTravelPropertiesById(event.stringValue);
