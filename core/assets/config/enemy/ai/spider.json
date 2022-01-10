@@ -13,7 +13,6 @@
 			attackDistance: 1.5f,
 			
 			subAI: {
-				
 				type: FIGHT_AI,
 				
 				stateNameAttack: attack,

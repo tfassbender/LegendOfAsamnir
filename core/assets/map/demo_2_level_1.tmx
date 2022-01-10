@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="140" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="41" nextobjectid="14124">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="140" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="41" nextobjectid="14202">
  <properties>
   <property name="above_player_layers" value="[]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -153,21 +153,24 @@
   <object id="14019" name="object.key_wall" x="1650.67" y="1552.33">
    <point/>
   </object>
-  <object id="14020" name="enemy.spider" x="1216" y="1216">
+  <object id="14020" name="enemy.spider" x="1568" y="960">
    <properties>
     <property name="drop" value="{key: 1}"/>
+    <property name="predefinedMovementPositions" value="[{x:-1, y:2}, {x:0, y:4}, {x:4, y:6}, {x:7, y:4}, {x:9, y:2}, {x:7, y:0}, {x:4, y:-2}, {x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
-  <object id="14023" name="enemy.spider" x="1344" y="1216">
+  <object id="14023" name="enemy.spider" x="1664" y="800">
    <properties>
     <property name="drop" value="{key: 1}"/>
+    <property name="predefinedMovementPositions" value="[{x:3, y:-2}, {x:4, y:-5}, {x:3, y:-7}, {x:0, y:-9}, {x:-3, y:-7}, {x:-4, y:-5}, {x:-3, y:-2}, {x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
-  <object id="14024" name="enemy.spider" x="1472" y="1216">
+  <object id="14024" name="enemy.spider" x="1760" y="960">
    <properties>
     <property name="drop" value="{key: 1}"/>
+    <property name="predefinedMovementPositions" value="[{x:-3, y:-2}, {x:-7, y:0}, {x:-8, y:2}, {x:-7, y:4}, {x:-4, y:6}, {x:-1, y:4}, {x:1, y:2}, {x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
@@ -216,7 +219,7 @@
   </object>
   <object id="14120" name="player.startingPosition" x="1888" y="1600">
    <properties>
-    <property name="startingPointId" value="3"/>
+    <property name="startingPointId" value="4"/>
    </properties>
    <point/>
   </object>
@@ -226,8 +229,419 @@
    </properties>
    <point/>
   </object>
+  <object id="14124" name="player.startingPosition" x="1760" y="576">
+   <properties>
+    <property name="startingPointId" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14125" name="object.spawnPoint.bat" x="640" y="2400">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14126" name="object.spawnPoint.bat" x="1120" y="2560">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14127" name="object.spawnPoint.bat" x="1568" y="2240">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14128" name="object.spawnPoint.bat" x="1504" y="2272">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14129" name="object.spawnPoint.bat" x="2400" y="2048">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14130" name="object.spawnPoint.bat" x="3296" y="1792">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14131" name="object.spawnPoint.bat" x="1408" y="2848">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14132" name="object.spawnPoint.bat" x="3488" y="2208">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14133" name="object.spawnPoint.bat" x="3488" y="2336">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14134" name="object.spawnPoint.bat" x="3584" y="2304">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14135" name="object.spawnPoint.bat" x="3616" y="2688">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14136" name="object.spawnPoint.bat" x="4096" y="2816">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14137" name="object.spawnPoint.bat" x="4064" y="2720">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14138" name="object.spawnPoint.bat" x="4128" y="2688">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14139" name="object.spawnPoint.bat" x="2848" y="2592">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14140" name="object.spawnPoint.bat" x="2944" y="2560">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14141" name="object.spawnPoint.bat" x="3040" y="2624">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14142" name="object.spawnPoint.bat" x="2400" y="2688">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14143" name="object.spawnPoint.bat" x="2752" y="1184">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14144" name="object.spawnPoint.bat" x="3296" y="1184">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14145" name="object.spawnPoint.bat" x="3456" y="768">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14146" name="object.spawnPoint.bat" x="3520" y="800">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14147" name="object.spawnPoint.bat" x="3968" y="896">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14148" name="object.spawnPoint.bat" x="4096" y="896">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14149" name="object.spawnPoint.bat" x="4128" y="832">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14150" name="object.spawnPoint.bat" x="3264" y="416">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14151" name="object.spawnPoint.bat" x="3328" y="448">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14152" name="object.spawnPoint.bat" x="3584" y="608">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14153" name="object.spawnPoint.bat" x="2880" y="224">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14154" name="object.spawnPoint.bat" x="2848" y="320">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14155" name="object.spawnPoint.bat" x="2752" y="160">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14156" name="object.spawnPoint.bat" x="1664" y="384">
+   <properties>
+    <property name="spawn" value="enemy__bat"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14157" name="object.spawnPoint.mini_golem" x="896" y="2432">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14158" name="object.spawnPoint.mini_golem" x="1888" y="2752">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14159" name="object.spawnPoint.mini_golem" x="1920" y="1920">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14160" name="object.spawnPoint.mini_golem" x="2944" y="1952">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14161" name="object.spawnPoint.mini_golem" x="4096" y="2240">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14162" name="object.spawnPoint.mini_golem" x="4128" y="2272">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14163" name="object.spawnPoint.mini_golem" x="4096" y="2752">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14164" name="object.spawnPoint.mini_golem" x="3488" y="2880">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14165" name="object.spawnPoint.mini_golem" x="3552" y="2912">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14166" name="object.spawnPoint.mini_golem" x="3584" y="1280">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14167" name="object.spawnPoint.mini_golem" x="2848" y="1216">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14168" name="object.spawnPoint.mini_golem" x="4128" y="928">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14169" name="object.spawnPoint.mini_golem" x="4192" y="896">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14170" name="object.spawnPoint.mini_golem" x="3040" y="320">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14171" name="object.spawnPoint.mini_golem" x="2880" y="352">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14172" name="object.spawnPoint.mini_golem" x="2944" y="224">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14173" name="object.spawnPoint.mini_golem" x="2432" y="256">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14174" name="object.spawnPoint.mini_golem" x="2026" y="372">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14175" name="object.spawnPoint.mini_golem" x="1408" y="768">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14176" name="object.spawnPoint.mini_golem" x="1920" y="768">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14179" name="object.spawnPoint.mini_golem" x="1408" y="1026">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14180" name="object.spawnPoint.mini_golem" x="1920" y="1024">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14183" name="object.spawnPoint.mini_golem" x="1664" y="608">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14184" name="object.spawnPoint.mini_golem" x="1664" y="1184">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14185" name="object.spawnPoint.bat" x="1856" y="896">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14191" name="enemy.bat" x="2112" y="1024">
+   <properties>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14192" name="enemy.bat" x="2080" y="1024">
+   <point/>
+  </object>
+  <object id="14193" name="object.spawnPoint.bat" x="1824" y="1012">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14194" name="object.spawnPoint.bat" x="1728" y="1088">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14195" name="object.spawnPoint.bat" x="1600" y="1088">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14196" name="object.spawnPoint.bat" x="1504" y="1011">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14197" name="object.spawnPoint.bat" x="1472" y="896">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14198" name="object.spawnPoint.bat" x="1503" y="786">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14199" name="object.spawnPoint.bat" x="1600" y="736">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14200" name="object.spawnPoint.bat" x="1728" y="736">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14201" name="object.spawnPoint.bat" x="1824" y="787">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="33" name="physics">
+ <objectgroup id="33" name="physics" locked="1">
   <object id="8161" x="224.01" y="2390">
    <polygon points="0,0 0,-22 28.9375,-21.9375"/>
   </object>

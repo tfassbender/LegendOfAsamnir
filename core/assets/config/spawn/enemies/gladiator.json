@@ -9,6 +9,16 @@
 		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
+	//*****************************************
+	//*** movement back to starting position
+	//*****************************************
+	enemy__gladiator__movement_back_to_start: {
+		spawnType: enemy.gladiator,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
 	//*********************************
 	//*** teams
 	//*********************************

@@ -8,6 +8,17 @@
 		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
+	//*****************************************
+	//*** movement back to starting position
+	//*****************************************
+	enemy__cobra__movement_back_to_start: {
+		spawnType: enemy.cobra,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:0}]\"}",
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	
+	
 	//*********************************
 	//*** movement up
 	//*********************************
