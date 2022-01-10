@@ -69,6 +69,10 @@ public class GameMapManager {
 		return getInitialMap().initialStartingPointId;
 	}
 	
+	public String getStartConfig() {
+		return getInitialMap().startConfig;
+	}
+	
 	private GameMapConfig getInitialMap() {
 		for (GameMapConfig config : mapFiles) {
 			if (config.initial) {

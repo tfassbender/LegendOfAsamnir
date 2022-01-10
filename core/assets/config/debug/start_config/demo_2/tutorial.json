@@ -1,0 +1,16 @@
+{
+	eventsLists: {
+		final: {
+			events: [
+				{
+					eventType: COLLECT_RUNE,
+					stringValue: othala,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: bow,
+				},
+			]
+		},
+	}
+}

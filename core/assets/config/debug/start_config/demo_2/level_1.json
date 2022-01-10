@@ -1,0 +1,39 @@
+{
+	startingPointMapping: {
+		1: initial,
+		2: start_2,
+		3: start_2,
+		4: start_2,
+	},
+	eventsLists: {
+		initial: {
+			subConfigPath: config/debug/start_config/demo_2/tutorial.json
+			subConfigName: final,
+			events: []
+		},
+		
+		start_2: {
+			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: special_action_bomb,
+				}
+			]
+		},
+		
+		final: {
+			subConfigName: start_2,
+			events: [
+				{
+					eventType: COLLECT_RUNE,
+					stringValue: ansuz,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: ring,
+				},
+			]
+		}
+	}
+}

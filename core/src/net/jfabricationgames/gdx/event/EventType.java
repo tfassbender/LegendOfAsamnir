@@ -76,4 +76,8 @@ public enum EventType {
 	//*** Configuration
 	//*******************************
 	CONFIG_GENERATED_EVENT,
+	//*******************************
+	//*** Debug Config Events
+	//*******************************
+	COLLECT_RUNE,
 }
