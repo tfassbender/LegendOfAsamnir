@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.util;
+package net.jfabricationgames.gdx.debug.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;

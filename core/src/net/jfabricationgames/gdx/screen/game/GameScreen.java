@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
+import net.jfabricationgames.gdx.debug.util.DebugStartConfigUtil;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -52,7 +53,6 @@ import net.jfabricationgames.gdx.screen.menu.LoadingScreen;
 import net.jfabricationgames.gdx.screen.menu.PauseMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.ShopMenuScreen;
 import net.jfabricationgames.gdx.state.GameStateManager;
-import net.jfabricationgames.gdx.util.DebugStartConfigUtil;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener, InGameMenuScreen.MenuGameScreen {
 	
