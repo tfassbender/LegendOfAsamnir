@@ -1,5 +1,6 @@
 {
 	startingPointMapping: {
+		//0: initial,
 		1: initial,
 		2: start_2,
 		3: start_2,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="140" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="41" nextobjectid="14202">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="140" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="41" nextobjectid="14221">
  <properties>
   <property name="above_player_layers" value="[]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -301,7 +301,7 @@
    </properties>
    <point/>
   </object>
-  <object id="14136" name="object.spawnPoint.bat" x="4096" y="2816">
+  <object id="14136" name="object.spawnPoint.bat" x="4064" y="2816">
    <properties>
     <property name="spawn" value="enemy__bat"/>
    </properties>
@@ -458,12 +458,6 @@
    <point/>
   </object>
   <object id="14162" name="object.spawnPoint.mini_golem" x="4128" y="2272">
-   <properties>
-    <property name="spawn" value="enemy__mini_golem"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="14163" name="object.spawnPoint.mini_golem" x="4096" y="2752">
    <properties>
     <property name="spawn" value="enemy__mini_golem"/>
    </properties>
@@ -637,6 +631,114 @@
   <object id="14201" name="object.spawnPoint.bat" x="1824" y="787">
    <properties>
     <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14203" name="object.spawnPoint.shield" x="2255.67" y="3056.17">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14204" name="object.spawnPoint.health" x="2320.18" y="3056.36">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14205" name="object.spawnPoint.mini_golem" x="2252" y="2966.5">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14206" name="object.spawnPoint.mini_golem" x="2320" y="2956">
+   <properties>
+    <property name="spawn" value="enemy__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14207" name="object.spawnPoint.health" x="3856.25" y="1587">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14208" name="object.spawnPoint.health" x="4208.25" y="849.5">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14209" name="object.spawnPoint.health" x="2095.5" y="593.5">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14210" name="object.spawnPoint.health" x="2096" y="1523.5">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14211" name="object.spawnPoint.shield" x="3822.33" y="1587">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14212" name="object.spawnPoint.shield" x="3456.33" y="687">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14213" name="object.spawnPoint.shield" x="4160" y="2208">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14214" name="object.spawnPoint.shield" x="4176.5" y="2674.5">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14215" name="object.spawnPoint.shield" x="2127.75" y="593.75">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14216" name="object.spawnPoint.shield" x="2192.33" y="1427.33">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14217" name="object.spawnPoint.shield" x="2095.33" y="1584.33">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14218" name="object.spawnPoint.shield" x="1999.33" y="596">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14219" name="object.spawnPoint.health" x="1967.42" y="595.917">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14220" name="object.spawnPoint.spider" x="4112" y="2738">
+   <properties>
+    <property name="spawn" value="enemy__spider"/>
    </properties>
    <point/>
   </object>

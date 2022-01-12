@@ -29,10 +29,6 @@ public class InputManager {
 		return inputProfile.getContext();
 	}
 	
-	public InputProfile getInputProfile() {
-		return inputProfile;
-	}
-	
 	public InputContext getInputContext() {
 		return inputProfile.getContext();
 	}

@@ -7,11 +7,6 @@ import net.jfabricationgames.gdx.hud.StatsCharacter;
 
 public class HeadsUpDisplay implements Disposable {
 	
-	private final float hudSceneWidth;
-	private final float hudSceneHeight;
-	private OrthographicCamera camera;
-	private StatsCharacter character;
-	
 	private StatusBar statusBar;
 	private OnScreenInfoRenderer onScreenItemRenderer;
 	private OnScreenRuneRenderer onScreenRuneRenderer;
@@ -19,11 +14,6 @@ public class HeadsUpDisplay implements Disposable {
 	private WorldEdge worldEdge;
 	
 	public HeadsUpDisplay(float hudSceneWidth, float hudSceneHeight, OrthographicCamera camera, StatsCharacter character) {
-		this.hudSceneWidth = hudSceneWidth;
-		this.hudSceneHeight = hudSceneHeight;
-		this.camera = camera;
-		this.character = character;
-		
 		statusBar = new StatusBar(camera, character, hudSceneWidth, hudSceneHeight);
 		onScreenItemRenderer = new OnScreenInfoRenderer(camera, character, hudSceneWidth, hudSceneHeight);
 		onScreenRuneRenderer = new OnScreenRuneRenderer(camera, hudSceneWidth, hudSceneHeight);
@@ -45,21 +35,5 @@ public class HeadsUpDisplay implements Disposable {
 		onScreenItemRenderer.dispose();
 		onScreenText.dispose();
 		worldEdge.dispose();
-	}
-	
-	protected float getHudSceneWidth() {
-		return hudSceneWidth;
-	}
-	
-	protected float getHudSceneHeight() {
-		return hudSceneHeight;
-	}
-	
-	protected OrthographicCamera getCamera() {
-		return camera;
-	}
-	
-	protected StatsCharacter getCharacter() {
-		return character;
 	}
 }

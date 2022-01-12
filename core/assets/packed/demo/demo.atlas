@@ -122,6 +122,13 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
+  index: 12
+adventurer_idle
+  rotate: false
+  xy: 874, 567
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
   index: 13
 adventurer_idle
   rotate: false
@@ -130,13 +137,6 @@ adventurer_idle
   orig: 32, 32
   offset: 0, 0
   index: 1
-adventurer_idle
-  rotate: false
-  xy: 874, 567
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 12
 adventurer_jump
   rotate: false
   xy: 874, 567
@@ -815,14 +815,14 @@ archaeologist_idle
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
-  index: 5
+  index: 6
 archaeologist_idle
   rotate: false
   xy: 1046, 926
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
-  index: 6
+  index: 5
 archaeologist_idle
   rotate: false
   xy: 1112, 926
@@ -899,14 +899,21 @@ armadillo_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 8
 armadillo_idle
   rotate: false
   xy: 450, 39
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 1
+armadillo_move
+  rotate: false
+  xy: 450, 39
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
 armadillo_move
   rotate: false
   xy: 450, 39
@@ -914,13 +921,6 @@ armadillo_move
   orig: 32, 32
   offset: 0, 0
   index: 3
-armadillo_move
-  rotate: false
-  xy: 450, 39
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 1
 armadillo_curl
   rotate: false
   xy: 484, 141
@@ -2285,14 +2285,14 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 1
+  index: 11
 cyclops_idle
   rotate: false
   xy: 1904, 960
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 11
+  index: 1
 cyclops_attack_beam
   rotate: false
   xy: 1970, 960
@@ -2663,14 +2663,14 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 4
+  index: 14
 cyclops_idle
   rotate: false
   xy: 378, 208
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 14
+  index: 4
 cyclops_idle
   rotate: false
   xy: 444, 275
@@ -4441,14 +4441,14 @@ hedgehog_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 hedgehog_move
   rotate: false
   xy: 1418, 396
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 hedgehog_idle
   rotate: false
   xy: 1452, 396

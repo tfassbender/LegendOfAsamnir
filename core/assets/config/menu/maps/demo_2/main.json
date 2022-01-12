@@ -2,8 +2,8 @@
 	name: Village,
 	texture: {
 		atlas: packed/menu/menu.atlas,
-		texture: mini_map_demo_2_prolog //TODO change when main map is ready
+		texture: mini_map_demo_2_main
 	},
-	textureWidth: 500,
-	textureHeight: 500,
+	textureWidth: 800,
+	textureHeight: 414,
 }
