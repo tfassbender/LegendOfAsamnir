@@ -7,6 +7,9 @@ import com.badlogic.gdx.maps.MapProperties;
 import net.jfabricationgames.gdx.animation.AnimationDirector;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.rune.RuneType;
 
 public class SpecialActionItem extends Item {
@@ -29,6 +32,7 @@ public class SpecialActionItem extends Item {
 		if (canUseSpecialActions()) {
 			super.pickUp();
 			GlobalValuesDataHandler.getInstance().put(action.getActionEnabledGlobalValueKey(), true);
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.SPECIAL_ACTION_ITEM_PICKED_UP).setStringValue(itemName));
 		}
 	}
 	

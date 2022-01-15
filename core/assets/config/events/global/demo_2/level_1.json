@@ -21,7 +21,7 @@
 	demo_2_level_1_goto_main: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_main_goto_tutorial,
+			stringValue: demo_2_level_1_goto_main,
 		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
@@ -72,8 +72,17 @@
 		conditionalExecutionId: demo_2_level_1_switch_open_lock_vault_2,
 	},
 	
+	demo_2_level_1_vault_3_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_1_switch_vault_3,
+		}
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_1_switch_open_lock_vault_3,
+	},
+	
 	//*******************************************
-	//*** rune
+	//*** runes / special items
 	//*******************************************
 	
 	demo_2_level_1_rune_ansuz_found: {
@@ -85,5 +94,17 @@
 		executionParameters: {
 			cutsceneId: demo_2_level_1_rune_ansuz_found,
 		}
-	}
+	},
+	
+	demo_2_level_1_special_item_ring_found: {
+		event: {
+			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
+			stringValue: ring,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: Thorin
+			displayText: "This must be the ring, that the castle guard lost here...",
+		}
+	},
 }

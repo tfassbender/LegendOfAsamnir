@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="140" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="41" nextobjectid="14221">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="140" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="41" nextobjectid="14399">
  <properties>
   <property name="above_player_layers" value="[]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -19,12 +19,12 @@
  </layer>
  <layer id="3" name="trees" width="140" height="100" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="35" name="terrain" width="140" height="100" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   eJztXVGWWzcItfPR5pykS8la2y20O5nJJJltTL+7iJbjcqIQCQECxHv2/fGM/awnAYILkp4vl+/4s/n7+fIzXjvXjfA8aMMKuPeT4Dp6jeQ7b/ruiPBXULsVATL8+v/fPfuY2cLr5PMeULffDN/9Or8kFDN5vCivl7SRiZnt43i+DD6XzNtdQFuFMUr0slMPGvwd2LaHj7X4iKOBzoeRTj5Hd6QgQDa9uSTlBi1G14/8lhdHoPodxS7wK3SsPZ1LOcb1ert2d9yDMVji9Qwz3yWRE9iElbN6cl2Kka3u1iWFB9+l88yTm8McQJm1c8uiO0kONMMqx+n1m+ogKrdZASdvDQc5Yn5l9X3Rc70XV735INV7hm2+u95erXJHG1uRxQ6uFhmPWljnYAaXRxl45l/R+V5Pnr33MHZwfkFqszBHVvSRlauPaiIRfNID1+v3v3s2MfJ/o5oIB60vRdm9dt7zwsguRvd5dx180EFVnXOQ6qgSrwH7GOnL0k9qE2jrb8b2VmxWwp8joJ3f2Rw+ul7pOR4a/0Cn1lj2crHZU2TddAbOXr1yBsmckPrjjFyb4yOzdclKvjcb3vF/5kcgL8qs6aMdVV5bsgB4U6s7Gl8q1oBG8LDB3hy+CrhlaxdfyHuS72fAkhusYMfaJeeDM2opYIMoZ41/anMqix2fJfacZRwcMFddjSUe6wg7AbYOc1LjH6W81MPnzvyX1VZ7MZWb8+1ns3jsyU9oW5xMLT4rqs7cW/9+4Edk1fityOT2mnksudbCs7z1ofVNkINTmVfgrZL8g8qOqydk8oueTj056C4fp63NAzy4SoV9a7tk3sa0N/K+BXQejGR7D3xcC65e4oEjrk8B2vUYDiMOD++v1sNb2Wm5sIVzQJ+rc6kjY+Zvo2S/mkdZ4kQ7lsw68yNXsqO374DGTEmMkNqxh13co7/CXKY3di7mjPhPlAx3rgcfFR7+q5V7q/PVtp8vP+u0x396+VF0fZfyHc5PafcDaNcNd+QZEWubvxSomURA6+/o9b3ve/vQTN9puZd1j1Amqub7L+T1nqHZ61oBYFNWvbV8d2XuZO99OAO8n7uwkrugX7K0oe1nZR+Ncqh2fhOxa3/cqs5mNVdt+732UHeStv74oLwhA7qnSPJ8jRVurPW1dL8c4Oh7W7TQxvR2/v/+n638er29RsOLf3nunZEiy69L7rPKR6xjofrz4vu9dnbVsiJ8x2zvP4CLIVZZnGG/udcatRRHXT/lcLS8dzeHjpZXtWcxeI9XMvdWY8dof1lFW+fGank2hXRv3e551OJodacqqLBvzYKqtWAOLa8GPwK5r3YcO/1Pz3dE+faVNRkuf1nduy3VF14nfd6pZGzR5x3pGlA2Vx3lE7OcaSSX3nm1KmdGpf2oyDekiOYHWecwpOefdtxfiqh4eaQ43J5/pTgCf6zEt3dBI4MK66qr55RW+Hk2t5f445ZTjPrnWYeQxk/OrjxqxVXXRC347T3/ubfdVYwxFfu028Z6nPafD5fLp/e3Vwu0/Ledx0fmzghuLp2JD+B8+vjxtl4Mry3u4TcSVuHhk6L2NlDf4O0/rb6voh+PhkVWlrVeiX+K9mEYA0a1LK7eWCF/AHjFsWhZV6pTZMXGGdcFv7fSF+3zP7xt1nOfzCo/tcoxuo5N+4VrO7tB+7H7mSnauc3FHImdn/W8Itrb0fKbjPNnUv468gmW39nsQevrzpTLrWJFFiv1AoTGT6F/3c0Vj7B+oUWG/46O01b/AfY0mgezPlfPab3ille906sd0NfO/b2W5+pJEeXf2vyp15+omnZmvJXqJeKMEY4TuX/WGkHk2Q1PVPeVK+B0fW9n2DxwtHwrA9r9dGfkqZWwsr+RfpeLkWc4+xWJinElmvPs3H/Q8siR7DM50KOeowfKrBo30fjUjNps2zb2bXau4KjnfFo8Ys6PyOKjnr7Ms6YXbdPVzmpXeL772cDxtJ1ruFy9zWM+Zj5DZxesY9TauuZ3jzK4DfWxFXORe4Y3j5E8Cy/6GWSzvtxjPuR11tS7Zga8ycMnzPLomc4ffil23/LTQvtHRDvfRvI5K48FeOVWFedllT7R+YT9yt5jmtEejV90jN5r1BxW9tNxc97TH4zGEfW8Ku47vXF5521Sm6+UL3qeL+BspzLfPeq+6Gr1OC0qxDBtTqI9M4C29XIZzw9p3ZbeWzOnMMem36H/n3lNYfd5j1VUeVbTiOdk+fhK8XOGaB9XIa62XFTrP6R8M3uf1O68uMfvpXbvbXOe7VWw1xa79dyiin/3hmVcmTxEy6OlZ5it+tSecfa6705UyAU47Hx2Q4Wz0zuBOZRHvjuT5VF/E6kC2lh6hvFYYPFjrU16/Iat9LpK3IdDxb2aFj1b6owafWoh1T+OVVs/4XjI7pqrVy0IfvttZJ8anYzsadRGLxdEed/TGjdAa/uor1UfqL1v+9tv8N2oOXD0dYEWO559q4VU3pb7S38DTlob8uK3K/wugxtW758XtHVRjQ22dg0yaecit9fBw8Y8YifXnoeOQZaWtYhqtQ7IPyI5A7UHOn5JfQNipUTWPdmizc90zp1VO0MNZifn9t7nP1tzss7v3bVTr9jTjgNt18p/MvyVxDZBNiM70uRzIxmvxC1rPqnl6q0uNHURrV1b4kFrX9BPiy1L7ADvIx0/9d29fml0jzrwrNt5I8OPra5TgR4stT34nma+SWQB3ILaQPTZNJhjWfulLdDWB0dtRNni6rNdIvO8Wds924renxa1b6p9jq1EJ+01lvlfLX/qAc8aRdpYlb2aqI9Z7N5d84+suWaD0/0zec22k56MPdY1M2PkrL87znpQvzfiJ6P3e31ZrSdrMbPFXn+qrWftrg/j/Vflwsm6Uoy19MUjH8s4z1Tx+Y9Sec/mMo5tZKeS/CrCDi3xUNqPKvNmZp/Iu6Xrix6gferV1DmbWH3mBuBp8vkDY2jz7ZX8vKdry3k3D2jWfqrkZD1w61vV8S/F9XGw
   </data>
  </layer>
  <layer id="36" name="shadows" width="140" height="100" locked="1">
@@ -37,7 +37,7 @@
    eJztnNlu4zAMRfMSY/7/i9s8CNUEkq2FyyV1D2AUM3VkUjySZSXN60UIIYQQQgghhOjx/j3+VcfbNxwCDn05h7fQ8e1LfVxm2RBNSj2l2qmP+nf0JS6tmmpzGV+P9Fm5d3jQui5CXKcQrZ9RPT6BLP1LX/S5XnnWj5xr9MnkSw8+h8txytijL/Ps7J9loDyHZ8lHC6k91yz9nC0fSSRdyeZR5Ng1sHIlsj/R4tXC05VyXI3/QwQ5Nm28HWn50ooNDcSYLPB2ZMQHNGfQ4rGk5H73+RFvX+o4rdiNNyN1/p6+zMQp1ebItXbO6Z0f2TcEX2ZiXMlrpvY713k6L/LnRa3nj505QGI8tq4pOc5LW+W9tVauUX3p1c56fpmNV4J39dOyZvQlpi8a7c1ccyV/b+hLrHp5YuEBui+lTfLMXf08no9mYp7N6alN8gx9GWuT/IHky0jNtNsl91i6gOxL3Tbp4+3Ham1n85l9PWlj7YC2MxLt0Zln0O4v0nnstEX6oPiyW2MN/8gzo30vsWaQrLMGqHGhod1HUXwpoMfnDX1pEyFGD7x8iUCkWK2w6JOovnyIFKsF0epnDfvnf1b6I+qaZJWsea0wU+dy7sj7lZnIls8Opb5X52fr+Pbl7t8ZoC9/0Jdn+F1C68z6kwH6ssfdejfjGiZrXpZkd6Qm45zpSVZPPrTuuWSPTL6MrPHJHhl8yX5PRSJiH5+w7kIlUn/TEV+uV5zvjacnGESoAV3BIcKeHVIsp/LkBoozKHGczGgNpOea2bmMrvizUoOdus14ccp7WhHY7feR19bPWZpzE9FBY3zejf/vz91oQGd08OhXq30cOiNP9v6kM3Kc0o90Zp/T+lBznXQCp+RZ0Bgfp4y5U/L8RuP57wROybOFRJ1PcuXDSbm2WN1vstoLRNrHPm1sPDFaG2tPJM/dga608RxHO7XX9Iau3OPhDOp7Z7wPjWG9LtCaF3bapSvjIK1RJK5j9ToEvJ4HNNtGvd9Z97Mkvdj5GYg1Wv3mMRY1GImfe/vzZPGjZjYPr2eBqH2PEu/uXtdOHtbPAp9zW9/tFwUvz2fHWO88hH2y2ddE9qWAuGd991qEfl7NIYMvBY16SLaJ5MruPRAhD0lG1xU7a4+VeBCQmCeJDmhjsTceRv5uAS2XTKD2bW8Ovfs+4qz3IBSQ+3VnfiE6oLpC8OD3TJIZ6AuZgb4QQgghhBByHj8XAiFv
   </data>
  </layer>
- <objectgroup id="4" name="objects">
+ <objectgroup id="4" name="objects" locked="1">
   <object id="13897" name="player.startingPosition" x="192" y="2538">
    <properties>
     <property name="startingPointId" value="0"/>
@@ -131,7 +131,7 @@
    </properties>
    <point/>
   </object>
-  <object id="14002" name="object.chest" x="2288" y="3056.25">
+  <object id="14002" name="object.chest" x="2288" y="3024.25">
    <properties>
     <property name="drop" value="{key: 1}"/>
    </properties>
@@ -144,13 +144,13 @@
    </properties>
    <point/>
   </object>
-  <object id="14017" name="object.key_wall" x="1440" y="1550.5">
+  <object id="14017" name="object.key_wall" x="1440" y="1551">
    <point/>
   </object>
-  <object id="14018" name="object.key_wall" x="1525" y="1553.25">
+  <object id="14018" name="object.key_wall" x="1632" y="1551">
    <point/>
   </object>
-  <object id="14019" name="object.key_wall" x="1650.67" y="1552.33">
+  <object id="14019" name="object.key_wall" x="1536" y="1551">
    <point/>
   </object>
   <object id="14020" name="enemy.spider" x="1568" y="960">
@@ -219,11 +219,11 @@
   </object>
   <object id="14120" name="player.startingPosition" x="1888" y="1600">
    <properties>
-    <property name="startingPointId" value="4"/>
+    <property name="startingPointId" value="5"/>
    </properties>
    <point/>
   </object>
-  <object id="14121" name="player.startingPosition" x="2784" y="256">
+  <object id="14121" name="player.startingPosition" x="2784" y="288">
    <properties>
     <property name="startingPointId" value="4"/>
    </properties>
@@ -403,7 +403,7 @@
    </properties>
    <point/>
   </object>
-  <object id="14153" name="object.spawnPoint.bat" x="2880" y="224">
+  <object id="14153" name="object.spawnPoint.bat" x="2880" y="256">
    <properties>
     <property name="spawn" value="enemy__bat"/>
    </properties>
@@ -415,7 +415,7 @@
    </properties>
    <point/>
   </object>
-  <object id="14155" name="object.spawnPoint.bat" x="2752" y="160">
+  <object id="14155" name="object.spawnPoint.bat" x="2726.5" y="240.5">
    <properties>
     <property name="spawn" value="enemy__bat"/>
    </properties>
@@ -511,7 +511,7 @@
    </properties>
    <point/>
   </object>
-  <object id="14172" name="object.spawnPoint.mini_golem" x="2944" y="224">
+  <object id="14172" name="object.spawnPoint.mini_golem" x="2960.67" y="235">
    <properties>
     <property name="spawn" value="enemy__mini_golem"/>
    </properties>
@@ -634,13 +634,13 @@
    </properties>
    <point/>
   </object>
-  <object id="14203" name="object.spawnPoint.shield" x="2255.67" y="3056.17">
+  <object id="14203" name="object.spawnPoint.shield" x="2255.67" y="3024.17">
    <properties>
     <property name="spawn" value="item__shield"/>
    </properties>
    <point/>
   </object>
-  <object id="14204" name="object.spawnPoint.health" x="2320.18" y="3056.36">
+  <object id="14204" name="object.spawnPoint.health" x="2320.18" y="3024.36">
    <properties>
     <property name="spawn" value="item__health"/>
    </properties>
@@ -741,6 +741,496 @@
     <property name="spawn" value="enemy__spider"/>
    </properties>
    <point/>
+  </object>
+  <object id="14265" name="object.key_wall" x="1316.95" y="1587.86">
+   <properties>
+    <property name="lockId" value="demo_2_level_1_lock_vault_3"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14266" name="object.switch" x="1316" y="1531.83">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_1_switch_vault_3"/>
+    <property name="stateSwitchId" value="demo_2_level_1_switch_vault_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14273" name="object.spawnPoint.pot" x="429.333" y="2450.67">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14274" name="object.spawnPoint.pot" x="464" y="2421.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14275" name="object.spawnPoint.pot" x="1035.5" y="2806">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14276" name="object.spawnPoint.pot" x="1061" y="2814.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14277" name="object.spawnPoint.pot" x="2324" y="2826">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14278" name="object.spawnPoint.pot" x="2349.5" y="2803">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14279" name="object.spawnPoint.pot" x="2401" y="2812">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14280" name="object.spawnPoint.pot" x="3211" y="2633.33">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14283" name="object.spawnPoint.pot" x="3805.67" y="2361">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14285" name="object.spawnPoint.pot" x="3825.67" y="2291">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14287" name="object.spawnPoint.pot" x="3277.33" y="1206.33">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14288" name="object.spawnPoint.pot" x="3334.5" y="1239.17">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14290" name="object.spawnPoint.pot" x="3955" y="953">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14292" name="object.spawnPoint.pot" x="3169.33" y="347.333">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14293" name="object.spawnPoint.pot" x="3206.67" y="352.667">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14294" name="object.spawnPoint.pot" x="3117" y="407.333">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14295" name="object.spawnPoint.pot" x="2770.67" y="203">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14296" name="object.spawnPoint.pot" x="2803.67" y="202">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14297" name="object.spawnPoint.pot" x="2825.33" y="223.333">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14298" name="object.spawnPoint.pot" x="2719.33" y="321.667">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14299" name="object.spawnPoint.pot" x="2683.5" y="309.667">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14302" name="object.spawnPoint.pot" x="2112" y="283.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14304" name="object.spawnPoint.pot" x="2220" y="232">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14305" name="object.spawnPoint.pot" x="2196.5" y="342.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14308" name="object.spawnPoint.pot" x="1987" y="312.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14310" name="object.spawnPoint.pot" x="2014" y="240.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14312" name="object.spawnPoint.pot" x="1758" y="386">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14313" name="object.spawnPoint.pot" x="1774.5" y="1456.5">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14314" name="object.spawnPoint.pot" x="1802" y="1448">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14315" name="object.spawnPoint.pot" x="1831" y="1444">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14317" name="object.spawnPoint.pot" x="1706" y="1652">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14318" name="object.spawnPoint.pot" x="1726.5" y="1665">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14319" name="object.spawnPoint.box" x="948" y="2384">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14329" name="object.spawnPoint.pot" x="3921.33" y="950">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14331" name="object.spawnPoint.box" x="3219.67" y="2692">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14332" name="object.spawnPoint.pot" x="3230.33" y="2714.33">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14334" name="object.spawnPoint.pot" x="2807" y="347.167">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14348" name="object.spawnPoint.barrel" x="2154" y="2898">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14349" name="object.spawnPoint.barrel" x="3221" y="2651.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14353" name="object.spawnPoint.box" x="3504.25" y="2664.75">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14354" name="object.spawnPoint.box" x="3469.75" y="2675">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14355" name="object.spawnPoint.box" x="4144" y="2861.33">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14356" name="object.spawnPoint.box" x="2163.33" y="2859.67">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14357" name="object.spawnPoint.box" x="925.5" y="2371">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14358" name="object.spawnPoint.box" x="4154" y="2307.5">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14359" name="object.spawnPoint.box" x="3823.67" y="1702.67">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14360" name="object.spawnPoint.box" x="3826.33" y="1729">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14361" name="object.spawnPoint.box" x="3302.67" y="1233">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14362" name="object.spawnPoint.box" x="3434.67" y="677.333">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14363" name="object.spawnPoint.box" x="3987.25" y="944.75">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14364" name="object.spawnPoint.box" x="2830.33" y="370.667">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14365" name="object.spawnPoint.box" x="2136.67" y="241.667">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14366" name="object.spawnPoint.box" x="2116" y="237">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14368" name="object.spawnPoint.box" x="2137.33" y="368.333">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14369" name="object.spawnPoint.box" x="1961.67" y="239.333">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14370" name="object.spawnPoint.box" x="2038" y="268.667">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14373" name="object.spawnPoint.box" x="2321.5" y="1265">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14374" name="object.spawnPoint.box" x="2348.5" y="1295">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14375" name="object.spawnPoint.box" x="2259.5" y="1424.5">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14376" name="object.spawnPoint.box" x="1790" y="1688.5">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14377" name="object.spawnPoint.box" x="1817" y="1710.5">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14378" name="object.spawnPoint.box" x="1830.5" y="1664">
+   <properties>
+    <property name="spawn" value="object__box"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14379" name="object.spawnPoint.barrel" x="4151" y="2888.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14380" name="object.spawnPoint.barrel" x="3789" y="2289.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14381" name="object.spawnPoint.barrel" x="3837.5" y="1758">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14382" name="object.spawnPoint.barrel" x="4141.75" y="974.25">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14383" name="object.spawnPoint.barrel" x="4214.5" y="912.25">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14384" name="object.spawnPoint.barrel" x="1951.5" y="382.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14385" name="object.spawnPoint.barrel" x="1927" y="367">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14386" name="object.spawnPoint.barrel" x="2054" y="302.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14387" name="object.spawnPoint.barrel" x="2164.5" y="368.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14388" name="object.spawnPoint.barrel" x="2292" y="1358.33">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14389" name="object.spawnPoint.barrel" x="2096" y="1328">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14390" name="object.spawnPoint.barrel" x="1849" y="1685.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14391" name="object.chest" x="2257" y="179.5">
+   <point/>
+  </object>
+  <object id="14392" name="object.chest" x="1994.5" y="207.5">
+   <point/>
+  </object>
+  <object id="14393" name="object.chest" x="1265.33" y="1614">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14394" name="object.eventObject" x="2487.67" y="2656.67" width="15.3333" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="14396" name="object.eventObject" x="3671" y="1647.5" width="73.5" height="38.5">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="14397" name="object.eventObject" x="2464" y="704" width="32" height="32.5">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="14398" name="object.eventObject" x="1664" y="1504" width="18" height="64">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="33" name="physics" locked="1">
@@ -1878,22 +2368,22 @@
   <object id="8592" x="2240.01" y="3104">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
-  <object id="8593" x="2272.01" y="3158">
+  <object id="8593" x="2272.01" y="3094">
    <polygon points="0,0 0,-22 28.9375,-21.9375"/>
   </object>
-  <object id="8594" x="2272" y="3158">
+  <object id="8594" x="2272" y="3094">
    <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
   </object>
-  <object id="8595" x="2272.01" y="3136">
+  <object id="8595" x="2272.01" y="3072">
    <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
   </object>
-  <object id="8596" x="2272.01" y="3136">
+  <object id="8596" x="2272.01" y="3072">
    <polygon points="0,0 16.9219,-23.9844 0,-30"/>
   </object>
-  <object id="8597" x="2272.01" y="3136">
+  <object id="8597" x="2272.01" y="3072">
    <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
   </object>
-  <object id="8598" x="2272.01" y="3136">
+  <object id="8598" x="2272.01" y="3072">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
   <object id="8599" x="2304.01" y="3126">
@@ -11184,24 +11674,6 @@
   <object id="11742" x="3040.01" y="128">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
-  <object id="11743" x="3104.01" y="118">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11744" x="3104" y="118">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11745" x="3104.01" y="96">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11746" x="3104.01" y="96">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11747" x="3104.01" y="96">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11748" x="3104.01" y="96">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
   <object id="11749" x="3136.01" y="182">
    <polygon points="0,0 0,-22 28.9375,-21.9375"/>
   </object>
@@ -11256,166 +11728,22 @@
   <object id="11766" x="2944.01" y="128">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
-  <object id="11767" x="2976.01" y="86">
+  <object id="11815" x="2656.01" y="150">
    <polygon points="0,0 0,-22 28.9375,-21.9375"/>
   </object>
-  <object id="11768" x="2976" y="86">
+  <object id="11816" x="2656" y="150">
    <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
   </object>
-  <object id="11769" x="2976.01" y="64">
+  <object id="11817" x="2656.01" y="128">
    <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
   </object>
-  <object id="11770" x="2976.01" y="64">
+  <object id="11818" x="2656.01" y="128">
    <polygon points="0,0 16.9219,-23.9844 0,-30"/>
   </object>
-  <object id="11771" x="2976.01" y="64">
+  <object id="11819" x="2656.01" y="128">
    <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
   </object>
-  <object id="11772" x="2976.01" y="64">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11773" x="3072.01" y="86">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11774" x="3072" y="86">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11775" x="3072.01" y="64">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11776" x="3072.01" y="64">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11777" x="3072.01" y="64">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11778" x="3072.01" y="64">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11779" x="2880.01" y="118">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11780" x="2880" y="118">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11781" x="2880.01" y="96">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11782" x="2880.01" y="96">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11783" x="2880.01" y="96">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11784" x="2880.01" y="96">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11785" x="2848.01" y="86">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11786" x="2848" y="86">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11787" x="2848.01" y="64">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11788" x="2848.01" y="64">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11789" x="2848.01" y="64">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11790" x="2848.01" y="64">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11791" x="2816.01" y="118">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11792" x="2816" y="118">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11793" x="2816.01" y="96">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11794" x="2816.01" y="96">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11795" x="2816.01" y="96">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11796" x="2816.01" y="96">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11797" x="2752.01" y="86">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11798" x="2752" y="86">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11799" x="2752.01" y="64">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11800" x="2752.01" y="64">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11801" x="2752.01" y="64">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11802" x="2752.01" y="64">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11803" x="2720.01" y="118">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11804" x="2720" y="118">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11805" x="2720.01" y="96">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11806" x="2720.01" y="96">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11807" x="2720.01" y="96">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11808" x="2720.01" y="96">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11809" x="2688.01" y="54">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11810" x="2688" y="54">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11811" x="2688.01" y="32">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11812" x="2688.01" y="32">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11813" x="2688.01" y="32">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11814" x="2688.01" y="32">
-   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
-  </object>
-  <object id="11815" x="2656.01" y="118">
-   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
-  </object>
-  <object id="11816" x="2656" y="118">
-   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
-  </object>
-  <object id="11817" x="2656.01" y="96">
-   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
-  </object>
-  <object id="11818" x="2656.01" y="96">
-   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
-  </object>
-  <object id="11819" x="2656.01" y="96">
-   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
-  </object>
-  <object id="11820" x="2656.01" y="96">
+  <object id="11820" x="2656.01" y="128">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
   <object id="11821" x="2592.01" y="118">
@@ -16656,22 +16984,22 @@
   <object id="13578" x="1280.01" y="1504">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
-  <object id="13579" x="1312.01" y="1590">
+  <object id="13579" x="1312.01" y="1686">
    <polygon points="0,0 0,-22 28.9375,-21.9375"/>
   </object>
-  <object id="13580" x="1312" y="1590">
+  <object id="13580" x="1312" y="1686">
    <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
   </object>
-  <object id="13581" x="1312.01" y="1568">
+  <object id="13581" x="1312.01" y="1664">
    <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
   </object>
-  <object id="13582" x="1312.01" y="1568">
+  <object id="13582" x="1312.01" y="1664">
    <polygon points="0,0 16.9219,-23.9844 0,-30"/>
   </object>
-  <object id="13583" x="1312.01" y="1568">
+  <object id="13583" x="1312.01" y="1664">
    <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
   </object>
-  <object id="13584" x="1312.01" y="1568">
+  <object id="13584" x="1312.01" y="1664">
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
   <object id="13585" x="1344.01" y="1654">
@@ -17782,6 +18110,132 @@
    <polygon points="0,0 24.9091,0.181818 12.5455,-38.1818"/>
   </object>
   <object id="14117" x="1894" y="1492.18" width="19.6364" height="3.63636"/>
+  <object id="14227" x="2752.01" y="182">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14228" x="2752" y="182">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14229" x="2752.01" y="160">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14230" x="2752.01" y="160">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14231" x="2752.01" y="160">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14232" x="2752.01" y="160">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
+  <object id="14233" x="2784.01" y="150">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14234" x="2784" y="150">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14235" x="2784.01" y="128">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14236" x="2784.01" y="128">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14237" x="2784.01" y="128">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14238" x="2784.01" y="128">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
+  <object id="14239" x="2880.01" y="150">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14240" x="2880" y="150">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14241" x="2880.01" y="128">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14242" x="2880.01" y="128">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14243" x="2880.01" y="128">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14244" x="2880.01" y="128">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
+  <object id="14245" x="2848.01" y="214">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14246" x="2848" y="214">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14247" x="2848.01" y="192">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14248" x="2848.01" y="192">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14249" x="2848.01" y="192">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14250" x="2848.01" y="192">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
+  <object id="14251" x="2912.01" y="214">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14252" x="2912" y="214">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14253" x="2912.01" y="192">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14254" x="2912.01" y="192">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14255" x="2912.01" y="192">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14256" x="2912.01" y="192">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
+  <object id="14257" x="2720.01" y="118">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14258" x="2720" y="118">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14259" x="2720.01" y="96">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14260" x="2720.01" y="96">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14261" x="2720.01" y="96">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14262" x="2720.01" y="96">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
+  <object id="14267" x="1184.01" y="1526">
+   <polygon points="0,0 0,-22 28.9375,-21.9375"/>
+  </object>
+  <object id="14268" x="1184" y="1526">
+   <polygon points="0,0 0.0111111,-22 -28.9889,-22"/>
+  </object>
+  <object id="14269" x="1184.01" y="1504">
+   <polygon points="0,0 28.9063,0.03125 16.9375,-24"/>
+  </object>
+  <object id="14270" x="1184.01" y="1504">
+   <polygon points="0,0 16.9219,-23.9844 0,-30"/>
+  </object>
+  <object id="14271" x="1184.01" y="1504">
+   <polygon points="0,0 0.0111111,-29.9889 -19,-23.9375"/>
+  </object>
+  <object id="14272" x="1184.01" y="1504">
+   <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
+  </object>
  </objectgroup>
  <objectgroup id="34" name="unreachable_area_physics" locked="1">
   <object id="13797" x="495" y="2422.04">
@@ -17856,10 +18310,10 @@
   <object id="13820" x="3087.5" y="405.5">
    <polygon points="0,0 -0.217391,-20.1304 13.8696,-5.56522"/>
   </object>
-  <object id="13821" x="2735" y="214.54">
+  <object id="13821" x="2800" y="181.873">
    <polygon points="0,0 -14,-6 -0.25,-20.25"/>
   </object>
-  <object id="13822" x="2735" y="214.5">
+  <object id="13822" x="2800" y="181.833">
    <polygon points="0,0 -0.217391,-20.1304 13.8696,-5.56522"/>
   </object>
   <object id="13823" x="2063.75" y="374.04">
@@ -18071,6 +18525,12 @@
   </object>
   <object id="14097" x="2258.36" y="557.636">
    <polygon points="0,0 -11,5.4375 5.25,4.125"/>
+  </object>
+  <object id="14263" x="1296.18" y="1556.89">
+   <polygon points="0,0 -14,-6 -0.25,-20.25"/>
+  </object>
+  <object id="14264" x="1296.18" y="1556.85">
+   <polygon points="0,0 -0.217391,-20.1304 13.8696,-5.56522"/>
   </object>
  </objectgroup>
  <objectgroup id="39" name="ground_physics" locked="1">

@@ -1,0 +1,44 @@
+{
+	id: demo_2_main_goto_level_1,
+	controlledActions: {
+		initial: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 2, y: -2},
+			cameraFollowsTarget: false,
+			
+			startsWithCutscene: true,
+			
+			executes: [
+				move_further,
+			]
+		},
+		move_further: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 5, y: 0},
+			cameraFollowsTarget: false,
+			
+			executes: [
+				wait,
+			]
+		},
+		wait: {
+			type: WAIT,
+			
+			executionDelayInSeconds: 1f,
+			cameraFollowsTarget: false,
+			
+			executes: [
+				change_map,
+			]
+		}
+		change_map: {
+			type: EVENT,
+			
+			globalEvent: demo_2_main_goto_level_1_after_cutscene,
+			
+			waitForEventToFinish: false,
+		}
+	}
+}

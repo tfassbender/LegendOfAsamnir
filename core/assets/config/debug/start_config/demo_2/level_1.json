@@ -5,6 +5,7 @@
 		2: start_2,
 		3: start_2,
 		4: start_2,
+		5: start_5,
 	},
 	eventsLists: {
 		initial: {
@@ -19,6 +20,26 @@
 				{
 					eventType: GIVE_ITEM_TO_PLAYER,
 					stringValue: special_action_bomb,
+				}
+			]
+		},
+		
+		// Add 3 keys to open the boss level key walls backwards 
+		// ATTENTION: do NOT add to final
+		start_5: {
+			subConfigName: start_2,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key,
 				}
 			]
 		},

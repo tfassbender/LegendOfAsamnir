@@ -50,4 +50,11 @@
 			stateSwitchId: demo_2_level_1_switch_vault_2,
 		}
 	},
+	
+	demo_2_level_1_switch_open_lock_vault_3: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_1_switch_vault_3,
+		}
+	},
 }

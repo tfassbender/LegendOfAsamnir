@@ -233,4 +233,27 @@
 			startingPointId: 0,
 		}
 	},
+	
+	demo_2_main_goto_level_1: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_1,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_goto_level_1,
+		}
+	},
+	
+	demo_2_main_goto_level_1_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_main_goto_level_1_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_1,
+			startingPointId: 0,
+		}
+	},
 }

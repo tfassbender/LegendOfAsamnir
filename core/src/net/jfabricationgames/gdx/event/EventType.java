@@ -50,6 +50,7 @@ public enum EventType {
 	RUNE_FOUND, //
 	RUNE_NEEDED, //
 	RUNE_USED, //
+	SPECIAL_ACTION_ITEM_PICKED_UP, //
 	//*******************************
 	//*** Cutscenes
 	//*******************************

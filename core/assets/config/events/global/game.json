@@ -6,7 +6,7 @@
 		},
 		executionType: SHOW_ON_SCREEN_TEXT,
 		executionParameters: {
-			displayTextHeader: "???",
+			displayTextHeader: "Thorin",
 			displayText: "I have no idea what this is. Maybe I should hit it with my axe... That solves all problems.",
 		}
 	},
@@ -17,7 +17,7 @@
 		},
 		executionType: SHOW_ON_SCREEN_TEXT,
 		executionParameters: {
-			displayTextHeader: "???",
+			displayTextHeader: "Thorin",
 			displayText: "I don't realy know how to use this...",
 		}
 	},

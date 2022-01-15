@@ -68,4 +68,26 @@
             }
         }
     },
+    
+    demo_2_level_1_switch_open_lock_vault_3: {
+        conditionId: demo_2_level_1_switch_open_lock_vault_3,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_vault_3
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_1_lock_vault_3
+                }
+            }
+        }
+    },
 }

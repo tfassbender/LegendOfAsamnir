@@ -54,7 +54,8 @@
 	config/cutscene/demo_2/main/builder_on_second_farm.json
 	config/cutscene/demo_2/main/first_enter_village.json,
 	config/cutscene/demo_2/main/archaeologist_near_invisible_path.json,
-	config/cutscene/demo_2/main/adventurer_female_on_the_hill.json
+	config/cutscene/demo_2/main/adventurer_female_on_the_hill.json,
+	config/cutscene/demo_2/main/goto_level_1.json,
 	
 	//********************************************************
 	//*** Demo 2 Village Blacksmith
@@ -83,4 +84,5 @@
 	
 	config/cutscene/demo_2/level_1/adventurer_at_first_destroyable_wall.json,
 	config/cutscene/demo_2/level_1/rune_ansuz_found.json,
+	config/cutscene/demo_2/level_1/goto_main.json,
 ]

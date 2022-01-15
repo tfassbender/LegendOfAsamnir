@@ -14,7 +14,7 @@
 		drops: {
 			coin: 0.5,
 			big_coin: 0.2,
-			arrow: 0.1,
+			arrow: 0.05,
 		}
 		
 		destroySound: wood_break,
@@ -34,9 +34,9 @@
 		physicsBodyOffsetFactorY: -0.125,
 		
 		drops: {
-			coin: 0.3,
+			coin: 0.4,
 			big_coin: 0.1,
-			arrow: 0.1,
+			arrow: 0.05,
 		}
 		
 		animationBreak: box_break,
@@ -56,7 +56,6 @@
 		
 		drops: {
 			coin: 0.75,
-			big_coin: 0.05,
 		}
 		
 		animationBreak: pot_break,
@@ -135,7 +134,7 @@
 		hitSound: wood_hit_2,
 		
 		drops: {
-			coin: 0.5,
+			coin: 0.6,
 			big_coin: 0.3,
 			arrow: 0.1,
 		}
