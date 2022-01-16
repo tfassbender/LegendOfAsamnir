@@ -83,11 +83,18 @@
 		//initial: true
 	},
 	{
+		name: demo_2_castle_tavern,
+		map: "map/demo_2_castle_tavern.tmx",
+		initialStartingPointId: 1,
+		startConfig: config/debug/start_config/demo_2/castle_tavern.json,
+		initial: true
+	},
+	{
 		name: demo_2_level_1,
 		map: "map/demo_2_level_1.tmx",
 		initialStartingPointId: 0,
 		startConfig: config/debug/start_config/demo_2/level_1.json,
-		initial: true
+		//initial: true
 	},
 	
 ]

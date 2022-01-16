@@ -1,0 +1,202 @@
+{
+	id: demo_2_castle_tavern_builder_barkeeper,
+	controlledActions: {
+		barkeeper_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "Oh a dwarf!\nDid you come all the way from Svartalfheim to taste the mead of our castle tavern?",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				condition_lantern_picked_up,
+			],
+		},
+		
+		condition_lantern_picked_up: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_castle_tavern_barkeeper_moved,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: thorin_question_after_lantern_picked_up,
+				condition_not_met: thorin_question_before_lantern_picked_up,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		thorin_question_before_lantern_picked_up: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I need to leave.",
+					"Of cause! One mead please!",
+					"Do you have a lantern?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				give_mead,
+				barkeeper_lantern,
+			],
+		},
+		
+		thorin_question_after_lantern_picked_up: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I don't need anything.",
+					"Of cause! One mead please!",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				give_mead,
+			],
+		},
+		
+		//***************************************
+		//*** Thorin gets mead
+		//***************************************
+		
+		give_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "It's great, that a dwarf comes all the way from Svartalfheim to my tavern.\nYou know what? Tell your friends in Svartalfheim to come here and taste the mead too. Then your mead is on me.",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_mead,
+			]
+		},
+		
+		thorin_answer_mead: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "That's a good deal!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				give_mead_event,
+			],
+		},
+		
+		give_mead_event: {
+			type: EVENT,
+			
+			event: {
+				eventType: GIVE_ITEM_TO_PLAYER,
+				stringValue: mana,
+			},
+			
+			executes: [
+				end,
+			]
+		},
+		
+		//**********************************************
+		//*** Thorin asks for a lantern
+		//**********************************************
+		
+		barkeeper_lantern: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "A lantern? Sure I have one.\n \nYou probably need it to get through the dungeon to svartalfheim, right?\nYou can keep it, so you find the way back to my tavern after you made it to svartalfheim.",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				barkeeper_lantern_2,
+			]
+		},
+		
+		barkeeper_lantern_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "It's there beneath the barrels. Just take it.",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				barkeeper_move,
+			]
+		},
+		
+		barkeeper_move: {
+			type: MOVE,
+			controlledUnitId: demo_2_castle_tavern_barkeeper,
+			controlledUnitTarget: {x: 0, y: -2.5},
+			
+			executes: [
+				barkeeper_move_set_global_value,
+			]
+		},
+		
+		barkeeper_move_set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_castle_tavern_barkeeper_moved, value: true}",
+			},
+			
+			executes: [
+				end
+			]
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		},
+	}
+}

@@ -1,0 +1,76 @@
+{
+	id: demo_2_castle_tavern_adventurer_female_by_the_door,
+	controlledActions: {
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I love the mead in this tavern. Did you try it?",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			]
+		},
+		
+		thorin_answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I'll try it!",
+					"Yes, it's realy good!",
+					"Where does that door lead?",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				end,
+				adventurer_tells_about_door,
+			],
+		}
+		
+		adventurer_tells_about_door: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "That's the door to the castle. The king installed it to have a shorter way to his tavern. But it's locked now, so nobody can enter the castle.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_2,
+			]
+		},
+		
+		thorin_answer_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Your king seems to be a wise man.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		},
+	}
+}

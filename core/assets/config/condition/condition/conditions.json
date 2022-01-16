@@ -7,5 +7,6 @@
 	config/condition/condition/levels/demo_2/main.json,
 	config/condition/condition/levels/demo_2/village_blacksmith.json,
 	config/condition/condition/levels/demo_2/village_shop.json,
+	config/condition/condition/levels/demo_2/castle_tavern.json,
 	config/condition/condition/levels/demo_2/level_1.json,
 ]

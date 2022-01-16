@@ -79,6 +79,15 @@
 	config/cutscene/demo_2/village_tavern/adventurer_female_drinking.json,
 	
 	//********************************************************
+	//*** Demo 2 Castle Tavern
+	//********************************************************
+	
+	config/cutscene/demo_2/castle_tavern/adventurer_blocking_the_entry.json,
+	config/cutscene/demo_2/castle_tavern/adventurer_female_eating.json,
+	config/cutscene/demo_2/castle_tavern/adventurer_female_by_the_door.json,
+	config/cutscene/demo_2/castle_tavern/builder_barkeeper.json,
+	
+	//********************************************************
 	//*** Demo 2 Level 1
 	//********************************************************
 	

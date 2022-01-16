@@ -1,0 +1,26 @@
+{
+	// used in the cutscene in which the guard has to re-check the text on the board
+	demo_2_castle_tavern_height_restriction_changed: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_castle_tavern_height_restriction_changed,
+			expectedValue: true,
+		}
+	},
+	
+	demo_2_castle_tavern_barkeeper_moved: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_castle_tavern_barkeeper_moved,
+			expectedValue: true,
+		}
+	},
+	
+	demo_2_castle_tavern_adventurer_blocking_the_entry_moved: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_castle_tavern_adventurer_blocking_the_entry_moved,
+			expectedValue: true,
+		}
+	}
+}

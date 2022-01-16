@@ -170,6 +170,15 @@
 		},
 		{
 			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/demo_2_castle_tavern.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		},
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
 			"path": "map/demo_2_level_1.tmx",
 			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
 			"parameters": {

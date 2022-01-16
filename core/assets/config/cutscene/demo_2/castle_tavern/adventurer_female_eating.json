@@ -1,0 +1,18 @@
+{
+	id: demo_2_castle_tavern_adventurer_female_eating,
+	controlledActions: {
+		blacksmith_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "It's gread to be a guard in this castle. There is not much to do, and the meals and drinks are free!",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+		},
+	}
+}

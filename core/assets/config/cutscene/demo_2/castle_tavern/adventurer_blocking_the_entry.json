@@ -1,0 +1,209 @@
+{
+	id: demo_2_castle_tavern_adventurer_blocking_the_entry,
+	controlledActions: {
+		initial: {
+			startsWithCutscene: true,
+			
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_castle_tavern_adventurer_blocking_the_entry_moved,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: greeting_already_moved,
+				condition_not_met: greeting,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		greeting_already_moved: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "What do you want? I already let you pass.",
+				colorHeader: #780000,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "You shall not pass!!! Unless you are taller than 1.5 meters, like it's written on the board.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			]
+		},
+		
+		thorin_answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Ok, I'll leave.",
+					"I'm a dwarf! Get outa my way!",
+					"The board says 1.0 meters!",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				answer_outa_my_way,
+				answer_check_board,
+			]
+		},
+		
+		//***************************
+		//*** Outa my way
+		//***************************
+		
+		answer_outa_my_way: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "A dwarf?!\n \nI think this rule should prevent children from entering, but not dwarfs...\nBut that doesn't matter! As long as the board says that you are too small, I cannot let you enter!",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			]
+		}
+		
+		//********************************
+		//*** Check the board again
+		//********************************
+		
+		answer_check_board: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "What?! Are you sure? Wait, I'll have a look.",
+				colorHeader: #780000,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				checked_board,
+			]
+		},
+		
+		checked_board: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_castle_tavern_height_restriction_changed,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: answer_height_changed,
+				condition_not_met: answer_height_not_changed,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		answer_height_not_changed: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "No! It says 1.5 meters! So you are not allowed to pass, because you're too small.",
+				colorHeader: #780000,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer
+			]
+		},
+		
+		answer_height_changed: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Guard",
+				displayText: "Oh, you are right ... I was sure that it said 1.5 meters, but ... Ok, I think you are more than 1 meter tall, so you can pass.",
+				colorHeader: #780000,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				move_away,
+			]
+		},
+		
+		move_away: {
+			type: MOVE,
+			controlledUnitId: demo_2_castle_tavern_guard_blocking_the_way,
+			controlledUnitTarget: {x: 1.4, y: 1.2},
+			
+			executes: [
+				set_moved_away,
+			]
+		},
+		
+		set_moved_away: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_castle_tavern_adventurer_blocking_the_entry_moved, value: true}",
+			},
+			
+			executes: [
+				end,
+			]
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

@@ -60,6 +60,15 @@
 	demo_2_village_tavern_builder_barkeeper: config/npc/levels/demo_2/village_tavern/builder_barkeeper.json,
 	
 	//************************************************
+	//*** Demo 2 - Castle Tavern
+	//************************************************
+	
+	demo_2_castle_tavern_adventurer_blocking_the_entry: config/npc/levels/demo_2/castle_tavern/adventurer_blocking_the_entry.json,
+	demo_2_castle_tavern_adventurer_female_by_the_door: config/npc/levels/demo_2/castle_tavern/adventurer_female_by_the_door.json,
+	demo_2_castle_tavern_adventurer_female_eating: config/npc/levels/demo_2/castle_tavern/adventurer_female_eating.json,
+	demo_2_castle_tavern_builder_barkeeper: config/npc/levels/demo_2/castle_tavern/builder_barkeeper.json,
+	
+	//************************************************
 	//*** Demo 2 - Level 1
 	//************************************************
 	
