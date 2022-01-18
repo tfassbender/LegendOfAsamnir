@@ -10,7 +10,7 @@ public enum SpecialAction implements ItemSpecialAction {
 	JUMP(0, 0f, 10f, 1f, "special_action_available__jump"), //
 	BOW(1, 0f, 25f, 1f, "special_action_available__bow"), //
 	BOMB(2, 0f, 35f, 1f, "special_action_available__bomb"), //
-	BOOMERANG(3, 25f, 5f, 1f, "special_action_available__boomerang"), //
+	BOOMERANG(3, 5f, 25f, 1f, "special_action_available__boomerang"), //
 	WAND(4, 10f, 25f, 1f, "special_action_available__wand"), // 
 	FEATHER(5, 0f, 0f, 0.65f, "special_action_available__feather"), //
 	LANTERN(6, 10f, 0f, 0.65f, "special_action_available__lantern"), //
