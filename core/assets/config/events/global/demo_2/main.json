@@ -268,4 +268,16 @@
 			startingPointId: 0,
 		}
 	},
+	
+	demo_2_main_goto_level_2_entry: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_2_entry,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_2_entry,
+			startingPointId: 0,
+		}
+	},
 }

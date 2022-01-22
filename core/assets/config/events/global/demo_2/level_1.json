@@ -37,7 +37,7 @@
 		executionType: CHANGE_MAP,
 		executionParameters: {
 			map: demo_2_main,
-			startingPointId: 5,
+			startingPointId: 10,
 		}
 	},
 	

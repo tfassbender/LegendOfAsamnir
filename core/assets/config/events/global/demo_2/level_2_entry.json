@@ -1,0 +1,30 @@
+{
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_level_2_entry_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_2_entry_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 11,
+		}
+	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_2_entry_switch_entry: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_entry_switch_entry,
+		}
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_entry_open_door_entry,
+	},
+}

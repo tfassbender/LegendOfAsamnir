@@ -1,0 +1,12 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_2_entry_switch_entry_activated: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_2_entry_switch_entry,
+		}
+	},
+}

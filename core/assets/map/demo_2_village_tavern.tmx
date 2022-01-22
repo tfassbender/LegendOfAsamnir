@@ -211,7 +211,7 @@
   <object id="15" x="165" y="96" width="123" height="52"/>
   <object id="16" x="32" y="96" width="63.5" height="54"/>
  </objectgroup>
- <objectgroup id="9" name="unreachable_area_physics">
+ <objectgroup id="9" name="unreachable_area_physics" locked="1">
   <object id="51" x="112.303" y="136.833">
    <polygon points="0,0 -7.81818,8.90909 -0.545455,12"/>
   </object>

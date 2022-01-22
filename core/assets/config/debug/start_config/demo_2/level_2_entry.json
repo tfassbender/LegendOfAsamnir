@@ -1,0 +1,17 @@
+{
+	startingPointMapping: {
+		//0: initial,
+		1: initial,
+	},
+	eventsLists: {
+		initial: {
+			subConfigPath: config/debug/start_config/demo_2/level_1.json
+			subConfigName: final,
+			events: []
+		},
+		
+		final: {
+			subConfigName: initial,
+		}
+	}
+}

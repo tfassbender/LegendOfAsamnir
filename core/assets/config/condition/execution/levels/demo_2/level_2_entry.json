@@ -1,0 +1,27 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+    demo_2_level_2_entry_open_door_entry: {
+        conditionId: demo_2_level_2_entry_switch_entry_activated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_entry_lock_entry
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_entry_lock_entry
+                }
+            }
+        }
+    },
+}

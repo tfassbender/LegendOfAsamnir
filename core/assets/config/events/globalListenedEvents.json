@@ -13,4 +13,5 @@
 	config/events/global/demo_2/village_tavern.json,
 	config/events/global/demo_2/castle_tavern.json,
 	config/events/global/demo_2/level_1.json,
+	config/events/global/demo_2/level_2_entry.json,
 ]
