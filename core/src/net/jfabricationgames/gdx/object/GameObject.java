@@ -34,6 +34,8 @@ import net.jfabricationgames.gdx.util.MapUtil;
 public class GameObject implements Hittable, StatefulMapObject, CutsceneControlledUnit, CutscenePositioningUnit {
 	
 	public static final String MAP_PROPERTY_KEY_DEBUG_OBJECT = "debugObject";
+	public static final String MAP_PROPERTY_KEY_PHYSICS_BODY_SIZE_FACTOR_X = "physicsBodySizeFactorX";
+	public static final String MAP_PROPERTY_KEY_PHYSICS_BODY_SIZE_FACTOR_Y = "physicsBodySizeFactorY";
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("object");
 	protected static final AssetGroupManager assetManager = AssetGroupManager.getInstance();
@@ -57,6 +59,7 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 	protected PhysicsBodyProperties physicsBodyProperties;
 	protected Vector2 physicsBodySizeFactor;
 	protected Vector2 physicsBodyOffsetFactor;
+	protected Vector2 mapConfiguredBodySizeFactor;
 	
 	public GameObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties, GameObjectMap gameMap) {
 		this.typeConfig = typeConfig;
@@ -78,6 +81,10 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 				.setCollisionType(typeConfig.collisionType);
 		physicsBodySizeFactor = new Vector2(typeConfig.physicsBodySizeFactorX, typeConfig.physicsBodySizeFactorY);
 		physicsBodyOffsetFactor = new Vector2(typeConfig.physicsBodyOffsetFactorX, typeConfig.physicsBodyOffsetFactorY);
+		
+		float mapConfiguredBodySizeFactorX = Float.parseFloat(mapProperties.get(MAP_PROPERTY_KEY_PHYSICS_BODY_SIZE_FACTOR_X, "1f", String.class));
+		float mapConfiguredBodySizeFactorY = Float.parseFloat(mapProperties.get(MAP_PROPERTY_KEY_PHYSICS_BODY_SIZE_FACTOR_Y, "1f", String.class));
+		mapConfiguredBodySizeFactor = new Vector2(mapConfiguredBodySizeFactorX, mapConfiguredBodySizeFactorY);
 		
 		hitSound = typeConfig.hitSound;
 	}
@@ -116,8 +123,8 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 	public void applyState(ObjectMap<String, String> state) {}
 	
 	public void createPhysicsBody(float x, float y) {
-		float width = sprite.getWidth() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.x;
-		float height = sprite.getHeight() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.y;
+		float width = sprite.getWidth() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.x * mapConfiguredBodySizeFactor.x;
+		float height = sprite.getHeight() * Constants.WORLD_TO_SCREEN * physicsBodySizeFactor.y * mapConfiguredBodySizeFactor.y;
 		
 		x += sprite.getWidth() * Constants.WORLD_TO_SCREEN * physicsBodyOffsetFactor.x;
 		y += sprite.getHeight() * Constants.WORLD_TO_SCREEN * physicsBodyOffsetFactor.y;

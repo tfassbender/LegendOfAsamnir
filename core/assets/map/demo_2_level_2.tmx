@@ -738,9 +738,15 @@
  </layer>
  <objectgroup id="10" name="objects">
   <object id="438" name="object.key_wall" x="1264" y="1907">
+   <properties>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+   </properties>
    <point/>
   </object>
   <object id="439" name="object.key_wall" x="1264.67" y="2034.33">
+   <properties>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+   </properties>
    <point/>
   </object>
   <object id="442" name="object.chest" x="2400" y="2976">
@@ -769,6 +775,7 @@
   <object id="447" name="object.key_wall" x="1090" y="1968">
    <properties>
     <property name="lockId" value="demo_2_level_2_gate_main_1"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
    <point/>
@@ -776,6 +783,7 @@
   <object id="448" name="object.key_wall" x="1408" y="2226.75">
    <properties>
     <property name="lockId" value="demo_2_level_2_gate_exit"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
    <point/>
@@ -818,6 +826,7 @@
   <object id="454" name="object.key_wall" x="256" y="1970">
    <properties>
     <property name="lockId" value="demo_2_level_2_gate_boomerang"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
    <point/>
@@ -885,6 +894,7 @@
   <object id="469" name="object.key_wall" x="800" y="864">
    <properties>
     <property name="lockId" value="demo_2_level_2_gate_main_2_1"/>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
    <point/>
@@ -892,17 +902,27 @@
   <object id="470" name="object.key_wall" x="800" y="544">
    <properties>
     <property name="lockId" value="demo_2_level_2_gate_main_2_2"/>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
    <point/>
   </object>
   <object id="471" name="object.key_wall" x="1952" y="1040">
+   <properties>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+   </properties>
    <point/>
   </object>
   <object id="472" name="object.key_wall" x="2016" y="1040">
+   <properties>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+   </properties>
    <point/>
   </object>
   <object id="473" name="object.key_wall" x="2080" y="1040">
+   <properties>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+   </properties>
    <point/>
   </object>
   <object id="474" name="item.key" x="1408" y="896">
