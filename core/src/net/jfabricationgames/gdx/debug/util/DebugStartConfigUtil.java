@@ -62,8 +62,10 @@ public class DebugStartConfigUtil {
 		StartConfigEventList eventList = startConfig.eventsLists.get(configName);
 		EventHandler eventHandler = EventHandler.getInstance();
 		
-		for (EventConfig event : eventList.events) {
-			eventHandler.fireEvent(event);
+		if (eventList.events != null) {
+			for (EventConfig event : eventList.events) {
+				eventHandler.fireEvent(event);
+			}
 		}
 		
 		executeSubListConfigEvents(startConfig, eventList);

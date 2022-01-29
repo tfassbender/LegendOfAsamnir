@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="18" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="327">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="18" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="328">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -201,11 +201,11 @@
  </objectgroup>
  <objectgroup id="8" name="physics" locked="1">
   <object id="1" x="0" y="0" width="32" height="576"/>
-  <object id="2" x="32" y="0" width="544" height="114.109"/>
+  <object id="2" x="32" y="0" width="544" height="112.109"/>
   <object id="3" x="544" y="110.085" width="32" height="465.915"/>
   <object id="5" x="32" y="436.57" width="191.985" height="139.43"/>
   <object id="6" x="352.373" y="436.57" width="191.627" height="139.43"/>
-  <object id="310" x="320" y="275.257" width="224" height="55.4746"/>
+  <object id="310" x="320" y="275.257" width="224" height="59.8079"/>
   <object id="311" x="320" y="205.414" width="32" height="70.5133"/>
   <object id="312" x="162.981" y="105.3" width="25.4867" height="38.9008"/>
   <object id="313" x="290.415" y="105.3" width="25.4867" height="38.9008"/>

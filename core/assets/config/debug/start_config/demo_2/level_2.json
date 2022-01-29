@@ -5,7 +5,7 @@
 	},
 	eventsLists: {
 		initial: {
-			subConfigPath: config/debug/start_config/demo_2/level_1.json
+			subConfigPath: config/debug/start_config/demo_2/level_2_entry.json
 			subConfigName: final,
 			events: []
 		},

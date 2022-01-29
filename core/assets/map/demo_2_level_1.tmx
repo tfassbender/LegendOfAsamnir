@@ -37,7 +37,7 @@
    eJztnNlu4zAMRfMSY/7/i9s8CNUEkq2FyyV1D2AUM3VkUjySZSXN60UIIYQQQgghhOjx/j3+VcfbNxwCDn05h7fQ8e1LfVxm2RBNSj2l2qmP+nf0JS6tmmpzGV+P9Fm5d3jQui5CXKcQrZ9RPT6BLP1LX/S5XnnWj5xr9MnkSw8+h8txytijL/Ps7J9loDyHZ8lHC6k91yz9nC0fSSRdyeZR5Ng1sHIlsj/R4tXC05VyXI3/QwQ5Nm28HWn50ooNDcSYLPB2ZMQHNGfQ4rGk5H73+RFvX+o4rdiNNyN1/p6+zMQp1ebItXbO6Z0f2TcEX2ZiXMlrpvY713k6L/LnRa3nj505QGI8tq4pOc5LW+W9tVauUX3p1c56fpmNV4J39dOyZvQlpi8a7c1ccyV/b+hLrHp5YuEBui+lTfLMXf08no9mYp7N6alN8gx9GWuT/IHky0jNtNsl91i6gOxL3Tbp4+3Ham1n85l9PWlj7YC2MxLt0Zln0O4v0nnstEX6oPiyW2MN/8gzo30vsWaQrLMGqHGhod1HUXwpoMfnDX1pEyFGD7x8iUCkWK2w6JOovnyIFKsF0epnDfvnf1b6I+qaZJWsea0wU+dy7sj7lZnIls8Opb5X52fr+Pbl7t8ZoC9/0Jdn+F1C68z6kwH6ssfdejfjGiZrXpZkd6Qm45zpSVZPPrTuuWSPTL6MrPHJHhl8yX5PRSJiH5+w7kIlUn/TEV+uV5zvjacnGESoAV3BIcKeHVIsp/LkBoozKHGczGgNpOea2bmMrvizUoOdus14ccp7WhHY7feR19bPWZpzE9FBY3zejf/vz91oQGd08OhXq30cOiNP9v6kM3Kc0o90Zp/T+lBznXQCp+RZ0Bgfp4y5U/L8RuP57wROybOFRJ1PcuXDSbm2WN1vstoLRNrHPm1sPDFaG2tPJM/dga608RxHO7XX9Iau3OPhDOp7Z7wPjWG9LtCaF3bapSvjIK1RJK5j9ToEvJ4HNNtGvd9Z97Mkvdj5GYg1Wv3mMRY1GImfe/vzZPGjZjYPr2eBqH2PEu/uXtdOHtbPAp9zW9/tFwUvz2fHWO88hH2y2ddE9qWAuGd991qEfl7NIYMvBY16SLaJ5MruPRAhD0lG1xU7a4+VeBCQmCeJDmhjsTceRv5uAS2XTKD2bW8Ovfs+4qz3IBSQ+3VnfiE6oLpC8OD3TJIZ6AuZgb4QQgghhBByHj8XAiFv
   </data>
  </layer>
- <objectgroup id="4" name="objects" locked="1">
+ <objectgroup id="4" name="objects">
   <object id="13897" name="player.startingPosition" x="192" y="2538">
    <properties>
     <property name="startingPointId" value="0"/>
