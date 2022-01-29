@@ -1,0 +1,137 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+    demo_2_level_2_gate_main_1_openLock_ifAllSwitchesAreActivated: {
+        conditionId: demo_2_level_2_gate_main_1_allSwitchesActivated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_main_1
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_main_1
+                }
+            }
+        }
+    },
+    
+    demo_2_level_2_gate_boomerang_openLock_ifAllSwitchesAreActivated: {
+        conditionId: demo_2_level_2_gate_boomerang_allSwitchesActivated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_boomerang
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_boomerang
+                }
+            }
+        }
+    },
+    
+    demo_2_level_2_boss_key_1_pressure_switch: {
+		conditionId: demo_2_level_2_boss_key_1_pressure_switch,
+		thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_boss_key_1_gate
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_boss_key_1_gate
+                }
+            }
+        }
+	},
+	
+	demo_2_level_2_gate_boss_key_2_openLock_ifAllSwitchesAreActivated: {
+		conditionId: demo_2_level_2_gate_boss_key_2_allSwitchesActivated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_boss_key_2_gate
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_boss_key_2_gate
+                }
+            }
+        }
+    },
+    
+    demo_2_level_2_gate_main_2_1_switch: {
+		conditionId: demo_2_level_2_gate_main_2_1_switch,
+		thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_main_2_1
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_main_2_1
+                }
+            }
+        }
+	},
+    
+    demo_2_level_2_gate_main_2_2_switch: {
+		conditionId: demo_2_level_2_gate_main_2_2_switch,
+		thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_main_2_2
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_main_2_2
+                }
+            }
+        }
+	},
+}

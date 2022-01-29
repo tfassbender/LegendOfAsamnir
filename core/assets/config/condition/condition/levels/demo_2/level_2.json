@@ -1,0 +1,113 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_2_gate_main_1_allSwitchesActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_2_gate_main_1_switch_1,
+				}
+			},
+			condition2: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_2_gate_main_1_switch_2,
+				}
+			}
+		}
+	},
+	
+	//switches 1 and 3 have to be active, but not 2 and 4
+	demo_2_level_2_gate_boomerang_allSwitchesActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_2_gate_boomerang_switch_1,
+				}
+			},
+			condition2: {
+				conditionType: AND,
+				conditionalParameters: {
+					condition: {
+						conditionType: NOT,
+						conditionalParameters: {
+							condition: {
+								conditionType: STATE_SWITCH_ACTIVE,
+								parameters: {
+									stateSwitchId: demo_2_level_2_gate_boomerang_switch_2,
+								}
+							}								
+						}
+					},
+					condition2: {
+						conditionType: AND,
+						conditionalParameters: {
+							condition: {
+								conditionType: STATE_SWITCH_ACTIVE,
+								parameters: {
+									stateSwitchId: demo_2_level_2_gate_boomerang_switch_3,
+								}
+							},
+							condition2: {
+								conditionType: NOT,
+								conditionalParameters: {
+									condition: {
+									conditionType: STATE_SWITCH_ACTIVE,
+										parameters: {
+											stateSwitchId: demo_2_level_2_gate_boomerang_switch_4,
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	demo_2_level_2_boss_key_1_pressure_switch: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_2_boss_key_1_pressure_switch,
+		}
+	},
+	
+	demo_2_level_2_gate_boss_key_2_allSwitchesActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_2_boss_key_2_pressure_switch_1,
+				}
+			},
+			condition2: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_2_boss_key_2_pressure_switch_2,
+				}
+			}
+		}
+	},
+	
+	demo_2_level_2_gate_main_2_1_switch: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_2_gate_main_2_1_switch,
+		}
+	},
+	
+	demo_2_level_2_gate_main_2_2_switch: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_2_gate_main_2_2_switch,
+		}
+	},
+}

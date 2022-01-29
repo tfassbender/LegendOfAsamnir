@@ -1,0 +1,76 @@
+{
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_level_2_goto_level_2_entry: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_2_goto_level_2_entry,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_2_entry,
+			startingPointId: 2,
+		}
+	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_2_gate_main_1_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_gate_main_1_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_main_1_openLock_ifAllSwitchesAreActivated,
+	},
+	
+	demo_2_level_2_gate_boomerang_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_gate_boomerang_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_boomerang_openLock_ifAllSwitchesAreActivated,
+	},
+	
+	demo_2_level_2_boss_key_1_pressure_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_boss_key_1_pressure_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_boss_key_1_pressure_switch
+	},
+	
+	demo_2_level_2_boss_key_2_pressure_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_boss_key_2_pressure_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_boss_key_2_openLock_ifAllSwitchesAreActivated
+	},
+	
+	demo_2_level_2_gate_main_2_1_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_gate_main_2_1_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_main_2_1_switch
+	},
+	
+	demo_2_level_2_gate_main_2_2_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_gate_main_2_2_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_main_2_2_switch
+	}
+}

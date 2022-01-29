@@ -2,6 +2,12 @@
 	startingPointMapping: {
 		//0: initial,
 		1: initial,
+		2: start_2,
+		3: initial,
+		4: start_4,
+		5: initial,
+		6: initial,
+		7: initial,
 	},
 	eventsLists: {
 		initial: {
@@ -10,9 +16,46 @@
 			events: []
 		},
 		
+		start_2: {
+			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key
+				},
+			]
+		},
+		
+		start_4: {
+			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: boomerang,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: mana,
+				},
+			]
+		},
+		
 		final: {
 			subConfigName: initial,
-			events: []
+			events: [
+				{
+					eventType: COLLECT_RUNE,
+					stringValue: mannaz,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: boomerang,
+				},
+			]
 		}
 	}
 }

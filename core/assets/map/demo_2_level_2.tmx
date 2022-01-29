@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="533">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="542">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -760,14 +760,14 @@
   </object>
   <object id="444" name="object.switch" x="1344" y="1872">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_main_1_switch_1"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_main_1_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_main_1_switch_1"/>
    </properties>
    <point/>
   </object>
   <object id="446" name="object.switch" x="1344" y="2000">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_main_1_switch_2"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_main_1_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_main_1_switch_2"/>
    </properties>
    <point/>
@@ -795,30 +795,30 @@
    </properties>
    <point/>
   </object>
-  <object id="450" name="object.switch" x="320" y="1888">
+  <object id="450" name="object.switch" x="320" y="1839">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch_1"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_boomerang_switch_1"/>
    </properties>
    <point/>
   </object>
-  <object id="451" name="object.switch" x="352" y="1888">
+  <object id="451" name="object.switch" x="352" y="1839">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch_2"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_boomerang_switch_2"/>
    </properties>
    <point/>
   </object>
-  <object id="452" name="object.switch" x="384" y="1888">
+  <object id="452" name="object.switch" x="384" y="1839">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch_3"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_boomerang_switch_3"/>
    </properties>
    <point/>
   </object>
-  <object id="453" name="object.switch" x="416" y="1888">
+  <object id="453" name="object.switch" x="416" y="1839">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch_4"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_boomerang_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_boomerang_switch_4"/>
    </properties>
    <point/>
@@ -847,7 +847,7 @@
    </properties>
    <point/>
   </object>
-  <object id="459" name="object.movable_rock" x="1056" y="1389">
+  <object id="459" name="object.movable_rock" x="1088" y="1389">
    <point/>
   </object>
   <object id="460" name="object.key_wall" x="1056" y="1456">
@@ -859,19 +859,19 @@
   </object>
   <object id="461" name="object.pressure_switch" x="466" y="1000">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_boss_key_2_pressure_switch_1"/>
+    <property name="eventParameter" value="demo_2_level_2_boss_key_2_pressure_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_boss_key_2_pressure_switch_1"/>
    </properties>
    <point/>
   </object>
   <object id="464" name="object.pressure_switch" x="466" y="1144">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_boss_key_2_pressure_switch_2"/>
+    <property name="eventParameter" value="demo_2_level_2_boss_key_2_pressure_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_boss_key_2_pressure_switch_2"/>
    </properties>
    <point/>
   </object>
-  <object id="465" name="object.movable_rock" x="336" y="1002">
+  <object id="465" name="object.movable_rock" x="336" y="999">
    <point/>
   </object>
   <object id="466" name="object.key_wall" x="203.5" y="1185.75">
@@ -881,7 +881,7 @@
    </properties>
    <point/>
   </object>
-  <object id="467" name="object.switch" x="207.424" y="880.576">
+  <object id="467" name="object.switch" x="207.424" y="847.576">
    <properties>
     <property name="eventParameter" value="demo_2_level_2_gate_main_2_1_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_main_2_1_switch"/>
@@ -975,8 +975,57 @@
    </properties>
    <point/>
   </object>
+  <object id="533" name="object.key_wall" x="1920" y="1920">
+   <properties>
+    <property name="lockId" value="demo_2_level_2_gate_exit"/>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="534" name="object.eventObject" x="333.362" y="2656.28" width="101.155" height="31.5">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_2_goto_level_2_entry"/>
+   </properties>
+  </object>
+  <object id="535" name="player.startingPosition" x="1184" y="2016">
+   <properties>
+    <property name="startingPointId" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="536" name="player.startingPosition" x="384" y="1952">
+   <properties>
+    <property name="startingPointId" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="537" name="player.startingPosition" x="928" y="1472">
+   <properties>
+    <property name="startingPointId" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="539" name="player.startingPosition" x="224" y="1056">
+   <properties>
+    <property name="startingPointId" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="540" name="player.startingPosition" x="192" y="896">
+   <properties>
+    <property name="startingPointId" value="6"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="541" name="player.startingPosition" x="1312" y="896">
+   <properties>
+    <property name="startingPointId" value="7"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="8" name="physics">
+ <objectgroup id="8" name="physics" locked="1">
   <object id="327" x="128" y="2720" width="192" height="112.333"/>
   <object id="328" x="448" y="2720" width="224.333" height="111.667"/>
   <object id="329" x="320" y="2656" width="13" height="212.667"/>
@@ -1078,6 +1127,7 @@
   <object id="495" x="2368" y="96" width="32" height="704"/>
   <object id="496" x="1536" y="832" width="32" height="288"/>
   <object id="515" x="2016" y="416" width="288" height="272"/>
+  <object id="538" x="1013.75" y="1360" width="116.75" height="12.5"/>
  </objectgroup>
  <objectgroup id="9" name="unreachable_area_physics" locked="1">
   <object id="504" x="171.215" y="933.116" width="52" height="15"/>
