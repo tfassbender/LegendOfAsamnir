@@ -160,6 +160,8 @@ class TiledMapPhysicsLoader {
 		}
 		
 		fixtureDef.shape = shape;
+		fixtureDef.filter.categoryBits = type.collisionType.category;
+		fixtureDef.filter.maskBits = type.collisionType.mask;
 		
 		Body body = PhysicsBodyCreator.createBody(bodyDef);
 		body.createFixture(fixtureDef);
@@ -246,8 +248,6 @@ class TiledMapPhysicsLoader {
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 1.0f;
 		fixtureDef.restitution = 0.0f;
-		fixtureDef.filter.categoryBits = PhysicsCollisionType.MAP_OBJECT.category;
-		fixtureDef.filter.maskBits = PhysicsCollisionType.MAP_OBJECT.mask;
 		materials.put("default", fixtureDef);
 		
 		Gdx.app.log(getClass().getSimpleName(), "loading materials file: " + MAP_MATERIALS_CONFIG_FILE);
