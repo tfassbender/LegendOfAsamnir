@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="551">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="554">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -788,7 +788,7 @@
    </properties>
    <point/>
   </object>
-  <object id="449" name="object.switch" x="1455.25" y="2191.75">
+  <object id="449" name="object.switch" x="1455.25" y="2186.75">
    <properties>
     <property name="eventParameter" value="demo_2_level_2_switch_gate_exit"/>
     <property name="stateSwitchId" value="demo_2_level_2_switch_gate_exit"/>
@@ -977,13 +977,13 @@
   </object>
   <object id="533" name="object.key_wall" x="1920" y="1920">
    <properties>
-    <property name="lockId" value="demo_2_level_2_gate_exit"/>
-    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="lockId" value="demo_2_level_2_gate_boss_room"/>
+    <property name="physicsBodySizeFactorX" value="1.5f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
    <point/>
   </object>
-  <object id="534" name="object.eventObject" x="333.362" y="2656.28" width="101.155" height="31.5">
+  <object id="534" name="object.eventObject" x="333.362" y="2656.28" width="101.155" height="51">
    <properties>
     <property name="eventParameter" value="demo_2_level_2_goto_level_2_entry"/>
    </properties>
@@ -1073,6 +1073,24 @@
   <object id="550" name="npc.demo_2_level_2_adventurer_female_at_pressure_switches" x="366" y="1140.67">
    <properties>
     <property name="unitId" value="demo_2_level_2_adventurer_at_pressure_switches"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="551" name="enemy.bat" x="2048" y="1568">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="552" name="enemy.bat" x="1984" y="1664">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="553" name="enemy.bat" x="2112" y="1664">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
    </properties>
    <point/>
   </object>

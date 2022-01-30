@@ -15,6 +15,18 @@
 		}
 	},
 	
+	demo_2_level_2_entry_goto_level_2: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_2_entry_goto_level_2,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_2,
+			startingPointId: 0,
+		}
+	},
+	
 	//*******************************************
 	//*** switches
 	//*******************************************

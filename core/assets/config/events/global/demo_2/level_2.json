@@ -105,5 +105,47 @@
 		},
 		executionType: CONDITIONAL_EVENT,
 		conditionalExecutionId: demo_2_level_2_gate_4th_wall_openLock_ifTestedEnouthSwitches
-	}
+	},
+	
+	demo_2_level_2_switch_gate_exit_open_lock: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_switch_gate_exit,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_switch_gate_exit,
+	},
+	
+	//*******************************************
+	//*** boss fight
+	//*******************************************
+	
+	demo_2_level_2_boss_enemy_killed_increase_count: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_level_2_boss_enemy_killed,
+		},
+		executionType: INCREASE_GLOBAL_VALUE,
+		executionParameters: {
+			globalValueKey: demo_2_level_2_boss_room_enemies_defeated,
+		}
+	},
+	demo_2_level_2_boss_enemy_killed_open_lock: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_level_2_boss_enemy_killed,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_boss_room_openLock_ifAllEnemiesDefeated
+	},
+	
+	// this event is executed after the player enters the dungeon, because there won't be any more enemies to kill in the boss room
+	demo_2_level_2_boss_enemy_killed_open_lock_after_entering_dungeon: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_level_2_all_boss_enemies_killed,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_boss_room_openLock_ifAllEnemiesDefeated
+	},
 }

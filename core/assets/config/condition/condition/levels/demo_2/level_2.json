@@ -125,5 +125,20 @@
 			key: demo_2_level_2_adventurer_at_pressure_switches_moved,
 			expectedValue: true,
 		}
+	},
+	
+	demo_2_level_2_gate_boss_room_allEnemiesDefeated: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_2_boss_room_enemies_defeated,
+			expectedValue: 3,
+		}
+	},
+	
+	demo_2_level_2_switch_gate_exit: {
+		conditionType: STATE_SWITCH_ACTIVE,
+		parameters: {
+			stateSwitchId: demo_2_level_2_switch_gate_exit,
+		}
 	}
 }

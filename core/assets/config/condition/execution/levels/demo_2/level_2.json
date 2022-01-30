@@ -136,7 +136,7 @@
 	},
 	
 	demo_2_level_2_gate_4th_wall_openLock_ifTestedEnouthSwitches: {
-		conditionId: demo_2_level_2_gate_4th_wall_testedEnouthSwitches
+		conditionId: demo_2_level_2_gate_4th_wall_testedEnouthSwitches,
 		thenCase: {
 			type: EVENT,
 			eventConfig: {
@@ -149,5 +149,43 @@
 		elseCase: {
 			type: NO_EXECUTION, // the door cannot be locked again
 		}
+	},
+	
+	demo_2_level_2_gate_boss_room_openLock_ifAllEnemiesDefeated: {
+		conditionId: demo_2_level_2_gate_boss_room_allEnemiesDefeated,
+		thenCase: {
+			type: EVENT,
+			eventConfig: {
+        		executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_boss_room
+                }
+    		}
+		}
+		elseCase: {
+			type: NO_EXECUTION, // the door cannot be locked again
+		}
+	},
+	
+    demo_2_level_2_switch_gate_exit: {
+		conditionId: demo_2_level_2_switch_gate_exit,
+		thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_exit
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_2_gate_exit
+                }
+            }
+        }
 	},
 }
