@@ -65,6 +65,8 @@ public class GameObjectTypeConfig {
 	public float interactionMarkerOffsetY = 0f;
 	public InteractiveAction interactiveAction; // references a value from the InteractiveAction enum
 	
+	// to make an object not interactive, configure it without a sensor (addSensor: false)
+	
 	//****************************************
 	//*** Locked Objects
 	//****************************************

@@ -120,6 +120,21 @@ public enum GlobalEventExecutionType {
 					.fireEvent(new EventConfig().setEventType(EventType.SET_GLOBAL_CONDITION_VALUE).setParameterObject(parameterObject));
 		}
 	},
+	INCREASE_GLOBAL_VALUE {
+		
+		private static final String MAP_KEY_GLOBAL_VALUE_KEY = "globalValueKey";
+		
+		@Override
+		public void execute(GlobalEventConfig eventConfig) {
+			String key = eventConfig.executionParameters.get(MAP_KEY_GLOBAL_VALUE_KEY);
+			
+			ObjectMap<String, Object> parameterObject = new ObjectMap<>();
+			parameterObject.put("key", key);
+			
+			EventHandler.getInstance()
+					.fireEvent(new EventConfig().setEventType(EventType.INCREASE_GLOBAL_CONDITION_VALUE).setParameterObject(parameterObject));
+		}
+	},
 	CHANGE_HEALTH {
 		
 		private static final String MAP_KEY_AMOUNT = "amount";

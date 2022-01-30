@@ -332,5 +332,102 @@
 		texture: stone,
 		
 		density: 5f,
-	}
+	},
+	
+	//**********************************
+	//*** Walls for demo 2 level 2
+	//**********************************
+	
+	wall_1: {
+		type: LOCKED,
+		
+		texture: wall_1,
+		hitSound: rock_hit,
+		interactionSound: rock_break,
+		
+		textureSizeFactorX: 0.68,
+		textureSizeFactorY: 0.68,
+		
+		physicsBodySizeFactorX: 0.7,
+		physicsBodySizeFactorY: 0.6,
+		physicsBodyOffsetFactorX: 0.01,
+		physicsBodyOffsetFactorY: 0.05,
+		
+		addSensor: false,
+		
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: empty,
+		changeBodyToSensorAfterAction: true,
+		
+		defaultLocked: true,
+	},
+	wall_2: {
+		type: LOCKED,
+		
+		texture: wall_2,
+		hitSound: rock_hit,
+		interactionSound: rock_break,
+		
+		textureSizeFactorX: 0.68,
+		textureSizeFactorY: 0.68,
+		
+		physicsBodySizeFactorX: 0.7,
+		physicsBodySizeFactorY: 0.6,
+		physicsBodyOffsetFactorX: 0.01,
+		physicsBodyOffsetFactorY: 0.05,
+		
+		addSensor: false,
+		
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: empty,
+		changeBodyToSensorAfterAction: true,
+		
+		defaultLocked: true,
+	},
+	wall_3: {
+		type: LOCKED,
+		
+		texture: wall_3,
+		hitSound: rock_hit,
+		interactionSound: rock_break,
+		
+		textureSizeFactorX: 0.68,
+		textureSizeFactorY: 0.68,
+		
+		physicsBodySizeFactorX: 0.7,
+		physicsBodySizeFactorY: 0.6,
+		physicsBodyOffsetFactorX: 0.01,
+		physicsBodyOffsetFactorY: 0.05,
+		
+		addSensor: false,
+		
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: empty,
+		changeBodyToSensorAfterAction: true,
+		
+		defaultLocked: true,
+	},
+	wall_4: {
+		type: LOCKED,
+		
+		textureSizeFactorX: 0.68,
+		textureSizeFactorY: 0.68,
+		
+		texture: wall_4,
+		hitSound: rock_hit,
+		interactionSound: rock_break,
+		
+		physicsBodySizeFactorX: 0.7,
+		physicsBodySizeFactorY: 0.6,
+		physicsBodyOffsetFactorX: 0.01,
+		physicsBodyOffsetFactorY: 0.05,
+		
+		addSensor: false,
+		
+		multipleActionExecutionsPossible: false,
+		textureAfterAction: empty,
+		changeBodyToSensorAfterAction: true,
+		
+		defaultLocked: true,
+	},
 }

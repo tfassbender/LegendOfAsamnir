@@ -94,4 +94,10 @@
 	config/cutscene/demo_2/level_1/adventurer_at_first_destroyable_wall.json,
 	config/cutscene/demo_2/level_1/rune_ansuz_found.json,
 	config/cutscene/demo_2/level_1/goto_main.json,
+	
+	//********************************************************
+	//*** Demo 2 Level 2
+	//********************************************************
+	
+	config/cutscene/demo_2/level_2/break_4th_wall.json,
 ]

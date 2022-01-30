@@ -114,8 +114,8 @@ public class InteractiveObject extends GameObject implements Interactive {
 	}
 	
 	private boolean isChangeBodyToSensorAfterAction() {
-		return actionExecuted && animation != null && animation.isAnimationFinished() && typeConfig.changeBodyToSensorAfterAction
-				&& !changedBodyToSensor;
+		return actionExecuted && typeConfig.changeBodyToSensorAfterAction && !changedBodyToSensor //
+				&& (animation == null || animation.isAnimationFinished());
 	}
 	
 	@Override

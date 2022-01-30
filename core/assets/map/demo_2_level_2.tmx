@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="542">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="550">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -29,9 +29,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,2019,1379,1379,2017,2741,0,0,0,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,0,0,0,0,0,0,0,0,0,1379,1379,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,2019,1379,1379,2017,2741,0,0,0,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,0,0,0,0,0,0,0,0,0,1379,1379,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,2051,1379,1379,2049,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1379,1379,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,1379,1379,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,1379,1379,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,1379,1379,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2019,1379,1379,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2019,1379,1379,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2050,2051,1379,1379,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,1379,0,0,0,
 0,0,2741,2018,2018,2018,2018,2741,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2741,1379,1379,1379,1379,2741,0,0,0,0,0,0,0,0,0,0,2741,2018,2018,2018,2018,2018,2018,2741,0,0,0,0,0,0,0,0,0,0,0,0,1379,1379,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -909,19 +909,19 @@
   </object>
   <object id="471" name="object.key_wall" x="1952" y="1040">
    <properties>
-    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
    </properties>
    <point/>
   </object>
   <object id="472" name="object.key_wall" x="2016" y="1040">
    <properties>
-    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
    </properties>
    <point/>
   </object>
   <object id="473" name="object.key_wall" x="2080" y="1040">
    <properties>
-    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
    </properties>
    <point/>
   </object>
@@ -935,30 +935,30 @@
    </properties>
    <point/>
   </object>
-  <object id="476" name="object.switch" x="1936" y="433">
+  <object id="476" name="object.switch" x="1936" y="427">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch_2"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_4th_wall_switch_2"/>
    </properties>
    <point/>
   </object>
-  <object id="477" name="object.switch" x="1968" y="433">
+  <object id="477" name="object.switch" x="1968" y="427">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch_3"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_4th_wall_switch_3"/>
    </properties>
    <point/>
   </object>
-  <object id="478" name="object.switch" x="2000" y="433">
+  <object id="478" name="object.switch" x="2000" y="427">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch_4"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_4th_wall_switch_4"/>
    </properties>
    <point/>
   </object>
-  <object id="479" name="object.switch" x="1904" y="433">
+  <object id="479" name="object.switch" x="1904" y="427">
    <properties>
-    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch_1"/>
+    <property name="eventParameter" value="demo_2_level_2_gate_4th_wall_switch"/>
     <property name="stateSwitchId" value="demo_2_level_2_gate_4th_wall_switch_1"/>
    </properties>
    <point/>
@@ -1024,8 +1024,54 @@
    </properties>
    <point/>
   </object>
+  <object id="542" name="player.startingPosition" x="1920" y="512">
+   <properties>
+    <property name="startingPointId" value="8"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="543" name="object.wall_1" x="1280" y="384">
+   <properties>
+    <property name="lockId" value="demo_2_level_2_gate_4th_wall_1"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="545" name="object.wall_2" x="1472" y="384">
+   <properties>
+    <property name="lockId" value="demo_2_level_2_gate_4th_wall_2"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="546" name="object.wall_3" x="1664" y="384">
+   <properties>
+    <property name="lockId" value="demo_2_level_2_gate_4th_wall_3"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="547" name="object.wall_4" x="1856" y="384">
+   <properties>
+    <property name="lockId" value="demo_2_level_2_gate_4th_wall_4"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="548" name="player.startingPosition" x="1856" y="1024">
+   <properties>
+    <property name="startingPointId" value="9"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="549" name="player.startingPosition" x="1920" y="1824">
+   <properties>
+    <property name="startingPointId" value="10"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="8" name="physics" locked="1">
+ <objectgroup id="8" name="physics" visible="0" locked="1">
   <object id="327" x="128" y="2720" width="192" height="112.333"/>
   <object id="328" x="448" y="2720" width="224.333" height="111.667"/>
   <object id="329" x="320" y="2656" width="13" height="212.667"/>

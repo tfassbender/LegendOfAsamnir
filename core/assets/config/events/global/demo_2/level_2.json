@@ -73,4 +73,23 @@
 		executionType: CONDITIONAL_EVENT,
 		conditionalExecutionId: demo_2_level_2_gate_main_2_2_switch
 	}
+	
+	demo_2_level_2_gate_4th_wall_switch_activated_increase_count: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_gate_4th_wall_switch,
+		},
+		executionType: INCREASE_GLOBAL_VALUE,
+		executionParameters: {
+			globalValueKey: demo_2_level_2_gate_4th_wall_switches_tested,
+		}
+	},
+	demo_2_level_2_gate_4th_wall_switch_activated_open_lock: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_2_gate_4th_wall_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_gate_4th_wall_openLock_ifTestedEnouthSwitches
+	}
 }

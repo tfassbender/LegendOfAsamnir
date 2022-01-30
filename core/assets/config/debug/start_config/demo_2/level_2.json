@@ -8,6 +8,9 @@
 		5: initial,
 		6: initial,
 		7: initial,
+		8: initial,
+		9: start_9,
+		10: initial,
 	},
 	eventsLists: {
 		initial: {
@@ -40,6 +43,24 @@
 				{
 					eventType: GIVE_ITEM_TO_PLAYER,
 					stringValue: mana,
+				},
+			]
+		},
+		
+		start_9: {
+			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key
 				},
 			]
 		},

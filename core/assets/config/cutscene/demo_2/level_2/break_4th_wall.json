@@ -1,0 +1,100 @@
+{
+	id: demo_2_level_2_break_4th_wall,
+	controlledActions: {
+		initial_thorin_swaring: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "These damn switches don't have any effect!\n \nI hate trying this, but ...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_asking_the_narrator_for_help,
+			],
+		},
+		
+		thorin_asking_the_narrator_for_help: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Hey, strange narrator voice!\n \nDo something usefull one time and tell me how I get through these walls!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				break_4th_wall,
+			],
+		},
+		
+		break_4th_wall: {
+			executionDelayInSeconds: 2f,
+			
+			type: EVENT,
+			
+			event: {
+				eventType: OPEN_LOCK,
+				stringValue: demo_2_level_2_gate_4th_wall_4,
+			},
+			
+			executes: [
+				narrators_answer,
+			],
+		},
+		
+		narrators_answer: {
+			executionDelayInSeconds: 2f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "And so our glorious hero Thorin managed to get ahead by breaking the 4th wall.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_confused,
+			],
+		},
+		
+		thorin_confused: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_confused_2,
+			],
+		},
+		
+		thorin_confused_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I have absolutely no idea what this voice is talking about...\n \nBut the way is free, so ... whatever ...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

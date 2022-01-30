@@ -72,13 +72,14 @@ public enum EventType {
 	//*******************************
 	//*** Conditions
 	//*******************************
-	SET_GLOBAL_CONDITION_VALUE,
+	SET_GLOBAL_CONDITION_VALUE, //
+	INCREASE_GLOBAL_CONDITION_VALUE, //
 	//*******************************
 	//*** Configuration
 	//*******************************
-	CONFIG_GENERATED_EVENT,
+	CONFIG_GENERATED_EVENT, //
 	//*******************************
 	//*** Debug Config Events
 	//*******************************
-	COLLECT_RUNE,
+	COLLECT_RUNE, //
 }

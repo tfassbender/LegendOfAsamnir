@@ -134,4 +134,20 @@
             }
         }
 	},
+	
+	demo_2_level_2_gate_4th_wall_openLock_ifTestedEnouthSwitches: {
+		conditionId: demo_2_level_2_gate_4th_wall_testedEnouthSwitches
+		thenCase: {
+			type: EVENT,
+			eventConfig: {
+        		executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_level_2_break_4th_wall,
+				}
+    		}
+		}
+		elseCase: {
+			type: NO_EXECUTION, // the door cannot be locked again
+		}
+	},
 }
