@@ -1,0 +1,129 @@
+{
+	id: demo_2_level_2_adventurer_female_at_pressure_switches,
+	controlledActions: {
+		initial_condition: {
+			startsWithCutscene: true,
+			
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_level_2_adventurer_moved,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: adventurer_greeting_after_moved,
+				condition_not_met: adventurer_greeting_before_moved,
+			}
+		},
+		
+		adventurer_greeting_before_moved: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Hey can you help me? I need to get through this door, but it is activated by these switches. I can't keep them activated and get through the door at the same time.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I can't help you now.",
+					"Activate the switch. I'll go.",
+				],
+			},
+			choiceOptionExecutions: [
+				end,
+				adventurer_answer,
+			],
+		},
+		
+		adventurer_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Allright! If you solve the puzzle on the other side of this door we both can proceed our quests.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				adventurer_move,
+			],
+		},
+		
+		adventurer_move: {
+			type: MOVE,
+			controlledUnitId: demo_2_level_2_adventurer_at_pressure_switches,
+			controlledUnitTarget: {x: 4, y: 0},
+			
+			executes: [
+				adventurer_turn,
+			]
+		},
+		
+		adventurer_turn: {
+			type: MOVE,
+			controlledUnitId: demo_2_level_2_adventurer_at_pressure_switches,
+			controlledUnitTarget: {x: -0.1, y: 0}, // move back a little bit, to make the adventurer turn arround
+			
+			executes: [
+				set_moved,
+			]
+		},
+		
+		set_moved: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_2_adventurer_at_pressure_switches_moved, value: true}",
+			},
+		},
+		
+		adventurer_greeting_after_moved: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Go through the gate and activate the switch. I'll follow you, when the way is free.",
+				colorHeader: #ff00ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

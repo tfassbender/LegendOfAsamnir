@@ -1,4 +1,18 @@
 {
+	//*******************************************
+	//*** npc interaction
+	//*******************************************
+	
+	demo_2_level_2_adventurer_female_at_pressure_switches: {
+		event: {
+			eventType: NPC_INTERACTION,
+			stringValue: demo_2_level_2_adventurer_female_at_pressure_switches,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_2_adventurer_female_at_pressure_switches,
+		}
+	},
 	
 	//*******************************************
 	//*** change map

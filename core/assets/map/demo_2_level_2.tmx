@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="550">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="551">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -1067,6 +1067,12 @@
   <object id="549" name="player.startingPosition" x="1920" y="1824">
    <properties>
     <property name="startingPointId" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="550" name="npc.demo_2_level_2_adventurer_female_at_pressure_switches" x="366" y="1140.67">
+   <properties>
+    <property name="unitId" value="demo_2_level_2_adventurer_at_pressure_switches"/>
    </properties>
    <point/>
   </object>

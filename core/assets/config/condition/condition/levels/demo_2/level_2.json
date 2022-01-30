@@ -117,5 +117,13 @@
 			key: demo_2_level_2_gate_4th_wall_switches_tested,
 			expectedValue: 10,
 		}
+	},
+	
+	demo_2_level_2_adventurer_moved: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_2_adventurer_at_pressure_switches_moved,
+			expectedValue: true,
+		}
 	}
 }
