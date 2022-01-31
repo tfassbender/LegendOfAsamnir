@@ -1,0 +1,52 @@
+{
+	id: demo_2_level_2_rune_mannaz_found,
+	controlledActions: {
+		initial_narrator_explanation: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 3f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "After slaying all the enemies in the grave vault, thorin finaly found the rune Mannaz.\nThis rune gave him the ability to reflect magical attacks with his shield.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Why should I need to reflect magical attacks?\nI got an axe, to solve this kind of problems!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_2,
+			],
+		},
+		
+		thorin_answer_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Well, at least this dungeon had something usefull...\n \nWhere was this mead shrine again?",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

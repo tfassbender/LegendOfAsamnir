@@ -140,5 +140,13 @@
 		parameters: {
 			stateSwitchId: demo_2_level_2_switch_gate_exit,
 		}
-	}
+	},
+	
+	demo_2_level_2_mead_shrine_found: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_2_mead_shrine_found,
+			expectedValue: true,
+		}
+	},
 }

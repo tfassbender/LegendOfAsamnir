@@ -148,4 +148,28 @@
 		executionType: CONDITIONAL_EVENT,
 		conditionalExecutionId: demo_2_level_2_gate_boss_room_openLock_ifAllEnemiesDefeated
 	},
+	
+	//*******************************************
+	//*** other event objects
+	//*******************************************
+	
+	demo_2_level_2_mana_shrine_found: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_2_mana_shrine_found,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_2_start_cutscene_if_first_time_seing_mead_shrine,
+	},
+	
+	demo_2_level_2_rune_mannaz_found: {
+		event: {
+			eventType: RUNE_FOUND,
+			stringValue: MANNAZ,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_2_rune_mannaz_found,
+		}
+	},
 }

@@ -23,4 +23,8 @@
 		eventType: OUT_OF_AMMO,
 		stringValue: BOMB,
 	},
+	playerLowOnMana: {
+		eventType: OUT_OF_AMMO,
+		stringValue: MANA,
+	}
 }

@@ -1,0 +1,47 @@
+{
+	id: demo_2_level_2_mana_shrine_found,
+	controlledActions: {
+		initial_thorin_found_mead_shrine: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "This seams to be one of those shrines, that grants ... mead ...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_found_mead_shrine_2,
+			],
+		},
+		
+		thorin_found_mead_shrine_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I might just stay here...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value,
+			],
+		},
+		
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_2_mead_shrine_found, value: true}",
+			},
+		},
+	}
+}

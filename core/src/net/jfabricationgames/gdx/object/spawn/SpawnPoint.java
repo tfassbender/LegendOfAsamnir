@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.object.spawn;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
@@ -170,9 +172,11 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	private void addPropertiesFromSpawn(MapProperties properties) {
-		properties.put("x", mapProperties.get("x"));
-		properties.put("y", mapProperties.get("y"));
-		properties.put("spawn", mapProperties.get("spawn"));
+		Iterator<String> iter = mapProperties.getKeys();
+		while (iter.hasNext()) {
+			String key = iter.next();
+			properties.put(key, mapProperties.get(key));
+		}
 	}
 	
 	private void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {

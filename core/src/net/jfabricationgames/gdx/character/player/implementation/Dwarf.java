@@ -48,6 +48,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	private static final float MOVING_SPEED_CUTSCENE = 3.5f;
 	
 	private static final float TIME_TILL_GAME_OVER_MENU = 3f;
+	private static final float LOW_MANA_LEVEL = 15f;
 	
 	private static final String ATTACK_CONFIG_FILE_NAME = "config/dwarf/attacks.json";
 	
@@ -162,7 +163,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) //
 							&& propertiesDataHandler.hasEnoughEndurance(activeSpecialAction.enduranceCost) // 
 							&& attackHandler.allAttacksExecuted()) {
-						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						useMana(activeSpecialAction.manaCost);
 						propertiesDataHandler.reduceEndurance(activeSpecialAction.enduranceCost);
 						attackHandler.startAttack(activeSpecialAction.name().toLowerCase(),
 								movementHandler.getMovingDirection().getNormalizedDirectionVector());
@@ -172,7 +173,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					if (propertiesDataHandler.hasEnoughMana(activeSpecialAction.manaCost) && //
 							propertiesDataHandler.hasEnoughEndurance(activeSpecialAction.enduranceCost) // 
 							&& attackHandler.allAttacksExecuted()) {
-						propertiesDataHandler.reduceMana(activeSpecialAction.manaCost);
+						useMana(activeSpecialAction.manaCost);
 						propertiesDataHandler.reduceEndurance(activeSpecialAction.enduranceCost);
 						renderer.startDarknessFade();
 						
@@ -197,6 +198,14 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 		}
 		
 		return false;
+	}
+	
+	private void useMana(float mana) {
+		boolean manaAboveCriticalLevelBeforeUse = propertiesDataHandler.hasEnoughMana(LOW_MANA_LEVEL);
+		propertiesDataHandler.reduceMana(mana);
+		if (manaAboveCriticalLevelBeforeUse && !propertiesDataHandler.hasEnoughMana(LOW_MANA_LEVEL)) {
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.OUT_OF_AMMO).setStringValue("MANA"));
+		}
 	}
 	
 	private void fireOutOfAmmoEvent(ItemAmmoType ammoType) {
@@ -540,7 +549,7 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 					propertiesDataHandler.increaseMana(change);
 				}
 				else if (change < 0) {
-					propertiesDataHandler.reduceMana(-change);
+					useMana(-change);
 				}
 				break;
 			case BEFORE_PERSIST_STATE:

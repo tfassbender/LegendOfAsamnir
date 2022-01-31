@@ -188,4 +188,20 @@
             }
         }
 	},
+	
+	demo_2_level_2_start_cutscene_if_first_time_seing_mead_shrine: {
+		conditionId: demo_2_level_2_mead_shrine_found,
+		thenCase: {
+			type: NO_EXECUTION,
+		}
+		elseCase: {
+			type: EVENT,
+			eventConfig: {
+        		executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_level_2_mana_shrine_found,
+				}
+    		}
+		}
+	}
 }

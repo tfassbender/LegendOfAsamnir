@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="554">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="661">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -112,7 +112,7 @@
 0,0,0,0,2017,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2019,0,0,0,0,0,0,0,0,0,0,0,2049,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2051
 </data>
  </layer>
- <layer id="4" name="terrain" width="77" height="100" locked="1">
+ <layer id="4" name="terrain" width="77" height="100">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -157,9 +157,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1025,0,0,0,1025,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1025,0,0,0,1025,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1059,1057,1057,1057,1030,1057,1057,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1774,1775,1776,0,0,0,0,0,0,0,0,0,1025,0,0,0,1025,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1806,1807,1808,0,0,0,0,0,0,0,0,0,1059,1057,1057,1057,1030,1057,1057,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1838,1839,1840,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1027,1057,1057,1057,1031,1057,1057,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1025,0,0,0,1025,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1025,0,0,0,1025,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -179,9 +179,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1774,1775,1776,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1806,1807,1808,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1838,1839,1840,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -216,7 +216,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="5" name="terrain_2" width="77" height="100" locked="1">
+ <layer id="5" name="terrain_2" width="77" height="100">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -261,6 +261,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2958,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2957,263,2957,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -280,11 +282,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2061,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3052,2093,3052,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3084,263,3084,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1076,26 +1076,320 @@
    </properties>
    <point/>
   </object>
-  <object id="551" name="enemy.bat" x="2048" y="1568">
+  <object id="551" name="enemy.bat" x="1873.33" y="1446.67">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
    </properties>
    <point/>
   </object>
-  <object id="552" name="enemy.bat" x="1984" y="1664">
+  <object id="552" name="enemy.bat" x="1869.33" y="1670.67">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
    </properties>
    <point/>
   </object>
-  <object id="553" name="enemy.bat" x="2112" y="1664">
+  <object id="553" name="enemy.bat" x="2253.33" y="1466.67">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="554" name="object.spawnPoint.bat" x="576" y="3040">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="555" name="object.spawnPoint.bat" x="1216" y="2976">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="558" name="object.spawnPoint.mini_golem" x="2087" y="2547">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="561" name="object.spawnPoint.bat" x="1760" y="2548">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="562" name="object.spawnPoint.bat" x="2220" y="3021">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="563" name="object.spawnPoint.bat" x="2243" y="2915">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="564" name="object.spawnPoint.bat" x="1671" y="2605">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="565" name="object.spawnPoint.bat" x="1713" y="2769">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="566" name="object.spawnPoint.mini_golem" x="2111" y="2492">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="567" name="object.spawnPoint.mini_golem" x="2140" y="2591">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="568" name="object.spawnPoint.mini_golem" x="1968" y="2939">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="569" name="object.spawnPoint.mini_golem" x="2067" y="2920">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="570" name="object.spawnPoint.cobra" x="2336" y="2976">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="571" name="object.signboard" x="448" y="1856">
+   <properties>
+    <property name="colorHeader" value="#00ff00"/>
+    <property name="displayText" value="Two of the switches are broken. We need to repair this."/>
+    <property name="displayTextHeader" value="Gate Controlls"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="574" name="object.spawnPoint" x="655" y="1424">
+   <properties>
+    <property name="spawn" value="playerLowOnMana"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="581" name="object.eventObject" x="575.667" y="1350.67" width="161" height="151.667">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_2_mana_shrine_found"/>
+   </properties>
+  </object>
+  <object id="582" name="object.spawnPoint.bat" x="1164" y="1023">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="583" name="object.spawnPoint.bat" x="1272" y="1079">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="584" name="object.spawnPoint.bat" x="1307" y="963">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="585" name="object.spawnPoint.mini_golem" x="1409" y="933">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="586" name="object.spawnPoint.mini_golem" x="1396" y="975">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="589" name="object.spawnPoint.cobra" x="759" y="662">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="590" name="object.spawnPoint.cobra" x="828.5" y="680">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="591" name="object.spawnPoint.bat" x="1401.33" y="157.333">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="592" name="object.spawnPoint.bat" x="2328" y="290.667">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="594" name="object.spawnPoint.spider" x="1189.33" y="528">
+   <properties>
+    <property name="spawn" value="enemy__spider"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="596" name="object.spawnPoint.mini_golem" x="1646" y="1004">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="597" name="object.spawnPoint.mini_golem" x="1609" y="1024">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="598" name="object.spawnPoint.mini_golem" x="1653" y="1049">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="599" name="object.spawnPoint.spider" x="2336" y="640">
+   <properties>
+    <property name="spawn" value="enemy__spider"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="600" name="enemy.bat" x="2190.67" y="1632">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="601" name="enemy.bat" x="2144" y="1769.33">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="602" name="enemy.spider" x="2036" y="1552">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="603" name="enemy.spider" x="2248" y="1792">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="609" name="enemy.mini_golem" x="1814" y="1540">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="610" name="enemy.mini_golem" x="1973" y="1402">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="611" name="enemy.mini_golem" x="2138" y="1456">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="612" name="enemy.mini_golem" x="2273" y="1578">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="613" name="enemy.mini_golem" x="2002" y="1664">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="614" name="enemy.mini_golem" x="2037" y="1779">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="616" name="enemy.cobra" x="1921" y="1543">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="617" name="enemy.cobra" x="1817" y="1765">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="618" name="enemy.cobra" x="2259" y="1674">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="619" name="item.rune_mannaz" x="2000.5" y="2128">
+   <point/>
+  </object>
+  <object id="660" name="player.startingPosition" x="1920" y="2176">
+   <properties>
+    <property name="startingPointId" value="11"/>
    </properties>
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="8" name="physics" visible="0" locked="1">
+ <objectgroup id="8" name="physics">
   <object id="327" x="128" y="2720" width="192" height="112.333"/>
   <object id="328" x="448" y="2720" width="224.333" height="111.667"/>
   <object id="329" x="320" y="2656" width="13" height="212.667"/>
@@ -1198,6 +1492,46 @@
   <object id="496" x="1536" y="832" width="32" height="288"/>
   <object id="515" x="2016" y="416" width="288" height="272"/>
   <object id="538" x="1013.75" y="1360" width="116.75" height="12.5"/>
+  <object id="646" x="1968.18" y="2080.73">
+   <polygon points="0,0 -7.81818,10.5455 -11.0909,48.3636"/>
+  </object>
+  <object id="647" x="1956.91" y="2127.82">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="648" x="1968.73" y="2138.54">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="649" x="1979.27" y="2127.45">
+   <polygon points="0,0 -4,-38.7273 -11.2727,-46.9091"/>
+  </object>
+  <object id="650" x="2032.73" y="2080.37">
+   <polygon points="0,0 -7.81818,10.5455 -11.0909,48.3636"/>
+  </object>
+  <object id="651" x="2021.46" y="2127.46">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="652" x="2033.28" y="2138.18">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="653" x="2043.82" y="2127.09">
+   <polygon points="0,0 -4,-38.7273 -11.2727,-46.9091"/>
+  </object>
+  <object id="654" x="2000" y="2050.54">
+   <polygon points="0,0 -12.5455,2.36364 12.7273,2.18182"/>
+  </object>
+  <object id="655" x="1987.64" y="2053.27">
+   <polygon points="0,0 12.7273,9.27273 24.9091,-0.363636"/>
+  </object>
+  <object id="656" x="1996.55" y="2060">
+   <polygon points="0,0 -8.72727,4 -8.90909,40"/>
+  </object>
+  <object id="657" x="2004.36" y="2059.63">
+   <polygon points="0,0 7.45455,4.72727 8,40.9091"/>
+  </object>
+  <object id="658" x="1987.64" y="2100.36">
+   <polygon points="0,0 24.9091,0.181818 12.5455,-38.1818"/>
+  </object>
+  <object id="659" x="1990" y="2100.36" width="19.6364" height="3.63636"/>
  </objectgroup>
  <objectgroup id="9" name="unreachable_area_physics" locked="1">
   <object id="504" x="171.215" y="933.116" width="52" height="15"/>
@@ -1213,6 +1547,21 @@
   <object id="512" x="1002.67" y="1477.33" width="9" height="107.333"/>
   <object id="513" x="1012.67" y="1477.33" width="203.333" height="15.3333"/>
   <object id="514" x="1131" y="1493.33" width="10.6667" height="91.0417"/>
+  <object id="576" x="623.819" y="1417.09">
+   <polygon points="0,0 -8.36364,12.1818 8.54545,12.3636"/>
+  </object>
+  <object id="577" x="688.179" y="1417.09">
+   <polygon points="0,0 -8.54545,12 8.54545,12.1818"/>
+  </object>
+  <object id="578" x="656.909" y="1377.27">
+   <polygon points="0,0 -10,11.4545 -11.2727,22.5455"/>
+  </object>
+  <object id="579" x="656.909" y="1377.09">
+   <polygon points="0,0 -11.4545,22.7273 9.81818,22.7273"/>
+  </object>
+  <object id="580" x="656.909" y="1376.73">
+   <polygon points="0,0 7.45455,11.0909 9.81818,22.5455"/>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="ground_physics" locked="1">
   <object id="437" x="333.692" y="2655.89" width="100.616" height="207.558">
