@@ -23,11 +23,15 @@ public class FightAI extends AbstractAttackAI {
 		subAI.calculateMove(delta);
 		
 		super.calculateMove(delta);
-		if (targetInRange(attackDistance)) {
+		if (targetInRange(attackDistance) && canSeeTarget()) {
 			AIAttackingMove move = new AIAttackingMove(this);
 			move.targetPosition = targetingPlayer.getPosition();
 			setMove(MoveType.ATTACK, move);
 		}
+	}
+	
+	protected boolean canSeeTarget() {
+		return true;
 	}
 	
 	@Override

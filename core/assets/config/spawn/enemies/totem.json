@@ -1,0 +1,10 @@
+{
+	//*********************************
+	//*** no movement
+	//*********************************
+	enemy__totem: {
+		spawnType: enemy.totem,
+		spawnOnGameStart: true,
+		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+}

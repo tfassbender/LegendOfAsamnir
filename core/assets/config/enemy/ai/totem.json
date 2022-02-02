@@ -16,6 +16,23 @@
 			subAI: {
 				type: BASE_AI,
 			}
-		}
+		},
+		
+		totem_ray_cast: {
+			type: RAY_CAST_FIGHT_AI,
+			
+			stateNameAttack: attack,
+			
+			attackTimerConfig: {
+				type: FIXED,
+				fixedTime: 1f,
+			},
+			attackDistance: 6f,
+			minDistanceToTargetPlayer: 0f,
+			
+			subAI: {
+				type: BASE_AI,
+			}
+		},
 	}
 }

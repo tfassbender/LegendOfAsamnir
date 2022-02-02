@@ -23,6 +23,7 @@ import net.jfabricationgames.gdx.character.enemy.ai.ActionAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FastAttackFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.FightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MimicSurpriseAI;
+import net.jfabricationgames.gdx.character.enemy.ai.RayCastFightAI;
 import net.jfabricationgames.gdx.character.enemy.ai.TeamMovementAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
@@ -184,6 +185,20 @@ public enum ArtificialIntelligenceType {
 			AttackTimer attackTimer = createAttackTimer(aiConfig.attackTimerConfig);
 			
 			FightAI ai = new FightAI(subAI, attackState, attackTimer, aiConfig.attackDistance);
+			ai.setMinDistanceToTargetPlayer(aiConfig.minDistanceToTargetPlayer);
+			return ai;
+		}
+	},
+	RAY_CAST_FIGHT_AI {
+		
+		@Override
+		public ArtificialIntelligence buildAI(ArtificialIntelligenceConfig aiConfig, CharacterStateMachine stateMachine,
+				MapProperties mapProperties) {
+			ArtificialIntelligence subAI = aiConfig.subAI.buildAI(stateMachine, mapProperties);
+			CharacterState attackState = stateMachine.getState(aiConfig.stateNameAttack);
+			AttackTimer attackTimer = createAttackTimer(aiConfig.attackTimerConfig);
+			
+			RayCastFightAI ai = new RayCastFightAI(subAI, attackState, attackTimer, aiConfig.attackDistance);
 			ai.setMinDistanceToTargetPlayer(aiConfig.minDistanceToTargetPlayer);
 			return ai;
 		}
