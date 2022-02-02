@@ -172,4 +172,26 @@
 			cutsceneId: demo_2_level_2_rune_mannaz_found,
 		}
 	},
+	
+	demo_2_level_2_first_mimic_defeated: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_level_2_first_mimic_defeated,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_2_first_mimic_defeated,
+		}
+	},
+	
+	demo_2_level_2_first_chest_mimic_defeated: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_level_2_first_chest_mimic_defeated,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_2_first_chest_mimic_defeated,
+		}
+	},
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="663">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="722">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -1184,7 +1184,7 @@
   </object>
   <object id="571" name="object.signboard" x="448" y="1856">
    <properties>
-    <property name="colorHeader" value="#00ff00"/>
+    <property name="colorHeader" value="#33ff33"/>
     <property name="displayText" value="Two of the switches are broken. We need to repair this."/>
     <property name="displayTextHeader" value="Gate Controlls"/>
    </properties>
@@ -1319,44 +1319,10 @@
    </properties>
    <point/>
   </object>
-  <object id="609" name="enemy.mini_golem" x="1814" y="1540">
-   <properties>
-    <property name="aiType" value="mini_golem_team"/>
-    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
-   </properties>
-   <point/>
-  </object>
   <object id="610" name="enemy.mini_golem" x="1973" y="1402">
    <properties>
     <property name="aiType" value="mini_golem_team"/>
-    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="611" name="enemy.mini_golem" x="2138" y="1456">
-   <properties>
-    <property name="aiType" value="mini_golem_team"/>
-    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="612" name="enemy.mini_golem" x="2273" y="1578">
-   <properties>
-    <property name="aiType" value="mini_golem_team"/>
-    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="613" name="enemy.mini_golem" x="2002" y="1664">
-   <properties>
-    <property name="aiType" value="mini_golem_team"/>
-    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="614" name="enemy.mini_golem" x="2037" y="1779">
-   <properties>
-    <property name="aiType" value="mini_golem_team"/>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1392,6 +1358,318 @@
    <properties>
     <property name="aiType" value="totem_ray_cast"/>
     <property name="spawn" value="enemy__totem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="663" name="object.spawnPoint.barrel" x="238.333" y="2847.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="664" name="object.spawnPoint.barrel" x="206.667" y="2847.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="665" name="object.spawnPoint.barrel" x="1170" y="2784">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="666" name="object.spawnPoint.barrel" x="1393" y="2931">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="667" name="object.spawnPoint.barrel" x="1296" y="2143.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="668" name="object.spawnPoint.mimic_barrel" x="1326.67" y="2146.33">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_first_mimic_defeated"/>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="669" name="object.spawnPoint.barrel" x="1169" y="1887.33">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="670" name="object.spawnPoint.barrel" x="511.333" y="1854.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="671" name="object.spawnPoint.barrel" x="819.333" y="1679.33">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="673" name="object.spawnPoint.barrel" x="977.5" y="1376">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="674" name="object.spawnPoint.barrel" x="987" y="1404">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="675" name="object.spawnPoint.barrel" x="1327.5" y="1073.5">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="676" name="object.spawnPoint.barrel" x="108.333" y="978.667">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="677" name="object.spawnPoint.barrel" x="108" y="1012">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="678" name="object.spawnPoint.barrel" x="960" y="320">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="681" name="object.spawnPoint.mimic_chest" x="1184" y="160">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_first_chest_mimic_defeated"/>
+    <property name="spawn" value="enemy__mimic_chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="682" name="object.spawnPoint.barrel" x="1728" y="128">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="683" name="object.spawnPoint.barrel" x="2272.67" y="192.667">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="684" name="object.spawnPoint.barrel" x="2244" y="192.667">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="685" name="object.spawnPoint.barrel" x="2048" y="704">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="686" name="object.spawnPoint.barrel" x="2080.67" y="767.333">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="687" name="object.spawnPoint.barrel" x="1792" y="1088">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="688" name="object.spawnPoint.barrel" x="1792" y="896">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="689" name="object.spawnPoint.barrel" x="1766" y="1088">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="690" name="object.spawnPoint.barrel" x="1984" y="1472">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="691" name="object.spawnPoint.barrel" x="2144" y="1536">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="693" name="object.spawnPoint.barrel" x="1920" y="1728">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="694" name="object.spawnPoint.barrel" x="2080" y="1728">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="695" name="object.spawnPoint.barrel" x="1745.33" y="1632.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="696" name="object.spawnPoint.barrel" x="1746" y="1580.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="697" name="object.spawnPoint.barrel" x="1856" y="1314">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="698" name="object.spawnPoint.barrel" x="1832" y="1313.33">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="699" name="object.spawnPoint.barrel" x="2240.67" y="1312">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="700" name="object.spawnPoint.barrel" x="2177.33" y="1856">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="703" name="object.spawnPoint.mimic_barrel" x="819" y="1717.67">
+   <properties>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="704" name="object.spawnPoint.mimic_barrel" x="992" y="323">
+   <properties>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="705" name="object.spawnPoint.mimic_barrel" x="1024" y="323">
+   <properties>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="706" name="object.spawnPoint.chest" x="1760" y="1344">
+   <properties>
+    <property name="spawn" value="object__chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="707" name="object.spawnPoint.chest" x="2304" y="1344">
+   <properties>
+    <property name="spawn" value="object__chest"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="708" name="enemy.mini_golem" x="2137" y="1458.5">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="709" name="enemy.mini_golem" x="1824" y="1536">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="710" name="enemy.mini_golem" x="2003.5" y="1660.5">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="711" name="enemy.mini_golem" x="2264.5" y="1573">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="712" name="enemy.mini_golem" x="2039" y="1772">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="714" name="enemy.mimic_barrel" x="2080" y="1632">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="715" name="enemy.mimic_barrel" x="2203.67" y="1859">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="717" name="object.spawnPoint.shield" x="2031.33" y="1328.33">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="718" name="object.spawnPoint.shield" x="1998" y="1329.33">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="719" name="object.spawnPoint.health" x="1967.5" y="1328.5">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="720" name="object.spawnPoint.health" x="1936.25" y="1328.75">
+   <properties>
+    <property name="spawn" value="item__health"/>
    </properties>
    <point/>
   </object>

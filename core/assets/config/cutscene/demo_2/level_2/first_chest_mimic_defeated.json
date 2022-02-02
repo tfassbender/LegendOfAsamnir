@@ -1,0 +1,35 @@
+{
+	id: demo_2_level_2_first_chest_mimic_defeated,
+	controlledActions: {
+		initial: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Now these things look like chests too?!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_second_text,
+			],
+		},
+		
+		thorin_second_text: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Well...\n \nNothing my axe couldn't handle!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

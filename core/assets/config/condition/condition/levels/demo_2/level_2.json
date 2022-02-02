@@ -131,7 +131,7 @@
 		conditionType: GLOBAL_VALUE_SET,
 		parameters: {
 			key: demo_2_level_2_boss_room_enemies_defeated,
-			expectedValue: 3,
+			expectedValue: 18,
 		}
 	},
 	

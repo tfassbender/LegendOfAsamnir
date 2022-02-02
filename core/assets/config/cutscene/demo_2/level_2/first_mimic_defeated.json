@@ -1,0 +1,35 @@
+{
+	id: demo_2_level_2_first_mimic_defeated,
+	controlledActions: {
+		initial: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "What was that?!\n \nWas I just attacked by a barrel?",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_second_text,
+			],
+		},
+		
+		thorin_second_text: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "At least this seemed to be the only one so far...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

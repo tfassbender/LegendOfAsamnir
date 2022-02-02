@@ -18,6 +18,7 @@
 	config/spawn/enemies/mimic_chest.json,
 	config/spawn/enemies/mini_golem.json,
 	config/spawn/enemies/spider.json,
+	config/spawn/enemies/totem.json,
 	
 	//******************
 	//*** common
