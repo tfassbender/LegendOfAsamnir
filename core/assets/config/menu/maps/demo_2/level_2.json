@@ -2,8 +2,8 @@
 	name: Graveyard's Crypt ,
 	texture: {
 		atlas: packed/menu/menu.atlas,
-		texture: mini_map_demo_2_level_1
+		texture: mini_map_demo_2_level_2
 	},
-	textureWidth: 600,
-	textureHeight: 428,
+	textureWidth: 385,
+	textureHeight: 500,
 }
