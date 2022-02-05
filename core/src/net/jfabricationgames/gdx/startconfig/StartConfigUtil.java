@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.debug.util;
+package net.jfabricationgames.gdx.startconfig;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -15,19 +15,19 @@ import net.jfabricationgames.gdx.rune.RuneType;
 /**
  * Used to fire events, that are configured in a configuration file, to be able to start a map with the pre-configured settings (like runes, items, ...)
  */
-public class DebugStartConfigUtil {
+public class StartConfigUtil {
 	
 	private static StartConfigEventListener eventListener;
 	
-	public static void configureDebugStartConfig(String startConfigPath, int initialStartingPointId) {
+	public static void configureGameStartConfig(String startConfigPath, int initialStartingPointId) {
 		initializeEventListener();
 		
 		if (startConfigPath == null || startConfigPath.isEmpty()) {
-			Gdx.app.debug(DebugStartConfigUtil.class.getSimpleName(), "No start settings configured.");
+			Gdx.app.debug(StartConfigUtil.class.getSimpleName(), "No start settings configured.");
 			return;
 		}
 		
-		Gdx.app.debug(DebugStartConfigUtil.class.getSimpleName(),
+		Gdx.app.debug(StartConfigUtil.class.getSimpleName(),
 				"Executing events from start configuration file: " + startConfigPath + " with starting point id: " + initialStartingPointId);
 		StartConfig startConfig = loadStartConfigFromPath(startConfigPath);
 		executeStartConfigEvents(startConfig, initialStartingPointId);
@@ -55,7 +55,7 @@ public class DebugStartConfigUtil {
 	
 	private static void executeStartConfigEvents(StartConfig startConfig, String configName) {
 		if (configName == null) {
-			Gdx.app.debug(DebugStartConfigUtil.class.getSimpleName(), "The given config name is null. The start config events cannot be executed.");
+			Gdx.app.debug(StartConfigUtil.class.getSimpleName(), "The given config name is null. The start config events cannot be executed.");
 			return;
 		}
 		
@@ -73,12 +73,12 @@ public class DebugStartConfigUtil {
 	
 	private static void executeSubListConfigEvents(StartConfig startConfig, StartConfigEventList eventList) {
 		if (eventList.subConfigName == null) {
-			Gdx.app.debug(DebugStartConfigUtil.class.getSimpleName(), "No sub event list configured. Ending start configuration events.");
+			Gdx.app.debug(StartConfigUtil.class.getSimpleName(), "No sub event list configured. Ending start configuration events.");
 			return;
 		}
 		
 		String subConfigPath = eventList.subConfigPath;
-		Gdx.app.debug(DebugStartConfigUtil.class.getSimpleName(), "Executing sub event list from start configuration file: " + subConfigPath
+		Gdx.app.debug(StartConfigUtil.class.getSimpleName(), "Executing sub event list from start configuration file: " + subConfigPath
 				+ " (null means same file) with config name: " + eventList.subConfigName);
 		
 		StartConfig subConfig = startConfig;

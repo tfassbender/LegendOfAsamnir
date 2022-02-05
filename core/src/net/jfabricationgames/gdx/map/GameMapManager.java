@@ -46,19 +46,27 @@ public class GameMapManager {
 	public void showMap(String mapIdentifier, int playerStartingPointId) {
 		gameMap.beforeLoadMap(mapIdentifier);
 		
-		String mapAsset = GameMapManager.getInstance().getMapFilePath(mapIdentifier);
+		String mapAsset = getMapFilePath(mapIdentifier);
 		GameMapLoaderFactory.createGameMapLoader(gameMap, mapAsset).loadMap();
 		
 		gameMap.afterLoadMap(mapIdentifier, playerStartingPointId);
 	}
 	
 	public String getMapFilePath(String mapName) {
+		return getMapConfigById(mapName).map;
+	}
+	
+	private GameMapConfig getMapConfigById(String mapName) {
 		for (GameMapConfig config : mapFiles) {
 			if (mapName.equals(config.name)) {
-				return config.map;
+				return config;
 			}
 		}
 		throw new IllegalStateException("A map with the name '" + mapName + "' is not found in the config file.");
+	}
+	
+	public String getMapStartConfig(String mapIdentifier) {
+		return getMapConfigById(mapIdentifier).mapEnteringConfig;
 	}
 	
 	public String getInitialMapIdentifier() {
@@ -69,8 +77,8 @@ public class GameMapManager {
 		return getInitialMap().initialStartingPointId;
 	}
 	
-	public String getStartConfig() {
-		return getInitialMap().startConfig;
+	public String getDebugStartConfig() {
+		return getInitialMap().debugStartConfig;
 	}
 	
 	private GameMapConfig getInitialMap() {

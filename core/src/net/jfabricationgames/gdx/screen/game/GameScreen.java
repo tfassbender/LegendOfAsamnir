@@ -24,7 +24,6 @@ import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
-import net.jfabricationgames.gdx.debug.util.DebugStartConfigUtil;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
@@ -52,6 +51,7 @@ import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.LoadingScreen;
 import net.jfabricationgames.gdx.screen.menu.PauseMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.ShopMenuScreen;
+import net.jfabricationgames.gdx.startconfig.StartConfigUtil;
 import net.jfabricationgames.gdx.state.GameStateManager;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener, InGameMenuScreen.MenuGameScreen {
@@ -173,7 +173,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		GameMapManager gameMapManager = GameMapManager.getInstance();
 		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
 		gameMapManager.showMap(initialMapIdentifier, gameMapManager.getInitialStartingPointId());
-		DebugStartConfigUtil.configureDebugStartConfig(gameMapManager.getStartConfig(), gameMapManager.getInitialStartingPointId());
+		StartConfigUtil.configureGameStartConfig(gameMapManager.getDebugStartConfig(), gameMapManager.getInitialStartingPointId());
 	}
 	
 	private void changeMap(String mapIdentifier, int playerStartingPointId) {
@@ -185,6 +185,12 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			
 			// fire a MAP_ENTERED event for the spawn points to know that they need to add their objects to the world
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.MAP_ENTERED).setStringValue(mapIdentifier));
+			
+			// fire configured events, that are needed at a specific entry point
+			String mapStartConfig = GameMapManager.getInstance().getMapStartConfig(mapIdentifier);
+			if (mapStartConfig != null) {
+				StartConfigUtil.configureGameStartConfig(mapStartConfig, playerStartingPointId);
+			}
 		});
 	}
 	

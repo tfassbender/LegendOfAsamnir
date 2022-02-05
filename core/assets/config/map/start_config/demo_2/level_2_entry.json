@@ -1,0 +1,17 @@
+{
+	startingPointMapping: {
+		2: open_gate,
+	},
+	eventsLists: {
+		// open the gate when the player gets out of the dungeon, because he can't reach the switch (and it was already activated)
+		open_gate: {
+			events: [
+				{
+					eventType: SET_STATE_SWITCH_STATE,
+					stringValue: demo_2_level_2_entry_switch_entry,
+					booleanValue: true,
+				}
+			]
+		},
+	}
+}
