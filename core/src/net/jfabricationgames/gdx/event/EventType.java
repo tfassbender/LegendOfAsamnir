@@ -42,6 +42,7 @@ public enum EventType {
 	INTERACTED_WITH_LOCKED_OBJECT, //
 	OPEN_LOCK, //
 	CLOSE_LOCK, //
+	SET_STATE_SWITCH_STATE, //
 	//*******************************
 	//*** Items
 	//*******************************

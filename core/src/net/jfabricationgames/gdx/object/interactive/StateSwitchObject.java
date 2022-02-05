@@ -10,6 +10,7 @@ import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
 import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventListener;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
@@ -17,7 +18,7 @@ import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.rune.RuneType;
 
-public class StateSwitchObject extends InteractiveObject {
+public class StateSwitchObject extends InteractiveObject implements EventListener {
 	
 	private static final String MAP_PROPERTIES_KEY_STATE_SWITCH_ID = "stateSwitchId";
 	private static final String MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER = "eventParameter";
@@ -45,6 +46,7 @@ public class StateSwitchObject extends InteractiveObject {
 	
 	public StateSwitchObject(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties properties, GameObjectMap gameMap) {
 		super(typeConfig, sprite, properties, gameMap);
+		EventHandler.getInstance().registerEventListener(this);
 	}
 	
 	@Override
@@ -74,7 +76,7 @@ public class StateSwitchObject extends InteractiveObject {
 			MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 		}
 		else {
-			showRuneNeededText();
+			fireRuneNeededEvent();
 		}
 	}
 	
@@ -98,8 +100,16 @@ public class StateSwitchObject extends InteractiveObject {
 		}
 	}
 	
-	private void showRuneNeededText() {
+	private void fireRuneNeededEvent() {
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_NEEDED).setStringValue(RUNE_NEEDED_EVENT_KEY));
+	}
+	
+	@Override
+	public void handleEvent(EventConfig event) {
+		if (event.eventType == EventType.SET_STATE_SWITCH_STATE && event.stringValue.equals(stateSwitchId)) {
+			active = !event.booleanValue; // set active to the opposite value, because the executeInteraction will switch it to the opposite value again
+			executeInteraction();
+		}
 	}
 	
 	@Override
@@ -128,5 +138,10 @@ public class StateSwitchObject extends InteractiveObject {
 		else {
 			super.endContact(contact);
 		}
+	}
+	@Override
+	public void removeFromMap() {
+		super.removeFromMap();
+		EventHandler.getInstance().removeEventListener(this);
 	}
 }
