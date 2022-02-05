@@ -1,0 +1,20 @@
+{
+	startingPointMapping: {
+		0: reset_npcs_moved,
+	},
+	eventsLists: {
+		reset_npcs_moved: {
+			// reset the global value that tells the npcs that they are already moved
+			events: [
+				{
+					eventType: SET_GLOBAL_CONDITION_VALUE,
+					stringValue: "{key: demo_2_castle_tavern_adventurer_blocking_the_entry_moved, value: false}",
+				},
+				{
+					eventType: SET_GLOBAL_CONDITION_VALUE,
+					stringValue: "{key: demo_2_castle_tavern_barkeeper_moved, value: false}",
+				}
+			]
+		},
+	}
+}
