@@ -162,6 +162,17 @@
 		conditionalExecutionId: demo_2_level_2_start_cutscene_if_first_time_seing_mead_shrine,
 	},
 	
+	demo_2_level_2_boomerang_found: {
+		event: {
+			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
+			stringValue: boomerang,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_2_boomerang_found,
+		}
+	}
+	
 	demo_2_level_2_rune_mannaz_found: {
 		event: {
 			eventType: RUNE_FOUND,

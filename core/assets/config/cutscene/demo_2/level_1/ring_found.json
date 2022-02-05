@@ -1,0 +1,51 @@
+{
+	id: demo_2_level_1_ring_found,
+	controlledActions: {
+		initial_thorin: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "This must be the ring, that the castle guard lost here...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				one_ring,
+			]
+		},
+		
+		one_ring: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Hey, there's something written on it.\n \nOne ring to rule them all, ...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				whatever,
+			]
+		},
+		
+		whatever: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Nah, whatever...\n \nNow the guard will let me enter the castle and the tavern!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		}
+	}
+}

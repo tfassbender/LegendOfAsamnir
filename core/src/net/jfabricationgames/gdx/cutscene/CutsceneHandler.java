@@ -118,7 +118,8 @@ public class CutsceneHandler implements EventListener {
 	private void playCutscene(CutsceneConfig cutscene) {
 		Gdx.app.debug(getClass().getSimpleName(), "playing cutscene: " + cutscene.id);
 		if (isCutsceneActive()) {
-			throw new IllegalStateException("A cutscene is already in action. Can't start a second cutscene.");
+			Gdx.app.error(getClass().getSimpleName(), "A cutscene is already in action. Can't start a second cutscene.");
+			return;
 		}
 		
 		activeCutsceneId = cutscene.id;

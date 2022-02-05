@@ -1,0 +1,19 @@
+{
+	id: demo_2_level_1_first_bomb_found,
+	controlledActions: {
+		initial_thorin: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "This looks like it could explode and blow away these rocks that block my way.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

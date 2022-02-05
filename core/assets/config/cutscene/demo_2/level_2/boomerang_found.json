@@ -1,0 +1,19 @@
+{
+	id: demo_2_level_2_boomerang_found,
+	controlledActions: {
+		initial_thorin: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "What's this?\n \nLooks like some kind of ... stick...\nMaybe I can throw it in someones face...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

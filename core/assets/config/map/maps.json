@@ -92,7 +92,7 @@
 	{
 		name: demo_2_level_1,
 		map: "map/demo_2_level_1.tmx",
-		initialStartingPointId: 0,
+		initialStartingPointId: 1,
 		startConfig: config/debug/start_config/demo_2/level_1.json,
 		//initial: true
 	},
@@ -106,7 +106,7 @@
 	{
 		name: demo_2_level_2,
 		map: "map/demo_2_level_2.tmx",
-		initialStartingPointId: 1,
+		initialStartingPointId: 3,
 		startConfig: config/debug/start_config/demo_2/level_2.json,
 		initial: true
 	},

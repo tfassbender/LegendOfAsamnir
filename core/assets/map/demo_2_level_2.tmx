@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="731">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="77" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="748">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -1711,6 +1711,108 @@
    <properties>
     <property name="eventParameter" value="respawnCheckpoint"/>
    </properties>
+  </object>
+  <object id="731" name="object.spawnPoint.pot" x="1398.33" y="2960.33">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="732" name="object.spawnPoint.pot" x="1398" y="2977">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="733" name="object.spawnPoint.pot" x="1824" y="2463">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="734" name="object.spawnPoint.pot" x="1849.33" y="2463.33">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="735" name="object.spawnPoint.pot" x="1824" y="2080">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="736" name="object.spawnPoint.pot" x="1856" y="2080">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="737" name="object.spawnPoint.pot" x="1840" y="2080">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="738" name="object.spawnPoint.pot" x="64" y="1920">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="739" name="object.spawnPoint.pot" x="80" y="1920">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="740" name="object.spawnPoint.pot" x="992" y="1504">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="741" name="object.spawnPoint.pot" x="992" y="1520">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="742" name="object.spawnPoint.pot" x="1536" y="448">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="743" name="object.spawnPoint.pot" x="1600" y="448">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="744" name="object.spawnPoint.pot" x="1583" y="448">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="745" name="object.spawnPoint.pot" x="1344" y="448">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="746" name="object.spawnPoint.pot" x="1728" y="960">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="747" name="object.spawnPoint.pot" x="1711" y="960">
+   <properties>
+    <property name="spawn" value="object__pot"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="physics" locked="1">

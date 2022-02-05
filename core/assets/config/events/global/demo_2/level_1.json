@@ -85,6 +85,17 @@
 	//*** runes / special items
 	//*******************************************
 	
+	demo_2_level_1_special_item_bomb_found: {
+		event: {
+			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
+			stringValue: special_action_bomb,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_1_first_bomb_found,
+		}
+	},
+	
 	demo_2_level_1_rune_ansuz_found: {
 		event: {
 			eventType: RUNE_FOUND,
@@ -101,10 +112,9 @@
 			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
 			stringValue: ring,
 		},
-		executionType: SHOW_ON_SCREEN_TEXT,
+		executionType: START_CUTSCENE,
 		executionParameters: {
-			displayTextHeader: Thorin
-			displayText: "This must be the ring, that the castle guard lost here...",
+			cutsceneId: demo_2_level_1_ring_found,
 		}
 	},
 }
