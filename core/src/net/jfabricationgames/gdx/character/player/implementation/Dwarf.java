@@ -101,7 +101,8 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	
 	protected boolean changeAction(CharacterAction action) {
 		if (isAlive() || action == CharacterAction.DIE) {
-			if (!propertiesDataHandler.hasEnoughEndurance(action)) {
+			if (!propertiesDataHandler.hasEnoughEndurance(action) && action != CharacterAction.ATTACK_SPIN) {
+				// spin attacks can be executed without endurance, because holding them charged costs endurance
 				return false;
 			}
 			if ((action == CharacterAction.BLOCK || action == CharacterAction.SHIELD_HIT) && !propertiesDataHandler.hasBlock()) {

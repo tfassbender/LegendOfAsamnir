@@ -22,6 +22,7 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	private static final float SPRINT_INPUT_ACTIONS_MAX_DELTA = 0.5f;
 	
+	private static final float SPIN_ATTACK_CHARGED_ENDURANCE_COSTS_PER_SECOND = 20f; // resulting costs are reduced by regeneration (15f)
 	private static final String SOUND_SPIN_ATTACK_CHARGED = "spin_attack_charged";
 	
 	private static final String INPUT_MOVE_UP = "up";
@@ -61,7 +62,7 @@ class CharacterInputProcessor implements InputActionListener {
 	
 	private float idleTime;
 	private float timeTillIdleAnimation;
-	private float attackHeld;
+	private float attackHeldTime;
 	private float timeTillSpinAttack;
 	
 	private MovingDirection jumpDirection;
@@ -95,6 +96,17 @@ class CharacterInputProcessor implements InputActionListener {
 		
 		boolean move = moveUp || moveDown || moveLeft || moveRight;
 		boolean characterActionSet = false;
+		
+		if (spinAttackCharged) {
+			player.propertiesDataHandler.reduceEndurance(SPIN_ATTACK_CHARGED_ENDURANCE_COSTS_PER_SECOND * delta);
+			if (player.propertiesDataHandler.getEndurancePercentual() <= 0f) {
+				// release the spin attack if the player runs out of endurance
+				spinAttack = true;
+				spinAttackCharged = false;
+				attackHeldTime = 0f;
+				attackReleased = true;
+			}
+		}
 		
 		if (player.isAlive()) {
 			if (!characterActionSet && spinAttack) {
@@ -189,8 +201,8 @@ class CharacterInputProcessor implements InputActionListener {
 				attackReleased = false;
 			}
 			
-			attackHeld += delta;
-			if (attackHeld >= timeTillSpinAttack && !spinAttackCharged) {
+			attackHeldTime += delta;
+			if (attackHeldTime >= timeTillSpinAttack && !spinAttackCharged) {
 				spinAttackCharged = true;
 				player.soundHandler.playSound(SOUND_SPIN_ATTACK_CHARGED);
 			}
@@ -200,7 +212,7 @@ class CharacterInputProcessor implements InputActionListener {
 				spinAttack = true;
 				spinAttackCharged = false;
 			}
-			attackHeld = 0;
+			attackHeldTime = 0f;
 			attackReleased = true;
 		}
 		if (inputContext.isStateActive(INPUT_BLOCK)) {
