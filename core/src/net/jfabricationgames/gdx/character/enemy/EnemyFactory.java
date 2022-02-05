@@ -102,8 +102,9 @@ public class EnemyFactory {
 	public static class EnemyFactoryInstance implements EnemySpawnFactory {
 		
 		@Override
-		public void createAndAddEnemy(String type, float x, float y, MapProperties mapProperties) {
+		public void createAndAddEnemy(String type, float x, float y, MapProperties mapProperties, Runnable onRemoveFromMap) {
 			Enemy enemy = createEnemy(type, x, y, mapProperties);
+			enemy.setOnRemoveFromMap(onRemoveFromMap);
 			gameMap.addEnemy(enemy);
 		}
 	}

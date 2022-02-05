@@ -4,5 +4,5 @@ import com.badlogic.gdx.maps.MapProperties;
 
 public interface EnemySpawnFactory {
 	
-	public void createAndAddEnemy(String type, float x, float y, MapProperties mapProperties);
+	public void createAndAddEnemy(String type, float x, float y, MapProperties mapProperties, Runnable onRemoveFromMap);
 }

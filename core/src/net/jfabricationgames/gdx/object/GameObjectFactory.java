@@ -60,8 +60,9 @@ public class GameObjectFactory {
 		GameObjectFactory.playerObjectClass = playerObjectClass;
 	}
 	
-	public static void createAndAddObject(String type, float x, float y, MapProperties mapProperties) {
+	public static void createAndAddObject(String type, float x, float y, MapProperties mapProperties, Runnable onRemoveFromMap) {
 		GameObject object = createObject(type, x, y, mapProperties);
+		object.setOnRemoveFromMap(onRemoveFromMap);
 		gameMap.addObject(object);
 	}
 	

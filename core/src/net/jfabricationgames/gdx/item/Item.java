@@ -30,6 +30,8 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	
 	protected static final SoundSet soundSet = SoundManager.getInstance().loadSoundSet("item");
 	
+	protected static ItemTypeConfig defaultTypeConfig;
+	
 	protected AnimationDirector<TextureRegion> animation;
 	protected Sprite sprite;
 	protected MapProperties properties;
@@ -50,7 +52,7 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	@MapObjectState
 	private String mapProperties;
 	
-	protected static ItemTypeConfig defaultTypeConfig;
+	private Runnable onRemoveFromMap;
 	
 	public Item(String itemName, ItemTypeConfig typeConfig, Sprite sprite, AnimationDirector<TextureRegion> animation, MapProperties properties) {
 		this.itemName = itemName;
@@ -166,6 +168,14 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	public void removeFromMap() {
 		itemMap.removeItem(this, body);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
+		
+		if (onRemoveFromMap != null) {
+			onRemoveFromMap.run();
+		}
+	}
+	
+	public void setOnRemoveFromMap(Runnable onRemoveFromMap) {
+		this.onRemoveFromMap = onRemoveFromMap;
 	}
 	
 	private void playPickUpSound() {

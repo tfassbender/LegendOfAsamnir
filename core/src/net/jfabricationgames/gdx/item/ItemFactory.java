@@ -176,8 +176,10 @@ public class ItemFactory {
 	public static class ItemFactoryInstance implements ItemSpawnFactory {
 		
 		@Override
-		public void createAndAddItem(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
+		public void createAndAddItem(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects,
+				Runnable onRemoveFromMap) {
 			Item item = createItem(type, x, y, mapProperties);
+			item.setOnRemoveFromMap(onRemoveFromMap);
 			if (renderAboveGameObjects) {
 				itemMap.addItemAboveGameObjects(item);
 			}

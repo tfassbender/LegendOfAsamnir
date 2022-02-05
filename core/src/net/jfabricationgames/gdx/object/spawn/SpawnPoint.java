@@ -70,6 +70,8 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	private EnemySpawnFactory enemySpawnFactory;
 	private ItemSpawnFactory itemSpawnFactory;
 	
+	private boolean spawnedObjectPresentInMap;
+	
 	public SpawnPoint(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties, GameObjectMap gameMap) {
 		super(typeConfig, sprite, mapProperties, gameMap);
 		loadSpawnConfigFromMapProperties();
@@ -122,7 +124,8 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	
 	@Override
 	public void handleEvent(EventConfig event) {
-		if (isEventHandled(event)) {
+		if (!spawnedObjectPresentInMap && isEventHandled(event)) {
+			Gdx.app.debug(getClass().getSimpleName(), "Received event, that is handled by this spawn point: " + event);
 			spawn();
 		}
 	}
@@ -153,6 +156,9 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 			mapProperties = MapUtil.createMapPropertiesFromString(spawnConfig.spawnTypeMapProperties);
 		}
 		
+		Gdx.app.debug(getClass().getSimpleName(), "Spawning object of type '" + spawnConfig.spawnType + "' with map properties: "
+				+ MapUtil.mapPropertiesToString(mapProperties, false));
+		
 		switch (parts[0]) {
 			case Constants.OBJECT_NAME_ITEM:
 				createAndAddItemAfterWorldStep(parts[1], body.getPosition().x * Constants.SCREEN_TO_WORLD,
@@ -169,6 +175,8 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 			default:
 				throw new IllegalStateException("Unknown spawn type: " + spawnConfig.spawnType);
 		}
+		
+		spawnedObjectPresentInMap = true;
 	}
 	
 	private void addPropertiesFromSpawn(MapProperties properties) {
@@ -181,20 +189,24 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	
 	private void createAndAddItemAfterWorldStep(String type, float x, float y, MapProperties mapProperties, boolean renderAboveGameObjects) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			itemSpawnFactory.createAndAddItem(type, x, y, mapProperties, renderAboveGameObjects);
+			itemSpawnFactory.createAndAddItem(type, x, y, mapProperties, renderAboveGameObjects, this::spawnObjectRemovedFromMap);
 		});
 	}
 	
 	private void createAndAddEnemyAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			enemySpawnFactory.createAndAddEnemy(type, x, y, mapProperties);
+			enemySpawnFactory.createAndAddEnemy(type, x, y, mapProperties, this::spawnObjectRemovedFromMap);
 		});
 	}
 	
 	private void createAndAddObjectAfterWorldStep(String type, float x, float y, MapProperties mapProperties) {
 		PhysicsWorld.getInstance().runAfterWorldStep(() -> {
-			GameObjectFactory.createAndAddObject(type, x, y, mapProperties);
+			GameObjectFactory.createAndAddObject(type, x, y, mapProperties, this::spawnObjectRemovedFromMap);
 		});
+	}
+	
+	private void spawnObjectRemovedFromMap() {
+		spawnedObjectPresentInMap = false;
 	}
 	
 	@Override

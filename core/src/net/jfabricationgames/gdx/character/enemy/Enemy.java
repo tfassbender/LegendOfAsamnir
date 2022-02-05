@@ -59,6 +59,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 	protected boolean defeated;
 	
 	private EnemyCharacterMap gameMap;
+	private Runnable onRemoveFromMap;
 	
 	public Enemy(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(properties);
@@ -308,6 +309,14 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		gameMap.removeEnemy(this, body);
 		PhysicsWorld.getInstance().removeContactListener(this);
 		body = null;// set the body to null to avoid strange errors in native Box2D methods
+		
+		if (onRemoveFromMap != null) {
+			onRemoveFromMap.run();
+		}
+	}
+	
+	public void setOnRemoveFromMap(Runnable onRemoveFromMap) {
+		this.onRemoveFromMap = onRemoveFromMap;
 	}
 	
 	@Override

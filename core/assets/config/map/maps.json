@@ -35,7 +35,7 @@
 	{
 		name: map_change_test_1,
 		map: "map/map_change_test_1.tmx",
-		//initial: true
+		initial: true
 	},
 	{
 		name: map_change_test_2,
@@ -88,7 +88,7 @@
 		mapEnteringConfig: config/map/start_config/demo_2/castle_tavern.json,
 		initialStartingPointId: 1,
 		debugStartConfig: config/debug/start_config/demo_2/castle_tavern.json,
-		initial: true
+		//initial: true
 	},
 	{
 		name: demo_2_level_1,
