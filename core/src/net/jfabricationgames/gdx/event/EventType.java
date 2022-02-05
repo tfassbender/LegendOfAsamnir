@@ -39,6 +39,7 @@ public enum EventType {
 	EVENT_OBJECT_TOUCHED, //
 	UPDATE_MAP_OBJECT_STATES, //
 	STATE_SWITCH_ACTION, //
+	INTERACTED_WITH_LOCKED_OBJECT, //
 	OPEN_LOCK, //
 	CLOSE_LOCK, //
 	//*******************************

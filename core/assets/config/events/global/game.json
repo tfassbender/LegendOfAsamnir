@@ -54,4 +54,40 @@
 			displayText: "This one doesn't look like the other keys. It seems to be special.",
 		}
 	},
+	
+	interact_with_locked_object__simple_key: {
+		event: {
+			eventType: INTERACTED_WITH_LOCKED_OBJECT,
+			stringValue: unlocked_by_simple_key,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Thorin",
+			displayText: "I'll need a key to unlock this.",
+		}
+	},
+	
+	interact_with_locked_object__special_key: {
+		event: {
+			eventType: INTERACTED_WITH_LOCKED_OBJECT,
+			stringValue: unlocked_by_special_key,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Thorin",
+			displayText: "This one looks different. I'll need a special key to unlock this.",
+		}
+	},
+	
+	interact_with_locked_object__event: {
+		event: {
+			eventType: INTERACTED_WITH_LOCKED_OBJECT,
+			stringValue: unlocked_by_event,
+		},
+		executionType: SHOW_ON_SCREEN_TEXT,
+		executionParameters: {
+			displayTextHeader: "Thorin",
+			displayText: "This does not seem to be opened with a key. There must be another way.",
+		}
+	},
 }

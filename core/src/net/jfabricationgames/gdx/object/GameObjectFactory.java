@@ -31,7 +31,6 @@ public class GameObjectFactory {
 	private static EnemySpawnFactory enemySpawnFactory;
 	private static ItemSpawnFactory itemSpawnFactory;
 	private static GameObjectItemDropUtil itemDropUtil;
-	private static GameObjectTextBox textBox;
 	private static Class<?> playerObjectClass;
 	
 	static {
@@ -55,10 +54,6 @@ public class GameObjectFactory {
 	
 	public static void setItemDropUtil(GameObjectItemDropUtil itemDropUtil) {
 		GameObjectFactory.itemDropUtil = itemDropUtil;
-	}
-	
-	public static void setGameObjectTextBox(GameObjectTextBox textBox) {
-		GameObjectFactory.textBox = textBox;
 	}
 	
 	public static void setPlayerObjectClass(Class<?> playerObjectClass) {
@@ -112,7 +107,6 @@ public class GameObjectFactory {
 		
 		object.setItemDropUtil(itemDropUtil);
 		object.processMapProperties();
-		object.setTextBox(textBox);
 		object.setPlayerObjectClass(playerObjectClass);
 		
 		object.createPhysicsBody(x * Constants.WORLD_TO_SCREEN, y * Constants.WORLD_TO_SCREEN);

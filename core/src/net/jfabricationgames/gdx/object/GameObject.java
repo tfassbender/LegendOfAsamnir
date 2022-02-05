@@ -45,7 +45,6 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 	protected Body body;
 	protected GameObjectMap gameMap;
 	protected GameObjectItemDropUtil itemDropUtil;
-	protected GameObjectTextBox textBox;
 	protected Class<?> playerObjectClass;
 	
 	protected TextureAtlas textureAtlas;
@@ -91,10 +90,6 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 	
 	public void setItemDropUtil(GameObjectItemDropUtil itemDropUtil) {
 		this.itemDropUtil = itemDropUtil;
-	}
-	
-	public void setTextBox(GameObjectTextBox textBox) {
-		this.textBox = textBox;
 	}
 	
 	public void setPlayerObjectClass(Class<?> playerObjectClass) {

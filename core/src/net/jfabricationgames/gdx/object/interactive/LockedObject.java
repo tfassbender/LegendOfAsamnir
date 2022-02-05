@@ -24,10 +24,9 @@ public class LockedObject extends InteractiveObject implements EventListener {
 	private static final String MAP_PROPERTY_KEY_LOCK_ID = "lockId";
 	private static final String MAP_PROPERTY_KEY_UNLOCK_CONDITION = "unlockCondition";
 	
-	private static final String LOCK_MESSAGE_HEADER = "Locked";
-	private static final String LOCK_MESSAGE_TEXT_SIMPLE_KEY = "I'll need a key to unlock this.";
-	private static final String LOCK_MESSAGE_TEXT_SPECIAL_KEY = "This one looks different. I'll need a special key to unlock this.";
-	private static final String LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION = "This does not seem to be opened with a key. There must be another way.";
+	private static final String LOCK_EVENT_TEXT_SIMPLE_KEY = "unlocked_by_simple_key";
+	private static final String LOCK_EVENT_TEXT_SPECIAL_KEY = "unlocked_by_special_key";
+	private static final String LOCK_EVENT_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION = "unlocked_by_event";
 	
 	private ObjectMap<String, String> keyProperties;
 	
@@ -52,7 +51,7 @@ public class LockedObject extends InteractiveObject implements EventListener {
 			return true;
 		}
 		else {
-			showLockMessage();
+			fireLockEvent();
 		}
 		
 		return false;
@@ -94,23 +93,24 @@ public class LockedObject extends InteractiveObject implements EventListener {
 		return ConditionHandler.getInstance().isConditionMet(conditionId);
 	}
 	
-	private void showLockMessage() {
-		String messageText;
-		
+	/**
+	 * Fire an event, that can be used to show a configurable on screen text.
+	 */
+	private void fireLockEvent() {
+		EventConfig eventConfig = new EventConfig().setEventType(EventType.INTERACTED_WITH_LOCKED_OBJECT);
 		if (isUnlockedByEvent() || isUnlockedByCondition()) {
-			messageText = LOCK_MESSAGE_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION;
+			eventConfig.setStringValue(LOCK_EVENT_TEXT_UNLOCKED_BY_EVENT_OR_CONDITION);
 		}
 		else {
 			if (KeyItemProperties.isSpecialKey(keyProperties)) {
-				messageText = LOCK_MESSAGE_TEXT_SPECIAL_KEY;
+				eventConfig.setStringValue(LOCK_EVENT_TEXT_SPECIAL_KEY);
 			}
 			else {
-				messageText = LOCK_MESSAGE_TEXT_SIMPLE_KEY;
+				eventConfig.setStringValue(LOCK_EVENT_TEXT_SIMPLE_KEY);
 			}
 		}
 		
-		textBox.setHeaderText(LOCK_MESSAGE_HEADER);
-		textBox.setText(messageText);
+		EventHandler.getInstance().fireEvent(eventConfig);
 	}
 	
 	@Override
