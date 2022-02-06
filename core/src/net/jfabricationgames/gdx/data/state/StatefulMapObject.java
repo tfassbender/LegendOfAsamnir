@@ -6,7 +6,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 public interface StatefulMapObject {
 	
 	public static final String MAP_PROPERTIES_KEY_ID = "id";
-
+	public static final String MAP_PROPERTIES_KEY_STATEFULL_OBJECT_ID = "__statefull_object_id";
+	
 	public static String getMapObjectId(MapProperties mapProperties) {
 		Integer id = mapProperties.get(StatefulMapObject.MAP_PROPERTIES_KEY_ID, Integer.class);
 		if (id == null) {

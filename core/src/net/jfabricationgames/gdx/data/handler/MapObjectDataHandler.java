@@ -45,6 +45,7 @@ public class MapObjectDataHandler {
 	
 	public void updateData(GameDataContainer gameDataContainer) {
 		properties = gameDataContainer.mapObjectDataContainer;
+		objectCounter.set(properties.uniqueObjectCount);
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_OBJECT_STATES));
 	}
 	
@@ -154,7 +155,9 @@ public class MapObjectDataHandler {
 	}
 	
 	public synchronized int getUniqueObjectCount() {
-		return objectCounter.addAndGet(1);
+		int count = objectCounter.addAndGet(1);
+		properties.uniqueObjectCount = count + 1;
+		return count;
 	}
 	
 	public void setMapIdentifier(String mapIdentifier) {

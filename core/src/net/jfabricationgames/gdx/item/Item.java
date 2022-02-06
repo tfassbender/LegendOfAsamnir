@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.physics.PhysicsBodyCreator.PhysicsBodyPropertie
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
 import net.jfabricationgames.gdx.sound.SoundManager;
 import net.jfabricationgames.gdx.sound.SoundSet;
+import net.jfabricationgames.gdx.util.MapUtil;
 import net.jfabricationgames.gdx.util.SerializationUtil;
 
 public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem {
@@ -108,11 +109,18 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 				return getSpecialItemValue();
 			}
 			else if (itemName.equals("key")) {
-				return "key_" + MapObjectDataHandler.getInstance().getUniqueObjectCount();
+				return "key_" + getStatefullObjectId();
 			}
 		}
 		
 		return StatefulMapObject.getMapObjectId(properties);
+	}
+	
+	private Object getStatefullObjectId() {
+		if (!properties.containsKey(StatefulMapObject.MAP_PROPERTIES_KEY_STATEFULL_OBJECT_ID)) {
+			properties.put(StatefulMapObject.MAP_PROPERTIES_KEY_STATEFULL_OBJECT_ID, MapObjectDataHandler.getInstance().getUniqueObjectCount());
+		}
+		return properties.get(StatefulMapObject.MAP_PROPERTIES_KEY_STATEFULL_OBJECT_ID);
 	}
 	
 	private boolean isSpecialItem() {
@@ -230,6 +238,6 @@ public class Item implements StatefulMapObject, CutsceneControlledUnit, DataItem
 	
 	@Override
 	public String toString() {
-		return "Item [name=" + itemName + "; properties=" + properties + "]";
+		return "Item [name=" + itemName + "; properties=" + MapUtil.mapPropertiesToString(properties, true) + "]";
 	}
 }
