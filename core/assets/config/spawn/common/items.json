@@ -2,11 +2,11 @@
 	item__health: {
 		spawnType: item.health,
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	item__shield: {
 		spawnType: item.shield,
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 }

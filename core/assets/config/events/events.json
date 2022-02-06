@@ -1,6 +1,6 @@
 {
-	GAME_STARTED: {
-		eventType: GAME_STARTED,
+	NEW_GAME_STARTED: {
+		eventType: NEW_GAME_STARTED,
 	},
 	GAME_LOADED: {
 		eventType: GAME_LOADED,

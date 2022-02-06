@@ -5,6 +5,9 @@ import java.util.function.Consumer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
 
@@ -65,6 +68,8 @@ public class LoadGameDialog extends GameDataServiceDialog {
 		if (gameDataService.isQuickSaveGameDataSlotExisting()) {
 			gameDataService.loadGameDataFromQuicksaveSlot();
 			backToGame();
+			
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);
@@ -76,6 +81,8 @@ public class LoadGameDialog extends GameDataServiceDialog {
 		if (gameDataService.isGameDataSlotExisting(slot)) {
 			gameDataService.loadGameDataFromSaveSlot(slot);
 			backToGame();
+			
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);

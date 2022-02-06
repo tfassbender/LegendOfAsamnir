@@ -5,7 +5,7 @@
 	enemy__cobra: {
 		spawnType: enemy.cobra,
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*****************************************
@@ -15,7 +15,7 @@
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	
@@ -26,31 +26,31 @@
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:1}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_up_3: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:3}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_up_5: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:5}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_up_7: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:7}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_up_10: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -60,31 +60,31 @@
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-1}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_down_3: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-3}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_down_5: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-5}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_down_7: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-7}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_down_10: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-10}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -94,31 +94,31 @@
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-1, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_left_3: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-3, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_left_5: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-5, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_left_7: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-7, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_left_10: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-10, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -128,30 +128,30 @@
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:1, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_right_3: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:3, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_right_5: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:5, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_right_7: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:7, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__cobra__movement_right_10: {
 		spawnType: enemy.cobra,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:10, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 }

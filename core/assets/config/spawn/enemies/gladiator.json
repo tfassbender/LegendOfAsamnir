@@ -6,7 +6,7 @@
 	enemy__gladiator: {
 		spawnType: enemy.gladiator,
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*****************************************
@@ -16,7 +16,7 @@
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -27,19 +27,19 @@
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{aiType: \"gladiator_team\", teamId: \"gladiator_team_1\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__team_2: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{aiType: \"gladiator_team\", teamId: \"gladiator_team_2\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__team_3: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{aiType: \"gladiator_team\", teamId: \"gladiator_team_3\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -50,31 +50,31 @@
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:1}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_up_3: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:3}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_up_5: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:5}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_up_7: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:7}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_up_10: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -85,31 +85,31 @@
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-1}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_down_3: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-3}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_down_5: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-5}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_down_7: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-7}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_down_10: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:-10}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -120,31 +120,31 @@
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-1, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_left_3: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-3, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_left_5: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-5, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_left_7: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-7, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_left_10: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:-10, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	//*********************************
@@ -155,30 +155,30 @@
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:1, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_right_3: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:3, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_right_5: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:5, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_right_7: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:7, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	enemy__gladiator__movement_right_10: {
 		spawnType: enemy.gladiator,
 		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:10, y:0}, {x:0, y:0}]\"}",
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 }

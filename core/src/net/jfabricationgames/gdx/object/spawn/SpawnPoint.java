@@ -11,9 +11,12 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.data.handler.MapObjectDataHandler;
+import net.jfabricationgames.gdx.data.state.MapObjectState;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.object.EnemySpawnFactory;
 import net.jfabricationgames.gdx.object.GameObject;
 import net.jfabricationgames.gdx.object.GameObjectFactory;
@@ -70,12 +73,20 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	private EnemySpawnFactory enemySpawnFactory;
 	private ItemSpawnFactory itemSpawnFactory;
 	
+	@MapObjectState
 	private boolean spawnedObjectPresentInMap;
 	
 	public SpawnPoint(GameObjectTypeConfig typeConfig, Sprite sprite, MapProperties mapProperties, GameObjectMap gameMap) {
 		super(typeConfig, sprite, mapProperties, gameMap);
 		loadSpawnConfigFromMapProperties();
 		EventHandler.getInstance().registerEventListener(this);
+	}
+	
+	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		super.applyState(state);
+		
+		spawnedObjectPresentInMap = Boolean.parseBoolean(state.get("spawnedObjectPresentInMap", "false"));
 	}
 	
 	private void loadSpawnConfigFromMapProperties() {
@@ -124,13 +135,25 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	
 	@Override
 	public void handleEvent(EventConfig event) {
-		if (!spawnedObjectPresentInMap && isEventHandled(event)) {
+		if (isEventHandled(event)) {
 			Gdx.app.debug(getClass().getSimpleName(), "Received event, that is handled by this spawn point: " + event);
 			spawn();
+			MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 		}
 	}
 	
 	private boolean isEventHandled(EventConfig event) {
+		if (event.eventType == EventType.GAME_LOADED) {
+			if (!spawnedObjectPresentInMap) {
+				//don't respawn after loading the game, if the spawned object was already removed
+				return false;
+			}
+		}
+		else if (spawnedObjectPresentInMap) {
+			//don't spawn the object twice (except for GAME_LOADED, because the state is set by the loading mechanisms but the objects are not spawned yet)
+			return false;
+		}
+		
 		for (String eventName : spawnConfig.events) {
 			EventConfig handledEvent = EventHandler.getInstance().getEventByName(eventName);
 			if (handledEvent != null && handledEvent.eventType == event.eventType) {
@@ -207,6 +230,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	
 	private void spawnObjectRemovedFromMap() {
 		spawnedObjectPresentInMap = false;
+		MapObjectDataHandler.getInstance().addStatefulMapObject(this);
 	}
 	
 	@Override

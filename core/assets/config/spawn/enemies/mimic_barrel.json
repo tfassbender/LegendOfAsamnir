@@ -5,6 +5,6 @@
 	enemy__mimic_barrel: {
 		spawnType: enemy.mimic_barrel,
 		spawnOnGameStart: true,
-		events: [GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 }

@@ -79,7 +79,6 @@ public class GameDataService implements EventListener {
 		GameDataHandler.getInstance().updateData(gameData);
 		
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.UPDATE_MAP_AFTER_LOADING_GAME_STATE));
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
 	}
 	
 	public boolean isGameDataSlotExisting(int slot) {
