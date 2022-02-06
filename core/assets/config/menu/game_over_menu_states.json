@@ -1,7 +1,7 @@
 {
 	button_restartGame: {
 		down: button_quit,
-		select: respawnInLastCheckpoint,
+		select: restartFromLastCheckpoint,
 		initial: true
 	},
 	button_quit: {

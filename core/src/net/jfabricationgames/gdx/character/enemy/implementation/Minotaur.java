@@ -13,18 +13,12 @@ import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.character.enemy.ai.ActionAI;
 import net.jfabricationgames.gdx.character.enemy.ai.MinotaurAttackAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
-import net.jfabricationgames.gdx.event.EventConfig;
-import net.jfabricationgames.gdx.event.EventHandler;
-import net.jfabricationgames.gdx.event.EventListener;
-import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.state.GameStateManager;
 
-public class Minotaur extends Enemy implements EventListener {
+public class Minotaur extends Enemy {
 	
 	public Minotaur(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
-		
-		EventHandler.getInstance().registerEventListener(this);
 	}
 	
 	@Override
@@ -104,22 +98,5 @@ public class Minotaur extends Enemy implements EventListener {
 	protected void die() {
 		super.die();
 		GameStateManager.fireQuickSaveEvent();
-	}
-
-	@Override
-	public void handleEvent(EventConfig event) {
-		if (event.eventType == EventType.PLAYER_RESPAWNED) {
-			resetHealthToMaximum();
-		}
-	}
-	
-	private void resetHealthToMaximum() {
-		health = typeConfig.health;
-	}
-	
-	@Override
-	public void removeFromMap() {
-		EventHandler.getInstance().removeEventListener(this);
-		super.removeFromMap();
 	}
 }

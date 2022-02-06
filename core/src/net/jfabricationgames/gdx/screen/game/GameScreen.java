@@ -314,13 +314,6 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		shopMenu.showMenu();
 	}
 	
-	@Override
-	public void restartGame() {
-		Gdx.app.log(getClass().getSimpleName(), "--- Restarting Game ------------------------------------------------------------");
-		GameMapManager gameMapManager = GameMapManager.getInstance();
-		changeMap(gameMapManager.getInitialMapIdentifier(), gameMapManager.getInitialStartingPointId());
-	}
-	
 	/**
 	 * Get the path of the configuration file, for the mini-map from the current game map or null if the property is not set.
 	 */

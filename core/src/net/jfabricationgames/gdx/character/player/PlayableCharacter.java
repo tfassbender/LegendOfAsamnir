@@ -17,7 +17,6 @@ public interface PlayableCharacter extends StatsCharacter, CutsceneMoveableUnit,
 	
 	public boolean isAlive();
 	public void removeFromMap();
-	public void respawn();
 	public void reAddToWorld();
 	
 	public void setPosition(float x, float y);

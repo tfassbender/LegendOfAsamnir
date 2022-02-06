@@ -12,21 +12,15 @@ import net.jfabricationgames.gdx.character.enemy.Enemy;
 import net.jfabricationgames.gdx.character.enemy.EnemyTypeConfig;
 import net.jfabricationgames.gdx.character.enemy.ai.CyclopsAttackAI;
 import net.jfabricationgames.gdx.character.state.CharacterState;
-import net.jfabricationgames.gdx.event.EventConfig;
-import net.jfabricationgames.gdx.event.EventHandler;
-import net.jfabricationgames.gdx.event.EventListener;
-import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.state.GameStateManager;
 
-public class Cyclops extends Enemy implements EventListener {
+public class Cyclops extends Enemy {
 	
 	private static final float DAMAGE_TAKEN_IN_STATE_ATTACK_BEAM = 5f;
 	private static final float FOLLOW_AI_MIN_DISTANCE_TO_PLAYER = 6f;
 	
 	public Cyclops(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
-		
-		EventHandler.getInstance().registerEventListener(this);
 	}
 	
 	@Override
@@ -95,22 +89,5 @@ public class Cyclops extends Enemy implements EventListener {
 	protected void die() {
 		super.die();
 		GameStateManager.fireQuickSaveEvent();
-	}
-	
-	@Override
-	public void handleEvent(EventConfig event) {
-		if (event.eventType == EventType.PLAYER_RESPAWNED) {
-			resetHealthToMaximum();
-		}
-	}
-	
-	private void resetHealthToMaximum() {
-		health = typeConfig.health;
-	}
-	
-	@Override
-	public void removeFromMap() {
-		EventHandler.getInstance().removeEventListener(this);
-		super.removeFromMap();
 	}
 }

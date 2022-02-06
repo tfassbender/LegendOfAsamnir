@@ -563,16 +563,6 @@ public class Dwarf implements PlayableCharacter, Disposable, ContactListener, Ev
 	}
 	
 	@Override
-	public void respawn() {
-		Vector2 respawnPoint = propertiesDataHandler.getRespawnPoint();
-		setPosition(respawnPoint.x, respawnPoint.y);
-		propertiesDataHandler.changeStatsAfterRespawn();
-		GameStateManager.getInstance().setGameOver(false);
-		
-		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.PLAYER_RESPAWNED));
-	}
-	
-	@Override
 	public void dispose() {
 		soundHandler.dispose();
 		PhysicsWorld.getInstance().removeContactListener(this);

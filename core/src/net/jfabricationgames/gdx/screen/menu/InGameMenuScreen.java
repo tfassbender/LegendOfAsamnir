@@ -13,7 +13,11 @@ import com.badlogic.gdx.utils.Array;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.player.PlayableCharacter;
 import net.jfabricationgames.gdx.character.player.Player;
+import net.jfabricationgames.gdx.data.GameDataService;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
@@ -64,16 +68,19 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 		ScreenManager.getInstance().changeToGameScreen();
 	}
 	
-	public void respawnInLastCheckpoint() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Respawn' selected");
-		player.respawn();
-		backToGame();
-	}
-	
-	public void restartGame() {
-		Gdx.app.debug(getClass().getSimpleName(), "'Restart Game' selected");
-		gameScreen.restartGame();
-		backToGame();
+	public void restartFromLastCheckpoint() {
+		Gdx.app.debug(getClass().getSimpleName(), "'Restart from last checkpoint' selected");
+		
+		GameDataService gameDataService = new GameDataService();
+		if (gameDataService.isQuickSaveGameDataSlotExisting()) {
+			gameDataService.loadGameDataFromQuicksaveSlot();
+			backToGame();
+			
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+		}
+		else {
+			playMenuSound(ControlledMenu.SOUND_ERROR);
+		}
 	}
 	
 	//*********************************************************************
@@ -81,8 +88,6 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 	//*********************************************************************
 	
 	public interface MenuGameScreen extends Screen {
-		
-		public void restartGame();
 		
 		public String getGameMapConfigPath();
 		
