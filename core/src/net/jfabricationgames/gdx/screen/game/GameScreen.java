@@ -22,6 +22,7 @@ import net.jfabricationgames.gdx.condition.ConditionType;
 import net.jfabricationgames.gdx.constants.Constants;
 import net.jfabricationgames.gdx.cutscene.CutsceneHandler;
 import net.jfabricationgames.gdx.cutscene.action.CutsceneActionFactory;
+import net.jfabricationgames.gdx.data.GameDataHandler;
 import net.jfabricationgames.gdx.data.handler.FastTravelDataHandler;
 import net.jfabricationgames.gdx.data.properties.FastTravelPointProperties;
 import net.jfabricationgames.gdx.event.EventConfig;
@@ -69,7 +70,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private static void showLoadingScreen(Runnable afterCreatingGameScreen) {
 		new LoadingScreen(() -> {
 			ScreenManager.getInstance().setScreen(new GameScreen());
-			afterCreatingGameScreen.run();
+			if (afterCreatingGameScreen != null) {
+				afterCreatingGameScreen.run();
+			}
 		}).showMenu();
 	}
 	
@@ -171,9 +174,25 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private void loadGameMap() {
 		GameMapManager gameMapManager = GameMapManager.getInstance();
-		String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
-		gameMapManager.showMap(initialMapIdentifier, gameMapManager.getInitialStartingPointId());
-		StartConfigUtil.configureGameStartConfig(gameMapManager.getDebugStartConfig(), gameMapManager.getInitialStartingPointId());
+		
+		if (isNewGame()) {
+			String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
+			gameMapManager.showMap(initialMapIdentifier, gameMapManager.getInitialStartingPointId());
+			StartConfigUtil.configureGameStartConfig(gameMapManager.getDebugStartConfig(), gameMapManager.getInitialStartingPointId());
+		}
+		else {
+			GameDataHandler gameDataHandler = GameDataHandler.getInstance();
+			
+			String currentMapIdentifier = gameDataHandler.getCurrentMapIdentifier();
+			gameMapManager.showMap(currentMapIdentifier, 0); // use starting point 0 (which exists on every map) and change to the correct position afterwards
+			
+			Vector2 playerPosition = gameDataHandler.getPlayerPosition();
+			Player.getInstance().setPosition(playerPosition.x, playerPosition.y);
+		}
+	}
+	
+	private boolean isNewGame() {
+		return GameDataHandler.getInstance().getCurrentMapIdentifier() == null;
 	}
 	
 	private void changeMap(String mapIdentifier, int playerStartingPointId) {

@@ -194,9 +194,12 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		loadGameDialog.dispose();
 	}
 	
+	private void createGameScreen() {
+		createGameScreen(null);
+	}
+	
 	private void createGameScreen(Runnable afterCreatingGameScreen) {
 		Gdx.app.log(getClass().getSimpleName(), "Crating game screen");
-		GameDataHandler.getInstance().createNewGameData();
 		GameScreen.loadAndShowGameScreen(afterCreatingGameScreen);
 		dispose();
 	}
@@ -206,10 +209,8 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	//****************************************************************
 	
 	public void continueGame() {
-		createGameScreen(() -> {
-			new GameDataService().loadGameDataFromQuicksaveSlot();
-		});
-		
+		new GameDataService().loadGameDataFromQuicksaveSlot();
+		createGameScreen();
 	}
 	
 	public void showLoadGameMenu() {
@@ -218,6 +219,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	public void startGame() {
+		GameDataHandler.getInstance().createNewGameData();
 		createGameScreen(() -> {
 			GlobalValuesDataHandler.getInstance().put(SpecialAction.JUMP.actionEnabledGlobalValueKey, true);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.NEW_GAME_STARTED));
@@ -234,38 +236,32 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	}
 	
 	public void loadFromQuickSaveSlot() {
-		createGameScreen(() -> {
-			loadGameDialog.loadFromQuickSaveSlot();
-		});
+		loadGameDialog.loadFromQuickSaveSlot();
+		createGameScreen();
 	}
 	
 	public void loadFromSlot1() {
-		createGameScreen(() -> {
-			loadGameDialog.loadFromSlot(1);
-		});
+		loadGameDialog.loadFromSlot(1);
+		createGameScreen();
 	}
 	
 	public void loadFromSlot2() {
-		createGameScreen(() -> {
-			loadGameDialog.loadFromSlot(2);
-		});
+		loadGameDialog.loadFromSlot(2);
+		createGameScreen();
 	}
 	
 	public void loadFromSlot3() {
-		createGameScreen(() -> {
-			loadGameDialog.loadFromSlot(3);
-		});
+		loadGameDialog.loadFromSlot(3);
+		createGameScreen();
 	}
 	
 	public void loadFromSlot4() {
-		createGameScreen(() -> {
-			loadGameDialog.loadFromSlot(4);
-		});
+		loadGameDialog.loadFromSlot(4);
+		createGameScreen();
 	}
 	
 	public void loadFromSlot5() {
-		createGameScreen(() -> {
-			loadGameDialog.loadFromSlot(5);
-		});
+		loadGameDialog.loadFromSlot(5);
+		createGameScreen();
 	}
 }

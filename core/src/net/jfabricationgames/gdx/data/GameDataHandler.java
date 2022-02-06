@@ -1,6 +1,7 @@
 package net.jfabricationgames.gdx.data;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 
 import net.jfabricationgames.gdx.data.container.CharacterDataContainer;
 import net.jfabricationgames.gdx.data.container.CharacterItemContainer;
@@ -59,5 +60,13 @@ public class GameDataHandler implements DataHandler {
 	
 	protected GameDataContainer getGameData() {
 		return gameDataContainer;
+	}
+	
+	public String getCurrentMapIdentifier() {
+		return gameDataContainer.mapDataContainer.mapIdentifier;
+	}
+	
+	public Vector2 getPlayerPosition() {
+		return gameDataContainer.characterDataContainer.position;
 	}
 }
