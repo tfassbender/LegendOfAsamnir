@@ -165,32 +165,6 @@
 		}
 	},
 	
-	demo_2_main_goto_level_5_entry_change_map: {
-		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_main_goto_level_5_entry,
-		},
-		
-		executionType: CHANGE_MAP,
-		executionParameters: {
-			map: demo_2_level_5_entry,
-			startingPointId: 0,
-		}
-	},
-	
-	demo_2_main_goto_level_5_entry_set_global_value: {
-		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_main_goto_level_5_entry,
-		},
-		
-		executionType: SET_GLOBAL_VALUE,
-		executionParameters: {
-			globalValueKey: demo_2_main_final_dungeon_tested,
-			globalValue: true,
-		}
-	},
-	
 	demo_2_main_goto_village_shop: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -283,6 +257,44 @@
 		executionParameters: {
 			map: demo_2_level_2_entry,
 			startingPointId: 0,
+		}
+	},
+	
+	demo_2_main_goto_level_5_entry_change_map: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_5_entry,
+		},
+		
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_5_entry,
+			startingPointId: 0,
+		}
+	},
+	
+	demo_2_main_goto_level_5_entry_set_global_value: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_5_entry,
+		},
+		
+		executionType: SET_GLOBAL_VALUE,
+		executionParameters: {
+			globalValueKey: demo_2_main_final_dungeon_tested,
+			globalValue: true,
+		}
+	},
+	
+	// level not available yet - delete after all levels are done
+	demo_2_main_goto_level_in_progress: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_in_progress,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_goto_level_in_progress,
 		}
 	},
 }

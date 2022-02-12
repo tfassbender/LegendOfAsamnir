@@ -1,0 +1,28 @@
+{
+	id: demo_2_main_goto_level_in_progress,
+	controlledActions: {
+		you_shall_not_pass: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "You shall not pass!!!\n \n \nCause this level is still under construction...",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				move,
+			],
+		},
+		
+		move: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -0.5},
+		}
+	}
+}
