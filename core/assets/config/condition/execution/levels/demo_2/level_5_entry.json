@@ -1,0 +1,36 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+    demo_2_level_5_entry_gate_lantern: {
+        conditionId: demo_2_level_5_entry_lantern_activated,
+        thenCase: {
+            type: NO_EXECUTION,
+        }
+        elseCase: {
+            type: CONDITION,
+			conditionalExecution: {
+				conditionId: demo_2_level_5_entry_lantern_found,
+				thenCase: {
+					type: EVENT,
+            		eventConfig: {
+                		executionType: START_CUTSCENE,
+						executionParameters: {
+							cutsceneId: demo_2_level_5_entry_gate_lantern_not_activated,
+						}
+            		}
+        		},
+        		elseCase: {
+					type: EVENT,
+            		eventConfig: {
+                		executionType: START_CUTSCENE,
+						executionParameters: {
+							cutsceneId: demo_2_level_5_entry_gate_lantern_not_found_yet,
+						}
+            		}
+        		}
+			}
+        }
+    },
+}

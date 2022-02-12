@@ -1,0 +1,42 @@
+{
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_level_5_entry_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_5_entry_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 12,
+		}
+	},
+	
+//	demo_2_level_2_entry_goto_level_5: {
+//		event: {
+//			eventType: EVENT_OBJECT_TOUCHED,
+//			stringValue: demo_2_level_2_entry_goto_level_5,
+//		},
+//		executionType: CHANGE_MAP,
+//		executionParameters: {
+//			map: demo_2_level_5,
+//			startingPointId: 0,
+//		}
+//	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_5_entry_gate_lantern: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_5_entry_gate_lantern,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_5_entry_gate_lantern,
+	},
+}

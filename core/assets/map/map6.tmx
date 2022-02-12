@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="141" height="74" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="820">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="141" height="74" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="820">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -13,7 +13,7 @@
    eJztnG1O4zAQhufPcgkklpOgnAR6j124CXvWLRJVQxo7/njnw+77SPOrqT0zfuIECVeEEEIIIa08JIKQFHRGj1RvR+9xlHqO+uudXwsz1LCHVj2149U6M0LfI+Su0UM6g8mlZRwLenvY0oPWtYzoDKoWOmMTiNoiR0tNJZRcr7k20XoaJTc6ozc2Mi/vNY7gTIk33nVF6ql3PnQmflj1AoGnMxZ98XaBztAZOmO7Nsi5Z3PGKhDQmfsKBIj5W/O1qD3q+kRY+1Y8e2jdMzrTj3cPIzpTc10PIzhj7Qed6c+Fzujlh+yBFXRmDGdK5rJC2xntPtEZOqORI53B5x2p/1Fr08oJ2QvkWNFixNq0ckL2AjlWtBixrp68ct+pRdOZ93O8fcfHwVxRfdmrK0remjXn0OjtxZXTOX59x6v0ebP2r9fB1rq8oyevXrR7u8jVlXW8VMyd8691rNmcsQSd4/Z7n+f4vRP/EvNs95D1XrIIzj860462M0dOfGw+O0naiy///pzjcRV/Je0fncGilWNujL3nyqvk95En+bkvba/p2WPoTB3Wziyyv39s95GjZ9jXNc9CZzyw7GnumbPdR0pikZ/7FP9uOs4VgWVPF8G4khpv/XyjM/u5IrDsackzpyYu4z3LrTu13qCI5ExPvbnrZ7gPt+82Le83KOiMHQhvaveviHVEcEYzJyTWvbasbYtV3rM7o0XE2rTX5J7uv3uBzpBaZnKG2EBnSC0jOENiYH1v04NbRrs/6Iw/dKZuLjJeX7ycIVfoTNlc5MrozuQ+ozM61PQT8U7ZCyJXOtAHnSG10BlSC53xpeYdDBVR8rXiaP6oeafwcKanbqscLHswkzPIs/So2q3m9LqXRnWm5Cx96lz13jnrEZzx9mB0ZxbJn6XPnXGrOX+PypfO2JHKaf2//Jcz9euz9IukHXkS3Dmm0aKmx1E9KLlmL9bPnZPc7hep3weZzZFeLOfSzufo+kWwv/EyYiAY2ZnaQJ+VRfYpggtauUbLJ2J41G1JtNy815vO4HOMmpfFWmv2h87Y5jUTiDo977vozswInelnVjdKoDPECm9H6Mx4WK09nSGR+A8M8ad2
   </data>
  </layer>
- <layer id="2" name="background_2" width="141" height="74" locked="1">
+ <layer id="2" name="background_2" width="141" height="74">
   <data encoding="base64" compression="zlib">
    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
   </data>
@@ -1221,7 +1221,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="12" name="physics" locked="1">
+ <objectgroup id="12" name="physics">
   <object id="17" x="1344" y="32" width="32" height="224"/>
   <object id="18" x="1184" y="192" width="32" height="192"/>
   <object id="19" x="1568" y="32" width="32" height="256"/>

@@ -108,4 +108,11 @@
 	config/cutscene/demo_2/level_2/break_4th_wall.json,
 	config/cutscene/demo_2/level_2/first_chest_mimic_defeated.json,
 	config/cutscene/demo_2/level_2/rune_mannaz_found.json,
+	
+	//********************************************************
+	//*** Demo 2 Level 5
+	//********************************************************
+	
+	config/cutscene/demo_2/level_5/gate_lantern_not_activated.json,
+	config/cutscene/demo_2/level_5/gate_lantern_not_found_yet.json,
 ]

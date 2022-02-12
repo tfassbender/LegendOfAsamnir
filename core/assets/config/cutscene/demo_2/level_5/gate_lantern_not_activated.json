@@ -1,0 +1,27 @@
+{
+	id: demo_2_level_5_entry_gate_lantern_not_activated,
+	controlledActions: {
+		showText: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "It's too dark in here.\n \nI need to use the lantern, to see the way.",
+				showNextPageIcon: false,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				move,
+			],
+		},
+		move: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -1},
+		},
+	}
+}

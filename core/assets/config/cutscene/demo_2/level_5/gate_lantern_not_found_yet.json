@@ -1,0 +1,27 @@
+{
+	id: demo_2_level_5_entry_gate_lantern_not_found_yet,
+	controlledActions: {
+		showText: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "It's too dark in here.\n \nI should to back and find something that brings light to this dungeon.",
+				showNextPageIcon: false,
+			}
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executes: [
+				move,
+			],
+		},
+		move: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -2},
+		},
+	}
+}

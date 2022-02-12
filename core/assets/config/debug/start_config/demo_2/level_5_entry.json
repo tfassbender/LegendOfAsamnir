@@ -1,0 +1,23 @@
+{
+	startingPointMapping: {
+		//0: initial,
+		1: initial,
+	},
+	eventsLists: {
+		initial: {
+			subConfigPath: config/debug/start_config/demo_2/level_2.json
+			subConfigName: final,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: lantern,
+				}
+			]
+		},
+		
+		final: {
+			subConfigName: initial,
+			events: []
+		}
+	}
+}

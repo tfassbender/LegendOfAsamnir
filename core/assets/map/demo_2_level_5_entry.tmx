@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="8" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="857">
+ <properties>
+  <property name="above_player_layers" value="[3, 4]"/>
+  <property name="background_layers" value="[0, 1, 2]"/>
+  <property name="dungeon_level" value="true"/>
+  <property name="shadow_layers" value="[5, 6, 7]"/>
+ </properties>
+ <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
+ <layer id="1" name="background" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYBtmGBmQI09ttwx0eFAjLHGJAwCd3QMf
+  </data>
+ </layer>
+ <layer id="2" name="background_2" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgYGLCjkHgMSMDQxMUnwTiU0j8h4wQ+UVQ/BKIXyHxYfK4ADnyB4H8Q1D8FIv8QzQ+qfKMSP4/isX8JjT/PwHiw0hqFqL5H5sdyG45AsTMTLjlQXqVCMg7EZDHBWDuP4TmB1gYP0USQzYHOQwB8BAwEQ==
+  </data>
+ </layer>
+ <layer id="5" name="terrain" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B8AAACQAAB
+  </data>
+ </layer>
+ <layer id="8" name="shadow_underlying" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYAs3A0MREh5oMFjcQS7AFpZbSAhfAACPBmE=
+  </data>
+ </layer>
+ <layer id="10" name="background_above_player" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBha4CAjA8MhKH7KiCn/EIsYKfKMTAwMTFBMDHgCNO8wATMfE5BnJtIuWoAn0LBE9sNBLOGL7AfkMAQA4JEOLQ==
+  </data>
+ </layer>
+ <layer id="3" name="shadows" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJzbxsPAMAkH3grEm4AYBq5zMzDc4EbwN6LJXwTKXcYjjw7IkZ8M5E+E4qlY5Dei8UmV34zH/9jcNw2Ip+BQA7MLlxkg+W1AvAWPPLXDD11+GjQskf0wGSl8YQDZHOQwBAAFbCkn
+  </data>
+ </layer>
+ <layer id="4" name="shadows_2" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMtnLTT16ch4FhEzcED4T92EAoUF6CZ+DcAJKzwGM/Me7fhOQHWBhTw40AEUQPxw==
+  </data>
+ </layer>
+ <layer id="9" name="shadows_3" width="8" height="18" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4A4cJkHgpEBACGEAb8=
+  </data>
+ </layer>
+ <objectgroup id="11" name="objects">
+  <object id="851" name="object.eventObject" x="96" y="574.455" width="63.967" height="1.56818">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_entry_goto_main"/>
+   </properties>
+  </object>
+  <object id="852" name="object.eventObject" x="106.699" y="63.625" width="45.875" height="4.75">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_entry_goto_level_5"/>
+   </properties>
+  </object>
+  <object id="853" name="object.eventObject" x="32" y="224" width="95.6337" height="5.75">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_entry_gate_lantern"/>
+   </properties>
+  </object>
+  <object id="854" name="player.startingPosition" x="128" y="544">
+   <properties>
+    <property name="startingPointId" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="855" name="player.startingPosition" x="128" y="480">
+   <properties>
+    <property name="startingPointId" value="1"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="12" name="physics" locked="1">
+  <object id="820" x="0" y="0" width="32" height="544"/>
+  <object id="821" x="224" y="0" width="32" height="544"/>
+  <object id="826" x="32" y="0" width="64" height="78"/>
+  <object id="827" x="160" y="0" width="64" height="77.4659"/>
+  <object id="828" x="128" y="192" width="96" height="128"/>
+  <object id="829" x="160" y="175.75" width="64" height="16.25"/>
+  <object id="830" x="32" y="352" width="32" height="96"/>
+  <object id="831" x="32" y="526.25" width="32" height="17.75"/>
+  <object id="832" x="64" y="544" width="32" height="32"/>
+  <object id="833" x="160" y="544" width="32" height="32"/>
+  <object id="834" x="192" y="527.25" width="32" height="16.75"/>
+  <object id="839" x="32" y="448">
+   <polygon points="0,0 32,0 0,14"/>
+  </object>
+  <object id="840" x="160" y="320">
+   <polygon points="0,0 -32,0 -0.03125,13.9688"/>
+  </object>
+  <object id="841" x="160" y="320" width="64" height="14"/>
+  <object id="842" x="64" y="544">
+   <polygon points="0,0 32,0 0.25,-17.75"/>
+  </object>
+  <object id="843" x="192" y="544">
+   <polygon points="0,0 -32,0 -0.25,-16.5"/>
+  </object>
+  <object id="844" x="32" y="352">
+   <polygon points="0,0 32,0 0.25,-17.75"/>
+  </object>
+  <object id="845" x="160" y="192">
+   <polygon points="0,0 -32,0 -0.25,-16.5"/>
+  </object>
+  <object id="847" x="96.0625" y="77.995">
+   <polygon points="0,0 9.5,-3.25 11.25,-14.5"/>
+  </object>
+  <object id="848" x="107.335" y="63.415">
+   <polygon points="0,0 20.5652,-20.1304 -0.26087,-20.2174"/>
+  </object>
+  <object id="849" x="127.942" y="43.205">
+   <polygon points="0,0 24.1821,19.9185 23.8696,-0.706522"/>
+  </object>
+  <object id="850" x="152.125" y="62.995">
+   <polygon points="0,0 1.6875,11.75 7.5625,14.1875"/>
+  </object>
+  <object id="856" x="64" y="576" width="128" height="2.90909"/>
+ </objectgroup>
+</map>
