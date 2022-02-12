@@ -87,6 +87,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 		super.applyState(state);
 		
 		spawnedObjectPresentInMap = Boolean.parseBoolean(state.get("spawnedObjectPresentInMap", "false"));
+		return;
 	}
 	
 	private void loadSpawnConfigFromMapProperties() {

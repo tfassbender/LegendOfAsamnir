@@ -20,6 +20,7 @@ import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.input.InputManager;
 import net.jfabricationgames.gdx.screen.ScreenManager;
+import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
 
 public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends MenuScreen<T> {
@@ -74,9 +75,9 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 		GameDataService gameDataService = new GameDataService();
 		if (gameDataService.isQuickSaveGameDataSlotExisting()) {
 			gameDataService.loadGameDataFromQuicksaveSlot();
-			backToGame();
-			
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			GameScreen.loadAndShowGameScreen(() -> {
+				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			});
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);

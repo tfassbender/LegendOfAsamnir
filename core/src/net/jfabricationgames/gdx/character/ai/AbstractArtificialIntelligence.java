@@ -81,6 +81,13 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		subAI.postSolve(contact, impulse);
 	}
 	
+	@Override
+	public void characterRemovedFromMap() {
+		if (subAI != null) {
+			subAI.characterRemovedFromMap();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected <T> T getObjectCollidingWithEnemySensor(Contact contact, Class<T> collidingType) {
 		Fixture fixtureA = contact.getFixtureA();

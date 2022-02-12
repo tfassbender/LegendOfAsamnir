@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Disposable;
 
+import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.util.GameUtil;
 
 /**
@@ -65,6 +66,7 @@ public class PhysicsWorld implements ContactListener, Disposable {
 		Gdx.app.debug(getClass().getSimpleName(), "Removing bodies from world");
 		Array<Body> bodies = new Array<Body>();
 		world.getBodies(bodies);
+		EventHandler.getInstance();
 		for (Body body : bodies) {
 			world.destroyBody(body);
 		}

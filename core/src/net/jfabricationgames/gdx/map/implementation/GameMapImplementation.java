@@ -34,6 +34,7 @@ import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.item.Item;
 import net.jfabricationgames.gdx.item.ItemFactory;
 import net.jfabricationgames.gdx.map.GameMap;
+import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.map.ground.GameMapGroundType;
 import net.jfabricationgames.gdx.map.ground.MapObjectType;
 import net.jfabricationgames.gdx.object.GameObject;
@@ -106,7 +107,7 @@ public class GameMapImplementation implements GameMap {
 	
 	private void updateMap() {
 		String mapIdentifier = MapDataHandler.getInstance().getMapIdentifier();
-		beforeLoadMap(mapIdentifier);
+		GameMapManager.getInstance().showMap(mapIdentifier, 0);
 	}
 	
 	private void updatePlayerPosition() {
@@ -201,7 +202,7 @@ public class GameMapImplementation implements GameMap {
 	}
 	
 	private void removeBodiesFromWorld() {
-		Gdx.app.debug(getClass().getSimpleName(), "removeCurrentMap - world locked: " + PhysicsWorld.getInstance().isInWorldStepExecution());
+		Gdx.app.debug(getClass().getSimpleName(), "removeBodiesFromWorld - world locked: " + PhysicsWorld.getInstance().isInWorldStepExecution());
 		PhysicsWorld.getInstance().removeBodiesFromWorld();
 	}
 	
@@ -611,6 +612,6 @@ public class GameMapImplementation implements GameMap {
 	public void dispose() {
 		renderer.dispose();
 		map.dispose();
-		PhysicsWorld.getInstance().dispose();
+		//PhysicsWorld.getInstance().dispose();
 	}
 }

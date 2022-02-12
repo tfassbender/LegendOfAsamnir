@@ -133,6 +133,7 @@ public class TeamMovementAI extends FollowAI implements EventListener {
 	
 	@Override
 	public void characterRemovedFromMap() {
+		super.characterRemovedFromMap();
 		EventHandler.getInstance().removeEventListener(this);
 	}
 	

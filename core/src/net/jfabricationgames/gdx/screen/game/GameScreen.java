@@ -61,6 +61,8 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private static final String ACTION_SHOW_MENU = "menu";
 	
+	private static GameScreen instance;
+	
 	public static void loadAndShowGameScreen(Runnable afterCreatingGameScreen) {
 		AssetGroupManager assetManager = AssetGroupManager.getInstance();
 		showLoadingScreen(afterCreatingGameScreen);
@@ -69,11 +71,18 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	
 	private static void showLoadingScreen(Runnable afterCreatingGameScreen) {
 		new LoadingScreen(() -> {
-			ScreenManager.getInstance().setScreen(new GameScreen());
+			createGameScreen();
+			ScreenManager.getInstance().setScreen(instance);
 			if (afterCreatingGameScreen != null) {
 				afterCreatingGameScreen.run();
 			}
 		}).showMenu();
+	}
+	
+	private static void createGameScreen() {
+		if (instance == null) {
+			instance = new GameScreen();
+		}
 	}
 	
 	private OrthographicCamera camera;
@@ -360,7 +369,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	public void dispose() {
 		EventHandler.getInstance().removeEventListener(this);
 		inputContext.removeListener(this);
-		AssetGroupManager.getInstance().unloadGroup(ScreenManager.ASSET_GROUP_NAME);
+		//AssetGroupManager.getInstance().unloadGroup(ScreenManager.ASSET_GROUP_NAME);
 		
 		map.dispose();
 		hud.dispose();

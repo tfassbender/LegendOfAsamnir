@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventType;
+import net.jfabricationgames.gdx.screen.game.GameScreen;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
 
@@ -67,9 +68,9 @@ public class LoadGameDialog extends GameDataServiceDialog {
 		Gdx.app.log(getClass().getSimpleName(), "'loadFromQuickSaveSlot' selected");
 		if (gameDataService.isQuickSaveGameDataSlotExisting()) {
 			gameDataService.loadGameDataFromQuicksaveSlot();
-			backToGame();
-			
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			GameScreen.loadAndShowGameScreen(() -> {
+				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			});
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);
@@ -80,9 +81,9 @@ public class LoadGameDialog extends GameDataServiceDialog {
 		Gdx.app.log(getClass().getSimpleName(), "'loadFromSlot' " + slot + " selected");
 		if (gameDataService.isGameDataSlotExisting(slot)) {
 			gameDataService.loadGameDataFromSaveSlot(slot);
-			backToGame();
-			
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			GameScreen.loadAndShowGameScreen(() -> {
+				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			});
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);

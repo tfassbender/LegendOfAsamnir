@@ -2,7 +2,7 @@ package net.jfabricationgames.gdx.constants;
 
 public class Constants {
 	
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	
 	public static final float WORLD_TO_SCREEN = 0.04f;
 	public static final float SCREEN_TO_WORLD = 1f / WORLD_TO_SCREEN;
