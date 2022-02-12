@@ -68,9 +68,7 @@ public class LoadGameDialog extends GameDataServiceDialog {
 		Gdx.app.log(getClass().getSimpleName(), "'loadFromQuickSaveSlot' selected");
 		if (gameDataService.isQuickSaveGameDataSlotExisting()) {
 			gameDataService.loadGameDataFromQuicksaveSlot();
-			GameScreen.loadAndShowGameScreen(() -> {
-				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
-			});
+			loadGame();
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);
@@ -81,12 +79,17 @@ public class LoadGameDialog extends GameDataServiceDialog {
 		Gdx.app.log(getClass().getSimpleName(), "'loadFromSlot' " + slot + " selected");
 		if (gameDataService.isGameDataSlotExisting(slot)) {
 			gameDataService.loadGameDataFromSaveSlot(slot);
-			GameScreen.loadAndShowGameScreen(() -> {
-				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
-			});
+			loadGame();
 		}
 		else {
 			playMenuSound(ControlledMenu.SOUND_ERROR);
 		}
+	}
+
+	private void loadGame() {
+		GameScreen.loadAndShowGameScreen(() -> {
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			backToGame();
+		});
 	}
 }
