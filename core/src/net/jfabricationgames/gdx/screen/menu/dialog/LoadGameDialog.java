@@ -85,7 +85,7 @@ public class LoadGameDialog extends GameDataServiceDialog {
 			playMenuSound(ControlledMenu.SOUND_ERROR);
 		}
 	}
-
+	
 	private void loadGame() {
 		GameScreen.loadAndShowGameScreen(() -> {
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));

@@ -4,7 +4,6 @@
 	//*********************************
 	enemy__totem: {
 		spawnType: enemy.totem,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 }

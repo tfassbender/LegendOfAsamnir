@@ -65,7 +65,7 @@
 		name: demo_2_main,
 		map: "map/demo_2_main.tmx",
 		initialStartingPointId: 1,
-		initial: true
+		//initial: true
 	},
 	{
 		name: demo_2_village_blacksmith,

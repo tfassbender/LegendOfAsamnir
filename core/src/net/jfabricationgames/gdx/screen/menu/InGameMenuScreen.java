@@ -77,6 +77,7 @@ public abstract class InGameMenuScreen<T extends ControlledMenu<T>> extends Menu
 			gameDataService.loadGameDataFromQuicksaveSlot();
 			GameScreen.loadAndShowGameScreen(() -> {
 				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+				backToGame();
 			});
 		}
 		else {

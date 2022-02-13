@@ -63,6 +63,15 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	}
 	
 	@Override
+	public void applyState(ObjectMap<String, String> state) {
+		super.applyState(state);
+		
+		active = Boolean.parseBoolean(state.get("active"));
+		changeSwitchObjectState(stateSwitchId, active);
+		updateSprite();
+	}
+	
+	@Override
 	protected void executeInteraction() {
 		if (runeCollected()) {
 			performAction();

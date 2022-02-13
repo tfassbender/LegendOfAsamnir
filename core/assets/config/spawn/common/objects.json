@@ -1,55 +1,46 @@
 {
 	object__pot: {
 		spawnType: object.pot,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	object__pot__empty: {
 		spawnType: object.pot,
-		spawnOnGameStart: true,
 		spawnTypeMapProperties: "{drop: \"{}\"}",
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	object__box: {
 		spawnType: object.box,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	object__box__empty: {
 		spawnType: object.box,
-		spawnOnGameStart: true,
 		spawnTypeMapProperties: "{drop: \"{}\"}",
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	object__barrel: {
 		spawnType: object.barrel,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	object__barrel__empty: {
 		spawnType: object.barrel,
-		spawnOnGameStart: true,
 		spawnTypeMapProperties: "{drop: \"{}\"}",
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	object__chest: {
 		spawnType: object.chest,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	object__chest__empty: {
 		spawnType: object.chest,
-		spawnOnGameStart: true,
 		spawnTypeMapProperties: "{drop: \"{}\"}",
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	object__destroyable_wall: {
 		spawnType: object.destroyable_wall,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	}
 }

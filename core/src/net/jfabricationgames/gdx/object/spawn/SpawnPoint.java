@@ -52,20 +52,7 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 			spawnConfigs.putAll(configs);
 		}
 		
-		addGameStartEvents(spawnConfigs);
-		
 		return spawnConfigs;
-	}
-	
-	private static void addGameStartEvents(ObjectMap<String, SpawnConfig> spawnConfigs) {
-		for (SpawnConfig config : spawnConfigs.values()) {
-			if (config.spawnOnGameStart) {
-				if (config.events == null) {
-					config.events = new Array<>();
-				}
-				config.events.add(EventHandler.EVENT_GAME_STARTED);
-			}
-		}
 	}
 	
 	private SpawnConfig spawnConfig;

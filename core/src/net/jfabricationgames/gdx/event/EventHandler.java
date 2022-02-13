@@ -7,8 +7,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class EventHandler {
 	
-	public static final String EVENT_GAME_STARTED = "NEW_GAME_STARTED";
-	
 	private static final String EVENT_CONFIG_FILE = "config/events/events.json";
 	
 	private static EventHandler instance = new EventHandler();

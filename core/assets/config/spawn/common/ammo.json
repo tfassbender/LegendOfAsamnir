@@ -1,18 +1,15 @@
 {
 	playerOutOfAmmo_arrows: {
 		spawnType: item.arrow,
-		events: [playerOutOfAmmo_arrows],
-		spawnOnGameStart: true,
+		events: [playerOutOfAmmo_arrows, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	playerOutOfAmmo_bombs: {
 		spawnType: item.bomb,
-		events: [playerOutOfAmmo_bombs],
-		spawnOnGameStart: true,
+		events: [playerOutOfAmmo_bombs, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 	
 	playerLowOnMana: {
 		spawnType: item.mana,
-		events: [playerLowOnMana],
-		spawnOnGameStart: true,
+		events: [playerLowOnMana, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	}
 }

@@ -4,7 +4,6 @@
 	//*********************************
 	enemy__mimic_chest: {
 		spawnType: enemy.mimic_chest,
-		spawnOnGameStart: true,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
 }
