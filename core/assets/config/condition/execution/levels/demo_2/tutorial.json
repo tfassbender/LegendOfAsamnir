@@ -18,4 +18,20 @@
             }
         }
     },
+    
+    demo_2_tutorial_entry: {
+        conditionId: demo_2_tutorial_entry_cutscene_played,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_tutorial_entry,
+				}
+            }
+        }
+    },
 }

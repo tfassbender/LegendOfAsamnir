@@ -1201,14 +1201,20 @@
    <point/>
   </object>
   <object id="14391" name="object.chest" x="2257" y="179.5">
+   <properties>
+    <property name="drop" value="{big_coin: 1}"/>
+   </properties>
    <point/>
   </object>
   <object id="14392" name="object.chest" x="1994.5" y="207.5">
+   <properties>
+    <property name="drop" value="{big_coin: 1}"/>
+   </properties>
    <point/>
   </object>
   <object id="14393" name="object.chest" x="1265.33" y="1614">
    <properties>
-    <property name="drop" value="{key: 1}"/>
+    <property name="drop" value="{big_coin: 1}"/>
    </properties>
    <point/>
   </object>

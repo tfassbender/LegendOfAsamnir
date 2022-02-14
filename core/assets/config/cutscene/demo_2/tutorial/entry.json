@@ -1,0 +1,32 @@
+{
+	id: demo_2_tutorial_entry,
+	controlledActions: {
+		thorin_text: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 2f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Where am I?!\n \nI need to find my way back to Svartalfheim.",
+				showNextPageIcon: true,
+			},
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_tutorial_entry_cutscene_played, value: true}",
+			},
+		}
+	}
+}

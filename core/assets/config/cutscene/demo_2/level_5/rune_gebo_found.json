@@ -1,0 +1,52 @@
+{
+	id: demo_2_level_5_entry_rune_gebo_found,
+	controlledActions: {
+		initial_thorin: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 3f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Another of these runes.\n \nWell, this one was easy to find...\nI wonder what it does...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				narrator_explanation,
+			],
+		},
+		
+		narrator_explanation: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "On his way to svartalfheim, thorin found another rune: gebo\n \nThis rune granted him the ability to sacrifice the gold, he found, to buy items.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Hey, this one seems actually usefull!\n \nNow I can buy mead!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

@@ -16,6 +16,15 @@
 	//*** cutscenes
 	//*******************************************
 	
+	demo_2_tutorial_entry: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_tutorial_entry,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_tutorial_entry
+	}
+	
 	demo_2_tutorial_adventurer: {
 		event: {
 			eventType: NPC_INTERACTION,

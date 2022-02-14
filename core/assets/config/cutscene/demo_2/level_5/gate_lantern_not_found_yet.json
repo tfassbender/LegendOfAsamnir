@@ -6,7 +6,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Thorin",
-				displayText: "It's too dark in here.\n \nI should to back and find something that brings light to this dungeon.",
+				displayText: "It's too dark in here.\n \nI should go back and find something that brings light to this dungeon.",
 				showNextPageIcon: false,
 			}
 			

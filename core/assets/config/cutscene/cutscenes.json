@@ -33,6 +33,7 @@
 	//*** Demo 2 Tutorial
 	//********************************************************
 	
+	config/cutscene/demo_2/tutorial/entry.json,
 	config/cutscene/demo_2/tutorial/adventurer.json,
 	config/cutscene/demo_2/tutorial/gate_adventurer.json,
 	config/cutscene/demo_2/tutorial/running_adventurer.json,
@@ -114,6 +115,7 @@
 	//*** Demo 2 Level 5
 	//********************************************************
 	
+	config/cutscene/demo_2/level_5/rune_gebo_found.json,
 	config/cutscene/demo_2/level_5/gate_lantern_not_activated.json,
 	config/cutscene/demo_2/level_5/gate_lantern_not_found_yet.json,
 ]

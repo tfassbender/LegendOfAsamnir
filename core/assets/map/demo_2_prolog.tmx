@@ -25,7 +25,7 @@
  </layer>
  <layer id="5" name="background_above_player" width="44" height="35" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztl0EKwjAQRWcn1G1PrqLrKh5AobbbWjyAbvQeXsDpohBkSpMmmTbwH3yyzGcm8H+IAAAAABCaS0a0/dM1m9vVMCV7O6+IjoZK+A1G5+3BHu+GYrHnuw6sr/AGbfVSnOWN76pYtbBTW50iznMJfp8eu8zXRG8+P8IbtFXr6LeYOJe5dpqa32biHn12CgAAGvR5tzN6yMYx9zT7diFkgGumaPbX1Pz2eWdmlmsGLvl/IOHT+cZ6YAxCdCjNXpWa3xCdb6gH/gBaN9v5
+   eJztl0EKwjAQRWcn1K0nV7HrKh5Aoeq2igfQjd7DC3SKFEJJaaZJphk6Dz5d5jMT8n8B5sctm9oBDfUbF2l+FUWRwQnflk1H54TfmxK9HRcAe0Ol+g1G4+2JHu+GYrHDs3LUz3IHXfVmnOUFz7pm/zzu7tRVh4jzTMHvy2OXqyXAB79fyx101YPotxg5l6l2Ks1vNXKPPjtVFEXhoM27rdFD1sTc4+zbhSUDqJnC2V+l+W3zzswsagam/H9gw6fzDfXAGIToUJy9SprfEJ2vrwfWSpzfAQ==
   </data>
  </layer>
  <layer id="6" name="terrain_above_player" width="44" height="35" locked="1">
@@ -43,7 +43,7 @@
    eJztwzENAAAIA7AJwL8xDHFggYOjTZoAAAAAAPzTtYEbA+EfAb8=
   </data>
  </layer>
- <objectgroup id="10" name="objects" locked="1">
+ <objectgroup id="10" name="objects">
   <object id="112" name="player.startingPosition" x="256.5" y="960.167">
    <properties>
     <property name="startingPointId" value="1"/>
@@ -211,7 +211,7 @@
   <object id="145" name="object.signboard" x="686.5" y="816.5">
    <properties>
     <property name="colorHeader" value="#0000ff"/>
-    <property name="displayText" value="The door is locked. Use the key to open it my moving close and pressing the interaction button E on the keyboard or Y on the controller."/>
+    <property name="displayText" value="The door is locked. Use the key to open it my moving close and pressing the interaction button (E on the keyboard or Y on the controller)"/>
     <property name="displayTextHeader" value="Locked Doors"/>
    </properties>
    <point/>

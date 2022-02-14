@@ -28,7 +28,7 @@
 //	},
 	
 	//*******************************************
-	//*** switches
+	//*** gates
 	//*******************************************
 	
 	demo_2_level_5_entry_gate_lantern: {
@@ -38,5 +38,20 @@
 		},
 		executionType: CONDITIONAL_EVENT,
 		conditionalExecutionId: demo_2_level_5_entry_gate_lantern,
+	},
+	
+	//*******************************************
+	//*** other event objects
+	//*******************************************
+	
+	demo_2_level_5_entry_rune_gebo_found: {
+		event: {
+			eventType: RUNE_FOUND,
+			stringValue: GEBO,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_5_entry_rune_gebo_found,
+		}
 	},
 }

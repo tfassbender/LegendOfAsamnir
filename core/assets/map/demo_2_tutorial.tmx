@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="91" height="103" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="1999">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="91" height="103" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="2002">
  <properties>
   <property name="above_player_layers" value="[6]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -258,6 +258,21 @@
   </object>
   <object id="1998" name="animal.fox" x="832" y="2528">
    <point/>
+  </object>
+  <object id="1999" name="object.eventObject" x="1234.5" y="672" width="93.5" height="5">
+   <properties>
+    <property name="eventParameter" value="demo_2_tutorial_entry"/>
+   </properties>
+  </object>
+  <object id="2000" name="object.eventObject" x="1226" y="576" width="8" height="101">
+   <properties>
+    <property name="eventParameter" value="demo_2_tutorial_entry"/>
+   </properties>
+  </object>
+  <object id="2001" name="object.eventObject" x="1328" y="576" width="7" height="101">
+   <properties>
+    <property name="eventParameter" value="demo_2_tutorial_entry"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="8" name="physics" locked="1">
@@ -5057,7 +5072,7 @@
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
  </objectgroup>
- <objectgroup id="10" name="unreachable_area_physics">
+ <objectgroup id="10" name="unreachable_area_physics" locked="1">
   <object id="11" x="992" y="288" width="32" height="116.667"/>
   <object id="12" x="928" y="288" width="64" height="369"/>
   <object id="13" x="992" y="480" width="32" height="146.667"/>

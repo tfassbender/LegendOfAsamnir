@@ -111,7 +111,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "You want to send out a lady on a dangerous quest, while waiting here?! I thought you would be a brave warrior on a mighty quest... but maybe I was wrong...",
+				displayText: "You want to send out a lady on a dangerous quest, while waiting here?!\nI thought you would be a brave warrior on a mighty quest... but maybe I was wrong...",
 				colorHeader: #FF00FF,
 				showNextPageIcon: true,
 			},

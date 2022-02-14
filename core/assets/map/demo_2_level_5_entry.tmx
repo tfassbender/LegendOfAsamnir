@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="8" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="857">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="8" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="873">
  <properties>
   <property name="above_player_layers" value="[3, 4]"/>
   <property name="background_layers" value="[0, 1, 2]"/>
@@ -19,7 +19,7 @@
  </layer>
  <layer id="5" name="terrain" width="8" height="18" locked="1">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B8AAACQAAB
+   eJxjYBgF1Aa8HLjl3nAzMOhyQGhsgIeHgYGdEUIPBQAA7vACcQ==
   </data>
  </layer>
  <layer id="8" name="shadow_underlying" width="8" height="18" locked="1">
@@ -75,6 +75,9 @@
    </properties>
    <point/>
   </object>
+  <object id="872" name="item.rune_gebo" x="176.484" y="400.484">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="physics" locked="1">
   <object id="820" x="0" y="0" width="32" height="544"/>
@@ -120,5 +123,45 @@
    <polygon points="0,0 1.6875,11.75 7.5625,14.1875"/>
   </object>
   <object id="856" x="64" y="576" width="128" height="2.90909"/>
+  <object id="857" x="143.945" y="352.718">
+   <polygon points="0,0 -7.81818,10.5455 -11.0909,48.3636"/>
+  </object>
+  <object id="858" x="132.675" y="399.808">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="859" x="144.495" y="410.528">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="860" x="155.035" y="399.438">
+   <polygon points="0,0 -4,-38.7273 -11.2727,-46.9091"/>
+  </object>
+  <object id="861" x="208.495" y="352.358">
+   <polygon points="0,0 -7.81818,10.5455 -11.0909,48.3636"/>
+  </object>
+  <object id="862" x="197.225" y="399.448">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="863" x="209.045" y="410.168">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="864" x="219.585" y="399.078">
+   <polygon points="0,0 -4,-38.7273 -11.2727,-46.9091"/>
+  </object>
+  <object id="865" x="175.765" y="322.528">
+   <polygon points="0,0 -12.5455,2.36364 12.7273,2.18182"/>
+  </object>
+  <object id="866" x="163.405" y="325.258">
+   <polygon points="0,0 12.7273,9.27273 24.9091,-0.363636"/>
+  </object>
+  <object id="867" x="172.315" y="331.988">
+   <polygon points="0,0 -8.72727,4 -8.90909,40"/>
+  </object>
+  <object id="868" x="180.125" y="331.618">
+   <polygon points="0,0 7.45455,4.72727 8,40.9091"/>
+  </object>
+  <object id="869" x="163.405" y="372.348">
+   <polygon points="0,0 24.9091,0.181818 12.5455,-38.1818"/>
+  </object>
+  <object id="870" x="165.765" y="372.348" width="19.6364" height="3.63636"/>
  </objectgroup>
 </map>
