@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="8146">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="8154">
  <properties>
   <property name="above_player_layers" value="[9, 12, 17, 18, 27]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26]"/>
@@ -18,7 +18,7 @@
    eJzt3c1twkAUhVGLQgOVkFSSpJGkk7gW/KQsIsUL/+C5MDpHejtYAPNJlmbEDAMAAAAAAAAAAAAAAAAAAADwqF5Ow3A+aC6n9KeDx1XtjdN8TfOxYr4XvudTfzDrb3trO7lOr3/TFg0d+ZyWmK3tFf3R2vvKZ7RnmK3Ph/qDHP1Bjv4gR3+Qoz/I0R/k6A9y9Ac5+oN5Lc7pjPqDf7aep255dgZ6tOc8NbCd9iBDe5ChPci5ag9i7MNBjv4gR3+Qoz/I0R/k6A9y9Ac5+oMc/UGO/iBHf5CjP8jRH+ToD3L0Bzn6gxz9QY7+KLUOXq2F5vRH0V+G/ij6y9AfRX8Z+qPoL0N/FP0db+5eo/rv3Z8F9xWdO/1djr7n6Vlm/O1v6VqYm0una+Qe7nGvUY+2fhfGfVZL+Y95yNAeZGgPMrQHGdqDDO3Rq717LC1Ge/Qqvb9iHwYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2uwEVXkxQ
   </data>
  </layer>
- <layer id="5" name="background_2" width="224" height="116">
+ <layer id="5" name="background_2" width="224" height="116" locked="1">
   <data encoding="base64" compression="zlib">
    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
   </data>
@@ -911,6 +911,46 @@
     <property name="startingPointId" value="13"/>
    </properties>
    <point/>
+  </object>
+  <object id="8146" name="object.eventObject" x="1952" y="1888" width="159.879" height="352.333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8147" name="object.eventObject" x="2592" y="928" width="222.545" height="30">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8148" name="object.eventObject" x="928" y="576" width="31.8788" height="224.667">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8149" name="object.eventObject" x="2560" y="224" width="64.8788" height="128">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8150" name="object.eventObject" x="3904" y="1792" width="63.8788" height="355.833">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8151" name="object.eventObject" x="5824" y="1728" width="157.879" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8152" name="object.eventObject" x="6272" y="1920" width="32.5455" height="126">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8153" name="object.eventObject" x="4661" y="2984" width="86.3788" height="15.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="33" name="physics" locked="1">
