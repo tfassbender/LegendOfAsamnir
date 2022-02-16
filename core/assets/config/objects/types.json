@@ -12,9 +12,8 @@
 		physicsBodyOffsetFactorY: -0.15,
 		
 		drops: {
-			coin: 0.5,
-			big_coin: 0.2,
-			arrow: 0.05,
+			coin: 0.6,
+			big_coin: 0.1,
 		}
 		
 		destroySound: wood_break,
@@ -35,8 +34,7 @@
 		
 		drops: {
 			coin: 0.4,
-			big_coin: 0.1,
-			arrow: 0.05,
+			big_coin: 0.05,
 		}
 		
 		animationBreak: box_break,
@@ -135,8 +133,7 @@
 		
 		drops: {
 			coin: 0.6,
-			big_coin: 0.3,
-			arrow: 0.1,
+			big_coin: 0.4,
 		}
 		dropPositionOffsetY: -0.25,
 		renderDropsAboveObject: true,

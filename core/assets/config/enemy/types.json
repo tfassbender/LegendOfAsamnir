@@ -53,7 +53,6 @@
 		
 		drops: {
 			coin: 0.5,
-			big_coin: 0.2,
 		}
 	},
 	mini_golem: {
@@ -139,7 +138,7 @@
 		
 		drops: {
 			coin: 0.5,
-			big_coin: 0.2,
+			big_coin: 0.1,
 		}
 	},
 	mimic_chest: {
@@ -168,9 +167,8 @@
 		pushForceHit: 30,
 		
 		drops: {
-			coin: 0.3,
-			big_coin: 0.4,
-			arrow: 0.2,
+			coin: 0.7,
+			big_coin: 0.1,
 		}
 	},
 	mimic_barrel: {
@@ -201,7 +199,6 @@
 		drops: {
 			coin: 0.4,
 			big_coin: 0.2,
-			arrow: 0.1,
 		}
 	},
 	cobra: {
@@ -230,7 +227,7 @@
 		
 		drops: {
 			coin: 0.4,
-			big_coin: 0.3,
+			big_coin: 0.1,
 		}
 	},
 	fire_elemental: {
@@ -316,7 +313,6 @@
 		drops: {
 			coin: 0.4,
 			big_coin: 0.1,
-			arrow: 0.2,
 		}
 	},
 	cyclops: {
@@ -371,5 +367,9 @@
 		
 		pushForceDamage: 0,
 		pushForceHit: 0,
+		
+		drops: {
+			coin: 0.5,
+		}
 	},
 }
