@@ -114,7 +114,7 @@ public class GameMapDialog extends InGameMenuDialog {
 			batch.begin();
 			
 			background.draw(batch, 120, -20, 950, 640);
-			banner.draw(batch, 200, 480, 600, 200);
+			banner.draw(batch, 165, 480, 650, 200);
 			buttonBackToMenu.draw(batch);
 			
 			float mapTextureX = 0;
