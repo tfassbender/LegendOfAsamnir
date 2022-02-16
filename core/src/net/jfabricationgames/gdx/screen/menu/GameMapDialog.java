@@ -80,11 +80,12 @@ public class GameMapDialog extends InGameMenuDialog {
 		playerPositionPointerBlinkTimer = 0;
 	}
 	
-	private void loadConfig(String mapConfigPath) {
+	protected void loadConfig(String mapConfigPath) {
 		if (mapConfigPath == null) {
 			Gdx.app.debug(getClass().getSimpleName(), "No map config given in current map. Mini-Map will not be shown.");
 			config = new MapConfig();
 			config.name = "Map";
+			mapTexture = null;
 			return;
 		}
 		
@@ -120,7 +121,7 @@ public class GameMapDialog extends InGameMenuDialog {
 			float mapTextureX = 0;
 			float mapTextureY = 0;
 			if (hasMapTexture()) {
-				mapTextureX = 100 + (1000 - config.textureHeight) / 2;
+				mapTextureX = 100 + (1000 - config.textureWidth) / 2;
 				mapTextureY = 40 + (500 - config.textureHeight) / 2;
 				batch.draw(mapTexture, mapTextureX, mapTextureY, config.textureWidth, config.textureHeight);
 			}

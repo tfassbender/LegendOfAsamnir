@@ -454,6 +454,7 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	public void showMap() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Show Map' selected");
+		mapDialog.loadConfig(gameScreen.getGameMapConfigPath());
 		mapDialog.setVisible(true);
 		mapDialog.setFocusToBackButton();
 		stateMachine.changeState("mapDialog_button_mapDialogBack");

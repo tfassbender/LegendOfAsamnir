@@ -1,5 +1,5 @@
 {
-	name: Village,
+	name: Hyrgat,
 	texture: {
 		atlas: packed/menu/menu.atlas,
 		texture: mini_map_demo_2_main
