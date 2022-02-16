@@ -73,7 +73,7 @@ public class RandomIdleStatesMovementAI extends RandomMovementAI {
 				}
 			}
 			
-			if (isMovingAgainstStaticBody()) {
+			if (isMovementTakingTooLong()) {
 				resetTargetPosition();
 			}
 		}

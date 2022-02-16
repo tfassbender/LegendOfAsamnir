@@ -1,7 +1,6 @@
 package net.jfabricationgames.gdx.character.ai.implementation;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Contact;
 
@@ -12,12 +11,14 @@ import net.jfabricationgames.gdx.character.state.CharacterState;
 
 public class RandomMovementAI extends AbstractRelativeMovementAI {
 	
+	private static final float MAX_TIME_TO_REACH_TARGET = 5f;
+	
 	private Vector2 targetPosition;
 	
 	private float maxDistance;
+	private float targetTime = 0f;
 	
 	private boolean changeTargetWhenStaticBodyHit;
-	private Body staticBodyContact;
 	
 	public RandomMovementAI(ArtificialIntelligence subAI, CharacterState movingState, CharacterState idleState, float maxDistance,
 			float idleTimeBetweenMovements, boolean changeTargetWhenStaticBodyHit) {
@@ -71,7 +72,8 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 				}
 			}
 			
-			if (isMovingAgainstStaticBody()) {
+			targetTime += delta;
+			if (isMovementTakingTooLong()) {
 				calculateNextTargetPoint();
 			}
 		}
@@ -79,11 +81,8 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 		subAI.executeMove(delta);
 	}
 	
-	/**
-	 * Indicates that the character is moving against a static body. This indicates that the target cannot be reached and a new target has to be chosen.
-	 */
-	protected boolean isMovingAgainstStaticBody() {
-		return staticBodyContact != null;
+	protected boolean isMovementTakingTooLong() {
+		return targetTime > MAX_TIME_TO_REACH_TARGET;
 	}
 	
 	protected void calculateNextTargetPoint() {
@@ -95,6 +94,8 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 		}
 		
 		resetIdleTimeBetweenMovements();
+		
+		targetTime = 0;
 	}
 	
 	protected boolean isTargetPositionSet() {
@@ -108,37 +109,12 @@ public class RandomMovementAI extends AbstractRelativeMovementAI {
 	@Override
 	public void beginContact(Contact contact) {
 		if (changeTargetWhenStaticBodyHit) {
-			boolean isCharacterInvolved = isCharacterInvolved(contact);
-			boolean isStaticBodyInvolved = isStaticBodyInvolved(contact);
-			
-			if (isCharacterInvolved && isStaticBodyInvolved) {
+			if (isCharacterInvolved(contact) && isStaticBodyInvolved(contact)) {
 				calculateNextTargetPoint();
-				
-				//store the contact body to change the target again if it doesn't change the direction enough to get away from that body
-				if (contact.getFixtureA().getBody().getType() == BodyType.StaticBody) {
-					staticBodyContact = contact.getFixtureA().getBody();
-				}
-				else {
-					staticBodyContact = contact.getFixtureB().getBody();
-				}
 			}
 		}
 		
 		super.beginContact(contact);
-	}
-	
-	@Override
-	public void endContact(Contact contact) {
-		if (changeTargetWhenStaticBodyHit) {
-			boolean isCharacterInvolved = isCharacterInvolved(contact);
-			
-			if (isCharacterInvolved
-					&& (contact.getFixtureA().getBody() == staticBodyContact || contact.getFixtureB().getBody() == staticBodyContact)) {
-				staticBodyContact = null;
-			}
-		}
-		
-		super.endContact(contact);
 	}
 	
 	private boolean isCharacterInvolved(Contact contact) {
