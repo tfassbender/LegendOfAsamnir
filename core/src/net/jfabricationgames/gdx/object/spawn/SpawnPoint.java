@@ -137,8 +137,11 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 				return false;
 			}
 		}
-		else if (spawnedObjectPresentInMap) {
-			//don't spawn the object twice (except for GAME_LOADED, because the state is set by the loading mechanisms but the objects are not spawned yet)
+		else if (spawnedObjectPresentInMap && event.eventType != EventType.MAP_ENTERED) {
+			/** don't spawn the object twice, except for 
+			 * - GAME_LOADED, because the state is set by the loading mechanisms but the objects are not spawned yet
+			 * - MAP_ENTERED, because no objects will be spawned yet
+			 */
 			return false;
 		}
 		

@@ -56,7 +56,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Barkeeper",
-				displayText: "A lantern? I had one, but a view days ago an adventurer needed it and so I sold it to him. Unfortunately I haven't seen him since...\n \nBut there is another tavern in the castle to the east. They shurely have a lantern there.\nBut they usually don't let adventurers enter the castle, so you'll have to find a way to get into the castle's tavern.",
+				displayText: "A lantern? I had one, but a few days ago an adventurer needed it and so I sold it to him. Unfortunately I haven't seen him since...\n \nBut there is another tavern in the castle to the east. They shurely have a lantern there.\nBut they usually don't let adventurers enter the castle, so you'll have to find a way to get into the castle's tavern.",
 				colorHeader: #deba2c,
 				showNextPageIcon: true,
 			}

@@ -69,7 +69,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "???",
-				displayText: "Oh ... wait ... \nThat was the wrong chapter...\nLet's skipp a view pages...\n...\nThis seems to be a good point to start!",
+				displayText: "Oh ... wait ... \nThat was the wrong chapter...\nLet's skipp a few pages...\n...\nThis seems to be a good point to start!",
 				colorHeader: #000099,
 				showNextPageIcon: true,
 				showOnBlackScreen: true,
@@ -218,7 +218,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Thorin",
-				displayText: "Maybe I just had a view drinks to much last night...\n...\nOr not enough drinks!",
+				displayText: "Maybe I just had a few drinks too much last night...\n...\nOr not enough drinks!",
 				showNextPageIcon: true,
 			}
 			
