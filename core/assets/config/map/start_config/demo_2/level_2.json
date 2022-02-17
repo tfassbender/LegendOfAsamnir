@@ -1,0 +1,17 @@
+{
+	startingPointMapping: {
+		game_loaded: reset_npc_interaction,
+		0: reset_npc_interaction,
+	},
+	eventsLists: {
+		// open the gate when the player gets out of the dungeon, because he can't reach the switch (and it was already activated)
+		reset_npc_interaction: {
+			events: [
+				{
+					eventType: SET_GLOBAL_CONDITION_VALUE,
+					stringValue: "{key: demo_2_level_2_adventurer_at_pressure_switches_moved, value: false}",
+				}
+			]
+		},
+	}
+}

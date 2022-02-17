@@ -66,9 +66,11 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	public void applyState(ObjectMap<String, String> state) {
 		super.applyState(state);
 		
-		active = Boolean.parseBoolean(state.get("active"));
-		changeSwitchObjectState(stateSwitchId, active);
-		updateSprite();
+		if (!isPressureActivated()) {
+			active = Boolean.parseBoolean(state.get("active"));
+			changeSwitchObjectState(stateSwitchId, active);
+			updateSprite();
+		}
 	}
 	
 	@Override

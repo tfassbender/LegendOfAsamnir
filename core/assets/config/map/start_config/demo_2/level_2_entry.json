@@ -1,5 +1,6 @@
 {
 	startingPointMapping: {
+		game_loaded: open_gate,
 		2: open_gate,
 	},
 	eventsLists: {

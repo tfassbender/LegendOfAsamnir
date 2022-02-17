@@ -52,8 +52,8 @@ import net.jfabricationgames.gdx.screen.menu.InGameMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.LoadingScreen;
 import net.jfabricationgames.gdx.screen.menu.PauseMenuScreen;
 import net.jfabricationgames.gdx.screen.menu.ShopMenuScreen;
-import net.jfabricationgames.gdx.startconfig.StartConfigUtil;
 import net.jfabricationgames.gdx.state.GameStateManager;
+import net.jfabricationgames.gdx.util.StartConfigUtil;
 
 public class GameScreen extends ScreenAdapter implements InputActionListener, EventListener, InGameMenuScreen.MenuGameScreen {
 	
@@ -187,7 +187,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		if (isNewGame()) {
 			String initialMapIdentifier = gameMapManager.getInitialMapIdentifier();
 			gameMapManager.showMap(initialMapIdentifier, gameMapManager.getInitialStartingPointId());
-			StartConfigUtil.configureGameStartConfig(gameMapManager.getDebugStartConfig(), gameMapManager.getInitialStartingPointId());
+			StartConfigUtil.configureMapStartConfig(gameMapManager.getDebugStartConfig(), gameMapManager.getInitialStartingPointId());
 		}
 		else {
 			GameDataHandler gameDataHandler = GameDataHandler.getInstance();
@@ -217,7 +217,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			// fire configured events, that are needed at a specific entry point
 			String mapStartConfig = GameMapManager.getInstance().getMapStartConfig(mapIdentifier);
 			if (mapStartConfig != null) {
-				StartConfigUtil.configureGameStartConfig(mapStartConfig, playerStartingPointId);
+				StartConfigUtil.configureMapStartConfig(mapStartConfig, playerStartingPointId);
 			}
 		});
 	}
@@ -312,6 +312,13 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		}
 		if (event.eventType == EventType.CHANGE_MAP) {
 			changeMap(event.stringValue, event.intValue);
+		}
+		if (event.eventType == EventType.GAME_LOADED) {
+			String currentMapIdentifier = map.getCurrentMapIdentifier();
+			String mapStartConfig = GameMapManager.getInstance().getMapStartConfig(currentMapIdentifier);
+			if (mapStartConfig != null) {
+				StartConfigUtil.executeGameLoadStartConfig(mapStartConfig);
+			}
 		}
 	}
 	

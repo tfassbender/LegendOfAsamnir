@@ -473,6 +473,11 @@ public class GameMapImplementation implements GameMap {
 	}
 	
 	@Override
+	public String getCurrentMapIdentifier() {
+		return currentMapIdentifier;
+	}
+	
+	@Override
 	public CutsceneControlledUnit getUnitById(String unitId) {
 		if (CutsceneHandler.CONTROLLED_UNIT_ID_PLAYER.equals(unitId)) {
 			return player;

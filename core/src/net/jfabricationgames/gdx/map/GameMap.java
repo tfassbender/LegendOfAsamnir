@@ -60,6 +60,8 @@ public interface GameMap extends EventListener, CutsceneUnitProvider, EnemyChara
 	public float getMapWidth();
 	public float getMapHeight();
 	
+	public String getCurrentMapIdentifier();
+	
 	public void addPostAddObjectProcessing(Function<Array<GameObject>, Array<GameObject>> postAddObjectProcessingFunction);
 	
 	public void removePhysicsObjectsWithType(MapObjectType invisiblePathBlocker);

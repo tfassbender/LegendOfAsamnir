@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.startconfig;
+package net.jfabricationgames.gdx.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -9,6 +9,7 @@ import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 import net.jfabricationgames.gdx.event.EventConfig;
 import net.jfabricationgames.gdx.event.EventHandler;
 import net.jfabricationgames.gdx.event.EventListener;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.map.GameMapManager;
 import net.jfabricationgames.gdx.rune.RuneType;
 
@@ -17,9 +18,11 @@ import net.jfabricationgames.gdx.rune.RuneType;
  */
 public class StartConfigUtil {
 	
+	private static final String GAME_LOADED_START_CONFIG_NAME = "game_loaded";
+	
 	private static StartConfigEventListener eventListener;
 	
-	public static void configureGameStartConfig(String startConfigPath, int initialStartingPointId) {
+	public static void configureMapStartConfig(String startConfigPath, int initialStartingPointId) {
 		initializeEventListener();
 		
 		if (startConfigPath == null || startConfigPath.isEmpty()) {
@@ -31,6 +34,21 @@ public class StartConfigUtil {
 				"Executing events from start configuration file: " + startConfigPath + " with starting point id: " + initialStartingPointId);
 		StartConfig startConfig = loadStartConfigFromPath(startConfigPath);
 		executeStartConfigEvents(startConfig, initialStartingPointId);
+	}
+	
+	public static void executeGameLoadStartConfig(String startConfigPath) {
+		if (startConfigPath == null || startConfigPath.isEmpty()) {
+			Gdx.app.debug(StartConfigUtil.class.getSimpleName(), "No start settings configured.");
+			return;
+		}
+		
+		Gdx.app.debug(StartConfigUtil.class.getSimpleName(),
+				"Executing events from start configuration file: " + startConfigPath + " after game loaded.");
+		StartConfig startConfig = loadStartConfigFromPath(startConfigPath);
+		String configName = startConfig.startingPointMapping.get(GAME_LOADED_START_CONFIG_NAME);
+		if (configName != null) {
+			executeStartConfigEvents(startConfig, configName);
+		}
 	}
 	
 	private static void initializeEventListener() {
@@ -97,15 +115,10 @@ public class StartConfigUtil {
 		
 		@Override
 		public void handleEvent(EventConfig event) {
-			switch (event.eventType) {
-				case COLLECT_RUNE: {
-					RuneType type = RuneType.getByContainingName(event.stringValue);
-					GameMapManager.getInstance().getMap().processRunePickUp(type);
-					GlobalValuesDataHandler.getInstance().put(type.globalValueKeyCollected, true);
-				}
-				default:
-					//do nothing here, because not all events are handled here
-					break;
+			if (event.eventType == EventType.COLLECT_RUNE) {
+				RuneType type = RuneType.getByContainingName(event.stringValue);
+				GameMapManager.getInstance().getMap().processRunePickUp(type);
+				GlobalValuesDataHandler.getInstance().put(type.globalValueKeyCollected, true);
 			}
 		}
 	}
