@@ -219,6 +219,9 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			if (mapStartConfig != null) {
 				StartConfigUtil.configureMapStartConfig(mapStartConfig, playerStartingPointId);
 			}
+			
+			// quicksave after entering a map
+			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.QUICKSAVE));
 		});
 	}
 	

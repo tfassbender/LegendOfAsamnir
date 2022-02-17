@@ -11,6 +11,9 @@ import net.jfabricationgames.gdx.animation.AnimationSpriteConfig;
 import net.jfabricationgames.gdx.animation.TextureAnimationDirector;
 import net.jfabricationgames.gdx.character.player.implementation.SpecialAction;
 import net.jfabricationgames.gdx.constants.Constants;
+import net.jfabricationgames.gdx.event.EventConfig;
+import net.jfabricationgames.gdx.event.EventHandler;
+import net.jfabricationgames.gdx.event.EventType;
 import net.jfabricationgames.gdx.screen.ScreenManager;
 import net.jfabricationgames.gdx.screen.menu.components.AmmoSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
@@ -446,6 +449,9 @@ public class PauseMenuScreen extends InGameMenuScreen<PauseMenuScreen> {
 	
 	public void backToMainMenu() {
 		Gdx.app.debug(getClass().getSimpleName(), "'Main Menu' selected");
+		
+		//save the game before navigating back to the main menu
+		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.QUICKSAVE));
 		removeInputListener();
 		gameScreen.dispose();
 		
