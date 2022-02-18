@@ -64,8 +64,8 @@
 	{
 		name: demo_2_main,
 		map: "map/demo_2_main.tmx",
-		initialStartingPointId: 0,
-		//initial: true
+		initialStartingPointId: 3,
+		initial: true
 	},
 	{
 		name: demo_2_village_blacksmith,
@@ -103,7 +103,7 @@
 		mapEnteringConfig: config/map/start_config/demo_2/level_2_entry.json,
 		initialStartingPointId: 1,
 		debugStartConfig: config/debug/start_config/demo_2/level_2_entry.json,
-		initial: true
+		//initial: true
 	},
 	{
 		name: demo_2_level_2,
