@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="91" height="103" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="2002">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="91" height="103" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="2006">
  <properties>
   <property name="above_player_layers" value="[6]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -273,6 +273,38 @@
    <properties>
     <property name="eventParameter" value="demo_2_tutorial_entry"/>
    </properties>
+  </object>
+  <object id="2002" name="object.signboard" x="694.667" y="1676">
+   <properties>
+    <property name="colorHeader" value="#0000ff"/>
+    <property name="displayText" value="If you hold down the attack button for a while, you can charge a spin attack. But keeping it charged will cost endurance."/>
+    <property name="displayTextHeader" value="Spin Attack"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2003" name="object.signboard" x="1424.33" y="716.667">
+   <properties>
+    <property name="colorHeader" value="#0000ff"/>
+    <property name="displayText" value="In the top right corner of the screen you can find your characters stats. It includes your current health, your shield, your mana and your endurance. Without a shield you cannot block attacks. Without mana you cannot use magical items. Without endurance you cannot attack, block or run fast."/>
+    <property name="displayTextHeader" value="Display"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2004" name="object.signboard" x="928" y="1034">
+   <properties>
+    <property name="colorHeader" value="#0000ff"/>
+    <property name="displayText" value="Some items can be equiped and used with the space bar on the keyboard or the x button on the controller. You can view and equip items in the menu, or by using the keys R or T on the keyboard or the Shoulder Buttons RB or LB on the controller. Some items need ammunition to be used, others need mana."/>
+    <property name="displayTextHeader" value="Items"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2005" name="object.signboard" x="1454" y="2506.67">
+   <properties>
+    <property name="colorHeader" value="#0000ff"/>
+    <property name="displayText" value="If you press the attack button, while running fast you will use a jump attack. This attack is more powerfull, than a normal attack, but costs more endurance."/>
+    <property name="displayTextHeader" value="Jump Attack"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="physics" locked="1">
