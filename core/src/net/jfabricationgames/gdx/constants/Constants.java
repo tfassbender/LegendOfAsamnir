@@ -2,6 +2,8 @@ package net.jfabricationgames.gdx.constants;
 
 public class Constants {
 	
+	public static final String GAME_VERSION = "0.2.0";
+	
 	public static final boolean DEBUG = false;
 	
 	public static final float WORLD_TO_SCREEN = 0.04f;
