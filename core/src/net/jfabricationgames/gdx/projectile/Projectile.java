@@ -226,7 +226,7 @@ public abstract class Projectile implements ContactListener {
 	
 	protected void stopProjectileAfterObjectHit() {
 		if (hasBody()) {
-			setBodyLinearDamping();
+			startBodyLinearDamping();
 			attackPerformed = true;
 		}
 	}
@@ -281,7 +281,8 @@ public abstract class Projectile implements ContactListener {
 		Fixture fixtureB = contact.getFixtureB();
 		
 		Object attackUserData = CollisionUtil.getCollisionTypeUserData(collisionType, fixtureA, fixtureB);
-		if (attackUserData == this) {
+		Fixture attackedFixture = CollisionUtil.getOtherTypeFixture(collisionType, fixtureA, fixtureB);
+		if (attackUserData == this && !attackedFixture.isSensor()) {
 			Object attackedUserData = CollisionUtil.getOtherTypeUserData(collisionType, fixtureA, fixtureB);
 			
 			if (attackedUserData instanceof ProjectileReflector) {
@@ -295,7 +296,7 @@ public abstract class Projectile implements ContactListener {
 				hittable.takeDamage(damage, typeConfig.attackType);
 			}
 			
-			setBodyLinearDamping();
+			startBodyLinearDamping();
 			attackPerformed = true;
 			
 			processContact(attackedUserData);
@@ -306,7 +307,7 @@ public abstract class Projectile implements ContactListener {
 		return reflected || (attackPerformed && !typeConfig.multipleHitsPossible);
 	}
 	
-	protected void setBodyLinearDamping() {
+	protected void startBodyLinearDamping() {
 		body.setLinearDamping(typeConfig.dampingAfterObjectHit);
 	}
 	

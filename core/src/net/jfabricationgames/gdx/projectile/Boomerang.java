@@ -78,11 +78,11 @@ public class Boomerang extends Projectile {
 	}
 	
 	@Override
-	protected void setBodyLinearDamping() {
+	protected void startBodyLinearDamping() {
 		if (moveBackToPlayer) {
 			return;
 		}
 		
-		super.setBodyLinearDamping();
+		super.startBodyLinearDamping();
 	}
 }
