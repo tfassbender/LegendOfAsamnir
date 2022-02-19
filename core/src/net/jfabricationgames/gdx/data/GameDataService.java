@@ -18,7 +18,7 @@ import net.jfabricationgames.gdx.event.EventType;
 
 public class GameDataService implements EventListener {
 	
-	public static final String GAME_DATA_SAVE_DIRECTORY = ".DwarfScrollerGDX/saves/";
+	public static final String GAME_DATA_SAVE_DIRECTORY = ".legend_of_asamnir/saves/";
 	public static final String GAME_DATA_SAVE_FILENAME_QUICKSAVE = "quicksave.json";
 	public static final String GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER = "<index>";
 	public static final String GAME_DATA_SAVE_FILENAME = "save_" + GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER + ".json";

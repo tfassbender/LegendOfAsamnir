@@ -15,7 +15,7 @@ public class LogConfiguration {
 		LogAdapter logAdapter = new LogAdapter();
 		logAdapter.log("APPLICATION_START", "################################################################################");
 		logAdapter.log("APPLICATION_START", "#                                                                              #");
-		logAdapter.log("APPLICATION_START", "#                      Starting DwarfScrollerGDX                               #");
+		logAdapter.log("APPLICATION_START", "#                      Starting - Legend of Asamnir                            #");
 		logAdapter.log("APPLICATION_START", "#                                                                              #");
 		logAdapter.log("APPLICATION_START", "################################################################################");
 		

@@ -16,7 +16,7 @@ public class DesktopLauncher {
 	
 	private static LwjglApplicationConfiguration createApplicationConfiguration() {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "DwarfScrollerGDX";
+		config.title = "Legend of Asamnir";
 		config.width = 1200;
 		config.height = 800;
 		config.vSyncEnabled = true;
