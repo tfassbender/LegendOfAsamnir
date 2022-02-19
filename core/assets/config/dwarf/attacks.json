@@ -14,7 +14,7 @@
 		type: HIT,
 		delay: 0.3,
 		duration: 0,
-		damage: 15,
+		damage: 20,
 		distFromCenter: 0.5,
 		hitFixtureRadius: 0.6,
 		pushForce: 1
@@ -24,7 +24,7 @@
 		type: SPIN_ATTACK,
 		delay: 0.1,
 		duration: 0,
-		damage: 5,
+		damage: 10,
 		distFromCenter: 0,
 		hitFixtureRadius: 1.5,
 		pushForce: 3,
