@@ -205,10 +205,16 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	//****************************************************************
 	
 	public void continueGame() {
-		new GameDataService().loadGameDataFromQuicksaveSlot();
-		createGameScreen(() -> {
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
-		});
+		try {
+			new GameDataService().loadGameDataFromQuicksaveSlot();
+			createGameScreen(() -> {
+				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.GAME_LOADED));
+			});
+		}
+		catch (IllegalStateException e) {
+			Gdx.app.log(getClass().getSimpleName(), "Continue Game not possible due to an exception. Starting new game instead: " + e.getMessage());
+			startGame();
+		}
 	}
 	
 	public void showLoadGameMenu() {
