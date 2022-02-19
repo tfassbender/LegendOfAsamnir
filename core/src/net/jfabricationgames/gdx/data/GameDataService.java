@@ -61,17 +61,21 @@ public class GameDataService implements EventListener {
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.BEFORE_PERSIST_STATE));
 	}
 	
-	public void loadGameDataFromQuicksaveSlot() {
+	public void loadGameDataFromQuicksaveSlot() throws IllegalStateException {
 		loadGameData(GAME_DATA_SAVE_FILENAME_QUICKSAVE);
 	}
 	
-	public void loadGameDataFromSaveSlot(int slot) {
+	public void loadGameDataFromSaveSlot(int slot) throws IllegalStateException {
 		loadGameData(GAME_DATA_SAVE_FILENAME.replace(GAME_DATA_SAVE_FILENAME_INDEX_PLACEHOLDER, Integer.toString(slot)));
 	}
 	
-	private void loadGameData(String fileName) {
+	private void loadGameData(String fileName) throws IllegalStateException {
 		Gdx.app.log(getClass().getSimpleName(), "loading game from file: " + fileName);
 		FileHandle fileHandle = Gdx.files.external(GAME_DATA_SAVE_DIRECTORY + fileName);
+		
+		if (!fileHandle.exists()) {
+			throw new IllegalStateException("The save file '" + fileName + "' does not exist.");
+		}
 		
 		Json json = new Json();
 		GameDataContainer gameData = json.fromJson(GameDataContainer.class, fileHandle);
