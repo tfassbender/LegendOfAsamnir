@@ -55,7 +55,7 @@
 		name: demo_2_prolog,
 		map: "map/demo_2_prolog.tmx",
 		initialStartingPointId: 0,
-		initial: true
+		//initial: true
 	},
 	{
 		name: demo_2_tutorial,
@@ -110,9 +110,16 @@
 		name: demo_2_level_2,
 		map: "map/demo_2_level_2.tmx",
 		mapEnteringConfig: config/map/start_config/demo_2/level_2.json,
-		initialStartingPointId: 4,
+		initialStartingPointId: 11,
 		debugStartConfig: config/debug/start_config/demo_2/level_2.json,
 		//initial: true
+	},
+	{
+		name: demo_2_level_3,
+		map: "map/demo_2_level_3.tmx",
+		initialStartingPointId: 0,
+		debugStartConfig: config/debug/start_config/demo_2/level_3.json,
+		initial: true
 	},
 	{
 		name: demo_2_level_5_entry,
