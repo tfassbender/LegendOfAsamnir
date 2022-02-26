@@ -1821,7 +1821,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="8" name="physics" locked="1">
+ <objectgroup id="8" name="physics">
   <object id="327" x="128" y="2720" width="192" height="112.333"/>
   <object id="328" x="448" y="2720" width="224.333" height="111.667"/>
   <object id="329" x="320" y="2656" width="13" height="212.667"/>
