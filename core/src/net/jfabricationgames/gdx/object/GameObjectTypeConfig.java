@@ -79,4 +79,6 @@ public class GameObjectTypeConfig {
 	//****************************************
 	
 	public boolean pressureActivated = false;
+	public boolean magicActivated = false;
+	public boolean canBeDeactivated = true;
 }

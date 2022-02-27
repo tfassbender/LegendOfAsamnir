@@ -92,5 +92,19 @@
 			frameDuration: 0.1,
 			playMode: NORMAL
 		},
+		{
+			alias: magic_switch_activate,
+			name: magic_switch,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: NORMAL,
+		},
+		{
+			alias: magic_switch_deactivate,
+			name: magic_switch,
+			atlas: packed/demo/demo.atlas,
+			frameDuration: 0.1,
+			playMode: REVERSED,
+		},
 	]
 }

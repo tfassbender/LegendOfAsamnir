@@ -234,7 +234,7 @@ public class GameObject implements Hittable, StatefulMapObject, CutsceneControll
 		}
 	}
 	
-	public void changeBodyToNonSensor() {
+	protected void changeBodyToNonSensor() {
 		for (Fixture fixture : body.getFixtureList()) {
 			fixture.setSensor(false);
 		}

@@ -173,6 +173,9 @@ public class InteractiveObject extends GameObject implements Interactive {
 		if (typeConfig.interactiveAction != null) {
 			typeConfig.interactiveAction.execute(this);
 		}
+		if (typeConfig.animationAction != null) {
+			animation = getActionAnimation();
+		}
 	}
 	
 	protected void playInteractionSound() {

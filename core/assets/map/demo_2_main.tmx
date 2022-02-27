@@ -158,7 +158,7 @@
    eJzt0zERACAQBLHr378whgLkgAmG4hMF22wCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBnq5Jdvyugp3Hfm/4DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeO4A1cYDgA==
   </data>
  </layer>
- <objectgroup id="4" name="objects" locked="1">
+ <objectgroup id="4" name="objects">
   <object id="1" name="player.startingPosition" x="192" y="2240">
    <properties>
     <property name="startingPointId" value="0"/>
@@ -20340,7 +20340,7 @@
    <polygon points="0,0 0.727273,-30 18,-60.3636"/>
   </object>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics">
+ <objectgroup id="34" name="unreachable_area_physics" locked="1">
   <object id="5698" x="3200" y="543.5" width="128" height="32"/>
   <object id="5699" x="3296" y="479.5" width="32" height="64"/>
   <object id="5709" x="2880" y="863.5" width="96" height="96"/>

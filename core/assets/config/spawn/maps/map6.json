@@ -1,9 +1,11 @@
 {
 	map6__chestDroppingHealthItem: {
+		events: [playerOutOfAmmo_arrows, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 		spawnType: object.chest,
 		spawnTypeMapProperties: "{drop: \"{health: 1}\"}",
 	},
 	map6__chestDroppingShieldItem: {
+		events: [playerOutOfAmmo_arrows, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 		spawnType: object.chest,
 		spawnTypeMapProperties: "{drop: \"{shield: 1}\"}",
 	}

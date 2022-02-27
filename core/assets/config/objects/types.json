@@ -331,6 +331,26 @@
 		density: 5f,
 	},
 	
+	magic_switch: {
+		type: STATE_SWITCH,
+		
+		texture: magic_switch_1,
+		textureAfterAction: magic_switch_20,
+		interactionSound: switch_activated,
+		animationAction: magic_switch_activate,
+		
+		physicsBodySizeFactorX: 0.8f,
+		physicsBodySizeFactorY: 0.8f,
+		physicsBodyOffsetFactorX: 0f,
+		physicsBodyOffsetFactorY: 0f,
+		
+		addSensor: false,
+		isSensor: false,
+		changeBodyToSensorAfterAction: true,
+		magicActivated: true,
+		canBeDeactivated: false,
+	},
+	
 	//**********************************
 	//*** Walls for demo 2 level 2
 	//**********************************

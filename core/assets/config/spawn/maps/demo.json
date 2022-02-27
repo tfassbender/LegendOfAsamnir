@@ -1,9 +1,11 @@
 {
 	gameStart_potDroppingBigCoin: {
+		events: [playerOutOfAmmo_arrows, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 		spawnType: object.pot,
 		spawnTypeMapProperties: "{drop: \"{big_coin: 1}\"}",
 	}
 	gameStart_miniGolemMovingAndDroppingBigCoin: {
+		events: [playerOutOfAmmo_arrows, NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 		spawnType: enemy.mini_golem,
 		spawnTypeMapProperties: "{drop: \"{big_coin: 1}\", predefinedMovementPositions: \"[{x:0, y:-2}, {x:0, y:0}]\"}",
 	}

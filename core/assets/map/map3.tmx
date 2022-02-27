@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="215">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="218">
  <properties>
   <property name="background_layers" value="[0, 1]"/>
   <property name="continuous_damage" value="1"/>
@@ -597,6 +597,21 @@ Arrows: 25 Coins..</property>
    <point/>
   </object>
   <object id="211" name="item.ring" x="512" y="464">
+   <point/>
+  </object>
+  <object id="216" name="object.magic_switch" x="800" y="1312">
+   <properties>
+    <property name="eventParameter" value="demo_magic_switch"/>
+    <property name="stateSwitchId" value="demo_magic_switch"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="217" name="object.pressure_switch" x="864" y="1312">
+   <properties>
+    <property name="canBeDeactivated" value="false"/>
+    <property name="eventParameter" value="demoLevel_pressure_switch_not_deactivateable"/>
+    <property name="stateSwitchId" value="demoLevel_pressure_switch_not_deactivateable"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

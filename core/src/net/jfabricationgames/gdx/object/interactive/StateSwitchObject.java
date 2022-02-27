@@ -16,12 +16,14 @@ import net.jfabricationgames.gdx.object.GameObjectMap;
 import net.jfabricationgames.gdx.object.GameObjectTypeConfig;
 import net.jfabricationgames.gdx.physics.CollisionUtil;
 import net.jfabricationgames.gdx.physics.PhysicsCollisionType;
+import net.jfabricationgames.gdx.projectile.MagicWave;
 import net.jfabricationgames.gdx.rune.RuneType;
 
 public class StateSwitchObject extends InteractiveObject implements EventListener {
 	
 	private static final String MAP_PROPERTIES_KEY_STATE_SWITCH_ID = "stateSwitchId";
 	private static final String MAP_PROPERTIES_KEY_STATE_CHANGED_EVENT_PARAMETER = "eventParameter";
+	private static final String MAP_PROPERTIES_KEY_CAN_BE_DEACTIVATED = "canBeDeactivated";
 	private static final String RUNE_NEEDED_EVENT_KEY = "rune_needed__ansuz";
 	
 	private static ObjectMap<String, Boolean> switchObjectStates = new ObjectMap<>();
@@ -66,7 +68,7 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	public void applyState(ObjectMap<String, String> state) {
 		super.applyState(state);
 		
-		if (!isPressureActivated()) {
+		if (!isPressureActivated() && canBeDeactivated()) {
 			active = Boolean.parseBoolean(state.get("active"));
 			changeSwitchObjectState(stateSwitchId, active);
 			updateSprite();
@@ -76,15 +78,18 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	@Override
 	protected void executeInteraction() {
 		if (runeCollected()) {
-			performAction();
-			active = !active;
-			
-			changeSwitchObjectState(stateSwitchId, active);
-			updateSprite();
-			executeEvent();
-			playInteractionSound();
-			
-			MapObjectDataHandler.getInstance().addStatefulMapObject(this);
+			if (!active || canBeDeactivated()) {
+				performAction();
+				active = !active;
+				
+				changeSwitchObjectState(stateSwitchId, active);
+				updateSprite();
+				executeEvent();
+				playInteractionSound();
+				changeBodySensorProperty();
+				
+				MapObjectDataHandler.getInstance().addStatefulMapObject(this);
+			}
 		}
 		else {
 			fireRuneNeededEvent();
@@ -111,6 +116,20 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 		}
 	}
 	
+	private void changeBodySensorProperty() {
+		if (typeConfig.changeBodyToSensorAfterAction) {
+			if (active) {
+				// changes the body to a sensor after the animation finished
+				actionExecuted = true;
+				changedBodyToSensor = false;
+			}
+			else {
+				actionExecuted = false;
+				changeBodyToNonSensor();
+			}
+		}
+	}
+	
 	private void fireRuneNeededEvent() {
 		EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.RUNE_NEEDED).setStringValue(RUNE_NEEDED_EVENT_KEY));
 	}
@@ -126,7 +145,12 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	@Override
 	public void beginContact(Contact contact) {
 		if (isPressureActivated()) {
-			if (CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, Object.class) != null) {
+			if (isActivatedByCollision(contact)) {
+				executeInteraction();
+			}
+		}
+		else if (isMagicActivated()) {
+			if (CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, MagicWave.class) != null) {
 				executeInteraction();
 			}
 		}
@@ -135,14 +159,31 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 		}
 	}
 	
+	private boolean isActivatedByCollision(Contact contact) {
+		Object collidingObject = CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, Object.class);
+		return collidingObject != null && !(collidingObject instanceof MagicWave);
+	}
+	
 	private boolean isPressureActivated() {
 		return typeConfig.pressureActivated;
+	}
+	
+	private boolean isMagicActivated() {
+		return typeConfig.magicActivated;
+	}
+	
+	private boolean canBeDeactivated() {
+		boolean canBeDeactivatedByMapPropertiesConfig = Boolean.parseBoolean(mapProperties.get(MAP_PROPERTIES_KEY_CAN_BE_DEACTIVATED, String.class));
+		if (!canBeDeactivatedByMapPropertiesConfig) {
+			return false;
+		}
+		return typeConfig.canBeDeactivated;
 	}
 	
 	@Override
 	public void endContact(Contact contact) {
 		if (isPressureActivated()) {
-			if (CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, Object.class) != null) {
+			if (isActivatedByCollision(contact)) {
 				executeInteraction();
 			}
 		}

@@ -18243,7 +18243,7 @@
    <polygon points="0,0 -19,-23.9297 -29.0078,-0.0078125"/>
   </object>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics" locked="1">
+ <objectgroup id="34" name="unreachable_area_physics">
   <object id="13797" x="495" y="2422.04">
    <polygon points="0,0 -14,-6 -0.25,-20.25"/>
   </object>
