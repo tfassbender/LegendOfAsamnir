@@ -1,0 +1,33 @@
+{
+	id: demo_2_level_3_signboard,
+	controlledActions: {
+		show_text_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Lost Hills",
+				displayText: "Go up, up, the mountain ahead.",
+				colorHeader: #0000ff,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			startsWithCutscene: true,
+			
+			executes: [
+				show_text_2,
+			]
+		},
+		show_text_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "The mountain ahead?\n \nWhich one?\nI'm surrounded by mountains!",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

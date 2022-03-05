@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="80" height="68" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8654">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="80" height="68" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8676">
  <properties>
   <property name="above_player_layers" value="[6, 7, 8]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -8,34 +8,34 @@
   <property name="shadow_layers" value="[9]"/>
  </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
- <layer id="1" name="background" width="80" height="68">
+ <layer id="1" name="background" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
    eJzt2+FOxCAMAOBxuelbG0+fRH0ycz6IWeIS7JVS2gJl40fjnw3Kt8I25oVlWYLzeALBOSZ13BnjSH5Ynq3jiH4riOmXzhNaYeHBb4tnEL1tc36t5u/1L6jjoJ2ln7Qdaz/JuSm/t/D/b8qutx9lKLXT+i3A7z08mln4adux8NPaY3630N5vreiXcrGo29gvVRecNjR+e97a+uX4Wd+rOXlZ+eXmkNYPtlfiVzpmKz/teOMxWPnt7UrmKnWftPazGK/Gr9STqjXs+cy7H6yFmn656OG3xXZv3qI035fL9LMKD36Yo3TundmPE/fgI49R/Wb9tfernbOFXw9L7r1z+tWp1xZ9HMEQy2/foxnFr+W+9Gj19xHo3Frv63v1KzkXs7P2w9r9RublGfxS726p80quy9H9sHdf7p62xs/SsZZfap5J/KT7r1o/7Tu51o+ah1o/bW1g62Wp3zXThyRa+b1e6tUfdz+thR/3GnP2/SSB5fiZqb2eftI1xsLvioQkrxH9ath58Nu/62Ox7YPA4+ExNeYk186DH9WPxfo3/fz6pXLM5Tz9aL94fZH63QPv+ozqR+V4y/jFhrm+j+AnGZdVztZ+XgypMcFnipr9SvLrbaeti+lHP6Na5gjf7Y/il8vT0m8l+kvt82A5tXzn8Oa3Jvqjzo2/Y2PPDh6itZ80PPhZvb+d0c/y/fdsfpL9A41h3L7kW1bJGHra1fCD7Uu+ZY3iB/PmPFdse/tbfBHPEdCPkyfnutX0S9WP1M9q/nKO/wk2/bb0o86LQ3K9JfXB9ZP8P73Eb59/PfziuFx4wfGT/h6htO4so9V6rfHTGB7FL/79wPQbo/5q2+XW8unXxx8bO/eandmPGnt8DvW/X2f1y809bv2l6lcSud+8eQhu3ZT41VhzvUbJvGvtN4JhyZo1/fh+1FimH+2XG8v0k1lMv8f4BfxUe4M=
   </data>
  </layer>
- <layer id="43" name="shadows_underneath" width="80" height="68">
+ <layer id="43" name="shadows_underneath" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt2ksOgjAQANAmLvVArjyUZ+sBXWIasVVqO8h7CQkJhNCh0x9NiVHyOaX7wINtxHGuPdbvXjleMzMWOfg3II4yH3o8C0rPdUPbFEPP3Adopd2Zz/oGAGx35L4wF2WcXeaWdV6AX9HuALDmm3+m1uDGeRfHtWu1uQf8i0/q+qt7AeAIIuy5Wuuzo4gQI2Cfrpfl3JwD+pA7sLidZr8Bo9XGE8YYAAAAAABtHvIAY2c=
+   eJzt2ksKwyAQAFChy/ZAXfVQPZsH7DJFarWN+MH3IBBICHGcMcYkBHqJ1xCeHTfOEcexVszvVjVeMjIWcfI+YB5pPbS4FqTec8PYNIeWtQ9Qy7gznvUNADhv52dhTNo4us0167ywulKeM44+ASDnn2+m1uD6+RbH3DFzMnbxS65/OhcAdjDDP1e5Z/YsZogRsKb77dj3zgFtqB04PC6j74DeSvMJcwwAAAAAgDovSSNnkQ==
   </data>
  </layer>
- <layer id="41" name="background_2" width="80" height="68">
+ <layer id="41" name="background_2" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
    eJztnH1OIzkQxdMTiWPA/LmnYDlJ4CKggZyD7MCeg5EYlmOw0ijDPTa107X7KF6Vy22nYaR5kkVI+sP+uVxlVztZLN6/vg0v/98O046ZosODxWKzK+e7cnbQdq37XZ2+zlQeoP1vwU+4HXVkJ7J1VK0+LBanppx9aLvXd2A5Nz+0udNO7ERSR8bqb8LqUyM/e19Ull/WvlE9xyur40WBS48xbtuWYeMxPl/u+ngsF8vXn6Oy7LCNNcrw88Y4k7VlHfO2bYyN5eEdcwbHHAf8auyupo32vF78VmTcf6rgJ0Iew+7cD+P58nc5vr537Nre47jC7p4b+G129foSMCzxWyV85hR+l+N7v43XWA+vz906r9X2TirsTttRIz0/skEWY3RcMptDtfBT2xCprR0ty/ymjNtSO0rnl/jZz58Cm1Pd7T77XMFP2Gx25a/hx3j1GOu4xjGNn8u4/d2xPRsLnxPtj6R1lDH8hzOOMz7SCtmJMvyQyVUQf2VcX41lbeyvZHvMF021PXY9xrGG3914/mdzfIYfMrmt5Cc2K9xLMYPxm2p73vVEGFMyMcZys3O0DL/bsfxJ4oQeI7L8lJ28Pi7EDHvNFtsToS+R8gjXV1v0fKQyY9zsHA3Xbmy+ULN+uzGstyPHKfxabE+Efcl8Dt5zA7zYGBWdLF+/d0zes8rws32wz/xGVjX8Mrpe/oijH0dmhyamemVJ+mLqmmCqpuQnevNTKcfN8v+6XQVl3em+LZrCD30Ji3ki6yOZv8zY1+3wuvzs/KxYna2NMnudYl92zlKqS6mPasqjU59WMX7WRpm9boNjcE5i61vDr9RHNYW1swe/odBHXhun3LsUT2v4RX0X9bu9fqtwrJb8j6wldR4nLKbE/0g1/OTYUp43ev6i128V8huIHWIeZl/Px1RZftqPpf7ezsxPX3s5nn3zs3Ff8wqeL5uLX2TnD+AjkB9bJ/bi5+UWbdxfQ910nXb7Bvyi++A1kB9bJ2afjz0MLxnhc9Ao52/jPsZwXOdqPaJ5ql3jzMFP61/DT8RyL3j+08jQy30ov8i+Gb9onmrnSHPww+Oz/M5J7oVd8ynIG5X4SY70C+T41O7eMz+W/2PtOzO5Fo+fJ8xbu89ITI5KuWX46diYm5/IMszEjxp+Nudfyy9aJ6n/1P71+J0mcm2Rny3lkYShxm82v8A5quauavJ2mT1Gqx27u135ePCSX2QX1q+02F9k52wdajl5/lrOfeHjE31phXMrm6P+DozRBsXuSnMym9edk5+XI2Tzi/98POT+WoSxHOO5HcMln/Qe+Xl1PerIzotHb8mvZOulY6McTesaTtvF2ImUn/WBc/Krib+lfGrvNbBejz2HUp/A4nANv/uBx1AWO6M6evcqHYt+Lzq/lE9i5Tngp/GI8WPPYTVfLVxOTOxlPmw9+p6SWvlFKq3Rs8L2HpJnUSLkx3z0FrhcwzNB+YzNFVmOnKknv2j8tvDT53d2TxGOM8tPhfyQizL06jWX/4s+78XPyj4rsfv7PPsTWT/i7ZXU40sxtYaf+hXPl0X7MPbJz+5RY4y0Ltl6ePZXsik2NlSZtZF3rzn5RfOR2rrbHKVnUywvbufPLfxK+cyaInXE8bRPfqInYGj5eXnx3vxK+aSagvXS+fPFHvmJlKF931u3aj2Zr5tSh1I+qabg3CI7f7b80E+xfSds/iy5XJs/svFEdE8+x7V7qw/uqan80Iey99jan33nKsqR4ud2zp5Rb35e/kUk/K7HNTCrn9rNM7BSe/5G3mPz5178srEgu4bMKMq//PsaYkimf9ncoNTfjJ/utWA5Ubwm8svGAjYGVKX1MPqVUv7Ffg8107/s+aW2Fe28xE/Ps/P1iF82FkRryJKNYFsYO8y/nJrvoWb6F/sW+dn92ir7PMbWFdvN+OGaWzUlJ2/r7In1G7s3G3OXQZ8yu8d9TyymRuxYHRg/Ea7jW/PK0boHx1eU+2N1F10Ofv/U+kZvbzzK7jfDe2Sfl7F5UCSWa2Djq7SH3+M3jPM6u/8hy09tJCtvrboy6z82h/DaEcUIlmtAfphnOgrs3uOnNoj8jyv4qWrWlCq9h+5J0bjDfPkq4JepK+aFkV/LHOkm4Fcbm6esKbXdusdA+UW+fCo/XCtifVrnSB6/2ticmWfYuQa2ewP+82fidzPys7nrzNwrm7u37Si1u5Uf+86Bjtu1aUOPOXrPnGNJpVzd48DngKIsPxsj0O4sB7UT3Ftaays9co5M7Dc/Srm66FnsPviJsr9b4KlHzhHlfZ9U26ZiPkJZWBu0z7FRWX7Wjnr9tlJPfmzu4c3jmd/A96xPtud717HrxFtidz1/W6knv5p5fIkfU5af/R/5KTvv9x5q1SPnrbL87J6y1mdlU/nhuNUcXi9+vWTHLtuP91b8UMpvH7/t1SK7f4TlTd4Tv/dkeyLm761+8WvTL35c/wD8ytLu
   </data>
  </layer>
- <layer id="35" name="terrain" width="80" height="68">
+ <layer id="35" name="terrain" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="5" name="terrain_2" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztzrENgCAARcFPJYk4ivsv5RAWTEABhOSuee1LAAAAAAAAAAAAAAAAANZ76u6Dc3138tZexrWWXKUXAAAAAAAAgPl+eSYCcQ==
+   eJzt17ENgDAMBMBQEYkwCqPCpAxBkCdIgYKlu+bb11d2KQAAAAAAAAAAAAB5XNvsBnmdfbt1iQQAgD/Y6+wGed39rj9qJONai//oTQAAAAAAAAC+9wDq2gRC
   </data>
  </layer>
- <layer id="45" name="drop_shadows" width="80" height="68">
+ <layer id="45" name="drop_shadows" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmktuwzAMBb139ulRchFdJEcr0vsVRWtEMKjvIytKfgN4E9OyNKBk0c621XO/bdvn/n/Hxy3dl6+93N+amJUJfx4l6A+jxk0A8nsUWnO8NLZcbh6UHPfmZzxGr2iM3crfDGj5O8+HOK9b/R1tzYBV/sW/Mf/exLlx5Br99Z9PxbT4O8/9mfDgb2boD4P+MEJh3en19wD2LyuhUb+VzqM1kmc85I6HPvTioe8e+pBihtrVQx9S0B9274ewNnvbe3j2JxE/LzXe/6GM9BcUnv/P/fdIkRtfzXveUv9GzwHv+eF9DR7h79VwTw1/pTxH5uAV8u+1v9cZ6UD6mKqftOoiD/7Qe4xsk/7GtkN/ttfTXx6pBtJsX6uNMy3v5dD/GCF49ddCro4LCcdae7IV/NXQ2sfaePrD4jXqD/rDWN3f3fj5tLq/3PsG+sPi6U+OK+2bW9u1bsOaFn8t/7m6qr+UI6t5bt2GNVbrGf31xfXGS9fRH4ZUn3jDs78ZoD+M2nGGU5x0Xfxb7T5xdjTWebStmaE/DPrDaBlzvJ+Qvg2kvgmsjOdvhDNAfxj0h0F/GPSHYTHWq9QeP1wpVyy4Uq4QQgghhBBC1uUb124Pyg==
+   eJztmltuwyAQRf3v/KdLyUbYSJdWJfurqtYKsngNd6YM+B7JPw4ew9GAGTvb1s79tm1f+/8dH7d8X157vb8tbVYm/HlMQX8YLW4CkN+j0JrjtbGVcvOg5rg3P+MxekVj7Fb+ZkDL33k+xHkt9XfEmgGr/IvPMf/exLlx5Br99f+eayPxd577M+HB38zQHwb9YYTKutPr7wHsX1ZCo36r/Y7WSJ7xkDse+tCLh7576EOOGWpXD33IQX/YvR+Jtdnb3sOzvxTx81Lj/R/KSH9B4fn/uf8eOUrja3nPW+vf6DngPT+8r8Ej/D0F99TwV8tzZA4y/7AYufpJqy5a3Z91TPobG4f+bK+nvzKpGkgzvlaMM5L3cuh/jBC8+pNQquNCxrHWnmwFfy1I+9janv6w9hr1B/1hrO7vbvx8Wt1f6X0D/WHt6S/drrZvlsa1jmGNxJ/kP1dX9ZdzZDXPrWNYY7We0V9fu972qevoDyNVn3jDs78ZoD+M1nGGU7vUdfG51n3i7Gis82ismaE/DPrDkIw53k+kvg3kvgmsjOdvhDNAfxj0h0F/GPSHYTHWq9QeP1wpVyy4Uq4QQgghhBBC1uUbgFoLoA==
   </data>
  </layer>
  <layer id="42" name="shadows_underlying" width="80" height="68" locked="1">
@@ -45,12 +45,12 @@
  </layer>
  <layer id="23" name="background_above_player" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt2EEKgCAQBdDct+/+R7EuFtEiCLIg0Sbeg9kL6nxmhgEAAAAAAICvmNNetDONvU8QW/ZeQ8np6DPnWtwlAIQjvwH4qyj7htKcfVUAb9jpAVDLXZ5keQNh9Pijd/OwvgG0Uuo3T3Z1+lV9pYwAAAAAgM0KpZ4zLw==
+   eJzt2DEOgCAMBVDY3b3/UdCLGeNg4gBEDYh5L+nOAL+0IQAAAAAAAPAVSzyKduap9wnGltxXAIBuVn8xAH5qlH1Diuc+r7YAnrhmipkAgLtK/STpNzCMHm+0NA/LDaCVXN7U7Ork1ftyPQIAAAAAdhuCgC0X
   </data>
  </layer>
  <layer id="44" name="terrain_above_player" width="80" height="68" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt2UEOgyAUBUAST96oB6nKPU2TLtouQAWtJDPJX7GBtyDhEQIAQF2xC+H5nqH7927a9pBfkUl+AAAAAPCl/+hvf6flPjcmzvWasdLZUp2tPjdPfmXkV0Z+ZVJ/Lv5jAGhRbPwNxP0sB9eAc7nv93FfXWvOdJpbp1b3CQAAAAAAAABwhRX3ZyP4
+   eJzt2jsKgDAQBcCFnFzQg/jJPW0sLAR/UQnOwKvShC22eGwEAEBZOUX0S9r09W/q1pjfLYP5AQAAAMAvrHvprXS6QgAAYCW7aaGw6eIb8Cz7/hz76l3jTqd5NLpPAAAAAAAAAKAmM6t9Gak=
   </data>
  </layer>
  <layer id="36" name="shadows" width="80" height="68" locked="1">
@@ -135,7 +135,7 @@
   </object>
   <object id="8629" name="object.key_wall" x="912" y="592">
    <properties>
-    <property name="lockId" value="demo_2_level_3_"/>
+    <property name="lockId" value="demo_2_level_3_gate_boss"/>
     <property name="physicsBodySizeFactorX" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
@@ -167,6 +167,7 @@
   </object>
   <object id="8634" name="object.key_wall" x="2112" y="1200">
    <properties>
+    <property name="lockId" value="demo_2_level_3_gate_wand"/>
     <property name="physicsBodySizeFactorX" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
@@ -174,6 +175,7 @@
   </object>
   <object id="8636" name="object.key_wall" x="1680" y="240">
    <properties>
+    <property name="lockId" value="demo_2_level_3_magic_switch_gate"/>
     <property name="physicsBodySizeFactorX" value="1.3f"/>
     <property name="unlockedByEvent" value="true"/>
    </properties>
@@ -187,50 +189,47 @@
   </object>
   <object id="8643" name="player.startingPosition" x="1056" y="1152">
    <properties>
-    <property name="startingPointId" value="1"/>
+    <property name="startingPointId" value="2"/>
    </properties>
    <point/>
   </object>
   <object id="8644" name="player.startingPosition" x="1216" y="1264">
    <properties>
-    <property name="startingPointId" value="2"/>
+    <property name="startingPointId" value="3"/>
    </properties>
    <point/>
   </object>
   <object id="8645" name="player.startingPosition" x="1680" y="320">
    <properties>
-    <property name="startingPointId" value="3"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="8646" name="player.startingPosition" x="2112" y="1312">
-   <properties>
     <property name="startingPointId" value="4"/>
    </properties>
    <point/>
   </object>
-  <object id="8647" name="player.startingPosition" x="1680" y="160">
+  <object id="8646" name="player.startingPosition" x="2432" y="1280">
    <properties>
     <property name="startingPointId" value="5"/>
    </properties>
    <point/>
   </object>
-  <object id="8648" name="player.startingPosition" x="1280" y="464">
+  <object id="8647" name="player.startingPosition" x="1680" y="192">
    <properties>
     <property name="startingPointId" value="6"/>
    </properties>
    <point/>
   </object>
+  <object id="8648" name="player.startingPosition" x="1280" y="464">
+   <properties>
+    <property name="startingPointId" value="8"/>
+   </properties>
+   <point/>
+  </object>
   <object id="8649" name="player.startingPosition" x="864" y="1440">
    <properties>
-    <property name="startingPointId" value="7"/>
+    <property name="startingPointId" value="9"/>
    </properties>
    <point/>
   </object>
   <object id="8651" name="animal.armadillo" x="2336" y="1312">
-   <point/>
-  </object>
-  <object id="8652" name="animal.armadillo" x="2016" y="1312">
    <point/>
   </object>
   <object id="8653" name="object.pressure_switch" x="1994.73" y="1311.82">
@@ -240,8 +239,66 @@
    </properties>
    <point/>
   </object>
+  <object id="8654" name="object.magic_switch" x="1840" y="272">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_magic_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_3_magic_switch"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8655" name="player.startingPosition" x="928" y="1920">
+   <properties>
+    <property name="startingPointId" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8656" name="object.eventObject" x="864" y="2016" width="127.152" height="7.9394">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_goto_main_right"/>
+   </properties>
+  </object>
+  <object id="8657" name="object.eventObject" x="352" y="2016" width="63.8187" height="7.9394">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_goto_main_left"/>
+   </properties>
+  </object>
+  <object id="8658" name="object.eventObject" x="1600" y="160" width="159.819" height="6.9394">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_goto_level_3_top_right"/>
+   </properties>
+  </object>
+  <object id="8659" name="object.eventObject" x="1312" y="160" width="159.819" height="6.9394">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_goto_level_3_top_left"/>
+   </properties>
+  </object>
+  <object id="8660" name="player.startingPosition" x="1392" y="192">
+   <properties>
+    <property name="startingPointId" value="7"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8662" name="enemy.minotaur" x="864" y="384">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_3_boss_defeated"/>
+    <property name="unitId" value="minotaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8664" name="object.eventObject" x="1210.5" y="401.5" width="5.319" height="110.189">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_entered_boss_area"/>
+    <property name="unitId" value="demo_2_level_3_event_object_boss_area_entered"/>
+   </properties>
+  </object>
+  <object id="8665" name="object.spawnPoint" x="2032.51" y="1072.69">
+   <properties>
+    <property name="spawn" value="playerLowOnMana"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="33" name="physics">
+ <objectgroup id="33" name="physics" locked="1">
   <object id="8157" x="416" y="1472" width="134" height="704.333"/>
   <object id="8165" x="704.182" y="1536" width="288" height="49.4545"/>
   <object id="8175" x="256" y="1376" width="64" height="48.6667"/>
@@ -254,9 +311,9 @@
   <object id="8237" x="320" y="1568" width="32" height="64"/>
   <object id="8238" x="384" y="1568" width="32" height="64"/>
   <object id="8239" x="416" y="1344" width="96" height="96"/>
-  <object id="8240" x="256" y="768" width="22" height="179.333"/>
-  <object id="8241" x="490" y="768" width="22" height="178.333"/>
-  <object id="8242" x="278" y="768" width="211.667" height="19.3333"/>
+  <object id="8240" x="256" y="768" width="24.3333" height="179.333"/>
+  <object id="8241" x="486.667" y="768" width="25.3333" height="178.333"/>
+  <object id="8242" x="280.333" y="768" width="206" height="20"/>
   <object id="8246" x="669" y="1391.67" width="8" height="144.333"/>
   <object id="8249" x="768" y="1120" width="96"/>
   <object id="8252" x="672" y="1536" width="32" height="32"/>
@@ -695,9 +752,6 @@
   <object id="8529" x="2259.25" y="1261.5">
    <polygon points="0,0 -11,5.4375 5.25,4.125"/>
   </object>
-  <object id="8531" x="1363.13" y="108.75">
-   <polygon points="0,0 -11,5.4375 5.25,4.125"/>
-  </object>
   <object id="8532" x="1395" y="364.625">
    <polygon points="0,0 -11,5.4375 5.25,4.125"/>
   </object>
@@ -831,6 +885,21 @@
   </object>
   <object id="8617" x="1600" y="256">
    <polygon points="0,0 32.0625,-15.375 0,-15.4375"/>
+  </object>
+  <object id="8671" x="1999.58" y="1065.69">
+   <polygon points="0,0 -8.36364,12.1818 8.54545,12.3636"/>
+  </object>
+  <object id="8672" x="2063.94" y="1065.69">
+   <polygon points="0,0 -8.54545,12 8.54545,12.1818"/>
+  </object>
+  <object id="8673" x="2032.67" y="1025.87">
+   <polygon points="0,0 -10,11.4545 -11.2727,22.5455"/>
+  </object>
+  <object id="8674" x="2032.67" y="1025.69">
+   <polygon points="0,0 -11.4545,22.7273 9.81818,22.7273"/>
+  </object>
+  <object id="8675" x="2032.67" y="1025.33">
+   <polygon points="0,0 7.45455,11.0909 9.81818,22.5455"/>
   </object>
  </objectgroup>
  <objectgroup id="37" name="invisible_paths_blocker_physics" locked="1">

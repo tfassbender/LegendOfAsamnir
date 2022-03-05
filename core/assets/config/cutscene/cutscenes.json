@@ -112,6 +112,17 @@
 	config/cutscene/demo_2/level_2/rune_mannaz_found.json,
 	
 	//********************************************************
+	//*** Demo 2 Level 3
+	//********************************************************
+	
+	config/cutscene/demo_2/level_3/goto_level_3_top_left.json,
+	config/cutscene/demo_2/level_3/goto_level_3_top_right.json,
+	config/cutscene/demo_2/level_3/goto_main_left.json,
+	config/cutscene/demo_2/level_3/goto_main_right.json,
+	config/cutscene/demo_2/level_3/signboard.json,
+	config/cutscene/demo_2/level_3/entered_boss_area.json,
+	
+	//********************************************************
 	//*** Demo 2 Level 5
 	//********************************************************
 	

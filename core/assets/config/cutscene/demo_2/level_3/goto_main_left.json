@@ -1,0 +1,34 @@
+{
+	id: demo_2_level_3_goto_main_left,
+	controlledActions: {
+		initial: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -7},
+			cameraFollowsTarget: false,
+			
+			startsWithCutscene: true,
+			
+			executes: [
+				wait,
+			]
+		},
+		wait: {
+			type: WAIT,
+			
+			executionDelayInSeconds: 1f,
+			cameraFollowsTarget: false,
+			
+			executes: [
+				change_map,
+			]
+		}
+		change_map: {
+			type: EVENT,
+			
+			globalEvent: demo_2_level_3_goto_main_left_after_cutscene,
+			
+			waitForEventToFinish: false,
+		}
+	}
+}

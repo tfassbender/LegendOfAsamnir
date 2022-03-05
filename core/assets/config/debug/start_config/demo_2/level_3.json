@@ -2,6 +2,14 @@
 	startingPointMapping: {
 		//0: initial,
 		1: initial,
+		2: initial,
+		3: initial,
+		4: start_4,
+		5: initial,
+		6: start_4,
+		7: start_4,
+		8: start_8,
+		9: start_4,
 	},
 	eventsLists: {
 		initial: {
@@ -10,16 +18,32 @@
 			events: []
 		},
 		
-		final: {
+		start_4: {
 			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: wand,
+				},
+			]
+		}
+		
+		start_8: {
+			subConfigName: start_4,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key,
+				}
+			]
+		}
+		
+		final: {
+			subConfigName: start_4,
 			events: [
 				{
 					eventType: COLLECT_RUNE,
 					stringValue: algiz,
-				},
-				{
-					eventType: GIVE_ITEM_TO_PLAYER,
-					stringValue: wand,
 				},
 			]
 		}

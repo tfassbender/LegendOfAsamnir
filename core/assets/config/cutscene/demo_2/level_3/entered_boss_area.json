@@ -1,0 +1,123 @@
+{
+	id: demo_2_level_3_entered_boss_area,
+	controlledActions: {
+		initial: {
+			type: WAIT,
+			executionDelayInSeconds: 1f,
+			startsWithCutscene: true,
+			
+			executes: [
+				moveCloser,
+				moveCamera,
+			],
+		},
+		moveCloser: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: demo_2_level_3_event_object_boss_area_entered,
+			controlledUnitTarget: {x: -5, y: 2},
+			
+			executes: [
+				taunt,
+			],
+		},
+		moveCamera: {
+			type: MOVE_CAMERA,
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			controlledUnitTarget: {x: -3, y: 0},
+			speedFactor: 3.5f,
+		},
+		taunt: {
+			type: CHANGE_STATE,
+			controlledUnitId: minotaur, // references a unit id that is defined in the map properties of the unit
+			controlledUnitState: taunt, // references a state from an enemy's config file (config/enemy/states/<enemy_name>.json)
+			
+			executes: [
+				waitAfterFirstTaunt,
+			],
+		},
+		waitAfterFirstTaunt: {
+			type: WAIT,
+			executionDelayInSeconds: 1.5f,
+			
+			executes: [
+				movePlayer,
+				moveMinotaur,
+			],
+		},
+		movePlayer: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			speedFactor: 0.5f,
+			controlledUnitTarget: {x: -1, y: 0},
+		},
+		moveMinotaur: {
+			type: MOVE,
+			controlledUnitId: minotaur,
+			controlledUnitTarget: {x: -4.5, y: 0},
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			
+			executes: [
+				taunt_2
+			],
+		},
+		taunt_2: {
+			type: CHANGE_STATE,
+			controlledUnitId: minotaur,
+			controlledUnitState: taunt,
+			
+			executionDelayInSeconds: 1f,
+			
+			executes: [
+				thorin_comment,
+			],
+		},
+		thorin_comment: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionDelayInSeconds: 1f,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "This one is a bit bigger than the others...\n \nMaybe he's the first worthy opponent!",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				attack_knock,
+			]
+		}
+		attack_knock: {
+			type: CHANGE_STATE,
+			controlledUnitId: minotaur,
+			controlledUnitState: attack_knock,
+			controlledUnitAttackTargetDirection: {x: 0, y: 1},
+			
+			executionDelayInSeconds: 2f,
+			
+			executes: [
+				set_global_value,
+			],
+		},
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_3_boss_cutscene_executed, value: true}",
+			},
+			
+			executes: [
+				end,
+			]
+		},
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 1.5f,
+		}
+	}
+}

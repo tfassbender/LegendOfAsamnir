@@ -1,0 +1,29 @@
+{
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_level_3_top_right_goto_level_3: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_top_right_goto_level_3,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_top_right_goto_level_3,
+		}
+	},
+	demo_2_level_3_top_right_goto_level_3_after_cutscene: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_top_right_goto_level_3_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3,
+			startingPointId: 6,
+		}
+	},
+	
+	//TODO left, right and top
+}
