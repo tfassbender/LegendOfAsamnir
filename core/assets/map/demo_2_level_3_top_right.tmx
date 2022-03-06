@@ -109,7 +109,7 @@
   </object>
   <object id="8709" name="object.eventObject" x="320" y="242" width="160" height="110">
    <properties>
-    <property name="eventParameter" value="demo_2_level_3_top_right_repeated_entry"/>
+    <property name="eventParameter" value="demo_2_level_3_top_right_repeated_entering_map"/>
    </properties>
   </object>
  </objectgroup>

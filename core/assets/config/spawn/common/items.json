@@ -7,4 +7,8 @@
 		spawnType: item.shield,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
+	item__mana: {
+		spawnType: item.mana,
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
 }

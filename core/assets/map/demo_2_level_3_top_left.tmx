@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8761">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8762">
  <properties>
   <property name="above_player_layers" value="[6, 7, 8]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -62,7 +62,7 @@
    eJztwTEBAAAAwqD1T20JT6AAAAAAPgYQaAAB
   </data>
  </layer>
- <objectgroup id="4" name="objects" locked="1">
+ <objectgroup id="4" name="objects">
   <object id="8753" name="object.eventObject" x="576" y="384" width="159.819" height="3.27273">
    <properties>
     <property name="eventParameter" value="demo_2_level_3_top_left_goto_level_3_top_right"/>
@@ -88,6 +88,13 @@
   <object id="8757" name="object.chest" x="302" y="480">
    <properties>
     <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8761" name="object.spawnPoint.mimic_chest" x="179" y="595">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_first_chest_mimic_defeated"/>
+    <property name="spawn" value="enemy__mimic_chest"/>
    </properties>
    <point/>
   </object>

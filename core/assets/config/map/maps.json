@@ -117,7 +117,7 @@
 	{
 		name: demo_2_level_3,
 		map: "map/demo_2_level_3.tmx",
-		initialStartingPointId: 6,
+		initialStartingPointId: 1,
 		debugStartConfig: config/debug/start_config/demo_2/level_3.json,
 		initial: true
 	},
