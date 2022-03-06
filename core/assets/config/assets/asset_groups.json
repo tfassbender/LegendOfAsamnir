@@ -215,6 +215,24 @@
 		},
 		{
 			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/demo_2_level_3_top_right.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		},
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
+			"path": "map/demo_2_level_3_top_left.tmx",
+			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
+			"parameters": {
+				"textureMinFilter": "Nearest",
+				"textureMagFilter": "Nearest"
+			}
+		},
+		{
+			"type": "com.badlogic.gdx.maps.tiled.TiledMap",
 			"path": "map/demo_2_level_5_entry.tmx",
 			"parametersType": "com.badlogic.gdx.maps.tiled.TmxMapLoader$Parameters",
 			"parameters": {

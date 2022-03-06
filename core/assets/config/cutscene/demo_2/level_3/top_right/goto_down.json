@@ -1,25 +1,13 @@
 {
-	id: demo_2_level_3_goto_level_3_top_right,
+	id: demo_2_level_3_top_right_goto_down,
 	controlledActions: {
 		initial: {
 			type: MOVE,
 			controlledUnitId: PLAYER,
-			controlledUnitTarget: {x: 0, y: 7},
+			controlledUnitTarget: {x: 0, y: -7},
 			cameraFollowsTarget: false,
 			
 			startsWithCutscene: true,
-			
-			executes: [
-				set_global_value,
-			]
-		},
-		set_global_value: {
-			type: EVENT,
-			
-			event: {
-				eventType: SET_GLOBAL_CONDITION_VALUE,
-				stringValue: "{key: demo_2_level_3_top_right_moved_up, value: false}",
-			},
 			
 			executes: [
 				wait,
@@ -38,7 +26,7 @@
 		change_map: {
 			type: EVENT,
 			
-			globalEvent: demo_2_level_3_goto_level_3_top_right_after_cutscene,
+			globalEvent: demo_2_level_3_top_right_goto_down_after_cutscene,
 			
 			waitForEventToFinish: false,
 		}

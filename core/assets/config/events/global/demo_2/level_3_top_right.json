@@ -3,20 +3,20 @@
 	//*** change map
 	//*******************************************
 	
-	demo_2_level_3_top_right_goto_level_3: {
+	demo_2_level_3_top_right_goto_down: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_level_3_top_right_goto_level_3,
+			stringValue: demo_2_level_3_top_right_goto_down,
 		},
 		executionType: START_CUTSCENE,
 		executionParameters: {
-			cutsceneId: demo_2_level_3_top_right_goto_level_3,
+			cutsceneId: demo_2_level_3_top_right_goto_down,
 		}
 	},
-	demo_2_level_3_top_right_goto_level_3_after_cutscene: {
+	demo_2_level_3_top_right_goto_down_after_cutscene: {
 		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_level_3_top_right_goto_level_3_after_cutscene,
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_3_top_right_goto_down_after_cutscene,
 		},
 		executionType: CHANGE_MAP,
 		executionParameters: {
@@ -25,5 +25,82 @@
 		}
 	},
 	
-	//TODO left, right and top
+	demo_2_level_3_top_right_goto_up: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_top_right_goto_up,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_top_right_goto_up,
+		}
+	},
+	// last movement was not up -> re-enter from down
+	demo_2_level_3_top_right_goto_up_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_3_top_right_goto_up_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3_top_right,
+			startingPointId: 0,
+		}
+	},
+	// last movement was up -> puzzle solved
+	demo_2_level_3_top_right_goto_level_3_top_left_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_3_top_right_goto_level_3_top_left_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3_top_left,
+			startingPointId: 0,
+		}
+	},
+	
+	demo_2_level_3_top_right_goto_left: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_top_right_goto_left,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_top_right_goto_left,
+		}
+	},
+	demo_2_level_3_top_right_goto_left_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_3_top_right_goto_left_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3_top_right,
+			startingPointId: 3,
+		}
+	},
+	
+	demo_2_level_3_top_right_goto_right: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_top_right_goto_right,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_top_right_goto_right,
+		}
+	},
+	demo_2_level_3_top_right_goto_right_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_3_top_right_goto_right_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3_top_right,
+			startingPointId: 2,
+		}
+	},
 }

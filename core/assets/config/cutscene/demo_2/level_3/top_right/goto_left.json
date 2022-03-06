@@ -1,10 +1,10 @@
 {
-	id: demo_2_level_3_goto_level_3_top_right,
+	id: demo_2_level_3_top_right_goto_left,
 	controlledActions: {
 		initial: {
 			type: MOVE,
 			controlledUnitId: PLAYER,
-			controlledUnitTarget: {x: 0, y: 7},
+			controlledUnitTarget: {x: -7, y: 0},
 			cameraFollowsTarget: false,
 			
 			startsWithCutscene: true,
@@ -38,7 +38,7 @@
 		change_map: {
 			type: EVENT,
 			
-			globalEvent: demo_2_level_3_goto_level_3_top_right_after_cutscene,
+			globalEvent: demo_2_level_3_top_right_goto_left_after_cutscene,
 			
 			waitForEventToFinish: false,
 		}

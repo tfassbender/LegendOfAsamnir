@@ -121,6 +121,12 @@
 	config/cutscene/demo_2/level_3/goto_main_right.json,
 	config/cutscene/demo_2/level_3/signboard.json,
 	config/cutscene/demo_2/level_3/entered_boss_area.json,
+	config/cutscene/demo_2/level_3/top_right/goto_down.json,
+	config/cutscene/demo_2/level_3/top_right/goto_left.json,
+	config/cutscene/demo_2/level_3/top_right/goto_right.json,
+	config/cutscene/demo_2/level_3/top_right/goto_up.json,
+	config/cutscene/demo_2/level_3/top_left/goto_level_3.json,
+	config/cutscene/demo_2/level_3/top_left/goto_level_3_top_right.json,
 	
 	//********************************************************
 	//*** Demo 2 Level 5

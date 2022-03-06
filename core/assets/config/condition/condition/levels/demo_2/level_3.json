@@ -6,4 +6,12 @@
 			expectedValue: true,
 		}
 	},
+	
+	demo_2_level_3_lost_hills_puzzle_solved: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_3_top_right_moved_up,
+			expectedValue: true,
+		}
+	}
 }

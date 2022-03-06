@@ -15,7 +15,7 @@
 	},
 	demo_2_level_3_goto_main_left_after_cutscene: {
 		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
+			eventType: CUTSCENE_EVENT,
 			stringValue: demo_2_level_3_goto_main_left_after_cutscene,
 		},
 		executionType: CHANGE_MAP,
@@ -37,35 +37,13 @@
 	},
 	demo_2_level_3_goto_main_right_after_cutscene: {
 		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
+			eventType: CUTSCENE_EVENT,
 			stringValue: demo_2_level_3_goto_main_right_after_cutscene,
 		},
 		executionType: CHANGE_MAP,
 		executionParameters: {
 			map: demo_2_main,
 			startingPointId: 15,
-		}
-	},
-	
-	demo_2_level_3_goto_level_3_top_left: {
-		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_level_3_goto_level_3_top_left,
-		},
-		executionType: START_CUTSCENE,
-		executionParameters: {
-			cutsceneId: demo_2_level_3_goto_level_3_top_left,
-		}
-	},
-	demo_2_level_3_goto_level_3_top_left_after_cutscene: {
-		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_level_3_goto_level_3_top_left_after_cutscene,
-		},
-		executionType: CHANGE_MAP,
-		executionParameters: {
-			map: demo_2_level_3_top_left,
-			startingPointId: 0,
 		}
 	},
 	
@@ -81,12 +59,34 @@
 	},
 	demo_2_level_3_goto_level_3_top_right_after_cutscene: {
 		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
+			eventType: CUTSCENE_EVENT,
 			stringValue: demo_2_level_3_goto_level_3_top_right_after_cutscene,
 		},
 		executionType: CHANGE_MAP,
 		executionParameters: {
 			map: demo_2_level_3_top_right,
+			startingPointId: 0,
+		}
+	},
+	
+	demo_2_level_3_goto_level_3_top_left: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_goto_level_3_top_left,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_goto_level_3_top_left,
+		}
+	},
+	demo_2_level_3_goto_level_3_top_left_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_3_goto_level_3_top_left_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3_top_left,
 			startingPointId: 1,
 		}
 	},

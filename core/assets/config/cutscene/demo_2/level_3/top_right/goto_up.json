@@ -1,0 +1,80 @@
+{
+	id: demo_2_level_3_top_right_goto_up,
+	controlledActions: {
+		initial: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: 7},
+			cameraFollowsTarget: false,
+			
+			startsWithCutscene: true,
+			
+			executes: [
+				wait,
+			]
+		},
+		wait: {
+			type: WAIT,
+			
+			executionDelayInSeconds: 1f,
+			cameraFollowsTarget: false,
+			
+			executes: [
+				test_puzzle_solved,
+			]
+		},
+		test_puzzle_solved: {
+			type: CONDITION,
+			
+			condition: {
+				conditionId: demo_2_level_3_lost_hills_puzzle_solved,
+				thenCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_met,
+					}
+				},
+				elseCase: {
+					type: CUTSCENE,
+					executionParameters: {
+						conditionCase: condition_not_met,
+					}
+				}
+			},
+			conditionOptionExecutions: {
+				condition_met: change_map_puzzle_solved,
+				condition_not_met: change_map_puzzle_not_solved,
+			}
+		},
+		change_map_puzzle_solved: {
+			type: EVENT,
+			
+			globalEvent: demo_2_level_3_top_right_goto_level_3_top_left_after_cutscene,
+			
+			waitForEventToFinish: false,
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		change_map_puzzle_not_solved: {
+			type: EVENT,
+			
+			globalEvent: demo_2_level_3_top_right_goto_up_after_cutscene,
+			
+			waitForEventToFinish: false,
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_3_top_right_moved_up, value: true}",
+			},
+		},
+	}
+}
