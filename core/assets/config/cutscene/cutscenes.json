@@ -125,6 +125,7 @@
 	config/cutscene/demo_2/level_3/top_right/goto_left.json,
 	config/cutscene/demo_2/level_3/top_right/goto_right.json,
 	config/cutscene/demo_2/level_3/top_right/goto_up.json,
+	config/cutscene/demo_2/level_3/top_right/repeated_entering_map.json,
 	config/cutscene/demo_2/level_3/top_left/goto_level_3.json,
 	config/cutscene/demo_2/level_3/top_left/goto_level_3_top_right.json,
 	

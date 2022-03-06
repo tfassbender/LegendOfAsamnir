@@ -22,6 +22,18 @@
 			},
 			
 			executes: [
+				set_global_value_2,
+			]
+		},
+		set_global_value_2: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_3_top_right_entered_map_twice, value: true}",
+			},
+			
+			executes: [
 				wait,
 			]
 		},

@@ -13,5 +13,30 @@
 			key: demo_2_level_3_top_right_moved_up,
 			expectedValue: true,
 		}
+	},
+	
+	demo_2_level_3_top_right_repeated_entering: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: GLOBAL_VALUE_SET,
+				parameters: {
+					key: demo_2_level_3_top_right_entered_map_twice,
+					expectedValue: true,
+				}
+			},
+			condition2: {
+				conditionType: NOT,
+				conditionalParameters: {
+					condition: {
+						conditionType: GLOBAL_VALUE_SET,
+						parameters: {
+							key: demo_2_level_3_top_right_repeated_entering_cutscene_executed,
+							expectedValue: true,
+						}
+					}								
+				}
+			}
+		},
 	}
 }

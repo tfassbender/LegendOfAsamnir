@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8709">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8710">
  <properties>
   <property name="above_player_layers" value="[6, 7, 8]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -105,6 +105,11 @@
   <object id="8708" name="object.eventObject" x="640" y="241" width="3.15233" height="111.064">
    <properties>
     <property name="eventParameter" value="demo_2_level_3_top_right_goto_right"/>
+   </properties>
+  </object>
+  <object id="8709" name="object.eventObject" x="320" y="242" width="160" height="110">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_top_right_repeated_entry"/>
    </properties>
   </object>
  </objectgroup>

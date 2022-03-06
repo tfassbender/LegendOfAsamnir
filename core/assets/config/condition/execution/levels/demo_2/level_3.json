@@ -18,4 +18,20 @@
             }
         }
     },
+    
+    demo_2_level_3_top_right_repeated_entering: {
+		conditionId: demo_2_level_3_top_right_repeated_entering,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+                executionParameters: {
+					cutsceneId: demo_2_level_3_top_right_repeated_entering_map,
+				}
+            }
+        },
+        elseCase: {
+            type: NO_EXECUTION,
+        },
+	}
 }

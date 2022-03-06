@@ -103,4 +103,13 @@
 			startingPointId: 2,
 		}
 	},
+	
+	demo_2_level_3_top_right_repeated_entry: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_top_right_repeated_entry,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_3_top_right_repeated_entering,
+	}
 }

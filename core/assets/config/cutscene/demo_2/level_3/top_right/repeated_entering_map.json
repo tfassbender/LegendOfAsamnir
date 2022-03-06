@@ -1,0 +1,29 @@
+{
+	id: demo_2_level_3_top_right_repeated_entering_map,
+	controlledActions: {
+		initial: {
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "This area seems ... strangely familiar ...",
+				showNextPageIcon: false,
+			}
+			
+			executes: [
+				set_global_value
+			]
+		},
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_3_top_right_repeated_entering_cutscene_executed, value: true}",
+			},
+		},
+	}
+}
