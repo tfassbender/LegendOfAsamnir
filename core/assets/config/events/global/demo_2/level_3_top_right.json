@@ -107,7 +107,7 @@
 	demo_2_level_3_top_right_repeated_entry: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_level_3_top_right_repeated_entry,
+			stringValue: demo_2_level_3_top_right_repeated_entering_map,
 		},
 		executionType: CONDITIONAL_EVENT,
 		conditionalExecutionId: demo_2_level_3_top_right_repeated_entering,

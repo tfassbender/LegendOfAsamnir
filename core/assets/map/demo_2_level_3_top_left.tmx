@@ -93,7 +93,6 @@
   </object>
   <object id="8761" name="object.spawnPoint.mimic_chest" x="179" y="595">
    <properties>
-    <property name="enemyDefeatedEventText" value="demo_2_level_2_first_chest_mimic_defeated"/>
     <property name="spawn" value="enemy__mimic_chest"/>
    </properties>
    <point/>

@@ -113,7 +113,7 @@
 			stringValue: demo_2_level_3_pressure_switch_armadillo,
 		},
 		// no conditional event, because the magic switch cannot be deactivated
-		executionType: START_CUTSCENE,
+		executionType: OPEN_LOCK,
         executionParameters: {
         	lockId: demo_2_level_3_gate_wand,
         }
@@ -141,5 +141,40 @@
 		executionParameters: {
 			lockId: demo_2_level_3_gate_boss,
 		}
+	},
+	
+	//*******************************************
+	//*** other event objects
+	//*******************************************
+	
+	demo_2_level_3_wand_found: {
+		event: {
+			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
+			stringValue: wand,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_wand_found,
+		}
+	},
+	
+	demo_2_level_2_rune_algiz_found: {
+		event: {
+			eventType: RUNE_FOUND,
+			stringValue: ALGIZ,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_3_rune_algiz_found,
+		}
+	},
+	
+	demo_2_level_3_hidden_path_found: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_3_hidden_path_found,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_3_start_hidden_path_found_cutscene,
 	},
 }

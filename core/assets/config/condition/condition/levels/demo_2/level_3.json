@@ -38,5 +38,13 @@
 				}
 			}
 		},
-	}
+	},
+	
+	demo_2_level_3_hidden_path_found_cutscene_executed: {
+		conditionType: GLOBAL_VALUE_SET,
+		parameters: {
+			key: demo_2_level_3_hidden_path_found_cutscene_executed,
+			expectedValue: true,
+		}
+	},
 }

@@ -33,5 +33,21 @@
         elseCase: {
             type: NO_EXECUTION,
         },
+	},
+	
+	demo_2_level_3_start_hidden_path_found_cutscene: {
+		conditionId: demo_2_level_3_hidden_path_found_cutscene_executed,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+                executionParameters: {
+					cutsceneId: demo_2_level_3_hidden_path_found,
+				}
+            }
+        }
 	}
 }

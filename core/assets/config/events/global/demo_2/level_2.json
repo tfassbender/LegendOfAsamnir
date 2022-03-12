@@ -171,7 +171,7 @@
 		executionParameters: {
 			cutsceneId: demo_2_level_2_boomerang_found,
 		}
-	}
+	},
 	
 	demo_2_level_2_rune_mannaz_found: {
 		event: {

@@ -1,5 +1,5 @@
 {
-	name: Northern Hills,
+	name: Lost Hills,
 	texture: {
 		atlas: packed/menu/menu.atlas,
 		texture: mini_map_demo_2_level_3

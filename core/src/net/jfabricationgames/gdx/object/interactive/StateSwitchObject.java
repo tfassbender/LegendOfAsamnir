@@ -161,7 +161,8 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	
 	private boolean isActivatedByCollision(Contact contact) {
 		Object collidingObject = CollisionUtil.getObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact, Object.class);
-		return collidingObject != null && !(collidingObject instanceof MagicWave);
+		PhysicsCollisionType collisionType = CollisionUtil.getCollisionTypeOfObjectCollidingWith(this, PhysicsCollisionType.OBSTACLE, contact);
+		return collidingObject != null && collisionType != PhysicsCollisionType.PLAYER_ATTACK;
 	}
 	
 	private boolean isPressureActivated() {

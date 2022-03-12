@@ -1,0 +1,31 @@
+{
+	id: demo_2_level_3_hidden_path_found,
+	controlledActions: {
+		initial: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Was this damn bridge here the whole time?!\n \nI could have just entered here and skipped these damn mountains?!\n*angry mumbling*",
+				showNextPageIcon: false,
+			}
+			
+			executes: [
+				set_global_value,
+			],
+		},
+		
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_3_hidden_path_found_cutscene_executed, value: true}",
+			},
+		},
+	}
+}

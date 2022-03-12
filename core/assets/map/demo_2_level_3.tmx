@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="80" height="68" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8750">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="80" height="68" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="8760">
  <properties>
   <property name="above_player_layers" value="[6, 7, 8]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5]"/>
@@ -81,27 +81,6 @@
    <point/>
   </object>
   <object id="8607" name="object.spawnPoint.totem" x="1664" y="1600">
-   <properties>
-    <property name="aiType" value="totem_ray_cast"/>
-    <property name="spawn" value="enemy__totem"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="8608" name="object.spawnPoint.totem" x="2128" y="704">
-   <properties>
-    <property name="aiType" value="totem_ray_cast"/>
-    <property name="spawn" value="enemy__totem"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="8609" name="object.spawnPoint.totem" x="2016" y="704">
-   <properties>
-    <property name="aiType" value="totem_ray_cast"/>
-    <property name="spawn" value="enemy__totem"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="8610" name="object.spawnPoint.totem" x="2240" y="736">
    <properties>
     <property name="aiType" value="totem_ray_cast"/>
     <property name="spawn" value="enemy__totem"/>
@@ -528,7 +507,7 @@
    </properties>
    <point/>
   </object>
-  <object id="8716" name="object.spawnPoint.mimic_barrel" x="1748.5" y="1359">
+  <object id="8716" name="object.spawnPoint.mimic_barrel" x="1748.5" y="1361">
    <properties>
     <property name="spawn" value="enemy__mimic_barrel"/>
    </properties>
@@ -540,19 +519,19 @@
    </properties>
    <point/>
   </object>
-  <object id="8718" name="object.spawnPoint.barrel" x="1774.67" y="1362.67">
+  <object id="8718" name="object.spawnPoint.barrel" x="1774.67" y="1358.67">
    <properties>
     <property name="spawn" value="object__barrel"/>
    </properties>
    <point/>
   </object>
-  <object id="8719" name="object.spawnPoint.barrel" x="1648" y="1742.67">
+  <object id="8719" name="object.spawnPoint.barrel" x="1648" y="1740.67">
    <properties>
     <property name="spawn" value="object__barrel"/>
    </properties>
    <point/>
   </object>
-  <object id="8720" name="object.spawnPoint.barrel" x="1681.33" y="1746">
+  <object id="8720" name="object.spawnPoint.barrel" x="1681.33" y="1743">
    <properties>
     <property name="spawn" value="object__barrel"/>
    </properties>
@@ -723,6 +702,55 @@
   <object id="8749" name="object.spawnPoint.mana" x="1024" y="832">
    <properties>
     <property name="spawn" value="item__mana"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8750" name="object.chest" x="1424" y="979.667">
+   <properties>
+    <property name="drop" value="{arrow: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8751" name="object.spawnPoint.health" x="1167.75" y="1298.25">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8752" name="object.eventObject" x="1024" y="1184" width="63.8333" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8753" name="object.eventObject" x="2334" y="1056" width="193.833" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8754" name="object.eventObject" x="1280" y="401.091" width="31.8333" height="110.606">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8755" name="object.eventObject" x="544" y="1174.25" width="32" height="67">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_hidden_path_found"/>
+   </properties>
+  </object>
+  <object id="8756" name="object.eventObject" x="864.25" y="608" width="95.8333" height="31.606">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="8758" name="object.spawnPoint.arrow" x="2512" y="1234.67">
+   <properties>
+    <property name="spawn" value="item__arrow"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8759" name="object.spawnPoint.arrow" x="527.818" y="1425.09">
+   <properties>
+    <property name="spawn" value="item__arrow"/>
    </properties>
    <point/>
   </object>

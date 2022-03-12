@@ -1,0 +1,18 @@
+{
+	id: demo_2_level_3_wand_found,
+	controlledActions: {
+		initial: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Oh great! Another stick!\n \nI wonder what this one can be used for...",
+				showNextPageIcon: false,
+			}
+		},
+	}
+}

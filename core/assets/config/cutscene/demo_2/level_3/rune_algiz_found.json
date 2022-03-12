@@ -1,0 +1,71 @@
+{
+	id: demo_2_level_3_rune_algiz_found,
+	controlledActions: {
+		initial_narrator_explanation: {
+			startsWithCutscene: true,
+			executionDelayInSeconds: 3f,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "After finding the path though the lost hills and defeating the mighty minotaur, Thorin found the rune Algiz!\nHe thenforth was able to see the hidden pathes between the nine words...",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				narrator_addition,
+			],
+		},
+		
+		narrator_addition: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "... and the shortcuts between some mountains.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Shortcuts?\n \nSo where is the shortcut to svartalfheim?",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_2,
+			],
+		},
+		
+		thorin_answer_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionDelayInSeconds: 2f,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Worth a try...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}
