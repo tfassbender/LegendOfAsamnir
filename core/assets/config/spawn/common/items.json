@@ -11,4 +11,12 @@
 		spawnType: item.mana,
 		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
 	},
+	item__arrow: {
+		spawnType: item.arrow,
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
+	item__bomb: {
+		spawnType: item.bomb,
+		events: [NEW_GAME_STARTED, GAME_LOADED, PLAYER_RESPAWNED, MAP_ENTERED],
+	},
 }

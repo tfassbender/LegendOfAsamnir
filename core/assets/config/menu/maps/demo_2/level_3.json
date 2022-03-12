@@ -4,6 +4,6 @@
 		atlas: packed/menu/menu.atlas,
 		texture: mini_map_demo_2_level_3
 	},
-	textureWidth: 640,
-	textureHeight: 504,
+	textureWidth: 617,
+	textureHeight: 500,
 }
