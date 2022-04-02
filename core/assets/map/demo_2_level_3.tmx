@@ -1019,7 +1019,7 @@
   <object id="8640" x="1963.45" y="1315.77" width="40.5455" height="16.4091"/>
   <object id="8641" x="1963.82" y="1299.27" width="15.0909" height="16.4318"/>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics" locked="1">
+ <objectgroup id="34" name="unreachable_area_physics">
   <object id="8398" x="1760" y="0" width="32" height="433.5"/>
   <object id="8399" x="1792" y="320" width="128" height="113"/>
   <object id="8400" x="1920" y="192" width="767.5" height="241"/>

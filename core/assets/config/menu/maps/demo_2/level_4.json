@@ -1,0 +1,9 @@
+{
+	name: Dark Wastelands,
+	texture: {
+		atlas: packed/menu/menu.atlas,
+		texture: mini_map_demo_2_level_4
+	},
+	textureWidth: 594,
+	textureHeight: 500,
+}
