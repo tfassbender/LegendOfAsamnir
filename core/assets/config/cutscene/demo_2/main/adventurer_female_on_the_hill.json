@@ -43,7 +43,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "I have traveled many lands and have heard many stories about the magic of the runes.\nI can tell you some secrets about the magic of the runes, if you want.\nWhat do you want to learn about the runes?",
+				displayText: "I have traveled many lands and have heard many stories about the magic of the runes.\nI can tell you some secrets about the runes, if you want.\nWhat do you want to learn about the runes?",
 				colorHeader: #ff00ff,
 				showNextPageIcon: true,
 			}
@@ -180,7 +180,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "In these lands there are 9 runes to be found. But legends tell of the existence of many more runes.\nNoone that I know has seen the other runes, but wanderers tell the tail, that the arsen goods have found many more runes.",
+				displayText: "In these lands there are 9 runes to be found. But legends tell of the existence of many more runes.\nNo one that I know has seen the other runes, but wanderers tell the tail, that the arsen goods have found many more runes.",
 				colorHeader: #ff00ff,
 				showNextPageIcon: true,
 			}
@@ -197,7 +197,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "Only 9 runes were found so far in these lands. Maybe there are more, but we haven't found them yet. Indeed the 9th rune was not seen by anyone for centuries. There are only tales of this rune left and noone remembers what it was used for...",
+				displayText: "Only 9 runes were found so far in these lands. Maybe there are more, but we haven't found them yet. Indeed the 9th rune was not seen by anyone for centuries. There are only tales of this rune left and no one remembers what it was used for...",
 				colorHeader: #ff00ff,
 				showNextPageIcon: true,
 			}
@@ -214,7 +214,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
-				displayText: "Indeed there are only 5 runes to be found yet, because this is just a demo version...",
+				displayText: "Indeed there are only 5 runes to be found in midgard. You may find the other ones in the sequel...",
 				colorHeader: #000099,
 				showNextPageIcon: true,
 			}
@@ -297,7 +297,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Adventurer",
-				displayText: "Noone knows where you can find which rune. They just appear in different positions and noone knows how or why.\nMost adventurers think that the aresen gods placed the runes on their ways.",
+				displayText: "No one knows where you can find which rune. They just appear in different positions and no one knows how or why.\nMost adventurers think that the aresen gods placed the runes on their ways.",
 				colorHeader: #ff00ff,
 				showNextPageIcon: true,
 			}

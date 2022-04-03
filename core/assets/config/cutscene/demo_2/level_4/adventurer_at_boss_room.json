@@ -1,0 +1,165 @@
+{
+	id: demo_2_level_4_adventurer_at_boss_room,
+	controlledActions: {
+		adventurer_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			startsWithCutscene: true,
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "You're the first adventurer I've seen here. Not many adventurers reach this wasteland.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			executes: [
+				thorin_answer,
+			],
+		},
+		
+		thorin_answer: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"What do you do here?",
+					"I have to go...",
+				],
+			},
+			choiceOptionExecutions: [
+				boss_explenation_1,
+				end,
+			],
+		},
+		
+		boss_explenation_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I just fought the creature that guards the treasure of these wastelands. But I couldn't beat it.\n \nI barely made it out alive.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				boss_explenation_2,
+			],
+		},
+		
+		boss_explenation_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "If you want to fight this creature too, I can tell you a view things about it.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer_2,
+			],
+		},
+		
+		thorin_answer_2: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"Please tell me.",
+					"I'll just kill it ...",
+				],
+			},
+			choiceOptionExecutions: [
+				boss_explenation_3,
+				end,
+			],
+		},
+		
+		boss_explenation_3: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "This creature is not like the other creatues that I fought on my way here. It seemed to be able to block all my attacks.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				boss_explenation_4,
+			],
+		},
+		
+		boss_explenation_4: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "Also it uses some kind of light to attack at a very long range. I wasn't even able to block this attack with my shield.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				boss_explenation_5,
+			],
+		},
+		
+		boss_explenation_5: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "I think I managed to hurt it with my swort, once as it didn't see my attack.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				boss_explenation_6,
+			],
+		},
+		
+		boss_explenation_6: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Adventurer",
+				displayText: "That's all I could find out about this creature.\n \nI hope I could help you to fight it.",
+				colorHeader: #009933,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				end,
+			],
+		},
+		
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 0f,
+		}
+	}
+}

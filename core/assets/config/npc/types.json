@@ -79,4 +79,10 @@
 	//************************************************
 	
 	demo_2_level_2_adventurer_female_at_pressure_switches: config/npc/levels/demo_2/level_2/adventurer_female_at_pressure_switches.json,
+	
+	//************************************************
+	//*** Demo 2 - Level 4
+	//************************************************
+	
+	demo_2_level_4_adventurer_at_boss_room: config/npc/levels/demo_2/level_4/adventurer_at_boss_room.json,
 }

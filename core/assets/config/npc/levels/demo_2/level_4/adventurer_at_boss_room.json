@@ -1,0 +1,21 @@
+{
+	graphicsConfigFile: config/npc/graphics/adventurer.json
+	
+	aiConfig: {
+		type: PRE_DEFINED_MOVEMENT_AI,
+		
+		stateNameMove: move,
+		stateNameIdle: idle,
+		
+		useRelativePositions: true,
+		
+		subAI: {
+			type: BASE_AI,
+		}
+	},
+	
+	interactionPossible: true,
+	movingSpeed: 1.5f,
+	
+	interactionEventId: demo_2_level_4_adventurer_at_boss_room,
+}

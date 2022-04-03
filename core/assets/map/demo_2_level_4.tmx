@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9036">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9047">
  <properties>
   <property name="above_player_layers" value="[4, 5, 6]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="35" name="terrain" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmW1OwzAMhrtJO8iQ4B5DgiMAJwFOAvxFcBKYxI5FqlE1REmapE5tp+8jWdO6L8d9/ZGs69bBMXD9O3D9/e9xb+zC2Be5R7r4cJ774tnH6GDsur47Krk0duVcs+O4X9AXDdwYu428fiD6nVBt0Iqvpq29fnHys+X2oB6t5U5NPrkdUIStq76e+XrnHDYbwi8TyFTv7Dltx9qEPKZjLbFMXWdKrp0a7pE5rEU7S4KYjvSxaHke5QQ6ixM6awOAEs76hhoQZpgDfT1oKm5S9mvS76/E3p4726NPnJmjteGzPj1I13ApKdqXsnZOP6TEoCVwftEOEntoCb48R2/9D0feSqy/En3ixv0PqpW6UBspe7WBVH+OGe/VQKi2TeX63a7r7o097MhdqkZublLm8qOJ05Ox50i8JOrK1UFpTHL/Q34xcXo19ragvjg1TdVbY7MK9VyXomkwkqrpmnNWKH+pfpN7/ilZR+wzWmbe2FmeBCTvKXEuk8YcbWnJIwlInANtcC8BAJrQVLM0+SqBkrnEF2PEPQ93Tondh1ZmbHsfU2NNrWsQe4gy7LVL3x+ANpB6liSdNdcpAAAAALTBL32wVVk=
+   eJztmW1OwzAMhrtJE+cY0rjHkOAIwEkYJwH+IjgJTGLHwhVMDVGSJqnT2On7SNa07stxX38k67plcPRc//Jcf/t73JJdkn2ye6SLd+u5K559jPZk1+XdUcmO7Mq6ZsZxO6MvGrghuw28vmf6HV9t0Iqrpi29ftXke13bg3K0ljsl+ajtgCJMXfX1zNU7p7BaMX6ZQMZ6Z89pPdQm5DEfS4ll7Dpjcu3UcI9MYSnamRPEdKCPRcvzaE2gszC+szYAOKlZ31AD/JznQFcPGoublP2a9PsrsbenzvboE79M0dr5sy49SNdwLjHal7L2mn5IiUFL4PyiHST20BxceY7e+p8aeSux/kr0qTb2f1Ct1IXScOzVLhj3e7H+HBPeqwFfbRvL9btN192TPWzYXSpGam5y5vIjxelA9hSIl0Rd2TrIjUnqf8jPFKcXstcZ9VVT01y9NTSrcM91MZoGA7GaLjln+fKX6zdrzz856wh9RsvMGzrLk4DkPSXOZeKYoi0teSQBiXOgCe4lAEATmmqWJl8lkDOXuGKMuKdhzymh+9DKjG3uY0qsqXUNYg+Rh7l26fsD0AZSz5Kks+Q6BQAAAIA2+AGo/lVh
   </data>
  </layer>
  <layer id="5" name="terrain_2" width="76" height="64" locked="1">
@@ -71,13 +71,6 @@
    <properties>
     <property name="eventParameter" value="demo_2_level_4_magic_switch_right"/>
     <property name="stateSwitchId" value="demo_2_level_4_magic_switch_right"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="9011" name="object.pressure_switch" x="912" y="1073.5">
-   <properties>
-    <property name="eventParameter" value="demo_2_level_3_pressure_switch"/>
-    <property name="stateSwitchId" value="demo_2_level_3_pressure_switch"/>
    </properties>
    <point/>
   </object>
@@ -181,6 +174,61 @@
    </properties>
    <point/>
   </object>
+  <object id="9036" name="object.eventObject" x="704" y="704" width="31.8333" height="127.333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9037" name="object.eventObject" x="480" y="832" width="191.833" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9038" name="object.eventObject" x="864" y="1024" width="31.8333" height="192">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9039" name="object.eventObject" x="480" y="1216" width="11.8333" height="63.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9040" name="object.eventObject" x="1781" y="1074.67" width="2.49997" height="77.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9041" name="object.eventObject" x="2080" y="992" width="127.333" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9042" name="object.eventObject" x="1120" y="1589" width="15.3333" height="138.333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9043" name="object.eventObject" x="1088" y="1088.75" width="10.8333" height="62.5833">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="9044" name="object.spawnPoint" x="1232.55" y="1040.64">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_arrows"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9045" name="item.arrow" x="1056" y="1120">
+   <point/>
+  </object>
+  <object id="9046" name="npc.demo_2_level_4_adventurer_at_boss_room" x="912.583" y="1070.96">
+   <properties>
+    <property name="unitId" value="demo_2_level_4_adventurer_at_boss_room"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="33" name="physics" locked="1">
   <object id="8760" x="1120" y="896" width="576" height="109"/>
@@ -254,7 +302,7 @@
   </object>
   <object id="8992" x="1862.21" y="1075.91" width="19.6364" height="3.63636"/>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics" locked="1">
+ <objectgroup id="34" name="unreachable_area_physics">
   <object id="8793" x="224" y="224">
    <polygon points="0,0 32.0625,-15.375 0,-15.4375"/>
   </object>
@@ -583,7 +631,7 @@
   <object id="8953" x="960" y="832" width="64" height="32"/>
   <object id="8954" x="928" y="864" width="32" height="96"/>
   <object id="8955" x="896" y="960" width="64.25" height="80.75"/>
-  <object id="8957" x="960" y="1024" width="160" height="50.25"/>
+  <object id="8957" x="960" y="1024" width="160" height="64.25"/>
   <object id="8958" x="672" y="832" width="95.6667" height="115.667"/>
   <object id="8959" x="640" y="1056" width="159.667" height="114.667"/>
   <object id="8960" x="1152" y="1824" width="320" height="64"/>
