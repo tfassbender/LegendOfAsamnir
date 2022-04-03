@@ -1,0 +1,101 @@
+{
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+//	demo_2_level_4_goto_main: {
+//		event: {
+//			eventType: EVENT_OBJECT_TOUCHED,
+//			stringValue: demo_2_level_4_goto_main,
+//		},
+//		executionType: START_CUTSCENE,
+//		executionParameters: {
+//			cutsceneId: demo_2_level_4_goto_main,
+//		}
+//	},
+//	demo_2_level_4_goto_main_after_cutscene: {
+//		event: {
+//			eventType: CUTSCENE_EVENT,
+//			stringValue: demo_2_level_4_goto_main_after_cutscene,
+//		},
+//		executionType: CHANGE_MAP,
+//		executionParameters: {
+//			map: demo_2_main,
+//			startingPointId: 16,
+//		}
+//	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_4_magic_switch_top_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_4_magic_switch_top,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated,
+	},
+	demo_2_level_4_magic_switch_right_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_4_magic_switch_right,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated,
+	},
+	demo_2_level_4_magic_switch_bottom_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_4_magic_switch_bottom,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated,
+	},
+	demo_2_level_4_switch_top_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_4_switch_top,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated,
+	},
+	demo_2_level_4_switch_bottom_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_4_switch_bottom,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated,
+	},
+	demo_2_level_3_pressure_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_3_pressure_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated,
+	},
+	
+	//*******************************************
+	//*** boss fight
+	//*******************************************
+	
+	
+	
+	//*******************************************
+	//*** other event objects
+	//*******************************************
+	
+//	demo_2_level_4_feather_found: {
+//		event: {
+//			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
+//			stringValue: feather,
+//		},
+//		executionType: START_CUTSCENE,
+//		executionParameters: {
+//			cutsceneId: demo_2_level_4_feather_found,
+//		}
+//	},
+}

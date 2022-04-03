@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9006">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9036">
  <properties>
   <property name="above_player_layers" value="[4, 5, 6]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -8,22 +8,22 @@
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
  <layer id="1" name="background" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt102OwjAMBeDQBRKIizAH4P5XQXORQUKoDCKt/1Lb9Vu8HZTnr0lob5fWbooc2xzNdaxznVr7mf73o2RaibZXVC9Ob3jNOT2GPH9kaY7qXq99+Z5Pw956q+hFMYSXzUzw+h7K/oTXHMr+pHqtWezBa20uzoxVvXqzSp0l9lnSe2bjelVZX9+e2ShelPWzRy9p4DXnNPXfpTgeVbyub/uS4iX1rBZ4wSuCJ7zie2V8dt6qI+c9I7KZt1eUfpo5RphrZ87stYd9Zem1NGsEB+/f5rwzRVkvUf7T1z7j7RQh8JKbZfTy3JvaPpLnUov7Aa/4a8xilkpekrUHL7nX/aD3+j0s34NMXpROI9YXvOJ7ac+ISvvR4kzd4rzn/M4oL+m6p37H0kszr4eXRQ945fHSWvVm8LhvIzOiI7zqdcnUL1Iny3Ovmpd3F0rPCB0idMnk5W0RuWuG84rSWzsz9VpZvXozLH3GyjOjEXc+ePHn3er7mSP18u7tnZ5BtfXD8aq6xxAEQRAEQZBn/gD5xj6S
+   eJztmU1ygzAMhR0WnUnbiyTd5/5X6fQizYYhYZDRH5aEtHg7jN/7kIwNj+/WHgJ9tEWS+2jrNrV2n979YTTtSOrLKy+K7+K16PoM+blSL0d2XnNfvmrNEKq3jLwwDIuXTqbitS1MfxavRZj+xPLaY3EGXnu5KBmz8oKycjlz2EcRtGej8spSX1t7NgwvTP2ckRdXxWvRdYLPUhQeWXjdXvoSw4vLM5uKl09eWXhXfY3nNb97vhDrKTR3lL2zhsf53fPT4UU5Z3hmNsqf9PzrhZ/Gc8WMlWaOzOsMfaXJq5fVAwfruSlnJi/1YuWlzuQyZsWLxiwiL8velPrh7Es1nkfx8l9jGlky8eLUXvHi8/q9yHn9XfrPIBIvjKcj6qt4+eclXSMy9aPGmjpivafMcxQvbt1jx2jykuS14KXhwxsv6j0z8ZLWFpTBos6PFOSR+99qzSwLL8x/q1FevMirP0+eNNe9bLysvWB8evDgwUskXtYsPHuNsF5hfEszY+8VlReUoXeNFs+IjKj5ihc976jxkcXlZe3bWhCDbPVD4ZW1x7ZYWHsonVOS73AZZfEdrlQqlbLrH7xfOzI=
   </data>
  </layer>
  <layer id="41" name="background_2" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="35" name="terrain" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmW1OwzAMhrtJO8iQ4B5DgiMAJ4GdBPiL4CQwiR2LVKNaFyVpkjqN7byPZE3L1tZx/JW069rg4Bn/8Yx//H9ujVwZ+SbXSBaf1neXPXsb7YzclldHJNdGbqyxsR23C+oigTsj94Hfd0TP8eUGqbhyWuv5qya/69oalENb7JTkq7YCghj7VZ/PXLVzDqsV4c0YMlU7e47rc25CHNPRii1j5xkTa0fFNTKFVnxnSWDTM70tNPejNYGfhfGdtQFASc38hhzgZ+gDXTVoym5c9mvc15djbU/t7VEnTszxteFalz9w9+FcYnyfy9xr6sHFBprA+YUeONbQHFxxjtp6SY245Zh/OepUG/sdlJa8UBoue7WBWH0OCf+VgC+3TcX6w6brHo08bchVKkZqbFLG8rOx04uRfcBeHP3K9oNcm6S+Q341dnoz8i7Iv+ZAVVtDvQp1X6ctFy7F1FqX7LN88Uv1zNr9T848QtdI6XlDZ3kc4LynxLlMHHN8S0occYB7TcVaAgAkISlnSdKVAzl9icvGsHsadp8SWgctPfZ4H1NiTtp9EHuIPMZz574/ADrgepbEnZbzFAAAAAB08AeC5lKH
+   eJztmW1OwzAMhrtJO8iQ4B5DgiMAJwFOAvxFcBKYxI5FqlE1REmapE5tp+8jWdO6L8d9/ZGs69bBMXD9O3D9/e9xb+zC2Be5R7r4cJ774tnH6GDsur47Krk0duVcs+O4X9AXDdwYu428fiD6nVBt0Iqvpq29fnHys+X2oB6t5U5NPrkdUIStq76e+XrnHDYbwi8TyFTv7Dltx9qEPKZjLbFMXWdKrp0a7pE5rEU7S4KYjvSxaHke5QQ6ixM6awOAEs76hhoQZpgDfT1oKm5S9mvS76/E3p4726NPnJmjteGzPj1I13ApKdqXsnZOP6TEoCVwftEOEntoCb48R2/9D0feSqy/En3ixv0PqpW6UBspe7WBVH+OGe/VQKi2TeX63a7r7o097MhdqkZublLm8qOJ05Ox50i8JOrK1UFpTHL/Q34xcXo19ragvjg1TdVbY7MK9VyXomkwkqrpmnNWKH+pfpN7/ilZR+wzWmbe2FmeBCTvKXEuk8YcbWnJIwlInANtcC8BAJrQVLM0+SqBkrnEF2PEPQ93Tondh1ZmbHsfU2NNrWsQe4gy7LVL3x+ANpB6liSdNdcpAAAAALTBL32wVVk=
   </data>
  </layer>
  <layer id="5" name="terrain_2" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztzrkNwCAABMEjMpJxKe6/KRfhgALIeKSZZNNNAAAAAAAAAAAAYF9PXX1wju9O3trLWGvJVXoBAAAAAAAAAGCmH6zKAnE=
+   eJzt0rENgDAQA8CnIlLCKBk1TMoQFD8AdDzSXePWshwBAAAAAAAAAAAAdR3t6wb/cfWI2TJ5NkbEvmVS1+nPr62en142AwAAAAAAAIDyblLxBEI=
   </data>
  </layer>
  <layer id="42" name="shadows_underlying" width="76" height="64" locked="1">
@@ -41,7 +41,147 @@
    eJzt0LERACAMA7HsvxYMlglSmxxS+ZXPVQAAAAAAAAAAAAAAsNtNDwg6Q//5EwAAAAAAAHhdA/tIAkw=
   </data>
  </layer>
- <objectgroup id="4" name="objects" locked="1"/>
+ <objectgroup id="4" name="objects">
+  <object id="9006" name="player.startingPosition" x="560" y="192">
+   <properties>
+    <property name="startingPointId" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9007" name="object.eventObject" x="480" y="160" width="159.333" height="4.5">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_4_goto_main"/>
+   </properties>
+  </object>
+  <object id="9008" name="object.magic_switch" x="1104" y="560">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_4_magic_switch_top"/>
+    <property name="stateSwitchId" value="demo_2_level_4_magic_switch_top"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9009" name="object.magic_switch" x="976" y="1808">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_4_magic_switch_bottom"/>
+    <property name="stateSwitchId" value="demo_2_level_4_magic_switch_bottom"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9010" name="object.magic_switch" x="2320" y="1264">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_4_magic_switch_right"/>
+    <property name="stateSwitchId" value="demo_2_level_4_magic_switch_right"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9011" name="object.pressure_switch" x="912" y="1073.5">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_3_pressure_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_3_pressure_switch"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9012" name="object.switch" x="240" y="1264">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_4_switch_bottom"/>
+    <property name="stateSwitchId" value="demo_2_level_4_switch_bottom"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9013" name="object.switch" x="288" y="576">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_4_switch_top"/>
+    <property name="stateSwitchId" value="demo_2_level_4_switch_top"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9014" name="object.key_wall" x="992" y="1120">
+   <properties>
+    <property name="lockId" value="demo_2_level_4_boss_room_lock"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9015" name="object.key_wall" x="512" y="1248">
+   <properties>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9016" name="object.key_wall" x="560" y="1248">
+   <properties>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9017" name="object.key_wall" x="1760" y="1120">
+   <properties>
+    <property name="lockId" value="demo_2_level_4_boss_killed_lock"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9018" name="object.chest" x="1899.5" y="666.75">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9019" name="object.chest" x="1890.5" y="1673.25">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9028" name="enemy.cyclops" x="1600" y="1120">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_4_boss_defeated"/>
+    <property name="unitId" value="cyclops"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9029" name="item.feather" x="1872.5" y="1104.63">
+   <point/>
+  </object>
+  <object id="9030" name="player.startingPosition" x="864" y="1120">
+   <properties>
+    <property name="startingPointId" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9031" name="player.startingPosition" x="560" y="256">
+   <properties>
+    <property name="startingPointId" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9032" name="player.startingPosition" x="608" y="1248">
+   <properties>
+    <property name="startingPointId" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9033" name="player.startingPosition" x="1024" y="1120">
+   <properties>
+    <property name="startingPointId" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9034" name="player.startingPosition" x="1792" y="1120">
+   <properties>
+    <property name="startingPointId" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9035" name="object.spawnPoint" x="368.477" y="1200.56">
+   <properties>
+    <property name="spawn" value="playerLowOnMana"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="33" name="physics" locked="1">
   <object id="8760" x="1120" y="896" width="576" height="109"/>
   <object id="8766" x="1184" y="1264.67" width="512" height="143.333"/>
@@ -114,7 +254,7 @@
   </object>
   <object id="8992" x="1862.21" y="1075.91" width="19.6364" height="3.63636"/>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics">
+ <objectgroup id="34" name="unreachable_area_physics" locked="1">
   <object id="8793" x="224" y="224">
    <polygon points="0,0 32.0625,-15.375 0,-15.4375"/>
   </object>
@@ -484,9 +624,6 @@
   <object id="8999" x="787" y="1389.33">
    <polygon points="0,0 -11,5.4375 5.25,4.125"/>
   </object>
-  <object id="9000" x="371.364" y="1196.09">
-   <polygon points="0,0 -11,5.4375 5.25,4.125"/>
-  </object>
   <object id="9001" x="690.625" y="1036.13">
    <polygon points="0,0 -11,5.4375 5.25,4.125"/>
   </object>
@@ -501,6 +638,21 @@
   </object>
   <object id="9005" x="595.438" y="300.563">
    <polygon points="0,0 -11,5.4375 5.25,4.125"/>
+  </object>
+  <object id="9020" x="335.819" y="1192.91">
+   <polygon points="0,0 -8.36364,12.1818 8.54545,12.3636"/>
+  </object>
+  <object id="9021" x="400.179" y="1192.91">
+   <polygon points="0,0 -8.54545,12 8.54545,12.1818"/>
+  </object>
+  <object id="9022" x="368.909" y="1153.09">
+   <polygon points="0,0 -10,11.4545 -11.2727,22.5455"/>
+  </object>
+  <object id="9023" x="368.909" y="1152.91">
+   <polygon points="0,0 -11.4545,22.7273 9.81818,22.7273"/>
+  </object>
+  <object id="9024" x="368.909" y="1152.55">
+   <polygon points="0,0 7.45455,11.0909 9.81818,22.5455"/>
   </object>
  </objectgroup>
 </map>

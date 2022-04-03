@@ -1,0 +1,63 @@
+{
+	demo_2_level_4_boss_gate_allSwitchesActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_4_magic_switch_top,
+				}
+			},
+			condition2: {
+				conditionType: AND,
+				conditionalParameters: {
+					condition: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demo_2_level_4_magic_switch_right,
+						}
+					},
+					condition2: {
+						conditionType: AND,
+						conditionalParameters: {
+							condition: {
+								conditionType: STATE_SWITCH_ACTIVE,
+								parameters: {
+									stateSwitchId: demo_2_level_4_magic_switch_bottom,
+								}
+							},
+							condition2: {
+								conditionType: AND,
+								conditionalParameters: {
+									condition: {
+										conditionType: STATE_SWITCH_ACTIVE,
+										parameters: {
+											stateSwitchId: demo_2_level_4_switch_top,
+										}
+									},
+									condition2: {
+										conditionType: AND,
+										conditionalParameters: {
+											condition: {
+												conditionType: STATE_SWITCH_ACTIVE,
+												parameters: {
+													stateSwitchId: demo_2_level_4_switch_bottom,
+												}
+											},
+											condition2: {
+												conditionType: STATE_SWITCH_ACTIVE,
+												parameters: {
+													stateSwitchId: demo_2_level_3_pressure_switch,
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

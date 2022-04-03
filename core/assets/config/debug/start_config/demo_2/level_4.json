@@ -1,0 +1,41 @@
+{
+	startingPointMapping: {
+		//0: initial,
+		1: initial,
+		2: initial,
+		3: start_3,
+		4: initial,
+		5: initial,
+	},
+	eventsLists: {
+		initial: {
+			subConfigPath: config/debug/start_config/demo_2/level_3.json
+			subConfigName: final,
+			events: []
+		},
+		
+		start_3: {
+			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key,
+				},
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: key,
+				}
+			]
+		}
+		
+		final: {
+			subConfigName: initial,
+			events: [
+				{
+					eventType: GIVE_ITEM_TO_PLAYER,
+					stringValue: feather,
+				}
+			]
+		}
+	}
+}

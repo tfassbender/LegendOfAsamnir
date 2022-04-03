@@ -1,4 +1,4 @@
-package net.jfabricationgames.gdx.screen.menu;
+package net.jfabricationgames.gdx.screen.menu.dialog;
 
 import java.util.function.Consumer;
 
@@ -26,7 +26,6 @@ import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonB
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
 import net.jfabricationgames.gdx.screen.menu.config.MapConfig;
 import net.jfabricationgames.gdx.screen.menu.control.ControlledMenu;
-import net.jfabricationgames.gdx.screen.menu.dialog.InGameMenuDialog;
 import net.jfabricationgames.gdx.texture.TextureLoader;
 
 public class GameMapDialog extends InGameMenuDialog {
@@ -80,7 +79,7 @@ public class GameMapDialog extends InGameMenuDialog {
 		playerPositionPointerBlinkTimer = 0;
 	}
 	
-	protected void loadConfig(String mapConfigPath) {
+	public void loadConfig(String mapConfigPath) {
 		if (mapConfigPath == null) {
 			Gdx.app.debug(getClass().getSimpleName(), "No map config given in current map. Mini-Map will not be shown.");
 			config = new MapConfig();

@@ -1,0 +1,27 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+    demo_2_level_4_boss_gate_openLock_ifAllSwitchesAreActivated: {
+        conditionId: demo_2_level_4_boss_gate_allSwitchesActivated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_4_boss_room_lock
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_4_boss_room_lock
+                }
+            }
+        }
+    },
+}

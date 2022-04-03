@@ -24,6 +24,7 @@ import net.jfabricationgames.gdx.screen.menu.components.RuneSubMenu;
 import net.jfabricationgames.gdx.screen.menu.components.SpecialActionItemSubMenu;
 import net.jfabricationgames.gdx.screen.menu.control.MenuStateMachine;
 import net.jfabricationgames.gdx.screen.menu.dialog.GameControlsDialog;
+import net.jfabricationgames.gdx.screen.menu.dialog.GameMapDialog;
 import net.jfabricationgames.gdx.screen.menu.dialog.LoadGameDialog;
 import net.jfabricationgames.gdx.screen.menu.dialog.SaveGameDialog;
 

@@ -122,14 +122,14 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 13
 adventurer_idle
   rotate: false
   xy: 914, 269
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 13
+  index: 1
 adventurer_idle
   rotate: false
   xy: 914, 269
@@ -815,14 +815,14 @@ archaeologist_idle
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
-  index: 6
+  index: 5
 archaeologist_idle
   rotate: false
   xy: 1196, 926
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
-  index: 5
+  index: 6
 archaeologist_idle
   rotate: false
   xy: 1262, 926
@@ -899,14 +899,14 @@ armadillo_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 8
 armadillo_idle
   rotate: false
   xy: 1004, 696
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 8
+  index: 1
 armadillo_move
   rotate: false
   xy: 1004, 696
@@ -4441,14 +4441,14 @@ hedgehog_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 hedgehog_move
   rotate: false
   xy: 1956, 490
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 hedgehog_idle
   rotate: false
   xy: 1990, 524

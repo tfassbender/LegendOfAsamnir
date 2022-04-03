@@ -174,7 +174,8 @@ public class StateSwitchObject extends InteractiveObject implements EventListene
 	}
 	
 	private boolean canBeDeactivated() {
-		boolean canBeDeactivatedByMapPropertiesConfig = Boolean.parseBoolean(mapProperties.get(MAP_PROPERTIES_KEY_CAN_BE_DEACTIVATED, String.class));
+		boolean canBeDeactivatedByMapPropertiesConfig = Boolean
+				.parseBoolean(mapProperties.get(MAP_PROPERTIES_KEY_CAN_BE_DEACTIVATED, "true", String.class));
 		if (!canBeDeactivatedByMapPropertiesConfig) {
 			return false;
 		}
