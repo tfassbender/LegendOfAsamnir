@@ -1,0 +1,67 @@
+{
+	id: demo_2_level_4_feather_found,
+	controlledActions: {
+		initial: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			startsWithCutscene: true,
+			executionDelayInSeconds: 1f,
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "A feather?\n \nThat's the great treasure of this area?!",
+				showNextPageIcon: false,
+			}
+			
+			executes: [
+				text_2
+			]
+		},
+		
+		text_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I could have found this damn thing everywhere!\n \nWhat do I even do with it?",
+				showNextPageIcon: false,
+			}
+			
+			executes: [
+				narrator_answer,
+			]
+		},
+		
+		narrator_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "It's a magical feather, that can be used to change the text on some signboards.\n \nIt can be usefull to enter some areas, that could not be entered otherwise.",
+				colorHeader: #000099,
+				showNextPageIcon: false,
+			}
+			
+			executes: [
+				thorin_answer,
+			]
+		},
+		
+		thorin_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Signboards? Why should I need to change a signboard to enter an area?",
+				showNextPageIcon: false,
+			}
+		},
+	}
+}

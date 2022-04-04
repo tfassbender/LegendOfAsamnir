@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9047">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9053">
  <properties>
   <property name="above_player_layers" value="[4, 5, 6]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -156,7 +156,7 @@
    </properties>
    <point/>
   </object>
-  <object id="9033" name="player.startingPosition" x="1024" y="1120">
+  <object id="9033" name="player.startingPosition" x="1016" y="1120">
    <properties>
     <property name="startingPointId" value="4"/>
    </properties>
@@ -220,12 +220,42 @@
    </properties>
    <point/>
   </object>
-  <object id="9045" name="item.arrow" x="1056" y="1120">
+  <object id="9045" name="item.arrow" x="1039" y="1120">
    <point/>
   </object>
   <object id="9046" name="npc.demo_2_level_4_adventurer_at_boss_room" x="912.583" y="1070.96">
    <properties>
     <property name="unitId" value="demo_2_level_4_adventurer_at_boss_room"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9048" name="object.spawnPoint.shield" x="1072.5" y="1135.33">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9049" name="object.spawnPoint.health" x="1072" y="1107">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9050" name="object.spawnPoint.shield" x="1584" y="1040">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9051" name="object.spawnPoint.health" x="1552" y="1040.17">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9052" name="object.spawnPoint.shield" x="1584" y="1232">
+   <properties>
+    <property name="spawn" value="item__shield"/>
    </properties>
    <point/>
   </object>

@@ -138,6 +138,7 @@
 	
 	config/cutscene/demo_2/level_4/goto_main.json,
 	config/cutscene/demo_2/level_4/adventurer_at_boss_room.json,
+	config/cutscene/demo_2/level_4/feather_found.json,
 	
 	//********************************************************
 	//*** Demo 2 Level 5

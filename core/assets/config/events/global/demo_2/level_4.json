@@ -95,14 +95,14 @@
 	//*** other event objects
 	//*******************************************
 	
-//	demo_2_level_4_feather_found: {
-//		event: {
-//			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
-//			stringValue: feather,
-//		},
-//		executionType: START_CUTSCENE,
-//		executionParameters: {
-//			cutsceneId: demo_2_level_4_feather_found,
-//		}
-//	},
+	demo_2_level_4_feather_found: {
+		event: {
+			eventType: SPECIAL_ACTION_ITEM_PICKED_UP,
+			stringValue: feather,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_4_feather_found,
+		}
+	},
 }
