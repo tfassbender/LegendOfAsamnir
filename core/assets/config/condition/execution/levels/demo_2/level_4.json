@@ -24,4 +24,20 @@
             }
         }
     },
+    
+    demo_2_level_4_start_boss_cutscene: {
+        conditionId: demo_2_level_4_boss_cutscene_executed,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: START_CUTSCENE,
+                executionParameters: {
+					cutsceneId: demo_2_level_4_entered_boss_area,
+				}
+            }
+        }
+    },
 }

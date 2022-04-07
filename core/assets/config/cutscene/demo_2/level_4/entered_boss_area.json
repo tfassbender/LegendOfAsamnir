@@ -1,0 +1,98 @@
+{
+	id: demo_2_level_4_entered_boss_area,
+	controlledActions: {
+		initial: {
+			type: WAIT,
+			executionDelayInSeconds: 1f,
+			startsWithCutscene: true,
+			
+			executes: [
+				movePlayer,
+				moveCyclops,
+				moveCamera,
+			],
+		},
+		movePlayer: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: demo_2_level_4_event_object_boss_area_entered,
+			controlledUnitTarget: {x: 5, y: -1},
+			
+			executes: [
+				beam,
+			],
+		},
+		moveCyclops: {
+			type: MOVE,
+			controlledUnitId: cyclops,
+			controlledUnitTarget: {x: 5, y: 1},
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+		},
+		moveCamera: {
+			type: MOVE_CAMERA,
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			controlledUnitTarget: {x: 3, y: 0},
+			speedFactor: 3.5f,
+		},
+		beam: {
+			executionDelayInSeconds: 3f,
+			
+			type: CHANGE_STATE,
+			controlledUnitId: cyclops, // references a unit id that is defined in the map properties of the unit
+			controlledUnitState: attack_beam, // references a state from an enemy's config file (config/enemy/states/<enemy_name>.json)
+			
+			controlledUnitAttackTargetDirection: {x: -1, y: 0},
+			
+			executes: [
+				thorin_comment,
+			],
+		},
+		thorin_comment: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionDelayInSeconds: 3f,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Can you see in the dark with this eye?!",
+				showNextPageIcon: false,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				attack_knock,
+			]
+		}
+		attack_knock: {
+			type: CHANGE_STATE,
+			controlledUnitId: cyclops,
+			controlledUnitState: attack_stomp,
+			controlledUnitAttackTargetDirection: {x: -1, y: 0},
+			
+			executionDelayInSeconds: 1f,
+			
+			executes: [
+				set_global_value,
+			],
+		},
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_4_boss_cutscene_executed, value: true}",
+			},
+			
+			executes: [
+				end,
+			]
+		},
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 1.5f,
+		}
+	}
+}

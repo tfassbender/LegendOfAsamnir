@@ -89,7 +89,25 @@
 	//*** boss fight
 	//*******************************************
 	
+	demo_2_level_4_entered_boss_area: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_4_entered_boss_area,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_4_start_boss_cutscene,
+	},
 	
+	demo_2_level_4_boss_defeated: {
+		event: {
+			eventType: ENEMY_DEFEATED,
+			stringValue: demo_2_level_4_boss_defeated,
+		},
+		executionType: OPEN_LOCK,
+		executionParameters: {
+			lockId: demo_2_level_4_boss_killed_lock,
+		}
+	},
 	
 	//*******************************************
 	//*** other event objects
