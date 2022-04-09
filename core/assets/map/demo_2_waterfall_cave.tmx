@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="15" height="13" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="924">
+ <properties>
+  <property name="above_player_layers" value="[3, 4]"/>
+  <property name="background_layers" value="[0, 1, 2]"/>
+  <property name="shadow_layers" value="[5, 6, 7]"/>
+ </properties>
+ <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
+ <layer id="1" name="background" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAANjyYEKCnXnzqqaV3FFOGcQFS0gW99QIA8UADDQ==
+  </data>
+ </layer>
+ <layer id="2" name="background_2" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYECAI4wMDExMmPgoIwNB8BiopgkLfkik3kVYMC69yO5kZsKuBpdeZHc241DDiCMMkN25GIfeRhxh8JiIcFiIIwyI0YsNUKr3CRAfwoIPQ808iEP+KR47Ye4hJl3QWy8AAeku5A==
+  </data>
+ </layer>
+ <layer id="5" name="terrain" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhcgJeDdD097AwMb7gZGHQ5IDSIT4peHh4GBnZGCH2ERLtJUe/LDsHo4DgTcXpB4DAR9nSyQzAx9iC7/wRUvouE8BtOAABC6AxC
+  </data>
+ </layer>
+ <layer id="8" name="shadow_underlying" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA3KOLGjkFgCx45fOZR4hZa6gUAnyIHlg==
+  </data>
+ </layer>
+ <layer id="10" name="background_above_player" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA3OMSIiQ8zQuQOYpE7xIjfvMdQ+YcE1A2EXgB+6Q53
+  </data>
+ </layer>
+ <layer id="3" name="shadows" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYECAbTwMDJOw4K08DATBJhxqNtJAL7I7t5CoF5ddyGAzjjAgRi8utwxFvdOAeCIWPAVq5mQc8lPx2AlzDzHpgt56AaMlIsI=
+  </data>
+ </layer>
+ <layer id="4" name="shadows_2" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAe2Mo9NPQiq7fgoa1dg0FvKFDvJixYAuh3cR7scrR0z2DVCwBioRCO
+  </data>
+ </layer>
+ <layer id="9" name="shadows_3" width="15" height="13" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BkgMs8+OUBHuAA4A==
+  </data>
+ </layer>
+ <objectgroup id="11" name="objects">
+  <object id="908" name="object.spawnPoint" x="208.563" y="144.563">
+   <properties>
+    <property name="spawn" value="playerLowOnMana"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="917" name="object.chest" x="51.3333" y="268.667">
+   <properties>
+    <property name="drop" value="{big_coin: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="918" name="object.chest" x="336" y="239">
+   <properties>
+    <property name="drop" value="{big_coin: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="919" name="object.chest" x="370" y="235.667">
+   <properties>
+    <property name="drop" value="{big_coin: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="920" name="object.eventObject" x="192" y="416" width="96" height="4">
+   <properties>
+    <property name="eventParameter" value="demo_2_waterfall_cave_goto_main"/>
+   </properties>
+  </object>
+  <object id="922" name="object.eventObject" x="224" y="320" width="32" height="7.33333">
+   <properties>
+    <property name="eventParameter" value="demo_2_waterfall_cave_entered"/>
+   </properties>
+  </object>
+  <object id="923" name="player.startingPosition" x="240" y="368">
+   <properties>
+    <property name="startingPointId" value="0"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="12" name="physics" locked="1">
+  <object id="877" x="176.339" y="96.4521">
+   <polygon points="0,0 -7.81818,10.5455 -11.0909,48.3636"/>
+  </object>
+  <object id="878" x="165.069" y="143.542">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="879" x="176.889" y="154.262">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="880" x="187.429" y="143.172">
+   <polygon points="0,0 -4,-38.7273 -11.2727,-46.9091"/>
+  </object>
+  <object id="881" x="240.889" y="96.0921">
+   <polygon points="0,0 -7.81818,10.5455 -11.0909,48.3636"/>
+  </object>
+  <object id="882" x="229.619" y="143.182">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="883" x="241.439" y="153.902">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="884" x="251.979" y="142.812">
+   <polygon points="0,0 -4,-38.7273 -11.2727,-46.9091"/>
+  </object>
+  <object id="885" x="208.159" y="66.2621">
+   <polygon points="0,0 -12.5455,2.36364 12.7273,2.18182"/>
+  </object>
+  <object id="886" x="195.799" y="68.9921">
+   <polygon points="0,0 12.7273,9.27273 24.9091,-0.363636"/>
+  </object>
+  <object id="887" x="204.709" y="75.7221">
+   <polygon points="0,0 -8.72727,4 -8.90909,40"/>
+  </object>
+  <object id="888" x="212.519" y="75.3521">
+   <polygon points="0,0 7.45455,4.72727 8,40.9091"/>
+  </object>
+  <object id="889" x="195.799" y="116.082">
+   <polygon points="0,0 24.9091,0.181818 12.5455,-38.1818"/>
+  </object>
+  <object id="890" x="198.159" y="116.082" width="19.6364" height="3.63636"/>
+  <object id="892" x="0" y="95" width="38.6667" height="225"/>
+  <object id="893" x="32" y="302.5" width="160.5" height="17.5"/>
+  <object id="894" x="192" y="320" width="32" height="96"/>
+  <object id="895" x="256" y="320" width="32" height="96"/>
+  <object id="896" x="288" y="303" width="192" height="17"/>
+  <object id="897" x="441.333" y="128" width="38.6667" height="175.5">
+   <properties>
+    <property name="building_level" value="true"/>
+   </properties>
+  </object>
+  <object id="899" x="128" y="0" width="160" height="77.5"/>
+  <object id="900" x="192" y="320">
+   <polygon points="0,0 32,0 0.25,-17.75"/>
+  </object>
+  <object id="901" x="288" y="320">
+   <polygon points="0,0 -32,0 -0.25,-16.5"/>
+  </object>
+  <object id="902" x="0" y="0" width="128" height="160"/>
+  <object id="903" x="288" y="0" width="160" height="192"/>
+  <object id="904" x="320" y="192">
+   <polygon points="0,0 -32,0 -0.03125,13.9688"/>
+  </object>
+  <object id="905" x="96" y="160">
+   <polygon points="0,0 32,0 0,14"/>
+  </object>
+  <object id="906" x="32" y="160" width="64" height="13.875"/>
+  <object id="907" x="319.957" y="192" width="128.043" height="14"/>
+  <object id="909" x="144.182" y="128.182">
+   <polygon points="0,0 -14,18 14,19"/>
+  </object>
+  <object id="910" x="144.091" y="96">
+   <polygon points="0,0 -14,18 14,19"/>
+  </object>
+  <object id="911" x="272.364" y="96.2727">
+   <polygon points="0,0 -14,18 14,19"/>
+  </object>
+  <object id="912" x="431.667" y="258.667">
+   <polygon points="0,0 -14,18 14,19"/>
+  </object>
+  <object id="913" x="399" y="228">
+   <polygon points="0,0 -14,18 14,19"/>
+  </object>
+  <object id="914" x="431.333" y="227">
+   <polygon points="0,0 -14,18 14,19"/>
+  </object>
+  <object id="915" x="34.3333" y="192.333" width="59" height="23.6667"/>
+  <object id="916" x="34.3333" y="224.333" width="27" height="22.6667"/>
+ </objectgroup>
+</map>

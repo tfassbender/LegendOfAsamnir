@@ -3,6 +3,7 @@
 	config/condition/execution/levels/demo_2/prolog.json,
 	config/condition/execution/levels/demo_2/tutorial.json,
 	config/condition/execution/levels/demo_2/main.json,
+	config/condition/execution/levels/demo_2/waterfall_cave.json,
 	config/condition/execution/levels/demo_2/level_1.json,
 	config/condition/execution/levels/demo_2/level_2_entry.json,
 	config/condition/execution/levels/demo_2/level_2.json,

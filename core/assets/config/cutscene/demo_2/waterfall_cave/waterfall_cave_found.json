@@ -1,0 +1,58 @@
+{
+	id: demo_2_waterfall_cave_found,
+	controlledActions: {
+		initial: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: -1, y: 4},
+			
+			startsWithCutscene: true,
+			
+			executes: [
+				thorin_comment_1,
+			]
+		},
+		
+		thorin_comment_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionDelayInSeconds: 1.5f,
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "A treasure behind the waterfall?\n \nA bit too obvious...",
+				showNextPageIcon: true,
+			}
+			
+			executes: [
+				thorin_comment_2,
+			]
+		},
+		
+		thorin_comment_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			waitForEventToFinish: true,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "At least there is some mead here...",
+				showNextPageIcon: true,
+			}
+			
+			executes: [
+				set_global_value,
+			]
+		},
+		
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_waterfall_cave_cutscene_executed, value: true}",
+			},
+		},
+	}
+}

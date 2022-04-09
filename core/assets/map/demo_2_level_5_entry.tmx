@@ -47,7 +47,7 @@
    eJxjYBgFo4A4cJkHgpEBACGEAb8=
   </data>
  </layer>
- <objectgroup id="11" name="objects">
+ <objectgroup id="11" name="objects" locked="1">
   <object id="851" name="object.eventObject" x="96" y="574.455" width="63.967" height="1.56818">
    <properties>
     <property name="eventParameter" value="demo_2_level_5_entry_goto_main"/>

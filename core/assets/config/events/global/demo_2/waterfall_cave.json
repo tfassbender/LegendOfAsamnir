@@ -1,0 +1,30 @@
+{
+	//*******************************************
+	//*** cutscenes
+	//*******************************************
+	
+	demo_2_waterfall_cave_entered: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_waterfall_cave_entered,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_start_waterfall_cave_cutscene_if_first_execution,
+	},
+	
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_waterfall_cave_goto_main: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_waterfall_cave_goto_main,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_main,
+			startingPointId: 17,
+		}
+	},
+}

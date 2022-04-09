@@ -225,6 +225,18 @@
 		}
 	},
 	
+	demo_2_main_goto_waterfall_cave: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_waterfall_cave,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_waterfall_cave,
+			startingPointId: 0,
+		}
+	},
+	
 	demo_2_main_goto_level_1: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -260,6 +272,53 @@
 		}
 	},
 	
+	demo_2_main_goto_level_3_left: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_3_left,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3,
+			startingPointId: 10,
+		}
+	},
+	
+	demo_2_main_goto_level_3_right: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_3_right,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_3,
+			startingPointId: 0,
+		}
+	},
+	
+	demo_2_main_goto_level_4: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_main_goto_level_4,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_goto_level_4,
+		}
+	},
+	
+	demo_2_main_goto_level_4_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_main_goto_level_4_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_4,
+			startingPointId: 0,
+		}
+	},
+	
 	demo_2_main_goto_level_5_entry_change_map: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
@@ -283,18 +342,6 @@
 		executionParameters: {
 			globalValueKey: demo_2_main_final_dungeon_tested,
 			globalValue: true,
-		}
-	},
-	
-	// level not available yet - delete after all levels are done
-	demo_2_main_goto_level_in_progress: {
-		event: {
-			eventType: EVENT_OBJECT_TOUCHED,
-			stringValue: demo_2_main_goto_level_in_progress,
-		},
-		executionType: START_CUTSCENE,
-		executionParameters: {
-			cutsceneId: demo_2_main_goto_level_in_progress,
 		}
 	},
 }

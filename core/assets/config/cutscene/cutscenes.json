@@ -57,7 +57,7 @@
 	config/cutscene/demo_2/main/archaeologist_near_invisible_path.json,
 	config/cutscene/demo_2/main/adventurer_female_on_the_hill.json,
 	config/cutscene/demo_2/main/goto_level_1.json,
-	config/cutscene/demo_2/main/goto_level_in_progress.json,
+	config/cutscene/demo_2/main/goto_level_4.json,
 	
 	//********************************************************
 	//*** Demo 2 Village Blacksmith
@@ -88,6 +88,12 @@
 	config/cutscene/demo_2/castle_tavern/adventurer_female_eating.json,
 	config/cutscene/demo_2/castle_tavern/adventurer_female_by_the_door.json,
 	config/cutscene/demo_2/castle_tavern/builder_barkeeper.json,
+	
+	//********************************************************
+	//*** Demo 2 Waterfall Cave
+	//********************************************************
+	
+	config/cutscene/demo_2/waterfall_cave/waterfall_cave_found.json,
 	
 	//********************************************************
 	//*** Demo 2 Level 1

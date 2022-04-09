@@ -1,0 +1,17 @@
+{
+    demo_2_start_waterfall_cave_cutscene_if_first_execution: {
+        conditionId: demo_2_waterfall_cave_cutscene_executed,
+        thenCase: {
+            type: NO_EXECUTION,
+        },
+        elseCase: {
+			type: EVENT,
+    		eventConfig: {
+        		executionType: START_CUTSCENE,
+				executionParameters: {
+					cutsceneId: demo_2_waterfall_cave_found,
+				}
+    		}
+        }
+    },
+}

@@ -3,6 +3,7 @@
  <properties>
   <property name="above_player_layers" value="[4, 5, 6]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
+  <property name="building_level" value="true"/>
   <property name="mini_map_config_path" value="config/menu/maps/demo_2/level_4.json"/>
  </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>

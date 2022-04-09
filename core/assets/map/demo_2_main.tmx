@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="8160">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="224" height="116" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="8161">
  <properties>
   <property name="above_player_layers" value="[9, 12, 17, 18, 27]"/>
   <property name="background_layers" value="[0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26]"/>
@@ -212,17 +212,17 @@
   </object>
   <object id="6798" name="object.eventObject" x="2226.5" y="128" width="78" height="6.5">
    <properties>
-    <property name="eventParameter" value="demo_2_main_goto_level_in_progress"/>
+    <property name="eventParameter" value="demo_2_main_goto_level_3_left"/>
    </properties>
   </object>
   <object id="6799" name="object.eventObject" x="2784" y="118.455" width="31.8182" height="3.27273">
    <properties>
-    <property name="eventParameter" value="demo_2_main_goto_level_in_progress"/>
+    <property name="eventParameter" value="demo_2_main_goto_level_3_right"/>
    </properties>
   </object>
   <object id="6803" name="object.eventObject" x="3264" y="498" width="32" height="1.25">
    <properties>
-    <property name="eventParameter" value="demo_2_main_goto_level_in_progress"/>
+    <property name="eventParameter" value="demo_2_main_goto_waterfall_cave"/>
    </properties>
   </object>
   <object id="6805" name="object.eventObject" x="4448" y="3588.42" width="95.3333" height="6.5">
@@ -299,13 +299,7 @@
    </properties>
    <point/>
   </object>
-  <object id="6832" name="object.spawnPoint.mini_golem" x="2368" y="224">
-   <properties>
-    <property name="spawn" value="enemy__mini_golem"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="6833" name="object.spawnPoint.mini_golem" x="2772" y="202.5">
+  <object id="6832" name="object.spawnPoint.mini_golem" x="2400" y="224">
    <properties>
     <property name="spawn" value="enemy__mini_golem"/>
    </properties>
@@ -982,6 +976,12 @@
   <object id="8159" name="player.startingPosition" x="4496" y="3560.75">
    <properties>
     <property name="startingPointId" value="16"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8160" name="player.startingPosition" x="3281" y="525.727">
+   <properties>
+    <property name="startingPointId" value="17"/>
    </properties>
    <point/>
   </object>
@@ -20352,7 +20352,7 @@
    <polygon points="0,0 0.727273,-30 18,-60.3636"/>
   </object>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics" locked="1">
+ <objectgroup id="34" name="unreachable_area_physics">
   <object id="5698" x="3200" y="543.5" width="128" height="32"/>
   <object id="5699" x="3296" y="479.5" width="32" height="64"/>
   <object id="5709" x="2880" y="863.5" width="96" height="96"/>
