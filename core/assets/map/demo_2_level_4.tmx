@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9054">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9060">
  <properties>
   <property name="above_player_layers" value="[4, 5, 6]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -14,7 +14,7 @@
  </layer>
  <layer id="41" name="background_2" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="35" name="terrain" width="76" height="64" locked="1">
@@ -34,7 +34,7 @@
  </layer>
  <layer id="23" name="background_above_player" width="76" height="64" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt0LENgDAQA8BP2H8oYBIE7EEYAb6IotxJLl3YEQAAAAAAAAAAAAAwp7VE7KVffzRH23om9mb7o/HXN+/eq2X7mXuyv0qNqMkstfcKAAAAAAAAmNcDuowYqA==
+   eJzt2dEJhEAMBNDs2n9RaiXiCZahtmDE5dz3YD4DmfwmAgAAAAD6tZfWGwAAAAAAAC2NJWJO/Auy8/9mObuuib7Z+Se8+R/6wr3edPX9nZluZuvsXqVG1GSG2roFAAAAAAAA9OsAf9oaeg==
   </data>
  </layer>
  <layer id="44" name="terrain_above_player" width="76" height="64" locked="1">
@@ -75,14 +75,14 @@
    </properties>
    <point/>
   </object>
-  <object id="9012" name="object.switch" x="240" y="1264">
+  <object id="9012" name="object.switch" x="271.424" y="1264.94">
    <properties>
     <property name="eventParameter" value="demo_2_level_4_switch_bottom"/>
     <property name="stateSwitchId" value="demo_2_level_4_switch_bottom"/>
    </properties>
    <point/>
   </object>
-  <object id="9013" name="object.switch" x="288" y="576">
+  <object id="9013" name="object.switch" x="271.583" y="562.375">
    <properties>
     <property name="eventParameter" value="demo_2_level_4_switch_top"/>
     <property name="stateSwitchId" value="demo_2_level_4_switch_top"/>
@@ -261,7 +261,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="33" name="physics" locked="1">
+ <objectgroup id="33" name="physics">
   <object id="8760" x="1120" y="896" width="576" height="109"/>
   <object id="8766" x="1184" y="1264.67" width="512" height="143.333"/>
   <object id="8780" x="1120" y="1184" width="68.5" height="224"/>
@@ -332,8 +332,22 @@
    <polygon points="0,0 24.9091,0.181818 12.5455,-38.1818"/>
   </object>
   <object id="8992" x="1862.21" y="1075.91" width="19.6364" height="3.63636"/>
+  <object id="9054" x="254.455" y="1233.27" width="34.9091" height="22"/>
+  <object id="9055" x="254.534" y="1233.24">
+   <polygon points="0,0 34.8313,0.0222222 16.9486,-10.7662"/>
+  </object>
+  <object id="9056" x="254.488" y="1255.27">
+   <polygon points="0,0 34.8942,0.00390625 16.8722,9.38672"/>
+  </object>
+  <object id="9057" x="254.67" y="530" width="34.9091" height="22"/>
+  <object id="9058" x="254.749" y="529.97">
+   <polygon points="0,0 34.8313,0.0222222 16.9486,-10.7662"/>
+  </object>
+  <object id="9059" x="254.703" y="552">
+   <polygon points="0,0 34.8942,0.00390625 16.8722,9.38672"/>
+  </object>
  </objectgroup>
- <objectgroup id="34" name="unreachable_area_physics">
+ <objectgroup id="34" name="unreachable_area_physics" locked="1">
   <object id="8793" x="224" y="224">
    <polygon points="0,0 32.0625,-15.375 0,-15.4375"/>
   </object>
