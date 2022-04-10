@@ -1,0 +1,96 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	//switches 2 and 3 have to be active, but not 1 and 4, and the pressure switch has to be active
+	demo_2_level_5_gate_2_allSwitchesAreActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: NOT,
+				conditionalParameters: {
+					condition: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demo_2_level_5_gate_2_switch_1,
+						}
+					}
+				}
+			},
+			condition2: {
+				conditionType: AND,
+				conditionalParameters: {
+					condition: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demo_2_level_5_gate_2_switch_2,
+						}
+					},
+					condition2: {
+						conditionType: AND,
+						conditionalParameters: {
+							condition: {
+								conditionType: STATE_SWITCH_ACTIVE,
+								parameters: {
+									stateSwitchId: demo_2_level_5_gate_2_switch_3,
+								}
+							},
+							condition2: {
+								conditionType: AND,
+								conditionalParameters: {
+									condition: {
+										conditionType: NOT,
+										conditionalParameters: {
+											condition: {
+												conditionType: STATE_SWITCH_ACTIVE,
+												parameters: {
+													stateSwitchId: demo_2_level_5_gate_2_switch_4,
+												}
+											}
+										}
+									},
+									condition2: {
+										conditionType: STATE_SWITCH_ACTIVE,
+										parameters: {
+											stateSwitchId: demo_2_level_5_pressure_switch_armadillo,
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	demo_2_level_5_gate_3_openLock_ifAllSwitchesAreActivated: {
+		conditionType: AND,
+		conditionalParameters: {
+			condition: {
+				conditionType: STATE_SWITCH_ACTIVE,
+				parameters: {
+					stateSwitchId: demo_2_level_5_gate_3_magic_switch_1,
+				}
+			},
+			condition2: {
+				conditionType: AND,
+				conditionalParameters: {
+					condition: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demo_2_level_5_gate_3_magic_switch_2,
+						}
+					},
+					condition2: {
+						conditionType: STATE_SWITCH_ACTIVE,
+						parameters: {
+							stateSwitchId: demo_2_level_5_gate_3_magic_switch_3,
+						}
+					}
+				}
+			}
+		}
+	},
+}

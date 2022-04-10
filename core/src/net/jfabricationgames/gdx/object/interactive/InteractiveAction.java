@@ -31,6 +31,7 @@ public enum InteractiveAction {
 		private static final String MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED = "displayTextChanged";
 		private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_VALUE = "globalConditionValue";
 		private static final String MAP_PROPERTIES_KEY_GLOBAL_CONDITION_KEY = "globalConditionKey";
+		private static final String MAP_PROPERTIES_KEY_EVENT_PARAMETER = "eventParameter";
 		
 		@Override
 		public void execute(InteractiveObject object) {
@@ -40,11 +41,19 @@ public enum InteractiveAction {
 			String headerText = object.getMapProperties().get(MAP_PROPERTY_KEY_DISPLAY_TEXT_HEADER, String.class);
 			String text = object.getMapProperties().get(MAP_PROPERTY_KEY_DISPLAY_TEXT, String.class);
 			String changedText = object.getMapProperties().get(MAP_PROPERTIES_KEY_DISPLAY_TEXT_CHANGED, String.class);
+			String eventParameter = object.getMapProperties().get(MAP_PROPERTIES_KEY_EVENT_PARAMETER, String.class);
 			
 			if (player.isSpecialActionFeatherSelected() && !isValueChanged(globalConditionKey, globalConditionValue)) {
 				GlobalValuesDataHandler.getInstance().put(globalConditionKey, globalConditionValue);
 				
-				showOnScreenText("The text was changed.", "Text changed", headerColor);
+				if (eventParameter != null) {
+					EventHandler.getInstance()
+							.fireEvent(new EventConfig().setEventType(EventType.CHANGE_SIGNBOARD_TEXT).setStringValue(eventParameter));
+				}
+				else {
+					//only show the onscreen-text if no event is fired, because the event might lead to a cutscene
+					showOnScreenText("The text was changed.", "Text changed", headerColor);
+				}
 			}
 			else {
 				if (isValueChanged(globalConditionKey, globalConditionValue)) {

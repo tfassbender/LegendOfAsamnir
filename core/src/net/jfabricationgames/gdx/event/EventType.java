@@ -43,6 +43,7 @@ public enum EventType {
 	OPEN_LOCK, //
 	CLOSE_LOCK, //
 	SET_STATE_SWITCH_STATE, //
+	CHANGE_SIGNBOARD_TEXT, //
 	//*******************************
 	//*** Items
 	//*******************************

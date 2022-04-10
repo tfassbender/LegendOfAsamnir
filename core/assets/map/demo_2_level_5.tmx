@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1187">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1189">
  <properties>
   <property name="above_player_layers" value="[4, 5]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -10,7 +10,7 @@
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
  <layer id="1" name="background" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1m1uAiEQBuDV1NVsPIkH6IVMeqHeof/bxIO0iQew9SAt0UmQBWHgHRhTJpmosMKzfOwyDPx4n4bhVTBL4/DXxvdaLv+Db7mRS4Rvv5JLpO/NyZdruuV0fereQvrseyefXWZfcwDsz+6r6+Osvz5+3Yf2aV5/bvrGb1/Z9+l53n9Mc5/vXfFVwUdhnzmOnjE9TthzSYnvvJ77zuBzEzfsM1HIhzw35cR4zafN3GfKqL5VUP+h/arFF0tkPz+LS9lpcfs91mct3/P2UmY+R09998V9lPRbu893PddXYo75dsvbDLWfup+RPm4fNX2xvkt8dj9upvrsOZX0UXB9bnnJHkb56J1hgt4bVJbjC9VxfKkRW+epzxdzv5z1F7JwjaX7lBM5Bq0+3xzW9uWkZHRfe29L2726FuOXGtqNWuY8x9T3TJntEXy1jKl9avYhx487N7E+0fNbsp4QPu4cSPq4bglj991v5xF9I6BdlC9mRPlSnZz/cO+fG0hfy9DuM9F9ZaHdZ0LK9wskaOgm
+   eJzt1u1twjAQBuCASkARkzBAF0LqQt2h/1uJQVqJAWgZpLXgJOPY2Ge/Zx+qTzoBTsg98UfiYeDH+zQMr4JZGoe/a3yv5fI/+JYbuUT49iu5RPrenHy5pttO56esLbTPvnfy2W32OQdA/e6r6+PMv95/3Yf2aZ5/bvr6b1/Z9+l55n9Mc5/vXfFVwUdh7zmOnj49Tth9SYnvvJ77zuB9EzfsPVHIh9w35cR4zafN3Gfa6HiroPqh9arFF0tknZ/Fpe20uP0eq1nL97y9tJnP0XO8++I+Svqt3ec7n+srMcd8u+Vthq6fup6RPm6Nmr5Y7RKfXcfNVJ89ppI+Cq7PbS9ZwygfvTNM0HuD2nJ8oWMcX2rE5nnq88XcL2f+hSxcY+k65USOQavPN4a1fTkpGd3X3tvSdu9Yi/5LDe1GLWOeY+prpsz2CL5axtSamn3I/uOOTawmenxL5hPCxx0DSR/XLWHsvvvXeUTfCLguyhczonypTs5/uPfPDaSvZWj3mei+stDuMyHl+wV+XeeJ
   </data>
  </layer>
  <layer id="2" name="background_2" width="40" height="65" locked="1">
@@ -35,7 +35,7 @@
  </layer>
  <layer id="10" name="background_above_player" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmFEOwyAIhtvt/oey20WWuXtse2hiCCooKG35kj4s7X5+UTC6LI7jOI7jOI5zDt4r/dsX41sp3F8fI/1xYu3E33+25HkkGgG8+0zwp6Ghqe3+dDV6Ykj4i6BGIPdbu7bU3ESkliWQXDvPtS9XGJL+NOokpxmY86WRuz9SY8Z0uGPEgHtV7qnFwPzte69mfyzFL70PyW9qDjbiODAvmj2YCxartvY1aiNHby6Cci5HzlUL1v1FRl+ZDdY3LHmHvSs9TxwpzyP7i6OL9f5zNH/wzmB2Taf+SnvtrJqmxLW+BiRypzVGzTONJd2z+aOeF2fnb9RZqVWndl818s4p3RuoHqh3WQHRLelhmrn7d0qOaufyFqBmDuv7Q20NWsB6Dq37u/IcfwGXkI3W
+   eJztmFEOwiAMhpm+eX1P4hGYXsSI95g+LCFNgQItdNov2YPZ/PtTaAk4ZxiGFm4X566FxzAMwzCMNK+F/u2z4lsuzF8fI/3VxNoJn/+s0XOPNDx4957gT0JDUtv8yWr0xODwF0CNQM6ndm2uuQlILXPAuXYeS1+uMDj9SdRJStNXzpdE7r5wjRnTqR0jBtyrUk8pBuZv33sl+2Mufu69j35Tc7ASx4F5kezBtWCxSmtfojZS9ObCC+dy5Fy1oN1fqOgrs8H6hibvsHfF54kj5XlkfzFk0d5/juYP3hnMrunYX26vnVXTlLja1wBH7qTGKHmm0aT7a/6o58XZ+Rt1VmrVKd1XjbxzivcGqgfqXZZHdHN6mGbq/p2So9K5vAWomUL7/lBagxrQnkPt/v55jjc0VZN5
   </data>
  </layer>
  <layer id="3" name="shadows" width="40" height="65" locked="1">
@@ -184,10 +184,10 @@
    </properties>
    <point/>
   </object>
-  <object id="1168" name="object.pressure_switch" x="812.25" y="1757.75">
+  <object id="1168" name="object.pressure_switch" x="809.989" y="1759.97">
    <properties>
     <property name="canBeDeactivated" value="false"/>
-    <property name="eventParameter" value="demo_2_level_5_pressure_switch_armadillo"/>
+    <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
     <property name="stateSwitchId" value="demo_2_level_5_pressure_switch_armadillo"/>
    </properties>
    <point/>
@@ -195,28 +195,28 @@
   <object id="1169" name="object.switch" x="975.818" y="1680.91">
    <properties>
     <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
-    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_1"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_2_switch_1"/>
    </properties>
    <point/>
   </object>
   <object id="1170" name="object.switch" x="1007.82" y="1680.91">
    <properties>
     <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
-    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_2"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_2_switch_2"/>
    </properties>
    <point/>
   </object>
   <object id="1171" name="object.switch" x="1039.82" y="1680.91">
    <properties>
     <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
-    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_3"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_2_switch_3"/>
    </properties>
    <point/>
   </object>
   <object id="1172" name="object.switch" x="1071.82" y="1680.91">
    <properties>
     <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
-    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_4"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_2_switch_4"/>
    </properties>
    <point/>
   </object>
@@ -241,14 +241,24 @@
    </properties>
    <point/>
   </object>
-  <object id="1186" name="object.changeable_signboard" x="1133.88" y="960">
+  <object id="1186" name="object.changeable_signboard" x="1133.88" y="953">
    <properties>
     <property name="colorHeader" value="#ff0000"/>
     <property name="displayText" value="The gate is closed."/>
     <property name="displayTextChanged" value="The gate is opened."/>
     <property name="displayTextHeader" value="Gate Controll"/>
+    <property name="eventParameter" value="demo_2_level_5_signboard_gate_changed"/>
     <property name="globalConditionKey" value="demo_2_level_5_signboard_gate_changed"/>
     <property name="globalConditionValue" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1187" name="animal.armadillo" x="928" y="1792">
+   <point/>
+  </object>
+  <object id="1188" name="player.startingPosition" x="1056.33" y="144.333">
+   <properties>
+    <property name="startingPointId" value="6"/>
    </properties>
    <point/>
   </object>

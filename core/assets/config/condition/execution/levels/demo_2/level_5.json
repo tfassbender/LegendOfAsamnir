@@ -1,0 +1,43 @@
+{
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+    demo_2_level_5_gate_2_openLock_ifAllSwitchesAreActivated: {
+        conditionId: demo_2_level_5_gate_2_allSwitchesAreActivated,
+        thenCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_5_gate_2
+                }
+            }
+        }
+        elseCase: {
+            type: EVENT,
+            eventConfig: {
+                executionType: CLOSE_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_5_gate_2
+                }
+            }
+        }
+    },
+    
+    demo_2_level_5_gate_3_openLock_ifAllSwitchesAreActivated: {
+		conditionId: demo_2_level_5_gate_3_openLock_ifAllSwitchesAreActivated,
+		thenCase: {
+			type: EVENT,
+            eventConfig: {
+                executionType: OPEN_LOCK,
+                executionParameters: {
+                    lockId: demo_2_level_5_gate_3
+                }
+            }
+        }
+        elseCase: {
+			type: NO_EXECUTION, // the switches cannot be deactivated
+		}
+	}
+}

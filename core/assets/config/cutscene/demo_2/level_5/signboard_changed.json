@@ -1,0 +1,48 @@
+{
+	id: demo_2_level_5_signboard_changed,
+	controlledActions: {
+		initial_changed_message: {
+			startsWithCutscene: true,
+			
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Text changed",
+				displayText: "The text was changed:\n \nThe gate is opened.",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				open_gate,
+			],
+		},
+		
+		open_gate: {
+			type: EVENT,
+			
+			globalEvent: demo_2_level_5_signboard_gate_changed_open_gate,
+			
+			waitForEventToFinish: false,
+			
+			executes: [
+				thorin_comment,
+			]
+		},
+		
+		thorin_comment: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionDelayInSeconds: 4f,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "That was easy ...",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+		},
+	}
+}

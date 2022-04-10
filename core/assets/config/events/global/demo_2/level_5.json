@@ -1,0 +1,107 @@
+{
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_level_5_goto_level_5_entry: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_5_goto_level_5_entry,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_5_entry,
+			startingPointId: 2,
+		}
+	},
+	
+//	demo_2_level_5_goto_end: {
+//		event: {
+//			eventType: EVENT_OBJECT_TOUCHED,
+//			stringValue: demo_2_level_5_goto_end,
+//		},
+//		executionType: START_CUTSCENE,
+//		executionParameters: {
+//			cutsceneId: demo_2_level_5_goto_end,
+//		}
+//	},
+//	demo_2_level_5_goto_end_after_cutscene: {
+//		event: {
+//			eventType: CUTSCENE_EVENT,
+//			stringValue: demo_2_level_5_goto_end_after_cutscene,
+//		},
+//		executionType: CHANGE_MAP,
+//		executionParameters: {
+//			map: demo_2_end,
+//			startingPointId: 0,
+//		}
+//	},
+	
+	//*******************************************
+	//*** switches
+	//*******************************************
+	
+	demo_2_level_5_gate_2_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_5_gate_2_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_5_gate_2_openLock_ifAllSwitchesAreActivated,
+	},
+	
+	demo_2_level_5_gate_3_switch_activated: {
+		event: {
+			eventType: STATE_SWITCH_ACTION,
+			stringValue: demo_2_level_5_gate_3_magic_switch,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_5_gate_3_openLock_ifAllSwitchesAreActivated,
+	},
+	
+	demo_2_level_5_signboard_gate_changed: {
+		event: {
+			eventType: CHANGE_SIGNBOARD_TEXT,
+			stringValue: demo_2_level_5_signboard_gate_changed,
+		}
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_5_signboard_changed,
+		}
+	}
+	
+	demo_2_level_5_signboard_gate_changed_open_gate: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_5_signboard_gate_changed_open_gate,
+		}
+		executionType: OPEN_LOCK,
+		executionParameters: {
+			lockId: demo_2_level_5_gate_4,
+		}
+	}
+	
+	//*******************************************
+	//*** boss fight
+	//*******************************************
+	
+//	demo_2_level_5_entered_boss_area: {
+//		event: {
+//			eventType: EVENT_OBJECT_TOUCHED,
+//			stringValue: demo_2_level_5_entered_boss_area,
+//		},
+//		executionType: CONDITIONAL_EVENT,
+//		conditionalExecutionId: demo_2_level_5_start_boss_cutscene,
+//	},
+//	
+//	demo_2_level_5_boss_defeated: {
+//		event: {
+//			eventType: ENEMY_DEFEATED,
+//			stringValue: demo_2_level_5_boss_defeated,
+//		},
+//		executionType: OPEN_LOCK,
+//		executionParameters: {
+//			lockId: demo_2_level_5_boss_killed_lock,
+//		}
+//	},
+}

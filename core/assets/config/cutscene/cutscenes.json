@@ -154,4 +154,5 @@
 	config/cutscene/demo_2/level_5/rune_gebo_found.json,
 	config/cutscene/demo_2/level_5/gate_lantern_not_activated.json,
 	config/cutscene/demo_2/level_5/gate_lantern_not_found_yet.json,
+	config/cutscene/demo_2/level_5/signboard_changed.json,
 ]

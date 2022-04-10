@@ -21,4 +21,5 @@
 	config/events/global/demo_2/level_3_top_right.json,
 	config/events/global/demo_2/level_4.json,
 	config/events/global/demo_2/level_5_entry.json,
+	config/events/global/demo_2/level_5.json,
 ]
