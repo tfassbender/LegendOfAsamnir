@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9060">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="76" height="64" tilewidth="32" tileheight="32" infinite="0" nextlayerid="46" nextobjectid="9100">
  <properties>
   <property name="above_player_layers" value="[4, 5, 6]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -260,8 +260,194 @@
     <property name="unitId" value="demo_2_level_4_event_object_boss_area_entered"/>
    </properties>
   </object>
+  <object id="9071" name="object.spawnPoint.bat" x="438" y="330">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9072" name="object.spawnPoint.bat" x="289" y="315">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9073" name="object.spawnPoint.bat" x="243" y="398">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9074" name="object.spawnPoint.bat" x="854" y="881">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9075" name="object.spawnPoint.bat" x="813" y="828">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9076" name="object.spawnPoint.bat" x="1224" y="1667">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9077" name="object.spawnPoint.bat" x="1252" y="1744">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9078" name="object.spawnPoint.bat" x="2128" y="1214">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9079" name="object.spawnPoint.bat" x="2168" y="1276">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9080" name="object.spawnPoint.bat" x="1597" y="639">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9081" name="object.spawnPoint.bat" x="1494" y="675">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9082" name="object.spawnPoint.mini_golem" x="254.667" y="493">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9083" name="object.spawnPoint.mini_golem" x="250" y="334.667">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9084" name="object.spawnPoint.mini_golem" x="345.667" y="464.667">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9085" name="object.spawnPoint.mini_golem" x="728.5" y="1218.5">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9086" name="object.spawnPoint.mini_golem" x="841.5" y="1251">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9087" name="object.spawnPoint.mini_golem" x="777.5" y="1284.5">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9088" name="object.spawnPoint.mini_golem" x="818" y="1369.5">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9089" name="object.spawnPoint.mini_golem" x="1698.67" y="1669.33">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9090" name="object.spawnPoint.mini_golem" x="1640" y="1633.33">
+   <properties>
+    <property name="aiType" value="mini_golem_team"/>
+    <property name="spawn" value="enemy__mini_golem"/>
+    <property name="teamId" value="demo_2_level_3_mini_golems_room_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9091" name="object.spawnPoint.imp" x="608" y="896">
+   <properties>
+    <property name="spawn" value="enemy__imp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9092" name="object.spawnPoint.imp" x="2021.33" y="1444">
+   <properties>
+    <property name="spawn" value="enemy__imp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9093" name="object.spawnPoint.cobra" x="346" y="1254">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9094" name="object.spawnPoint.cobra" x="423.667" y="1300.67">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9095" name="object.spawnPoint.cobra" x="327.333" y="1334.67">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9097" name="enemy.spider" x="559.25" y="576.25">
+   <properties>
+    <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9098" name="object.spawnPoint.health" x="2191" y="1088.33">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9099" name="object.spawnPoint.shield" x="2190.73" y="1119.82">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
- <objectgroup id="33" name="physics">
+ <objectgroup id="33" name="physics" locked="1">
   <object id="8760" x="1120" y="896" width="576" height="109"/>
   <object id="8766" x="1184" y="1264.67" width="512" height="143.333"/>
   <object id="8780" x="1120" y="1184" width="68.5" height="224"/>

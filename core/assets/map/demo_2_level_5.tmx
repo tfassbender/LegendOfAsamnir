@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="1117">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1187">
  <properties>
-  <property name="above_player_layers" value="[3, 4]"/>
-  <property name="background_layers" value="[0, 1, 2]"/>
+  <property name="above_player_layers" value="[4, 5]"/>
+  <property name="background_layers" value="[0, 1, 2, 3]"/>
   <property name="dungeon_level" value="true"/>
-  <property name="invisible_paths_layer" value="[7]"/>
-  <property name="shadow_layers" value="[5, 6]"/>
+  <property name="invisible_paths_layer" value="[8]"/>
+  <property name="shadow_layers" value="[6, 7]"/>
  </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
  <layer id="1" name="background" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1lEOwiAMANBp1JkdxWuZeCHv4L8mHkQTD6DuILo4EmQwKG2hU5o0MWzCW4GNqoLHsamqPWNi4/zu41Hz5T/45mu+pPBtl3xJ6TsYuevTbM/p0/tWPr1Nvydk7+f0nQnG/zUfZP2V+hUftU/y+jPTVr9tYt/F8k49NUOf7V18TeBToZ85bpaa3hracwnG19ZDX0t8boKGfiZy+SjPTTGx6nOxHvq6NnU9V6jxXftVis+XlOM8Z5+2++z7t2/MVD6zzTV2Lp9pKj68z3Y/1Icx+/rbzL9zzM2xp0OeN3SMVL7Y+1L69DmV6IOu8RTrT30zulDfDdUW43Nd4whfHcZq5aoBxgI1YucR6oMapPpc+yelLyY5o/jye3Paxq7lqF9oSDdKmfMYU9kzONsUfKmMoWNK9lHWDzo3vjGp5xeznih80Dng9EHdHMbiG+9nir4VQb9UPp+RyhfqhPwH+vzQoPTlDOm+LooPF9J9XXD5XvoM29g=
+   eJzt1m1uAiEQBuDV1NVsPIkH6IVMeqHeof/bxIO0iQew9SAt0UmQBWHgHRhTJpmosMKzfOwyDPx4n4bhVTBL4/DXxvdaLv+Db7mRS4Rvv5JLpO/NyZdruuV0fereQvrseyefXWZfcwDsz+6r6+Osvz5+3Yf2aV5/bvrGb1/Z9+l53n9Mc5/vXfFVwUdhnzmOnjE9TthzSYnvvJ77zuBzEzfsM1HIhzw35cR4zafN3GfKqL5VUP+h/arFF0tkPz+LS9lpcfs91mct3/P2UmY+R09998V9lPRbu893PddXYo75dsvbDLWfup+RPm4fNX2xvkt8dj9upvrsOZX0UXB9bnnJHkb56J1hgt4bVJbjC9VxfKkRW+epzxdzv5z1F7JwjaX7lBM5Bq0+3xzW9uWkZHRfe29L2726FuOXGtqNWuY8x9T3TJntEXy1jKl9avYhx487N7E+0fNbsp4QPu4cSPq4bglj991v5xF9I6BdlC9mRPlSnZz/cO+fG0hfy9DuM9F9ZaHdZ0LK9wskaOgm
   </data>
  </layer>
  <layer id="2" name="background_2" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmGFOwzAMhdcWJgGH4A9CAq6BuFfHOUAqO8kYHGTqdg8WgbW3NztJt6ytUJ5kqdAu/eo4jp3JJCsrKysrKysra6y6mO6up1P7uaF0t2W6/LP7EfC1xf7fz8D3QnwrerYPMZ9P/53va/v7soy372Kf762aTG7J3qt0fO5dsw7m3rfe2ifYEhgWdG+TgO8DbGZci2n+QH8W5OtThWO76+vylwGvUSG+mnydmu8R+B6P4GsUX3eJcfY58wmDXBf0+xCf9i1dYpzHD/G5OUbT+Na0RkTybVV5GOOn8jnhOhSzYkrWNHJKLL4qMW5ZDB/PqTP0iW9dVvCsxOJciXHLYviuPN9Ve3zYkq+sZ1AL8nkM30O5y7NLWseNwefWqPPdvCNfUe77PIYPn+OY1MaQ59h3+I0Wn5urGw8f71WW+eZA3su+42/U+NxcPXn4NHE+5ZqgKA9zqRZXsvfG+iB2v+Z8uiK+ujjMVcx3zrqPawaO4Qb+Lz7G+33woWojb2AtgPcXkfOUiq9RYl/+Lz7G++eu6bvU75rOzYfrTdv3Q+qzJ9LyRoi9Tz7OXRj3lp+H6CktSS7H/KLl7yG5OL9I3kndK3VhQy7OL5J3UvdKsWoNLpbWK/XFF6rzWGPJOVZNFuoLfIrpT61aytprJUZFvr4gpJj+1KpVYnsRqy/wCXMEn7OwWbVKl15E6wt9uadV3mfJqlW0uLL6OPxGX0+O44RyREhaXFnrG78xdCYm45wqLa66jpuKT+sXnXiOh+LT+kUnnuOh+fi8iuc4FZ925sTCvWHjYcA5jhkXxw71Ur56Ptb32joO9eXH9Hi+etnHd8z+cE5pZ6Zj4nPq80zjGI2dj+d4bHxO2plmCv0Am7NZgQ==
+   eJztmA1OwzAMhdtuTAIOgUATEuMaiHsNzgHS2EnGz0GmjXuwCCze3mwnLW1XoTzJUqFd+sVxHLtFkZWVlZWVlZWVNVSNJ7/Xk4n93LE03TGd/Nj1APg25f7fd8B3T3xrerYPMZ+n/873vvt9VaXbR7nP9zQqiguy51F7fOFdDzUsvG+7s1ewN2BY0b3PFvhewB6MazHNH+jPknz9V+HY4fqs+mbAa1SMb06+bptvBnyzBnwLxdd1Ypx9znzCINcl/T7Gp82lTozz+DG+sMZoGt+W9ohI5jaqDmP8r3xBuA/FrJiSPY2cEouPSoxblsLHaxoMfeLtyxE8K7G4VGLcshS+U2dec8eHG/KV9QxqRT5P4bupfvPsG+3jhcEX9mjw3bImX1nt+zyFD5/jmNTGkOfYdzhHiy+s1bnDx2eVZd4ayHvZdzxHjS+s1a3Dp4nzKdcEZXWYS7W4krM31Qep5zXn0zXxzcvDXMV8XdZ9XDNwDC/g/+JjvN8HH2pu5A2sBfD+KnGd2uJbKLEv/xcf4/2ua/o69bumrvlwv2nnfkx99kRa3oix98nHuQvj3vLzMXpKS5LLMb9o+fuYXJxfJO+03SvVYUMuzi+Sd9rulVK1MbhYWq/UF1+szmMNJedYNVmsL/CU0p9atZR11kqMiry+IKaU/tSqVVJ7Easv8IQ5gr+zsFm1Sp1eROsLvdyzgfddjotiPLbnYtUqWlxZfRzO0evJcRx8X+nwWdLiytrfOMfYNzEZB3XVgE+Lq7r1WSpfTFq/GMRr3BVfFfGf1i8G8Rp3xReLPxmHv1fxGrfFJ/Vb2LvBpgofng2fDgOusfYtS9NKGdfj1MZM9b22j2N9eZMez6uXPb4m50OX0r6ZDokvqM9vGk00dD5e46HxBWnfNNvQFw2KWZI=
   </data>
  </layer>
  <layer id="5" name="terrain" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1rENwCAMRUEqb59RGIVRskMKWoRoEFa4k37jyuUr5Q4t1m6nvINfRrfTnujLqkYfALDXrKMyNNasozI2FgAAAAAAAMAffRcpCaU=
+   eJzt1jEKg0AQRuEJ4qbQ85mcJEkfLMVO7VPnKN7E3CED226WWMgM+j74EbZ6hcWIHMMc/nuz8km0pN6sdSHOq3eIAwAA28rdUR5urNwd5fHGAvZsqawL8uraugBb4v8DAP+aUuSiu5bWJWk37brrHk77Bu0adZPTPgAAAPjyLETawrrit5fzviPrK5HzKX4BYK0v/dkTlw==
+  </data>
+ </layer>
+ <layer id="16" name="terrain_2" width="40" height="65" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJztziESACAMwLChEHs7vBnu0BOomcTUNgIAAAAAAHrs7D6orfs2xysAAAAA/w4SGgHS
   </data>
  </layer>
  <layer id="8" name="shadow_underlying" width="40" height="65" locked="1">
@@ -40,7 +45,7 @@
  </layer>
  <layer id="4" name="shadows_2" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmG1uwzAIQHuAXH7N2ntk3nKRnaQ3WCPVGmKAwSa2NfEk/+qGn/yBIZdLEASZxzLaQGZ2vyAIguD/82F4i7YB71b4tdHTb3/+/9Uwvpa+fpa58nz353gD4x3EWNFvtwF+UoyE1roVb7/S31rp4Wc543jNe/i13CcPvzu6I5l8Fj8H+x3kO015tsS3+iXhXu7GtaJo9aNitMQqxfby81g7KraXHxVnrTiTODZ+q7gB59D6eeQXCpxPcU2Qlr+5FDus4O3VroH2vcZzbUzNsgl+Z9Z9eK7EnH1YC+Dfe/pZWZX7VEur39k1/ex+8L7VvKc9eyIqb5Tce/rh3AXPPbfOI3pKjp3IL1T+nsEL490rWdystcrIO6Mh/H6Rcg5Xk0l9QQlNf8rVUtxbS53R2jXU7BdXq1h6EaufJkeUsPQiSbE3EI9+izpXXj21hx8VP/xouH4R7/EoP6lflHolbVxMbRzqe9UZfppvTvBtuAkOcI+137JWIq7kScVsyb+lvrymx5PqZavfSEpncAZ6ftOoYXY/vMez+R0ca/j9Gp5+Pzd66uI=
+   eJztmG1uwyAMhvN/OU/vubH2HhlbLtKTTL3AEmlRLc8GGzuANF6JX2nNI2P8wTT1o8fLNH1v6zI/V08afDYNPpt65xsaGhoa+h/6UNSfpUGtGnw21eRbt/+/KdbXXJdPs9ex321br2C9AxsBfbs24EvZiMjXVnnz5X6rVQ0+TYxjn9fgs9wnD74buiOHjlj8bMy367jTFKfFvpYvJu7lqvQVJSsfZcNiK2fbi8/Dd5RtLz7KTiiISWwb1ypuwT2kfB75hRLOp7gniPPfXIoZAqi9Uh9I6zXea2F6liXBd2bfh/eKTOzDXgB/r8mnVRCeU6msfGf39L3zwftWUk9rzkRU3six1+TDuQvGPefnFjMlp5XIL1T+7oELy3tW0rBpe5WWd0aiwfdUKudwPVlqLshJMp9yvRRXa6kYLfWh5Ly4XkUzi2j5JDkiJ80sEgVnA+Uxb1Fx5TVTe/BR9gcfLW5exGfcii81L6ZmJaldrFI71HvVGXySNydYG64JBnjG0resQNhNcVI2Lfk3N5eXzHipflnL11K5GOxBNd80StQ7Hz7j3vh27T68/y5Pvh/pRflo
   </data>
  </layer>
  <layer id="14" name="invisible_paths_background" width="40" height="65" locked="1">
@@ -48,7 +53,206 @@
    eJztzsENABAQAMFL9IHK0H8VPGkAj5lk/xsBAAAAAPflFFG2anp9dGrrp2+Nz/4AAAAAAH43AbFbApU=
   </data>
  </layer>
- <objectgroup id="11" name="objects" locked="1"/>
+ <objectgroup id="11" name="objects">
+  <object id="1117" name="object.eventObject" x="576" y="2080" width="128.152" height="4.6894">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_goto_level_5_entry"/>
+   </properties>
+  </object>
+  <object id="1118" name="player.startingPosition" x="640" y="2039">
+   <properties>
+    <property name="startingPointId" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1119" name="player.startingPosition" x="608" y="1952">
+   <properties>
+    <property name="startingPointId" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1120" name="player.startingPosition" x="704" y="1472">
+   <properties>
+    <property name="startingPointId" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1121" name="player.startingPosition" x="480" y="1248">
+   <properties>
+    <property name="startingPointId" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1122" name="player.startingPosition" x="768" y="960">
+   <properties>
+    <property name="startingPointId" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1123" name="player.startingPosition" x="672" y="608">
+   <properties>
+    <property name="startingPointId" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1124" name="object.key_wall" x="544" y="1600">
+   <properties>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1125" name="object.key_wall" x="704" y="1376">
+   <properties>
+    <property name="lockId" value="demo_2_level_5_gate_2"/>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1126" name="object.key_wall" x="704" y="1184">
+   <properties>
+    <property name="lockId" value="demo_2_level_5_gate_3"/>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1127" name="object.key_wall" x="672" y="736">
+   <properties>
+    <property name="lockId" value="demo_2_level_5_gate_4"/>
+    <property name="physicsBodySizeFactorX" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1128" name="object.key_wall" x="928" y="144">
+   <properties>
+    <property name="lockId" value="demo_2_level_5_boss_gate"/>
+    <property name="physicsBodySizeFactorY" value="1.3f"/>
+    <property name="unlockedByEvent" value="true"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1129" name="object.eventObject" x="1088" y="111.636" width="3.42473" height="64.3258">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_goto_end"/>
+   </properties>
+  </object>
+  <object id="1130" name="object.eventObject" x="512" y="1536" width="95.583" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="1131" name="object.eventObject" x="640" y="1335.75" width="96.333" height="7.5833">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="1132" name="object.eventObject" x="672" y="1088" width="96.1966" height="31.3333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="1133" name="object.eventObject" x="608" y="697.636" width="128.197" height="5.69694">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="1134" name="object.eventObject" x="960" y="112" width="4.083" height="63.8333">
+   <properties>
+    <property name="eventParameter" value="respawnCheckpoint"/>
+   </properties>
+  </object>
+  <object id="1141" name="object.spawnPoint" x="304.561" y="1200.38">
+   <properties>
+    <property name="spawn" value="playerLowOnMana"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1157" name="object.spawnPoint" x="272.486" y="1872.48">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_bombs"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1158" name="object.destroyable_wall" x="176.182" y="1745.45">
+   <point/>
+  </object>
+  <object id="1159" name="object.chest" x="82.5" y="1743.75">
+   <properties>
+    <property name="drop" value="{key: 1}"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1168" name="object.pressure_switch" x="812.25" y="1757.75">
+   <properties>
+    <property name="canBeDeactivated" value="false"/>
+    <property name="eventParameter" value="demo_2_level_5_pressure_switch_armadillo"/>
+    <property name="stateSwitchId" value="demo_2_level_5_pressure_switch_armadillo"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1169" name="object.switch" x="975.818" y="1680.91">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1170" name="object.switch" x="1007.82" y="1680.91">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1171" name="object.switch" x="1039.82" y="1680.91">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1172" name="object.switch" x="1071.82" y="1680.91">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_2_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_2_gate_2_switch_4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1173" name="object.magic_switch" x="112" y="912">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_3_magic_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_3_magic_switch_3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1174" name="object.magic_switch" x="112" y="848">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_3_magic_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_3_magic_switch_2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1175" name="object.magic_switch" x="112" y="784">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_gate_3_magic_switch"/>
+    <property name="stateSwitchId" value="demo_2_level_5_gate_3_magic_switch_1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1186" name="object.changeable_signboard" x="1133.88" y="960">
+   <properties>
+    <property name="colorHeader" value="#ff0000"/>
+    <property name="displayText" value="The gate is closed."/>
+    <property name="displayTextChanged" value="The gate is opened."/>
+    <property name="displayTextHeader" value="Gate Controll"/>
+    <property name="globalConditionKey" value="demo_2_level_5_signboard_gate_changed"/>
+    <property name="globalConditionValue" value="true"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="12" name="physics" locked="1">
   <object id="905" x="480" y="1760">
    <polygon points="0,0 36.3333,0 0,-15.6364"/>
@@ -399,10 +603,28 @@
   <object id="1110" x="576" y="512" width="32" height="32"/>
   <object id="1111" x="416" y="494.75" width="192.5" height="17.5"/>
   <object id="1112" x="416" y="0" width="38.3333" height="512"/>
-  <object id="1113" x="890.333" y="224" width="37.6667" height="288"/>
+  <object id="1113" x="890.333" y="191.333" width="37.6667" height="320.667"/>
   <object id="1114" x="736.333" y="494" width="159.667" height="17.3333"/>
-  <object id="1115" x="890.667" y="208" width="293.333" height="15.6667"/>
+  <object id="1115" x="890.667" y="176" width="293.333" height="15.6667"/>
   <object id="1116" x="448" y="0" width="735.5" height="111.5"/>
+  <object id="1177" x="165.14" y="783.12">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="1178" x="176.96" y="793.84">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="1181" x="165.14" y="911.495">
+   <polygon points="0,0 -3.63636,7.81818 11.8182,11.0909"/>
+  </object>
+  <object id="1182" x="176.96" y="922.215">
+   <polygon points="0,0 13.6364,-4.36364 10.9091,-11.0909"/>
+  </object>
+  <object id="1184" x="176.636" y="883.818">
+   <polygon points="0,0 -11.4545,27.7273 11,27.2727"/>
+  </object>
+  <object id="1185" x="176.818" y="755.455">
+   <polygon points="0,0 -11.4545,27.7273 11,27.2727"/>
+  </object>
  </objectgroup>
  <objectgroup id="13" name="unreachable_area_physics" locked="1">
   <object id="873" x="192" y="736" width="32" height="288"/>
@@ -417,6 +639,34 @@
   <object id="883" x="608.25" y="493.25" width="13.5" height="70"/>
   <object id="884" x="722.25" y="493.25" width="13.5" height="71.5"/>
   <object id="885" x="640" y="96" width="63.2727" height="51.8182"/>
+  <object id="1136" x="271.455" y="1192.21">
+   <polygon points="0,0 -8.36364,12.1818 8.54545,12.3636"/>
+  </object>
+  <object id="1137" x="335.815" y="1192.21">
+   <polygon points="0,0 -8.54545,12 8.54545,12.1818"/>
+  </object>
+  <object id="1138" x="304.545" y="1152.39">
+   <polygon points="0,0 -10,11.4545 -11.2727,22.5455"/>
+  </object>
+  <object id="1139" x="304.545" y="1152.21">
+   <polygon points="0,0 -11.4545,22.7273 9.81818,22.7273"/>
+  </object>
+  <object id="1140" x="304.545" y="1151.85">
+   <polygon points="0,0 7.45455,11.0909 9.81818,22.5455"/>
+  </object>
+  <object id="1148" x="128" y="1637" width="52.7955" height="14.5"/>
+  <object id="1149" x="171.318" y="1651.5" width="9.47727" height="64.25"/>
+  <object id="1150" x="171.068" y="1765.25" width="9.81818" height="79.0455"/>
+  <object id="1151" x="67.5" y="1829.25" width="103.477" height="15"/>
+  <object id="1154" x="239.617" y="1864.2">
+   <polygon points="0,0 -8.36364,12.1818 8.54545,12.3636"/>
+  </object>
+  <object id="1155" x="303.977" y="1864.2">
+   <polygon points="0,0 -8.54545,12 8.54545,12.1818"/>
+  </object>
+  <object id="1165" x="779.972" y="1730.79" width="40" height="15.2727"/>
+  <object id="1166" x="779.602" y="1762.56" width="40.5455" height="16.4091"/>
+  <object id="1167" x="779.972" y="1746.06" width="15.0909" height="16.4318"/>
  </objectgroup>
  <objectgroup id="15" name="ground_physics" locked="1">
   <object id="882" x="622.083" y="519.125" width="99.583" height="40.25">
