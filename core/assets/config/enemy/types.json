@@ -372,4 +372,33 @@
 			coin: 0.5,
 		}
 	},
+	goblin_king: {
+		typeName: goblin_king,
+		
+		animationsConfig: config/animations/enemy/goblin_king.json,
+		stateConfig: config/enemy/states/goblin_king.json,
+		initialState: idle,
+		attackConfig: config/enemy/attack/goblin_king,
+		
+		health: 250,
+		movingSpeed: 1.5,
+		
+		imageOffsetX: 0f,
+		imageOffsetY: 0f,
+		
+		bodyShape: OCTAGON,
+		bodyWidth: 1.2f,
+		bodyHeight: 1.4f,
+		
+		addSensor: true,
+		sensorRadius: 15f,
+		
+		pushForceDamage: 0,
+		pushForceHit: 40,
+		
+		usesHealthBar: true,
+		healthBarOffsetX: 0.3,
+		healthBarOffsetY: -0.4,
+		healthBarWidthFactor: 1.0,
+	},
 }

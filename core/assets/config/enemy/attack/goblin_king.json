@@ -1,0 +1,22 @@
+[
+	{
+		id: attack_throw,
+		type: ROCK,
+		delay: 0.6,
+		duration: 2,
+		damage: 5,
+		distFromCenter: 0.2,
+		pushForce: 70
+	},
+	{
+		id: attack_slam,
+		type: NOVA,
+		delay: 0.2,
+		duration: 0,
+		damage: 15,
+		distFromCenter: 0,
+		hitFixtureRadius: 5,
+		pushForce: 150
+		pushForceAffectedByBlock: false,
+	},
+]

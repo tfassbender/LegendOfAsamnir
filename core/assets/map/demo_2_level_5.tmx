@@ -35,7 +35,7 @@
  </layer>
  <layer id="10" name="background_above_player" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmFEOwiAMhpm+eX1P4hGYXsSI95g+LCFNgQItdNov2YPZ/PtTaAk4ZxiGFm4X566FxzAMwzCMNK+F/u2z4lsuzF8fI/3VxNoJn/+s0XOPNDx4957gT0JDUtv8yWr0xODwF0CNQM6ndm2uuQlILXPAuXYeS1+uMDj9SdRJStNXzpdE7r5wjRnTqR0jBtyrUk8pBuZv33sl+2Mufu69j35Tc7ASx4F5kezBtWCxSmtfojZS9ObCC+dy5Fy1oN1fqOgrs8H6hibvsHfF54kj5XlkfzFk0d5/juYP3hnMrunYX26vnVXTlLja1wBH7qTGKHmm0aT7a/6o58XZ+Rt1VmrVKd1XjbxzivcGqgfqXZZHdHN6mGbq/p2So9K5vAWomUL7/lBagxrQnkPt/v55jjc0VZN5
+   eJztmFEOwiAMhpm+eX1PojdgegG9gRHvoT7MEFKgQAvd7JfswWz+/SnQBoxRFEUKp4Mxx8yjKIqibJMbUPPPQN2HesVd+8OP54T/9lHwLRXqr42e/kpiLbjPf2bvuXgaNnj3GuCPQ4NTW/3xarTEoPDngj0Sst/Va1PNjQP2MgWUa+c6teUKgtIfxz6JadrC+eLI3ReqMUM6pWOECHtV7MnFgPwtvZezPqbip95b7zc2BzNyHJAXzhpcChQrt/Y59kaM1lxY5lz2nKsapPtzBXVlNFDdkOQ9rF3+eWJNee5ZXxRepNeftfkL7wxG72nfX6rXjtrTmLjS1wBF7rjGyHmmkaS7NX/Y8+Lo/PU6K9Xq5O6ret45+b0B6wF7l2UB3ZQepBm7f8fkKHcuryHUjCG9P+TWoASk51C6v3+e4zda45uP
   </data>
  </layer>
  <layer id="3" name="shadows" width="40" height="65" locked="1">

@@ -168,6 +168,18 @@
 				raw_images/enemy/totem/totem_die,
 				raw_images/enemy/totem/totem_idle,
 				
+				// goblin king
+				raw_images/enemy/goblin_king/goblin_king_coin_bag,
+				raw_images/enemy/goblin_king/goblin_king_command,
+				raw_images/enemy/goblin_king/goblin_king_die,
+				raw_images/enemy/goblin_king/goblin_king_eat,
+				raw_images/enemy/goblin_king/goblin_king_idle,
+				raw_images/enemy/goblin_king/goblin_king_jump,
+				raw_images/enemy/goblin_king/goblin_king_move,
+				raw_images/enemy/goblin_king/goblin_king_panic,
+				raw_images/enemy/goblin_king/goblin_king_slam,
+				raw_images/enemy/goblin_king/goblin_king_throw,
+				
 				//##############################################################
 				//### NPCs
 				//##############################################################

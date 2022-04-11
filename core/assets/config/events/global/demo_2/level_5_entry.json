@@ -15,17 +15,17 @@
 		}
 	},
 	
-//	demo_2_level_2_entry_goto_level_5: {
-//		event: {
-//			eventType: EVENT_OBJECT_TOUCHED,
-//			stringValue: demo_2_level_2_entry_goto_level_5,
-//		},
-//		executionType: CHANGE_MAP,
-//		executionParameters: {
-//			map: demo_2_level_5,
-//			startingPointId: 0,
-//		}
-//	},
+	demo_2_level_2_entry_goto_level_5: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_5_entry_goto_level_5,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_5,
+			startingPointId: 0,
+		}
+	},
 	
 	//*******************************************
 	//*** gates

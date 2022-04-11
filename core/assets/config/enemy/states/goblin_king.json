@@ -1,0 +1,110 @@
+[
+	{
+		id: idle,
+		animation: goblin_king_idle,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			move, jump, slam, throw, coin_bag, command, eat, panic, damage, die
+		]
+	},
+	{
+		id: move,
+		animation: goblin_king_move,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			idle, jump, slam, throw, coin_bag, command, eat, panic, damage, die
+		]
+	},
+	{
+		id: jump,
+		animation: goblin_king_jump,
+		endsWithAnimation: true,
+		flipAnimationOnEnteringOnly: true,
+		followingState: slam,
+//		stateEnteringSound: cyclops_attack_beam,
+		interruptingStates: []
+	},
+	{
+		id: slam,
+		animation: goblin_king_stomp,
+//		stateEnteringSound: cyclops_attack_stomp,
+		attack: attack_slam
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: throw,
+		animation: goblin_king_throw,
+		attack: attack_throw
+		endsWithAnimation: true,
+		flipAnimationOnEnteringOnly: true
+		followingState: idle,
+//		stateEnteringSound: cyclops_attack_stone,
+		interruptingStates: []
+	},
+	{
+		id: coin_bag,
+		animation: goblin_king_coin_bag,
+		endsWithAnimation: true,
+		flipAnimationOnEnteringOnly: true
+//		stateEnteringSound: 
+		followingState: idle,
+		interruptingStates: []
+	},
+	{
+		id: command,
+		animation: goblin_king_command,
+		endsWithAnimation: true,
+//		stateEnteringSound: flesh_hit_1,
+		followingState: idle,
+		interruptingStates: [],
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: eat,
+		animation: goblin_king_eat,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			panic
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: panic,
+		animation: goblin_king_panic,
+		endsWithAnimation: true,
+		followingState: idle,
+		interruptingStates: [
+			damage, die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: damage,
+		animation: goblin_king_damage,
+		endsWithAnimation: true,
+		stateEnteringSound: flesh_hit_2,
+		followingState: idle,
+		interruptingStates: [
+			die
+		],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+	{
+		id: die,
+		animation: goblin_king_die,
+		endsWithAnimation: true,
+		changeStateAfterAnimationDelay: 3f,
+		followingState: END,
+		interruptingStates: [],
+		flipAnimationToMovingDirection: false,
+		flipAnimationOnEnteringOnly: true
+	},
+]
