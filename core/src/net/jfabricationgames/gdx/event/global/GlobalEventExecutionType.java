@@ -168,11 +168,23 @@ public enum GlobalEventExecutionType {
 	OPEN_LOCK {
 		
 		private static final String MAP_KEY_LOCK_ID = "lockId";
+		private static final String MAP_KEY_DELAY_IN_SECONDS = "delayInSeconds";
 		
 		@Override
 		public void execute(GlobalEventConfig eventConfig) {
 			String lockId = eventConfig.executionParameters.get(MAP_KEY_LOCK_ID);
-			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.OPEN_LOCK).setStringValue(lockId));
+			String delayInSecondsMapProperty = eventConfig.executionParameters.get(MAP_KEY_DELAY_IN_SECONDS, "0f");
+			
+			float delayInSeconds = Float.parseFloat(delayInSecondsMapProperty);
+			new Thread(() -> {
+				try {
+					Thread.sleep((long) (delayInSeconds * 1000));
+				}
+				catch (InterruptedException e) {
+					// interrupt can be ignored
+				}
+				EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.OPEN_LOCK).setStringValue(lockId));
+			}).start();
 		}
 	},
 	CLOSE_LOCK {

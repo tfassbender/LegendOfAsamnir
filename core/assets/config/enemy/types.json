@@ -375,16 +375,16 @@
 	goblin_king: {
 		typeName: goblin_king,
 		
-		animationsConfig: config/animations/enemy/goblin_king.json,
+		animationsConfig: config/animation/enemy/goblin_king.json,
 		stateConfig: config/enemy/states/goblin_king.json,
 		initialState: idle,
-		attackConfig: config/enemy/attack/goblin_king,
+		attackConfig: config/enemy/attack/goblin_king.json,
 		
 		health: 250,
 		movingSpeed: 1.5,
 		
 		imageOffsetX: 0f,
-		imageOffsetY: 0f,
+		imageOffsetY: 0.3f,
 		
 		bodyShape: OCTAGON,
 		bodyWidth: 1.2f,

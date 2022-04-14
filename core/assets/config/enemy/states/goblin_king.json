@@ -28,7 +28,7 @@
 	},
 	{
 		id: slam,
-		animation: goblin_king_stomp,
+		animation: goblin_king_slam,
 //		stateEnteringSound: cyclops_attack_stomp,
 		attack: attack_slam
 		endsWithAnimation: true,

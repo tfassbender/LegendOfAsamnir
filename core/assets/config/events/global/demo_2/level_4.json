@@ -106,6 +106,7 @@
 		executionType: OPEN_LOCK,
 		executionParameters: {
 			lockId: demo_2_level_4_boss_killed_lock,
+			delayInSeconds: 5f,
 		}
 	},
 	

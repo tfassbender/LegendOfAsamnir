@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import net.jfabricationgames.gdx.animation.AnimationManager;
 import net.jfabricationgames.gdx.character.enemy.implementation.Bat;
 import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
+import net.jfabricationgames.gdx.character.enemy.implementation.GoblinKing;
 import net.jfabricationgames.gdx.character.enemy.implementation.Minotaur;
 import net.jfabricationgames.gdx.character.enemy.implementation.Totem;
 import net.jfabricationgames.gdx.constants.Constants;
@@ -16,7 +17,6 @@ public class EnemyFactory {
 	
 	private EnemyFactory() {}
 	
-	private static final String ENEMY_NAME_BAT = "bat";
 	private static final String ENEMY_NAME_GLADIATOR = "gladiator";
 	private static final String ENEMY_NAME_MINI_GOLEM = "mini_golem";
 	private static final String ENEMY_NAME_SPIDER = "spider";
@@ -26,9 +26,13 @@ public class EnemyFactory {
 	private static final String ENEMY_NAME_FIRE_ELEMENTAL = "fire_elemental";
 	private static final String ENEMY_NAME_ICE_ELEMENTAL = "ice_elemental";
 	private static final String ENEMY_NAME_IMP = "imp";
+	
+	private static final String ENEMY_NAME_BAT = "bat";
+	private static final String ENEMY_NAME_TOTEM = "totem";
+	
 	private static final String ENEMY_NAME_MINOTAUR = "minotaur";
 	private static final String ENEMY_NAME_CYCLOPS = "cyclops";
-	private static final String ENEMY_NAME_TOTEM = "totem";
+	private static final String ENEMY_NAME_GOBLIN_KING = "goblin_king";
 	
 	private static final String CONFIG_FILE = "config/factory/enemy_factory.json";
 	
@@ -85,6 +89,9 @@ public class EnemyFactory {
 				break;
 			case ENEMY_NAME_CYCLOPS:
 				enemy = new Cyclops(typeConfig, properties);
+				break;
+			case ENEMY_NAME_GOBLIN_KING:
+				enemy = new GoblinKing(typeConfig, properties);
 				break;
 			default:
 				throw new IllegalStateException("Unknown enemy type: " + type);
