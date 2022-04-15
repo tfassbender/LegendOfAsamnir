@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.animation;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -34,6 +35,8 @@ public abstract class AnimationDirector<T extends TextureRegion> {
 		batch.draw(keyFrame, x, y, spriteConfig.width * 0.5f, spriteConfig.height * 0.5f, keyFrame.getRegionWidth(), keyFrame.getRegionHeight(),
 				Constants.WORLD_TO_SCREEN, Constants.WORLD_TO_SCREEN, 0f);
 	}
+	
+	public void scaleSprite(Sprite sprite) {}
 	
 	/**
 	 * Get the frame at the current time.

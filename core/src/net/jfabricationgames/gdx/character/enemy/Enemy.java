@@ -76,6 +76,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		
 		createAI();
 		ai.setCharacter(this);
+		ai.setAttackHandler(attackHandler);
 		
 		setImageOffset(typeConfig.imageOffsetX, typeConfig.imageOffsetY);
 	}
@@ -212,7 +213,7 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		return typeConfig.usesHealthBar && getPercentualHealth() < 1 && isAlive();
 	}
 	
-	private float getPercentualHealth() {
+	protected float getPercentualHealth() {
 		return health / typeConfig.health;
 	}
 	

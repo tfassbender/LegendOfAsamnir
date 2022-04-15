@@ -154,6 +154,7 @@
 		attackType: FORCE_FIELD,
 		
 		animation: force_field_goblin_king,
+		textureAnimation: false,
 		textureScale: 2f,
 		
 		speed: 0,

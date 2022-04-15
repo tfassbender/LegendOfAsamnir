@@ -65,7 +65,12 @@ public class ProjectileFactory {
 		}
 		AnimationDirector<TextureRegion> animation = null;
 		if (typeConfig.animation != null) {
-			animation = AnimationManager.getInstance().getTextureAnimationDirectorCopy(typeConfig.animation);
+			if (typeConfig.textureAnimation) {
+				animation = AnimationManager.getInstance().getTextureAnimationDirectorCopy(typeConfig.animation);
+			}
+			else {
+				animation = AnimationManager.getInstance().getGrowingAnimationDirector(typeConfig.animation);
+			}
 		}
 		
 		Projectile projectile;

@@ -24,9 +24,9 @@
 			type: GROWING,
 			atlas: packed/demo/demo.atlas,
 			
-			startScale: 0.1,
-			maxScale: 2,
-			duration: 2,
+			startScale: 0.01,
+			maxScale: 0.3,
+			duration: 1,
 		},
 	]
 }

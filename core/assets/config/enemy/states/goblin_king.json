@@ -43,7 +43,9 @@
 		flipAnimationOnEnteringOnly: true
 		followingState: idle,
 //		stateEnteringSound: cyclops_attack_stone,
-		interruptingStates: []
+		interruptingStates: [
+			eat //TODO remove
+		]
 	},
 	{
 		id: coin_bag,
@@ -52,7 +54,9 @@
 		flipAnimationOnEnteringOnly: true
 //		stateEnteringSound: 
 		followingState: throw,
-		interruptingStates: []
+		interruptingStates: [
+			eat //TODO remove
+		]
 	},
 	{
 		id: command,

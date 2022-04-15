@@ -14,6 +14,6 @@ public class ForceField extends Projectile {
 	
 	@Override
 	protected PhysicsBodyProperties createShapePhysicsBodyProperties() {
-		return new PhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(2f).setSensor(true);
+		return new PhysicsBodyProperties().setPhysicsBodyShape(PhysicsBodyShape.CIRCLE).setRadius(3f).setSensor(true);
 	}
 }

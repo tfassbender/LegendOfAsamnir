@@ -3,6 +3,7 @@ package net.jfabricationgames.gdx.character.enemy.implementation;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import net.jfabricationgames.gdx.attack.hit.AttackType;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.BaseAI;
 import net.jfabricationgames.gdx.character.ai.util.timer.RandomIntervalAttackTimer;
@@ -22,7 +23,7 @@ public class GoblinKing extends Enemy {
 	public static final String STATE_NAME_ATTACK_THROW = "throw";
 	public static final String STATE_NAME_COMMAND = "command";
 	public static final String STATE_NAME_EAT = "eat";
-	//	public static final String STATE_NAME_PANIC = "panic";
+	public static final String STATE_NAME_PANIC = "panic";
 	
 	public GoblinKing(EnemyTypeConfig typeConfig, MapProperties properties) {
 		super(typeConfig, properties);
@@ -53,6 +54,22 @@ public class GoblinKing extends Enemy {
 		
 		return new GoblinKingAttackAI(ai, attackStates, attackDistances, new RandomIntervalAttackTimer(minTimeBetweenAttacks, maxTimeBetweenAttacks));
 	}
+	
+	@Override
+	public void takeDamage(float damage, AttackType attackType) {
+		float percentualHealthBeforeDamage = getPercentualHealth();
+		super.takeDamage(damage, attackType);
+		float percentualHealthAfterDamage = getPercentualHealth();
+		
+		if (percentualHealthBeforeDamage >= 0.99f && percentualHealthAfterDamage < 0.99f) {
+			stateMachine.setState(STATE_NAME_EAT);
+		}
+		
+		if (stateMachine.isInState(STATE_NAME_EAT) && attackType == AttackType.ARROW) {
+			stateMachine.setState(STATE_NAME_PANIC);
+		}
+	}
+	
 	@Override
 	protected void die() {
 		super.die();

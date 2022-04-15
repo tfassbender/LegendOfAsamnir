@@ -171,6 +171,8 @@ public abstract class Projectile implements ContactListener {
 			animation.increaseStateTime(delta);
 			sprite = new Sprite(animation.getKeyFrame());
 			sprite.setRotation(animationRotation);
+			// scaling the sprite is needed if the animation is a growing animation instead of a multiple-texture animation
+			animation.scaleSprite(sprite);
 			
 			if (animation.isAnimationFinished() && typeConfig.removeAfterAnimationFinished) {
 				removeFromMap();

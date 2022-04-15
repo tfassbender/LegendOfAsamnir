@@ -1,5 +1,6 @@
 package net.jfabricationgames.gdx.animation;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -70,6 +71,11 @@ public class GrowingAnimationDirector<T extends TextureRegion> extends Animation
 		updateTextureScale();
 	}
 	
+	@Override
+	public void scaleSprite(Sprite sprite) {
+		sprite.setScale(getScale());
+	}
+	
 	public float getWidth() {
 		return spriteConfig.width;
 	}
@@ -78,8 +84,12 @@ public class GrowingAnimationDirector<T extends TextureRegion> extends Animation
 		return spriteConfig.height;
 	}
 	
+	public float getScale() {
+		return animationConfig.startScale + (animationConfig.maxScale - animationConfig.startScale) * (stateTime / animationConfig.duration);
+	}
+	
 	private void updateTextureScale() {
-		float scale = animationConfig.startScale + (animationConfig.maxScale - animationConfig.startScale) * (stateTime / animationConfig.duration);
+		float scale = getScale();
 		spriteConfig.setWidth(initialSpriteSize.width * scale);
 		spriteConfig.setHeight(initialSpriteSize.height * scale);
 	}
