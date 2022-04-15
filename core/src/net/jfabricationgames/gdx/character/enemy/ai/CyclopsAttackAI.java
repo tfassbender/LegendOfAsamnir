@@ -7,18 +7,10 @@ import com.badlogic.gdx.utils.ArrayMap;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
 import net.jfabricationgames.gdx.character.ai.implementation.AbstractMultiAttackAI;
 import net.jfabricationgames.gdx.character.ai.util.timer.AttackTimer;
+import net.jfabricationgames.gdx.character.enemy.implementation.Cyclops;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 
 public class CyclopsAttackAI extends AbstractMultiAttackAI {
-	
-	public static final String STATE_NAME_DAMAGE_HIGH = "damage_high";
-	public static final String STATE_NAME_DAMAGE_LOW = "damage_low";
-	public static final String STATE_NAME_DEFENSE = "defense";
-	public static final String STATE_NAME_ATTACK_THROW = "attack_throw";
-	public static final String STATE_NAME_ATTACK_STOMP = "attack_stomp";
-	public static final String STATE_NAME_ATTACK_BEAM = "attack_beam";
-	public static final String STATE_NAME_MOVE = "move";
-	public static final String STATE_NAME_IDLE = "idle";
 	
 	private static final float STOMP_IF_IN_RANGE = 0.5f;
 	private static final float THROW_IF_IN_STOMP_RANGE = 0.3f;
@@ -37,9 +29,9 @@ public class CyclopsAttackAI extends AbstractMultiAttackAI {
 			ArrayMap<CharacterState, Float> attackDistances, AttackTimer attackTimer) {
 		super(subAI, attackStates, attackDistances, attackTimer);
 		
-		attackBeamState = attackStates.get(STATE_NAME_ATTACK_BEAM);
-		attackStompState = attackStates.get(STATE_NAME_ATTACK_STOMP);
-		attackThrowState = attackStates.get(STATE_NAME_ATTACK_THROW);
+		attackBeamState = attackStates.get(Cyclops.STATE_NAME_ATTACK_BEAM);
+		attackStompState = attackStates.get(Cyclops.STATE_NAME_ATTACK_STOMP);
+		attackThrowState = attackStates.get(Cyclops.STATE_NAME_ATTACK_THROW);
 		
 		random = new Random();
 	}

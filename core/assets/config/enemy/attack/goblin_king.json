@@ -1,22 +1,34 @@
 [
 	{
 		id: attack_throw,
-		type: ROCK,
-		delay: 0.6,
+		type: COIN_BAG,
+		projectileType: coin_bag,
+		delay: 0.4,
 		duration: 2,
-		damage: 5,
-		distFromCenter: 0.2,
-		pushForce: 70
+		damage: 10,
+		distFromCenter: 1,
+		pushForce: 70,
 	},
 	{
 		id: attack_slam,
 		type: NOVA,
-		delay: 0.2,
+		delay: 0.3,
 		duration: 0,
 		damage: 15,
 		distFromCenter: 0,
 		hitFixtureRadius: 5,
-		pushForce: 150
+		pushForce: 150,
+		pushForceAffectedByBlock: false,
+	},
+	{
+		id: attack_force_field,
+		type: NOVA,
+		delay: 0,
+		duration: 2,
+		damage: 0,
+		distFromCenter: 0,
+		hitFixtureRadius: 0,
+		pushForce: 100,
 		pushForceAffectedByBlock: false,
 	},
 ]

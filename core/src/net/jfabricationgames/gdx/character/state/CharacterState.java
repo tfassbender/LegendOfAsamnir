@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.character.state;
 
+import java.util.function.Supplier;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -25,6 +27,7 @@ public class CharacterState implements CutsceneControlledState {
 	protected CharacterStateAttackHandler attackHandler;
 	private Array<CharacterStateAttack> attacks;
 	
+	private Supplier<Vector2> targetDirectionSupplier;
 	private Vector2 directionToTarget;
 	
 	private SoundHandler sound;
@@ -71,6 +74,10 @@ public class CharacterState implements CutsceneControlledState {
 	}
 	
 	private void startAttack() {
+		if (targetDirectionSupplier != null) {
+			directionToTarget = targetDirectionSupplier.get();
+		}
+		
 		if (directionToTarget == null) {
 			throw new IllegalStateException("The direction for the attack has not been set. "
 					+ "Use the setAttackDirection(Vector2) method to set the direction BEFORE changing to this state.");
@@ -119,5 +126,9 @@ public class CharacterState implements CutsceneControlledState {
 	@Override
 	public void setAttackDirection(Vector2 directionToTarget) {
 		this.directionToTarget = directionToTarget;
+	}
+	
+	public void setTargetDirectionSupplier(Supplier<Vector2> targetDirectionSupplier) {
+		this.targetDirectionSupplier = targetDirectionSupplier;
 	}
 }

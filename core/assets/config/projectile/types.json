@@ -116,7 +116,7 @@
 		dampingAfterObjectHit: 0,
 		
 		multipleHitsPossible: true,
-	}
+	},
 	magic_wave: {
 		attackType: MAGIC_WAVE,
 		
@@ -134,5 +134,33 @@
 		dampingAfterObjectHit: 0,
 		
 		multipleHitsPossible: false,
-	}
+	},
+	coin_bag: {
+		attackType: COIN_BAG,
+		
+		texture: projectile_coin_bag,
+		textureScale: 1
+		
+		speed: 125,
+		damping: 1,
+		range: 100,
+		removeAfterRangeExceeded: false,
+		dampingAfterRangeExceeded: 10,
+		dampingAfterObjectHit: 10,
+		
+		timeActive: 10,
+	},
+	force_field: {
+		attackType: FORCE_FIELD,
+		
+		animation: force_field_goblin_king,
+		textureScale: 2f,
+		
+		speed: 0,
+		damping: 0,
+		
+		timeActive: 2,
+		
+		multipleHitsPossible: true,
+	},
 }

@@ -25,6 +25,8 @@ public class ProjectileFactory {
 	private static final String PROJECTILE_TYPE_BOOMERANG = "boomerang";
 	private static final String PROJECTILE_TYPE_WAND = "wand";
 	private static final String PROJECTILE_TYPE_MAGIC_WAVE = "magic_wave";
+	private static final String PROJECTILE_TYPE_COIN_BAG = "coin_bag";
+	private static final String PROJECTILE_TYPE_FORCE_FIELD = "force_field";
 	
 	private static final String CONFIG_FILE = "config/factory/projectile_factory.json";
 	private static final String ANIMATION_CONFIG_FILE = "config/animation/projectiles.json";
@@ -93,6 +95,12 @@ public class ProjectileFactory {
 			case PROJECTILE_TYPE_WAND:
 			case PROJECTILE_TYPE_MAGIC_WAVE:
 				projectile = new MagicWave(typeConfig, sprite, gameMap);
+				break;
+			case PROJECTILE_TYPE_COIN_BAG:
+				projectile = new CoinBag(typeConfig, sprite, gameMap);
+				break;
+			case PROJECTILE_TYPE_FORCE_FIELD:
+				projectile = new ForceField(typeConfig, animation, gameMap);
 				break;
 			default:
 				throw new IllegalStateException("Unknown object type: " + type);

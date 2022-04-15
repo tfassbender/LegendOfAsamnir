@@ -18,6 +18,15 @@
 			atlas: packed/demo/demo.atlas,
 			frameDuration: 0.1,
 			playMode: NORMAL
-		}
+		},
+		{
+			name: force_field_goblin_king,
+			type: GROWING,
+			atlas: packed/demo/demo.atlas,
+			
+			startScale: 0.1,
+			maxScale: 2,
+			duration: 2,
+		},
 	]
 }

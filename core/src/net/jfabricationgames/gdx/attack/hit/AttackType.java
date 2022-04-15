@@ -15,9 +15,11 @@ public enum AttackType {
 	ROCK(PROJECTILE), //
 	BOOMERANG(PROJECTILE), //
 	MAGIC(PROJECTILE), //
+	COIN_BAG(PROJECTILE), //
 	WAND(MAGIC), //
 	MAGIC_WAVE(MAGIC), //
 	BEAM(ATTACK), //
+	FORCE_FIELD(MAGIC), //
 	CONTINUOUS_MAP_DAMAGE(ATTACK); // 
 	
 	private final AttackType superType;

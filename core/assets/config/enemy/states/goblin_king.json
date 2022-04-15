@@ -51,7 +51,7 @@
 		endsWithAnimation: true,
 		flipAnimationOnEnteringOnly: true
 //		stateEnteringSound: 
-		followingState: idle,
+		followingState: throw,
 		interruptingStates: []
 	},
 	{
