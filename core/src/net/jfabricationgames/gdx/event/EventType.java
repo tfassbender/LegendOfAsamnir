@@ -72,6 +72,7 @@ public enum EventType {
 	NPC_INTERACTION, //
 	AI_TEAM_CALL, //
 	ENEMY_DEFEATED, //
+	GOBLIN_KING_COMMAND, //
 	//*******************************
 	//*** Conditions
 	//*******************************

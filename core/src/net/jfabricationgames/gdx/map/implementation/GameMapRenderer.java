@@ -228,7 +228,7 @@ class GameMapRenderer implements Disposable {
 	
 	public void renderEnemyHealthBars() {
 		for (Enemy enemy : gameMap.enemies) {
-			enemy.drawHealthBar(shapeRenderer);
+			enemy.drawStatsBar(shapeRenderer);
 		}
 	}
 	

@@ -2,7 +2,6 @@ package net.jfabricationgames.gdx.character.ai;
 
 import com.badlogic.gdx.physics.box2d.ContactListener;
 
-import net.jfabricationgames.gdx.attack.AttackHandler;
 import net.jfabricationgames.gdx.character.ai.move.AIMove;
 import net.jfabricationgames.gdx.character.ai.move.MoveType;
 
@@ -28,8 +27,6 @@ public interface ArtificialIntelligence extends ContactListener {
 	public <T extends AIMove> T getMove(MoveType moveType, Class<T> clazz);
 	
 	public void setCharacter(ArtificialIntelligenceCharacter character);
-	
-	public default void setAttackHandler(AttackHandler attackHandler) {}
 	
 	public default void characterRemovedFromMap() {}
 }

@@ -16,6 +16,7 @@ import net.jfabricationgames.gdx.attack.hit.Hittable;
 import net.jfabricationgames.gdx.character.AbstractCharacter;
 import net.jfabricationgames.gdx.character.CharacterTypeConfig;
 import net.jfabricationgames.gdx.character.ai.ArtificialIntelligence;
+import net.jfabricationgames.gdx.character.enemy.statsbar.EnemyHealthBarRenderer;
 import net.jfabricationgames.gdx.character.state.CharacterState;
 import net.jfabricationgames.gdx.character.state.CharacterStateMachine;
 import net.jfabricationgames.gdx.constants.Constants;
@@ -76,7 +77,6 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		
 		createAI();
 		ai.setCharacter(this);
-		ai.setAttackHandler(attackHandler);
 		
 		setImageOffset(typeConfig.imageOffsetX, typeConfig.imageOffsetY);
 	}
@@ -199,17 +199,21 @@ public class Enemy extends AbstractCharacter implements Hittable, StatefulMapObj
 		return health > 0;
 	}
 	
-	public void drawHealthBar(ShapeRenderer shapeRenderer) {
-		if (drawHealthBar()) {
+	public void drawStatsBar(ShapeRenderer shapeRenderer) {
+		if (drawStatsBar()) {
 			AnimationSpriteConfig spriteConfig = getAnimation().getSpriteConfig();
 			float x = body.getPosition().x - spriteConfig.width * 0.5f * Constants.WORLD_TO_SCREEN + typeConfig.healthBarOffsetX;
 			float y = body.getPosition().y + spriteConfig.height * 0.5f * Constants.WORLD_TO_SCREEN + typeConfig.healthBarOffsetY;
 			float width = getAnimation().getSpriteConfig().width * typeConfig.healthBarWidthFactor;
-			healthBarRenderer.drawHealthBar(shapeRenderer, getPercentualHealth(), x, y, width);
+			drawStatsBar(shapeRenderer, x, y, width);
 		}
 	}
 	
-	private boolean drawHealthBar() {
+	protected void drawStatsBar(ShapeRenderer shapeRenderer, float x, float y, float width) {
+		healthBarRenderer.drawStatsBar(shapeRenderer, getPercentualHealth(), x, y, width);
+	}
+	
+	protected boolean drawStatsBar() {
 		return typeConfig.usesHealthBar && getPercentualHealth() < 1 && isAlive();
 	}
 	

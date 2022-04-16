@@ -1,0 +1,46 @@
+{
+	//*********************************************************************
+	//*** spawn enemies when the goblin king uses the command attack
+	//*********************************************************************
+	
+	enemy__goblin_king_command__mini_golem: {
+		spawnType: enemy.mini_golem,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}]\"}",
+		complexEvents: [
+			{
+				eventType: GOBLIN_KING_COMMAND,
+				stringValue: goblin_king_command_mini_golem,
+			}
+		]
+	},
+	enemy__goblin_king_command__gladiator: {
+		spawnType: enemy.gladiator,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}]\"}",
+		complexEvents: [
+			{
+				eventType: GOBLIN_KING_COMMAND,
+				stringValue: goblin_king_command_gladiator,
+			}
+		]
+	},
+	enemy__goblin_king_command__imp: {
+		spawnType: enemy.imp,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}]\"}",
+		complexEvents: [
+			{
+				eventType: GOBLIN_KING_COMMAND,
+				stringValue: goblin_king_command_imp,
+			}
+		]
+	},
+	enemy__goblin_king_command__spider: {
+		spawnType: enemy.spider,
+		spawnTypeMapProperties: "{predefinedMovementPositions: \"[{x:0, y:10}]\"}",
+		complexEvents: [
+			{
+				eventType: GOBLIN_KING_COMMAND,
+				stringValue: goblin_king_command_spider,
+			}
+		]
+	},
+}

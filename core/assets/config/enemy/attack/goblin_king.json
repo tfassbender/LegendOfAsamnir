@@ -14,7 +14,7 @@
 		type: NOVA,
 		delay: 0.3,
 		duration: 0,
-		damage: 15,
+		damage: 20,
 		distFromCenter: 0,
 		hitFixtureRadius: 5,
 		pushForce: 150,

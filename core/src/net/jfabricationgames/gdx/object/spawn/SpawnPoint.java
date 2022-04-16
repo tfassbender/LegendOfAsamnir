@@ -92,13 +92,25 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 	}
 	
 	private void checkWhetherSpawnEventsExist() {
-		if (spawnConfig.events == null) {
+		if (spawnConfig.events == null && spawnConfig.complexEvents == null) {
 			throw new IllegalStateException("The spawn config of this SpawnPoint doesn't contain any events. SpawnPoint: " + mapPropertiesToString());
 		}
-		for (String eventName : spawnConfig.events) {
-			if (EventHandler.getInstance().getEventByName(eventName) == null) {
-				throw new IllegalStateException("The spawn config of this SpawnPoint contains an event key that can't be found: " + eventName
-						+ ". SpawnConfig: " + mapPropertiesToString());
+		if (spawnConfig.events != null) {
+			for (String eventName : spawnConfig.events) {
+				if (EventHandler.getInstance().getEventByName(eventName) == null) {
+					throw new IllegalStateException("The spawn config of this SpawnPoint contains an event key that can't be found: " + eventName
+							+ ". SpawnConfig: " + mapPropertiesToString());
+				}
+			}
+		}
+		if (spawnConfig.complexEvents != null) {
+			for (EventConfig event : spawnConfig.complexEvents) {
+				if (event.eventType == null) {
+					throw new IllegalStateException(
+							"The spawn config of this SpawnPoint contains a complex event without an event type. SpawnConfig: "
+									+ mapPropertiesToString());
+				}
+				// if the event type is unknown, it would have let to a json parse exception, so this does not need to be checked
 			}
 		}
 	}
@@ -145,12 +157,22 @@ public class SpawnPoint extends GameObject implements EventListener, Disposable 
 			return false;
 		}
 		
-		for (String eventName : spawnConfig.events) {
-			EventConfig handledEvent = EventHandler.getInstance().getEventByName(eventName);
-			if (handledEvent != null && handledEvent.eventType == event.eventType) {
-				return true;
+		if (spawnConfig.events != null) {
+			for (String eventName : spawnConfig.events) {
+				EventConfig handledEvent = EventHandler.getInstance().getEventByName(eventName);
+				if (handledEvent != null && handledEvent.eventType == event.eventType) {
+					return true;
+				}
 			}
 		}
+		if (spawnConfig.complexEvents != null) {
+			for (EventConfig handledEvent : spawnConfig.complexEvents) {
+				if (handledEvent.equals(event)) {
+					return true;
+				}
+			}
+		}
+		
 		return false;
 	}
 	

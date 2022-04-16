@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1191">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1204">
  <properties>
   <property name="above_player_layers" value="[4, 5]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -10,7 +10,7 @@
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
  <layer id="1" name="background" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJzt1u1twjAQBuCASkARkzBAF0LqQt2h/1uJQVqJAWgZpLXgJOPY2Ge/Zx+qTzoBTsg98UfiYeDH+zQMr4JZGoe/a3yv5fI/+JYbuUT49iu5RPrenHy5pttO56esLbTPvnfy2W32OQdA/e6r6+PMv95/3Yf2aZ5/bvr6b1/Z9+l55n9Mc5/vXfFVwUdh7zmOnj49Tth9SYnvvJ77zuB9EzfsPVHIh9w35cR4zafN3Gfa6HiroPqh9arFF0tknZ/Fpe20uP0eq1nL97y9tJnP0XO8++I+Svqt3ec7n+srMcd8u+Vthq6fup6RPm6Nmr5Y7RKfXcfNVJ89ppI+Cq7PbS9ZwygfvTNM0HuD2nJ8oWMcX2rE5nnq88XcL2f+hSxcY+k65USOQavPN4a1fTkpGd3X3tvSdu9Yi/5LDe1GLWOeY+prpsz2CL5axtSamn3I/uOOTawmenxL5hPCxx0DSR/XLWHsvvvXeUTfCLguyhczonypTs5/uPfPDaSvZWj3mei+stDuMyHl+wV+XeeJ
+   eJzt1mtuwjAMAOCCtoKqnWQH2IWQdqHdYf83iYOAxAG2cZAtAktpGmM7dh5osWQBaam/5tFmGOTxMQ3DW8bUxv7vGt+bfPkffOttvrTw7R7n+Y5keB4nLX2YC3Ny1pa1j+o/37c3qJ/ig3y9Zjj23Yf7/AQfNv96/3Wfta/l+RdmrP92hX2HyDP/c1r6Yu+KYwEfhL/nOEX69DTZ7ks0vvNm6Tsb75uk4e+JMJ/lviklxms+bJc+1wbHawXUx9ZrKz4qLev8rC5tX6v5d6pmKd/L06XNfY6R491H+yDhd+u+2PlSn8ZM+Z7X88Suz13Plj5pjZI+qrbG59cJk+vzxzSnD0LqC9s1a9jKB+8MF/DegLYUH3ZM4uMGNc+5zxd3v5L5h1mkRu06lUSKoVVfbAxL+1IyZ3RffW9N261jNfqPG60bWxnzFFNfMzrbPfhKGbk1W/ZZ9p90bKia1uOrmU8WPukY5PRJ3TmM3Xf7OvfoGw2ua+WjjFY+rlPyH+n9S8PSVzNa97noPl207nORy/cLBmrrJw==
   </data>
  </layer>
  <layer id="2" name="background_2" width="40" height="65" locked="1">
@@ -18,9 +18,9 @@
    eJztmA1OwzAMhdtuTAIOgUATEuMaiHsNzgHS2EnGz0GmjXuwCCze3mwnLW1XoTzJUqFd+sVxHLtFkZWVlZWVlZWVNVSNJ7/Xk4n93LE03TGd/Nj1APg25f7fd8B3T3xrerYPMZ+n/873vvt9VaXbR7nP9zQqiguy51F7fOFdDzUsvG+7s1ewN2BY0b3PFvhewB6MazHNH+jPknz9V+HY4fqs+mbAa1SMb06+bptvBnyzBnwLxdd1Ypx9znzCINcl/T7Gp82lTozz+DG+sMZoGt+W9ohI5jaqDmP8r3xBuA/FrJiSPY2cEouPSoxblsLHaxoMfeLtyxE8K7G4VGLcshS+U2dec8eHG/KV9QxqRT5P4bupfvPsG+3jhcEX9mjw3bImX1nt+zyFD5/jmNTGkOfYdzhHiy+s1bnDx2eVZd4ayHvZdzxHjS+s1a3Dp4nzKdcEZXWYS7W4krM31Qep5zXn0zXxzcvDXMV8XdZ9XDNwDC/g/+JjvN8HH2pu5A2sBfD+KnGd2uJbKLEv/xcf4/2ua/o69bumrvlwv2nnfkx99kRa3oix98nHuQvj3vLzMXpKS5LLMb9o+fuYXJxfJO+03SvVYUMuzi+Sd9rulVK1MbhYWq/UF1+szmMNJedYNVmsL/CU0p9atZR11kqMiry+IKaU/tSqVVJ7Easv8IQ5gr+zsFm1Sp1eROsLvdyzgfddjotiPLbnYtUqWlxZfRzO0evJcRx8X+nwWdLiytrfOMfYNzEZB3XVgE+Lq7r1WSpfTFq/GMRr3BVfFfGf1i8G8Rp3xReLPxmHv1fxGrfFJ/Vb2LvBpgofng2fDgOusfYtS9NKGdfj1MZM9b22j2N9eZMez6uXPb4m50OX0r6ZDokvqM9vGk00dD5e46HxBWnfNNvQFw2KWZI=
   </data>
  </layer>
- <layer id="5" name="terrain" width="40" height="65" locked="1">
+ <layer id="5" name="terrain" width="40" height="65">
   <data encoding="base64" compression="zlib">
-   eJzt1jEKg0AQRuEJ4qbQ85mcJEkfLMVO7VPnKN7E3CED226WWMgM+j74EbZ6hcWIHMMc/nuz8km0pN6sdSHOq3eIAwAA28rdUR5urNwd5fHGAvZsqawL8uraugBb4v8DAP+aUuSiu5bWJWk37brrHk77Bu0adZPTPgAAAPjyLETawrrit5fzviPrK5HzKX4BYK0v/dkTlw==
+   eJzt2jEOwjAMRmGjqmFoz1c4CbCjjqhbYWfmKNwE7oClrCFiqfyLvk/ykukNGawoZuvwTL+dRXkXWkpn0S4pj6LtxuyR8gAAgGXV9iiFHau2RynuWMA/e3XRBXV9H12AJXH/AEDf0JrtfPZtdEnZwbuOPifRvtm7rj430T4AAABoOTdmYxNd8d1dvG/Npi7/yZjE39sAaPoALJYTnw==
   </data>
  </layer>
  <layer id="16" name="terrain_2" width="40" height="65" locked="1">
@@ -266,6 +266,72 @@
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_5_boss_defeated"/>
     <property name="unitId" value="goblin_king"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1191" name="object.spawnPoint.goblin_king_command_mini_golem" x="656" y="512">
+   <properties>
+    <property name="spawn" value="enemy__goblin_king_command__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1193" name="object.spawnPoint.goblin_king_command_mini_golem" x="688" y="512">
+   <properties>
+    <property name="spawn" value="enemy__goblin_king_command__mini_golem"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1194" name="object.spawnPoint.goblin_king_command_gladiator" x="656" y="512">
+   <properties>
+    <property name="spawn" value="enemy__goblin_king_command__gladiator"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1195" name="object.spawnPoint.goblin_king_command_gladiator" x="688" y="512">
+   <properties>
+    <property name="spawn" value="enemy__goblin_king_command__gladiator"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1196" name="object.spawnPoint.goblin_king_command_imp" x="672" y="512">
+   <properties>
+    <property name="spawn" value="enemy__goblin_king_command__imp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1198" name="object.spawnPoint.goblin_king_command_spider" x="672" y="512">
+   <properties>
+    <property name="spawn" value="enemy__goblin_king_command__spider"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1199" name="object.spawnPoint.shield" x="682" y="768">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1200" name="object.spawnPoint.health" x="662" y="768">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1201" name="object.spawnPoint.health" x="464" y="464">
+   <properties>
+    <property name="spawn" value="item__health"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1202" name="object.spawnPoint.shield" x="880" y="464">
+   <properties>
+    <property name="spawn" value="item__shield"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1203" name="object.spawnPoint" x="624.5" y="144.625">
+   <properties>
+    <property name="spawn" value="playerOutOfAmmo_arrows"/>
    </properties>
    <point/>
   </object>

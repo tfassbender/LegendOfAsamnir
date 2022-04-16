@@ -397,7 +397,7 @@
 		pushForceHit: 40,
 		
 		usesHealthBar: true,
-		healthBarOffsetX: 0.3,
+		healthBarOffsetX: 0.1,
 		healthBarOffsetY: -0.4,
 		healthBarWidthFactor: 1.0,
 	},

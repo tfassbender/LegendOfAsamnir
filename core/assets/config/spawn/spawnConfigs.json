@@ -19,6 +19,7 @@
 	config/spawn/enemies/mini_golem.json,
 	config/spawn/enemies/spider.json,
 	config/spawn/enemies/totem.json,
+	config/spawn/enemies/goblin_king.json,
 	
 	//******************
 	//*** common

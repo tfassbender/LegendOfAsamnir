@@ -1,5 +1,7 @@
 package net.jfabricationgames.gdx.character.enemy.ai;
 
+import java.util.function.Consumer;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -12,10 +14,15 @@ import net.jfabricationgames.gdx.character.state.CharacterState;
 
 public class GoblinKingAttackAI extends AbstractMultiAttackAI {
 	
+	private static final float ENDURANCE_COST_SLAM_ATTACK = 25f;
+	private static final float ENCURANCE_COST_COIN_BAG_ATTACK = 10f;
+	
 	private CharacterState attackSlamState;
 	private CharacterState attackCoinBagState;
 	
 	private AttackHandler attackHandler;
+	
+	private Consumer<Float> enduranceConsumer;
 	
 	public GoblinKingAttackAI(ArtificialIntelligence subAI, ArrayMap<String, CharacterState> attackStates,
 			ArrayMap<CharacterState, Float> attackDistances, AttackTimer attackTimer) {
@@ -46,27 +53,38 @@ public class GoblinKingAttackAI extends AbstractMultiAttackAI {
 	}
 	
 	@Override
+	protected boolean changeToAttackState(CharacterState state) {
+		boolean changedState = super.changeToAttackState(state);
+		
+		if (state == attackSlamState) {
+			enduranceConsumer.accept(ENDURANCE_COST_SLAM_ATTACK);
+		}
+		else if (state == attackCoinBagState) {
+			enduranceConsumer.accept(ENCURANCE_COST_COIN_BAG_ATTACK);
+		}
+		
+		return changedState;
+	}
+	
+	@Override
 	protected CharacterState chooseAttack() {
 		float distanceToTarget = distanceToTarget();
 		
-		if (!stateMachine.isInState(GoblinKing.STATE_NAME_EAT)) {
-			if (isInRangeForAttack(attackSlamState, distanceToTarget)) {
-				return attackSlamState;
-			}
-			else {
-				//TODO command state
-				
-				if (isInRangeForAttack(attackCoinBagState, distanceToTarget)) {
-					return attackCoinBagState;
-				}
-			}
+		if (isInRangeForAttack(attackSlamState, distanceToTarget)) {
+			return attackSlamState;
+		}
+		else if (isInRangeForAttack(attackCoinBagState, distanceToTarget)) {
+			return attackCoinBagState;
 		}
 		
 		return null;
 	}
 	
-	@Override
 	public void setAttackHandler(AttackHandler attackHandler) {
 		this.attackHandler = attackHandler;
+	}
+	
+	public void setEnduranceConsumer(Consumer<Float> enduranceConsumer) {
+		this.enduranceConsumer = enduranceConsumer;
 	}
 }

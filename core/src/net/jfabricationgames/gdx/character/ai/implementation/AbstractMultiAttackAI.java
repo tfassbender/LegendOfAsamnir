@@ -14,6 +14,8 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 	protected ArrayMap<String, CharacterState> attackStates;
 	protected ArrayMap<CharacterState, Float> attackDistances;
 	
+	private boolean moveToPlayerWhenAttacking = true;
+	
 	public AbstractMultiAttackAI(ArtificialIntelligence subAI, ArrayMap<String, CharacterState> attackStates,
 			ArrayMap<CharacterState, Float> attackDistances, AttackTimer attackTimer) {
 		super(subAI, null, attackTimer);
@@ -52,7 +54,9 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 					return;
 				}
 				
-				changeToAttackState(attack);
+				AIAttackingMove attackMove = new AIAttackingMove(this);
+				attackMove.attack = attack;
+				setMove(MoveType.ATTACK, attackMove);
 			}
 		}
 	}
@@ -66,7 +70,7 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 			if (changeToAttackState(move.attack)) {
 				move.executed();
 			}
-			if (inAttackState()) {
+			if (inAttackState() && moveToPlayerWhenAttacking) {
 				attackState.flipAnimationToDirection(directionToTarget());
 				if (distanceToTarget() > minDistanceToTargetPlayer) {
 					character.moveTo(move.targetPosition);
@@ -80,5 +84,9 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 	protected boolean isInRangeForAttack(CharacterState attack, float distanceToTarget) {
 		float attackDistance = attackDistances.get(attack, null);
 		return distanceToTarget <= attackDistance;
+	}
+	
+	public void setMoveToPlayerWhenAttacking(boolean moveToPlayerWhenAttacking) {
+		this.moveToPlayerWhenAttacking = moveToPlayerWhenAttacking;
 	}
 }
