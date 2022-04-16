@@ -23,17 +23,21 @@
 		endsWithAnimation: true,
 		flipAnimationOnEnteringOnly: true,
 		followingState: slam,
-//		stateEnteringSound: cyclops_attack_beam,
-		interruptingStates: []
+		stateEnteringSound: goblin_king_jump,
+		interruptingStates: [
+			eat, die
+		]
 	},
 	{
 		id: slam,
 		animation: goblin_king_slam,
-//		stateEnteringSound: cyclops_attack_stomp,
+		stateEnteringSound: goblin_king_slam,
 		attack: attack_slam
 		endsWithAnimation: true,
 		followingState: idle,
-		interruptingStates: []
+		interruptingStates: [
+			eat, die
+		]
 	},
 	{
 		id: throw,
@@ -42,9 +46,9 @@
 		endsWithAnimation: true,
 		flipAnimationOnEnteringOnly: true
 		followingState: idle,
-//		stateEnteringSound: cyclops_attack_stone,
+		stateEnteringSound: goblin_king_throw,
 		interruptingStates: [
-			eat //TODO remove
+			eat, die
 		]
 	},
 	{
@@ -52,19 +56,20 @@
 		animation: goblin_king_coin_bag,
 		endsWithAnimation: true,
 		flipAnimationOnEnteringOnly: true
-//		stateEnteringSound: 
+		stateEnteringSound: goblin_king_coin_bag
 		followingState: throw,
 		interruptingStates: [
-			eat //TODO remove
+			eat, die
 		]
 	},
 	{
 		id: command,
 		animation: goblin_king_command,
 		endsWithAnimation: true,
-//		stateEnteringSound: flesh_hit_1,
 		followingState: idle,
-		interruptingStates: [],
+		interruptingStates: [
+			die
+		],
 		flipAnimationOnEnteringOnly: true
 	},
 	{
@@ -73,7 +78,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			panic
+			panic, die
 		],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true
@@ -84,7 +89,7 @@
 		endsWithAnimation: true,
 		followingState: idle,
 		interruptingStates: [
-			damage, die
+			die
 		],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true

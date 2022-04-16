@@ -332,6 +332,27 @@
 					volume: 0.1,
 					delay: 0.3,
 				},
+				//goblin king
+				goblin_king_jump: {
+					path: "sound/enemy/attack/gladiator.wav",
+					volume: 0.4,
+					delay: 0.2,
+				},
+				goblin_king_coin_bag: {
+					path: "sound/enemy/attack/goblin_king_coin_bag.wav",
+					volume: 0.4,
+					delay: 0.4,
+				},
+				goblin_king_throw: {
+					path: "sound/enemy/attack/cyclops_stone_attack.wav",
+					delay: 0.3,
+					volume: 0.4,
+				},
+				goblin_king_slam: {
+					path: "sound/enemy/attack/goblin_king_slam.wav",
+					volume: 1,
+					delay: 0.2,
+				},
 			}
 		}
 		menu: {
