@@ -112,7 +112,7 @@
 			
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
-				displayText: "But fear not brave adventurers!\nThere are more tales to be told!\n \nBut these will be told in the sequels...",
+				displayText: "But fear not, brave adventurers!\nThere are more tales to be told!\n \nBut these will be told in the sequels...",
 				colorHeader: #000099,
 				showNextPageIcon: true,
 			}

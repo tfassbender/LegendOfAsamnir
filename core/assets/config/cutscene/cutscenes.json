@@ -57,6 +57,8 @@
 	config/cutscene/demo_2/main/archaeologist_near_invisible_path.json,
 	config/cutscene/demo_2/main/adventurer_female_on_the_hill.json,
 	config/cutscene/demo_2/main/goto_level_1.json,
+	config/cutscene/demo_2/main/goto_level_3_left.json,
+	config/cutscene/demo_2/main/goto_level_3_right.json,
 	config/cutscene/demo_2/main/goto_level_4.json,
 	
 	//********************************************************

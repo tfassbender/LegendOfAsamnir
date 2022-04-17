@@ -60,13 +60,13 @@
 	{
 		name: demo_2_tutorial,
 		map: "map/demo_2_tutorial.tmx",
-		initial: true
+		//initial: true
 	},
 	{
 		name: demo_2_main,
 		map: "map/demo_2_main.tmx",
-		initialStartingPointId: 0,
-		//initial: true
+		initialStartingPointId: 14,
+		initial: true
 	},
 	{
 		name: demo_2_village_blacksmith,

@@ -272,10 +272,21 @@
 		}
 	},
 	
+	
 	demo_2_main_goto_level_3_left: {
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: demo_2_main_goto_level_3_left,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_goto_level_3_left,
+		}
+	},
+	demo_2_main_goto_level_3_left_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_main_goto_level_3_left_after_cutscene,
 		},
 		executionType: CHANGE_MAP,
 		executionParameters: {
@@ -288,6 +299,16 @@
 		event: {
 			eventType: EVENT_OBJECT_TOUCHED,
 			stringValue: demo_2_main_goto_level_3_right,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_main_goto_level_3_right,
+		}
+	},
+	demo_2_main_goto_level_3_right_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_main_goto_level_3_right_after_cutscene,
 		},
 		executionType: CHANGE_MAP,
 		executionParameters: {
