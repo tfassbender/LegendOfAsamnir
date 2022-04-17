@@ -1,0 +1,188 @@
+{
+	id: demo_2_end_end_game,
+	controlledActions: {
+		initial: {
+			startsWithCutscene: true,
+			
+			type: WAIT,
+			executionDelayInSeconds: 2f,
+			
+			executes: [
+				thorin_comment
+			],
+		},
+		
+		thorin_comment: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Finally!\n \nThe way back to svartalfheim!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				narrator_comment_1,
+			]
+		},
+		narrator_comment_1: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "So, after surviving glorious quests, defeating mighty enemies and suffering so many bad jokes, Thorin finally found the way back to svartalfheim.",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				narrator_comment_2,
+			]
+		},
+		narrator_comment_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "That's where our story, about one of the bravest dwarfs, that ever walked the lands of midgard, ends now...",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_comment_2,
+			]
+		},
+		thorin_comment_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Hey, does that mean you will finally shut up?!\n \nNow I can go home and drink my mead in peace!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				move,
+			]
+		},
+		
+		move: {
+			type: WAIT,
+			executionDelayInSeconds: 1f,
+			
+			executes: [
+				movePlayer,
+			],
+		},
+		movePlayer: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -7.5},
+			
+			executes: [
+				move_without_camera_following,
+			],
+		},
+		
+		move_without_camera_following: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			controlledUnitTarget: {x: 0, y: -8},
+			cameraFollowsTarget: false,
+			
+			executes: [
+				narrator_last_comment,
+			]
+		},
+		narrator_last_comment: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			cameraFollowsTarget: false,
+			
+			executionDelayInSeconds: 2f,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "But fear not brave adventurers!\nThere are more tales to be told!\n \nBut these will be told in the sequels...",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_last_comment,
+			]
+		},
+		thorin_last_comment: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			cameraFollowsTarget: false,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "What?!?!?!\nWill you shut up already?!!\n \nYou better forget about that!!!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				fade_out,
+			]
+		},
+		
+		fade_out: {
+			type: COLOR_TRANSITION,
+			fadeIntoColor: true,
+			colorTransitionDelayInSeconds: 0f,
+			colorTransitionDurationInSeconds: 3f,
+			delayAfterColorTransitionInSeconds: 2f,
+			
+			cameraFollowsTarget: false,
+	
+			waitForEventToFinish: true,
+			
+			executes: [
+				show_end_text,
+			],
+		},
+		
+		show_end_text: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			cameraFollowsTarget: false,
+			
+			executionParameters: {
+				displayTextHeader: "Strange Narrator Voice",
+				displayText: "The End",
+				colorHeader: #000099,
+				showNextPageIcon: true,
+				showOnBlackScreen: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				back_to_main_menu,
+			]
+		},
+		
+		back_to_main_menu: {
+			type: EVENT,
+			
+			event: {
+				eventType: BACK_TO_MAIN_MENU,
+			},
+		}
+	}
+}

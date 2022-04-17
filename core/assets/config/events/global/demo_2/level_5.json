@@ -15,27 +15,27 @@
 		}
 	},
 	
-//	demo_2_level_5_goto_end: {
-//		event: {
-//			eventType: EVENT_OBJECT_TOUCHED,
-//			stringValue: demo_2_level_5_goto_end,
-//		},
-//		executionType: START_CUTSCENE,
-//		executionParameters: {
-//			cutsceneId: demo_2_level_5_goto_end,
-//		}
-//	},
-//	demo_2_level_5_goto_end_after_cutscene: {
-//		event: {
-//			eventType: CUTSCENE_EVENT,
-//			stringValue: demo_2_level_5_goto_end_after_cutscene,
-//		},
-//		executionType: CHANGE_MAP,
-//		executionParameters: {
-//			map: demo_2_end,
-//			startingPointId: 0,
-//		}
-//	},
+	demo_2_level_5_goto_end: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_5_goto_end,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_level_5_goto_end,
+		}
+	},
+	demo_2_level_5_goto_end_after_cutscene: {
+		event: {
+			eventType: CUTSCENE_EVENT,
+			stringValue: demo_2_level_5_goto_end_after_cutscene,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_end,
+			startingPointId: 0,
+		}
+	},
 	
 	//*******************************************
 	//*** switches
@@ -85,14 +85,14 @@
 	//*** boss fight
 	//*******************************************
 	
-//	demo_2_level_5_entered_boss_area: {
-//		event: {
-//			eventType: EVENT_OBJECT_TOUCHED,
-//			stringValue: demo_2_level_5_entered_boss_area,
-//		},
-//		executionType: CONDITIONAL_EVENT,
-//		conditionalExecutionId: demo_2_level_5_start_boss_cutscene,
-//	},
+	demo_2_level_5_entered_boss_area: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_level_5_entered_boss_area,
+		},
+		executionType: CONDITIONAL_EVENT,
+		conditionalExecutionId: demo_2_level_5_start_boss_cutscene,
+	},
 	
 	demo_2_level_5_boss_defeated: {
 		event: {

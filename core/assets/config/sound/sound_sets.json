@@ -297,10 +297,6 @@
 					delay: 0.3,
 				}
 				//cyclops
-				//cyclops_die: {
-				//	path: "sound/enemy/taunt.wav",
-				//	volume: 0.8,
-				//}
 				cyclops_attack_stomp: {
 					path: "sound/object/wood_knock.wav",
 					volume: 1
@@ -316,6 +312,10 @@
 					delay: 1.2,
 					volume: 0.4,
 				},
+				cyclops_die: {
+					path: "sound/enemy/taunt.wav",
+					volume: 0.6,
+				}
 				//imp
 				imp_attack: {
 					path: "sound/enemy/attack/imp_attack.wav",
@@ -353,6 +353,10 @@
 					volume: 1,
 					delay: 0.2,
 				},
+				goblin_king_die: {
+					path: "sound/enemy/taunt.wav",
+					volume: 0.4,
+				}
 			}
 		}
 		menu: {

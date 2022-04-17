@@ -93,7 +93,7 @@
 		endsWithAnimation: true,
 		changeStateAfterAnimationDelay: 3f,
 		followingState: END,
-		//stateEnteringSound: cyclops_die,
+		stateEnteringSound: cyclops_die,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,
 		flipAnimationOnEnteringOnly: true

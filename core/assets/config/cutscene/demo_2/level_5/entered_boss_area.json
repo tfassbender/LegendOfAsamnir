@@ -1,0 +1,167 @@
+{
+	id: demo_2_level_5_entered_boss_area,
+	controlledActions: {
+		initial: {
+			type: WAIT,
+			startsWithCutscene: true,
+			
+			executes: [
+				movePlayer,
+				moveCamera,
+			],
+		},
+		
+		movePlayer: {
+			type: MOVE,
+			controlledUnitId: PLAYER,
+			targetPositionRelativeToUnitId: demo_2_level_5_event_object_boss_area_entered,
+			controlledUnitTarget: {x: 0, y: 8},
+			
+			executes: [
+				goblin_king_greeting,
+			],
+		},
+		moveCamera: {
+			type: MOVE_CAMERA,
+			targetPositionRelativeToUnitId: PLAYER,
+			updatePositionRelativeToTarget: true,
+			controlledUnitTarget: {x: 0, y: 1},
+			speedFactor: 4.5f,
+		},
+		
+		goblin_king_greeting: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionDelayInSeconds: 2f,
+			
+			executionParameters: {
+				displayTextHeader: "Goblin King",
+				displayText: "You dare to enter my castle?!\n \nWhat are you searching for here?!",
+				colorHeader: #4ec712,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_answer,
+			]
+		},
+		thorin_answer: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "Hey, it can talk!\n \nI need to get to svartalfheim. So get out of my way!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				goblin_king_tribute,
+			]
+		},
+		goblin_king_tribute: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Goblin King",
+				displayText: "I won't let anyone pass through my castle, without paying a tribute to me - The mighty Goblin King!",
+				colorHeader: #4ec712,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				goblin_king_tribute_2,
+			]
+		},
+		goblin_king_tribute_2: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Goblin King",
+				displayText: "Unfortunately I don't like dwarfs, so it will cost you 10.000 Gold Coins to get through!\n \n*evil laughter*",
+				colorHeader: #4ec712,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				thorin_wont_pay,
+			]
+		},
+		thorin_wont_pay: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I don't like goblins either... So I'll make you an offer:\nI won't pay anything, you let me pass now and I won't kill you!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				goblin_king_command_attack,
+			]
+		},
+		goblin_king_command_attack: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Goblin King",
+				displayText: "You dare to threaten me?!\n \nThen prepare to die!\nGuards, kill this dwarf!",
+				colorHeader: #4ec712,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				command,
+			]
+		},
+		command: {
+			type: CHANGE_STATE,
+			controlledUnitId: goblin_king, // references a unit id that is defined in the map properties of the unit
+			controlledUnitState: command, // references a state from an enemy's config file (config/enemy/states/<enemy_name>.json)
+			
+			executes: [
+				fire_command_event,
+			],
+		},
+		fire_command_event: {
+			type: EVENT,
+			
+			event: {
+				eventType: GOBLIN_KING_COMMAND,
+				stringValue: "goblin_king_command_mini_golem",
+			},
+			
+			executes: [
+				set_global_value,
+			]
+		}
+		
+		set_global_value: {
+			type: EVENT,
+			
+			event: {
+				eventType: SET_GLOBAL_CONDITION_VALUE,
+				stringValue: "{key: demo_2_level_5_boss_cutscene_executed, value: true}",
+			},
+			
+			executes: [
+				end,
+			]
+		},
+		end: {
+			type: WAIT,
+			executionDelayInSeconds: 1f,
+		}
+	}
+}

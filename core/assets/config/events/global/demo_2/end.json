@@ -1,0 +1,28 @@
+{
+	//*******************************************
+	//*** change map
+	//*******************************************
+	
+	demo_2_end_goto_level_5: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_end_goto_level_5,
+		},
+		executionType: CHANGE_MAP,
+		executionParameters: {
+			map: demo_2_level_5,
+			startingPointId: 6,
+		}
+	},
+	
+	demo_2_end_path_reached: {
+		event: {
+			eventType: EVENT_OBJECT_TOUCHED,
+			stringValue: demo_2_end_path_reached,
+		},
+		executionType: START_CUTSCENE,
+		executionParameters: {
+			cutsceneId: demo_2_end_end_game,
+		}
+	}
+}

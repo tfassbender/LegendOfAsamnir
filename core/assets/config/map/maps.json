@@ -160,6 +160,12 @@
 		map: "map/demo_2_level_5.tmx",
 		initialStartingPointId: 5,
 		debugStartConfig: config/debug/start_config/demo_2/level_5.json,
+		//initial: true
+	},
+	{
+		name: demo_2_end,
+		map: "map/demo_2_end.tmx",
+		initialStartingPointId: 0,
 		initial: true
 	},
 ]

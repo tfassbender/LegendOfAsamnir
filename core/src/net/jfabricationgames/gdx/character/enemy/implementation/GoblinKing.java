@@ -75,7 +75,7 @@ public class GoblinKing extends Enemy {
 		
 		ArrayMap<CharacterState, Float> attackDistances = new ArrayMap<>();
 		attackDistances.put(attackSlamState, 4f);
-		attackDistances.put(attackCoinBagState, 15f);
+		attackDistances.put(attackCoinBagState, 12f);
 		
 		float minTimeBetweenAttacks = 0.5f;
 		float maxTimeBetweenAttacks = 2.5f;
@@ -171,8 +171,10 @@ public class GoblinKing extends Enemy {
 	
 	@Override
 	protected void drawStatsBar(ShapeRenderer shapeRenderer, float x, float y, float width) {
-		super.drawStatsBar(shapeRenderer, x, y, width);
-		enduranceBarRenderer.drawStatsBar(shapeRenderer, endurance / MAX_ENDURANCE, x, y + ENDURANCE_BAR_OFFSET_Y, width);
+		if (!defeated) {
+			super.drawStatsBar(shapeRenderer, x, y, width);
+			enduranceBarRenderer.drawStatsBar(shapeRenderer, endurance / MAX_ENDURANCE, x, y + ENDURANCE_BAR_OFFSET_Y, width);
+		}
 	}
 	
 	@Override

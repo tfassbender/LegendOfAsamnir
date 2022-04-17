@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1204">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1205">
  <properties>
   <property name="above_player_layers" value="[4, 5]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
@@ -133,7 +133,7 @@
    </properties>
    <point/>
   </object>
-  <object id="1129" name="object.eventObject" x="1088" y="111.636" width="3.42473" height="64.3258">
+  <object id="1129" name="object.eventObject" x="1039" y="111.636" width="3.42473" height="64.3258">
    <properties>
     <property name="eventParameter" value="demo_2_level_5_goto_end"/>
    </properties>
@@ -256,7 +256,7 @@
   <object id="1187" name="animal.armadillo" x="928" y="1792">
    <point/>
   </object>
-  <object id="1188" name="player.startingPosition" x="1056.33" y="144.333">
+  <object id="1188" name="player.startingPosition" x="992.33" y="144.333">
    <properties>
     <property name="startingPointId" value="6"/>
    </properties>
@@ -281,13 +281,7 @@
    </properties>
    <point/>
   </object>
-  <object id="1194" name="object.spawnPoint.goblin_king_command_gladiator" x="656" y="512">
-   <properties>
-    <property name="spawn" value="enemy__goblin_king_command__gladiator"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="1195" name="object.spawnPoint.goblin_king_command_gladiator" x="688" y="512">
+  <object id="1195" name="object.spawnPoint.goblin_king_command_gladiator" x="672" y="512">
    <properties>
     <property name="spawn" value="enemy__goblin_king_command__gladiator"/>
    </properties>
@@ -334,6 +328,12 @@
     <property name="spawn" value="playerOutOfAmmo_arrows"/>
    </properties>
    <point/>
+  </object>
+  <object id="1204" name="object.eventObject" x="621.716" y="493.447" width="100.569" height="1.439">
+   <properties>
+    <property name="eventParameter" value="demo_2_level_5_entered_boss_area"/>
+    <property name="unitId" value="demo_2_level_5_event_object_boss_area_entered"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="12" name="physics" locked="1">

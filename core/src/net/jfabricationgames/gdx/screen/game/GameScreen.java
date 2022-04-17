@@ -101,6 +101,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 	private PhysicsWorld physicsWorld;
 	
 	private boolean gameOver = false;
+	private boolean disposeAfterRender;
 	
 	private GameScreen() {
 		initializeCamerasAndViewports();
@@ -276,6 +277,11 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 		if (Constants.DEBUG) {
 			physicsWorld.renderDebugGraphics(camera.combined);
 		}
+		
+		if (disposeAfterRender) {
+			disposeAfterRender = false;
+			dispose();
+		}
 	}
 	
 	private void checkGameOver() {
@@ -322,6 +328,10 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			if (mapStartConfig != null) {
 				StartConfigUtil.executeGameLoadStartConfig(mapStartConfig);
 			}
+		}
+		if (event.eventType == EventType.BACK_TO_MAIN_MENU) {
+			ScreenManager.getInstance().changeToMainMenuScreen();
+			disposeAfterRender = true;
 		}
 	}
 	

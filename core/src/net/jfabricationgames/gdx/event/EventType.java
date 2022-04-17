@@ -20,6 +20,7 @@ public enum EventType {
 	SAVE_GAME, //
 	BEFORE_PERSIST_STATE, //
 	UPDATE_MAP_AFTER_LOADING_GAME_STATE, //
+	BACK_TO_MAIN_MENU, //
 	//*******************************
 	//*** Player Events
 	//*******************************

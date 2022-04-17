@@ -111,6 +111,7 @@
 		animation: goblin_king_die,
 		endsWithAnimation: true,
 		changeStateAfterAnimationDelay: 3f,
+		stateEnteringSound: goblin_king_die
 		followingState: END,
 		interruptingStates: [],
 		flipAnimationToMovingDirection: false,
