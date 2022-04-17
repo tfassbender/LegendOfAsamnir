@@ -28,13 +28,32 @@
 				options: [
 					"I don't need anything.",
 					"I want to buy something.",
-					"Do you have a lantern?",
+					"more options...",
 				],
 			},
 			choiceOptionExecutions: [
 				end,
 				open_shop_menu,
+				thorin_question_2,
+			],
+		},
+		thorin_question_2: {
+			type: PLAYER_CHOICE,
+			
+			waitForEventToFinish: true,
+			
+			choice: {
+				header: "Thorin",
+				options: [
+					"I need a place to rest.",
+					"Do you have a lantern?",
+					"more options...",
+				],
+			},
+			choiceOptionExecutions: [
+				barkeeper_rest,
 				barkeeper_lantern,
+				thorin_question,
 			],
 		},
 		
@@ -66,6 +85,89 @@
 			executes: [
 				thorin_question,
 			]
+		},
+		
+		barkeeper_rest: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Barkeeper",
+				displayText: "Sure. You can rest here for a while, to restore. I'll show you a room.",
+				colorHeader: #deba2c,
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				fade_out,
+			]
+		},
+		
+		fade_out: {
+			type: COLOR_TRANSITION,
+			fadeIntoColor: true,
+			colorTransitionDelayInSeconds: 0f,
+			colorTransitionDurationInSeconds: 3f,
+			delayAfterColorTransitionInSeconds: 3f,
+			
+			waitForEventToFinish: true,
+			
+			executes: [
+				restore_players_health,
+			],
+		},
+		
+		restore_players_health: {
+			type: EVENT,
+			showBlackScreen: true,
+			
+			event: {
+				eventType: CHANGE_HEALTH,
+				floatValue: 100f,
+			},
+			
+			executes: [
+				restore_players_shield,
+			]
+		},
+		restore_players_shield: {
+			type: EVENT,
+			showBlackScreen: true,
+			
+			event: {
+				eventType: CHANGE_SHIELD,
+				floatValue: 100f,
+			},
+			
+			executes: [
+				restore_players_mana,
+			]
+		},
+		restore_players_mana: {
+			type: EVENT,
+			showBlackScreen: true,
+			
+			event: {
+				eventType: CHANGE_MANA,
+				floatValue: 100f,
+			},
+			
+			executes: [
+				thorin_comment_after_restoring,
+			]
+		},
+		
+		thorin_comment_after_restoring: {
+			type: SHOW_ON_SCREEN_TEXT,
+			
+			executionParameters: {
+				displayTextHeader: "Thorin",
+				displayText: "I feel much better now!\nThanks!",
+				showNextPageIcon: true,
+			}
+			
+			waitForEventToFinish: true,
 		},
 		
 		end: {

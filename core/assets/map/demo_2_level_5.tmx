@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1205">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="1215">
  <properties>
   <property name="above_player_layers" value="[4, 5]"/>
   <property name="background_layers" value="[0, 1, 2, 3]"/>
   <property name="dungeon_level" value="true"/>
   <property name="invisible_paths_layer" value="[8]"/>
+  <property name="mini_map_config_path" value="config/menu/maps/demo_2/level_5.json"/>
   <property name="shadow_layers" value="[6, 7]"/>
  </properties>
  <tileset firstgid="1" source="tileset/tileset_pipoya_32.tsx"/>
@@ -18,7 +19,7 @@
    eJztmA1OwzAMhdtuTAIOgUATEuMaiHsNzgHS2EnGz0GmjXuwCCze3mwnLW1XoTzJUqFd+sVxHLtFkZWVlZWVlZWVNVSNJ7/Xk4n93LE03TGd/Nj1APg25f7fd8B3T3xrerYPMZ+n/873vvt9VaXbR7nP9zQqiguy51F7fOFdDzUsvG+7s1ewN2BY0b3PFvhewB6MazHNH+jPknz9V+HY4fqs+mbAa1SMb06+bptvBnyzBnwLxdd1Ypx9znzCINcl/T7Gp82lTozz+DG+sMZoGt+W9ohI5jaqDmP8r3xBuA/FrJiSPY2cEouPSoxblsLHaxoMfeLtyxE8K7G4VGLcshS+U2dec8eHG/KV9QxqRT5P4bupfvPsG+3jhcEX9mjw3bImX1nt+zyFD5/jmNTGkOfYdzhHiy+s1bnDx2eVZd4ayHvZdzxHjS+s1a3Dp4nzKdcEZXWYS7W4krM31Qep5zXn0zXxzcvDXMV8XdZ9XDNwDC/g/+JjvN8HH2pu5A2sBfD+KnGd2uJbKLEv/xcf4/2ua/o69bumrvlwv2nnfkx99kRa3oix98nHuQvj3vLzMXpKS5LLMb9o+fuYXJxfJO+03SvVYUMuzi+Sd9rulVK1MbhYWq/UF1+szmMNJedYNVmsL/CU0p9atZR11kqMiry+IKaU/tSqVVJ7Easv8IQ5gr+zsFm1Sp1eROsLvdyzgfddjotiPLbnYtUqWlxZfRzO0evJcRx8X+nwWdLiytrfOMfYNzEZB3XVgE+Lq7r1WSpfTFq/GMRr3BVfFfGf1i8G8Rp3xReLPxmHv1fxGrfFJ/Vb2LvBpgofng2fDgOusfYtS9NKGdfj1MZM9b22j2N9eZMez6uXPb4m50OX0r6ZDokvqM9vGk00dD5e46HxBWnfNNvQFw2KWZI=
   </data>
  </layer>
- <layer id="5" name="terrain" width="40" height="65">
+ <layer id="5" name="terrain" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
    eJzt2jEOwjAMRmGjqmFoz1c4CbCjjqhbYWfmKNwE7oClrCFiqfyLvk/ykukNGawoZuvwTL+dRXkXWkpn0S4pj6LtxuyR8gAAgGXV9iiFHau2RynuWMA/e3XRBXV9H12AJXH/AEDf0JrtfPZtdEnZwbuOPifRvtm7rj430T4AAABoOTdmYxNd8d1dvG/Npi7/yZjE39sAaPoALJYTnw==
   </data>
@@ -30,12 +31,12 @@
  </layer>
  <layer id="8" name="shadow_underlying" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmEsShCAMBd1zPU/i2Tjg1CxYmDJMoglJnNdVbvw8GhBQtg0AAAAAAIB3cLRogznwe8ZKvztlfZ+hx6Az51f6rSR7HeH3rAwrv1lOtN/IsRqzNNcyK7ufNVxmV/aXR9uNXK8cbR25XOmh9dsbf80arV9v52sWbTBz8ZyDtVT009CdXf/hm8uTO2MqCuq3J3OfzVGV2xnUJXtfVvOjc070mKb7GZL7ViIpt9o7EJXhmQu/tTnS/8Xo9qvg57VfdVXOLI/r019+kvegC+6heVdrF/eMNtdi7ZNmVFgfKjhmpoJfBUcPPv5vV04=
+   eJztmEsShCAMRN1zPU/i2Tjg1CxcmAIm0Q4hTr8qN36aJ19l2wghhBBCCHkHR4k2GEO/Z8z0u1PW9xl5nNTO+Zl+M1n9Hen3rAyU3ygn2u/MQY1ZmYvMWt0PDbp90SD9JBXQJ1trVe+w+u2lfw2N1a+W6zVEHYxcPOdgKxn9LFRn13/45vLkzpiKQvrti7mP5qjM9UzysnpbZvOTc070mJb7GZr7ZqIpN1sfiMrwzKXf3Bzt/2J0/WXw89qvapUzyuu16S8/TT+ointkXmvt6j1jzUWsfdqMDOtDBseVyeCXwdGDD4qBVZU=
   </data>
  </layer>
  <layer id="10" name="background_above_player" width="40" height="65" locked="1">
   <data encoding="base64" compression="zlib">
-   eJztmFEOwiAMhpm+eX1PojdgegG9gRHvoT7MEFKgQAvd7JfswWz+/SnQBoxRFEUKp4Mxx8yjKIqibJMbUPPPQN2HesVd+8OP54T/9lHwLRXqr42e/kpiLbjPf2bvuXgaNnj3GuCPQ4NTW/3xarTEoPDngj0Sst/Va1PNjQP2MgWUa+c6teUKgtIfxz6JadrC+eLI3ReqMUM6pWOECHtV7MnFgPwtvZezPqbip95b7zc2BzNyHJAXzhpcChQrt/Y59kaM1lxY5lz2nKsapPtzBXVlNFDdkOQ9rF3+eWJNee5ZXxRepNeftfkL7wxG72nfX6rXjtrTmLjS1wBF7rjGyHmmkaS7NX/Y8+Lo/PU6K9Xq5O6ret45+b0B6wF7l2UB3ZQepBm7f8fkKHcuryHUjCG9P+TWoASk51C6v3+e4zda45uP
+   eJztmFEOwiAMhpm+eX1PojdgegG9gRHvoT7MEFKgQAvd7JfwYDb//ivQBoxRFEUKp4Mxx8xQFEVRtskNqPlnoO5DveKu/eHHc8K/+yh4lwr110ZPfyWxFtznP7M3Lp6GDZ69Bvjj0ODUVn+8Gi0xKPy5YI+E7Hf12lRz44C9TAHl2rlObbmCoPTHsU+oNDly94XKH6RjCdZk2KtiIxcD8rf0Xs76mIqfem6939gczMjvgLxw1uBSoFi5tc+xN2K05sIy57LnXNUg3Z8rqCujgeqGJO9h7fLPE2vKc8/6ovAivf6szV94ZzB6T/v+Ur121J7GxJW+Bihyx/WNnGcaSbpb84c9L47OX6+zUq1O7r6q552T3xuwHrB3WRbQTelBmrH7d0yOcufyGkLNGNL7Q24NSkB6DqX7++c5fgOtZJlG
   </data>
  </layer>
  <layer id="3" name="shadows" width="40" height="65" locked="1">
@@ -334,6 +335,62 @@
     <property name="eventParameter" value="demo_2_level_5_entered_boss_area"/>
     <property name="unitId" value="demo_2_level_5_event_object_boss_area_entered"/>
    </properties>
+  </object>
+  <object id="1205" name="object.spawnPoint.imp" x="352" y="800">
+   <properties>
+    <property name="drop" value="{}"/>
+    <property name="spawn" value="enemy__imp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1206" name="object.spawnPoint.imp" x="304" y="992">
+   <properties>
+    <property name="drop" value="{}"/>
+    <property name="spawn" value="enemy__imp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1207" name="object.spawnPoint.bat" x="256" y="1680">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1208" name="object.spawnPoint.bat" x="368.667" y="1769.33">
+   <properties>
+    <property name="spawn" value="enemy__bat__movement_back_to_start"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1209" name="enemy.spider" x="256" y="1760">
+   <point/>
+  </object>
+  <object id="1210" name="object.spawnPoint.mimic_barrel" x="1102.67" y="1783.33">
+   <properties>
+    <property name="spawn" value="enemy__mimic_barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1211" name="object.spawnPoint.barrel" x="1102" y="1752.67">
+   <properties>
+    <property name="spawn" value="object__barrel"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1212" name="object.spawnPoint.cobra" x="1000.67" y="1782.67">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1213" name="object.spawnPoint.cobra" x="870.667" y="1743.33">
+   <properties>
+    <property name="spawn" value="enemy__cobra"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1214" name="item.arrow" x="560" y="624">
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="12" name="physics" locked="1">

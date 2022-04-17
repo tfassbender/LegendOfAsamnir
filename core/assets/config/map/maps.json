@@ -81,7 +81,7 @@
 	{
 		name: demo_2_village_tavern,
 		map: "map/demo_2_village_tavern.tmx",
-		//initial: true
+		initial: true
 	},
 	{
 		name: demo_2_castle_tavern,
@@ -158,14 +158,14 @@
 	{
 		name: demo_2_level_5,
 		map: "map/demo_2_level_5.tmx",
-		initialStartingPointId: 5,
+		initialStartingPointId: 1,
 		debugStartConfig: config/debug/start_config/demo_2/level_5.json,
-		//initial: true
+		initial: true
 	},
 	{
 		name: demo_2_end,
 		map: "map/demo_2_end.tmx",
 		initialStartingPointId: 0,
-		initial: true
+		//initial: true
 	},
 ]

@@ -129,14 +129,14 @@ adventurer_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 12
 adventurer_idle
   rotate: false
   xy: 3885, 794
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 12
+  index: 1
 adventurer_jump
   rotate: false
   xy: 3885, 794
@@ -913,14 +913,14 @@ armadillo_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 armadillo_move
   rotate: false
   xy: 3990, 760
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 armadillo_curl
   rotate: false
   xy: 774, 500
@@ -1977,14 +1977,14 @@ cobra_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 5
+  index: 1
 cobra_move
   rotate: false
   xy: 4034, 698
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 5
 cobra_attack
   rotate: false
   xy: 462, 107
@@ -2285,14 +2285,14 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 11
+  index: 1
 cyclops_idle
   rotate: false
   xy: 1922, 960
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 1
+  index: 11
 cyclops_attack_beam
   rotate: false
   xy: 1988, 960
@@ -2656,7 +2656,7 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 4
+  index: 13
 cyclops_idle
   rotate: false
   xy: 2450, 894
@@ -2670,7 +2670,7 @@ cyclops_idle
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 13
+  index: 4
 cyclops_idle
   rotate: false
   xy: 2516, 894
@@ -3643,14 +3643,14 @@ elemental_ice_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 6
+  index: 1
 elemental_ice_idle
   rotate: false
   xy: 1038, 728
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 6
 elemental_ice_move
   rotate: false
   xy: 1038, 728
@@ -4735,14 +4735,14 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 24
+  index: 34
 goblin_king_eat
   rotate: false
   xy: 1296, 794
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 34
+  index: 24
 goblin_king_eat
   rotate: false
   xy: 1362, 794
@@ -4750,13 +4750,6 @@ goblin_king_eat
   orig: 64, 64
   offset: 0, 0
   index: 5
-goblin_king_eat
-  rotate: false
-  xy: 1362, 794
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: 35
 goblin_king_eat
   rotate: false
   xy: 1362, 794
@@ -4773,6 +4766,13 @@ goblin_king_eat
   index: 25
 goblin_king_eat
   rotate: false
+  xy: 1362, 794
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 35
+goblin_king_eat
+  rotate: false
   xy: 1428, 794
   size: 64, 64
   orig: 64, 64
@@ -4784,7 +4784,7 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 26
+  index: 36
 goblin_king_eat
   rotate: false
   xy: 1428, 794
@@ -4798,7 +4798,7 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 36
+  index: 26
 goblin_king_eat
   rotate: false
   xy: 1494, 794
@@ -4812,7 +4812,7 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 37
+  index: 27
 goblin_king_eat
   rotate: false
   xy: 1494, 794
@@ -4826,7 +4826,7 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 27
+  index: 37
 goblin_king_eat
   rotate: false
   xy: 1560, 794
@@ -4834,13 +4834,6 @@ goblin_king_eat
   orig: 64, 64
   offset: 0, 0
   index: 8
-goblin_king_eat
-  rotate: false
-  xy: 1560, 794
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: 18
 goblin_king_eat
   rotate: false
   xy: 1560, 794
@@ -4857,6 +4850,13 @@ goblin_king_eat
   index: 28
 goblin_king_eat
   rotate: false
+  xy: 1560, 794
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 18
+goblin_king_eat
+  rotate: false
   xy: 1626, 794
   size: 64, 64
   orig: 64, 64
@@ -4868,7 +4868,7 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 19
+  index: 29
 goblin_king_eat
   rotate: false
   xy: 1626, 794
@@ -4882,7 +4882,7 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 29
+  index: 19
 goblin_king_eat
   rotate: false
   xy: 1692, 794
@@ -4890,13 +4890,6 @@ goblin_king_eat
   orig: 64, 64
   offset: 0, 0
   index: 10
-goblin_king_eat
-  rotate: false
-  xy: 1692, 794
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: 30
 goblin_king_eat
   rotate: false
   xy: 1692, 794
@@ -4913,6 +4906,13 @@ goblin_king_eat
   index: 20
 goblin_king_eat
   rotate: false
+  xy: 1692, 794
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 30
+goblin_king_eat
+  rotate: false
   xy: 1758, 828
   size: 64, 64
   orig: 64, 64
@@ -4924,14 +4924,14 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 41
+  index: 21
 goblin_king_eat
   rotate: false
   xy: 1758, 828
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 21
+  index: 41
 goblin_king_eat
   rotate: false
   xy: 1758, 828
@@ -4952,6 +4952,13 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
+  index: 22
+goblin_king_eat
+  rotate: false
+  xy: 1824, 828
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
   index: 42
 goblin_king_eat
   rotate: false
@@ -4960,13 +4967,6 @@ goblin_king_eat
   orig: 64, 64
   offset: 0, 0
   index: 32
-goblin_king_eat
-  rotate: false
-  xy: 1824, 828
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: 22
 goblin_king_eat
   rotate: false
   xy: 1890, 828
@@ -4980,14 +4980,14 @@ goblin_king_eat
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 33
+  index: 23
 goblin_king_eat
   rotate: false
   xy: 1890, 828
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
-  index: 23
+  index: 33
 goblin_king_eat
   rotate: false
   xy: 1890, 828
@@ -5274,14 +5274,14 @@ hedgehog_move
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 3
 hedgehog_move
   rotate: false
   xy: 1378, 626
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
+  index: 1
 hedgehog_idle
   rotate: false
   xy: 1412, 660
@@ -7514,14 +7514,14 @@ spider_idle
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 1
+  index: 4
 spider_idle
   rotate: false
   xy: 1888, 524
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 4
+  index: 1
 spider_jump
   rotate: false
   xy: 1888, 524

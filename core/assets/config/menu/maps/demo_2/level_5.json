@@ -1,0 +1,9 @@
+{
+	name: Goblin Cave,
+	texture: {
+		atlas: packed/menu/menu.atlas,
+		texture: mini_map_demo_2_level_5
+	},
+	textureWidth: 308,
+	textureHeight: 500,
+}
