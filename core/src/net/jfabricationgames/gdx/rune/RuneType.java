@@ -7,12 +7,12 @@ import net.jfabricationgames.gdx.data.handler.GlobalValuesDataHandler;
 public enum RuneType {
 	
 	OTHALA(0, "rune_collected__othala", "OTHALA - carry and use items"), //
-	ANSUZ(1, "rune_collected__ansuz", "ANSUZ - solve puzzles"), //
-	RAIDHO(2, "rune_collected__raidho", "RAIDHO - fast travel using the map"), //
-	GEBO(3, "rune_collected__gebo", "GEBO - sacrifice gold to buy supplies"), //
-	HAGALAZ(4, "rune_collected__hagalaz", "HAGALAZ - prevent death"), //
-	ALGIZ(5, "rune_collected__algiz", "ALGIZ - see hidden paths"), //
-	MANNAZ(6, "rune_collected__mannaz", "MANNAZ - reflect magical attacks"), //
+	GEBO(1, "rune_collected__gebo", "GEBO - sacrifice gold to buy supplies"), //
+	ANSUZ(2, "rune_collected__ansuz", "ANSUZ - solve puzzles"), //
+	MANNAZ(3, "rune_collected__mannaz", "MANNAZ - reflect magical attacks"), //
+	ALGIZ(4, "rune_collected__algiz", "ALGIZ - see hidden paths"), //
+	RAIDHO(5, "rune_collected__raidho", "RAIDHO - fast travel using the map"), //
+	HAGALAZ(6, "rune_collected__hagalaz", "HAGALAZ - prevent death"), //
 	KENAZ(7, "rune_collected__kenaz", "KENAZ - prevent from freezing colds"), //
 	LAGUZ(8, "rune_collected__laguz", "LAGUZ - open the last door to yggdrasiel"); //
 	

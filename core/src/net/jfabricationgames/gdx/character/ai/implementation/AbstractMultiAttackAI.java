@@ -56,6 +56,7 @@ public abstract class AbstractMultiAttackAI extends AbstractAttackAI {
 				
 				AIAttackingMove attackMove = new AIAttackingMove(this);
 				attackMove.attack = attack;
+				attackMove.targetPosition = targetingPlayer.getPosition();
 				setMove(MoveType.ATTACK, attackMove);
 			}
 		}

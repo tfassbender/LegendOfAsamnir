@@ -60,7 +60,7 @@
 	{
 		name: demo_2_tutorial,
 		map: "map/demo_2_tutorial.tmx",
-		//initial: true
+		initial: true
 	},
 	{
 		name: demo_2_main,
@@ -81,7 +81,7 @@
 	{
 		name: demo_2_village_tavern,
 		map: "map/demo_2_village_tavern.tmx",
-		initial: true
+		//initial: true
 	},
 	{
 		name: demo_2_castle_tavern,

@@ -4,6 +4,8 @@
 		show_text_1: {
 			type: SHOW_ON_SCREEN_TEXT,
 			
+			executionDelayInSeconds: 1.5f,
+			
 			executionParameters: {
 				displayTextHeader: "Strange Narrator Voice",
 				displayText: "After his glorious victory against his enmey, Thorin took his key and proceeded his quest.",

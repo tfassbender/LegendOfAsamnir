@@ -44,7 +44,9 @@ public class PreDefinedMovementAI extends AbstractRelativeMovementAI {
 		if (positionsDefined) {
 			Vector2 targetPoint = absolutePositions.get(targetPointIndex);
 			Vector2 position = character.getPosition();
-			if (position.dst2(targetPoint) > 0.1f) { // stop moving if the target position is already reached
+			
+			// stop moving if the target position is already reached and there is only one target
+			if (absolutePositions.size > 1 || position.dst2(targetPoint) > 0.1f) {
 				AIPositionChangingMove move = new AIPositionChangingMove(this);
 				move.movementTarget = targetPoint;
 				setMove(MoveType.MOVE, move);

@@ -75,14 +75,14 @@
    </properties>
    <point/>
   </object>
-  <object id="9012" name="object.switch" x="271.424" y="1264.94">
+  <object id="9012" name="object.switch" x="271.424" y="1259.94">
    <properties>
     <property name="eventParameter" value="demo_2_level_4_switch_bottom"/>
     <property name="stateSwitchId" value="demo_2_level_4_switch_bottom"/>
    </properties>
    <point/>
   </object>
-  <object id="9013" name="object.switch" x="271.583" y="562.375">
+  <object id="9013" name="object.switch" x="271.583" y="557.375">
    <properties>
     <property name="eventParameter" value="demo_2_level_4_switch_top"/>
     <property name="stateSwitchId" value="demo_2_level_4_switch_top"/>
