@@ -330,7 +330,7 @@ public class GameScreen extends ScreenAdapter implements InputActionListener, Ev
 			}
 		}
 		if (event.eventType == EventType.BACK_TO_MAIN_MENU) {
-			ScreenManager.getInstance().changeToMainMenuScreen();
+			ScreenManager.getInstance().changeToMainMenuScreen(event.booleanValue);
 			disposeAfterRender = true;
 		}
 	}

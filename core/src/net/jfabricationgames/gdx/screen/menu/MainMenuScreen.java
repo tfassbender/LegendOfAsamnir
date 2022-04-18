@@ -17,6 +17,7 @@ import net.jfabricationgames.gdx.screen.menu.components.FocusButton;
 import net.jfabricationgames.gdx.screen.menu.components.FocusButton.FocusButtonBuilder;
 import net.jfabricationgames.gdx.screen.menu.components.MainMenuAnimation;
 import net.jfabricationgames.gdx.screen.menu.components.MenuBox;
+import net.jfabricationgames.gdx.screen.menu.dialog.CreditsDialog;
 import net.jfabricationgames.gdx.screen.menu.dialog.LoadGameDialog;
 
 public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
@@ -31,9 +32,11 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 	private FocusButton buttonContinueGame;
 	private FocusButton buttonLoadGame;
 	private FocusButton buttonStartNewGame;
+	private FocusButton buttonCredits;
 	private FocusButton buttonQuit;
 	
 	private LoadGameDialog loadGameDialog;
+	private CreditsDialog creditsDialog;
 	
 	private MainMenuAnimation mainMenuAnimation;
 	
@@ -57,27 +60,30 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		banner = new MenuBox(10, 2, MenuBox.TextureType.BIG_BANNER);
 		bannerMainMenu = new MenuBox(6, 2, MenuBox.TextureType.BIG_BANNER_LOW);
 		
-		buttonContinueGame = createButton(3);
-		buttonLoadGame = createButton(2);
-		buttonStartNewGame = createButton(1);
+		buttonContinueGame = createButton(4);
+		buttonLoadGame = createButton(3);
+		buttonStartNewGame = createButton(2);
+		buttonCredits = createButton(1);
 		buttonQuit = createButton(0);
 		
 		buttonContinueGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonLoadGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonStartNewGame.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
+		buttonCredits.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 		buttonQuit.scaleBy(FocusButton.DEFAULT_BUTTON_SCALE);
 	}
 	
 	private void createDialogs() {
 		loadGameDialog = new LoadGameDialog(camera, () -> {
 		}, this::playMenuSound);
+		creditsDialog = new CreditsDialog(camera);
 	}
 	
 	private FocusButton createButton(int button) {
 		int buttonWidth = 290;
 		int buttonHeight = 55;
 		int buttonPosX = 370;
-		int lowestButtonY = 90;
+		int lowestButtonY = 40;
 		int buttonGapY = 50;
 		
 		return new FocusButtonBuilder() //
@@ -109,51 +115,50 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		
 		drawTexts();
 		
-		drawLoadGameDialog();
+		loadGameDialog.draw();
+		creditsDialog.draw();
 	}
 	
 	private void drawBackground() {
-		background.draw(batch, 300, 30, 580, 600);
+		background.draw(batch, 300, 0, 580, 650);
 	}
 	
 	private void drawButtons() {
 		buttonContinueGame.draw(batch);
 		buttonLoadGame.draw(batch);
 		buttonStartNewGame.draw(batch);
+		buttonCredits.draw(batch);
 		buttonQuit.draw(batch);
 	}
 	
 	private void drawBanners() {
-		banner.draw(batch, -15, 520, 1200, 350);
-		bannerMainMenu.draw(batch, 310, 430, 550, 250);
+		banner.draw(batch, -15, 550, 1200, 350);
+		bannerMainMenu.draw(batch, 310, 470, 550, 250);
 	}
 	
 	private void drawTexts() {
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(2f);
-		screenTextWriter.drawText("Legend of Asamnir", 150, 720);
+		screenTextWriter.drawText("Legend of Asamnir", 150, 750);
 		
 		int buttonTextX = 370;
 		int buttonTextWidth = 430;
 		screenTextWriter.setColor(Color.BLACK);
 		screenTextWriter.setScale(1.5f);
-		screenTextWriter.drawText("Main Menu", buttonTextX + 10, 573, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText("Main Menu", buttonTextX + 10, 613, buttonTextWidth, Align.center, false);
 		
 		screenTextWriter.setScale(1.15f);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonContinueGame) + "Continue", buttonTextX, 462, buttonTextWidth, Align.center,
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonContinueGame) + "Continue", buttonTextX, 517, buttonTextWidth, Align.center,
 				false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoadGame) + "Load Game", buttonTextX, 356, buttonTextWidth, Align.center, false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonStartNewGame) + "New Game", buttonTextX, 252, buttonTextWidth, Align.center,
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonLoadGame) + "Load Game", buttonTextX, 411, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonStartNewGame) + "New Game", buttonTextX, 307, buttonTextWidth, Align.center,
 				false);
-		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 148, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonCredits) + "Credits", buttonTextX, 202, buttonTextWidth, Align.center, false);
+		screenTextWriter.drawText(getButtonTextColorEncoding(buttonQuit) + "Quit", buttonTextX, 98, buttonTextWidth, Align.center, false);
 	}
 	
 	private String getButtonTextColorEncoding(FocusButton button) {
 		return button.hasFocus() ? TEXT_COLOR_ENCODING_FOCUS : TEXT_COLOR_ENCODING_NORMAL;
-	}
-	
-	private void drawLoadGameDialog() {
-		loadGameDialog.draw();
 	}
 	
 	@Override
@@ -174,6 +179,9 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 				case "button_startGame":
 					buttonStartNewGame.setFocused(true);
 					break;
+				case "button_credits":
+					buttonCredits.setFocused(true);
+					break;
 				case "button_quit":
 					buttonQuit.setFocused(true);
 					break;
@@ -185,6 +193,7 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 		buttonContinueGame.setFocused(false);
 		buttonLoadGame.setFocused(false);
 		buttonStartNewGame.setFocused(false);
+		buttonCredits.setFocused(false);
 		buttonQuit.setFocused(false);
 	}
 	
@@ -228,6 +237,16 @@ public class MainMenuScreen extends MenuScreen<MainMenuScreen> {
 			GlobalValuesDataHandler.getInstance().put(SpecialAction.JUMP.actionEnabledGlobalValueKey, true);
 			EventHandler.getInstance().fireEvent(new EventConfig().setEventType(EventType.NEW_GAME_STARTED));
 		});
+	}
+	
+	public void showCreditsDialog() {
+		creditsDialog.setVisible(true);
+		stateMachine.changeState("creditsDialog_button_back");
+	}
+	
+	public void closeCreditsDialog() {
+		creditsDialog.setVisible(false);
+		stateMachine.changeState("button_credits");
 	}
 	
 	//*********************************************************************

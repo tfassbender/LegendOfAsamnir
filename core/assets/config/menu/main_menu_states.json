@@ -11,13 +11,18 @@
 	}
 	button_startGame: {
 		up: button_load,
-		down: button_quit,
+		down: button_credits,
 		select: startGame,
 	},
-	button_quit: {
+	button_credits: {
 		up: button_startGame,
+		down: button_quit,
+		select: showCreditsDialog,
+	},
+	button_quit: {
+		up: button_credits,
 		select: quitGame,
-	}
+	},
 	
 	//*********************************************
 	//*** Load Game Dialog
@@ -57,4 +62,12 @@
 		up: loadDialog_button_saveSlot4,
 		select: loadFromSlot5,
 	},
+	
+	//*********************************************
+	//*** Credits Dialog
+	//*********************************************
+	
+	creditsDialog_button_back: {
+		select: closeCreditsDialog,
+	}
 }
