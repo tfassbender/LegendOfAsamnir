@@ -20,7 +20,7 @@ public class DesktopLauncher {
 		config.width = 1200;
 		config.height = 800;
 		config.vSyncEnabled = true;
-		// config.fullscreen = true;
+		config.fullscreen = true;
 		return config;
 	}
 	

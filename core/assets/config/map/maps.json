@@ -55,7 +55,7 @@
 		name: demo_2_prolog,
 		map: "map/demo_2_prolog.tmx",
 		initialStartingPointId: 0,
-		//initial: true
+		initial: true
 	},
 	{
 		name: demo_2_tutorial,
@@ -166,6 +166,6 @@
 		name: demo_2_end,
 		map: "map/demo_2_end.tmx",
 		initialStartingPointId: 0,
-		initial: true
+		//initial: true
 	},
 ]
