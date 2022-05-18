@@ -1079,18 +1079,21 @@
   <object id="551" name="enemy.bat" x="1873.33" y="1446.67">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="552" name="enemy.bat" x="1869.33" y="1670.67">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="553" name="enemy.bat" x="2253.33" y="1466.67">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
@@ -1298,24 +1301,28 @@
   <object id="600" name="enemy.bat" x="2190.67" y="1632">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="601" name="enemy.bat" x="2144" y="1769.33">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="602" name="enemy.spider" x="2036" y="1552">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="603" name="enemy.spider" x="2248" y="1792">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
@@ -1323,6 +1330,7 @@
    <properties>
     <property name="aiType" value="mini_golem_team"/>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1330,18 +1338,21 @@
   <object id="616" name="enemy.cobra" x="1921" y="1543">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="617" name="enemy.cobra" x="1817" y="1765">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
   <object id="618" name="enemy.cobra" x="2259" y="1674">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
@@ -1562,7 +1573,7 @@
    </properties>
    <point/>
   </object>
-  <object id="700" name="object.spawnPoint.barrel" x="2177.33" y="1856">
+  <object id="700" name="object.spawnPoint.barrel" x="2177.33" y="1851">
    <properties>
     <property name="spawn" value="object__barrel"/>
    </properties>
@@ -1602,6 +1613,7 @@
    <properties>
     <property name="aiType" value="mini_golem_team"/>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1610,6 +1622,7 @@
    <properties>
     <property name="aiType" value="mini_golem_team"/>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1618,6 +1631,7 @@
    <properties>
     <property name="aiType" value="mini_golem_team"/>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1626,6 +1640,7 @@
    <properties>
     <property name="aiType" value="mini_golem_team"/>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1634,6 +1649,7 @@
    <properties>
     <property name="aiType" value="mini_golem_team"/>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
     <property name="teamId" value="demo_2_level_2_mini_golems_room_5"/>
    </properties>
    <point/>
@@ -1641,12 +1657,14 @@
   <object id="714" name="enemy.mimic_barrel" x="2080" y="1632">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
-  <object id="715" name="enemy.mimic_barrel" x="2203.67" y="1859">
+  <object id="715" name="enemy.mimic_barrel" x="2203.67" y="1854">
    <properties>
     <property name="enemyDefeatedEventText" value="demo_2_level_2_boss_enemy_killed"/>
+    <property name="predefinedMovementPositions" value="[{x:0, y:0}]"/>
    </properties>
    <point/>
   </object>
@@ -1821,7 +1839,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="8" name="physics" locked="1">
+ <objectgroup id="8" name="physics">
   <object id="327" x="128" y="2720" width="192" height="112.333"/>
   <object id="328" x="448" y="2720" width="224.333" height="111.667"/>
   <object id="329" x="320" y="2656" width="13" height="212.667"/>
@@ -1865,12 +1883,12 @@
   <object id="372" x="1408" y="2080" width="384" height="111.333"/>
   <object id="373" x="1760" y="1952" width="32" height="160"/>
   <object id="374" x="1792" y="1952" width="96" height="111.75"/>
-  <object id="377" x="1856" y="1873.33" width="32" height="110.667"/>
-  <object id="378" x="1952" y="1874.17" width="32" height="141.833"/>
+  <object id="377" x="1856" y="1865.66" width="32" height="118.334"/>
+  <object id="378" x="1952" y="1865.5" width="32" height="150.5"/>
   <object id="379" x="1952" y="1952" width="128" height="111.5"/>
   <object id="380" x="2048" y="2048" width="32" height="256"/>
-  <object id="381" x="1984" y="1874" width="384" height="110"/>
-  <object id="382" x="1696" y="1873.33" width="160" height="110.667"/>
+  <object id="381" x="1984" y="1865.67" width="384" height="118.333"/>
+  <object id="382" x="1696" y="1865.66" width="160" height="118.334"/>
   <object id="384" x="1696" y="1184" width="32" height="704"/>
   <object id="385" x="2336" y="1184" width="32" height="704"/>
   <object id="386" x="1728" y="1184" width="384" height="111.333"/>
