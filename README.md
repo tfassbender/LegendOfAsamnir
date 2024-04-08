@@ -1,4 +1,4 @@
-# DwarfScrollerGDX (Legend of Asamnir)
+# Legend of Asamnir (DwarfScrollerGDX)
 
 A first test of a simple game using [libGDX](https://libgdx.badlogicgames.com/). 
 
